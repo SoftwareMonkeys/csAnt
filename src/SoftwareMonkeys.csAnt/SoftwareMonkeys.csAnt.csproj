@@ -74,7 +74,6 @@
     <Compile Include="BaseScript.ProjectName.cs" />
     <Compile Include="BaseScript.StartHttp.cs" />
     <Compile Include="GroupNodeNotFoundException.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BaseScript.ProjectDirectory.cs" />
     <Compile Include="BaseScript.Download.cs" />
     <Compile Include="BaseScript.Unzip.cs" />
@@ -90,6 +89,7 @@
     <Compile Include="BaseScript.GetNewestFolder.cs" />
     <Compile Include="BaseScript.MoveDirectory.cs" />
     <Compile Include="BaseScript.FindFiles.cs" />
+    <Compile Include="AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseScript.Execute.cs" />
