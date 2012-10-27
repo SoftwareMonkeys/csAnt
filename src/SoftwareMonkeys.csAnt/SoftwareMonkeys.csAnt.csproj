@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
+  <PropertyGroup>
+    <ProjectGuid>{B13BED0E-4F73-4F2A-8AA1-19273CFF9C47}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <OutputType>Library</OutputType>
+    <RootNamespace>SoftwareMonkeys.csAnt</RootNamespace>
+    <AssemblyName>SoftwareMonkeys.csAnt</AssemblyName>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <SignAssembly>true</SignAssembly>
+    <DelaySign>False</DelaySign>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
+    <NoStdLib>False</NoStdLib>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <AssemblyOriginatorKeyFile>SoftwareMonkeys.csAnt.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyMode>File</AssemblyOriginatorKeyMode>
+    <ProductVersion>10.0.0</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Platform)' == 'x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <RegisterForComInterop>False</RegisterForComInterop>
+    <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
+    <BaseAddress>4194304</BaseAddress>
+    <FileAlignment>4096</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <DebugSymbols>True</DebugSymbols>
+    <DebugType>Full</DebugType>
+    <Optimize>False</Optimize>
+    <CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <DebugSymbols>false</DebugSymbols>
+    <DebugType>PdbOnly</DebugType>
+    <Optimize>True</Optimize>
+    <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
+    <DefineConstants>TRACE</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Build.Engine" />
+    <Reference Include="Microsoft.Build.Framework" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="System" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\lib\Newtonsoft.Json.4.0.8\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="SoftwareMonkeys.FileNodes">
+      <HintPath>..\..\lib\FileNodes\Release\SoftwareMonkeys.FileNodes.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib">
+      <HintPath>..\..\lib\SharpZipLib_0860_Bin\net-20\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BaseScript.BaseNode.cs" />
+    <Compile Include="BaseScript.cs" />
+    <Compile Include="BaseScript.ExecuteScript.cs" />
+    <Compile Include="BaseScript.GroupName.cs" />
+    <Compile Include="BaseScript.GroupNode.cs" />
+    <Compile Include="BaseScript.ProjectName.cs" />
+    <Compile Include="BaseScript.StartHttp.cs" />
+    <Compile Include="BaseScript.Sync.cs" />
+    <Compile Include="GroupNodeNotFoundException.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="BaseScript.ProjectDirectory.cs" />
+    <Compile Include="BaseScript.Download.cs" />
+    <Compile Include="BaseScript.Unzip.cs" />
+    <Compile Include="BaseScript.Zip.cs" />
+    <Compile Include="BaseScript.DownloadAndUnzip.cs" />
+    <Compile Include="BaseScript.StartNewProcess.cs" />
+    <Compile Include="BaseScript.StartProcess.cs" />
+    <Compile Include="BaseScript.IsVerbose.cs" />
+    <Compile Include="BaseScript.ImportLocalLib.cs" />
+    <Compile Include="Arguments.cs" />
+    <Compile Include="BaseScript.ImportLocalWebApp.cs" />
+    <Compile Include="BaseScript.GetNewestFile.cs" />
+    <Compile Include="BaseScript.GetNewestFolder.cs" />
+    <Compile Include="BaseScript.MoveDirectory.cs" />
+    <Compile Include="BaseScript.FindFiles.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BaseScript.Execute.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BaseScript.BuildSolution.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BaseScript.ProjectNode.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BaseScript.CurrentDirectory.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.Targets" />
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <DebugType>none</DebugType>
+    <OutputPath>..\..\bin\Release\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <OutputPath>..\..\bin\Debug\</OutputPath>
+  </PropertyGroup>
+</Project>
