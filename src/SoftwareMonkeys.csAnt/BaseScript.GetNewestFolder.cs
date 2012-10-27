@@ -12,8 +12,11 @@ namespace SoftwareMonkeys.csAnt
 
 			var directories = new DirectoryInfo(directory).GetDirectories().OrderByDescending(p => p.CreationTime);
 
-			if (directories.Length > 0)
-				path = directories[0].FullName;
+			foreach (var d in directories)
+			{
+				path = d.FullName;
+				break;
+			}
 
 			return path;
 		}

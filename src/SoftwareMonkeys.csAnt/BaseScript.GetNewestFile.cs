@@ -12,8 +12,11 @@ namespace SoftwareMonkeys.csAnt
 
 			var files = new DirectoryInfo(directory).GetFiles().OrderByDescending(p => p.CreationTime);
 
-			if (files.Length > 0)
-				file = files[0].FullName;
+			foreach (var f in files)
+			{
+				file = f.FullName;
+				break;
+			}
 
 			return file;
 		}
