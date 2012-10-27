@@ -74,13 +74,6 @@ class PrepareScript
 
 		// Move from the tmp directory to the destination
 		MoveToDestination(tmpDir, csAntLibDir);
-
-		Console.WriteLine("");
-		Console.WriteLine("===== Preparation completed successfully! =====");
-		Console.WriteLine("");
-		Console.WriteLine("You can now run scripts via the csAnt.exe console application. (Pass the script name as the first parameter.)");
-		Console.WriteLine("");
-		Console.WriteLine("");
 	}
 
 	public void GetRemotecsAnt()
