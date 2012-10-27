@@ -73,7 +73,6 @@
     <Compile Include="BaseScript.GroupNode.cs" />
     <Compile Include="BaseScript.ProjectName.cs" />
     <Compile Include="BaseScript.StartHttp.cs" />
-    <Compile Include="BaseScript.Sync.cs" />
     <Compile Include="GroupNodeNotFoundException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BaseScript.ProjectDirectory.cs" />
