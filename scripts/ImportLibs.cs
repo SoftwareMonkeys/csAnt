@@ -10,7 +10,6 @@ using System.Reflection;
 
 class ImportLibs : BaseScript
 {
-
 	public static void Main(string[] args)
 	{
 		new ImportLibs().Start(args);
