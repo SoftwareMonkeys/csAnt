@@ -1,7 +1,17 @@
+// ------------------------------------------------------------------------------------------
+
 // To use this file....
-// 1) Rename this file to "ImportCustomLibs.cs" (remove the .disabled. section of the file name).
-// 2) Create a script called "Import[LibName]Lib.cs" for each library to import (such as "ImportMyProjectLib.cs")
-// 3) Use the ExecuteScript(...) function (look at the example below) to call each import library script
+
+// 1) Rename this file to "ImportCustomLibs.cs" (remove the '.disabled' section of the file name).
+
+// 2) Create a script called "Import[LibName]Lib.cs" for each library to import,
+//    such as "ImportMyProjectLib.cs"
+//    (Tip: use the "Import[Example]Lib.disabled.cs" file as a template)
+
+// 3) Use the BaseScript.ExecuteScript(...) function (look at the example provided below) to
+//    call each 'import library' script
+
+// ------------------------------------------------------------------------------------------
 
 //css_ref ../../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.dll;
 

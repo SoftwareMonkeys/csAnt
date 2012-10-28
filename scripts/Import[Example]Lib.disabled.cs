@@ -1,6 +1,12 @@
+// ------------------------------------------------------------------------------------------
+
 // To use this file:
-// 1) Rename from "Import[Example]Lib.disabled.cs" to "ImportMyProjectLib.cs" (and replace MyProject with your project name)
-// 2) Use the examples below to import the library
+
+// 1) Rename from "Import[Example]Lib.disabled.cs" to "ImportMyProjectLib.cs" (and replace 'MyProject' with your project name)
+
+// 2) Use the examples below to import the library (or any other suitable means)
+
+// ------------------------------------------------------------------------------------------
 
 //css_ref ../../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.dll;
 
