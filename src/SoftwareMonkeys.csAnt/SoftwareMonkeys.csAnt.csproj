@@ -90,6 +90,9 @@
     <Compile Include="BaseScript.MoveDirectory.cs" />
     <Compile Include="BaseScript.FindFiles.cs" />
     <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="BaseScript.GetScriptPath.cs" />
+    <Compile Include="BaseScript.ScriptExists.cs" />
+    <Compile Include="BaseScript.ProjectsDirectory.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseScript.Execute.cs" />
