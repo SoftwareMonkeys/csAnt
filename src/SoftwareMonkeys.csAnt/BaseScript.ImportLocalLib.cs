@@ -46,11 +46,14 @@ namespace SoftwareMonkeys.csAnt
 			);
 			
 			Console.WriteLine ("");
-			Console.WriteLine ("Importing local libraries:");
+			Console.WriteLine ("Importing local libraries...");
 			Console.WriteLine ("");
 
-			Console.WriteLine ("From:");
+			Console.WriteLine ("From base directory:");
 			Console.WriteLine (fromDir);
+			Console.WriteLine ("");
+
+			Console.WriteLine ("Files:");
 
 			// Loop through the files in the source directory
 			foreach (string fromFile in Directory.GetFiles(fromDir))
