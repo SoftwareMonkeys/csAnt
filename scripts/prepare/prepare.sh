@@ -1,9 +1,6 @@
-# Move to the project root
-cd ../..
-
 # Set general constants
-LIB_DIR="lib"
 BASE_DIR=$PWD
+LIB_DIR="lib"
 SOURCE_PROJECTS_DIR="$HOME/Ubuntu One/Projects"
 
 # Set cs-script constants
@@ -25,17 +22,34 @@ PREPARE_CS_SCRIPT="scripts/prepare/Prepare.cs"
 
 
 # Output some relevant details
+
+echo ""
+echo ""
+echo "========================================"
+echo "Preparing Project"
+echo "========================================"
+echo ""
+echo "The project is being prepared for development, by downloading required libraries, etc."
+echo ""
+
 echo "Base dir: $BASE_DIR"
 
 echo "Destination: $CSS_ZIPFILE"
 
+
+# ==================   lib directory   =================
+
+# Make the lib directory
+if [ ! -d "$LIB_DIR" ]; then
+	mkdir "\"$LIB_DIR\""
+fi
 
 # ==================   cs-script   =================
 
 
 # Make the cs-script directory
 if [ ! -d "$CSS_DIR" ]; then
-	mkdir $CSS_DIR
+	mkdir "\"$CSS_DIR\""
 fi
 
 
