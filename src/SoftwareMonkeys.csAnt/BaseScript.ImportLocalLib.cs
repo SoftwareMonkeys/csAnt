@@ -23,11 +23,7 @@ namespace SoftwareMonkeys.csAnt
 
 			// TODO: See if there's a cleaner way to format this path
 			string fromDir = Path.GetFullPath(
-				ProjectDirectory
-				+ Path.DirectorySeparatorChar
-				+ ".."
-				+ Path.DirectorySeparatorChar
-				+ ".."
+				ProjectsDirectory
 				+ Path.DirectorySeparatorChar
 				+ groupName
 				+ Path.DirectorySeparatorChar
@@ -52,6 +48,9 @@ namespace SoftwareMonkeys.csAnt
 			Console.WriteLine ("");
 			Console.WriteLine ("Importing local libraries:");
 			Console.WriteLine ("");
+
+			Console.WriteLine ("From:");
+			Console.WriteLine (fromDir);
 
 			// Loop through the files in the source directory
 			foreach (string fromFile in Directory.GetFiles(fromDir))
