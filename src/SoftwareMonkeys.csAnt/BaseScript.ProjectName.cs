@@ -19,12 +19,9 @@ namespace SoftwareMonkeys.csAnt
 				if (String.IsNullOrEmpty(projectName))
 				{
 					projectName = ProjectNode.Name;
-					
-					Console.WriteLine("");
-					Console.WriteLine("Project name: " + projectName);
-					Console.WriteLine("");
 
 					if (String.IsNullOrEmpty(projectName))
+						// TODO: Throw a custom exception
 						throw new Exception("No [ProjectName].node file was found....so the project name cannot be identified.");
 				}
 				return projectName;
