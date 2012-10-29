@@ -28,8 +28,11 @@ namespace SoftwareMonkeys.csAnt
 		/// <param name='arguments'></param>
 		public Process StartNewProcess(string command, string arguments)
 		{
-			Console.WriteLine("Executing command: " + command);
-			Console.WriteLine("Arguments: " + arguments);
+			Console.WriteLine("");
+			Console.WriteLine("Starting new process: " + command);
+			Console.WriteLine("Arguments:");
+			Console.WriteLine(arguments);
+			Console.WriteLine("");
 
 			// Create the process start info
 			ProcessStartInfo info = new ProcessStartInfo(command, arguments);
