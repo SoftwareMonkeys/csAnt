@@ -14,10 +14,12 @@ namespace SoftwareMonkeys.csAnt
 		/// </summary>
 		public FileNode BaseNode
 		{
-			get {
+			get
+			{
 				if (baseNode == null)
 					baseNode = GetBaseNode();
-				return baseNode; }
+				return baseNode;
+			}
 		}
 		
 		public FileNode GetBaseNode()
@@ -45,7 +47,7 @@ namespace SoftwareMonkeys.csAnt
 			string dir = CurrentDirectory;
 			
 			FileNode node = scanner.ScanDirectory(dir, true);
-			
+
 			return node;
 		}
 	}
