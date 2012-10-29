@@ -17,8 +17,9 @@ namespace SoftwareMonkeys.csAnt
 		public void ExecuteScript(string scriptName, string[] args)
 		{
 			string scriptFile = GetScriptPath(scriptName);
-			
-			Console.WriteLine("Executing script: " + scriptName);
+
+			if (IsVerbose)
+				Console.WriteLine("Executing script: " + scriptName);
 			
 			ExecuteScriptFromFile(scriptFile, args);
 		}
