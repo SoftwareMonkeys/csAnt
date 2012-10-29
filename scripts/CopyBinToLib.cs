@@ -20,8 +20,6 @@ class CopyBinToLibScript : BaseScript
 			+ Path.DirectorySeparatorChar
 			+ "Release";
 
-		Console.WriteLine("bin directory: " + binDirectory);
-
 		int i = 0;
 
 		foreach (string file in Directory.GetFiles(binDirectory))
