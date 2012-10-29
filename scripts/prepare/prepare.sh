@@ -34,8 +34,6 @@ echo ""
 
 echo "Base dir: $BASE_DIR"
 
-echo "Destination: $CSS_ZIPFILE"
-
 
 # ==================   lib directory   =================
 
