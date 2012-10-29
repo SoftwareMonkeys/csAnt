@@ -18,5 +18,7 @@ class ImportCustomLibsScript : BaseScript
 	public void Start(string[] args)
 	{
 		ExecuteScript("ImportFileNodesLib");
+
+		ExecuteScript("ImportGitSharpLib");
 	}
 }
