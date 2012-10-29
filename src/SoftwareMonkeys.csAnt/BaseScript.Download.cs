@@ -24,6 +24,9 @@ namespace SoftwareMonkeys.csAnt
 			Console.WriteLine ("  To file: " + toFile);
 
 			WebClient webClient = new WebClient();
+
+			webClient.Headers.Add("USER-AGENT", "csAnt");
+
 			webClient.Credentials = CredentialCache.DefaultCredentials;
 
 			Console.WriteLine ("  Please wait...(this may take some time)...");
@@ -43,8 +46,6 @@ namespace SoftwareMonkeys.csAnt
 				sizeString = size / 1000 + "kb";
 
 			Console.WriteLine ("  Size: " + sizeString);
-
-			File.Delete(toFile);
 
 			Console.WriteLine ("Download complete.");
 
