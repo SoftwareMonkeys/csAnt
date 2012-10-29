@@ -27,8 +27,21 @@ namespace SoftwareMonkeys.csAnt
 			// If the projects directory is specified in the base node
 			if (BaseNode != null && BaseNode.Properties.ContainsKey("ProjectsDirectory"))
 			{
+				string specifiedDir = BaseNode.Properties["ProjectsDirectory"];
+
+				string projectsDir = String.Empty;
+
+				if (specifiedDir.IndexOf("..") > -1)
+				{
+					projectsDir = Path.GetDirectoryName(BaseNode.FilePath)
+						+ Path.DirectorySeparatorChar
+						+ specifiedDir;
+				}
+				else
+					projectsDir = specifiedDir;
+
 				dir = Path.GetFullPath(
-					BaseNode.Properties["ProjectsDirectory"]
+					projectsDir
 				);
 			}
 			// Otherwise just step up above the project directory
