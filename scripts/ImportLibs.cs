@@ -24,10 +24,17 @@ class ImportLibs : BaseScript
 
 	public void ImportPrimaryLibs()
 	{
+		Console.WriteLine("");
+		Console.WriteLine("Importing primary libraries...");
+		Console.WriteLine("");
+
 		// FileNodes
+		Console.WriteLine("FileNodes");
 		ExecuteScript("ImportFileNodesLib");
 
-		// TODO: Add other critical dependency imports
+		// Git sharp
+		Console.WriteLine("GitSharp");
+		ExecuteScript("ImportGitSharpLib");
 	}
 
 	public void ImportCustomLibs()
