@@ -39,7 +39,7 @@ echo "Base dir: $BASE_DIR"
 
 # Make the lib directory
 if [ ! -d "$LIB_DIR" ]; then
-	mkdir "\"$LIB_DIR\""
+	mkdir $LIB_DIR
 fi
 
 # ==================   cs-script   =================
@@ -47,7 +47,7 @@ fi
 
 # Make the cs-script directory
 if [ ! -d "$CSS_DIR" ]; then
-	mkdir "\"$CSS_DIR\""
+	mkdir $CSS_DIR
 fi
 
 
@@ -105,6 +105,16 @@ echo "===== Executing Prepare.cs ====="
 
 mono $CSS_FILE $PREPARE_CS_SCRIPT "$SOURCE_PROJECTS_DIR"
 
+
+# ================   Create Project Node   =================
+# Create the project node
+
+# Launch the script via csAnt
+CREATE_PROJECT_NODE_SCRIPT="scripts/CreateProjectNode.cs"
+
+mono $CSS_FILE $CREATE_PROJECT_NODE_SCRIPT
+
+
 # ================   Import Libraries via csAnt   =================
 # Now csAnt is installed and ready to use
 
@@ -113,6 +123,8 @@ IMPORT_LIBS_SCRIPT="ImportLibs"
 CSANT_FILE="$LIB_DIR/csAnt/bin/Release/csAnt.exe"
 
 mono $CSANT_FILE $IMPORT_LIBS_SCRIPT
+
+
 
 echo ""
 echo "===== Preparation completed successfully! ====="
