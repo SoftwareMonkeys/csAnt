@@ -5,7 +5,7 @@ using Microsoft.CSharp;
 using System.Diagnostics;
 using SoftwareMonkeys.csAnt;
 
-class CreateProjectNodeScript : BaseScript
+class CreateProjectNodeScript
 {
 	public static void Main(string[] args)
 	{
@@ -18,7 +18,7 @@ class CreateProjectNodeScript : BaseScript
 		Console.WriteLine("Creating project node...");
 		Console.WriteLine("");
 
-		var projectName = "Example";
+		var projectName = Path.GetFileName(Environment.CurrentDirectory);
 
 		if (args.Length > 0)
 			projectName = args[0];
@@ -27,7 +27,7 @@ class CreateProjectNodeScript : BaseScript
 
 		var content = GetContent(projectName);
 
-		var filePath = ProjectDirectory
+		var filePath = Environment.CurrentDirectory
 			+ Path.DirectorySeparatorChar
 			+ projectName
 			+ ".node";
