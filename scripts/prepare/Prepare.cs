@@ -7,6 +7,7 @@ using System.Linq;
 using System.IO.Compression;
 using ICSharpCode.SharpZipLib.Zip;
 using ICSharpCode.SharpZipLib.Core;
+using System.Net;
 
 class PrepareScript
 {
@@ -74,11 +75,36 @@ class PrepareScript
 
 		// Move from the tmp directory to the destination
 		MoveToDestination(tmpDir, csAntLibDir);
+
 	}
 
 	public void GetRemotecsAnt()
 	{
-		throw new NotImplementedException();
+		var remotePath = "https://csant.googlecode.com/files/csAnt-bin-%5B2012-11-2--17-6-54%5D.zip";
+
+		var projectDirectory = GetProjectDirectory();
+
+		var libDir = projectDirectory
+			+ Path.DirectorySeparatorChar
+			+ "lib";
+
+		var csAntLibDir = libDir
+			+ Path.DirectorySeparatorChar
+			+ "csAnt";
+
+		var tmpDir = libDir
+			+ Path.DirectorySeparatorChar
+			+ "csAnt_tmp";
+
+		Console.WriteLine("To: " + tmpDir);
+
+		DownloadAndUnzip(
+			remotePath,
+			tmpDir
+		);
+
+		// Move from the tmp directory to the destination
+		MoveToDestination(tmpDir, csAntLibDir);
 	}
 
 	public void MoveToDestination(string tmpDir, string csAntLibDir)
@@ -153,5 +179,77 @@ class PrepareScript
 	public string GetProjectDirectory()
 	{
 		return Path.GetFullPath(".");
+	}
+
+
+	// This function is a copy of the BaseScript.Download function
+	public string Download(
+		string url,
+		string localDestination
+	)
+	{
+		Console.WriteLine ("Downloading...");
+		Console.WriteLine ("  From URL: " + url);
+
+		var fileName = Path.GetFileName(url);
+
+		var toFile = localDestination;
+
+		if (localDestination.IndexOf("/") == localDestination.Length-1)
+			toFile = localDestination + fileName;
+		
+		Console.WriteLine ("  To file: " + toFile);
+
+		WebClient webClient = new WebClient();
+
+		webClient.Headers.Add("USER-AGENT", "csAnt");
+
+		webClient.Credentials = CredentialCache.DefaultCredentials;
+
+		Console.WriteLine ("  Please wait...(this may take some time)...");
+
+		webClient.DownloadFile(
+			url,
+			toFile
+		);
+
+		var size = Convert.ToInt32(webClient.ResponseHeaders["Content-Length"]);
+
+		var sizeString = size + "b";
+
+		if (size > 1000*1000)
+			sizeString = size / 1000 / 1000 + "mb";
+		else if (size > 1000)
+			sizeString = size / 1000 + "kb";
+
+		Console.WriteLine ("  Size: " + sizeString);
+
+		Console.WriteLine ("Download complete.");
+
+		return toFile;
+	}
+
+	// This function is a copy of the BaseScript.DownloadAndUnzip function
+	public void DownloadAndUnzip(string zipFileUrl, string localDirectory)
+	{
+		// Create a temporary file name
+		var tmpFile = GetProjectDirectory()
+			+ Path.DirectorySeparatorChar
+			+ "_tmp"
+			+ Path.DirectorySeparatorChar
+			+ "tmp-" + Guid.NewGuid().ToString() + ".zip";
+
+		// Create the _tmp directory if it doesn't exist
+		if (!Directory.Exists(Path.GetDirectoryName(tmpFile)))
+			Directory.CreateDirectory(Path.GetDirectoryName(tmpFile));
+
+		// Download the zip file to the temporary location
+		Download (zipFileUrl, tmpFile);
+
+		// Unzip the zip file
+		UnZipFile (tmpFile, localDirectory);
+
+		// Delete the temporary file
+		File.Delete(tmpFile);
 	}
 }
