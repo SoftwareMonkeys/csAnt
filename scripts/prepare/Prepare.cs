@@ -1,4 +1,5 @@
 //css_ref ../../lib/SharpZipLib/net-20/ICSharpCode.SharpZipLib.dll;
+//css_ref ../../lib/HtmlAgilityPack/Net45/HtmlAgilityPack.dll;
 using System;
 using System.IO;
 using Microsoft.CSharp;
@@ -8,6 +9,8 @@ using System.IO.Compression;
 using ICSharpCode.SharpZipLib.Zip;
 using ICSharpCode.SharpZipLib.Core;
 using System.Net;
+using HtmlAgilityPack;
+using System.Collections.Generic;
 
 class PrepareScript
 {
@@ -80,7 +83,9 @@ class PrepareScript
 
 	public void GetRemotecsAnt()
 	{
-		var remotePath = "https://csant.googlecode.com/files/csAnt-bin-%5B2012-11-2--17-6-54%5D.zip";
+		var remotePath = GetRemotecsAntFilePath();
+
+		Console.WriteLine("Remote csAnt path: " + remotePath);
 
 		var projectDirectory = GetProjectDirectory();
 
@@ -105,6 +110,30 @@ class PrepareScript
 
 		// Move from the tmp directory to the destination
 		MoveToDestination(tmpDir, csAntLibDir);
+	}
+
+	public string GetRemotecsAntFilePath()
+	{
+		var url = "https://code.google.com/p/csant/downloads/list";
+
+		var xpath = "//table[@id='resultstable']/tr/td[3]";
+
+		var prefix = "https://csant.googlecode.com/files/";
+
+		var data = ScrapeXPathArray(
+			url,
+			xpath
+		);
+
+		foreach (string item in data)
+		{
+			if (item.IndexOf("csAnt-bin-") == 0)
+			{
+				return prefix + item;
+			}
+		}
+
+		return String.Empty;
 	}
 
 	public void MoveToDestination(string tmpDir, string csAntLibDir)
@@ -251,5 +280,38 @@ class PrepareScript
 
 		// Delete the temporary file
 		File.Delete(tmpFile);
+	}
+
+	public string[] ScrapeXPathArray(
+		string url,
+		string xpath
+	)
+	{
+		var web = new HtmlWeb();
+
+		var doc = web.Load(url);
+
+		var nodes = doc.DocumentNode.SelectNodes(xpath);
+
+		List<string> values = new List<string>();
+
+		Console.WriteLine("XPath: " + xpath);
+
+		if (nodes != null)
+		{
+			Console.WriteLine("Total nodes: " + nodes.Count);
+
+			foreach (var node in nodes)
+			{
+				if (!String.IsNullOrEmpty(node.InnerText.Trim ()))
+					values.Add (node.InnerText.Trim ());
+			}
+		}
+		else
+		{
+			Console.WriteLine("No nodes found.");
+		}
+
+		return values.ToArray();
 	}
 }
