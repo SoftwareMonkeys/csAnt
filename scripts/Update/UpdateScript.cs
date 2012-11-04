@@ -43,20 +43,22 @@ class UpdateScript : BaseScript
 		MoveToDestination(
 			tmpDir
 		);
+		
+		Directory.Delete(tmpDir, true);
 	}
 	
 	public void MoveToDestination(string tmpDir)
 	{
 		string subDir = Directory.GetDirectories(tmpDir)[0];
 
-		var baseDir = ProjectDirectory
-			+ Path.DirectorySeparatorChar
-			+ "_update";
+		var baseDir = ProjectDirectory;
 
 		if (!Directory.Exists(baseDir))
 			Directory.CreateDirectory(baseDir);
-
-		Console.WriteLine ("Updating files:");
+		
+		Console.WriteLine ("");
+		Console.WriteLine ("Updating files...");
+		Console.WriteLine ("");
 
 		foreach (string file in Directory.GetFiles (subDir, "*", SearchOption.AllDirectories))
 		{
@@ -65,19 +67,27 @@ class UpdateScript : BaseScript
 			if (!Directory.Exists(Path.GetDirectoryName(toFile)))
 				Directory.CreateDirectory(Path.GetDirectoryName(toFile));
 
+			var cmd = "Updating";
 
+			// TODO: See if the following if statements an be better organised
 			if (
 				// If the file is newer than the existing one
 				File.GetLastWriteTime(file) > File.GetLastWriteTime(toFile)
 			)
 			{
+				// If no to file already exists change the command text to "Adding".
+				if (!File.Exists(toFile))
+				{
+					cmd = "Adding";
+				}
+
 				if (
 					!File.Exists(toFile)
 				    // If both files are different
 					|| !FileEquals(file, toFile)
 				)
 				{
-					Console.WriteLine ("Updating:");
+					Console.WriteLine (cmd + ":");
 					Console.WriteLine ("  " + toFile.Replace(ProjectDirectory, ""));
 
 					if (File.Exists(toFile))
@@ -102,7 +112,6 @@ class UpdateScript : BaseScript
 			}
 		}
 
-		Directory.Delete(tmpDir, true);
 	}
 
 	public string GetRemotecsAntFilePath()
