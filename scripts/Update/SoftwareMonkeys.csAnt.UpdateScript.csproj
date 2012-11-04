@@ -7,7 +7,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{29e65635-19f6-4978-bf1e-904e7081defc}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>SemiCompiled</RootNamespace>
+    <RootNamespace>SoftwareMonkeys.csAnt.UpdateScript</RootNamespace>
     <AssemblyName>SemiCompiled</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
@@ -33,7 +33,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="SoftwareMonkeys.csAnt">
-      <HintPath>..\..\lib\csAnt\Release\SoftwareMonkeys.csAnt.dll</HintPath>
+      <HintPath>..\..\lib\csAnt\bin\Release\SoftwareMonkeys.csAnt.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
