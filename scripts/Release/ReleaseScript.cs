@@ -15,6 +15,8 @@ class CreateReleaseScript : BaseScript
 	
 	public void Start()
 	{
+		ExecuteScript("CopyBinToLib");
+
 		var listDir = ProjectDirectory
 			+ Path.DirectorySeparatorChar
 			+ "rls";
