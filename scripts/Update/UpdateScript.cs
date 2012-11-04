@@ -6,89 +6,129 @@ using System.Diagnostics;
 using SoftwareMonkeys.csAnt;
 using System.Collections.Generic;
 
-class CreateReleaseScript : BaseScript
+class UpdateScript : BaseScript
 {
 	public static void Main(string[] args)
 	{
-		new CreateReleaseScript().Start();
+		new UpdateScript().Start();
 	}
 	
 	public void Start()
 	{
-		var listDir = ProjectDirectory
+		GetRemotecsAnt();
+
+		Console.WriteLine ("Update complete.");
+	}
+	
+	public void GetRemotecsAnt()
+	{
+		var remotePath = GetRemotecsAntFilePath();
+
+		Console.WriteLine("Remote csAnt path: " + remotePath);
+
+		var projectDirectory = ProjectDirectory;
+
+		var tmpDir = projectDirectory
 			+ Path.DirectorySeparatorChar
-			+ "rls";
+			+ "_tmp_update";
 
-		// Loop through the folder containing release list files
-		foreach (string listFile in Directory.GetFiles(listDir, "*-list.txt"))
+		Console.WriteLine("To: " + tmpDir);
+
+		DownloadAndUnzip(
+			remotePath,
+			tmpDir
+		);
+
+		// Move from the tmp directory to the destination
+		MoveToDestination(
+			tmpDir
+		);
+	}
+	
+	public void MoveToDestination(string tmpDir)
+	{
+		string subDir = Directory.GetDirectories(tmpDir)[0];
+
+		var baseDir = ProjectDirectory
+			+ Path.DirectorySeparatorChar
+			+ "_update";
+
+		if (!Directory.Exists(baseDir))
+			Directory.CreateDirectory(baseDir);
+
+		Console.WriteLine ("Updating files:");
+
+		foreach (string file in Directory.GetFiles (subDir, "*", SearchOption.AllDirectories))
 		{
-			Console.WriteLine("----------------------------------------------------------------------");
-			Console.WriteLine("Release list file: " + listFile.Replace(ProjectDirectory, ""));
+			var toFile = file.Replace(subDir, baseDir);
 
-			var files = new List<string>(File.ReadLines(listFile)).ToArray();		
+			if (!Directory.Exists(Path.GetDirectoryName(toFile)))
+				Directory.CreateDirectory(Path.GetDirectoryName(toFile));
 
-			if (files.Length > 0)
+
+			if (
+				// If the file is newer than the existing one
+				File.GetLastWriteTime(file) > File.GetLastWriteTime(toFile)
+			)
 			{
-				Console.WriteLine(" ");
-				Console.WriteLine("Patterns:");
-
-				foreach (string file in files)
+				if (
+					!File.Exists(toFile)
+				    // If both files are different
+					|| !FileEquals(file, toFile)
+				)
 				{
-					Console.WriteLine("  " + file);
+					Console.WriteLine ("Updating:");
+					Console.WriteLine ("  " + toFile.Replace(ProjectDirectory, ""));
+
+					if (File.Exists(toFile))
+					{
+						BackupFile(toFile.Replace(baseDir, "").Trim(Path.DirectorySeparatorChar));
+
+						File.Delete(toFile);
+					}
+
+					File.Move(file, toFile);
 				}
-
-				Console.WriteLine(" ");
-
-				var variation = Path.GetFileNameWithoutExtension(listFile).Replace("-list", "");
-
-				var dateStamp = "["
-					+ DateTime.Now.Year
-					+  "-"
-					+ DateTime.Now.Month
-					+ "-"
-					+ DateTime.Now.Day
-					+ "--"
-					+ DateTime.Now.Hour
-					+ "-"
-					+ DateTime.Now.Minute
-					+ "-"
-					+ DateTime.Now.Second
-					+ "]";
-
-				var zipFileName = ProjectName
-					+ "-"
-					+ variation
-					+ "-"
-					+ dateStamp
-					+ ".zip";
-
-				var zipFilePath = ProjectDirectory
-					+ Path.DirectorySeparatorChar
-					+ "rls"
-					+ Path.DirectorySeparatorChar
-					+ variation
-					+ Path.DirectorySeparatorChar
-					+ zipFileName;
-
-				if (!Directory.Exists(Path.GetDirectoryName(zipFilePath)))
-					Directory.CreateDirectory(Path.GetDirectoryName(zipFilePath));
-
-				Console.WriteLine("Zip file path: " + zipFilePath);
-
-				Zip(
-					files,
-					zipFilePath
-				);
-
-				Console.WriteLine("  Release file: " + zipFilePath.Replace(ProjectDirectory, ""));
-				Console.WriteLine("Release zip file created successfully.");
-				Console.WriteLine("");
-				Console.WriteLine("----------------------------------------------------------------------");
-			} 
+				else
+				{
+					Console.WriteLine ("Skipping (file hasn't changed):");
+					Console.WriteLine ("  " + toFile.Replace(ProjectDirectory, ""));
+				}
+			}
 			else
-				Console.WriteLine("No files or patterns specified in the release file list.");
-
-			Console.WriteLine("");
+			{
+				Console.WriteLine ("Skipping (file isn't newer):");
+				Console.WriteLine ("  " + toFile.Replace(ProjectDirectory, ""));
+			}
 		}
+
+		Directory.Delete(tmpDir, true);
+	}
+
+	public string GetRemotecsAntFilePath()
+	{
+		// TODO: Make this more easily configurable
+		var url = "https://code.google.com/p/csant/downloads/list";
+
+		var xpath = "//table[@id='resultstable']/tr/td[3]";
+
+		var prefix = "csAnt-release-";
+
+		var downloadBase = "https://csant.googlecode.com/files/";
+
+		var data = ScrapeXPathArray(
+			url,
+			xpath
+		);
+
+		foreach (string item in data)
+		{
+			if (item.IndexOf(prefix) == 0)
+			{
+				return downloadBase + item;
+			}
+		}
+
+		return String.Empty;
 	}
 }
