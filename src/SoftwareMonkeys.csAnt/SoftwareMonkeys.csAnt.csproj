@@ -58,14 +58,14 @@
     <Reference Include="SoftwareMonkeys.FileNodes">
       <HintPath>..\..\lib\FileNodes\Release\SoftwareMonkeys.FileNodes.dll</HintPath>
     </Reference>
-    <Reference Include="ICSharpCode.SharpZipLib">
-      <HintPath>..\..\lib\SharpZipLib_0860_Bin\net-20\ICSharpCode.SharpZipLib.dll</HintPath>
-    </Reference>
     <Reference Include="HtmlAgilityPack">
       <HintPath>..\..\lib\HtmlAgilityPack\Net45\HtmlAgilityPack.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\..\lib\Newtonsoft.Json\Bin\Net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib">
+      <HintPath>..\..\lib\SharpZipLib\net-20\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -100,6 +100,11 @@
     <Compile Include="BaseScript.ScrapeListFromXPath.cs" />
     <Compile Include="BaseScript.BackupFile.cs" />
     <Compile Include="BaseScript.FileEquals.cs" />
+    <Compile Include="BaseScript.AddLib.cs" />
+    <Compile Include="BaseScript.GetLib.cs" />
+    <Compile Include="BaseScript.ListLibs.cs" />
+    <Compile Include="BaseScript.RemoveLib.cs" />
+    <Compile Include="BaseScript.GetLibs.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseScript.Execute.cs" />
