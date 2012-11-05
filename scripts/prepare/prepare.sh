@@ -22,6 +22,12 @@ HAP_LIB_ZIPFILE="$HAP_LIB_DIR/HtmlAgilityPack.zip"
 # Set Prepare.cs script constants
 PREPARE_CS_SCRIPT="scripts/prepare/Prepare.cs"
 
+# Import Libraries constants
+IMPORT_LIBS_SCRIPT="GetLibs"
+
+# csAnt constants
+CSANT_FILE="$LIB_DIR/csAnt/bin/Release/csAnt.exe"
+
 
 # ==================================================
 
@@ -151,9 +157,6 @@ mono $CSS_FILE $CREATE_PROJECT_NODE_SCRIPT
 # Now csAnt is installed and ready to use
 
 # Launch the import libs script via csAnt
-IMPORT_LIBS_SCRIPT="ImportLibs"
-CSANT_FILE="$LIB_DIR/csAnt/bin/Release/csAnt.exe"
-
 mono $CSANT_FILE $IMPORT_LIBS_SCRIPT
 
 
