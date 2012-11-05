@@ -1,6 +1,4 @@
 {
-  "Name": "csAnt",
-  "Properties":{
-    "Context": "Project"
-  }
+  "Context": "Project",
+  "Name": "csAnt"
 }
