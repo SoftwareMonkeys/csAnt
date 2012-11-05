@@ -18,13 +18,17 @@ namespace SoftwareMonkeys.csAnt
 
 			if (ProjectNode.Nodes["Libraries"].Nodes.ContainsKey(name))
 			{
-				var projectNode = ProjectNode.Nodes["Libraries"].Nodes[name];
+				var libNode = ProjectNode.Nodes["Libraries"].Nodes[name];
 
-				string url = projectNode.Properties["Url"];
+				// TODO: Use a custom exception
+				if (!libNode.Properties.ContainsKey("Url"))
+					throw new Exception("No 'Url' property found.");
+
+				string url = libNode.Properties["Url"];
 				string subPath = String.Empty;
 
-				if (projectNode.Properties.ContainsKey("SubPath"))
-					subPath = projectNode.Properties["SubPath"];
+				if (libNode.Properties.ContainsKey("SubPath"))
+					subPath = libNode.Properties["SubPath"];
 			
 				var libsPath = ProjectDirectory
 					+ Path.DirectorySeparatorChar
