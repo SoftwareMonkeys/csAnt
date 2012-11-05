@@ -1,0 +1,7 @@
+{
+  "Name": "NUnit",
+  "Properties": {
+    "Url": "http://launchpad.net/nunitv2/2.6.2/2.6.2/+download/NUnit-2.6.2.zip",
+    "SubPath": "/NUnit-2.6.2/"
+  }
+}
