@@ -6,16 +6,21 @@ namespace SoftwareMonkeys.csAnt
 {
 	public partial class BaseScript
 	{
-		public void AddLib (string name, string zipFileUrl)
+		public void AddLib(string name, string zipFileUrl)
+		{
+			AddLib(name, zipFileUrl, String.Empty);
+		}
+
+		public void AddLib (string name, string zipFileUrl, string subPath)
 		{
 			EnsureLibsNodeExists();
 
-			CreateLibNode(name, zipFileUrl);
+			CreateLibNode(name, zipFileUrl, subPath);
 		}
 
 		protected void EnsureLibsNodeExists()
 		{
-			if (!ProjectNode.Nodes.ContainsKey["Libraries"])
+			if (!ProjectNode.Nodes.ContainsKey("Libraries"))
 				CreateLibsNode();
 		}
 
@@ -40,7 +45,7 @@ namespace SoftwareMonkeys.csAnt
 			ProjectNode.Nodes.Add ("Libraries", node);
 		}
 		
-		protected void CreateLibNode(string name, string url)
+		protected void CreateLibNode(string name, string url, string subPath)
 		{
 			var libNodePath = ProjectDirectory
 				+ Path.DirectorySeparatorChar
@@ -58,6 +63,7 @@ namespace SoftwareMonkeys.csAnt
 
 			node.Name = name;
 			node.Properties["Url"] = url;
+			node.Properties["SubPath"] = subPath;
 
 			node.Save ();
 
