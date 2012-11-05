@@ -5,27 +5,52 @@ namespace SoftwareMonkeys.csAnt
 {
 	public partial class BaseScript
 	{
-		public void DownloadAndUnzip(string zipFileUrl, string localDirectory)
+		public void DownloadAndUnzip(string zipFileUrl, string zipFileLocalPath, string localDirectory, string subPath, bool force)
 		{
-			// Create a temporary file name
-			var tmpFile = ProjectDirectory
+
+			// Create the _tmp directory if it doesn't exist
+			if (!Directory.Exists(Path.GetDirectoryName(zipFileLocalPath)))
+				Directory.CreateDirectory(Path.GetDirectoryName(zipFileLocalPath));
+
+			Console.WriteLine ("Zip file path: " + zipFileLocalPath);
+
+			// If the zip file doesn't already exist
+			if (!File.Exists(zipFileLocalPath)
+			    // Or the force flag is true
+				|| force)
+			{
+				Console.WriteLine("Zip file already found locally. Skipping download.");
+
+				// Download the zip file to the temporary location
+				Download (zipFileUrl, zipFileLocalPath);
+			}
+
+			// Create a temporary folder name
+			var tmpFolder = ProjectDirectory
 				+ Path.DirectorySeparatorChar
 				+ "_tmp"
 				+ Path.DirectorySeparatorChar
-				+ "tmp-" + Guid.NewGuid().ToString() + ".zip";
-
-			// Create the _tmp directory if it doesn't exist
-			if (!Directory.Exists(Path.GetDirectoryName(tmpFile)))
-				Directory.CreateDirectory(Path.GetDirectoryName(tmpFile));
-
-			// Download the zip file to the temporary location
-			Download (zipFileUrl, tmpFile);
+				+ "tmp-" + Guid.NewGuid().ToString();
 
 			// Unzip the zip file
-			Unzip (tmpFile, localDirectory);
+			Unzip (zipFileLocalPath, tmpFolder);
 
-			// Delete the temporary file
-			File.Delete(tmpFile);
+			var fullSubPath = Path.GetFullPath(
+				tmpFolder
+				+ Path.DirectorySeparatorChar
+				+ subPath
+			);
+			
+			Console.WriteLine ("");
+			Console.WriteLine ("Moving files to: ");
+			Console.WriteLine ("  " + localDirectory);
+			Console.WriteLine ();
+
+			MoveDirectory(fullSubPath, localDirectory);
+			
+			// Delete the temporary folder
+			if (Directory.Exists(tmpFolder))
+				Directory.Delete(tmpFolder);
 		}
 	}
 }
