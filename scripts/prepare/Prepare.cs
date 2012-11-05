@@ -148,7 +148,7 @@ class PrepareScript
 
 		Directory.Move(subDir, csAntLibDir);
 
-		Directory.Delete(tmpDir);
+		Directory.Delete(tmpDir, true);
 	}
 
 	public string GetNewestFile(string directory)
