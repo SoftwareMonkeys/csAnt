@@ -3,8 +3,6 @@
 /lib/csAnt/bin/Release/*.config
 /lib/csAnt/bin/Release/*.snk
 /scripts/prepare/*
-/scripts/ImportLibs.cs
-/scripts/ImportCustomLibs.disabled.cs
 /scripts/HelloWorld.cs
 /scripts/CreateProjectNode.cs
 /scripts/BuildSolution.cs
