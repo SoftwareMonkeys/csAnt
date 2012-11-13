@@ -14,7 +14,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug</OutputPath>
+    <OutputPath>..\..\bin\Debug</OutputPath>
     <DefineConstants>DEBUG;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -23,17 +23,34 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>none</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release</OutputPath>
+    <OutputPath>..\..\bin\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="SoftwareMonkeys.FileNodes">
+      <HintPath>..\..\lib\FileNodes\Release\SoftwareMonkeys.FileNodes.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MyClass.cs" />
     <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="BaseProjectScript.cs" />
+    <Compile Include="BaseProjectScript.GroupName.cs" />
+    <Compile Include="BaseProjectScript.GroupNode.cs" />
+    <Compile Include="BaseProjectScript.ProjectDirectory.cs" />
+    <Compile Include="BaseProjectScript.ProjectName.cs" />
+    <Compile Include="BaseProjectScript.ProjectNode.cs" />
+    <Compile Include="BaseProjectScript.ImportLocalLib.cs" />
+    <Compile Include="BaseProjectScript.ImportLocalWebApp.cs" />
+    <Compile Include="BaseProjectScript.GoogleCodeUpload.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <ProjectReference Include="..\SoftwareMonkeys.csAnt\SoftwareMonkeys.csAnt.csproj">
+      <Project>{B13BED0E-4F73-4F2A-8AA1-19273CFF9C47}</Project>
+      <Name>SoftwareMonkeys.csAnt</Name>
+    </ProjectReference>
+  </ItemGroup>
 </Project>

@@ -1,11 +1,11 @@
 ﻿using System;
 
-namespace SoftwareMonkeys.csAnt
+namespace SoftwareMonkeys.csAnt.Projects
 {
 	/// <summary>
 	/// 
 	/// </summary>
-	public partial class BaseScript
+	public partial class BaseProjectScript
 	{
 		private string projectName = String.Empty;
 		/// <summary>

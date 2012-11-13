@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace SoftwareMonkeys.csAnt
+namespace SoftwareMonkeys.csAnt.Projects
 {
-	public partial class BaseScript
+	public partial class BaseProjectScript
 	{
 		/// <summary>
 		/// Gets the name of the group/company/organization that the project belongs to.
