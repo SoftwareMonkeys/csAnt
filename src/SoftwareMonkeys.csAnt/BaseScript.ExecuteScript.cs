@@ -18,10 +18,19 @@ namespace SoftwareMonkeys.csAnt
 		{
 			string scriptFile = GetScriptPath(scriptName);
 
-			if (IsVerbose)
-				Console.WriteLine("Executing script: " + scriptName);
+			if (!String.IsNullOrEmpty(scriptFile))
+			{
+				if (IsVerbose)
+					Console.WriteLine("Executing script: " + scriptName);
 			
-			ExecuteScriptFromFile(scriptFile, args);
+				ExecuteScriptFromFile(scriptFile, args);
+			}
+			else
+			{
+				IsError = true;
+
+				Console.WriteLine ("Cannot find '" + scriptName + "' script.");
+			}
 		}
 
 		public void ExecuteScriptFromFile(string scriptPath, string[] args)
