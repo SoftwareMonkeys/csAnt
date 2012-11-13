@@ -2,9 +2,9 @@ using System;
 
 namespace SoftwareMonkeys.csAnt.Projects
 {
-	public class MyClass
+	public partial class BaseProjectScript : BaseScript
 	{
-		public MyClass ()
+		public BaseProjectScript ()
 		{
 		}
 	}

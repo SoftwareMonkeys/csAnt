@@ -1,12 +1,12 @@
 using System;
 using System.IO;
 
-namespace SoftwareMonkeys.csAnt
+namespace SoftwareMonkeys.csAnt.Projects
 {
 	/// <summary>
 	/// 
 	/// </summary>
-	public partial class BaseScript
+	public partial class BaseProjectScript
 	{
 		private string projectDirectory = String.Empty;
 		/// <summary>
@@ -19,6 +19,8 @@ namespace SoftwareMonkeys.csAnt
 				if (String.IsNullOrEmpty(projectDirectory))
 				{
 					projectDirectory = Path.GetDirectoryName(ProjectNode.FilePath);
+
+					CurrentDirectory = projectDirectory;
 				}
 				return projectDirectory;
 			}

@@ -2,12 +2,12 @@
 using System.IO;
 using SoftwareMonkeys.FileNodes;
 
-namespace SoftwareMonkeys.csAnt
+namespace SoftwareMonkeys.csAnt.Projects
 {
 	/// <summary>
 	/// 
 	/// </summary>
-	public partial class BaseScript
+	public partial class BaseProjectScript
 	{
 		private FileNode projectNode;
 			
@@ -17,10 +17,16 @@ namespace SoftwareMonkeys.csAnt
 		/// </summary>
 		public FileNode ProjectNode
 		{
-			get {
+			get
+			{
 				if (projectNode == null)
+				{
 					projectNode = GetProjectNode();
-				return projectNode; }
+
+					CurrentNode = projectNode;
+				}
+				return projectNode;
+			}
 		}
 		
 		public FileNode GetProjectNode()

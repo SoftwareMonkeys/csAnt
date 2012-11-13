@@ -2,9 +2,9 @@
 using System.IO;
 using SoftwareMonkeys.FileNodes;
 
-namespace SoftwareMonkeys.csAnt
+namespace SoftwareMonkeys.csAnt.Projects
 {
-	public partial class BaseScript
+	public partial class BaseProjectScript
 	{
 		private FileNode groupNode;
 		/// <summary>
