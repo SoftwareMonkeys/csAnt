@@ -10,17 +10,23 @@ namespace SoftwareMonkeys.csAnt
 	/// </summary>
 	public partial class BaseScript
 	{
-		public void BuildSolution(string solutionFilePath)
+		public bool BuildSolution(string solutionFilePath)
 		{
+			var success = false;
+
 			if (IsRunningOnMono())
 			{
-				RunXBuild(solutionFilePath);
+				success = RunXBuild(solutionFilePath);
 			}
 			else
 			{
-				RunMicrosoftBuild(solutionFilePath);
+				success = RunMicrosoftBuild(solutionFilePath);
 			}
-			
+
+			if (!success)
+				IsError = true;
+
+			return success;
 		}
 		
 		public static bool IsRunningOnMono ()
@@ -28,8 +34,10 @@ namespace SoftwareMonkeys.csAnt
 		    return Type.GetType("Mono.Runtime") != null;
 		}
 
-		public void RunMicrosoftBuild(string solutionFilePath)
+		public bool RunMicrosoftBuild(string solutionFilePath)
 		{
+			var success = false;
+
 			// Instantiate a new Engine object
 			Engine engine = new Engine();
 
@@ -43,7 +51,7 @@ namespace SoftwareMonkeys.csAnt
 			engine.RegisterLogger(logger);
 
 			// Build a project file
-			bool success = engine.BuildProjectFile(solutionFilePath);
+			success = engine.BuildProjectFile(solutionFilePath);
 
 			//Unregister all loggers to close the log file
 			engine.UnregisterAllLoggers();
@@ -51,10 +59,15 @@ namespace SoftwareMonkeys.csAnt
 			if (success)
 				Console.WriteLine("Build succeeded.");
 			else
+			{
+				IsError = true;
 				Console.WriteLine(@"Build failed. View C:\temp\build.log for details");
+			}
+
+			return success;
 		}
 		
-		public void RunXBuild(string solutionFilePath)
+		public bool RunXBuild(string solutionFilePath)
 		{
 			var cmdName = "xbuild";
 
@@ -62,12 +75,23 @@ namespace SoftwareMonkeys.csAnt
 				"\"" + solutionFilePath + "\""
 			};
 
-			Execute(
+			var process = StartProcess(
 				cmdName,
 				arguments
 			);
-			
-            		Console.WriteLine("Build succeeded.");
+
+			var success = (process.ExitCode == 0);
+
+			if (success)
+            	Console.WriteLine("Build succeeded.");
+			else
+			{
+				IsError = true;
+
+            	Console.WriteLine("Build failed.");
+			}
+
+			return success;
 		}
 		
 	}
