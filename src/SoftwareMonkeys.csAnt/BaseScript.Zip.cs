@@ -19,7 +19,7 @@ namespace SoftwareMonkeys.csAnt
 			);
 
 			if (IsVerbose)
-				Console.WriteLine ("  Project directory: " + ProjectDirectory);
+				Console.WriteLine ("  Current directory: " + CurrentDirectory);
             
             s.SetLevel(9); // 0-9, 9 being the highest compression
 
@@ -31,9 +31,9 @@ namespace SoftwareMonkeys.csAnt
 				{
 					Console.WriteLine ("  Specified pattern/file: " + pattern);
 
-					string shortPattern = pattern.Replace(ProjectDirectory, "");
+					string shortPattern = pattern.Replace(CurrentDirectory, "");
 
-					string[] foundFiles = FindFiles(ProjectDirectory, shortPattern);
+					string[] foundFiles = FindFiles(CurrentDirectory, shortPattern);
 					
 					Console.WriteLine ("    Found " + foundFiles.Length.ToString() + " files.");
 					
@@ -41,11 +41,11 @@ namespace SoftwareMonkeys.csAnt
 
 					foreach (string foundFile in foundFiles)
 					{
-						Console.WriteLine ("    " + foundFile.Replace (ProjectDirectory, ""));
+						Console.WriteLine ("    " + foundFile.Replace (CurrentDirectory, ""));
 
 						var internalPath = zipFileName
 							+ "/"
-							+ foundFile.Replace(ProjectDirectory, "");
+							+ foundFile.Replace(CurrentDirectory, "");
 
 		                ZipEntry entry = new ZipEntry(
 							internalPath

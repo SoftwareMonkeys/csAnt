@@ -82,7 +82,7 @@ namespace SoftwareMonkeys.csAnt
 
 		public string GetScriptsPath()
 		{
-			var path = Path.Combine(ProjectDirectory, "scripts");
+			var path = Path.Combine(CurrentDirectory, "scripts");
 			
 			return path;
 			

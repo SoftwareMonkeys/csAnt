@@ -20,13 +20,13 @@ namespace SoftwareMonkeys.csAnt
 
 		protected void EnsureLibsNodeExists()
 		{
-			if (!ProjectNode.Nodes.ContainsKey("Libraries"))
+			if (!CurrentNode.Nodes.ContainsKey("Libraries"))
 				CreateLibsNode();
 		}
 
 		protected void CreateLibsNode()
 		{
-			var libNodePath = ProjectDirectory
+			var libNodePath = CurrentDirectory
 				+ Path.DirectorySeparatorChar
 				+ "lib"
 				+ Path.DirectorySeparatorChar
@@ -42,12 +42,12 @@ namespace SoftwareMonkeys.csAnt
 
 			node.Save ();
 
-			ProjectNode.Nodes.Add ("Libraries", node);
+			CurrentNode.Nodes.Add ("Libraries", node);
 		}
 		
 		protected void CreateLibNode(string name, string url, string subPath)
 		{
-			var libNodePath = ProjectDirectory
+			var libNodePath = CurrentDirectory
 				+ Path.DirectorySeparatorChar
 				+ "lib"
 				+ Path.DirectorySeparatorChar
@@ -67,7 +67,7 @@ namespace SoftwareMonkeys.csAnt
 
 			node.Save ();
 
-			ProjectNode.Nodes["Libraries"].Nodes.Add (name, node);
+			CurrentNode.Nodes["Libraries"].Nodes.Add (name, node);
 		}
 	}
 }

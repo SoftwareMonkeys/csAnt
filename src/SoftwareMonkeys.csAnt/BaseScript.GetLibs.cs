@@ -11,12 +11,20 @@ namespace SoftwareMonkeys.csAnt
 
 		public void GetLibs(bool force)
 		{
-			if (!ProjectNode.Nodes.ContainsKey("Libraries"))
-				Console.WriteLine ("No libraries listed.");
+			if (CurrentNode == null)
+				Console.WriteLine("CurrentNode wasn't initialized.");
 
-			foreach (var node in ProjectNode.Nodes["Libraries"].Nodes.Values)
+			if (CurrentNode.Nodes == null
+			    || !CurrentNode.Nodes.ContainsKey("Libraries"))
 			{
-				GetLib (node.Name, force);
+				Console.WriteLine ("No libraries listed.");
+			}
+			else
+			{
+				foreach (var node in CurrentNode.Nodes["Libraries"].Nodes.Values)
+				{
+					GetLib (node.Name, force);
+				}
 			}
 		}
 	}

@@ -16,9 +16,9 @@ namespace SoftwareMonkeys.csAnt
 			Console.WriteLine ("Retrieving library: " + name);
 			Console.WriteLine ("");
 
-			if (ProjectNode.Nodes["Libraries"].Nodes.ContainsKey(name))
+			if (CurrentNode.Nodes["Libraries"].Nodes.ContainsKey(name))
 			{
-				var libNode = ProjectNode.Nodes["Libraries"].Nodes[name];
+				var libNode = CurrentNode.Nodes["Libraries"].Nodes[name];
 
 				// TODO: Use a custom exception
 				if (!libNode.Properties.ContainsKey("Url"))
@@ -30,7 +30,7 @@ namespace SoftwareMonkeys.csAnt
 				if (libNode.Properties.ContainsKey("SubPath"))
 					subPath = libNode.Properties["SubPath"];
 			
-				var libsPath = ProjectDirectory
+				var libsPath = CurrentDirectory
 					+ Path.DirectorySeparatorChar
 					+ "lib";
 

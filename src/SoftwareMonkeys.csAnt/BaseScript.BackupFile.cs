@@ -5,17 +5,17 @@ namespace SoftwareMonkeys.csAnt
 {
 	public partial class BaseScript
 	{
-		public string BackupFile(string projectRelativeFilePath)
+		public string BackupFile(string relativeFilePath)
 		{
 			var fromFullFilePath = String.Empty;
 
-			fromFullFilePath = Path.GetFullPath(projectRelativeFilePath);
+			fromFullFilePath = Path.GetFullPath(relativeFilePath);
 
-			var toFilePath = ProjectDirectory
+			var toFilePath = CurrentDirectory
 				+ Path.DirectorySeparatorChar
 				+ "_bak"
 				+ Path.DirectorySeparatorChar
-				+ projectRelativeFilePath;
+				+ relativeFilePath;
 
 			var timeStamp = String.Format(
 				"[{0}-{1}-{2}--{3}-{4}-{5}]",
@@ -44,9 +44,9 @@ namespace SoftwareMonkeys.csAnt
 
 			Console.WriteLine("");
 			Console.WriteLine("Backing up file:");
-			Console.WriteLine("  " + fromFullFilePath.Replace (ProjectDirectory, ""));
+			Console.WriteLine("  " + fromFullFilePath.Replace (CurrentDirectory, ""));
 			Console.WriteLine("To:");
-			Console.WriteLine("  " + toFilePath.Replace (ProjectDirectory, ""));
+			Console.WriteLine("  " + toFilePath.Replace (CurrentDirectory, ""));
 			Console.WriteLine("");
 
 			File.Copy(
