@@ -50,7 +50,7 @@ class DeployLocalScript : BaseProjectScript
 			destination
 		);
 
-		var prepareScriptFile = "prepare.sh";
+		var prepareScriptFile = "launch-prepare.sh";
 
 		Environment.CurrentDirectory = destination;
 
