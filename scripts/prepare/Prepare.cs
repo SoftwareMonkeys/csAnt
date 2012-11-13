@@ -172,6 +172,12 @@ class PrepareScript
 			"GetLibs.cs"
 		};
 
+		var requiredScriptFolders = new string[]
+		{
+			"Update",
+			"Release"
+		};
+
 		if (!Directory.Exists(scriptsDir))
 			Directory.CreateDirectory(scriptsDir);
 
@@ -186,6 +192,7 @@ class PrepareScript
 
 		Console.WriteLine("Scripts:");
 
+		// Script files
 		foreach (string file in requiredScriptFiles)
 		{
 			var fromFile = fromScriptsDir
@@ -196,10 +203,27 @@ class PrepareScript
 				+ Path.DirectorySeparatorChar
 				+ file;
 
-			Console.WriteLine(toFile);
+			Console.WriteLine(file);
 
 			if (!File.Exists(toFile))
 				File.Copy(fromFile, toFile);
+		}
+
+		// Script folders
+		foreach (string dir in requiredScriptFolders)
+		{
+			var fromDir = fromScriptsDir
+				+ Path.DirectorySeparatorChar
+				+ dir;
+
+			var toDir = scriptsDir
+				+ Path.DirectorySeparatorChar
+				+ dir;
+
+			Console.WriteLine(dir);
+
+			if (!Directory.Exists(toDir))
+				Directory.Move(fromDir, toDir);
 		}
 
 		Console.WriteLine("");
