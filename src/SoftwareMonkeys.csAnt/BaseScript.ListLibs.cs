@@ -12,9 +12,9 @@ namespace SoftwareMonkeys.csAnt
 
 			var i = 0;
 
-			if (ProjectNode.Nodes.ContainsKey("Libraries"))
+			if (CurrentNode.Nodes.ContainsKey("Libraries"))
 			{
-				foreach (var node in ProjectNode.Nodes["Libraries"].Nodes.Values)
+				foreach (var node in CurrentNode.Nodes["Libraries"].Nodes.Values)
 				{
 					i++;
 
