@@ -1,0 +1,6 @@
+/bin/Release/*.dll
+/bin/Release/*.exe
+/bin/Release/*.config
+/bin/Release/*.snk
+/lib/cs-script/*
+/lib/FileNodes/Release/*
