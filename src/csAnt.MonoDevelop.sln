@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoftwareMonkeys.csAnt.UI.cs
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoftwareMonkeys.csAnt.Tests", "SoftwareMonkeys.csAnt.Tests\SoftwareMonkeys.csAnt.Tests.csproj", "{EFEAE89A-6324-41B0-AE1F-B2284D510CA6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoftwareMonkeys.csAnt.Projects", "SoftwareMonkeys.csAnt.Projects\SoftwareMonkeys.csAnt.Projects.csproj", "{F1B8ACD3-E1A2-4F09-8931-288675A675C7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -39,6 +41,14 @@ Global
 		{EFEAE89A-6324-41B0-AE1F-B2284D510CA6}.Release|Any CPU.Build.0 = Release|Any CPU
 		{EFEAE89A-6324-41B0-AE1F-B2284D510CA6}.Release|x86.ActiveCfg = Release|Any CPU
 		{EFEAE89A-6324-41B0-AE1F-B2284D510CA6}.Release|x86.Build.0 = Release|Any CPU
+		{F1B8ACD3-E1A2-4F09-8931-288675A675C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1B8ACD3-E1A2-4F09-8931-288675A675C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1B8ACD3-E1A2-4F09-8931-288675A675C7}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F1B8ACD3-E1A2-4F09-8931-288675A675C7}.Debug|x86.Build.0 = Debug|Any CPU
+		{F1B8ACD3-E1A2-4F09-8931-288675A675C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1B8ACD3-E1A2-4F09-8931-288675A675C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F1B8ACD3-E1A2-4F09-8931-288675A675C7}.Release|x86.ActiveCfg = Release|Any CPU
+		{F1B8ACD3-E1A2-4F09-8931-288675A675C7}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = SoftwareMonkeys.csAnt.UI.csAntConsole\SoftwareMonkeys.csAnt.UI.csAntConsole.csproj
