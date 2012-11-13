@@ -1,4 +1,6 @@
 {
-  "Context": "Project",
-  "Name": "csAnt"
+  "Name": "csAnt",
+  "Parameters":{
+    "Context": "Project"
+  }
 }
