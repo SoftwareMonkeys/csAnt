@@ -52,7 +52,7 @@ class PrepareScript
 			+ Path.DirectorySeparatorChar
 			+ "rls"
 			+ Path.DirectorySeparatorChar
-			+ "bin";
+			+ "ProjectRelease";
 
 		Console.WriteLine("csAnt release dir: " + csAntReleaseDir);
 
@@ -76,8 +76,22 @@ class PrepareScript
 
 		UnZipFile(csAntReleaseFile, tmpDir);
 
-		// Move from the tmp directory to the destination
-		MoveToDestination(tmpDir, csAntLibDir);
+		var scriptsDir = projectDirectory
+			+ Path.DirectorySeparatorChar
+			+ "scripts";
+
+		var subDir = Directory.GetDirectories(tmpDir)[0];
+
+		// Move libraries from the tmp directory to the destination
+		MoveLibsToDestination(subDir, csAntLibDir);
+
+		// Move scripts from the tmp directory to the destination
+		MoveScriptsToDestination(subDir, scriptsDir);
+
+		// Move launcher from the tmp directory to the destination
+		MoveLauncherToDestination(subDir, projectDirectory);
+
+		Directory.Delete(tmpDir, true);
 
 	}
 
@@ -103,13 +117,27 @@ class PrepareScript
 
 		Console.WriteLine("To: " + tmpDir);
 
+		var scriptsDir = projectDirectory
+			+ Path.DirectorySeparatorChar
+			+ "scripts";
+
 		DownloadAndUnzip(
 			remotePath,
 			tmpDir
 		);
 
-		// Move from the tmp directory to the destination
-		MoveToDestination(tmpDir, csAntLibDir);
+		var subDir = Directory.GetDirectories(tmpDir)[0];
+
+		// Move libraries from the tmp directory to the destination
+		MoveLibsToDestination(subDir, csAntLibDir);
+
+		// Move scripts from the tmp directory to the destination
+		MoveScriptsToDestination(subDir, scriptsDir);
+
+		// Move launcher from the tmp directory to the destination
+		MoveLauncherToDestination(subDir, projectDirectory);
+
+		Directory.Delete(tmpDir, true);
 	}
 
 	public string GetRemotecsAntFilePath()
@@ -127,7 +155,7 @@ class PrepareScript
 
 		foreach (string item in data)
 		{
-			if (item.IndexOf("csAnt-bin-") == 0)
+			if (item.IndexOf("csAnt-release-") == 0)
 			{
 				return prefix + item;
 			}
@@ -136,19 +164,82 @@ class PrepareScript
 		return String.Empty;
 	}
 
-	public void MoveToDestination(string tmpDir, string csAntLibDir)
+	public void MoveScriptsToDestination(string tmpDir, string scriptsDir)
+	{
+		var requiredScriptFiles = new string[]
+		{
+			"CreateProjectNode.cs",
+			"GetLibs.cs"
+		};
+
+		if (!Directory.Exists(scriptsDir))
+			Directory.CreateDirectory(scriptsDir);
+
+		string fromScriptsDir = tmpDir
+			+ Path.DirectorySeparatorChar
+			+ "scripts";
+
+		Console.WriteLine("");
+		Console.WriteLine("Getting csAnt scripts from:");
+		Console.WriteLine(scriptsDir);
+		Console.WriteLine("");
+
+		Console.WriteLine("Scripts:");
+
+		foreach (string file in requiredScriptFiles)
+		{
+			var fromFile = fromScriptsDir
+				+ Path.DirectorySeparatorChar
+				+ file;
+
+			var toFile = scriptsDir
+				+ Path.DirectorySeparatorChar
+				+ file;
+
+			Console.WriteLine(toFile);
+
+			if (!File.Exists(toFile))
+				File.Copy(fromFile, toFile);
+		}
+
+		Console.WriteLine("");
+
+	}
+
+	public void MoveLibsToDestination(string tmpDir, string csAntLibDir)
 	{
 		if (!Directory.Exists(csAntLibDir))
 			Directory.CreateDirectory(csAntLibDir);
 
-		string subDir = Directory.GetDirectories(tmpDir)[0];
-
 		if (Directory.Exists(csAntLibDir))
 			Directory.Delete(csAntLibDir, true);
 
-		Directory.Move(subDir, csAntLibDir);
+		string libDir = tmpDir
+			+ Path.DirectorySeparatorChar
+			+ "lib"
+			+ Path.DirectorySeparatorChar
+			+ "csAnt";
 
-		Directory.Delete(tmpDir, true);
+		Console.WriteLine("");
+		Console.WriteLine("Getting csAnt libraries from:");
+		Console.WriteLine(libDir);
+		Console.WriteLine("");
+
+		Directory.Move(libDir, csAntLibDir);
+	}
+
+
+	public void MoveLauncherToDestination(string tmpDir, string toDir)
+	{
+		var file = tmpDir
+			+ Path.DirectorySeparatorChar
+			+ "csAnt.sh";
+
+		var toFile = toDir
+			+ Path.DirectorySeparatorChar
+			+ "csAnt.sh";
+
+		File.Copy(file, toFile);
 	}
 
 	public string GetNewestFile(string directory)
