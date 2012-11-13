@@ -20,22 +20,27 @@ class CycleReleaseScript : BaseScript
 
 		ExecuteScript("CycleBuild");
 
-		Console.WriteLine("Creating release zip files...");
-		Console.WriteLine("");
+		if (!IsError)
+		{
+			Console.WriteLine("Creating release zip files...");
+			Console.WriteLine("");
 
-		// Create the release
-		ExecuteScript(
-			"Release",
-			new string[]{
-				"-mode:Release"
-			}
-		);
+			// Create the release
+			ExecuteScript(
+				"Release",
+				new string[]{
+					"-mode:Release"
+				}
+			);
+		}
 
-		Console.WriteLine("Uploading the release zip file to GoogleCode...");
-		Console.WriteLine("");
+		if (!IsError)
+		{
+			Console.WriteLine("Uploading the release zip file to GoogleCode...");
+			Console.WriteLine("");
 
-		// Upload to GoogleCode
-		ExecuteScript("GoogleCodeRelease");
-		
+			// Upload to GoogleCode
+			ExecuteScript("GoogleCodeRelease");
+		}
 	}
 }
