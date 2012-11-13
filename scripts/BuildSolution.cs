@@ -64,19 +64,26 @@ class BuildSolutionScript : BaseScript
 		
 		foreach (string solutionFile in solutionFiles)
 		{	
-			if (!foundSolution)
-				foundSolution = true;
+			if (!IsError)
+			{
+				if (!foundSolution)
+					foundSolution = true;
 		
-			var fileName = Path.GetFileNameWithoutExtension(solutionFile);
-			var ext = Path.GetExtension(solutionFile).Trim('.');
+				var fileName = Path.GetFileNameWithoutExtension(solutionFile);
+				var ext = Path.GetExtension(solutionFile).Trim('.');
 			
-			if (
-				fileName.ToLower() == shortName.ToLower()
-				&& ext.ToLower() == "sln"
-			)
-			{			
-				BuildSolution(solutionFile);
+				if (
+					fileName.ToLower() == shortName.ToLower()
+					&& ext.ToLower() == "sln"
+				)
+				{			
+					if (!BuildSolution(solutionFile))
+						IsError = true;
+				}
 			}
+
+			if (IsError)
+				break;
 		}
 		
 		if (!foundSolution)
