@@ -44,7 +44,7 @@ class CreateProjectNodeScript
 		return
 @"{
   ""Name"": """ + projectName + @""",
-  ""Parameters"":{
+  ""Properties"":{
     ""Context"": ""Project""
   }
 }";
