@@ -1,11 +1,14 @@
 //css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.dll;
+//css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.Projects.dll;
+
 using System;
 using System.IO;
 using Microsoft.CSharp;
 using System.Diagnostics;
 using SoftwareMonkeys.csAnt;
+using SoftwareMonkeys.csAnt.Projects;
 
-class DeployLocalScript : BaseScript
+class DeployLocalScript : BaseProjectScript
 {
 	public static void Main(string[] args)
 	{
@@ -26,11 +29,13 @@ class DeployLocalScript : BaseScript
 		Console.WriteLine("Destination:");
 		Console.WriteLine(destination);
 
+		// TODO: Make it possible to specify either ProjectRelease or StandardRelease, depending on how
+		// csAnt is to be used
 		var releaseDir = ProjectDirectory
 			+ Path.DirectorySeparatorChar
 			+ "rls"
 			+ Path.DirectorySeparatorChar
-			+ "release";
+			+ "ProjectRelease";
 
 		var releaseFile = GetNewestFile(releaseDir);
 
