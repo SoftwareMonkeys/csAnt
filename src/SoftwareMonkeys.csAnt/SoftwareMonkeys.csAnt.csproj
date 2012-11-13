@@ -72,12 +72,8 @@
     <Compile Include="BaseScript.BaseNode.cs" />
     <Compile Include="BaseScript.cs" />
     <Compile Include="BaseScript.ExecuteScript.cs" />
-    <Compile Include="BaseScript.GroupName.cs" />
-    <Compile Include="BaseScript.GroupNode.cs" />
-    <Compile Include="BaseScript.ProjectName.cs" />
     <Compile Include="BaseScript.StartHttp.cs" />
     <Compile Include="GroupNodeNotFoundException.cs" />
-    <Compile Include="BaseScript.ProjectDirectory.cs" />
     <Compile Include="BaseScript.Download.cs" />
     <Compile Include="BaseScript.Unzip.cs" />
     <Compile Include="BaseScript.Zip.cs" />
@@ -85,9 +81,7 @@
     <Compile Include="BaseScript.StartNewProcess.cs" />
     <Compile Include="BaseScript.StartProcess.cs" />
     <Compile Include="BaseScript.IsVerbose.cs" />
-    <Compile Include="BaseScript.ImportLocalLib.cs" />
     <Compile Include="Arguments.cs" />
-    <Compile Include="BaseScript.ImportLocalWebApp.cs" />
     <Compile Include="BaseScript.GetNewestFile.cs" />
     <Compile Include="BaseScript.GetNewestFolder.cs" />
     <Compile Include="BaseScript.MoveDirectory.cs" />
@@ -96,7 +90,6 @@
     <Compile Include="BaseScript.GetScriptPath.cs" />
     <Compile Include="BaseScript.ScriptExists.cs" />
     <Compile Include="BaseScript.ProjectsDirectory.cs" />
-    <Compile Include="BaseScript.GoogleCodeUpload.cs" />
     <Compile Include="BaseScript.ScrapeListFromXPath.cs" />
     <Compile Include="BaseScript.BackupFile.cs" />
     <Compile Include="BaseScript.FileEquals.cs" />
@@ -105,15 +98,18 @@
     <Compile Include="BaseScript.ListLibs.cs" />
     <Compile Include="BaseScript.RemoveLib.cs" />
     <Compile Include="BaseScript.GetLibs.cs" />
+    <Compile Include="BaseScript.BuildAllSolutions.cs" />
+    <Compile Include="BaseScript.IsError.cs" />
+    <Compile Include="BaseScript.GetTempDir.cs" />
+    <Compile Include="BaseScript.GetTmpFile.cs" />
+    <Compile Include="BaseScript.ClearTmp.cs" />
+    <Compile Include="BaseScript.CurrentNode.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseScript.Execute.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseScript.BuildSolution.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="BaseScript.ProjectNode.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseScript.CurrentDirectory.cs" />
@@ -130,4 +126,9 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <OutputPath>..\..\bin\Debug\</OutputPath>
   </PropertyGroup>
+  <ItemGroup>
+    <None Include="SoftwareMonkeys.csAnt.snk">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 </Project>
