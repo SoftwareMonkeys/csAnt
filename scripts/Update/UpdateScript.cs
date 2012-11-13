@@ -126,7 +126,7 @@ class UpdateScript : BaseProjectScript
 
 		var prefix = "csAnt-";
 
-		if (CurrentNode.Properties.Length > 0
+		if (CurrentNode.Properties.Count > 0
 			&& CurrentNode.Properties["Context"] == "Project")
 		{
 			prefix += "ProjectRelease-";
