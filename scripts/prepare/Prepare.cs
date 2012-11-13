@@ -239,7 +239,7 @@ class PrepareScript
 			+ Path.DirectorySeparatorChar
 			+ "csAnt.sh";
 
-		File.Copy(file, toFile);
+		File.Copy(file, toFile, true);
 	}
 
 	public string GetNewestFile(string directory)
