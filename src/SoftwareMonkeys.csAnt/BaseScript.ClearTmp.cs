@@ -1,11 +1,17 @@
 using System;
+using System.IO;
 
 namespace SoftwareMonkeys.csAnt
 {
-	public class BaseScript
+	public partial class BaseScript
 	{
-		public BaseScript ()
+		public void ClearTmp()
 		{
+			var tmpDir = CurrentDirectory
+				+ Path.DirectorySeparatorChar
+				+ "_tmp";
+
+			Directory.Delete(tmpDir, true);
 		}
 	}
 }

@@ -1,10 +1,16 @@
 using System;
+using System.IO;
+
+
 namespace SoftwareMonkeys.csAnt
 {
-	public class BaseScript
+	public partial class BaseScript
 	{
-		public BaseScript()
+		public string GetTmpFile()
 		{
+			return GetTmpDir()
+				+ Path.DirectorySeparatorChar
+				+ Guid.NewGuid().ToString();
 		}
 	}
 }
