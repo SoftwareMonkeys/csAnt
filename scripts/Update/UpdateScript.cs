@@ -124,7 +124,17 @@ class UpdateScript : BaseProjectScript
 
 		var xpath = "//table[@id='resultstable']/tr/td[3]";
 
-		var prefix = "csAnt-release-";
+		var prefix = "csAnt-";
+
+		if (CurrentNode.Properties.Length > 0
+			&& CurrentNode.Properties["Context"] == "Project")
+		{
+			prefix += "ProjectRelease-";
+		}
+		else
+		{
+			prefix += "StandardRelease-";
+		}
 
 		var downloadBase = "https://csant.googlecode.com/files/";
 
