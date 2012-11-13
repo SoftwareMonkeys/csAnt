@@ -24,8 +24,9 @@ class BuildSolutionScript : BaseScript
 	
 	public void ShowIndex()
 	{
-		var rootPath = CurrentDirectory;
-	
+		var rootPath = CurrentDirectory
+			+ Path.DirectorySeparatorChar
+			+ "src";	
 	
 		var solutionFiles = Directory.GetFiles(rootPath, "*.sln", SearchOption.AllDirectories);
 		
