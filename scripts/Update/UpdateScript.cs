@@ -33,7 +33,9 @@ class UpdateScript : BaseProjectScript
 
 		var tmpDir = projectDirectory
 			+ Path.DirectorySeparatorChar
-			+ "_tmp_update";
+			+ "_tmp"
+			+ Path.DirectorySeparatorChar
+			+ "update";
 
 		Console.WriteLine("To: " + tmpDir);
 
