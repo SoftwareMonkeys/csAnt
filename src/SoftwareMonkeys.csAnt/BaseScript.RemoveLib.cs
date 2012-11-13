@@ -13,9 +13,9 @@ namespace SoftwareMonkeys.csAnt
 
 		protected void RemoveLibNode(string name)
 		{
-			if (ProjectNode.Nodes.ContainsKey("Libraries"))
+			if (CurrentNode.Nodes.ContainsKey("Libraries"))
 			{
-				var libsNode = ProjectNode.Nodes["Libraries"];
+				var libsNode = CurrentNode.Nodes["Libraries"];
 
 				if (libsNode.Nodes.ContainsKey(name))
 				{

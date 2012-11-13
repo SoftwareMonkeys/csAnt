@@ -23,12 +23,12 @@ namespace SoftwareMonkeys.csAnt
 			
 			ExecuteScriptFromFile(scriptFile, args);
 		}
-		
+
 		public void ExecuteScriptFromFile(string scriptPath, string[] args)
 		{			
 			// TODO: Check if there's a better way to format this path
 			var cscsExe = Path.GetFullPath(
-				ProjectDirectory
+				CurrentDirectory
 				+ Path.DirectorySeparatorChar
 				+ "lib"
 				+ Path.DirectorySeparatorChar

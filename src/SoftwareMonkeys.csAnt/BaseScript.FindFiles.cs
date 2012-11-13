@@ -19,7 +19,7 @@ namespace SoftwareMonkeys.csAnt
 			if (pattern.IndexOf("*") == -1)
 			{
 				files = new string[]{
-					ProjectDirectory
+					CurrentDirectory
 					+ Path.DirectorySeparatorChar
 					+ pattern
 				};
@@ -32,7 +32,7 @@ namespace SoftwareMonkeys.csAnt
 					// Treat it as a full relative path (relative to the project directory)
 					// so no need for SearchOption.AllDirectories
 					files = Directory.GetFiles (
-						ProjectDirectory + "/",
+						CurrentDirectory + "/",
 					    	pattern.TrimStart('/') // Trim the slash off the start to make it work
 					);
 				}
@@ -42,7 +42,7 @@ namespace SoftwareMonkeys.csAnt
 					// Treat it only as a partial pattern to match anywhere, so it needs
 					// SearchOption.AllDirectories
 					files = Directory.GetFiles (
-						ProjectDirectory + "/",
+						CurrentDirectory + "/",
 					    	pattern,
 						SearchOption.AllDirectories
 					);
