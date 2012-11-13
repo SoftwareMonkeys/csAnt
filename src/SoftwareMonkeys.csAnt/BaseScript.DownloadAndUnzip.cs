@@ -26,10 +26,12 @@ namespace SoftwareMonkeys.csAnt
 			    // Or the force flag is true
 				|| force)
 			{
-				Console.WriteLine("Zip file already found locally. Skipping download.");
-
 				// Download the zip file to the temporary location
 				Download (zipFileUrl, zipFileLocalPath);
+			}
+			else
+			{				
+				Console.WriteLine("Zip file already found locally. Skipping download.");
 			}
 
 			// Create a temporary folder name
