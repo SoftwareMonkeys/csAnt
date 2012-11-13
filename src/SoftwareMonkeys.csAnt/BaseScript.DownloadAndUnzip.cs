@@ -5,6 +5,13 @@ namespace SoftwareMonkeys.csAnt
 {
 	public partial class BaseScript
 	{
+		public void DownloadAndUnzip(string zipFileUrl, string localDirectory)
+		{
+			string tmpFile = GetTmpFile();
+
+			DownloadAndUnzip(zipFileUrl, tmpFile, localDirectory, "/", false);
+		}
+
 		public void DownloadAndUnzip(string zipFileUrl, string zipFileLocalPath, string localDirectory, string subPath, bool force)
 		{
 
@@ -26,7 +33,7 @@ namespace SoftwareMonkeys.csAnt
 			}
 
 			// Create a temporary folder name
-			var tmpFolder = ProjectDirectory
+			var tmpFolder = CurrentDirectory
 				+ Path.DirectorySeparatorChar
 				+ "_tmp"
 				+ Path.DirectorySeparatorChar
