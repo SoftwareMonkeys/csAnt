@@ -1,11 +1,9 @@
 using System;
 namespace SoftwareMonkeys.csAnt
 {
-	public class BaseScript
+	public partial class BaseScript
 	{
-		public BaseScript()
-		{
-		}
+		public bool IsError { get;set; }
 	}
 }
 
