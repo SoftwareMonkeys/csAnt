@@ -44,38 +44,40 @@ namespace SoftwareMonkeys.csAnt
 			info.UseShellExecute = false;
 			info.RedirectStandardOutput = true;
 			info.RedirectStandardError = true;
-			info.RedirectStandardInput = true;
-			info.CreateNoWindow = false;
+			info.CreateNoWindow = true;
 
 			info.ErrorDialog = false;
 
 			// Start the process
-			Process process = Process.Start(info);
+			Process process = new Process();
 
-			// Write the process output to the console while it runs
-			while (!process.HasExited)
-			{
-				string output = String.Empty;
-				
-				if (!process.StandardOutput.EndOfStream)
-				{
-					output = process.StandardOutput.ReadLine();
-					
-					if (output != null)
-						Console.WriteLine(output);
-				}
-			}
-				
-			// Write the process errors to the console
-			if (!process.StandardError.EndOfStream)
-			{
-				string error = String.Empty;
+			process.StartInfo = info;
 
-				error = process.StandardError.ReadLine();
-				
-				if (error != null)
-					Console.WriteLine(error);
-			}
+			process.EnableRaisingEvents = true;
+
+			process.OutputDataReceived += new DataReceivedEventHandler
+			(
+			    delegate(object sender, DataReceivedEventArgs e)
+			    {
+			        // append the new data to the data already read-in
+			        Console.WriteLine(e.Data);
+			    }
+			);
+
+			process.ErrorDataReceived += new DataReceivedEventHandler
+			(
+			    delegate(object sender, DataReceivedEventArgs e)
+			    {
+			        // append the new data to the data already read-in
+			        Console.WriteLine(e.Data);
+			    }
+			);
+
+			process.Start();
+
+			process.BeginOutputReadLine();
+
+			process.WaitForExit();
 
 			return process;
 		}
