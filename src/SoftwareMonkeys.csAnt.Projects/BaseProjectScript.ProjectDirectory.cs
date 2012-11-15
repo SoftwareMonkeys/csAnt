@@ -27,6 +27,8 @@ namespace SoftwareMonkeys.csAnt.Projects
 			set
 			{
 				projectDirectory = value;
+
+				CurrentDirectory = value;
 			}
 		}
 		
