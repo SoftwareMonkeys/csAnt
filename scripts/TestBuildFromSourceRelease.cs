@@ -80,28 +80,6 @@ class TestBuildFromSourceReleaseScript : BaseProjectScript
 			Console.WriteLine("Can't find 'launch-prepare.sh' file.");
 	}
 
-	// TODO: Remove if not needed. Prepare script takes care of it
-	/*public void ImportLibs(string tmpDir)
-	{
-		var prepareScript = GetNewestFolder(tmpDir)
-			+ Path.DirectorySeparatorChar
-			+ "csAnt.sh"
-			+ " "
-			+ "GetLibs";
-
-		Console.WriteLine("Prepare script:");
-		Console.WriteLine(prepareScript);
-
-		Process process = null;
-
-		if (File.Exists(prepareScript))
-			process = StartProcess("sh", prepareScript);
-
-
-		if (process != null)
-			process.WaitForExit();
-	}*/
-
 	public void Build(string tmpDir)
 	{
 		var slnFiles = Directory.GetFiles(
