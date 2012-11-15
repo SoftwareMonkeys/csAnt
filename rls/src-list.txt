@@ -1,9 +1,13 @@
 /src/SoftwareMonkeys.csAnt/**.cs
 /src/SoftwareMonkeys.csAnt/**.csproj
 /src/SoftwareMonkeys.csAnt/**.snk
+/src/SoftwareMonkeys.csAnt.Projects/**.cs
+/src/SoftwareMonkeys.csAnt.Projects/**.csproj
+/src/SoftwareMonkeys.csAnt.Projects/**.snk
 /src/SoftwareMonkeys.csAnt.Tests/**.cs
 /src/SoftwareMonkeys.csAnt.Tests/**.csproj
 /src/SoftwareMonkeys.csAnt.Tests/**.snk
+/src/SoftwareMonkeys.csAnt.UI.csAntConsole/**.config
 /src/SoftwareMonkeys.csAnt.UI.csAntConsole/**.cs
 /src/SoftwareMonkeys.csAnt.UI.csAntConsole/**.csproj
 /src/SoftwareMonkeys.csAnt.UI.csAntConsole/**.snk

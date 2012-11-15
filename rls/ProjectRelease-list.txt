@@ -12,6 +12,9 @@
 /scripts/RemoveLib.cs
 /scripts/CycleRelease.cs
 /scripts/CycleBuild.cs
+/scripts/CopyBinToLib.cs
+/scripts/GoogleCodeRelease.cs
+/scripts/SetGoogleCode.cs
 /scripts/Release/*
 /scripts/Update/*
 /lib/NUnit/NUnit.node
