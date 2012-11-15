@@ -22,6 +22,7 @@ namespace SoftwareMonkeys.csAnt
 			set
 			{
 				currentDirectory = value;
+				Environment.CurrentDirectory = value;
 			}
 		}
 	}
