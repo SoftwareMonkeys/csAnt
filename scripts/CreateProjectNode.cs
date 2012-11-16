@@ -25,18 +25,23 @@ class CreateProjectNodeScript
 
 		Console.WriteLine("Project name: " + projectName);
 
-		var content = GetContent(projectName);
-
 		var filePath = Environment.CurrentDirectory
 			+ Path.DirectorySeparatorChar
 			+ projectName
 			+ ".node";
 
-		Console.WriteLine("Node file path:");
+		if (!File.Exists(filePath))
+		{
+			var content = GetContent(projectName);
 
-		Console.WriteLine(filePath);
+			Console.WriteLine("Node file path:");
 
-		File.WriteAllText(filePath, content);
+			Console.WriteLine(filePath);
+
+			File.WriteAllText(filePath, content);
+		}
+		else
+			Console.WriteLine("Project node already found. Skipping creation.");
 	}
 
 	public string GetContent(string projectName)
