@@ -29,6 +29,8 @@ namespace SoftwareMonkeys.csAnt
 		public Process StartProcess(string command, string arguments)
 		{
 			Console.WriteLine("");
+			Console.WriteLine("--------------------------------------------------");
+			Console.WriteLine("");
 			Console.WriteLine("Starting process: " + command);
 			Console.WriteLine("Arguments:");
 			Console.WriteLine(arguments);
@@ -59,7 +61,6 @@ namespace SoftwareMonkeys.csAnt
 			(
 			    delegate(object sender, DataReceivedEventArgs e)
 			    {
-			        // append the new data to the data already read-in
 			        Console.WriteLine(e.Data);
 			    }
 			);
@@ -68,7 +69,6 @@ namespace SoftwareMonkeys.csAnt
 			(
 			    delegate(object sender, DataReceivedEventArgs e)
 			    {
-			        // append the new data to the data already read-in
 			        Console.WriteLine(e.Data);
 			    }
 			);
