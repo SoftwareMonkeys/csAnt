@@ -104,6 +104,8 @@
     <Compile Include="BaseScript.GetTmpFile.cs" />
     <Compile Include="BaseScript.ClearTmp.cs" />
     <Compile Include="BaseScript.CurrentNode.cs" />
+    <Compile Include="BaseScript.IsLinux.cs" />
+    <Compile Include="BaseScript.IsWindows.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseScript.Execute.cs" />

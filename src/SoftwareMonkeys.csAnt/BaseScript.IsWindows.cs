@@ -2,10 +2,14 @@ using System;
 
 namespace SoftwareMonkeys.csAnt
 {
-	public class BaseScript
+	public partial class BaseScript
 	{
-		public BaseScript ()
+		public bool IsWindows
 		{
+			get
+			{
+				return (Environment.OSVersion.Platform == PlatformID.Win32NT);
+			}
 		}
 	}
 }
