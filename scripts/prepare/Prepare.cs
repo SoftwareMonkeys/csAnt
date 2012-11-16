@@ -187,7 +187,7 @@ class PrepareScript
 
 		Console.WriteLine("");
 		Console.WriteLine("Getting csAnt scripts from:");
-		Console.WriteLine(scriptsDir);
+		Console.WriteLine(fromScriptsDir);
 		Console.WriteLine("");
 
 		Console.WriteLine("Scripts:");
