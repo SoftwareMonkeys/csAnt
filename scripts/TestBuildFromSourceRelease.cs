@@ -46,44 +46,32 @@ class TestBuildFromSourceReleaseScript : BaseProjectScript
 			+ Path.DirectorySeparatorChar
 			+ "_tmp"
 			+ Path.DirectorySeparatorChar
-			+ Guid.NewGuid().ToString();
+			+ Guid.NewGuid().ToString()
+			+ Path.DirectorySeparatorChar
+			+ ProjectName;
 
 		Unzip(latestFile, tmpDir);
 
-		ProjectDirectory = GetNewestFolder(tmpDir);
+		// Move from the sub directory to the intended directory
+		MoveDirectory(
+			GetNewestFolder(tmpDir),
+			tmpDir
+		);
 
-		Prepare(tmpDir);
+		ProjectDirectory = tmpDir;
+
+		PrepareProject(ProjectDirectory);
 
 		if (!IsError)
-			Build(tmpDir);
+			Build(ProjectDirectory);
 
-		Directory.Delete(tmpDir, true);
+		Directory.Delete(ProjectDirectory, true);
 	}
 
-	public void Prepare(string tmpDir)
-	{
-		var prepareShortcut = GetNewestFolder(tmpDir)
-			+ Path.DirectorySeparatorChar
-			+ "launch-prepare.sh";
-
-		Console.WriteLine("Prepare script shortcut:");
-		Console.WriteLine(prepareShortcut);
-
-		if (File.Exists(prepareShortcut))
-		{
-			StartProcess(
-				"bash",
-				"\"" + prepareShortcut + "\""
-			);
-		}
-		else
-			Console.WriteLine("Can't find 'launch-prepare.sh' file.");
-	}
-
-	public void Build(string tmpDir)
+	public void Build(string projectDirectory)
 	{
 		var slnFiles = Directory.GetFiles(
-			tmpDir,
+			projectDirectory,
 			ProjectName + ".MonoDevelop.sln",
 			SearchOption.AllDirectories
 		);
@@ -99,7 +87,7 @@ class TestBuildFromSourceReleaseScript : BaseProjectScript
 		else
 		{
 			Console.WriteLine("No .sln files found in:");
-			Console.WriteLine(tmpDir);
+			Console.WriteLine(projectDirectory);
 		}
 	}
 }

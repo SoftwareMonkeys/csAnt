@@ -48,25 +48,24 @@ class TestBuildFromStandardReleaseScript : BaseProjectScript
 			+ Path.DirectorySeparatorChar
 			+ "_tmp"
 			+ Path.DirectorySeparatorChar
-			+ Guid.NewGuid().ToString();
+			+ Guid.NewGuid().ToString()
+			+ Path.DirectorySeparatorChar
+			+ ProjectName;
 
 		Unzip(latestFile, tmpDir);
 
-		var prepareShortcut = GetNewestFolder(tmpDir)
-			+ Path.DirectorySeparatorChar
-			+ "launch-prepare.sh";
+		// Move from the sub directory to the intended directory
+		MoveDirectory(
+			GetNewestFolder(tmpDir),
+			tmpDir
+		);
 
-		Console.WriteLine("Prepare script shortcut:");
-		Console.WriteLine(prepareShortcut);
+		ProjectDirectory = tmpDir;
 
-		if (File.Exists(prepareShortcut))
-		{
-			StartProcess(
-				"bash",
-				"\"" + prepareShortcut + "\""
-			);
-		}
-		else
-			Console.WriteLine("Can't find 'launch-prepare.sh' file.");
+		// Run the prepare scripts
+		PrepareProject(ProjectDirectory);
+
+		// Delete the temporary directory
+		Directory.Delete(tmpDir, true);
 	}
 }
