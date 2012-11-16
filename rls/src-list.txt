@@ -26,6 +26,6 @@
 /scripts/**.cs
 /scripts/Release/*
 /scripts/Update/*
-/launch-prepare.sh
+/prepare-linux.sh
 /csAnt.sh
 /*.node

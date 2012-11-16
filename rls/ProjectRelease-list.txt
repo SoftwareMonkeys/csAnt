@@ -24,5 +24,5 @@
 /lib/GCUpload/GCUpload.node
 /lib/Newtonsoft.Json/Newtonsoft.Json.node
 /lib/Libraries.node
-/launch-prepare.sh
+/prepare-linux.sh
 /csAnt.sh
