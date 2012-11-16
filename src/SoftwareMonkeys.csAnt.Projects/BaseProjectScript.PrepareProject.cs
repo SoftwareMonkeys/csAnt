@@ -1,9 +1,16 @@
 using System;
+using System.IO;
 
-namespace SoftwareMonkeys.csAnt
+namespace SoftwareMonkeys.csAnt.Projects
 {
-	public partial class BaseScript
+	public partial class BaseProjectScript
 	{
+		/// <summary>
+		/// Launches the 'prepare-[linux|windows]' script in the specified external project directory.
+		/// </summary>
+		/// <param name='projectDirectory'>
+		/// 
+		/// </param>
 		public void PrepareProject(string projectDirectory)
 		{
 			Console.WriteLine ("");
@@ -21,14 +28,14 @@ namespace SoftwareMonkeys.csAnt
 				cmdName = "cscript";
 			}
 			
-			ProjectDirectory = tmpDir;
+			ProjectDirectory = projectDirectory;
 
-			var preparePath = GetNewestFolder(tmpDir)
+			var preparePath = projectDirectory
 				+ Path.DirectorySeparatorChar
 				+ prepareFile;
 			
 			Console.WriteLine("Command name:");
-			Console.WriteLine(preparePath);
+			Console.WriteLine(cmdName);
 			Console.WriteLine("");
 			Console.WriteLine("Prepare script launcher:");
 			Console.WriteLine(preparePath);
@@ -42,8 +49,10 @@ namespace SoftwareMonkeys.csAnt
 			}
 			else
 			{
-				Console.WriteLine("Can't find '" + prepareFile + "' file in:");
-				Console.WriteLine(projectDirectory);
+				Console.WriteLine("");
+				Console.WriteLine("Can't find prepare file:");
+				Console.WriteLine(preparePath);
+				Console.WriteLine("");
 			}
 		}
 	}
