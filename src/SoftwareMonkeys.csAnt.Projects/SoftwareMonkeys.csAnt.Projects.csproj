@@ -45,6 +45,7 @@
     <Compile Include="BaseProjectScript.ImportLocalLib.cs" />
     <Compile Include="BaseProjectScript.ImportLocalWebApp.cs" />
     <Compile Include="BaseProjectScript.GoogleCodeUpload.cs" />
+    <Compile Include="BaseProjectScript.PrepareProject.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
