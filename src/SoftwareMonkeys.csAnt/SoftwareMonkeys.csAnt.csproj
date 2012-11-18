@@ -106,6 +106,8 @@
     <Compile Include="BaseScript.CurrentNode.cs" />
     <Compile Include="BaseScript.IsLinux.cs" />
     <Compile Include="BaseScript.IsWindows.cs" />
+    <Compile Include="BaseScript.Error.cs" />
+    <Compile Include="BaseScript.StopOnFail.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseScript.Execute.cs" />

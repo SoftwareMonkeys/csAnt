@@ -60,7 +60,12 @@ namespace SoftwareMonkeys.csAnt.UI.csAntConsole
 				
 				Console.WriteLine("");
 				Console.WriteLine("Total execution time: " + totalTime.ToString());
-				Console.WriteLine("===== Finished! =====");
+
+				if (!scr.IsError)
+					Console.WriteLine("---------- Finished ----------");
+				else
+					Console.WriteLine("!!!!!!!!!! Failed !!!!!!!!!!");
+
 				Console.WriteLine("");
 			}
 		}

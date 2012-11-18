@@ -77,7 +77,9 @@ namespace SoftwareMonkeys.csAnt
 			
 			var argsString = String.Join(" ", argsList.ToArray());
 			
-			Execute(command, argsString);
+			var process = Execute(command, argsString);
+
+			IsError = process.ExitCode > 0;
 		}
 	}
 }
