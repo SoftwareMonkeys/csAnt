@@ -7,6 +7,9 @@ namespace SoftwareMonkeys.csAnt
 	{
 		public void BuildAllSolutions(string directory)
 		{
+			// Don't stop on fail
+			StopOnFail = false;
+
 			int successful = 0;
 			int failed = 0;
 			int total = 0;
@@ -38,6 +41,12 @@ namespace SoftwareMonkeys.csAnt
 			Console.WriteLine ("Failed: " + failed);
 			Console.WriteLine ("");
 			Console.WriteLine ("");
+			
+			// Go back to stopping on failure
+			StopOnFail = true;
+
+			if (failed > 0)
+				Error(failed + " solution(s) failed to build.");
 		}
 	}
 }

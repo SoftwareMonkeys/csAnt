@@ -10,7 +10,9 @@ namespace SoftwareMonkeys.csAnt
 	/// </summary>
 	public partial class BaseScript
 	{
-		public bool BuildSolution(string solutionFilePath)
+		public bool BuildSolution(
+			string solutionFilePath
+		)
 		{
 			var success = false;
 
@@ -89,6 +91,11 @@ namespace SoftwareMonkeys.csAnt
 				IsError = true;
 
             	Console.WriteLine("Build failed.");
+			}
+
+			if (!success && StopOnFail)
+			{
+				Error ("Build failed.");
 			}
 
 			return success;
