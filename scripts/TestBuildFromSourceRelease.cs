@@ -63,31 +63,8 @@ class TestBuildFromSourceReleaseScript : BaseProjectScript
 		PrepareProject(ProjectDirectory);
 
 		if (!IsError)
-			Build(ProjectDirectory);
+			BuildAllSolutions(ProjectDirectory);
 
 		Directory.Delete(ProjectDirectory, true);
-	}
-
-	public void Build(string projectDirectory)
-	{
-		var slnFiles = Directory.GetFiles(
-			projectDirectory,
-			ProjectName + ".MonoDevelop.sln",
-			SearchOption.AllDirectories
-		);
-
-		string slnFile = String.Empty;
-
-		if (slnFiles.Length > 0)
-		{
-			slnFile = slnFiles[0];
-
-			BuildSolution(slnFile);
-		}
-		else
-		{
-			Console.WriteLine("No .sln files found in:");
-			Console.WriteLine(projectDirectory);
-		}
 	}
 }
