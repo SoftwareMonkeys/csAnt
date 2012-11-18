@@ -37,6 +37,7 @@
   <ItemGroup>
     <Compile Include="TestScript.cs" />
     <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="GetZipInternalPathTestFixture.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
