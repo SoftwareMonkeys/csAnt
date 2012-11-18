@@ -50,14 +50,6 @@ class DeployLocalScript : BaseProjectScript
 			destination
 		);
 
-		var prepareScriptFile = "launch-prepare.sh";
-
-		Environment.CurrentDirectory = destination;
-
-		// Execute the prepare script
-		StartProcess(
-			"sh",
-			prepareScriptFile
-		);
+		PrepareProject(destination);
 	}
 }
