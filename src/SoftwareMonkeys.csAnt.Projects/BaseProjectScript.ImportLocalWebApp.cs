@@ -6,12 +6,12 @@ namespace SoftwareMonkeys.csAnt.Projects
 {
 	public partial class BaseProjectScript
 	{
-		public void ImportLocalWebApp(string projectName, string buildMode)
+		public void ImportLocalWebApp(string projectName, string releaseName)
 		{
-			ImportLocalWebApp (GroupName, projectName, buildMode);
+			ImportLocalWebApp (GroupName, projectName, releaseName);
 		}
 
-		public void ImportLocalWebApp(string groupName, string projectName, string buildMode)
+		public void ImportLocalWebApp(string groupName, string projectName, string releaseName)
 		{
 			if (String.IsNullOrEmpty(groupName))
 				groupName = GroupName;
@@ -19,13 +19,14 @@ namespace SoftwareMonkeys.csAnt.Projects
 			if (String.IsNullOrEmpty(projectName))
 				throw new ArgumentNullException("A project name must be provided.", "projectName");
 
-			if (String.IsNullOrEmpty(buildMode))
-				buildMode = "Release";
+			if (String.IsNullOrEmpty(releaseName))
+				releaseName = "app";
 
 			// Get the source zip file
 			var fromZipFile = GetInstallFile(
 				groupName,
-				projectName
+				projectName,
+				releaseName
 			);
 
 			// Get the directory to unzip the zip file to
@@ -59,11 +60,15 @@ namespace SoftwareMonkeys.csAnt.Projects
 
 			// Move files from where they were unzipped, to their final destination
 			MoveDirectory (deepUnzipDir, newFolderName);
+
+			// Delete the temporary directory
+			Directory.Delete (unzipDir);
 		}
 
 		public string GetInstallFile(
 			string groupName,
-			string projectName
+			string projectName,
+			string releaseName
 		)
 		{
 			// TODO: Check if this path can be more flexible
@@ -81,7 +86,7 @@ namespace SoftwareMonkeys.csAnt.Projects
 				+ Path.DirectorySeparatorChar
 				+ "rls"
 				+ Path.DirectorySeparatorChar
-				+ "install"
+				+ releaseName
 			);
 
 			// Get the newest install file
