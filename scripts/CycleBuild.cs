@@ -24,12 +24,9 @@ class CycleBuildScript : BaseProjectScript
 		Console.WriteLine("Building...");
 		Console.WriteLine("");
 
-		// Build the solution
+		// Build the solutions
 		ExecuteScript(
-			"BuildSolution",
-			new string[]{
-				ProjectName + ".MonoDevelop"
-			}
+			"BuildAllSolutions"
 		);
 
 		if (!IsError)
