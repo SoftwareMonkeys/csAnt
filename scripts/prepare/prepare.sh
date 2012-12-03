@@ -15,7 +15,7 @@ SHARPZIPLIB_DIR="$LIB_DIR/SharpZipLib"
 SHARPZIPLIB_ZIPFILE="$SHARPZIPLIB_DIR/SharpZipLib_0860_Bin.zip"
 
 # Set HtmlAgilityPack constants
-HAP_LIB_URL="http://download-codeplex.sec.s-msft.com/Download/Release?ProjectName=htmlagilitypack&DownloadId=437941&FileTime=129893731308330000&Build=19612"
+HAP_LIB_URL="http://download-codeplex.sec.s-msft.com/Download/Release?ProjectName=htmlagilitypack&DownloadId=437941&FileTime=129893731308330000&Build=19692"
 HAP_LIB_DIR="$LIB_DIR/HtmlAgilityPack"
 HAP_LIB_ZIPFILE="$HAP_LIB_DIR/HtmlAgilityPack.zip"
 
@@ -68,7 +68,9 @@ echo ""
 echo "===== Downloading cs-script ====="
 
 if [ ! -f "$CSS_ZIPFILE" ]; then
+
 	wget $CSS_URL -O $CSS_ZIPFILE
+
 fi
 
 
@@ -133,6 +135,7 @@ echo "===== Unzipping the HtmlAgilityPack libraries ====="
 
 unzip -o "$HAP_LIB_ZIPFILE" -d $HAP_LIB_DIR
 
+echo "To: $HAP_LIB_DIR" 
 
 # ================   csAnt   =================
 
