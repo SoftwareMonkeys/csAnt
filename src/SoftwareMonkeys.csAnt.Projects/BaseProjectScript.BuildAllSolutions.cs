@@ -1,9 +1,9 @@
 using System;
 using System.IO;
 
-namespace SoftwareMonkeys.csAnt
+namespace SoftwareMonkeys.csAnt.Projects
 {
-	public partial class BaseScript
+	public partial class BaseProjectScript
 	{
 		public void BuildAllSolutions(string directory)
 		{

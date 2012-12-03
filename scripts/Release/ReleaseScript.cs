@@ -1,5 +1,6 @@
-//css_ref ../../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.dll;
-//css_ref ../../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.Projects.dll;
+//css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.dll;
+//css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.Projects.dll;
+
 using System;
 using System.IO;
 using Microsoft.CSharp;
@@ -12,13 +13,11 @@ class ReleaseScript : BaseProjectScript
 {
 	public static void Main(string[] args)
 	{
-		new ReleaseScript().Start();
+		new ReleaseScript().Start(args);
 	}
 	
-	public void Start()
+	public override bool Start(string[] args)
 	{
-		ExecuteScript("CopyBinToLib");
-
 		var listDir = ProjectDirectory
 			+ Path.DirectorySeparatorChar
 			+ "rls";
@@ -94,5 +93,7 @@ class ReleaseScript : BaseProjectScript
 
 			Console.WriteLine("");
 		}
+
+		return !IsError;
 	}
 }

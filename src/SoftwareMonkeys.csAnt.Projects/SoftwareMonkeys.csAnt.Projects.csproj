@@ -33,6 +33,8 @@
     <Reference Include="SoftwareMonkeys.FileNodes">
       <HintPath>..\..\lib\FileNodes\Release\SoftwareMonkeys.FileNodes.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Build.Engine" />
+    <Reference Include="Microsoft.Build.Framework" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
@@ -46,6 +48,8 @@
     <Compile Include="BaseProjectScript.ImportLocalWebApp.cs" />
     <Compile Include="BaseProjectScript.GoogleCodeUpload.cs" />
     <Compile Include="BaseProjectScript.PrepareProject.cs" />
+    <Compile Include="BaseProjectScript.BuildAllSolutions.cs" />
+    <Compile Include="BaseProjectScript.BuildSolution.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

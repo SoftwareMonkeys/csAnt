@@ -12,10 +12,10 @@ class CycleReleaseScript : BaseProjectScript
 {
 	public static void Main(string[] args)
 	{
-		new CycleReleaseScript().Start();
+		new CycleReleaseScript().Start(args);
 	}
 	
-	public void Start()
+	public override bool Start(string[] args)
 	{
 		Console.WriteLine("");
 		Console.WriteLine("Starting a full release cycle.");
@@ -23,27 +23,17 @@ class CycleReleaseScript : BaseProjectScript
 
 		ExecuteScript("CycleBuild");
 
-		if (!IsError)
-		{
-			Console.WriteLine("Creating release zip files...");
-			Console.WriteLine("");
+		Console.WriteLine("Creating release zip files...");
+		Console.WriteLine("");
 
-			// Create the release
-			ExecuteScript(
-				"Release",
-				new string[]{
-					"-mode:Release"
-				}
-			);
-		}
+		// Create the release
+		ExecuteScript(
+			"Release",
+			new string[]{
+				"-mode:Release"
+			}
+		);
 
-		if (!IsError)
-		{
-			Console.WriteLine("Uploading the release zip file to GoogleCode...");
-			Console.WriteLine("");
-
-			// Upload to GoogleCode
-			ExecuteScript("GoogleCodeRelease");
-		}
+		return !IsError;
 	}
 }

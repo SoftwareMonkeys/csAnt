@@ -1,158 +1,175 @@
 //css_ref ../../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.dll;
-//css_ref ../../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.Projects.dll;
-
 using System;
 using System.IO;
 using Microsoft.CSharp;
 using System.Diagnostics;
 using SoftwareMonkeys.csAnt;
-using SoftwareMonkeys.csAnt.Projects;
 using System.Collections.Generic;
 
-class UpdateScript : BaseProjectScript
+class RunTestsScript : BaseScript
 {
 	public static void Main(string[] args)
 	{
-		new UpdateScript().Start();
+		new RunTestsScript().Start(args);
 	}
 	
-	public void Start()
+	public override bool Start(string[] args)
 	{
-		GetRemotecsAnt();
+		var parser = new Arguments(args);
 
-		Console.WriteLine ("Update complete.");
-	}
-	
-	public void GetRemotecsAnt()
-	{
-		var remotePath = GetRemotecsAntFilePath();
+		var dateStamp = GetDateStamp();
 
-		Console.WriteLine("Remote csAnt path: " + remotePath);
+		EnsureDirectories(dateStamp);
 
-		var projectDirectory = ProjectDirectory;
+		var mode = "Release";
 
-		var tmpDir = projectDirectory
-			+ Path.DirectorySeparatorChar
-			+ "_tmp"
-			+ Path.DirectorySeparatorChar
-			+ "update";
+		if (parser.Contains("mode"))
+			mode = parser["mode"];
 
-		Console.WriteLine("To: " + tmpDir);
-
-		DownloadAndUnzip(
-			remotePath,
-			tmpDir
+		RunTests(
+			dateStamp,
+			mode
 		);
 
-		// Move from the tmp directory to the destination
-		MoveToDestination(
-			tmpDir
+		GenerateReports(
+			dateStamp
 		);
-		
-		Directory.Delete(tmpDir, true);
+
+		return !IsError;
 	}
-	
-	public void MoveToDestination(string tmpDir)
+
+	public void RunTests(string dateStamp, string mode)
 	{
-		string subDir = Directory.GetDirectories(tmpDir)[0];
+		var binPath = CurrentDirectory
+			+ Path.DirectorySeparatorChar
+			+ "bin"
+			+ Path.DirectorySeparatorChar
+			+ mode;
 
-		var baseDir = ProjectDirectory;
+		Console.WriteLine("Test assemblies found:");
 
-		if (!Directory.Exists(baseDir))
-			Directory.CreateDirectory(baseDir);
-		
-		Console.WriteLine ("");
-		Console.WriteLine ("Updating files...");
-		Console.WriteLine ("");
+		List<string> executedAssemblies = new List<string>();
 
-		foreach (string file in Directory.GetFiles (subDir, "*", SearchOption.AllDirectories))
+		foreach (string assemblyFile in Directory.GetFiles(binPath, "*.Tests.dll", SearchOption.AllDirectories))
 		{
-			var toFile = file.Replace(subDir, baseDir);
+			var assemblyFileName = Path.GetFileName(assemblyFile);
 
-			if (!Directory.Exists(Path.GetDirectoryName(toFile)))
-				Directory.CreateDirectory(Path.GetDirectoryName(toFile));
+			if (!executedAssemblies.Contains(assemblyFileName))
+			{
+				executedAssemblies.Add(
+					assemblyFileName
+				);
+				
+				Console.WriteLine(assemblyFile);
 
-			var cmd = "Updating";
+				RunAssemblyTests(dateStamp, assemblyFile);
+			}
+		}
+	}
 
-			// TODO: See if the following if statements an be better organised
-			if (
-				// If the file is newer than the existing one
-				File.GetLastWriteTime(file) > File.GetLastWriteTime(toFile)
+	public void RunAssemblyTests(string dateStamp, string assemblyFile)
+	{
+		string assemblyFileName = Path.GetFileName(assemblyFile);
+
+		string xmlResult = GetXmlResultDir(dateStamp)
+			+ Path.DirectorySeparatorChar
+			+ Path.GetFileNameWithoutExtension(assemblyFileName).Replace(".", "-")
+			+ ".xml";
+
+			string command = "mono";
+
+			List<string> arguments = new List<string>();
+
+			arguments.Add("--runtime=v4.0");
+
+			arguments.Add("lib/NUnit/bin/nunit-console.exe");
+
+			arguments.Add("\"" + assemblyFile + "\"");
+
+			arguments.Add("-xml=\"" + xmlResult + "\"");
+
+			StartProcess(
+				command,
+				arguments.ToArray()
+			);				
+
+	}
+
+	public void GenerateReports(string dateStamp)
+	{
+		var xmlResultDir = GetXmlResultDir(dateStamp)
+			+ Path.DirectorySeparatorChar
+			+ "*";
+
+		string htmlResultDir = GetHtmlResultDir(dateStamp);
+			
+		List<string> arguments = new List<string>();
+
+		arguments.Add("lib/NUnitResults/nunit-results.exe");
+
+		arguments.Add("\"" + xmlResultDir + "\"");
+
+		arguments.Add("\"" + htmlResultDir + "\"");
+
+		Execute(
+			"mono",
+			arguments.ToArray()
+		);
+	}
+
+	public void EnsureDirectories(string dateStamp)
+	{
+		var xmlResultDir = GetXmlResultDir(dateStamp);
+
+		if (!Directory.Exists(xmlResultDir))
+			Directory.CreateDirectory(xmlResultDir);
+
+		var htmlResultDir = GetHtmlResultDir(dateStamp);
+
+		if (!Directory.Exists(htmlResultDir))
+			Directory.CreateDirectory(htmlResultDir);
+
+	}
+
+	public string GetResultDir(string dateStamp)
+	{
+		string resultDir = Path.GetFullPath(
+			String.Format(
+				"{0}/tests/results/{1}",
+				CurrentDirectory,
+				dateStamp
 			)
-			{
-				// If no to file already exists change the command text to "Adding".
-				if (!File.Exists(toFile))
-				{
-					cmd = "Adding";
-				}
-
-				if (
-					!File.Exists(toFile)
-				    // If both files are different
-					|| !FileEquals(file, toFile)
-				)
-				{
-					Console.WriteLine (cmd + ":");
-					Console.WriteLine ("  " + toFile.Replace(ProjectDirectory, ""));
-
-					if (File.Exists(toFile))
-					{
-						BackupFile(toFile.Replace(baseDir, "").Trim(Path.DirectorySeparatorChar));
-
-						File.Delete(toFile);
-					}
-
-					File.Move(file, toFile);
-				}
-				else
-				{
-					Console.WriteLine ("Skipping (file hasn't changed):");
-					Console.WriteLine ("  " + toFile.Replace(ProjectDirectory, ""));
-				}
-			}
-			else
-			{
-				Console.WriteLine ("Skipping (file isn't newer):");
-				Console.WriteLine ("  " + toFile.Replace(ProjectDirectory, ""));
-			}
-		}
-
-	}
-
-	public string GetRemotecsAntFilePath()
-	{
-		// TODO: Make this more easily configurable
-		var url = "https://code.google.com/p/csant/downloads/list";
-
-		var xpath = "//table[@id='resultstable']/tr/td[3]";
-
-		var prefix = "csAnt-";
-
-		if (CurrentNode.Properties.Count > 0
-			&& CurrentNode.Properties["Context"] == "Project")
-		{
-			prefix += "project-release-";
-		}
-		else
-		{
-			prefix += "standard-release-";
-		}
-
-		var downloadBase = "https://csant.googlecode.com/files/";
-
-		var data = ScrapeXPathArray(
-			url,
-			xpath
 		);
 
-		foreach (string item in data)
-		{
-			if (item.IndexOf(prefix) == 0)
-			{
-				return downloadBase + item;
-			}
-		}
+		return resultDir;
+	}
 
-		return String.Empty;
+	public string GetXmlResultDir(string dateStamp)
+	{
+		return GetResultDir(dateStamp)
+			+ Path.DirectorySeparatorChar
+			+ "xml";
+	}
+
+	public string GetHtmlResultDir(string dateStamp)
+	{
+		return GetResultDir(dateStamp)
+			+ Path.DirectorySeparatorChar
+			+ "html";
+	}
+
+	public string GetDateStamp()
+	{
+		return DateTime.Now.Year
+			+ "-"
+			+ DateTime.Now.Month
+			+ "-"
+			+ DateTime.Now.Day
+			+ "--"
+			+ DateTime.Now.Hour
+			+ "-"
+			+ DateTime.Now.Minute
+			+ "-"
+			+ DateTime.Now.Second;
 	}
 }

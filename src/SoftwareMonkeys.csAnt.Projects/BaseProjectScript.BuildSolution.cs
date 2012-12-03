@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.Build.BuildEngine;
 
-namespace SoftwareMonkeys.csAnt
+namespace SoftwareMonkeys.csAnt.Projects
 {
 	/// <summary>
 	/// 
 	/// </summary>
-	public partial class BaseScript
+	public partial class BaseProjectScript
 	{
 		public bool BuildSolution(
 			string solutionFilePath
@@ -27,7 +27,7 @@ namespace SoftwareMonkeys.csAnt
 		{
 			var success = false;
 
-			if (IsRunningOnMono())
+			if (IsMono)
 			{
 				success = RunXBuild(solutionFilePath, mode);
 			}
@@ -40,11 +40,6 @@ namespace SoftwareMonkeys.csAnt
 				isError = true;
 
 			return success;
-		}
-		
-		public static bool IsRunningOnMono ()
-		{
-		    return Type.GetType("Mono.Runtime") != null;
 		}
 
 		public bool RunMicrosoftBuild(string solutionFilePath, string mode)
@@ -95,22 +90,35 @@ namespace SoftwareMonkeys.csAnt
 				"/property:Configuration=" + mode
 			};
 
-			var process = StartProcess(
+			var cmd = StartProcess(
 				cmdName,
 				arguments
 			);
 
-			var success = (process.ExitCode == 0);
+			cmd.CommandProcess.WaitForExit();
 
-			if (success)
+		//	var output = cmd.CommandProcess.StandardOutput.ReadToEnd();
+
+		//	var zeroErrorsNotFound = (output.IndexOf("0 Error(s)") == -1);
+
+			var exitCodeSuccess = (cmd.CommandProcess.ExitCode == 0);
+
+			if (
+				exitCodeSuccess
+			//    && zeroErrorsNotFound
+			)
+
+			{
             	Console.WriteLine("Build succeeded.");
+
+				return true;
+			}
 			else
 			{
 				Error ("Build failed.");
+
+				return false;
 			}
-
-
-			return success;
 		}
 		
 	}

@@ -12,10 +12,10 @@ class TestBuildFromStandardReleaseScript : BaseProjectScript
 {
 	public static void Main(string[] args)
 	{
-		new TestBuildFromStandardReleaseScript().Start();
+		new TestBuildFromStandardReleaseScript().Start(args);
 	}
 	
-	public void Start()
+	public override bool Start(string[] args)
 	{
 		Console.WriteLine("");
 		Console.WriteLine("Test building solutions from the release files...");
@@ -33,12 +33,14 @@ class TestBuildFromStandardReleaseScript : BaseProjectScript
 				+ Path.DirectorySeparatorChar
 				+ "rls"
 				+ Path.DirectorySeparatorChar
-				+ "StandardRelease";
+				+ "standard-release";
 
 			var latest = GetNewestFile(rlsDir);
 
 			UnzipAndPrepare(latest);
 		}
+
+		return !IsError;
 		
 	}
 

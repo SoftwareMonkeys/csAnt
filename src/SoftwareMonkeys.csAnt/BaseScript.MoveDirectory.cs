@@ -6,8 +6,15 @@ namespace SoftwareMonkeys.csAnt
 {
 	public partial class BaseScript
 	{
-		public static void MoveDirectory(string source, string target)
+		public void MoveDirectory(string source, string target)
 		{
+			Console.WriteLine ("");
+			Console.WriteLine ("Moving directory: ");
+			Console.WriteLine ("  " + source);
+			Console.WriteLine ("To: ");
+			Console.WriteLine ("  " + target);
+			Console.WriteLine ();
+
 		    var stack = new Stack<Folders>();
 		    stack.Push(new Folders(source, target));
 

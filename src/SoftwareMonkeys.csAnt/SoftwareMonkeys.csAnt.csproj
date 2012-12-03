@@ -44,8 +44,6 @@
     <DefineConstants>TRACE</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.Build.Engine" />
-    <Reference Include="Microsoft.Build.Framework" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -59,13 +57,28 @@
       <HintPath>..\..\lib\FileNodes\Release\SoftwareMonkeys.FileNodes.dll</HintPath>
     </Reference>
     <Reference Include="HtmlAgilityPack">
-      <HintPath>..\..\lib\HtmlAgilityPack\Net45\HtmlAgilityPack.dll</HintPath>
+      <HintPath>..\..\lib\HtmlAgilityPack\Net40\HtmlAgilityPack.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\..\lib\Newtonsoft.Json\Bin\Net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="ICSharpCode.SharpZipLib">
       <HintPath>..\..\lib\SharpZipLib\net-20\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="CSScriptLibrary">
+      <HintPath>..\..\lib\cs-script\Lib\CSScriptLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="SoftwareMonkeys.Jungle.Injection">
+      <HintPath>..\..\lib\Jungle\Release\SoftwareMonkeys.Jungle.Injection.dll</HintPath>
+    </Reference>
+    <Reference Include="SoftwareMonkeys.Jungle.Injection.Contracts">
+      <HintPath>..\..\lib\Jungle\Release\SoftwareMonkeys.Jungle.Injection.Contracts.dll</HintPath>
+    </Reference>
+    <Reference Include="SoftwareMonkeys.Jungle.Diagnostics">
+      <HintPath>..\..\lib\Jungle\Release\SoftwareMonkeys.Jungle.Diagnostics.dll</HintPath>
+    </Reference>
+    <Reference Include="SoftwareMonkeys.Jungle.Diagnostics.Contracts">
+      <HintPath>..\..\lib\Jungle\Release\SoftwareMonkeys.Jungle.Diagnostics.Contracts.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -81,7 +94,6 @@
     <Compile Include="BaseScript.StartNewProcess.cs" />
     <Compile Include="BaseScript.StartProcess.cs" />
     <Compile Include="BaseScript.IsVerbose.cs" />
-    <Compile Include="Arguments.cs" />
     <Compile Include="BaseScript.GetNewestFile.cs" />
     <Compile Include="BaseScript.GetNewestFolder.cs" />
     <Compile Include="BaseScript.MoveDirectory.cs" />
@@ -98,7 +110,6 @@
     <Compile Include="BaseScript.ListLibs.cs" />
     <Compile Include="BaseScript.RemoveLib.cs" />
     <Compile Include="BaseScript.GetLibs.cs" />
-    <Compile Include="BaseScript.BuildAllSolutions.cs" />
     <Compile Include="BaseScript.IsError.cs" />
     <Compile Include="BaseScript.GetTempDir.cs" />
     <Compile Include="BaseScript.GetTmpFile.cs" />
@@ -108,12 +119,35 @@
     <Compile Include="BaseScript.IsWindows.cs" />
     <Compile Include="BaseScript.Error.cs" />
     <Compile Include="BaseScript.StopOnFail.cs" />
+    <Compile Include="Options.cs" />
+    <Compile Include="Arguments.cs" />
+    <Compile Include="IScript.cs" />
+    <Compile Include="BaseScript.EnsureDirectoryExists.cs" />
+    <Compile Include="BaseScript.Git.cs" />
+    <Compile Include="BaseScript.StartDotNetExe.cs" />
+    <Compile Include="BaseScript.IsMono.cs" />
+    <Compile Include="BaseScript.GitClone.cs" />
+    <Compile Include="BaseScript.IsHelp.cs" />
+    <Compile Include="BaseScript.Arguments.cs" />
+    <Compile Include="BaseScript.NewNode.cs" />
+    <Compile Include="BaseScript.EnsureParentNodes.cs" />
+    <Compile Include="BaseScript.GetNode.cs" />
+    <Compile Include="DynamicLinq.cs" />
+    <Compile Include="BaseScript.ExecuteCommand.cs" />
+    <Compile Include="IScriptCommand.cs" />
+    <Compile Include="Commands\AddLibCommand.cs" />
+    <Compile Include="Commands\BackupFileCommand.cs" />
+    <Compile Include="Commands\BaseScriptCommand.cs" />
+    <Compile Include="Commands\DownloadCommand.cs" />
+    <Compile Include="Commands\DownloadAndUnzipCommand.cs" />
+    <Compile Include="Commands\HelloWorldCommand.cs" />
+    <Compile Include="Commands\ScriptCommandAttribute.cs" />
+    <Compile Include="AssemblyScanInfo.cs" />
+    <Compile Include="Commands\GetLibCommand.cs" />
+    <Compile Include="Commands\StartProcessCommand.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseScript.Execute.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="BaseScript.BuildSolution.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseScript.CurrentDirectory.cs" />
@@ -134,5 +168,8 @@
     <None Include="SoftwareMonkeys.csAnt.snk">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Commands\" />
   </ItemGroup>
 </Project>

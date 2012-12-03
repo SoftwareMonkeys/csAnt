@@ -11,5 +11,10 @@ namespace SoftwareMonkeys.csAnt.UI.csAntConsole
 		public LauncherScript()
 		{
 		}
+
+		public override bool Start (string[] args)
+		{
+			throw new System.NotImplementedException ();
+		}
 	}
 }

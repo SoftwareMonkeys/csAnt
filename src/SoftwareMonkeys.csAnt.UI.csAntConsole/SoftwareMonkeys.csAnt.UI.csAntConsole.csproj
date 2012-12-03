@@ -53,6 +53,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="LauncherScript.cs" />
     <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="ConsoleWriter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

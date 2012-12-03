@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using SoftwareMonkeys.csAnt.Commands;
 
 namespace SoftwareMonkeys.csAnt
 {
@@ -7,6 +8,19 @@ namespace SoftwareMonkeys.csAnt
 	{
 		public string BackupFile(string relativeFilePath)
 		{
+			var cmd = Injection.Retriever.Get<BackupFileCommand>(
+				new object[]{
+					this,
+					relativeFilePath
+				}
+			);
+
+			ExecuteCommand(cmd);
+
+			return (string)cmd.ReturnValue;
+
+			// TODO: Clean up
+			/*
 			var fromFullFilePath = String.Empty;
 
 			fromFullFilePath = Path.GetFullPath(relativeFilePath);
@@ -54,7 +68,7 @@ namespace SoftwareMonkeys.csAnt
 				toFilePath
 			);
 
-			return toFilePath;
+			return toFilePath;*/
 		}
 	}
 }

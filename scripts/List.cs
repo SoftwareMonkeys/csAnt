@@ -10,10 +10,10 @@ class ListScript : BaseScript
 {
 	public static void Main(string[] args)
 	{
-		new ListScript().Start();
+		new ListScript().Start(args);
 	}
 	
-	public void Start()
+	public override bool Start(string[] args)
 	{
 		var scriptsDir = CurrentDirectory
 			+ Path.DirectorySeparatorChar
@@ -42,6 +42,8 @@ class ListScript : BaseScript
 		scriptsList.Sort();
 
 		ShowList(scriptsList.ToArray());
+
+		return !IsError;
 	}
 
 	public void ShowList(string[] scripts)

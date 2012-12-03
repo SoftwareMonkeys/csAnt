@@ -1,6 +1,7 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
+using CSScriptLibrary;
 
 namespace SoftwareMonkeys.csAnt
 {
@@ -16,6 +17,10 @@ namespace SoftwareMonkeys.csAnt
 		
 		public void ExecuteScript(string scriptName, string[] args)
 		{
+			Console.WriteLine("");
+			Console.WriteLine("-------------------- Executing script: " + scriptName + " --------------------");
+			Console.WriteLine("");
+
 			string scriptFile = GetScriptPath(scriptName);
 
 			if (!String.IsNullOrEmpty(scriptFile))
@@ -31,11 +36,31 @@ namespace SoftwareMonkeys.csAnt
 
 				Console.WriteLine ("Cannot find '" + scriptName + "' script.");
 			}
+
+			Console.WriteLine("");
+			Console.WriteLine("-------------------- Finished script: " + scriptName + " --------------------");
+			Console.WriteLine("");
 		}
 
 		public void ExecuteScriptFromFile(string scriptPath, string[] args)
 		{			
-			// TODO: Check if there's a better way to format this path
+			// Load the script assembly
+			var a = CSScript.Load(scriptPath);
+
+			// Get the script type
+			var type = a.GetTypes()[0];
+
+			// Create an instance of the script
+			var script = a.CreateInstance(type.Name)
+				.AlignToInterface<IScript>();
+
+			script.Start(args);
+
+			IsError = script.IsError;
+
+			// TODO: Remove obsolete code
+
+			/*// TODO: Check if there's a better way to format this path
 			var cscsExe = Path.GetFullPath(
 				CurrentDirectory
 				+ Path.DirectorySeparatorChar
@@ -79,7 +104,7 @@ namespace SoftwareMonkeys.csAnt
 			
 			var process = Execute(command, argsString);
 
-			IsError = process.ExitCode > 0;
+			IsError = process.ExitCode > 0;*/
 		}
 	}
 }
