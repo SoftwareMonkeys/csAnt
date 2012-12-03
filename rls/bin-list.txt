@@ -2,5 +2,15 @@
 /bin/Release/*.exe
 /bin/Release/*.config
 /bin/Release/*.snk
-/lib/cs-script/*
+/lib/cs-script/*.dll
+/lib/cs-script/*.exe
+/lib/NUnit/bin/*.dll
+/lib/NUnit/*.dll
+/lib/SharpZipLib/net-20/*.dll
+/lib/FileNodes/Release/*.dll
+/lib/SharpZipLib/*.dll
+/lib/HtmlAgilityPack/*.dll
+/lib/GitSharp/*.dll
+/lib/GCUpload/*.dll
 /lib/FileNodes/Release/*
+/lib/Jungle/Release/*
