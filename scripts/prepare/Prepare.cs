@@ -1,5 +1,5 @@
 //css_ref ../../lib/SharpZipLib/net-20/ICSharpCode.SharpZipLib.dll;
-//css_ref ../../lib/HtmlAgilityPack/Net45/HtmlAgilityPack.dll;
+//css_ref ../../lib/HtmlAgilityPack/Net40/HtmlAgilityPack.dll;
 using System;
 using System.IO;
 using Microsoft.CSharp;
@@ -52,7 +52,7 @@ class PrepareScript
 			+ Path.DirectorySeparatorChar
 			+ "rls"
 			+ Path.DirectorySeparatorChar
-			+ "ProjectRelease";
+			+ "project-release";
 
 		Console.WriteLine("csAnt release dir: " + csAntReleaseDir);
 
@@ -155,7 +155,7 @@ class PrepareScript
 
 		foreach (string item in data)
 		{
-			if (item.IndexOf("csAnt-release-") == 0)
+			if (item.IndexOf("csAnt-project-release-") == 0)
 			{
 				return prefix + item;
 			}
@@ -175,7 +175,8 @@ class PrepareScript
 		var requiredScriptFolders = new string[]
 		{
 			"Update",
-			"Release"
+			"Release",
+			"RunTests"
 		};
 
 		if (!Directory.Exists(scriptsDir))
@@ -205,8 +206,7 @@ class PrepareScript
 
 			Console.WriteLine(file);
 
-			if (!File.Exists(toFile))
-				File.Copy(fromFile, toFile);
+			File.Copy(fromFile, toFile, true);
 		}
 
 		// Script folders
