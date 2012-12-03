@@ -6,6 +6,7 @@
 /scripts/HelloWorld.cs
 /scripts/CreateProjectNode.cs
 /scripts/BuildSolution.cs
+/scripts/BuildAllSolutions.cs
 /scripts/AddLib.cs
 /scripts/ListLibs.cs
 /scripts/GetLibs.cs
@@ -15,9 +16,13 @@
 /scripts/CopyBinToLib.cs
 /scripts/GoogleCodeRelease.cs
 /scripts/SetGoogleCode.cs
+/scripts/List.cs
 /scripts/Release/*
 /scripts/Update/*
+/scripts/ImportLocalLib/*
+/scripts/ImportLocalWebApp/*
 /lib/NUnit/NUnit.node
+/lib/NUnitResults/NUnitResults.node
 /lib/SharpZipLib/SharpZipLib.node
 /lib/HtmlAgilityPack/HtmlAgilityPack.node
 /lib/GitSharp/GitSharp.node
