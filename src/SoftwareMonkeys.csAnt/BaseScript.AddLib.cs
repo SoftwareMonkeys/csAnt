@@ -26,58 +26,6 @@ namespace SoftwareMonkeys.csAnt
 			cmd.Execute();
 		}
 
-		// TODO: Clean up
-		/*protected void EnsureLibsNodeExists()
-		{
-			if (!CurrentNode.Nodes.ContainsKey("Libraries"))
-				CreateLibsNode();
-		}
-
-		protected void CreateLibsNode()
-		{
-			var libNodePath = CurrentDirectory
-				+ Path.DirectorySeparatorChar
-				+ "lib"
-				+ Path.DirectorySeparatorChar
-				+ "Libraries.node";
-
-			// TODO: Check if these should be injected somehow
-			var node = new FileNode(
-				libNodePath,
-				new FileNodeSaver()
-			);
-
-			node.Name = "Libraries";
-
-			node.Save ();
-
-			CurrentNode.Nodes.Add ("Libraries", node);
-		}
-		
-		protected void CreateLibNode(string name, string url, string subPath)
-		{
-			var libNodePath = CurrentDirectory
-				+ Path.DirectorySeparatorChar
-				+ "lib"
-				+ Path.DirectorySeparatorChar
-				+ name
-				+ Path.DirectorySeparatorChar
-				+ name + ".node";
-
-			// TODO: Check if these should be injected somehow
-			var node = new FileNode(
-				libNodePath,
-				new FileNodeSaver()
-			);
-
-			node.Name = name;
-			node.Properties["Url"] = url;
-			node.Properties["SubPath"] = subPath;
-
-			node.Save ();
-
-			CurrentNode.Nodes["Libraries"].Nodes.Add (name, node);
-		}*/
 	}
 }
 
