@@ -13,14 +13,16 @@ class UpdateScript : BaseProjectScript
 {
 	public static void Main(string[] args)
 	{
-		new UpdateScript().Start();
+		new UpdateScript().Start(args);
 	}
 	
-	public void Start()
+	public override bool Start(string[] args)
 	{
 		GetRemotecsAnt();
 
 		Console.WriteLine ("Update complete.");
+
+		return !IsError;
 	}
 	
 	public void GetRemotecsAnt()
@@ -131,11 +133,11 @@ class UpdateScript : BaseProjectScript
 		if (CurrentNode.Properties.Count > 0
 			&& CurrentNode.Properties["Context"] == "Project")
 		{
-			prefix += "ProjectRelease-";
+			prefix += "project-release-";
 		}
 		else
 		{
-			prefix += "StandardRelease-";
+			prefix += "standard-release-";
 		}
 
 		var downloadBase = "https://csant.googlecode.com/files/";

@@ -12,10 +12,10 @@ class CycleBuildScript : BaseProjectScript
 {
 	public static void Main(string[] args)
 	{
-		new CycleBuildScript().Start();
+		new CycleBuildScript().Start(args);
 	}
 	
-	public void Start()
+	public override bool Start(string[] args)
 	{
 		Console.WriteLine("");
 		Console.WriteLine("Starting a full build cycle.");
@@ -37,5 +37,6 @@ class CycleBuildScript : BaseProjectScript
 			);
 		}
 		
+		return true;
 	}
 }

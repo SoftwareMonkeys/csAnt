@@ -14,8 +14,22 @@ namespace SoftwareMonkeys.csAnt
 
 		public void DownloadAndUnzip(string zipFileUrl, string zipFileLocalPath, string localDirectory, string subPath, bool force)
 		{
+			var cmd = Injection.Retriever.Get<DownloadAndUnzipCommand>(
+				new object[]
+				{
+					this,
+					zipFileUrl,
+					zipFileLocalPath,
+					localDirectory,
+					subPath
+				}
+			);
 
-			// Create the _tmp directory if it doesn't exist
+			cmd.Force = force;
+
+			ExecuteCommand(cmd);
+
+			/*// Create the _tmp directory if it doesn't exist
 			if (!Directory.Exists(Path.GetDirectoryName(zipFileLocalPath)))
 				Directory.CreateDirectory(Path.GetDirectoryName(zipFileLocalPath));
 
@@ -59,7 +73,7 @@ namespace SoftwareMonkeys.csAnt
 			
 			// Delete the temporary folder
 			if (Directory.Exists(tmpFolder))
-				Directory.Delete(tmpFolder);
+				Directory.Delete(tmpFolder);*/
 		}
 	}
 }

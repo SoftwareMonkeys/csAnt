@@ -9,6 +9,30 @@ namespace SoftwareMonkeys.csAnt
 	{
 	    public int Unzip(string zipFilePath, string destinationPath)
 	    {
+			return Unzip(
+				zipFilePath,
+			    destinationPath,
+				"/"
+			);
+		}
+
+	    public int Unzip(string zipFilePath, string destinationPath, string subPath)
+	    {
+			if (String.IsNullOrEmpty(zipFilePath))
+				throw new ArgumentException("A zip file path must be provided.", "zipFilePath");
+			
+			if (String.IsNullOrEmpty(destinationPath))
+				throw new ArgumentException("A destination path must be provided.", "destinationPath");
+
+			EnsureDirectoryExists(destinationPath);
+
+			// Create a temporary folder name
+			var tmpFolder = CurrentDirectory
+				+ Path.DirectorySeparatorChar
+				+ "_tmp"
+				+ Path.DirectorySeparatorChar
+				+ "tmp-" + Guid.NewGuid().ToString();
+
 			Console.WriteLine("Unzipping file: " + zipFilePath);
 			Console.WriteLine("To: " + destinationPath);
 
@@ -21,8 +45,8 @@ namespace SoftwareMonkeys.csAnt
                 zinstream = new ZipInputStream(File.OpenRead(zipFilePath));
  
                 // we need to extract to a folder so we must create it if needed
-                if (Directory.Exists(destinationPath) == false)
-                    Directory.CreateDirectory(destinationPath);
+                if (Directory.Exists(tmpFolder) == false)
+                    Directory.CreateDirectory(tmpFolder);
  
                 ZipEntry theEntry; // an entry in the zip file which could be a file or directory
  
@@ -33,14 +57,14 @@ namespace SoftwareMonkeys.csAnt
                     string fname   = Path.GetFileName(theEntry.Name);      // the file name
  
                     // if a path name exists we should create the directory in the destination folder
-                    string target = destinationPath + Path.DirectorySeparatorChar + dirname;
+                    string target = tmpFolder + Path.DirectorySeparatorChar + dirname;
                     if (dirname.Length > 0 && !Directory.Exists(target)) 
                         Directory.CreateDirectory(target);
  
                     // now we know the proper path exists in the destination so copy the file there
                     if (fname != String.Empty)
                     {
-						var filePath = destinationPath + Path.DirectorySeparatorChar + theEntry.Name;
+						var filePath = tmpFolder + Path.DirectorySeparatorChar + theEntry.Name;
 
                         DecompressAndWriteFile(filePath, zinstream);
 						File.SetLastWriteTime(filePath, theEntry.DateTime);
@@ -56,6 +80,25 @@ namespace SoftwareMonkeys.csAnt
             {
                 zinstream.Close();
             }
+
+			Console.WriteLine ("Sub path: " + subPath);
+
+			// Get the full sub path
+			var fullSubPath = Path.GetFullPath(
+				tmpFolder
+				+ Path.DirectorySeparatorChar
+				+ subPath
+			);
+			
+			Console.WriteLine ("Sub path:");
+			Console.WriteLine (fullSubPath);
+
+			// Move the files in the sub path within the temporary folder into the final destination
+			MoveDirectory(fullSubPath, destinationPath);
+			
+			// Delete the temporary folder
+			if (Directory.Exists(tmpFolder))
+				Directory.Delete(tmpFolder);
 
 			Console.WriteLine ("Extraction complete.");
  

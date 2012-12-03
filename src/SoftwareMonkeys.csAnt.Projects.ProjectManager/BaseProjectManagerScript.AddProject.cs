@@ -2,10 +2,14 @@ using System;
 
 namespace SoftwareMonkeys.csAnt.Projects.ProjectManager
 {
-	public class BaseProjectManagerScript
+	public partial class BaseProjectManagerScript
 	{
-		public BaseProjectManagerScript ()
+		public void AddProject(
+			string groupName,
+			string projectName
+			)
 		{
+			throw new NotImplementedException();
 		}
 	}
 }

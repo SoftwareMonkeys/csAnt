@@ -1,11 +1,12 @@
 using System;
+using SoftwareMonkeys.FileNodes;
+using System.IO;
 
-namespace SoftwareMonkeys.csAnt
+namespace SoftwareMonkeys.csAnt.Commands
 {
+	[ScriptCommand]
 	public class AddLibCommand : BaseScriptCommand
 	{
-		public IScript Script { get;set; }
-
 		public string Name { get;set; }
 
 		public string ZipFileUrl { get;set; }
@@ -17,7 +18,12 @@ namespace SoftwareMonkeys.csAnt
 			string name,
 			string zipFileUrl
 		)
+			: base(
+				script
+			)
 		{
+			Script = script;
+
 			Name = name;
 
 			ZipFileUrl = zipFileUrl;
@@ -29,7 +35,12 @@ namespace SoftwareMonkeys.csAnt
 			string zipFileUrl,
 			string subPath
 		)
+			: base(
+				script
+			)
 		{
+			Script = script;
+
 			Name = name;
 
 			ZipFileUrl = zipFileUrl;
@@ -60,13 +71,13 @@ namespace SoftwareMonkeys.csAnt
 
 		protected void EnsureLibsNodeExists()
 		{
-			if (!CurrentNode.Nodes.ContainsKey("Libraries"))
+			if (!Script.CurrentNode.Nodes.ContainsKey("Libraries"))
 				CreateLibsNode();
 		}
 
 		protected void CreateLibsNode()
 		{
-			var libNodePath = CurrentDirectory
+			var libNodePath = Script.CurrentDirectory
 				+ Path.DirectorySeparatorChar
 				+ "lib"
 				+ Path.DirectorySeparatorChar
@@ -82,12 +93,12 @@ namespace SoftwareMonkeys.csAnt
 
 			node.Save ();
 
-			CurrentNode.Nodes.Add ("Libraries", node);
+			Script.CurrentNode.Nodes.Add ("Libraries", node);
 		}
 		
 		protected void CreateLibNode(string name, string url, string subPath)
 		{
-			var libNodePath = CurrentDirectory
+			var libNodePath = Script.CurrentDirectory
 				+ Path.DirectorySeparatorChar
 				+ "lib"
 				+ Path.DirectorySeparatorChar
@@ -107,7 +118,7 @@ namespace SoftwareMonkeys.csAnt
 
 			node.Save ();
 
-			CurrentNode.Nodes["Libraries"].Nodes.Add (name, node);
+			Script.CurrentNode.Nodes["Libraries"].Nodes.Add (name, node);
 		}
 	}
 }

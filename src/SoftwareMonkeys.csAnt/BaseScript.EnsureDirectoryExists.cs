@@ -1,11 +1,16 @@
 using System;
+using System.IO;
 
 namespace SoftwareMonkeys.csAnt
 {
-	public class BaseScript
+	public partial class BaseScript
 	{
-		public BaseScript ()
+		public void EnsureDirectoryExists(
+			string directoryPath
+		)
 		{
+			if (!Directory.Exists(directoryPath))
+				Directory.CreateDirectory(directoryPath);
 		}
 	}
 }

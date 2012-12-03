@@ -1,6 +1,7 @@
 using System;
 using SoftwareMonkeys.FileNodes;
 using System.IO;
+using SoftwareMonkeys.csAnt.Commands;
 
 namespace SoftwareMonkeys.csAnt
 {
@@ -13,12 +14,20 @@ namespace SoftwareMonkeys.csAnt
 
 		public void AddLib (string name, string zipFileUrl, string subPath)
 		{
-			EnsureLibsNodeExists();
+			var cmd = Injection.Retriever.Get<AddLibCommand>(
+				new object[]{
+					this,
+					name,
+					zipFileUrl,
+					subPath
+				}
+			);
 
-			CreateLibNode(name, zipFileUrl, subPath);
+			cmd.Execute();
 		}
 
-		protected void EnsureLibsNodeExists()
+		// TODO: Clean up
+		/*protected void EnsureLibsNodeExists()
 		{
 			if (!CurrentNode.Nodes.ContainsKey("Libraries"))
 				CreateLibsNode();
@@ -68,7 +77,7 @@ namespace SoftwareMonkeys.csAnt
 			node.Save ();
 
 			CurrentNode.Nodes["Libraries"].Nodes.Add (name, node);
-		}
+		}*/
 	}
 }
 

@@ -1,15 +1,16 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Reflection;
 
 namespace SoftwareMonkeys.csAnt.UI.csAntConsole
 {
 	class Program
 	{
 		public static void Main(string[] args)
-		{			
-			Console.WriteLine("");
+		{		
+			InitializeConsoleWriter();
 
 			// Get the script name from the first argument
 			string scriptName = args[0];
@@ -22,6 +23,30 @@ namespace SoftwareMonkeys.csAnt.UI.csAntConsole
 
 			// Execute the script
 			Execute(scriptName, argsList.ToArray());
+		}
+
+		static public void InitializeConsoleWriter()
+		{	
+			System.Console.SetOut(
+				new ConsoleWriter(
+					GetOutputDirectory()
+				)
+			);
+		}
+
+		static public string GetOutputDirectory()
+		{
+			var output = Path.GetDirectoryName(
+				Assembly.GetExecutingAssembly().FullName
+				);
+
+			output = Path.GetFullPath(
+				output
+				+ "/../"
+				+ "scriptlogs"
+			);
+
+			return output;
 		}
 
 		static public void Execute(string scriptName, string[] args)
@@ -51,7 +76,7 @@ namespace SoftwareMonkeys.csAnt.UI.csAntConsole
 			else
 			{			
 				Environment.CurrentDirectory = scr.CurrentDirectory;
-							
+			
 				// Execute the script
 				scr.ExecuteScript(scriptName, args);
 
@@ -59,13 +84,22 @@ namespace SoftwareMonkeys.csAnt.UI.csAntConsole
 				var totalTime = DateTime.Now.Subtract(startTime);
 				
 				Console.WriteLine("");
-				Console.WriteLine("Total execution time: " + totalTime.ToString());
+				Console.WriteLine("");
+				
+				Console.WriteLine("--------------------------------------------------");
 
-				if (!scr.IsError)
-					Console.WriteLine("---------- Finished ----------");
+				Console.WriteLine("");
+				Console.WriteLine("Duration: " + totalTime.ToString());
+				Console.WriteLine("Successful: " + !scr.IsError);
+				Console.WriteLine("");
+				
+				if (scr.IsError)
+					Console.WriteLine("!!!!!!!!!!!!!!!!!!   Failed   !!!!!!!!!!!!!!!!!!");
 				else
-					Console.WriteLine("!!!!!!!!!! Failed !!!!!!!!!!");
+					Console.WriteLine("-------------------- Finished --------------------");
 
+
+				Console.WriteLine("");
 				Console.WriteLine("");
 			}
 		}

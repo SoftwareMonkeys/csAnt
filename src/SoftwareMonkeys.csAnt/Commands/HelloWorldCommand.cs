@@ -1,10 +1,26 @@
 using System;
+using SoftwareMonkeys.csAnt.Commands;
+using SoftwareMonkeys.Jungle.Injection;
+
 namespace SoftwareMonkeys.csAnt
 {
-	public class HelloWorldCommand
+	[ScriptCommand]
+	public class HelloWorldCommand : BaseScriptCommand
 	{
-		public HelloWorldCommand()
+		public HelloWorldCommand(
+			IScript script
+		)
+			: base(
+				script
+			)
 		{
+		}
+
+		public override void Execute ()
+		{
+			Console.WriteLine ("");
+			Console.WriteLine ("Hello World");
+			Console.WriteLine ("");
 		}
 	}
 }

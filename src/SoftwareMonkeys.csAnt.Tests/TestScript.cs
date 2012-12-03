@@ -7,6 +7,11 @@ namespace SoftwareMonkeys.csAnt.Tests
 		public TestScript ()
 		{
 		}
+
+		public override bool Start (string[] args)
+		{
+			throw new System.NotImplementedException ();
+		}
 	}
 }
 

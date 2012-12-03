@@ -2,11 +2,11 @@ using System;
 
 namespace SoftwareMonkeys.csAnt
 {
-	public class IScriptCommand
+	public interface IScriptCommand
 	{
-		public IScriptCommand ()
-		{
-		}
+		object ReturnValue { get;set; }
+
+		void Execute();
 	}
 }
 

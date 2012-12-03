@@ -11,7 +11,19 @@ namespace SoftwareMonkeys.csAnt
 			string localDestination
 		)
 		{
-			Console.WriteLine ("Downloading...");
+			var cmd = Injection.Retriever.Get<DownloadCommand>(
+				new object[]{
+					this,
+					url,
+					localDestination
+				}
+			);
+
+			ExecuteCommand(cmd);
+
+			return (string)cmd.ReturnValue;
+
+			/*Console.WriteLine ("Downloading...");
 			Console.WriteLine ("  From URL: " + url);
 
 			var fileName = Path.GetFileName(url);
@@ -49,7 +61,7 @@ namespace SoftwareMonkeys.csAnt
 
 			Console.WriteLine ("Download complete.");
 
-			return toFile;
+			return toFile;*/
 		}
 	}
 }

@@ -12,22 +12,22 @@ class DeployLocalScript : BaseProjectScript
 {
 	public static void Main(string[] args)
 	{
-		new DeployLocalScript().Start(new Arguments(args));
+		new DeployLocalScript().Start(args);
 	}
 	
-	public void Start(Arguments arguments)
+	public override bool Start(string[] args)
 	{
-		// Arguments expected:
-		// "--to:[destination]"
-
 		Console.WriteLine("");
 		Console.WriteLine("Deploying essential files to a local destination...");
 		Console.WriteLine("");
 
-		var destination = Path.GetFullPath(arguments["to"]);
+		var destination = GetDestination(args);
 
 		Console.WriteLine("Destination:");
 		Console.WriteLine(destination);
+
+		// Run the CycleRelease script
+		ExecuteScript("CycleRelease");
 
 		// TODO: Make it possible to specify either ProjectRelease or StandardRelease, depending on how
 		// csAnt is to be used
@@ -35,21 +35,30 @@ class DeployLocalScript : BaseProjectScript
 			+ Path.DirectorySeparatorChar
 			+ "rls"
 			+ Path.DirectorySeparatorChar
-			+ "ProjectRelease";
+			+ "project-release";
 
 		var releaseFile = GetNewestFile(releaseDir);
 
 		Console.WriteLine("Release file:");
 		Console.WriteLine(releaseFile);
 
+		// Unzip the release
 		Unzip(releaseFile, destination);
 
-		// Move the sub directory into the specified destination
+		// Move the sub directory into the destination
 		MoveDirectory(
 			GetNewestFolder(destination),
 			destination
 		);
 
+		// Run the prepare script in the new location
 		PrepareProject(destination);
+
+		return !IsError;
+	}
+
+	public string GetDestination(string[] args)
+	{
+		return Path.GetFullPath(args[0]);
 	}
 }

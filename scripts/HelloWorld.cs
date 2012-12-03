@@ -9,11 +9,15 @@ class HelloWorldScript : BaseScript
 {
 	public static void Main(string[] args)
 	{
-		new HelloWorldScript().Start();
+		new HelloWorldScript().Start(args);
 	}
 	
-	public void Start()
+	public override bool Start(string[] args)
 	{
-		Console.WriteLine("Hello world");
+		var cmd = Injection.Retriever.Get<HelloWorldCommand>();
+
+		ExecuteCommand(cmd);
+
+		return true;
 	}
 }

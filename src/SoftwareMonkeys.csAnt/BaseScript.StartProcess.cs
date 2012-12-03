@@ -1,5 +1,6 @@
 using System;
 using System.Diagnostics;
+using System.Collections.Generic;
 
 namespace SoftwareMonkeys.csAnt
 {
@@ -13,22 +14,31 @@ namespace SoftwareMonkeys.csAnt
 		/// </returns>
 		/// <param name='command'></param>
 		/// <param name='arguments'></param>
-		public Process StartProcess(string command, string[] arguments)
+		public StartProcessCommand StartProcess(string command, params string[] arguments)
 		{
-			return StartProcess(command, String.Join(" ", arguments));
+			return StartProcess(command + " " + String.Join(" ", arguments));
 		}
 		
 		/// <summary>
 		/// Starts/executes a process in the current thread.
 		/// </summary>
 		/// <returns>
-		/// The newly started process.
+		/// The start process command.
 		/// </returns>
 		/// <param name='command'></param>
 		/// <param name='arguments'></param>
-		public Process StartProcess(string command, string arguments)
+		public StartProcessCommand StartProcess(string command)
 		{
-			Console.WriteLine("");
+			var cmd = Injection.Retriever.Get<StartProcessCommand>();
+
+			cmd.CommandWithArguments = command;
+
+			ExecuteCommand(cmd);
+
+			return cmd;
+
+			// TODO: Remove if not needed
+		/*	Console.WriteLine("");
 			Console.WriteLine("--------------------------------------------------");
 			Console.WriteLine("");
 			Console.WriteLine("Starting process: " + command);
@@ -79,8 +89,26 @@ namespace SoftwareMonkeys.csAnt
 
 			process.WaitForExit();
 
-			return process;
+			return process;*/
 		}
+		/*
+		public string[] FixArguments(string[] arguments)
+		{
+			List<string> argsList = new List<string>(arguments);
+
+			for (int i = 0; i < argsList.Count; i++)
+			{
+				if (
+					argsList[0].IndexOf(" ") > -1
+				    && argsList[0].IndexOf("\"") != 0
+				)
+					argsList[0] = @"""" + argsList[0] + @"""";
+			}
+
+			return argsList.ToArray();
+		}
+*/
+
 	}
 }
 

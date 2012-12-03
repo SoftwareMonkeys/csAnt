@@ -1,5 +1,6 @@
 using System;
 using SoftwareMonkeys.FileNodes;
+using System.IO;
 
 namespace SoftwareMonkeys.csAnt.Projects.ProjectManager
 {
@@ -27,10 +28,22 @@ namespace SoftwareMonkeys.csAnt.Projects.ProjectManager
 			string filterQuery
 		)
 		{
+			// TODO: Remove if not needed. Function should be obsolete.
 			EnsureAccessNode();
 
-			//var node = new FileNode(
+			var node = NewNode (
+				"Access/" + name
+			);
 
+			node.Properties["Type"] = "Scrape";
+
+			node.Properties["Url"] = scrapeUrl;
+
+			node.Properties["XPath"] = xPathPattern;
+
+			node.Properties["Filter"] = filterQuery;
+
+			node.Save();
 		}
 	}
 }

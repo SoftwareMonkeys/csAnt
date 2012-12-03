@@ -8,7 +8,7 @@ namespace SoftwareMonkeys.csAnt
 	{
 		public string GetNewestFolder(string directory)
 		{
-			string path = String.Empty;
+			string path = directory;
 
 			var directories = new DirectoryInfo(directory).GetDirectories().OrderByDescending(p => p.CreationTime);
 

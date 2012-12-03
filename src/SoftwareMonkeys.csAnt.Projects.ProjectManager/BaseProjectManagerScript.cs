@@ -2,11 +2,8 @@ using System;
 
 namespace SoftwareMonkeys.csAnt.Projects.ProjectManager
 {
-	public class BaseProjectManagerScript
+	public abstract partial class BaseProjectManagerScript : BaseScript
 	{
-		public BaseProjectManagerScript ()
-		{
-		}
 	}
 }
 

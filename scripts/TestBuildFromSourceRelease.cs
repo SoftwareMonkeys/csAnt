@@ -12,10 +12,10 @@ class TestBuildFromSourceReleaseScript : BaseProjectScript
 {
 	public static void Main(string[] args)
 	{
-		new TestBuildFromSourceReleaseScript().Start();
+		new TestBuildFromSourceReleaseScript().Start(args);
 	}
 	
-	public void Start()
+	public override bool Start(string[] args)
 	{
 		Console.WriteLine("");
 		Console.WriteLine("Test building solutions from the release files...");
@@ -38,13 +38,21 @@ class TestBuildFromSourceReleaseScript : BaseProjectScript
 			UnzipAndBuild(latest);
 		}
 		
+		return !IsError;
 	}
 
 	public void UnzipAndBuild(string latestFile)
 	{
+
+		Console.WriteLine("");
+		Console.WriteLine("Unzipping...");
+		Console.WriteLine("");
+
 		var tmpDir = ProjectDirectory
 			+ Path.DirectorySeparatorChar
 			+ "_tmp"
+			+ Path.DirectorySeparatorChar
+			+ "testing"
 			+ Path.DirectorySeparatorChar
 			+ Guid.NewGuid().ToString()
 			+ Path.DirectorySeparatorChar
@@ -52,18 +60,38 @@ class TestBuildFromSourceReleaseScript : BaseProjectScript
 
 		Unzip(latestFile, tmpDir);
 
+		Console.WriteLine("");
+		Console.WriteLine("Tmp dir:");
+		Console.WriteLine(" " + tmpDir);
+		Console.WriteLine("");
+
+		var subDir = GetNewestFolder(tmpDir); 
+
 		// Move from the sub directory to the intended directory
 		MoveDirectory(
-			GetNewestFolder(tmpDir),
+			subDir,
 			tmpDir
 		);
 
 		ProjectDirectory = tmpDir;
 
+		Console.WriteLine("");
+		Console.WriteLine("Preparing...");
+		Console.WriteLine("");
+
 		PrepareProject(ProjectDirectory);
 
 		if (!IsError)
-			BuildAllSolutions(ProjectDirectory);
+		{
+			Console.WriteLine("");
+			Console.WriteLine("Testing build...");
+			Console.WriteLine("");
+
+			BuildAllSolutions(
+				ProjectDirectory
+				+ "/src"
+			);
+		}
 
 		Directory.Delete(ProjectDirectory, true);
 	}

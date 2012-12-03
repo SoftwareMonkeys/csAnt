@@ -1,6 +1,6 @@
 using System;
 
-namespace SoftwareMonkeys.csAnt.Projects.Access.Scraping
+namespace SoftwareMonkeys.csAnt.Projects.ProjectManager
 {
 	public partial class BaseProjectManagerScript
 	{
@@ -13,9 +13,13 @@ namespace SoftwareMonkeys.csAnt.Projects.Access.Scraping
 		{
 			if (!ScrapeExists(name))
 			{
-				throw new NotImplementedException();
+				AddScrapeAccess(
+					name,
+					scrapeUrl,
+					xPathPattern,
+					filterQuery
+				);
 			}
-
 		}
 	}
 }
