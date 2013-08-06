@@ -2,10 +2,14 @@ using System;
 
 namespace SoftwareMonkeys.csAnt
 {
-	public class BaseScript
+	public partial class BaseScript
 	{
-		public BaseScript ()
+		public void GitAdd(string file)
 		{
+			Console.WriteLine ("Adding file:");
+			Console.WriteLine (file);
+
+			Git ("add", file);
 		}
 	}
 }

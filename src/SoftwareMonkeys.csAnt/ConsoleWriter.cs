@@ -2,7 +2,7 @@ using System;
 using System.IO;
 using System.Text;
 
-namespace SoftwareMonkeys.csAnt.UI.csAntConsole
+namespace SoftwareMonkeys.csAnt
 {
 	public class ConsoleWriter : TextWriter
 	{
