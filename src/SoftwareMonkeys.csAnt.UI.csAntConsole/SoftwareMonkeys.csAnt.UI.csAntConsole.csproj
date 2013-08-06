@@ -48,12 +48,14 @@
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="CSScriptLibrary">
+      <HintPath>..\..\lib\cs-script\Lib\Bin\NET 4.0\CSScriptLibrary.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="LauncherScript.cs" />
     <Compile Include="AssemblyInfo.cs" />
-    <Compile Include="ConsoleWriter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -66,11 +68,12 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <WarningLevel>4</WarningLevel>
     <OutputPath>..\..\bin\Debug\</OutputPath>
-    <Commandlineparameters>HelloWorld</Commandlineparameters>
+    <Commandlineparameters>"HelloWorld" "-b:../../"</Commandlineparameters>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <WarningLevel>4</WarningLevel>
     <OutputPath>..\..\bin\Release\</OutputPath>
+    <Commandlineparameters>"HelloWorld" "-b:../../"</Commandlineparameters>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\SoftwareMonkeys.csAnt\SoftwareMonkeys.csAnt.csproj">

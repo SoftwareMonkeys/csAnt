@@ -1,10 +1,18 @@
 using System;
 namespace SoftwareMonkeys.csAnt
 {
-	public class BaseScript
+	public partial class BaseScript
 	{
-		public BaseScript()
+		public void GitCommit ()
 		{
+			GitCommit ("Committing changed files");
+		}
+		
+		public void GitCommit (string message)
+		{
+			Console.WriteLine ("Committing changed files...");
+
+			Git ("commit", "-a", "-m:'" + message + "'");
 		}
 	}
 }

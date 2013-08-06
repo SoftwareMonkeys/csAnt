@@ -65,9 +65,6 @@
     <Reference Include="ICSharpCode.SharpZipLib">
       <HintPath>..\..\lib\SharpZipLib\net-20\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
-    <Reference Include="LibGit2Sharp">
-      <HintPath>..\..\lib\LibGit2Sharp\LibGit2Sharp.dll</HintPath>
-    </Reference>
     <Reference Include="CSScriptLibrary">
       <HintPath>..\..\lib\cs-script\Lib\Bin\NET 4.0\CSScriptLibrary.dll</HintPath>
     </Reference>
