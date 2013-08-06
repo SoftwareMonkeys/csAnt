@@ -12,10 +12,12 @@ class BackupFileScript : BaseScript
 		new BackupFileScript().Start(args);
 	}
 	
-	public void Start(string[] args)
+	public override bool Start(string[] args)
 	{
 		var file = args[0];
 
 		BackupFile(file);
+
+		return !IsError;
 	}
 }

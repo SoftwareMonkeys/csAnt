@@ -12,7 +12,7 @@ class AddLibScript : BaseScript
 		new AddLibScript().Start(args);
 	}
 	
-	public void Start(string[] args)
+	public override bool Start(string[] args)
 	{
 		if (args.Length < 2)
 			Console.WriteLine("Two arguments expected; name and URL (to zip file).");
@@ -28,5 +28,7 @@ class AddLibScript : BaseScript
 
 			AddLib(name, url, subPath);
 		}
+
+		return !IsError;
 	}
 }

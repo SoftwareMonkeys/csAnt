@@ -11,12 +11,10 @@ namespace SoftwareMonkeys.csAnt
 			string localDestination
 		)
 		{
-			var cmd = Injection.Retriever.Get<DownloadCommand>(
-				new object[]{
-					this,
-					url,
-					localDestination
-				}
+			var cmd = new DownloadCommand(
+				this,
+				url,
+				localDestination
 			);
 
 			ExecuteCommand(cmd);

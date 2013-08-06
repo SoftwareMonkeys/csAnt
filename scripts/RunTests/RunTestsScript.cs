@@ -98,8 +98,7 @@ class RunTestsScript : BaseScript
 	public void GenerateReports(string dateStamp)
 	{
 		var xmlResultDir = GetXmlResultDir(dateStamp)
-			+ Path.DirectorySeparatorChar
-			+ "*";
+			+ Path.DirectorySeparatorChar;
 
 		string htmlResultDir = GetHtmlResultDir(dateStamp);
 			

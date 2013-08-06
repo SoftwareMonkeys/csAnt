@@ -5,7 +5,6 @@ using System.Net;
 
 namespace SoftwareMonkeys.csAnt
 {
-	[ScriptCommand]
 	public class DownloadCommand : BaseScriptCommand
 	{
 		public string DownloadUrl { get;set; }

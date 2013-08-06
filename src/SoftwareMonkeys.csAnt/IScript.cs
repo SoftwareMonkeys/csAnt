@@ -41,6 +41,10 @@ namespace SoftwareMonkeys.csAnt
 		#region Error functions
 		void Error(string message);
 		#endregion
+
+		#region Execute functions
+		void ExecuteScript(string scriptName);
+		#endregion
 	}
 }
 

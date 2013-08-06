@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Collections.Generic;
 
 namespace SoftwareMonkeys.csAnt.Projects
 {
@@ -25,6 +26,8 @@ namespace SoftwareMonkeys.csAnt.Projects
 			int failed = 0;
 			int total = 0;
 
+			List<string> failedSolutions = new List<string>();
+
 			foreach (string slnFile in Directory.GetFiles(directory, "*.sln", SearchOption.AllDirectories))
 			{
 				if (!isError)
@@ -41,7 +44,10 @@ namespace SoftwareMonkeys.csAnt.Projects
 				}
 
 				if (isError)
+				{
+					failedSolutions.Add(slnFile);
 					break;
+				}
 			}
 			
 			Console.WriteLine ("");
@@ -51,7 +57,15 @@ namespace SoftwareMonkeys.csAnt.Projects
 			Console.WriteLine ("Successful: " + successful);
 			Console.WriteLine ("Failed: " + failed);
 			Console.WriteLine ("");
+
+			Console.WriteLine ("The following solutions failed to build:");
+			foreach (string failedSolution in failedSolutions)
+			{
+				Console.WriteLine ("  " + failedSolution.Replace(ProjectDirectory, ""));
+			}
+			
 			Console.WriteLine ("");
+
 			
 			// Enable stopping on failure again
 			StopOnFail = true;

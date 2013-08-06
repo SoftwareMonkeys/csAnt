@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using CSScriptLibrary;
+using System.Reflection;
 
 namespace SoftwareMonkeys.csAnt
 {
@@ -15,10 +16,10 @@ namespace SoftwareMonkeys.csAnt
 			ExecuteScript(scriptName, new string[]{});
 		}
 		
-		public void ExecuteScript(string scriptName, string[] args)
+		public void ExecuteScript(string scriptName, params string[] args)
 		{
 			Console.WriteLine("");
-			Console.WriteLine("-------------------- Executing script: " + scriptName + " --------------------");
+			Console.WriteLine("---------- Executing script: " + scriptName + " ----------");
 			Console.WriteLine("");
 
 			string scriptFile = GetScriptPath(scriptName);
@@ -38,73 +39,36 @@ namespace SoftwareMonkeys.csAnt
 			}
 
 			Console.WriteLine("");
-			Console.WriteLine("-------------------- Finished script: " + scriptName + " --------------------");
+			Console.WriteLine("---------- Finished script: " + scriptName + " ----------");
 			Console.WriteLine("");
 		}
 
 		public void ExecuteScriptFromFile(string scriptPath, string[] args)
 		{			
 			// Load the script assembly
-			var a = CSScript.Load(scriptPath);
+			Assembly a = CSScript.Load(scriptPath);
 
 			// Get the script type
 			var type = a.GetTypes()[0];
 
-			// Create an instance of the script
-			var script = a.CreateInstance(type.Name)
-				.AlignToInterface<IScript>();
+			var b = (IScript)a
+				.CreateInstance(type.Name);
 
+			// Create an instance of the script
+			IScript script = b
+				;//.AlignToInterface<IScript>();
+
+			// Get the original current directory
+			var originalCurrentDirectory = script.CurrentDirectory;
+
+			// Start the target script
 			script.Start(args);
 
+			// Ensure the script's current directory is reset back to its original value (in case it was modified in a script)
+			script.CurrentDirectory = originalCurrentDirectory;
+
+			// If the target script ran into an error then recognize that error in the current script
 			IsError = script.IsError;
-
-			// TODO: Remove obsolete code
-
-			/*// TODO: Check if there's a better way to format this path
-			var cscsExe = Path.GetFullPath(
-				CurrentDirectory
-				+ Path.DirectorySeparatorChar
-				+ "lib"
-				+ Path.DirectorySeparatorChar
-				+ "cs-script"
-				+ Path.DirectorySeparatorChar
-				+ "cscs.exe"
-			);
-
-			if (IsVerbose)
-				Console.WriteLine("cscs.exe file: " + cscsExe);
-			
-			string command = String.Empty;
-			
-			// If running on mono then the command is "mono"
-			if (IsRunningOnMono())
-			{
-				command = "mono";
-			}
-			// Otherwise it's the cs-script file
-			else
-			{
-				command = cscsExe;
-			}
-
-			if (IsVerbose)
-				Console.WriteLine ("Command: " + command);
-			
-			var argsList = new List<string>();
-			
-			// If running on mono then the cs-script file path needs to be added as an argument
-			if (IsRunningOnMono())
-				argsList.Add("\"" + cscsExe + "\"");
-			
-			argsList.Add("\"" + scriptPath + "\"");
-			
-			argsList.AddRange(args);
-			
-			var argsString = String.Join(" ", argsList.ToArray());
-			
-			var process = Execute(command, argsString);
-
-			IsError = process.ExitCode > 0;*/
 		}
 	}
 }

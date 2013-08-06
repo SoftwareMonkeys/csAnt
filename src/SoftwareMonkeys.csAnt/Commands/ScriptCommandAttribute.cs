@@ -1,5 +1,4 @@
 using System;
-using SoftwareMonkeys.Jungle.Injection;
 
 namespace SoftwareMonkeys.csAnt
 {

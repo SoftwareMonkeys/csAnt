@@ -1,18 +1,19 @@
 //css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.dll;
+//css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.Projects.dll;
+
 using System;
 using System.IO;
-using Microsoft.CSharp;
-using System.Diagnostics;
 using SoftwareMonkeys.csAnt;
+using SoftwareMonkeys.csAnt.Projects;
 
-class BuildSolutionScript : BaseScript
+class BuildSolutionScript : BaseProjectScript
 {
 	public static void Main(string[] args)
 	{
 		new BuildSolutionScript().Start(args);
 	}
 	
-	public void Start(string[] args)
+	public override bool Start(string[] args)
 	{
 		Console.WriteLine("Looking for solution (*.sln) files...");
 				
@@ -20,13 +21,15 @@ class BuildSolutionScript : BaseScript
 			BuildByShortName(args[0]);
 		else
 			ShowIndex();
+
+		return true;
 	}
 	
 	public void ShowIndex()
 	{
 		var rootPath = CurrentDirectory
 			+ Path.DirectorySeparatorChar
-			+ "src";	
+			+ "src";
 	
 		var solutionFiles = Directory.GetFiles(rootPath, "*.sln", SearchOption.AllDirectories);
 		
@@ -57,7 +60,9 @@ class BuildSolutionScript : BaseScript
 	{
 		Console.WriteLine("Building by short name: " + shortName);
 	
-		var rootPath = CurrentDirectory;
+		var rootPath = CurrentDirectory
+			+ Path.DirectorySeparatorChar
+			+ "src";
 	
 		var solutionFiles = Directory.GetFiles(rootPath, "*.sln", SearchOption.AllDirectories);
 		

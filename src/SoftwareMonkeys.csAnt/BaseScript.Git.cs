@@ -8,16 +8,20 @@ namespace SoftwareMonkeys.csAnt
 	{
 		public void Git(params string[] arguments)
 		{
+			// TODO: Clean up
+
 			// TODO: Make this configurable
-			var gitExe = CurrentDirectory
+			/*var gitExe = CurrentDirectory
 				+ Path.DirectorySeparatorChar
 				+ "lib"
 				+ Path.DirectorySeparatorChar
 				+ "GitSharp"
 				+ Path.DirectorySeparatorChar
 				+ "Git.exe";
+*/
+			var gitExe = "git";
 
-			StartDotNetExe(
+			StartProcess(
 				gitExe,
 				arguments
 			);

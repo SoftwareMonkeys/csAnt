@@ -12,11 +12,15 @@ namespace SoftwareMonkeys.csAnt
 
 		public string GetTmpDir()
 		{
-			return CurrentDirectory
+			return Path.GetFullPath(
+				CurrentDirectory
+				+ Path.DirectorySeparatorChar
+				+ ".."
 				+ Path.DirectorySeparatorChar
 				+ "_tmp"
 				+ Path.DirectorySeparatorChar
-				+ Guid.NewGuid().ToString();
+				+ Guid.NewGuid().ToString()
+				);
 				
 		}
 	}

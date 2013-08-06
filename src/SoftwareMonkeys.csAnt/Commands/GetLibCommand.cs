@@ -2,6 +2,7 @@ using System;
 using SoftwareMonkeys.csAnt.Commands;
 using System.IO;
 using System.Linq;
+using SoftwareMonkeys.FileNodes;
 
 namespace SoftwareMonkeys.csAnt
 {
@@ -43,29 +44,45 @@ namespace SoftwareMonkeys.csAnt
 				{
 					var libNode = Script.CurrentNode.Nodes["Libraries"].Nodes[name];
 
-					// TODO: Use a custom exception
-					if (!libNode.Properties.ContainsKey("Url"))
-						Script.Error("No 'Url' property found.");
-					else
+					var successful = false;
+
+					// First: Look for an ImportScript property
+					if (libNode.Properties.ContainsKey("ImportScript"))
 					{
-						bool successful = false;
+						Console.WriteLine ("");
+						Console.WriteLine ("Getting library via import script:");
+						Console.WriteLine (libNode.Properties["ImportScript"]);
+						Console.WriteLine ("");
 
-						// If a local zip file is specified
-						if (libNode.Properties.ContainsKey("LocalZipFile"))
-						{
-							successful = GetLocalZipFileAndExtract(name);
-						}
-
-						// If the last attempt failed
-						if (!successful)
-						{
-							// If the zip file URL is specified
-							if (libNode.Properties.ContainsKey("Url"))
-							{
-								successful = DownloadZipAndExtract(name);
-							}
-						}
+						successful = GetLibByImportScript(libNode);
 					}
+
+					// Next (if unsuccessful): Look for a local zip file property
+					if (successful == false
+					    && libNode.Properties.ContainsKey("LocalZipFile"))
+					{
+						Console.WriteLine ("");
+						Console.WriteLine ("Getting library from local zip file:");
+						Console.WriteLine (libNode.Properties["LocalZipFile"]);
+						Console.WriteLine ("");
+
+						successful = GetLibByLocal(libNode);
+					}
+
+					// Next (if unsuccessful): Look for a URL property
+					if (successful == false
+					    && libNode.Properties.ContainsKey("Url"))
+					{
+						Console.WriteLine ("");
+						Console.WriteLine ("Getting library via URL download:");
+						Console.WriteLine (libNode.Properties["Url"]);
+						Console.WriteLine ("");
+
+						successful = GetLibByUrl(libNode);
+					}
+
+					if (!successful)
+						Script.Error("Couldn't determine import method from '" + libNode.Name + "' library node.");
 				}
 				else
 					Script.Error("Library not found: '" + name + "'. Add it using 'AddLib [name] [url]'.");
@@ -176,6 +193,29 @@ namespace SoftwareMonkeys.csAnt
 			return libsPath
 				+ Path.DirectorySeparatorChar
 				+ name;
+		}
+
+		public bool GetLibByUrl(FileNode libNode)
+		{
+			// TODO: Check if this function is needed (and whether the following function can be called directly.
+
+			return DownloadZipAndExtract(libNode.Name);
+		}
+
+		public bool GetLibByLocal(FileNode libNode)
+		{
+			// TODO: Check if this function is needed (and whether the following function can be called directly.
+
+			return GetLocalZipFileAndExtract(libNode.Name);
+		}
+
+		public bool GetLibByImportScript(FileNode libNode)
+		{
+			var scriptName = libNode.Properties["ImportScript"];
+
+			Script.ExecuteScript(scriptName);
+
+			return !Script.IsError;
 		}
 	}
 }

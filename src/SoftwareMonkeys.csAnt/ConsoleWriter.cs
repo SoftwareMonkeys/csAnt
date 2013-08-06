@@ -26,18 +26,18 @@ namespace SoftwareMonkeys.csAnt.UI.csAntConsole
 		{
 			System.Console.WriteLine(text);
 
-			AppendOutput(text + "\n");
+			//AppendOutput(text + "\n");
 
-			base.WriteLine (text);
+			//base.WriteLine (text);
 		}
 
 		public override void Write(string text)
 		{
 			System.Console.Write(text);
 			
-			AppendOutput(text);
+			//AppendOutput(text);
 
-			base.Write (text);
+			//base.Write (text);
 		}
 
 		public void AppendOutput(string text)

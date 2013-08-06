@@ -2,6 +2,7 @@ using System;
 using SoftwareMonkeys.csAnt.Commands;
 using System.Diagnostics;
 using System.Collections.Generic;
+using System.IO;
 
 namespace SoftwareMonkeys.csAnt
 {
@@ -107,6 +108,7 @@ namespace SoftwareMonkeys.csAnt
 			info.RedirectStandardError = true;
 			info.CreateNoWindow = true;
 
+
 			info.ErrorDialog = false;
 
 			// Start the process
@@ -141,6 +143,11 @@ namespace SoftwareMonkeys.csAnt
 			process.BeginOutputReadLine();
 
 			process.WaitForExit();
+
+			Console.WriteLine("");
+			Console.WriteLine("--------------------------------------------------");
+			Console.WriteLine("");
+			
 		}
 
 		public string[] FixArguments(string[] arguments)

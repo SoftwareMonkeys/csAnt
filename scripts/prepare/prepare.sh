@@ -4,9 +4,10 @@ LIB_DIR="lib"
 SOURCE_PROJECTS_DIR="$HOME/Ubuntu One/Projects"
 
 # Set cs-script constants
-CSS_URL="http://www.csscript.net/v3.3.0/cs-script.zip"
+#CSS_URL="http://www.csscript.net/v3.4.2/cs-script.zip"
+CSS_URL="https://dl.dropbox.com/u/2192462/CS-S_Binaries/cs-script.7z"
 CSS_DIR="$LIB_DIR/cs-script"
-CSS_ZIPFILE="$LIB_DIR/cs-script.zip"
+CSS_ZIPFILE="$LIB_DIR/cs-script.7z"
 CSS_FILE="$CSS_DIR/cscs.exe"
 
 # Set SharpZipLib constants
@@ -15,7 +16,7 @@ SHARPZIPLIB_DIR="$LIB_DIR/SharpZipLib"
 SHARPZIPLIB_ZIPFILE="$SHARPZIPLIB_DIR/SharpZipLib_0860_Bin.zip"
 
 # Set HtmlAgilityPack constants
-HAP_LIB_URL="http://download-codeplex.sec.s-msft.com/Download/Release?ProjectName=htmlagilitypack&DownloadId=437941&FileTime=129893731308330000&Build=19692"
+HAP_LIB_URL="http://download-codeplex.sec.s-msft.com/Download/Release?ProjectName=htmlagilitypack&DownloadId=437941&FileTime=129893731308330000&Build=19766"
 HAP_LIB_DIR="$LIB_DIR/HtmlAgilityPack"
 HAP_LIB_ZIPFILE="$HAP_LIB_DIR/HtmlAgilityPack.zip"
 

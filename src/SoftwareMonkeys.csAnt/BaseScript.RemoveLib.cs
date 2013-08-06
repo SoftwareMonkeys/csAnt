@@ -26,7 +26,11 @@ namespace SoftwareMonkeys.csAnt
 					Console.WriteLine ("Removing library node:");
 					Console.WriteLine ("  " + node.FilePath);
 
+					// Add the library directory
 					File.Delete (node.FilePath);
+
+					// Remove the library directory
+					Directory.Delete (Path.GetDirectoryName(node.FilePath), true);
 				}
 			}
 		}
