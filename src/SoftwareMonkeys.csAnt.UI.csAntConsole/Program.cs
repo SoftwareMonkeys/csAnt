@@ -8,32 +8,45 @@ namespace SoftwareMonkeys.csAnt.UI.csAntConsole
 {
 	class Program
 	{
+		static public ConsoleWriter Console { get;set; }
+
 		public static void Main(string[] args)
-		{		
+		{
 			InitializeConsoleWriter();
 
-			// Get the script name from the first argument
-			string scriptName = args[0];
-			
-			var argsList = new List<string>(args);
+			if (args.Length > 0)
+			{
+				// Get the script name from the first argument
+				string scriptName = args[0];
+				
+				var argsList = new List<string>(args);
 
-			// Remove the first argument (as it's the script name)
-			if (argsList.Count > 0)
-				argsList.RemoveAt(0);
+				// Remove the first argument (as it's the script name)
+				if (argsList.Count > 0)
+					argsList.RemoveAt(0);
 
-			// Execute the script
-			Execute(scriptName, argsList.ToArray());
+				// Execute the script
+				Execute(scriptName, argsList.ToArray());
+			}
+			else
+			{
+				Console.WriteLine ("Please specify the name of the script as an argument.");
+			}
 		}
 
 		static public void InitializeConsoleWriter()
 		{	
-			System.Console.SetOut(
+			Console = new ConsoleWriter(String.Empty);
+
+			// TODO: Clean up
+			/*System.Console.SetOut(
 				new ConsoleWriter(
 					GetOutputDirectory()
 				)
-			);
+			);*/
 		}
 
+		// TODO: Check if needed
 		static public string GetOutputDirectory()
 		{
 			var output = Path.GetDirectoryName(
@@ -55,13 +68,25 @@ namespace SoftwareMonkeys.csAnt.UI.csAntConsole
 
 			Console.WriteLine("");
 			Console.WriteLine("============================================");
-			Console.WriteLine("Executing script: " + scriptName);
+			Console.WriteLine(" Launching script: " + scriptName);
 			Console.WriteLine("============================================");
 			Console.WriteLine("");
-			
+
+			var parser = new Arguments(args);
+
 			var scr = new LauncherScript();
 
-			scr.IsVerbose = new Arguments(args).Contains("verbose");
+			scr.Console = Console;
+
+			if (parser.Contains("b"))
+				scr.CurrentDirectory = Path.GetFullPath(parser["b"]);
+
+			Console.WriteLine("");
+			Console.WriteLine("Base directory:");
+			Console.WriteLine(scr.CurrentDirectory);
+			Console.WriteLine("");
+
+			scr.IsVerbose = parser.Contains("verbose");
 			
 			scr.CurrentDirectory = Path.GetFullPath(
 				Environment.CurrentDirectory
@@ -82,11 +107,6 @@ namespace SoftwareMonkeys.csAnt.UI.csAntConsole
 
 				// Calculate the amount of time the script took to run
 				var totalTime = DateTime.Now.Subtract(startTime);
-				
-				Console.WriteLine("");
-				Console.WriteLine("");
-				
-				Console.WriteLine("--------------------------------------------------");
 
 				Console.WriteLine("");
 				Console.WriteLine("Duration: " + totalTime.ToString());
@@ -94,10 +114,9 @@ namespace SoftwareMonkeys.csAnt.UI.csAntConsole
 				Console.WriteLine("");
 				
 				if (scr.IsError)
-					Console.WriteLine("!!!!!!!!!!!!!!!!!!   Failed   !!!!!!!!!!!!!!!!!!");
+					Console.WriteLine("!!!!!!!!!!  Failed  !!!!!!!!!!");
 				else
-					Console.WriteLine("-------------------- Finished --------------------");
-
+					Console.WriteLine("========== Success ==========");
 
 				Console.WriteLine("");
 				Console.WriteLine("");

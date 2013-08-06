@@ -5,21 +5,16 @@ using Microsoft.CSharp;
 using System.Diagnostics;
 using SoftwareMonkeys.csAnt;
 
-class GetLibsScript : BaseScript
+class Test_ReleaseScript : BaseScript
 {
 	public static void Main(string[] args)
 	{
-		new GetLibsScript().Start(new Arguments(args));
+		new Test_ReleaseScript().Start(args);
 	}
 	
 	public override bool Start(string[] args)
 	{
-		var force = false;
-
-		if (args.Contains("force"))
-			force = Convert.ToBoolean(args["force"]);
-
-		GetLibs(force);
+		ExecuteScript("Release");
 
 		return !IsError;
 	}

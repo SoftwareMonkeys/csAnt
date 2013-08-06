@@ -14,7 +14,7 @@ class HelloWorldScript : BaseScript
 	
 	public override bool Start(string[] args)
 	{
-		var cmd = Injection.Retriever.Get<HelloWorldCommand>();
+		var cmd = new HelloWorldCommand(this);
 
 		ExecuteCommand(cmd);
 

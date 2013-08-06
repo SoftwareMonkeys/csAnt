@@ -14,16 +14,19 @@ namespace SoftwareMonkeys.csAnt
 
 		public void AddLib (string name, string zipFileUrl, string subPath)
 		{
-			var cmd = Injection.Retriever.Get<AddLibCommand>(
-				new object[]{
-					this,
-					name,
-					zipFileUrl,
-					subPath
-				}
+			Console.WriteLine ("Adding library...");
+			Console.WriteLine ("Name: " + name);
+			Console.WriteLine ("Url: " + zipFileUrl);
+			Console.WriteLine ("Sub path: " + subPath);
+
+			var cmd = new AddLibCommand(
+				this,
+				name,
+				zipFileUrl,
+				subPath
 			);
 
-			cmd.Execute();
+			ExecuteCommand(cmd);
 		}
 
 	}

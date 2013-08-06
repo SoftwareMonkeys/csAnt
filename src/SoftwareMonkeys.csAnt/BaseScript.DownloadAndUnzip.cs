@@ -14,15 +14,12 @@ namespace SoftwareMonkeys.csAnt
 
 		public void DownloadAndUnzip(string zipFileUrl, string zipFileLocalPath, string localDirectory, string subPath, bool force)
 		{
-			var cmd = Injection.Retriever.Get<DownloadAndUnzipCommand>(
-				new object[]
-				{
-					this,
-					zipFileUrl,
-					zipFileLocalPath,
-					localDirectory,
-					subPath
-				}
+			var cmd = new DownloadAndUnzipCommand(
+				this,
+				zipFileUrl,
+				zipFileLocalPath,
+				localDirectory,
+				subPath
 			);
 
 			cmd.Force = force;

@@ -65,20 +65,11 @@
     <Reference Include="ICSharpCode.SharpZipLib">
       <HintPath>..\..\lib\SharpZipLib\net-20\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
+    <Reference Include="LibGit2Sharp">
+      <HintPath>..\..\lib\LibGit2Sharp\LibGit2Sharp.dll</HintPath>
+    </Reference>
     <Reference Include="CSScriptLibrary">
-      <HintPath>..\..\lib\cs-script\Lib\CSScriptLibrary.dll</HintPath>
-    </Reference>
-    <Reference Include="SoftwareMonkeys.Jungle.Injection">
-      <HintPath>..\..\lib\Jungle\Release\SoftwareMonkeys.Jungle.Injection.dll</HintPath>
-    </Reference>
-    <Reference Include="SoftwareMonkeys.Jungle.Injection.Contracts">
-      <HintPath>..\..\lib\Jungle\Release\SoftwareMonkeys.Jungle.Injection.Contracts.dll</HintPath>
-    </Reference>
-    <Reference Include="SoftwareMonkeys.Jungle.Diagnostics">
-      <HintPath>..\..\lib\Jungle\Release\SoftwareMonkeys.Jungle.Diagnostics.dll</HintPath>
-    </Reference>
-    <Reference Include="SoftwareMonkeys.Jungle.Diagnostics.Contracts">
-      <HintPath>..\..\lib\Jungle\Release\SoftwareMonkeys.Jungle.Diagnostics.Contracts.dll</HintPath>
+      <HintPath>..\..\lib\cs-script\Lib\Bin\NET 4.0\CSScriptLibrary.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -141,10 +132,12 @@
     <Compile Include="Commands\DownloadCommand.cs" />
     <Compile Include="Commands\DownloadAndUnzipCommand.cs" />
     <Compile Include="Commands\HelloWorldCommand.cs" />
-    <Compile Include="Commands\ScriptCommandAttribute.cs" />
-    <Compile Include="AssemblyScanInfo.cs" />
     <Compile Include="Commands\GetLibCommand.cs" />
     <Compile Include="Commands\StartProcessCommand.cs" />
+    <Compile Include="ConsoleWriter.cs" />
+    <Compile Include="BaseScript.GitAdd.cs" />
+    <Compile Include="BaseScript.GitCommit.cs" />
+    <Compile Include="BaseScript.GitInit.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseScript.Execute.cs" />

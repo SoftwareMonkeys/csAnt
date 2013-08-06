@@ -1,4 +1,5 @@
 using System;
+using LibGit2Sharp;
 
 namespace SoftwareMonkeys.csAnt
 {
@@ -19,10 +20,25 @@ namespace SoftwareMonkeys.csAnt
 			string destinationDir
 		)
 		{
+			/*Repository.Clone(
+				sourceDir,
+				destinationDir
+			);*/
+
+			Console.WriteLine ("Cloning...");
+			Console.WriteLine ("Source: " + sourceDir);
+			Console.WriteLine ("Destination: " + destinationDir);
+
+			CurrentDirectory = destinationDir;
+
 			Git (
 				"clone",
-				sourceDir
+				sourceDir,
+				destinationDir,
+				"--verbose"
 			);
+
+			Console.WriteLine("Complete");
 		}
 	}
 }

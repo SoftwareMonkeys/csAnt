@@ -8,11 +8,9 @@ namespace SoftwareMonkeys.csAnt
 	{
 		public string BackupFile(string relativeFilePath)
 		{
-			var cmd = Injection.Retriever.Get<BackupFileCommand>(
-				new object[]{
-					this,
-					relativeFilePath
-				}
+			var cmd = new BackupFileCommand(
+				this,
+				relativeFilePath
 			);
 
 			ExecuteCommand(cmd);

@@ -1,10 +1,8 @@
 using System;
 using SoftwareMonkeys.csAnt.Commands;
-using SoftwareMonkeys.Jungle.Injection;
 
 namespace SoftwareMonkeys.csAnt
 {
-	[ScriptCommand]
 	public class HelloWorldCommand : BaseScriptCommand
 	{
 		public HelloWorldCommand(

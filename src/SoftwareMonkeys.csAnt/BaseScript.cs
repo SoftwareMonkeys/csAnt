@@ -1,8 +1,6 @@
 ﻿using System;
-using SoftwareMonkeys.Jungle.Injection;
 using System.IO;
 using System.Reflection;
-using SoftwareMonkeys.Jungle.Diagnostics;
 
 namespace SoftwareMonkeys.csAnt
 {
@@ -11,7 +9,7 @@ namespace SoftwareMonkeys.csAnt
 	/// </summary>
 	public abstract partial class BaseScript : IScript
 	{
-		public IInjectionContext Injection { get;set; }
+		public ConsoleWriter Console { get;set; }
 
 		public BaseScript()
 		{
@@ -22,17 +20,9 @@ namespace SoftwareMonkeys.csAnt
 
 		public virtual void Initialize()
 		{
-			var path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-
-			var loggerCreator = new LoggerAssembler(
-				path
-			).Creator;
-
-			Injection = new InjectionContextAssembler(
-				path,
-				loggerCreator
-			).Assemble();
-
+			// TODO: Inject the ConsoleWriter via constructor/creator
+			if (Console == null)
+				Console = new ConsoleWriter(String.Empty);
 		}
 	}
 }

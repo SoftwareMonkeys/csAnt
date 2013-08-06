@@ -2,10 +2,11 @@ using System;
 
 namespace SoftwareMonkeys.csAnt.Tests
 {
-	public class TestScript : BaseScript
+	public class TestScript : BaseTestScript
 	{
-		public TestScript ()
+		public TestScript (BaseTestFixture fixture)
 		{
+			CurrentDirectory = fixture.GetProjectRoot();
 		}
 
 		public override bool Start (string[] args)

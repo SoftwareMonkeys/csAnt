@@ -4,7 +4,6 @@ using System.IO;
 
 namespace SoftwareMonkeys.csAnt.Commands
 {
-	[ScriptCommand]
 	public class AddLibCommand : BaseScriptCommand
 	{
 		public string Name { get;set; }

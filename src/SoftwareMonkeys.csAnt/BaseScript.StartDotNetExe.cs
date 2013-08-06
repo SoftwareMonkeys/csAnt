@@ -20,6 +20,8 @@ namespace SoftwareMonkeys.csAnt
 
 			argsList.AddRange(arguments);
 
+			argsList.Add("--verbose");
+
 			return StartProcess(
 				cmd,
 				argsList.ToArray()

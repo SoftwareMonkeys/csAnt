@@ -5,7 +5,7 @@ using System.IO;
 namespace SoftwareMonkeys.csAnt.Tests
 {
 	[TestFixture]
-	public class ExecuteScriptTestFixture
+	public class ExecuteScriptTestFixture : BaseTestFixture
 	{
 		[Test]
 		public void Test_ExecuteScriptFromFile()
@@ -21,7 +21,7 @@ namespace SoftwareMonkeys.csAnt.Tests
 				script
 			);
 
-			var testScript = new TestScript();
+			var testScript = new TestScript(this);
 
 			testScript.ExecuteScriptFromFile(scriptFile, new string[]{});
 

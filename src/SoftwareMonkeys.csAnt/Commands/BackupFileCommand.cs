@@ -3,7 +3,6 @@ using System.IO;
 
 namespace SoftwareMonkeys.csAnt.Commands
 {
-	[ScriptCommand]
 	public class BackupFileCommand : BaseScriptCommand
 	{
 		public string RelativeFilePath { get;set; }

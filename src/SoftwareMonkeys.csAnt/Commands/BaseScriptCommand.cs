@@ -2,7 +2,6 @@ using System;
 
 namespace SoftwareMonkeys.csAnt.Commands
 {
-	[ScriptCommand]
 	public abstract class BaseScriptCommand : IScriptCommand
 	{
 		public IScript Script { get;set; }

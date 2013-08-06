@@ -4,7 +4,6 @@ using System.IO;
 
 namespace SoftwareMonkeys.csAnt
 {
-	[ScriptCommand]
 	public class DownloadAndUnzipCommand : BaseScriptCommand
 	{
 		public string DownloadUrl { get;set; }
@@ -93,33 +92,6 @@ namespace SoftwareMonkeys.csAnt
 			// Unzip the zip file
 			Script.Unzip (zipFileLocalPath, localDirectory, subPath);
 
-			// TODO: Remove. Should be obsolete
-			/*// Create a temporary folder name
-			var tmpFolder = Script.CurrentDirectory
-				+ Path.DirectorySeparatorChar
-				+ "_tmp"
-				+ Path.DirectorySeparatorChar
-				+ "tmp-" + Guid.NewGuid().ToString();
-
-			// Unzip the zip file
-			Script.Unzip (zipFileLocalPath, tmpFolder);
-
-			var fullSubPath = Path.GetFullPath(
-				tmpFolder
-				+ Path.DirectorySeparatorChar
-				+ subPath
-			);
-			
-			Console.WriteLine ("");
-			Console.WriteLine ("Moving files to: ");
-			Console.WriteLine ("  " + localDirectory);
-			Console.WriteLine ();
-
-			Script.MoveDirectory(fullSubPath, localDirectory);
-			
-			// Delete the temporary folder
-			if (Directory.Exists(tmpFolder))
-				Directory.Delete(tmpFolder);*/
 		}
 	}
 }
