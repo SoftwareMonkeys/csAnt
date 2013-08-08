@@ -75,7 +75,8 @@ namespace SoftwareMonkeys.csAnt
 					{
 						Console.WriteLine ("");
 						Console.WriteLine ("Getting library via URL download:");
-						Console.WriteLine (libNode.Properties["Url"]);
+						Console.WriteLine ("Url: " + libNode.Properties["Url"]);
+						Console.WriteLine ("Sub path: " + libNode.Properties["SubPath"]);
 						Console.WriteLine ("");
 
 						successful = GetLibByUrl(libNode);

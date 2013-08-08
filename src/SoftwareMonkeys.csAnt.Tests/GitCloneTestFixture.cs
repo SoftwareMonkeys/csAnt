@@ -11,7 +11,7 @@ namespace SoftwareMonkeys.csAnt.Tests
 		public void Test_GitClone()
 		{
 			// Create a test script
-			var testScript = new TestScript(this);
+			var testScript = new TestScript("TestScript", this);
 
 			// Create a temporary path
 			var tmpDir = testScript.GetTmpDir();

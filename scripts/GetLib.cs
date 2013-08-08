@@ -1,22 +1,29 @@
 //css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.dll;
-//css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.Tests.dll;
 using System;
 using System.IO;
 using Microsoft.CSharp;
 using System.Diagnostics;
 using SoftwareMonkeys.csAnt;
-using SoftwareMonkeys.csAnt.Tests;
 
-class Test_BackupFileScript : BaseTestScript
+class GetLibScript : BaseScript
 {
 	public static void Main(string[] args)
 	{
-		new Test_BackupFileScript().Start(args);
+		new GetLibScript().Start(args);
 	}
 	
 	public override bool Start(string[] args)
 	{
-		ExecuteScript("BackupFile", "csAnt.node");
+		var name = args[0];
+
+		var force = false;
+
+		var parser = new Arguments(args);
+
+		if (parser.Contains("force"))
+			force = Convert.ToBoolean(parser["force"]);
+
+		GetLib(name, force);
 
 		return !IsError;
 	}

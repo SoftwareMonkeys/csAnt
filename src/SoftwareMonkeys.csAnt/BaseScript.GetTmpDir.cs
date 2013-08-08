@@ -5,12 +5,12 @@ namespace SoftwareMonkeys.csAnt
 {
 	public partial class BaseScript
 	{
-		public string GetTemporaryDirectory()
+		public virtual string GetTemporaryDirectory()
 		{
 			return GetTmpDir();
 		}
 
-		public string GetTmpDir()
+		public virtual string GetTmpDir()
 		{
 			return Path.GetFullPath(
 				CurrentDirectory

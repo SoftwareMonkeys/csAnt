@@ -9,6 +9,7 @@
 /scripts/BuildAllSolutions.cs
 /scripts/AddLib.cs
 /scripts/ListLibs.cs
+/scripts/GetLib.cs
 /scripts/GetLibs.cs
 /scripts/RemoveLib.cs
 /scripts/CycleRelease.cs

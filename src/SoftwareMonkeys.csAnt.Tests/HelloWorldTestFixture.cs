@@ -9,7 +9,7 @@ namespace SoftwareMonkeys.csAnt.Tests
 		[Test]
 		public void Test_HelloWorldScript()
 		{
-			var script = new TestScript(this);
+			var script = new TestScript("TestScript", this);
 
 			script.ExecuteScript("HelloWorld");
 

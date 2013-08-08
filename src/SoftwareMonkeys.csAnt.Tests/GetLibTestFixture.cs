@@ -20,7 +20,7 @@ namespace SoftwareMonkeys.csAnt.Tests
 			Console.WriteLine ("Application path:");
 			Console.WriteLine (applicationPath);
 
-			var script = new TestScript(this);
+			var script = new TestScript("TestScript", this);
 
 			script.CurrentDirectory = applicationPath;
 

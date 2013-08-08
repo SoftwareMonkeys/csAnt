@@ -14,7 +14,7 @@ namespace SoftwareMonkeys.csAnt.Tests
 		[Test]
 		public void Test_RunAllTestScripts()
 		{
-			var script = new TestScript(this);
+			var script = new TestScript("TestScript", this);
 
 			try
 			{

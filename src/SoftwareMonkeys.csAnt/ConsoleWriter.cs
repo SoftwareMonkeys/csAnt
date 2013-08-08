@@ -8,7 +8,9 @@ namespace SoftwareMonkeys.csAnt
 	{
 		public string Output { get;set; }
 
-		public string OutputDirectory { get;set; }
+		public string LogFile { get;set; }
+
+		public StreamWriter LogFileWriter { get;set; }
 
 		public override Encoding Encoding
 		{
@@ -16,18 +18,26 @@ namespace SoftwareMonkeys.csAnt
 		}
 
 		public ConsoleWriter(
-			string outputDirectory
+			string outputDirectory,
+			string scriptName
 		)
 		{
-			OutputDirectory = outputDirectory;
+			var logFile = Path.GetFullPath(outputDirectory)
+				+ Path.DirectorySeparatorChar
+				+ GetTimeStamp()
+				+ "-" + scriptName
+				+ ".txt";
+
+			LogFile = logFile;
 		}
 		
 		public override void WriteLine(string text)
 		{
 			System.Console.WriteLine(text);
 
-			//AppendOutput(text + "\n");
-
+			AppendOutput(text + "\n");
+			
+			// TODO: Remove if not needed
 			//base.WriteLine (text);
 		}
 
@@ -35,14 +45,46 @@ namespace SoftwareMonkeys.csAnt
 		{
 			System.Console.Write(text);
 			
-			//AppendOutput(text);
+			AppendOutput(text);
 
+			// TODO: Remove if not needed
 			//base.Write (text);
 		}
 
-		public void AppendOutput(string text)
+		public void AppendOutput (string text)
 		{
 			Output += text;
+
+			if (!File.Exists (LogFile))
+			{
+				var dir = Path.GetDirectoryName(LogFile);
+
+				if (!Directory.Exists(dir))
+					Directory.CreateDirectory(dir);
+
+				LogFileWriter = File.CreateText (LogFile);
+
+				LogFileWriter.AutoFlush = true;
+			}
+
+			LogFileWriter.Write(text);
+		}
+
+		public string GetTimeStamp()
+		{
+			var dateTime = DateTime.Now;
+
+			return dateTime.Year
+				+ "-"
+				+ dateTime.Month
+				+ "-"
+				+ dateTime.Day
+				+ "--"
+				+ dateTime.Hour
+				+ "-"
+				+ dateTime.Minute
+				+ "-"
+				+ dateTime.Second;
 		}
 	}
 }
