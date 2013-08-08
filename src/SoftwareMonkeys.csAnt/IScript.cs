@@ -3,7 +3,7 @@ using SoftwareMonkeys.FileNodes;
 
 namespace SoftwareMonkeys.csAnt
 {
-	public interface IScript
+	public interface IScript : IDisposable
 	{
 		string CurrentDirectory { get;set; }
 
@@ -44,6 +44,10 @@ namespace SoftwareMonkeys.csAnt
 
 		#region Execute functions
 		void ExecuteScript(string scriptName);
+		#endregion
+
+		#region Time stamp functions
+		string GetTimeStamp();
 		#endregion
 	}
 }

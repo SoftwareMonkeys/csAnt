@@ -9,15 +9,17 @@ class GetLibsScript : BaseScript
 {
 	public static void Main(string[] args)
 	{
-		new GetLibsScript().Start(new Arguments(args));
+		new GetLibsScript().Start(args);
 	}
 	
 	public override bool Start(string[] args)
 	{
 		var force = false;
 
-		if (args.Contains("force"))
-			force = Convert.ToBoolean(args["force"]);
+		var arguments = new Arguments(args);
+
+		if (arguments.Contains("force"))
+			force = Convert.ToBoolean(arguments["force"]);
 
 		GetLibs(force);
 

@@ -11,18 +11,42 @@ namespace SoftwareMonkeys.csAnt
 	{
 		public ConsoleWriter Console { get;set; }
 
-		public BaseScript()
+		public string ScriptName { get; set; }
+
+		public BaseScript ()
 		{
-			Initialize();
+			var scriptName = GetType ().Name;
+
+			scriptName = FixScriptName(scriptName);
+
+			Initialize(scriptName);
+		}
+
+		public BaseScript(string scriptName)
+		{
+			ScriptName = scriptName;
+
+			Initialize(scriptName);
 		}
 
 		public abstract bool Start(string[] args);
 
-		public virtual void Initialize()
+		public virtual void Initialize(string scriptName)
 		{
 			// TODO: Inject the ConsoleWriter via constructor/creator
 			if (Console == null)
-				Console = new ConsoleWriter(String.Empty);
+				Console = new ConsoleWriter("logs", scriptName);
+		}
+
+		public string FixScriptName(string scriptName)
+		{
+			var x = "Script";
+
+			// If script name ends with "Script" then remove it
+			if (scriptName.EndsWith (x))
+				scriptName = scriptName.Substring(0, scriptName.Length-x.Length);
+
+			return scriptName;
 		}
 	}
 }

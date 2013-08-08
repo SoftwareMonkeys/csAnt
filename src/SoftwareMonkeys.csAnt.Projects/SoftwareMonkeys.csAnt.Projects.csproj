@@ -50,6 +50,8 @@
     <Compile Include="BaseProjectScript.PrepareProject.cs" />
     <Compile Include="BaseProjectScript.BuildAllSolutions.cs" />
     <Compile Include="BaseProjectScript.BuildSolution.cs" />
+    <Compile Include="BaseProjectScript.GetTmpDir.cs" />
+    <Compile Include="BaseProjectScript.CopyTestResults.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

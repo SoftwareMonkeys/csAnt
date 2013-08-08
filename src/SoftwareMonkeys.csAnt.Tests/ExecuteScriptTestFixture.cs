@@ -21,7 +21,7 @@ namespace SoftwareMonkeys.csAnt.Tests
 				script
 			);
 
-			var testScript = new TestScript(this);
+			var testScript = new TestScript("HelloWorld", this);
 
 			testScript.ExecuteScriptFromFile(scriptFile, new string[]{});
 

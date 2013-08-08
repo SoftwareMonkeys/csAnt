@@ -4,7 +4,7 @@ namespace SoftwareMonkeys.csAnt.Tests
 {
 	public class TestScript : BaseTestScript
 	{
-		public TestScript (BaseTestFixture fixture)
+		public TestScript (string scriptName, BaseTestFixture fixture) : base(scriptName)
 		{
 			CurrentDirectory = fixture.GetProjectRoot();
 		}

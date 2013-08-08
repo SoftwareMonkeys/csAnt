@@ -99,7 +99,6 @@
     <Compile Include="BaseScript.RemoveLib.cs" />
     <Compile Include="BaseScript.GetLibs.cs" />
     <Compile Include="BaseScript.IsError.cs" />
-    <Compile Include="BaseScript.GetTempDir.cs" />
     <Compile Include="BaseScript.GetTmpFile.cs" />
     <Compile Include="BaseScript.ClearTmp.cs" />
     <Compile Include="BaseScript.CurrentNode.cs" />
@@ -135,6 +134,10 @@
     <Compile Include="BaseScript.GitAdd.cs" />
     <Compile Include="BaseScript.GitCommit.cs" />
     <Compile Include="BaseScript.GitInit.cs" />
+    <Compile Include="BaseScript.GetTmpDir.cs" />
+    <Compile Include="BaseScript.Dispose.cs" />
+    <Compile Include="BaseScript.CopyDirectory.cs" />
+    <Compile Include="BaseScript.GetTimeStamp.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseScript.Execute.cs" />

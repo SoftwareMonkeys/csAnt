@@ -82,7 +82,7 @@ class RunTestsScript : BaseScript
 
 			arguments.Add("--runtime=v4.0");
 
-			arguments.Add("lib/NUnit/bin/nunit-console.exe");
+			arguments.Add("lib/NUnit/bin/net-2.0/nunit-console.exe");
 
 			arguments.Add("\"" + assemblyFile + "\"");
 

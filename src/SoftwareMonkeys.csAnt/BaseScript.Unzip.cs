@@ -27,12 +27,15 @@ namespace SoftwareMonkeys.csAnt
 			EnsureDirectoryExists(destinationPath);
 
 			// Create a temporary folder name
-			var tmpFolder = CurrentDirectory
+			var tmpFolder = GetTmpDir();
+
+			// TODO: Clean up
+			/*var tmpFolder = CurrentDirectory
 				+ Path.DirectorySeparatorChar
 				+ "_tmp"
 				+ Path.DirectorySeparatorChar
 				+ "tmp-" + Guid.NewGuid().ToString();
-
+*/
 			Console.WriteLine("Unzipping file: " + zipFilePath);
 			Console.WriteLine("To: " + destinationPath);
 
@@ -95,10 +98,6 @@ namespace SoftwareMonkeys.csAnt
 
 			// Move the files in the sub path within the temporary folder into the final destination
 			MoveDirectory(fullSubPath, destinationPath);
-			
-			// Delete the temporary folder
-			if (Directory.Exists(tmpFolder))
-				Directory.Delete(tmpFolder);
 
 			Console.WriteLine ("Extraction complete.");
  

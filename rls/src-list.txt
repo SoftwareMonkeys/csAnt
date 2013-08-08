@@ -26,14 +26,27 @@
 /lib/cs-script/Lib/Bin/NET 4.0/*.dll
 /lib/SharpZipLib/net-20/*.dll
 /lib/SharpZipLib/*.zip
+/lib/SharpZipLib/*.node
 /lib/FileNodes/Release/*.dll
 /lib/FileNodes/*.zip
+/lib/FileNodes/*.node
 /lib/HtmlAgilityPack/*.dll
 /lib/HtmlAgilityPack/*.zip
+/lib/HtmlAgilityPack/*.node
 /lib/GitSharp/*.dll
 /lib/GitSharp/*.zip
+/lib/GitSharp/*.node
 /lib/GCUpload/*.dll
 /lib/GCUpload/*.zip
+/lib/GCUpload/*.node
+/lib/NUnit/bin/*.dll
+/lib/NUnit/bin/*.exe
+/lib/NUnit/*.zip
+/lib/NUnit/*.node
+/lib/NUnitResults/*.dll
+/lib/NUnitResults/*.exe
+/lib/NUnitResults/*.zip
+/lib/NUnitResults/*.node
 /lib/*.zip
 /lib/Libraries.node
 /scripts/**.cs

@@ -63,7 +63,7 @@ namespace SoftwareMonkeys.csAnt
 		{
 			string tmpFile = Script.GetTmpFile();
 
-			DownloadAndUnzip(zipFileUrl, tmpFile, localDirectory, "/", false);
+			DownloadAndUnzip(zipFileUrl, tmpFile, localDirectory, SubPath, false);
 		}
 
 		public void DownloadAndUnzip(string zipFileUrl, string zipFileLocalPath, string localDirectory, string subPath, bool force)

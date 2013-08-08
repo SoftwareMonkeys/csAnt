@@ -12,8 +12,6 @@ namespace SoftwareMonkeys.csAnt.UI.csAntConsole
 
 		public static void Main(string[] args)
 		{
-			InitializeConsoleWriter();
-
 			if (args.Length > 0)
 			{
 				// Get the script name from the first argument
@@ -34,20 +32,13 @@ namespace SoftwareMonkeys.csAnt.UI.csAntConsole
 			}
 		}
 
-		static public void InitializeConsoleWriter()
+		static public void InitializeConsoleWriter(string scriptName)
 		{	
-			Console = new ConsoleWriter(String.Empty);
-
-			// TODO: Clean up
-			/*System.Console.SetOut(
-				new ConsoleWriter(
-					GetOutputDirectory()
-				)
-			);*/
+			Console = new ConsoleWriter("logs", scriptName);
 		}
 
 		// TODO: Check if needed
-		static public string GetOutputDirectory()
+		/*static public string GetOutputDirectory()
 		{
 			var output = Path.GetDirectoryName(
 				Assembly.GetExecutingAssembly().FullName
@@ -60,10 +51,12 @@ namespace SoftwareMonkeys.csAnt.UI.csAntConsole
 			);
 
 			return output;
-		}
+		}*/
 
 		static public void Execute(string scriptName, string[] args)
 		{
+			InitializeConsoleWriter(scriptName);
+
 			var startTime = DateTime.Now;
 
 			Console.WriteLine("");
@@ -74,7 +67,7 @@ namespace SoftwareMonkeys.csAnt.UI.csAntConsole
 
 			var parser = new Arguments(args);
 
-			var scr = new LauncherScript();
+			var scr = new LauncherScript(scriptName);
 
 			scr.Console = Console;
 

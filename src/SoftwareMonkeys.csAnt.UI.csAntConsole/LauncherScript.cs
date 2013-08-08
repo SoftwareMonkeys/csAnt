@@ -8,7 +8,7 @@ namespace SoftwareMonkeys.csAnt.UI.csAntConsole
 	/// </summary>
 	public class LauncherScript : BaseScript
 	{
-		public LauncherScript()
+		public LauncherScript(string scriptName) : base(scriptName)
 		{
 		}
 
