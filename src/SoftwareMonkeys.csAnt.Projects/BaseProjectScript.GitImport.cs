@@ -1,24 +1,24 @@
 using System;
 using System.IO;
 
-namespace SoftwareMonkeys.csAnt
+namespace SoftwareMonkeys.csAnt.Projects
 {
 	public partial class BaseProjectScript
 	{
-		public void GitImport()
+		public string GitImport(string importProject, string importProjectPath)
 		{
 			var projectName = ProjectName;
 
-			var importProjectName = args[0];
+			var importProjectName = importProject;
 
-			var sourceDirectory = Path.GetFullPath(args[1]);
+			var sourceDirectory = Path.GetFullPath(importProjectPath);
 
 			var currentDirectory = CurrentDirectory;
 
 			var parentDirectory = Path.GetDirectoryName(currentDirectory);
 
 			// Create the path to the directory containing the local copy of the import
-			var importsDirectory = parentDirectory
+			var importedDirectory = parentDirectory
 				+ Path.DirectorySeparatorChar
 				+ projectName
 				+ "-Imports"
@@ -33,9 +33,15 @@ namespace SoftwareMonkeys.csAnt
 
 			Console.WriteLine ("Parent directory: " + parentDirectory);
 
-			Console.WriteLine ("Import directory: " + importsDirectory);
+			Console.WriteLine ("Import directory: " + importedDirectory);;
+			
+			Directory.CreateDirectory(importedDirectory);
 
-			CloneImport(importProjectName, sourceDirectory, importsDirectory);
+			CurrentDirectory = importedDirectory;
+
+			GitClone(sourceDirectory);
+
+			return importedDirectory;
 		}
 	}
 }

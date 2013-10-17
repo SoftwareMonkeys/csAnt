@@ -5,7 +5,7 @@ namespace SoftwareMonkeys.csAnt.Projects
 {
 	public partial class BaseProjectScript
 	{
-		public void MoveTestResults(string fromProjectDirectory, string toProjectDirectory)
+		public void CopyTestResults(string fromProjectDirectory, string toProjectDirectory)
 		{
 			var fromTestsDir = fromProjectDirectory
 				+ Path.DirectorySeparatorChar
@@ -16,9 +16,9 @@ namespace SoftwareMonkeys.csAnt.Projects
 				+ "tests";
 
 			Console.WriteLine("Moving test results from:");
-			Console.WriteLine(fromTestsDir);
+			Console.WriteLine("  " + fromTestsDir);
 			Console.WriteLine("To:");
-			Console.WriteLine(destinationTestsDir);
+			Console.WriteLine("  " + destinationTestsDir);
 
 			CopyDirectory(fromTestsDir, destinationTestsDir);
 		}
