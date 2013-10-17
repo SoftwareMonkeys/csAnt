@@ -5,7 +5,7 @@ SOURCE_PROJECTS_DIR="../"
 
 # Set cs-script constants
 #CSS_URL="http://www.csscript.net/v3.4.2/cs-script.zip"
-CSS_URL="https://dl.dropbox.com/u/2192462/CS-S_Binaries/cs-script.7z"
+CSS_URL="https://dl.dropboxusercontent.com/u/2192462/CS-S_Binaries/cs-script.7z"
 CSS_DIR="$LIB_DIR/cs-script"
 CSS_ZIPFILE="$LIB_DIR/cs-script.7z"
 CSS_FILE="$CSS_DIR/cscs.exe"
