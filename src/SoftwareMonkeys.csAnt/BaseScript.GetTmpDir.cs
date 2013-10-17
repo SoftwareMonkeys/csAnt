@@ -12,16 +12,16 @@ namespace SoftwareMonkeys.csAnt
 
 		public virtual string GetTmpDir()
 		{
-			return Path.GetFullPath(
-				CurrentDirectory
-				+ Path.DirectorySeparatorChar
-				+ ".."
-				+ Path.DirectorySeparatorChar
-				+ "_tmp"
+			var tmpDir = Path.GetFullPath(
+				GetTmpRoot()
 				+ Path.DirectorySeparatorChar
 				+ Guid.NewGuid().ToString()
-				);
+			);
+
+			if (!Directory.Exists(tmpDir))
+				Directory.CreateDirectory(tmpDir);
 				
+			return tmpDir;
 		}
 	}
 }

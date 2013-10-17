@@ -10,6 +10,7 @@ namespace SoftwareMonkeys.csAnt
 			
 			Console.WriteLine ("");
 			Console.WriteLine ("-------------------- !!! Error !!! --------------------");
+			Console.WriteLine ("Script: " + ScriptName);
 			Console.WriteLine (message);
 			Console.WriteLine ("-------------------------------------------------------");
 			Console.WriteLine ("");

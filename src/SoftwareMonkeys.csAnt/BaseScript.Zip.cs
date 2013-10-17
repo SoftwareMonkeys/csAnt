@@ -6,6 +6,14 @@ namespace SoftwareMonkeys.csAnt
 {
 	public partial class BaseScript
 	{
+		public void Zip (string filePattern, string zipFilePath)
+		{
+			Zip (
+				new string[]{filePattern},
+				zipFilePath
+			);
+		}
+
 		/// <summary>
 		/// Zips the files matching the specified file patterns.
 		/// </summary>
@@ -22,6 +30,12 @@ namespace SoftwareMonkeys.csAnt
 		/// </param>
 		public void Zip(string[] filePatterns, string zipFilePath)
 		{
+			// TODO: Fix this function so that files outside the CurrentDirectory can be specified. Currently it causes an error
+
+			Console.WriteLine ("Creating zip file...");
+
+			Console.WriteLine ("  Zip file path: " + zipFilePath);
+
 			if (!Directory.Exists(Path.GetDirectoryName(zipFilePath)))
 				Directory.CreateDirectory(Path.GetDirectoryName(zipFilePath));
 
@@ -53,6 +67,9 @@ namespace SoftwareMonkeys.csAnt
 					}
 
 					string shortPattern = pattern.Replace(CurrentDirectory, "");
+
+					if (IsVerbose)
+						Console.WriteLine ("  Short pattern: " + shortPattern);
 
 					string[] foundFiles = FindFiles(CurrentDirectory, shortPattern);
 					

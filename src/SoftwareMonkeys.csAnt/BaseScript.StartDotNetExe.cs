@@ -6,7 +6,7 @@ namespace SoftwareMonkeys.csAnt
 {
 	public partial class BaseScript
 	{
-		public StartProcessCommand StartDotNetExe(string exeFile, string[] arguments)
+		public Process StartDotNetExe(string exeFile, string[] arguments)
 		{
 			string cmd = exeFile;
 			

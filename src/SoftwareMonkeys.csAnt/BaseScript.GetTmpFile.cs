@@ -10,7 +10,8 @@ namespace SoftwareMonkeys.csAnt
 		{
 			return GetTmpDir()
 				+ Path.DirectorySeparatorChar
-				+ Guid.NewGuid().ToString();
+				+ Guid.NewGuid().ToString()
+				+ ".tmp";
 		}
 	}
 }

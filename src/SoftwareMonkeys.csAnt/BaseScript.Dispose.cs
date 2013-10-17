@@ -4,9 +4,15 @@ namespace SoftwareMonkeys.csAnt
 {
 	public partial class BaseScript
 	{
-		public virtual void Dispose()
+		public virtual void Dispose ()
 		{
-			ClearTmp();
+			ClearTmp ();
+
+			foreach (var process in SubProcesses) {
+				process.Kill();
+			}
+
+			Console.Dispose();
 		}
 	}
 }

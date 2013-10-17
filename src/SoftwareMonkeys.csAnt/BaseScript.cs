@@ -13,6 +13,8 @@ namespace SoftwareMonkeys.csAnt
 
 		public string ScriptName { get; set; }
 
+		public int Indent { get;set; }
+
 		public BaseScript ()
 		{
 			var scriptName = GetType ().Name;
@@ -30,13 +32,6 @@ namespace SoftwareMonkeys.csAnt
 		}
 
 		public abstract bool Start(string[] args);
-
-		public virtual void Initialize(string scriptName)
-		{
-			// TODO: Inject the ConsoleWriter via constructor/creator
-			if (Console == null)
-				Console = new ConsoleWriter("logs", scriptName);
-		}
 
 		public string FixScriptName(string scriptName)
 		{

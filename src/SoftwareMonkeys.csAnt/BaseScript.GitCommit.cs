@@ -5,14 +5,32 @@ namespace SoftwareMonkeys.csAnt
 	{
 		public void GitCommit ()
 		{
-			GitCommit ("Committing changed files");
+			GitCommit ("Committing added/changed files");
 		}
 		
 		public void GitCommit (string message)
 		{
-			Console.WriteLine ("Committing changed files...");
+			Console.WriteLine ("Committing added/changed files...");
 
 			Git ("commit", "-a", "-m:'" + message + "'");
+		}
+		
+		public void GitCommitDirectory (string directory)
+		{
+			GitCommitDirectory ("");
+		}
+		
+		public void GitCommitDirectory (string directory, string message)
+		{
+			Console.WriteLine ("Committing added/changed files...");
+
+			var originalDirectory = CurrentDirectory;
+
+			CurrentDirectory = directory;
+
+			Git ("commit", "-a", "-m:'" + message + "'");
+
+			CurrentDirectory = originalDirectory;
 		}
 	}
 }
