@@ -20,6 +20,8 @@ namespace SoftwareMonkeys.csAnt.Tests
 			{
 				script.ExecuteScript("RunTestScripts");
 
+				Console.WriteLine(script.Console.Output);
+
 				if (script.IsError)
 					Assert.Fail();
 			}

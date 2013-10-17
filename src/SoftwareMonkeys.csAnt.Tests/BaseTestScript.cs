@@ -4,6 +4,10 @@ namespace SoftwareMonkeys.csAnt.Tests
 {
 	public abstract class BaseTestScript : BaseScript
 	{
+		public BaseTestScript () : base()
+		{
+		}
+
 		public BaseTestScript (string scriptName) : base(scriptName)
 		{
 		}
@@ -17,6 +21,16 @@ namespace SoftwareMonkeys.csAnt.Tests
 		{
 			if (!value)
 				Fail (message);
+		}
+
+		public bool Result()
+		{
+			if (IsError)
+				AddSummary ("* " + GetType ().Name + " test script failed.");
+			else
+				AddSummary (GetType ().Name + " test script succeeded.");
+
+			return !IsError;
 		}
 	}
 }
