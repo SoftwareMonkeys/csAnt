@@ -2,10 +2,23 @@ using System;
 
 namespace SoftwareMonkeys.csAnt
 {
-	public class BaseScript
+	public partial class BaseScript
 	{
-		public BaseScript ()
+		public string GetTimeStamp()
 		{
+			var dateTime = DateTime.Now;
+
+			return dateTime.Year
+				+ "-"
+				+ dateTime.Month
+				+ "-"
+				+ dateTime.Day
+				+ "--"
+				+ dateTime.Hour
+				+ "-"
+				+ dateTime.Minute
+				+ "-"
+				+ dateTime.Second;
 		}
 	}
 }
