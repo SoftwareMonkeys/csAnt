@@ -11,7 +11,7 @@ namespace SoftwareMonkeys.csAnt.Projects
 			BuildAllSolutions(directory, "Release");
 		}
 
-		public void BuildAllSolutions(string directory, string mode)
+		public void BuildAllSolutions (string directory, string mode)
 		{
 			Console.WriteLine ("");
 			Console.WriteLine ("Building all solutions...");
@@ -26,26 +26,22 @@ namespace SoftwareMonkeys.csAnt.Projects
 			int failed = 0;
 			int total = 0;
 
-			List<string> failedSolutions = new List<string>();
+			List<string> failedSolutions = new List<string> ();
 
-			foreach (string slnFile in Directory.GetFiles(directory, "*.sln", SearchOption.AllDirectories))
-			{
-				if (!isError)
-				{
+			foreach (string slnFile in Directory.GetFiles(directory, "*.sln", SearchOption.AllDirectories)) {
+				if (!isError) {
 					total++;
 
-					if (BuildSolution(slnFile, mode))
+					if (BuildSolution (slnFile, mode))
 						successful++;
-					else
-					{
+					else {
 						failed++;
 						isError = true;
 					}
 				}
 
-				if (isError)
-				{
-					failedSolutions.Add(slnFile);
+				if (isError) {
+					failedSolutions.Add (slnFile);
 					break;
 				}
 			}
@@ -58,10 +54,13 @@ namespace SoftwareMonkeys.csAnt.Projects
 			Console.WriteLine ("Failed: " + failed);
 			Console.WriteLine ("");
 
-			Console.WriteLine ("The following solutions failed to build:");
-			foreach (string failedSolution in failedSolutions)
-			{
-				Console.WriteLine ("  " + failedSolution.Replace(ProjectDirectory, ""));
+			if (failedSolutions.Count > 0) {
+				Console.WriteLine ("The following solutions failed to build:");
+				foreach (string failedSolution in failedSolutions) {
+					Console.WriteLine ("  " + failedSolution.Replace (ProjectDirectory, ""));
+
+					AddSummary("Failed to build: " + failedSolution.Replace (ProjectDirectory, ""));
+				}
 			}
 			
 			Console.WriteLine ("");
