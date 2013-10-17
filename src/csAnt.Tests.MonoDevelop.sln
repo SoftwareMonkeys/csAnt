@@ -1,0 +1,68 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoftwareMonkeys.csAnt", "SoftwareMonkeys.csAnt\SoftwareMonkeys.csAnt.csproj", "{16297BCB-0A8C-42E6-BE35-921085C3E238}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoftwareMonkeys.csAnt.UI.csAntConsole", "SoftwareMonkeys.csAnt.UI.csAntConsole\SoftwareMonkeys.csAnt.UI.csAntConsole.csproj", "{2292E955-9611-4356-B952-CE580117952A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoftwareMonkeys.csAnt.Projects", "SoftwareMonkeys.csAnt.Projects\SoftwareMonkeys.csAnt.Projects.csproj", "{3BFB55C4-1247-49BD-AEC9-31BC3C0F1168}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoftwareMonkeys.csAnt.Projects.ProjectManager", "SoftwareMonkeys.csAnt.Projects.ProjectManager\SoftwareMonkeys.csAnt.Projects.ProjectManager.csproj", "{161C94C7-EE13-4FD7-9AF3-9C171ABA1752}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoftwareMonkeys.csAnt.Tests", "SoftwareMonkeys.csAnt.Tests\SoftwareMonkeys.csAnt.Tests.csproj", "{E79918A1-F275-4073-9968-77DAB04622A9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoftwareMonkeys.csAnt.UI.Web.Application", "SoftwareMonkeys.csAnt.UI.Web.Application\SoftwareMonkeys.csAnt.UI.Web.Application.csproj", "{83C0B9EB-BB86-44B9-8C08-31F2D64407A3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoftwareMonkeys.csAnt.UI.Web", "SoftwareMonkeys.csAnt.UI.Web\SoftwareMonkeys.csAnt.UI.Web.csproj", "{75328A99-0850-47AB-97CB-BD087190B5A6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoftwareMonkeys.csAnt.UI.Web.Tests", "SoftwareMonkeys.csAnt.UI.Web.Tests\SoftwareMonkeys.csAnt.UI.Web.Tests.csproj", "{43DBE265-EFC9-488D-A580-EDC2CB0908F0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoftwareMonkeys.csAnt.Projects.Tests", "SoftwareMonkeys.csAnt.Projects.Tests\SoftwareMonkeys.csAnt.Projects.Tests.csproj", "{5B5A328E-6F70-498A-AB13-26E48CBE3BA1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{161C94C7-EE13-4FD7-9AF3-9C171ABA1752}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{161C94C7-EE13-4FD7-9AF3-9C171ABA1752}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{161C94C7-EE13-4FD7-9AF3-9C171ABA1752}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{161C94C7-EE13-4FD7-9AF3-9C171ABA1752}.Release|Any CPU.Build.0 = Release|Any CPU
+		{16297BCB-0A8C-42E6-BE35-921085C3E238}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16297BCB-0A8C-42E6-BE35-921085C3E238}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16297BCB-0A8C-42E6-BE35-921085C3E238}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16297BCB-0A8C-42E6-BE35-921085C3E238}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2292E955-9611-4356-B952-CE580117952A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2292E955-9611-4356-B952-CE580117952A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2292E955-9611-4356-B952-CE580117952A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2292E955-9611-4356-B952-CE580117952A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3BFB55C4-1247-49BD-AEC9-31BC3C0F1168}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3BFB55C4-1247-49BD-AEC9-31BC3C0F1168}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3BFB55C4-1247-49BD-AEC9-31BC3C0F1168}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3BFB55C4-1247-49BD-AEC9-31BC3C0F1168}.Release|Any CPU.Build.0 = Release|Any CPU
+		{43DBE265-EFC9-488D-A580-EDC2CB0908F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43DBE265-EFC9-488D-A580-EDC2CB0908F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43DBE265-EFC9-488D-A580-EDC2CB0908F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{43DBE265-EFC9-488D-A580-EDC2CB0908F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B5A328E-6F70-498A-AB13-26E48CBE3BA1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B5A328E-6F70-498A-AB13-26E48CBE3BA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B5A328E-6F70-498A-AB13-26E48CBE3BA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B5A328E-6F70-498A-AB13-26E48CBE3BA1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{75328A99-0850-47AB-97CB-BD087190B5A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75328A99-0850-47AB-97CB-BD087190B5A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75328A99-0850-47AB-97CB-BD087190B5A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75328A99-0850-47AB-97CB-BD087190B5A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{83C0B9EB-BB86-44B9-8C08-31F2D64407A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83C0B9EB-BB86-44B9-8C08-31F2D64407A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83C0B9EB-BB86-44B9-8C08-31F2D64407A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83C0B9EB-BB86-44B9-8C08-31F2D64407A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E79918A1-F275-4073-9968-77DAB04622A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E79918A1-F275-4073-9968-77DAB04622A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E79918A1-F275-4073-9968-77DAB04622A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E79918A1-F275-4073-9968-77DAB04622A9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = SoftwareMonkeys.csAnt.UI.Web.Application\SoftwareMonkeys.csAnt.UI.Web.Application.csproj
+	EndGlobalSection
+EndGlobal
