@@ -28,6 +28,7 @@
 /lib/HtmlAgilityPack/HtmlAgilityPack.node
 /lib/GitSharp/GitSharp.node
 /lib/GCUpload/GCUpload.node
+/lib/GCUpload/*.zip
 /lib/Newtonsoft.Json/Newtonsoft.Json.node
 /lib/Libraries.node
 /lib/csAnt/bin/Release/*
@@ -35,6 +36,7 @@
 /lib/cs-script/*.dll
 /lib/cs-script/*.exe
 /lib/cs-script/*.zip
+/lib/cs-script.7z
 /lib/SharpZipLib/net-20/*.dll
 /lib/SharpZipLib/*.zip
 /lib/FileNodes/Release/*.dll
