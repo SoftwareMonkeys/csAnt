@@ -102,6 +102,8 @@ namespace SoftwareMonkeys.csAnt
 
 			var localZipFilePath = GetLatestLocalZipFilePath(localZipFile);
 
+			var subPath = libNode.Properties["SubPath"];
+
 			var zipFilePath = GetZipFilePath(name);
 
 			var destination = GetLibPath(name);
@@ -110,7 +112,7 @@ namespace SoftwareMonkeys.csAnt
 			{
 				File.Copy(localZipFilePath, zipFilePath, true);
 
-				Script.Unzip(zipFilePath, destination);
+				Script.Unzip(zipFilePath, destination, subPath);
 
 				return true;
 			}
@@ -118,26 +120,36 @@ namespace SoftwareMonkeys.csAnt
 				return false;
 		}
 
-		public string GetLatestLocalZipFilePath(string localZipFile)
+		public string GetLatestLocalZipFilePath(string localZipPath)
 		{
 			var output = string.Empty;
 
 			// If there's no wildcard being used
-			if (localZipFile.IndexOf("*") == -1)
+			if (localZipPath.IndexOf("*") == -1)
 			{
-				output = Path.GetFullPath(localZipFile);
+				output = Path.GetFullPath(localZipPath);
 			}
 			else
 			{
-				var dir = Path.GetDirectoryName(localZipFile);
-				var file = Path.GetFileName(localZipFile);
+				localZipPath = localZipPath.TrimEnd('*');
 
-				var files = new DirectoryInfo(dir).GetFiles(file).OrderByDescending(p => p.CreationTime)
+				localZipPath = Path.GetFullPath(localZipPath);
+
+				Console.WriteLine("Path:");
+				Console.WriteLine(localZipPath);
+
+				var dir = localZipPath;
+
+				var files = new DirectoryInfo(dir).GetFiles("*.zip").OrderByDescending(p => p.CreationTime)
 					.ToArray();
 
 				if (files.Length > 0)
 					output = files[0].FullName;
 
+				Console.WriteLine ("File:");
+				Console.WriteLine (output);
+				
+				Console.WriteLine ("");
 			}
 
 			return output;
