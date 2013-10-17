@@ -1,11 +1,15 @@
 using System;
+using System.IO;
 
 namespace SoftwareMonkeys.csAnt
 {
-	public class BaseScript
+	public partial class BaseScript
 	{
-		public BaseScript ()
+		public virtual string GetTmpRoot()
 		{
+			return CurrentDirectory
+				+ Path.DirectorySeparatorChar
+				+ "_tmp";
 		}
 	}
 }

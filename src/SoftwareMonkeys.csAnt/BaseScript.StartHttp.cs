@@ -2,6 +2,7 @@
 using System.IO;
 using System.Diagnostics;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace SoftwareMonkeys.csAnt
 {
@@ -10,7 +11,17 @@ namespace SoftwareMonkeys.csAnt
 	/// </summary>
 	public partial class BaseScript
 	{
-		public Process StartHttp(string physicalPath, string host, int port)
+		public void StartHttp (string physicalPath, string host, int port)
+		{
+			StartHttp(
+				physicalPath,
+				host,
+				port,
+				true
+			);
+		}
+
+		public void StartHttp(string physicalPath, string host, int port, bool autoKill)
 		{
 			// TODO: Make the xsp4 server path configurable
 
@@ -19,29 +30,32 @@ namespace SoftwareMonkeys.csAnt
 
 			// Linux
 			var xspExe = "xsp4";
-		
-			Console.WriteLine("XSP exe file: " + xspExe);
 
 			List<string> parameters = new List<string>();
 
 			// Add all the parameters
 			parameters.Add ("--port " + port);
 			parameters.Add ("--root '" + physicalPath + "'");
-			parameters.Add ("--address " + host);
 
-			// If the script is running in verbose mode then make XSP4 run in verbose mode too
+			if (host != "0.0.0.0")
+				parameters.Add ("--address " + host);
+
+			// If the script is running in verbose mode then make XSP run in verbose mode too
 			if (IsVerbose)
 				parameters.Add ("--verbose");
 
 			// Launch the XSP4 (HTTP server) process
-			var process = StartNewProcess(
+			StartNewProcess(
 				xspExe,
 				parameters.ToArray()
 			);
 
-			Console.WriteLine ("HTTP Server Started!...");
+			// TODO: Check if needed
+			// If autoKill is true, add the process to the SubProcesses list, so it can be killed on dispose
+			//if (autoKill)
+			//	SubProcesses.Add(process);
 
-			return process;
+			Console.WriteLine ("HTTP Server Started!...");
 		}
 	}
 }

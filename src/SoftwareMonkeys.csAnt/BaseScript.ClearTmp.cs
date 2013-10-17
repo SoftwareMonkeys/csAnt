@@ -5,13 +5,11 @@ namespace SoftwareMonkeys.csAnt
 {
 	public partial class BaseScript
 	{
-		public void ClearTmp()
+		public virtual void ClearTmp()
 		{
-			var tmpDir = CurrentDirectory
-				+ Path.DirectorySeparatorChar
-				+ "_tmp";
+			var tmpRoot = GetTmpRoot ();
 
-			Directory.Delete(tmpDir, true);
+			Directory.Delete(tmpRoot, true);
 		}
 	}
 }

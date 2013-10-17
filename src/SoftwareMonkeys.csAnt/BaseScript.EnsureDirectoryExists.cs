@@ -9,6 +9,10 @@ namespace SoftwareMonkeys.csAnt
 			string directoryPath
 		)
 		{
+			// Check parent directories, up to the last one
+			if (directoryPath.IndexOf(Path.DirectorySeparatorChar) != directoryPath.LastIndexOf(Path.DirectorySeparatorChar))
+				EnsureDirectoryExists(Path.GetDirectoryName(directoryPath));
+
 			if (!Directory.Exists(directoryPath))
 				Directory.CreateDirectory(directoryPath);
 		}
