@@ -17,6 +17,10 @@ namespace SoftwareMonkeys.csAnt
 			get { return Encoding.ASCII; }
 		}
 
+		public ConsoleWriter ()
+		{
+		}
+
 		public ConsoleWriter(
 			string outputDirectory,
 			string scriptName
@@ -33,6 +37,11 @@ namespace SoftwareMonkeys.csAnt
 		
 		public override void WriteLine(string text)
 		{
+			if (text == null)
+				text = String.Empty;
+
+			// TODO: Increase the indent depending on the indent of the script
+
 			System.Console.WriteLine(text);
 
 			AppendOutput(text + "\n");
@@ -43,6 +52,9 @@ namespace SoftwareMonkeys.csAnt
 
 		public override void Write(string text)
 		{
+			if (text == null)
+				text = String.Empty;
+
 			System.Console.Write(text);
 			
 			AppendOutput(text);
@@ -53,14 +65,19 @@ namespace SoftwareMonkeys.csAnt
 
 		public void AppendOutput (string text)
 		{
+			if (text == null)
+				text = String.Empty;
+
 			Output += text;
 
-			if (!File.Exists (LogFile))
-			{
-				var dir = Path.GetDirectoryName(LogFile);
+			if (!File.Exists (LogFile)) {
+				var dir = Path.GetDirectoryName (LogFile);
 
-				if (!Directory.Exists(dir))
-					Directory.CreateDirectory(dir);
+				if (!Directory.Exists (dir))
+					Directory.CreateDirectory (dir);
+			}
+
+			if (LogFileWriter == null) {
 
 				LogFileWriter = File.CreateText (LogFile);
 
@@ -84,7 +101,17 @@ namespace SoftwareMonkeys.csAnt
 				+ "-"
 				+ dateTime.Minute
 				+ "-"
-				+ dateTime.Second;
+				+ dateTime.Second
+				+ "--"
+				+ dateTime.Ticks;
+		}
+
+		protected override void Dispose (bool disposing)
+		{
+			if (disposing)
+				LogFileWriter.Close();
+
+			base.Dispose (disposing);
 		}
 	}
 }
