@@ -76,22 +76,24 @@ class RunTestsScript : BaseScript
 			+ Path.GetFileNameWithoutExtension(assemblyFileName).Replace(".", "-")
 			+ ".xml";
 
-			string command = "mono";
+		string command = "mono";
 
-			List<string> arguments = new List<string>();
+		List<string> arguments = new List<string>();
 
-			arguments.Add("--runtime=v4.0");
+		arguments.Add("--runtime=v4.0");
 
-			arguments.Add("lib/NUnit/bin/net-2.0/nunit-console.exe");
+		arguments.Add("lib/NUnit/bin/net-2.0/nunit-console.exe");
 
-			arguments.Add("\"" + assemblyFile + "\"");
+		arguments.Add("\"" + assemblyFile + "\"");
 
-			arguments.Add("-xml=\"" + xmlResult + "\"");
+		arguments.Add("-xml=\"" + xmlResult + "\"");
 
-			StartProcess(
-				command,
-				arguments.ToArray()
-			);				
+		StartProcess(
+			command,
+			arguments.ToArray()
+		);
+
+		AddSummary("Ran tests in '" + assemblyFileName + "' assembly.");		
 
 	}
 
