@@ -12,6 +12,9 @@ using System.Net;
 using HtmlAgilityPack;
 using System.Collections.Generic;
 
+/// <summary>
+/// Prepares the project for development by ensuring all necessary libraries etc. have been downloaded.
+/// </summary>
 class PrepareScript
 {
 	public static void Main(string[] args)
@@ -27,21 +30,74 @@ class PrepareScript
 
 		var sourceProjectsDirectory = args[0];
 
+		sourceProjectsDirectory = Path.GetFullPath(sourceProjectsDirectory);
+
 		Console.WriteLine("Source projects dir: " + sourceProjectsDirectory);
 
-		var csAntDir = sourceProjectsDirectory
+		var csAntZipFile = projectDirectory
 			+ Path.DirectorySeparatorChar
-			+ "SoftwareMonkeys"
+			+ "lib"
+			+ Path.DirectorySeparatorChar
+			+ "csAnt"
+			+ Path.DirectorySeparatorChar
+			+ "csAnt.zip";
+
+		// If the csAnt zip file isn't already here, get it
+		if (!File.Exists(csAntZipFile))
+		{
+			var csAntDir = sourceProjectsDirectory
+				+ Path.DirectorySeparatorChar
+				+ "SoftwareMonkeys"
+				+ Path.DirectorySeparatorChar
+				+ "csAnt";
+
+			Console.WriteLine("csAnt dir: " + csAntDir);
+
+			if (Directory.Exists(csAntDir))
+				GetLocalcsAnt(csAntDir);
+			else
+				GetRemotecsAnt();
+		}
+		else
+		{
+			UnzipExisting(csAntZipFile);
+		} 
+	}
+
+	public void UnzipExisting(string csAntZipFile)
+	{
+		var projectDirectory = GetProjectDirectory();
+
+		var scriptsDir = projectDirectory
+			+ Path.DirectorySeparatorChar
+			+ "scripts";
+
+		var libDir = projectDirectory
+			+ Path.DirectorySeparatorChar
+			+ "lib";
+
+		var csAntLibDir = libDir
 			+ Path.DirectorySeparatorChar
 			+ "csAnt";
 
-		Console.WriteLine("csAnt dir: " + csAntDir);
+		var tmpDir = libDir
+			+ Path.DirectorySeparatorChar
+			+ "csAnt_tmp";
 
-		if (Directory.Exists(csAntDir))
-			GetLocalcsAnt(csAntDir);
-		else
-			GetRemotecsAnt();
+		UnZipFile(csAntZipFile, tmpDir);
 
+		var subDir = Directory.GetDirectories(tmpDir)[0];
+
+		// Move libraries from the tmp directory to the destination
+		MoveLibsToDestination(subDir, csAntLibDir);
+
+		// Move scripts from the tmp directory to the destination
+		MoveScriptsToDestination(subDir, scriptsDir);
+
+		// Move launcher from the tmp directory to the destination
+		MoveLauncherToDestination(subDir, projectDirectory);
+
+		Directory.Delete(tmpDir, true);
 	}
 
 	public void GetLocalcsAnt(string csAntDir)
