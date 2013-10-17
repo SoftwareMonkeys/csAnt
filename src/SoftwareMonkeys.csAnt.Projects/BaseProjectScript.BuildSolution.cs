@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Microsoft.Build.BuildEngine;
+using System.IO;
 
 namespace SoftwareMonkeys.csAnt.Projects
 {
@@ -38,6 +39,8 @@ namespace SoftwareMonkeys.csAnt.Projects
 
 			if (!success)
 				isError = true;
+			else
+				AddSummary("Built solution: " + Path.GetFileName(solutionFilePath));
 
 			return success;
 		}
@@ -90,18 +93,19 @@ namespace SoftwareMonkeys.csAnt.Projects
 				"/property:Configuration=" + mode
 			};
 
-			var cmd = StartProcess(
+			var process = StartProcess(
 				cmdName,
 				arguments
 			);
 
-			cmd.CommandProcess.WaitForExit();
+			process.WaitForExit();
 
+			// TODO: Clean up
 		//	var output = cmd.CommandProcess.StandardOutput.ReadToEnd();
 
 		//	var zeroErrorsNotFound = (output.IndexOf("0 Error(s)") == -1);
 
-			var exitCodeSuccess = (cmd.CommandProcess.ExitCode == 0);
+			var exitCodeSuccess = (process.ExitCode == 0);
 
 			if (
 				exitCodeSuccess
