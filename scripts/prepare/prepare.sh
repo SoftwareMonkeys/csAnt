@@ -1,7 +1,7 @@
 # Set general constants
 BASE_DIR=$PWD
 LIB_DIR="lib"
-SOURCE_PROJECTS_DIR="$HOME/Ubuntu One/Projects"
+SOURCE_PROJECTS_DIR="../"
 
 # Set cs-script constants
 #CSS_URL="http://www.csscript.net/v3.4.2/cs-script.zip"
@@ -66,11 +66,20 @@ fi
 # Download the cs-script libraries
 
 echo ""
-echo "===== Downloading cs-script ====="
 
 if [ ! -f "$CSS_ZIPFILE" ]; then
 
+	echo "===== Downloading cs-script ====="
+
+	echo "$CSS_ZIPFILE not found locally, needs to be downloaded."
+
 	wget $CSS_URL -O $CSS_ZIPFILE
+
+fi
+
+if [ -f "$CSS_ZIPFILE" ]; then
+
+	echo "$CSS_ZIPFILE found locally, download skipped"
 
 fi
 
@@ -95,9 +104,11 @@ fi
 # Download the SharpZipLib libraries
 
 echo ""
-echo "===== Downloading SharpZipLib ====="
 
 if [ ! -f "$SHARPZIPLIB_ZIPFILE" ]; then
+
+	echo "===== Downloading SharpZipLib ====="
+
 	wget $SHARPZIPLIB_URL -O $SHARPZIPLIB_ZIPFILE
 fi
 
