@@ -1,66 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <ProjectGuid>{B13BED0E-4F73-4F2A-8AA1-19273CFF9C47}</ProjectGuid>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.0</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{16297BCB-0A8C-42E6-BE35-921085C3E238}</ProjectGuid>
     <OutputType>Library</OutputType>
     <RootNamespace>SoftwareMonkeys.csAnt</RootNamespace>
     <AssemblyName>SoftwareMonkeys.csAnt</AssemblyName>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <SignAssembly>true</SignAssembly>
-    <DelaySign>False</DelaySign>
-    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
-    <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
-    <NoStdLib>False</NoStdLib>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
-    <AssemblyOriginatorKeyFile>SoftwareMonkeys.csAnt.snk</AssemblyOriginatorKeyFile>
-    <AssemblyOriginatorKeyMode>File</AssemblyOriginatorKeyMode>
-    <ProductVersion>10.0.0</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
+    <ConsolePause>false</ConsolePause>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Platform)' == 'x86' ">
-    <PlatformTarget>x86</PlatformTarget>
-    <RegisterForComInterop>False</RegisterForComInterop>
-    <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
-    <BaseAddress>4194304</BaseAddress>
-    <FileAlignment>4096</FileAlignment>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
-    <OutputPath>bin\Debug\</OutputPath>
-    <DebugSymbols>True</DebugSymbols>
-    <DebugType>Full</DebugType>
-    <Optimize>False</Optimize>
-    <CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
-    <OutputPath>bin\Release\</OutputPath>
-    <DebugSymbols>false</DebugSymbols>
-    <DebugType>PdbOnly</DebugType>
-    <Optimize>True</Optimize>
-    <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
-    <DefineConstants>TRACE</DefineConstants>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System.Core">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Xml" />
-    <Reference Include="System.Xml.Linq">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="WindowsBase" />
     <Reference Include="System" />
     <Reference Include="SoftwareMonkeys.FileNodes">
       <HintPath>..\..\lib\FileNodes\Release\SoftwareMonkeys.FileNodes.dll</HintPath>
-    </Reference>
-    <Reference Include="HtmlAgilityPack">
-      <HintPath>..\..\lib\HtmlAgilityPack\Net40\HtmlAgilityPack.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\lib\Newtonsoft.Json\Bin\Net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="ICSharpCode.SharpZipLib">
       <HintPath>..\..\lib\SharpZipLib\net-20\ICSharpCode.SharpZipLib.dll</HintPath>
@@ -68,101 +39,89 @@
     <Reference Include="CSScriptLibrary">
       <HintPath>..\..\lib\cs-script\Lib\Bin\NET 4.0\CSScriptLibrary.dll</HintPath>
     </Reference>
+    <Reference Include="HtmlAgilityPack">
+      <HintPath>..\..\lib\HtmlAgilityPack\Net40\HtmlAgilityPack.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="BaseScript.AddLib.cs" />
+    <Compile Include="BaseScript.Arguments.cs" />
+    <Compile Include="BaseScript.BackupFile.cs" />
     <Compile Include="BaseScript.BaseNode.cs" />
+    <Compile Include="BaseScript.ClearTmp.cs" />
+    <Compile Include="BaseScript.CopyDirectory.cs" />
     <Compile Include="BaseScript.cs" />
-    <Compile Include="BaseScript.ExecuteScript.cs" />
-    <Compile Include="BaseScript.StartHttp.cs" />
-    <Compile Include="GroupNodeNotFoundException.cs" />
+    <Compile Include="BaseScript.CurrentDirectory.cs" />
+    <Compile Include="BaseScript.CurrentNode.cs" />
+    <Compile Include="BaseScript.Dispose.cs" />
     <Compile Include="BaseScript.Download.cs" />
-    <Compile Include="BaseScript.Unzip.cs" />
-    <Compile Include="BaseScript.Zip.cs" />
     <Compile Include="BaseScript.DownloadAndUnzip.cs" />
-    <Compile Include="BaseScript.StartNewProcess.cs" />
-    <Compile Include="BaseScript.StartProcess.cs" />
-    <Compile Include="BaseScript.IsVerbose.cs" />
+    <Compile Include="BaseScript.EnsureDirectoryExists.cs" />
+    <Compile Include="BaseScript.EnsureParentNodes.cs" />
+    <Compile Include="BaseScript.Error.cs" />
+    <Compile Include="BaseScript.Execute.cs" />
+    <Compile Include="BaseScript.ExecuteCommand.cs" />
+    <Compile Include="BaseScript.ExecuteScript.cs" />
+    <Compile Include="BaseScript.FileEquals.cs" />
+    <Compile Include="BaseScript.FindFiles.cs" />
+    <Compile Include="BaseScript.GetLib.cs" />
+    <Compile Include="BaseScript.GetLibs.cs" />
     <Compile Include="BaseScript.GetNewestFile.cs" />
     <Compile Include="BaseScript.GetNewestFolder.cs" />
-    <Compile Include="BaseScript.MoveDirectory.cs" />
-    <Compile Include="BaseScript.FindFiles.cs" />
-    <Compile Include="AssemblyInfo.cs" />
-    <Compile Include="BaseScript.GetScriptPath.cs" />
-    <Compile Include="BaseScript.ScriptExists.cs" />
-    <Compile Include="BaseScript.ProjectsDirectory.cs" />
-    <Compile Include="BaseScript.ScrapeListFromXPath.cs" />
-    <Compile Include="BaseScript.BackupFile.cs" />
-    <Compile Include="BaseScript.FileEquals.cs" />
-    <Compile Include="BaseScript.AddLib.cs" />
-    <Compile Include="BaseScript.GetLib.cs" />
-    <Compile Include="BaseScript.ListLibs.cs" />
-    <Compile Include="BaseScript.RemoveLib.cs" />
-    <Compile Include="BaseScript.GetLibs.cs" />
-    <Compile Include="BaseScript.IsError.cs" />
-    <Compile Include="BaseScript.GetTmpFile.cs" />
-    <Compile Include="BaseScript.ClearTmp.cs" />
-    <Compile Include="BaseScript.CurrentNode.cs" />
-    <Compile Include="BaseScript.IsLinux.cs" />
-    <Compile Include="BaseScript.IsWindows.cs" />
-    <Compile Include="BaseScript.Error.cs" />
-    <Compile Include="BaseScript.StopOnFail.cs" />
-    <Compile Include="Options.cs" />
-    <Compile Include="Arguments.cs" />
-    <Compile Include="IScript.cs" />
-    <Compile Include="BaseScript.EnsureDirectoryExists.cs" />
-    <Compile Include="BaseScript.Git.cs" />
-    <Compile Include="BaseScript.StartDotNetExe.cs" />
-    <Compile Include="BaseScript.IsMono.cs" />
-    <Compile Include="BaseScript.GitClone.cs" />
-    <Compile Include="BaseScript.IsHelp.cs" />
-    <Compile Include="BaseScript.Arguments.cs" />
-    <Compile Include="BaseScript.NewNode.cs" />
-    <Compile Include="BaseScript.EnsureParentNodes.cs" />
     <Compile Include="BaseScript.GetNode.cs" />
-    <Compile Include="DynamicLinq.cs" />
-    <Compile Include="BaseScript.ExecuteCommand.cs" />
+    <Compile Include="BaseScript.GetScriptPath.cs" />
+    <Compile Include="BaseScript.GetTimeStamp.cs" />
+    <Compile Include="BaseScript.GetTmpDir.cs" />
+    <Compile Include="BaseScript.GetTmpFile.cs" />
+    <Compile Include="BaseScript.Git.cs" />
+    <Compile Include="BaseScript.GitAdd.cs" />
+    <Compile Include="BaseScript.GitClone.cs" />
+    <Compile Include="BaseScript.GitCommit.cs" />
+    <Compile Include="BaseScript.GitInit.cs" />
+    <Compile Include="BaseScript.IsError.cs" />
+    <Compile Include="BaseScript.IsHelp.cs" />
+    <Compile Include="BaseScript.IsLinux.cs" />
+    <Compile Include="BaseScript.IsMono.cs" />
+    <Compile Include="BaseScript.IsVerbose.cs" />
+    <Compile Include="BaseScript.IsWindows.cs" />
+    <Compile Include="BaseScript.ListLibs.cs" />
+    <Compile Include="BaseScript.MoveDirectory.cs" />
+    <Compile Include="BaseScript.NewNode.cs" />
+    <Compile Include="BaseScript.ProjectsDirectory.cs" />
+    <Compile Include="BaseScript.RemoveLib.cs" />
+    <Compile Include="BaseScript.ScrapeListFromXPath.cs" />
+    <Compile Include="BaseScript.ScriptExists.cs" />
+    <Compile Include="BaseScript.StartDotNetExe.cs" />
+    <Compile Include="BaseScript.StartHttp.cs" />
+    <Compile Include="BaseScript.StartNewProcess.cs" />
+    <Compile Include="BaseScript.StartProcess.cs" />
+    <Compile Include="BaseScript.StopOnFail.cs" />
+    <Compile Include="BaseScript.Summaries.cs" />
+    <Compile Include="BaseScript.Unzip.cs" />
+    <Compile Include="BaseScript.Zip.cs" />
+    <Compile Include="ConsoleWriter.cs" />
+    <Compile Include="IScript.cs" />
     <Compile Include="IScriptCommand.cs" />
+    <Compile Include="Arguments.cs" />
     <Compile Include="Commands\AddLibCommand.cs" />
     <Compile Include="Commands\BackupFileCommand.cs" />
     <Compile Include="Commands\BaseScriptCommand.cs" />
-    <Compile Include="Commands\DownloadCommand.cs" />
     <Compile Include="Commands\DownloadAndUnzipCommand.cs" />
-    <Compile Include="Commands\HelloWorldCommand.cs" />
+    <Compile Include="Commands\DownloadCommand.cs" />
     <Compile Include="Commands\GetLibCommand.cs" />
+    <Compile Include="Commands\HelloWorldCommand.cs" />
     <Compile Include="Commands\StartProcessCommand.cs" />
-    <Compile Include="ConsoleWriter.cs" />
-    <Compile Include="BaseScript.GitAdd.cs" />
-    <Compile Include="BaseScript.GitCommit.cs" />
-    <Compile Include="BaseScript.GitInit.cs" />
-    <Compile Include="BaseScript.GetTmpDir.cs" />
-    <Compile Include="BaseScript.Dispose.cs" />
-    <Compile Include="BaseScript.CopyDirectory.cs" />
-    <Compile Include="BaseScript.GetTimeStamp.cs" />
+    <Compile Include="DynamicLinq.cs" />
+    <Compile Include="BaseScript.SubProcesses.cs" />
+    <Compile Include="BaseScript.GetTmpRoot.cs" />
+    <Compile Include="BaseScript.Initialize.cs" />
+    <Compile Include="BaseScript.GetScript.cs" />
+    <Compile Include="ExpectedArgumentAttribute.cs" />
+    <Compile Include="Commands\StartNewProcessCommand.cs" />
+    <Compile Include="BaseScript.Sync.cs" />
+    <Compile Include="BaseScript.GitPush.cs" />
+    <Compile Include="BaseScript.CopyTestFiles.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Compile Include="BaseScript.Execute.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="BaseScript.CurrentDirectory.cs" />
-  </ItemGroup>
-  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.Targets" />
-  <PropertyGroup>
-    <PostBuildEvent>
-    </PostBuildEvent>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
-    <DebugType>none</DebugType>
-    <OutputPath>..\..\bin\Release\</OutputPath>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
-    <OutputPath>..\..\bin\Debug\</OutputPath>
-  </PropertyGroup>
-  <ItemGroup>
-    <None Include="SoftwareMonkeys.csAnt.snk">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Commands\" />
-  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
