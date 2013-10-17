@@ -1,5 +1,8 @@
 using System;
 using SoftwareMonkeys.FileNodes;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Threading;
 
 namespace SoftwareMonkeys.csAnt
 {
@@ -11,7 +14,27 @@ namespace SoftwareMonkeys.csAnt
 
 		bool IsError { get;set; }
 
+		ConsoleWriter Console { get; set; }
+
+		int Indent { get; set; }
+
+		#region Start
 		bool Start(string[] args);
+		#endregion
+
+		#region Initialize
+		void Initialize(string scriptName);
+
+		void Initialize(string scriptName, ConsoleWriter consoleWriter);
+		#endregion
+
+		#region Summaries
+		List<string> Summaries { get;set; }
+
+		void AddSummary(string text);
+
+		void OutputSummaries();
+		#endregion
 
 		#region IO
 		void MoveDirectory(string from, string to);
@@ -48,6 +71,12 @@ namespace SoftwareMonkeys.csAnt
 
 		#region Time stamp functions
 		string GetTimeStamp();
+		#endregion
+
+		#region Start process functions
+		Process StartProcess(string command, string[] arguments);
+
+		Thread StartNewProcess(string command, string[] arguments);
 		#endregion
 	}
 }
