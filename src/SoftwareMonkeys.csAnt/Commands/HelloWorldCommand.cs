@@ -19,6 +19,8 @@ namespace SoftwareMonkeys.csAnt
 			Console.WriteLine ("");
 			Console.WriteLine ("Hello World");
 			Console.WriteLine ("");
+
+			Script.AddSummary("Printed out the words 'Hello world'.");
 		}
 	}
 }
