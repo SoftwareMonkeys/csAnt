@@ -7,18 +7,15 @@ namespace SoftwareMonkeys.csAnt.Projects
 	{
 		public override string GetTmpDir()
 		{
-			return Path.GetFullPath(
-				CurrentDirectory
-				+ Path.DirectorySeparatorChar
-				+ ".."
-				+ Path.DirectorySeparatorChar
-				+ ProjectName
-				+ ".tmp"
+			var path = GetTmpRoot ()
 				+ Path.DirectorySeparatorChar
 				+ GetTimeStamp()
 				+ Path.DirectorySeparatorChar
-				+ ProjectName
-				);
+				+ ProjectName;
+
+			EnsureDirectoryExists(path);
+
+			return path;
 		}
 	}
 }
