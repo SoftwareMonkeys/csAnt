@@ -2,11 +2,15 @@ using System;
 
 namespace SoftwareMonkeys.csAnt.Tests
 {
-	public class ITestScript
+	public interface ITestScript : IScript
 	{
-		public ITestScript ()
-		{
-		}
+		// The original starting directory (which may be different from the CurrentDirectory if it is changed)
+		string OriginalDirectory { get;set; }
+
+		// The group to put all tests in
+		string TestGroupName { get;set; }
+
+		TestUtilities Utilities { get;set; }
 	}
 }
 
