@@ -4,6 +4,15 @@ LIB_DIR="$BASE_DIR/lib"
 SOURCE_PROJECTS_DIR="../"
 GENERAL_LIB_DIR="$BASE_DIR/../lib"
 
+if [ ! -d "$GENERAL_LIB_DIR" ]; then
+	GENERAL_LIB_DIR="$BASE_DIR/../../../lib"
+fi
+
+if [ ! -d "$GENERAL_LIB_DIR" ]; then
+	GENERAL_LIB_DIR="$BASE_DIR/../../../../../lib"
+fi
+
+
 # Set cs-script constants
 #CSS_URL="http://www.csscript.net/v3.4.2/cs-script.zip"
 CSS_URL="https://dl.dropboxusercontent.com/u/2192462/CS-S_Binaries/cs-script.7z"
@@ -19,7 +28,7 @@ SHARPZIPLIB_ZIPFILE="$SHARPZIPLIB_DIR/SharpZipLib_0860_Bin.zip"
 
 # Set HtmlAgilityPack constants
 HAP_LIB_URL="http://download-codeplex.sec.s-msft.com/Download/Release?ProjectName=htmlagilitypack&DownloadId=437941&FileTime=129893731308330000&Build=19692"
-HAP_LIB_Local="$GENERAL_LIB_DIR/HtmlAgilityPack/HtmlAgilityPack.zip"
+HAP_LIB_LOCAL="$GENERAL_LIB_DIR/HtmlAgilityPack/HtmlAgilityPack.zip"
 HAP_LIB_DIR="$LIB_DIR/HtmlAgilityPack"
 HAP_LIB_ZIPFILE="$HAP_LIB_DIR/HtmlAgilityPack.zip"
 
@@ -169,13 +178,15 @@ if [ ! -f "$HAP_LIB_ZIPFILE" ]; then
 
 	# If a local copy is found then grab it
 	if [ -f "$HAP_LIB_LOCAL" ]; then
-		echo "  Found"
+		echo "  Found local... using:"
+		echo "  $HAP_LIB_LOCAL"
 		cp $HAP_LIB_LOCAL -O $HAP_LIB_ZIPFILE
 	fi
 
 	# If no local copy is found then download a copy
 	if [ ! -f "$HAP_LIB_LOCAL" ]; then
-		echo "  Not found"
+		echo "  Not found. Getting from:"
+		echo "  $HAP_LIB_URL"
 		wget $HAP_LIB_URL -O $HAP_LIB_ZIPFILE
 	fi
 fi
