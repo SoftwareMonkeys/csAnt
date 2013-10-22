@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using CSScriptLibrary;
 using System.Reflection;
+using System.Text;
 
 namespace SoftwareMonkeys.csAnt
 {
@@ -18,9 +19,12 @@ namespace SoftwareMonkeys.csAnt
 		
 		public void ExecuteScript(string scriptName, params string[] args)
 		{
+			var parentScriptList = GetParentScriptList();
+
 			Console.WriteLine("");
 			Console.WriteLine("// --------------------------------------------------");
 			Console.WriteLine("// Executing script: " + scriptName);
+			WriteParentScriptList(parentScriptList);
 			Console.WriteLine("// Path: " + CurrentDirectory);
 			Console.WriteLine("");
 
@@ -42,22 +46,75 @@ namespace SoftwareMonkeys.csAnt
 			
 			Console.WriteLine("");
 			Console.WriteLine("// Finished executing script: " + scriptName);
+			WriteParentScriptList(parentScriptList);
 			Console.WriteLine("// --------------------------------------------------");
 			Console.WriteLine("");
 		}
 
+		public void WriteParentScriptList (string[] list)
+		{
+			var builder = new StringBuilder();
+
+			if (list.Length > 0) {
+				builder.Append("// Script stack: ");
+
+				for (var i = 0; i < list.Length; i++) {
+						if (i > 0)
+							builder.Append(", ");
+
+						if (String.IsNullOrEmpty(list[i]))
+							throw new Exception("Item is null or empty.");
+
+						builder.Append(list [i]);
+				}
+			
+				builder.Append(Environment.NewLine);
+
+				Console.Write(builder.ToString());
+			}
+		}
+
+		public string[] GetParentScriptList ()
+		{
+			var c = Console;
+
+			List<string> list = new List<string> ();
+
+			if (c is SubConsoleWriter) {
+				while (c is SubConsoleWriter) {
+					c = ((SubConsoleWriter)c).ParentWriter;
+					if (!list.Contains(c.ScriptName))
+						list.Insert (0, c.ScriptName);
+				}
+			}
+
+			return list.ToArray ();
+		}
+
 		public void ExecuteScriptFromFile (string scriptPath, string[] args)
 		{			
-			IScript script = GetScriptFromPath(scriptPath);
+			IScript script = GetScriptFromPath (scriptPath);
 
 			// Get the original current directory
 			var originalCurrentDirectory = script.CurrentDirectory;
 
 			// Set the indent of the new script to be one more than the current script
-			script.Indent = Indent+1;
+			script.Indent = Indent + 1;
 
-			// Start the target script
-			script.Start (args);
+			script.SetUp (); // TODO: Check if this should be automatically run by the script itself
+		
+			// Give the sub script the same time stamp (so all sub scripts can be marked with the same time, helping to organize them)
+			script.TimeStamp = TimeStamp;	// Start the target script
+
+			// Run the Start function inside a try...catch block 
+			try {
+				script.Start (args);
+			} catch (Exception ex) {
+				script.Error (ex.ToString());
+			}
+			finally{
+				script.TearDown (); // TODO: Check if this should be automatically run by the script itself
+			}
 
 			// Ensure the script's current directory is reset back to its original value (in case it was modified in a script)
 			script.CurrentDirectory = originalCurrentDirectory;
