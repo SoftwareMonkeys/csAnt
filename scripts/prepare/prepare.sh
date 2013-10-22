@@ -1,6 +1,6 @@
 # Set general constants
 BASE_DIR=$PWD
-LIB_DIR="lib"
+LIB_DIR="$BASE_DIR/lib"
 SOURCE_PROJECTS_DIR="../"
 GENERAL_LIB_DIR="$BASE_DIR/../lib"
 
@@ -106,8 +106,18 @@ fi
 echo ""
 echo "===== Unzipping the cs-script libraries ====="
 
-unzip -o $CSS_ZIPFILE -d $LIB_DIR
+cd $LIB_DIR
 
+CSS_ZIPFILE_TMP=$LIB_DIR/cs-script2.7z
+
+echo "Tmp cs-script zip file: "
+echo $CSS_ZIPFILE_TMP
+
+cp -f $CSS_ZIPFILE $CSS_ZIPFILE_TMP
+
+p7zip -d $CSS_ZIPFILE_TMP
+
+cd $BASE_DIR
 
 # ================   SharpZipLib   =================
 
