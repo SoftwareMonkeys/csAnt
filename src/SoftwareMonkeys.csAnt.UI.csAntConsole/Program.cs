@@ -8,7 +8,7 @@ namespace SoftwareMonkeys.csAnt.UI.csAntConsole
 {
 	class Program
 	{
-		static public ConsoleWriter Console { get;set; }
+		static public ConsoleWriter Console { get; set; }
 
 		public static void Main(string[] args)
 		{
@@ -106,10 +106,14 @@ namespace SoftwareMonkeys.csAnt.UI.csAntConsole
 				Console.WriteLine("Successful: " + !scr.IsError);
 				Console.WriteLine("");
 				
+				// Output the summaries to help the user see what happened
+				scr.OutputSummaries();
+
 				if (scr.IsError)
 					Console.WriteLine("!!!!!!!!!!  Failed  !!!!!!!!!!");
 				else
 					Console.WriteLine("========== Success ==========");
+
 
 				Console.WriteLine("");
 				Console.WriteLine("");
