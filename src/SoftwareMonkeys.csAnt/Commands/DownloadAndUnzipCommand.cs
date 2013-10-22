@@ -55,7 +55,10 @@ namespace SoftwareMonkeys.csAnt
 			// TODO: Add the ability to use additional parameters
 			DownloadAndUnzip(
 				DownloadUrl,
-				UnzipDestination
+				ZipFileLocalPath,
+				UnzipDestination,
+				SubPath,
+				Force
 			);
 		}
 

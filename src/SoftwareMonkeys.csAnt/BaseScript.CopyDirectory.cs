@@ -21,6 +21,9 @@ namespace SoftwareMonkeys.csAnt
 			foreach (string newPath in Directory.GetFiles(source, "*.*", SearchOption.AllDirectories))
 			{
 				var destinationFile = newPath.Replace (source, destination);
+
+				EnsureDirectoryExists(Path.GetDirectoryName(destinationFile));
+
 				Console.WriteLine ("Copying: " + newPath);
 				Console.WriteLine ("To: " + destinationFile);
 				File.Copy (newPath, destinationFile);

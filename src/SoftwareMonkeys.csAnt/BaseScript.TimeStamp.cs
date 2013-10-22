@@ -2,9 +2,9 @@ using System;
 
 namespace SoftwareMonkeys.csAnt
 {
-	public class BaseScript
+	public partial class BaseScript
 	{
-		public string TimeStamp = String.Empty;
+		public string TimeStamp { get;set; }
 	}
 }
 

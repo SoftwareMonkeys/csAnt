@@ -2,13 +2,17 @@ using System;
 
 namespace SoftwareMonkeys.csAnt
 {
-	public class RequiredArgumentAttribute
+	[AttributeUsage(AttributeTargets.Class, AllowMultiple=true)]
+	public class ExpectedArgumentAttribute : Attribute
 	{
 		public string ArgumentName { get; set; }
 
 		//public string TypeName { get; set; }
 
-		public RequiredArgumentAttribute (
+		public ExpectedArgumentAttribute()
+		{}
+
+		public ExpectedArgumentAttribute (
 			string argumentName
 		)
 		{

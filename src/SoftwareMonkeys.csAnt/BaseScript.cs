@@ -26,22 +26,12 @@ namespace SoftwareMonkeys.csAnt
 
 		public BaseScript(string scriptName)
 		{
+			if (String.IsNullOrEmpty(scriptName))
+				throw new ArgumentException("The script name must be provided.", "scriptName");
+
 			ScriptName = scriptName;
 
 			Initialize(scriptName);
-		}
-
-		public abstract bool Start(string[] args);
-
-		public string FixScriptName(string scriptName)
-		{
-			var x = "Script";
-
-			// If script name ends with "Script" then remove it
-			if (scriptName.EndsWith (x))
-				scriptName = scriptName.Substring(0, scriptName.Length-x.Length);
-
-			return scriptName;
 		}
 	}
 }

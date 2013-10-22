@@ -12,6 +12,10 @@ namespace SoftwareMonkeys.csAnt
 
 		public StreamWriter LogFileWriter { get;set; }
 
+		public string ScriptName { get;set; }
+		
+		public IScript Script { get;set; }
+
 		public override Encoding Encoding
 		{
 			get { return Encoding.ASCII; }
@@ -33,6 +37,8 @@ namespace SoftwareMonkeys.csAnt
 				+ ".txt";
 
 			LogFile = logFile;
+
+			ScriptName = scriptName;
 		}
 		
 		public override void WriteLine(string text)
@@ -45,6 +51,8 @@ namespace SoftwareMonkeys.csAnt
 			System.Console.WriteLine(text);
 
 			AppendOutput(text + "\n");
+			
+			AppendOutputFile(text + "\n");
 			
 			// TODO: Remove if not needed
 			//base.WriteLine (text);
@@ -59,6 +67,8 @@ namespace SoftwareMonkeys.csAnt
 			
 			AppendOutput(text);
 
+			AppendOutputFile(text);
+
 			// TODO: Remove if not needed
 			//base.Write (text);
 		}
@@ -69,6 +79,12 @@ namespace SoftwareMonkeys.csAnt
 				text = String.Empty;
 
 			Output += text;
+		}
+		
+		public void AppendOutputFile(string text)
+		{
+			if (text == null)
+				text = String.Empty;
 
 			if (!File.Exists (LogFile)) {
 				var dir = Path.GetDirectoryName (LogFile);
