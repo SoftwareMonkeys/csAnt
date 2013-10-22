@@ -7,16 +7,16 @@ using System.Diagnostics;
 using SoftwareMonkeys.csAnt;
 using SoftwareMonkeys.csAnt.Tests;
 
-class Test_HelloWorldScript : BaseTestScript
+class Test_ErrorScript : BaseTestScript
 {
 	public static void Main(string[] args)
 	{
-		new Test_HelloWorldScript().Start(args);
+		new Test_ErrorScript().Start(args);
 	}
 	
 	public override bool Start(string[] args)
 	{
-		ExecuteScript("HelloWorld");
+		Error("Intentional error.");
 
 		return !IsError;
 	}
