@@ -4,14 +4,18 @@ using System.Collections;
 using System.ComponentModel;
 using System.Web;
 using System.Web.SessionState;
+using System.IO;
 
 namespace SoftwareMonkeys.csAnt.UI.Web.Application
 {
 	public class Global : System.Web.HttpApplication
 	{
-		
+
 		protected virtual void Application_Start (Object sender, EventArgs e)
 		{
+			Environment.CurrentDirectory = Path.GetFullPath(Environment.CurrentDirectory + "/../..");
+
+			Console.WriteLine ("Current directory: " + Environment.CurrentDirectory);
 		}
 		
 		protected virtual void Session_Start (Object sender, EventArgs e)

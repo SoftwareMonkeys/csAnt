@@ -39,16 +39,12 @@
     <Content Include="Global.asax" />
     <Content Include="web.config" />
     <Content Include="Default.aspx" />
+    <Content Include="Launch.aspx" />
+    <Content Include="Master.master" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
-    <Compile Include="Default.aspx.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Default.aspx.designer.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
@@ -60,4 +56,10 @@
       </Properties>
     </MonoDevelop>
   </ProjectExtensions>
+  <ItemGroup>
+    <ProjectReference Include="..\SoftwareMonkeys.csAnt.UI.Web\SoftwareMonkeys.csAnt.UI.Web.csproj">
+      <Project>{75328A99-0850-47AB-97CB-BD087190B5A6}</Project>
+      <Name>SoftwareMonkeys.csAnt.UI.Web</Name>
+    </ProjectReference>
+  </ItemGroup>
 </Project>
