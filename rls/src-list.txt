@@ -53,7 +53,8 @@
 /scripts/Release/*
 /scripts/Update/*
 /scripts/prepare/*
-/scripts/RunTests/*
+/scripts/RunUnitTests/*
+/scripts/RunTestScripts/*
 /prepare-linux.sh
 /csAnt.sh
 /csAnt.node
