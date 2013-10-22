@@ -14,11 +14,13 @@ namespace SoftwareMonkeys.csAnt
 
 		public GetLibCommand (
 			IScript script,
-			string libName
+			string libName,
+			bool force
 		)
 			: base(script)
 		{
 			LibName = libName;
+			ForceDownload = force;
 		}
 
 		public override void Execute ()
@@ -26,7 +28,7 @@ namespace SoftwareMonkeys.csAnt
 			GetLib(LibName);
 		}
 
-		public void GetLib(string name)
+		public void GetLib (string name)
 		{
 			// TODO: See if this function can be simplified and shortened
 			Console.WriteLine ("");
@@ -34,60 +36,68 @@ namespace SoftwareMonkeys.csAnt
 			Console.WriteLine ("");
 
 			if (Script.CurrentNode.Nodes == null
-			    || !Script.CurrentNode.Nodes.ContainsKey("Libraries"))
-			{
+				|| !Script.CurrentNode.Nodes.ContainsKey ("Libraries")) {
 				Script.Error ("No libraries listed.");
-			}
-			else
-			{
-				if (Script.CurrentNode.Nodes["Libraries"].Nodes.ContainsKey(name))
-				{
-					var libNode = Script.CurrentNode.Nodes["Libraries"].Nodes[name];
+			} else {
+				if (!AlreadyFound (name) || ForceDownload) {
+					if (Script.CurrentNode.Nodes ["Libraries"].Nodes.ContainsKey (name)) {
+						var libNode = Script.CurrentNode.Nodes ["Libraries"].Nodes [name];
 
-					var successful = false;
+						var successful = false;
 
-					// First: Look for an ImportScript property
-					if (libNode.Properties.ContainsKey("ImportScript"))
-					{
-						Console.WriteLine ("");
-						Console.WriteLine ("Getting library via import script:");
-						Console.WriteLine (libNode.Properties["ImportScript"]);
-						Console.WriteLine ("");
+						// First: Look for an ImportScript property
+						if (libNode.Properties.ContainsKey ("ImportScript")) {
+							Console.WriteLine ("");
+							Console.WriteLine ("Getting library via import script:");
+							Console.WriteLine (libNode.Properties ["ImportScript"]);
+							Console.WriteLine ("");
 
-						successful = GetLibByImportScript(libNode);
-					}
+							successful = GetLibByImportScript (libNode);
+						}
 
-					// Next (if unsuccessful): Look for a local zip file property
-					if (successful == false
-					    && libNode.Properties.ContainsKey("LocalZipFile"))
-					{
-						Console.WriteLine ("");
-						Console.WriteLine ("Getting library from local zip file:");
-						Console.WriteLine (libNode.Properties["LocalZipFile"]);
-						Console.WriteLine ("");
+						// Next (if unsuccessful): Look for a local zip file property
+						if (successful == false
+							&& libNode.Properties.ContainsKey ("LocalZipFile")) {
+							Console.WriteLine ("");
+							Console.WriteLine ("Getting library from local zip file:");
+							Console.WriteLine (libNode.Properties ["LocalZipFile"]);
+							Console.WriteLine ("");
 
-						successful = GetLibByLocal(libNode);
-					}
+							successful = GetLibByLocal (libNode);
+						}
 
-					// Next (if unsuccessful): Look for a URL property
-					if (successful == false
-					    && libNode.Properties.ContainsKey("Url"))
-					{
-						Console.WriteLine ("");
-						Console.WriteLine ("Getting library via URL download:");
-						Console.WriteLine ("Url: " + libNode.Properties["Url"]);
-						Console.WriteLine ("Sub path: " + libNode.Properties["SubPath"]);
-						Console.WriteLine ("");
+						// Next (if unsuccessful): Look for a URL property
+						if (successful == false
+							&& libNode.Properties.ContainsKey ("Url")) {
+							Console.WriteLine ("");
+							Console.WriteLine ("Getting library via URL download:");
+							Console.WriteLine ("Url: " + libNode.Properties ["Url"]);
+							Console.WriteLine ("Sub path: " + libNode.Properties ["SubPath"]);
+							Console.WriteLine ("");
 
-						successful = GetLibByUrl(libNode);
-					}
+							successful = GetLibByUrl (libNode);
+						}
 
-					if (!successful)
-						Script.Error("Couldn't determine import method from '" + libNode.Name + "' library node.");
+						if (!successful)
+							Script.Error ("Couldn't determine import method from '" + libNode.Name + "' library node.");
+					} else
+						Script.Error ("Library not found: '" + name + "'. Add it using 'AddLib [name] [url]'.");
 				}
 				else
-					Script.Error("Library not found: '" + name + "'. Add it using 'AddLib [name] [url]'.");
+					Script.Console.WriteLine("'" + name + "' lib is already found. Skipping retrieval.");
 			}
+		}
+
+		public bool AlreadyFound (string name)
+		{
+			var libDir = Script.CurrentDirectory
+				+ Path.DirectorySeparatorChar
+				+ "lib"
+				+ Path.DirectorySeparatorChar
+				+ name;
+
+			return Directory.GetFiles(libDir).Length > 0
+				|| Directory.GetDirectories(libDir).Length > 0;
 		}
 
 		public bool GetLocalZipFileAndExtract(string name)
