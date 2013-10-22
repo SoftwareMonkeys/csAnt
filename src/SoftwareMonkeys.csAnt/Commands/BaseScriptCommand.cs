@@ -8,11 +8,14 @@ namespace SoftwareMonkeys.csAnt.Commands
 
 		public object ReturnValue { get;set; }
 
+		public ConsoleWriter Console { get; set; }
+
 		public BaseScriptCommand(
 			IScript script
 		)
 		{
 			Script = script;
+			Console = script.Console;
 		}
 
 		public abstract void Execute();

@@ -6,9 +6,13 @@ namespace SoftwareMonkeys.csAnt
 	{
 		public string GetTimeStamp()
 		{
-			var dateTime = DateTime.Now;
+			return GetTimeStamp(DateTime.Now);
 
-			return dateTime.Year
+		}
+		
+		public string GetTimeStamp(DateTime dateTime)
+		{
+			var stamp = dateTime.Year
 				+ "-"
 				+ dateTime.Month
 				+ "-"
@@ -19,6 +23,8 @@ namespace SoftwareMonkeys.csAnt
 				+ dateTime.Minute
 				+ "-"
 				+ dateTime.Second;
+
+			return stamp;
 		}
 	}
 }

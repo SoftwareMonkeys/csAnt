@@ -28,7 +28,10 @@ namespace SoftwareMonkeys.csAnt
 			var b = (IScript)a.CreateInstance (type.Name);
 
 			// TODO: See if it's possible to pass the scriptName via the constructor when creating the instance above
-			b.Initialize(scriptName, Console);
+			b.Initialize(
+				scriptName,
+				new SubConsoleWriter(Console, scriptName)
+			);
 
 			// Create an instance of the script
 			IScript script = b;//.AlignToInterface<IScript>(); // TODO: Remove if not needed

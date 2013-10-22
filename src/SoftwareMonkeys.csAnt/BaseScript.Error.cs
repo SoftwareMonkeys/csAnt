@@ -14,9 +14,6 @@ namespace SoftwareMonkeys.csAnt
 			Console.WriteLine (message);
 			Console.WriteLine ("-------------------------------------------------------");
 			Console.WriteLine ("");
-
-			if (StopOnFail)
-				Environment.Exit(1);
 		}
 	}
 }

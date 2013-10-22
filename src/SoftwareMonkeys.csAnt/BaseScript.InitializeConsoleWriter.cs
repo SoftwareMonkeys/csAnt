@@ -2,10 +2,13 @@ using System;
 
 namespace SoftwareMonkeys.csAnt
 {
-	public class BaseScript
+	public partial class BaseScript
 	{
-		public BaseScript ()
+		public virtual void InitializeConsoleWriter(string scriptName, ConsoleWriter consoleWriter)
 		{
+			Console = consoleWriter;
+
+			Console.Script = this;
 		}
 	}
 }
