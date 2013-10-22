@@ -23,10 +23,13 @@ class CycleTestsScript : BaseProjectScript
 
 		ExecuteScript("CycleBuild");
 
-		Console.WriteLine("Running the tests...");
-		Console.WriteLine("");
+		if (!IsError)
+		{
+			Console.WriteLine("Running the tests...");
+			Console.WriteLine("");
 
-		ExecuteScript("RunTests");
+			ExecuteScript("RunTests");
+		}
 
 		return !IsError;
 	}
