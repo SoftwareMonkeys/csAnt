@@ -8,7 +8,14 @@ namespace SoftwareMonkeys.csAnt
 {
 	public interface IScript : IDisposable
 	{
+		#region Properties
+		string ScriptName { get;set; }
+
 		string CurrentDirectory { get;set; }
+
+		bool IsVerbose { get;set; }
+
+		string TimeStamp { get;set; }
 
 		FileNode CurrentNode { get;set; }
 
@@ -16,10 +23,16 @@ namespace SoftwareMonkeys.csAnt
 
 		ConsoleWriter Console { get; set; }
 
+		// TODO: Check if needed
 		int Indent { get; set; }
+		#endregion
 
 		#region Start
+		void SetUp();
+
 		bool Start(string[] args);
+
+		void TearDown();
 		#endregion
 
 		#region Initialize
@@ -39,10 +52,14 @@ namespace SoftwareMonkeys.csAnt
 		#region IO
 		void MoveDirectory(string from, string to);
 
+		void CopyDirectory(string from, string to);
+
 		string GetTemporaryDirectory();
 		string GetTmpDir();
 
 		string GetTmpFile();
+
+		void EnsureDirectoryExists(string path);
 		#endregion
 
 		#region Downloads
