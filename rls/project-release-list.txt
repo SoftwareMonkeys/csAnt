@@ -17,10 +17,11 @@
 /scripts/SetGoogleCode.cs
 /scripts/TestResults.cs
 /scripts/List.cs
+/scripts/RunTests.cs
 /scripts/Release/*
 /scripts/Update/*
-/scripts/RunTests/*
-/scripts/ImportLocalLib/*
+/scripts/RunUnitTests/*
+/scripts/RunTestScripts/*
 /scripts/ImportLocalWebApp/*
 /scripts/Test_*.cs
 /lib/csAnt/bin/Release/*.dll

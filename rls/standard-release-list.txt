@@ -17,10 +17,12 @@
 /scripts/CopyBinToLib.cs
 /scripts/GoogleCodeRelease.cs
 /scripts/SetGoogleCode.cs
+/scripts/RunTests.cs
 /scripts/List.cs
 /scripts/Release/*
 /scripts/Update/*
-/scripts/ImportLocalLib/*
+/scripts/RunUnitTests/*
+/scripts/RunTestScripts/*
 /scripts/ImportLocalWebApp/*
 /lib/NUnit/NUnit.node
 /lib/NUnitResults/NUnitResults.node
