@@ -66,7 +66,7 @@ class Test_BuildAndTestFromSourceReleaseScript : BaseProjectTestScript
 		// Build and test
 		ExecuteScript("CycleTests");
 
-		CopyTestResults(tmpDir, ProjectDirectory);
+		Utilities.CopyTestResults(tmpDir, ProjectDirectory);
 	}
 
 }
