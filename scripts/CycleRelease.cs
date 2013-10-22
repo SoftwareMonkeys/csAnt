@@ -5,6 +5,7 @@ using System;
 using System.IO;
 using Microsoft.CSharp;
 using System.Diagnostics;
+using System.Collections.Generic;
 using SoftwareMonkeys.csAnt;
 using SoftwareMonkeys.csAnt.Projects;
 
@@ -21,18 +22,33 @@ class CycleReleaseScript : BaseProjectScript
 		Console.WriteLine("Starting a full release cycle.");
 		Console.WriteLine("");
 
+		var releaseName = String.Empty;
+
+		if (args.Length > 0){
+			releaseName = args[0];
+			Console.WriteLine("Release name: " + releaseName);
+		}
+
 		ExecuteScript("CycleBuild");
 
-		Console.WriteLine("Creating release zip files...");
-		Console.WriteLine("");
+		if (!IsError)
+		{
+			Console.WriteLine("Creating release zip files...");
+			Console.WriteLine("");
 
-		// Create the release
-		ExecuteScript(
-			"Release",
-			new string[]{
-				"-mode:Release"
-			}
-		);
+			List<string> execArgs = new List<string>();
+
+			if (releaseName != String.Empty)
+				execArgs.Add(releaseName);
+
+			execArgs.Add("-mode:Release");
+
+			// Create the release
+			ExecuteScript(
+				"Release",
+				execArgs.ToArray()
+			);
+		}
 
 		return !IsError;
 	}
