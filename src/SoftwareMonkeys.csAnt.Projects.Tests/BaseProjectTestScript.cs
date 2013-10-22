@@ -1,11 +1,59 @@
 using System;
+using SoftwareMonkeys.csAnt.Tests;
 
 namespace SoftwareMonkeys.csAnt.Projects.Tests
 {
-	public class BaseProjectTestScript
+	public abstract class BaseProjectTestScript : BaseProjectScript, ITestScript
 	{
-		public BaseProjectTestScript ()
+		public string OriginalDirectory { get;set; }
+
+		public TestReportGenerator ReportGenerator { get;set; }
+		public TestSummarizer TestSummarizer { get;set; }
+
+		public string TestGroupName { get; set; }
+
+		public TestUtilities Utilities { get;set; }
+
+		public BaseProjectTestScript () : base()
 		{
+			IsVerbose = true;
+			StopOnFail = false;
+
+			// TODO: Check if these should be injected
+			ReportGenerator = new TestReportGenerator(this);
+			TestSummarizer = new TestSummarizer(this);
+		}
+
+		public override abstract bool Start(string[] args);
+
+		public override void SetUp ()
+		{
+			base.SetUp ();
+
+			TestGroupName = ScriptName;
+			
+			Utilities = new TestUtilities(this);
+
+			OriginalDirectory = CurrentDirectory;
+
+			if (IsVerbose)
+				Console.WriteLine ("Actual directory: " + OriginalDirectory);
+
+		}
+
+		public override void TearDown ()
+		{
+			base.TearDown ();
+			
+			TestSummarizer.Summarize();
+
+			ReportGenerator.GenerateReports();
+			
+			if (IsVerbose) {
+				Console.WriteLine ("Current directory: " + CurrentDirectory);
+				CurrentDirectory = OriginalDirectory;
+				Console.WriteLine ("Actual directory: " + OriginalDirectory);
+			}
 		}
 	}
 }
