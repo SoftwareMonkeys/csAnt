@@ -6,6 +6,7 @@ using System.IO;
 using SoftwareMonkeys.csAnt;
 using SoftwareMonkeys.csAnt.Projects;
 
+[ExpectedArgument]
 class BuildSolutionScript : BaseProjectScript
 {
 	public static void Main(string[] args)
@@ -64,10 +65,17 @@ class BuildSolutionScript : BaseProjectScript
 			+ Path.DirectorySeparatorChar
 			+ "src";
 	
-		var solutionFiles = Directory.GetFiles(rootPath, "*.sln", SearchOption.AllDirectories);
+		string pattern = String.Empty;
+
+		if (shortName.IndexOf(".sln") > -1)
+			pattern = "*";
+		else
+			pattern = "*.sln";
+
+		var solutionFiles = Directory.GetFiles(rootPath, pattern, SearchOption.AllDirectories);
 		
 		bool foundSolution = false;
-		
+	
 		foreach (string solutionFile in solutionFiles)
 		{	
 			if (!IsError)
