@@ -19,6 +19,8 @@ namespace SoftwareMonkeys.csAnt.Projects
 			Console.WriteLine ("Mode: " + mode);
 			Console.WriteLine ("");
 
+			var originalStopOnFail = StopOnFail;
+
 			// Don't stop on fail
 			StopOnFail = false;
 
@@ -65,12 +67,11 @@ namespace SoftwareMonkeys.csAnt.Projects
 			
 			Console.WriteLine ("");
 
-			
-			// Enable stopping on failure again
-			StopOnFail = true;
-
 			if (failed > 0)
 				Error(failed + " solution(s) failed to build.");
+		
+			// Enable stopping on failure again
+			StopOnFail = originalStopOnFail;
 		}
 	}
 }
