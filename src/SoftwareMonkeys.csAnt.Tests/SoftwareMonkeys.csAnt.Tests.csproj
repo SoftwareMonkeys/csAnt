@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.0</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{EFEAE89A-6324-41B0-AE1F-B2284D510CA6}</ProjectGuid>
+    <ProjectGuid>{E79918A1-F275-4073-9968-77DAB04622A9}</ProjectGuid>
     <OutputType>Library</OutputType>
     <RootNamespace>SoftwareMonkeys.csAnt.Tests</RootNamespace>
     <AssemblyName>SoftwareMonkeys.csAnt.Tests</AssemblyName>
@@ -30,36 +30,53 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="nunit.core.interfaces, Version=2.6.0.12051, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77">
-      <SpecificVersion>False</SpecificVersion>
-    </Reference>
-    <Reference Include="nunit.framework, Version=2.6.0.12051, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77">
-      <SpecificVersion>False</SpecificVersion>
-    </Reference>
-    <Reference Include="nunit.core, Version=2.6.0.12051, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77">
-      <SpecificVersion>False</SpecificVersion>
-    </Reference>
     <Reference Include="SoftwareMonkeys.FileNodes">
       <HintPath>..\..\lib\FileNodes\Release\SoftwareMonkeys.FileNodes.dll</HintPath>
     </Reference>
+    <Reference Include="nunit.framework, Version=2.5.10.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77">
+      <Private>False</Private>
+      <Package>mono-nunit</Package>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Web" />
+    <Reference Include="HtmlAgilityPack">
+      <HintPath>..\..\lib\HtmlAgilityPack\Net40\HtmlAgilityPack.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="TestScript.cs" />
     <Compile Include="AssemblyInfo.cs" />
-    <Compile Include="GetZipInternalPathTestFixture.cs" />
+    <Compile Include="AddLibTestFixture.cs" />
     <Compile Include="ArgumentsTestFixture.cs" />
-    <Compile Include="ExecuteScriptTestFixture.cs" />
-    <Compile Include="GetLibTestFixture.cs" />
     <Compile Include="BaseTestFixture.cs" />
-    <Compile Include="HelloWorldTestFixture.cs" />
-    <Compile Include="RunTestScriptsTestFixture.cs" />
     <Compile Include="BaseTestScript.cs" />
+    <Compile Include="DownloadTestFixture.cs" />
+    <Compile Include="ExecuteScriptTestFixture.cs" />
+    <Compile Include="FailingTestFixture.cs" />
+    <Compile Include="GetLibTestFixture.cs" />
+    <Compile Include="GetZipInternalPathTestFixture.cs" />
     <Compile Include="GitCloneTestFixture.cs" />
+    <Compile Include="HelloWorldTestFixture.cs" />
+    <Compile Include="TestScript.cs" />
+    <Compile Include="DownloadAndUnzipTestFixture.cs" />
+    <Compile Include="ClearTmpTestFixture.cs" />
+    <Compile Include="SyncTestFixture.cs" />
+    <Compile Include="FindFilesTestFixture.cs" />
+    <Compile Include="TestScriptResult.cs" />
+    <Compile Include="TestScriptResultSaver.cs" />
+    <Compile Include="TestScriptResultLoader.cs" />
+    <Compile Include="TestReportGenerator.cs" />
+    <Compile Include="TestSummarizer.cs" />
+    <Compile Include="ITestScript.cs" />
+    <Compile Include="TestHtmlReportGenerator.cs" />
+    <Compile Include="TestUtilities.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
+    <None Include="SoftwareMonkeys.csAnt.Tests.csproj" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\SoftwareMonkeys.csAnt\SoftwareMonkeys.csAnt.csproj">
-      <Project>{B13BED0E-4F73-4F2A-8AA1-19273CFF9C47}</Project>
+      <Project>{16297BCB-0A8C-42E6-BE35-921085C3E238}</Project>
       <Name>SoftwareMonkeys.csAnt</Name>
     </ProjectReference>
   </ItemGroup>
