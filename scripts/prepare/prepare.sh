@@ -2,10 +2,12 @@
 BASE_DIR=$PWD
 LIB_DIR="lib"
 SOURCE_PROJECTS_DIR="../"
+GENERAL_LIB_DIR="$BASE_DIR/../lib"
 
 # Set cs-script constants
 #CSS_URL="http://www.csscript.net/v3.4.2/cs-script.zip"
 CSS_URL="https://dl.dropboxusercontent.com/u/2192462/CS-S_Binaries/cs-script.7z"
+CSS_LIB_LOCAL="$GENERAL_LIB_DIR/cs-script/cs-script.7z"
 CSS_DIR="$LIB_DIR/cs-script"
 CSS_ZIPFILE="$LIB_DIR/cs-script.7z"
 CSS_FILE="$CSS_DIR/cscs.exe"
@@ -16,7 +18,8 @@ SHARPZIPLIB_DIR="$LIB_DIR/SharpZipLib"
 SHARPZIPLIB_ZIPFILE="$SHARPZIPLIB_DIR/SharpZipLib_0860_Bin.zip"
 
 # Set HtmlAgilityPack constants
-HAP_LIB_URL="http://download-codeplex.sec.s-msft.com/Download/Release?ProjectName=htmlagilitypack&DownloadId=437941&FileTime=129893731308330000&Build=19766"
+HAP_LIB_URL="http://download-codeplex.sec.s-msft.com/Download/Release?ProjectName=htmlagilitypack&DownloadId=437941&FileTime=129893731308330000&Build=19692"
+HAP_LIB_Local="$GENERAL_LIB_DIR/HtmlAgilityPack/HtmlAgilityPack.zip"
 HAP_LIB_DIR="$LIB_DIR/HtmlAgilityPack"
 HAP_LIB_ZIPFILE="$HAP_LIB_DIR/HtmlAgilityPack.zip"
 
@@ -69,11 +72,25 @@ echo ""
 
 if [ ! -f "$CSS_ZIPFILE" ]; then
 
-	echo "===== Downloading cs-script ====="
+	echo "===== Getting cs-script ====="
 
-	echo "$CSS_ZIPFILE not found locally, needs to be downloaded."
+	echo "Zip file not found locally, needs to be retrieved."
 
-	wget $CSS_URL -O $CSS_ZIPFILE
+	echo "Looking for local cs-script file"
+	echo "$CSS_LIB_LOCAL"
+
+	# If no local copy is found then download a copy
+	if [ ! -f "$CSS_LIB_LOCAL" ]; then
+		echo "  Not found"
+		wget $CSS_URL -O $CSS_ZIPFILE
+	fi
+
+	# If a local copy is found then grab it
+	if [ -f "$CSS_LIB_LOCAL" ]; then
+		echo "  Found"
+		cp $CSS_LIB_LOCAL "$(dirname "$CSS_ZIPFILE")"
+	fi
+
 
 fi
 
@@ -107,7 +124,7 @@ echo ""
 
 if [ ! -f "$SHARPZIPLIB_ZIPFILE" ]; then
 
-	echo "===== Downloading SharpZipLib ====="
+	echo "===== Getting SharpZipLib ====="
 
 	wget $SHARPZIPLIB_URL -O $SHARPZIPLIB_ZIPFILE
 fi
@@ -133,10 +150,24 @@ fi
 # Download the HtmlAgilityPack libraries
 
 echo ""
-echo "===== Downloading HtmlAgilityPack ====="
+echo "===== Getting HtmlAgilityPack ====="
 
 if [ ! -f "$HAP_LIB_ZIPFILE" ]; then
-	wget $HAP_LIB_URL -O $HAP_LIB_ZIPFILE
+
+	echo "Looking for local HtmlAgilityPack file"
+	echo "$HAP_LIB_LOCAL"
+
+	# If a local copy is found then grab it
+	if [ -f "$HAP_LIB_LOCAL" ]; then
+		echo "  Found"
+		cp $HAP_LIB_LOCAL -O $HAP_LIB_ZIPFILE
+	fi
+
+	# If no local copy is found then download a copy
+	if [ ! -f "$HAP_LIB_LOCAL" ]; then
+		echo "  Not found"
+		wget $HAP_LIB_URL -O $HAP_LIB_ZIPFILE
+	fi
 fi
 
 
