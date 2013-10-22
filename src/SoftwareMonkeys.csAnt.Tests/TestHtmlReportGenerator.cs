@@ -5,13 +5,13 @@ using HtmlAgilityPack;
 
 namespace SoftwareMonkeys.csAnt.Tests
 {
-	public class HtmlReportGenerator
+	public class TestHtmlReportGenerator
 	{
 		public string ReportsDirectory { get;set; }
 
 		public ITestScript Script { get; set; }
 
-		public HtmlReportGenerator(
+		public TestHtmlReportGenerator(
 			ITestScript script,
 			string reportsDir
 		)
@@ -159,6 +159,20 @@ namespace SoftwareMonkeys.csAnt.Tests
 				statusNode.AppendChild (statusTextNode);
 
 				itemNode.AppendChild (statusNode);
+
+				// Sub tests column
+				if (SubTestsExist(name))
+				{
+					var subTestsNode = doc.CreateElement ("td");
+
+					var subTestsText = "<a href='" + name + "/index.html'>Sub Tests</a>";
+
+					var subTestsTextNode = doc.CreateTextNode (subTestsText);
+
+					subTestsNode.AppendChild (subTestsTextNode);
+
+					itemNode.AppendChild (subTestsNode);
+				}
 			} else {
 				itemNode = existingItemNode;
 				if (Script.IsVerbose)
@@ -168,9 +182,24 @@ namespace SoftwareMonkeys.csAnt.Tests
 			return itemNode;
 		}
 
+		public bool SubTestsExist (string scriptName)
+		{
+			var subTestsFolder = ReportsDirectory
+				+ Path.DirectorySeparatorChar
+				+ Script.TimeStamp
+				+ Path.DirectorySeparatorChar
+				+ "html"
+				+ Path.DirectorySeparatorChar
+				+ scriptName;
+
+			return Directory.Exists(subTestsFolder);
+		}
+
 		public void CreateIndexFile(String file)
 		{
 			var indexTemplate = GetIndexTemplate();
+
+			indexTemplate.Replace("{{ProjectDirectory}}", Script.CurrentDirectory);
 
 			File.WriteAllText(file, indexTemplate);
 		}
@@ -182,7 +211,7 @@ namespace SoftwareMonkeys.csAnt.Tests
 		<title>
 			Test Script Reports
 		</title>
-		<LINK href='../../../../../styles/general.css' rel='stylesheet' type='text/css'>
+		<LINK href='{{ProjectDirectory}}/styles/general.css' rel='stylesheet' type='text/css'>
 	</head>
 	<body>
 		<h1>Test Script Reports</h1>
@@ -194,20 +223,6 @@ namespace SoftwareMonkeys.csAnt.Tests
 			return template;
 		}
 
-		/*public string GetIndexItemTemplate ()
-		{
-			var template = @"<tr>
-				<td>
-					<a href=""{{Name}}.html"">{{Name}}</a>
-				</td>
-				<td>
-					Successful: {{Successful}}
-				</td>
-			</tr>";
-
-			return template;
-		}*/
-
 		public string GetHtmlTemplate(
 			string name,
 			bool successful,
@@ -217,7 +232,8 @@ namespace SoftwareMonkeys.csAnt.Tests
 			var output = GetHtmlTemplate();
 
 			var statusColor = GetStatusColor(successful);
-
+			
+			output = output.Replace("{{ProjectDirectory}}", Script.CurrentDirectory);
 			output = output.Replace("{{Name}}", name);
 			output = output.Replace("{{Successful}}", successful.ToString());
 			output = output.Replace("{{Log}}", HttpUtility.HtmlEncode(log).Replace("\n", "<br/>"));
@@ -243,7 +259,7 @@ namespace SoftwareMonkeys.csAnt.Tests
 		<title>
 			{{Name}}
 		</title>
-		<LINK href='../../../../../styles/general.css' rel='stylesheet' type='text/css'>
+		<LINK href='{{ProjectDirectory}}/styles/general.css' rel='stylesheet' type='text/css'>
 	</head>
 	<body>
 		<h1>{{Name}}</h1>

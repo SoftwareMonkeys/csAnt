@@ -1,15 +1,45 @@
 using System;
+using System.Xml.Serialization;
 
 namespace SoftwareMonkeys.csAnt.Tests
 {
-	public class TestScriptLog
+	[Serializable]
+	public class TestScriptResult
 	{
-		public string ScriptName
+		[XmlIgnore]
+		public IScript Script { get;set; }
 
-		public TestScriptLog ()
+		public string ScriptName { get; set; }
+
+		public bool Succeeded { get;set; }
+
+		public string Log { get; set; }
+		
+		[XmlIgnore]
+		public TestScriptResultSaver Saver { get; set; }
+		
+		public TestScriptResult ()
 		{
 		}
 
+		public TestScriptResult (
+			IScript script,
+			bool succeeded,
+			string log,
+			TestScriptResultSaver saver
+		)
+		{
+			Succeeded = succeeded;
+			ScriptName = script.ScriptName;
+			Script = script;
+			Log = log;
+			Saver = saver;
+		}
+
+		public void Save()
+		{
+			Saver.Save (this);
+		}
 
 	}
 }
