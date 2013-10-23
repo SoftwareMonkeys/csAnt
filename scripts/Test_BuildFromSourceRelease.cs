@@ -25,7 +25,8 @@ class Test_BuildFromSourceReleaseScript : BaseProjectTestScript
 
 		ExecuteScript("CycleBuild");
 
-		ExecuteScript("Release");
+		if (!IsError)
+			ExecuteScript("Release", "src");
 
 		if (!IsError)
 		{

@@ -10,11 +10,11 @@ using SoftwareMonkeys.csAnt;
 using SoftwareMonkeys.csAnt.Projects;
 using SoftwareMonkeys.csAnt.Projects.Tests;
 
-class Test_BuildAndTestFromSourceReleaseScript : BaseProjectTestScript
+class Test_BuildFromGitScript : BaseProjectTestScript
 {
 	public static void Main(string[] args)
 	{
-		new Test_BuildAndTestFromSourceReleaseScript().Start(args);
+		new Test_BuildFromGitScript().Start(args);
 	}
 	
 	public override bool Start(string[] args)
