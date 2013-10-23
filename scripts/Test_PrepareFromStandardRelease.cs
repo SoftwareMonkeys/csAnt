@@ -1,6 +1,5 @@
 //css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.dll;
 //css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.Projects.dll;
-//css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.Projects.Tests.dll;
 
 using System;
 using System.IO;
@@ -8,9 +7,8 @@ using Microsoft.CSharp;
 using System.Diagnostics;
 using SoftwareMonkeys.csAnt;
 using SoftwareMonkeys.csAnt.Projects;
-using SoftwareMonkeys.csAnt.Projects.Tests;
 
-class TestBuildFromStandardReleaseScript : BaseProjectTestScript
+class TestBuildFromStandardReleaseScript : BaseProjectScript
 {
 	public static void Main(string[] args)
 	{
@@ -27,7 +25,7 @@ class TestBuildFromStandardReleaseScript : BaseProjectTestScript
 		Console.WriteLine("");
 
 		// Build and create release zips for the solution
-		ExecuteScript("Release", "standard-release");
+		ExecuteScript("Release");
 
 		if (!IsError)
 		{
@@ -48,11 +46,21 @@ class TestBuildFromStandardReleaseScript : BaseProjectTestScript
 
 	public void UnzipAndPrepare(string latestFile)
 	{
-		var tmpDir = GetTmpDir();
+		var tmpDir = ProjectDirectory
+			+ Path.DirectorySeparatorChar
+			+ "_tmp"
+			+ Path.DirectorySeparatorChar
+			+ Guid.NewGuid().ToString()
+			+ Path.DirectorySeparatorChar
+			+ ProjectName;
 
-		Console.WriteLine("Tmp dir: " + tmpDir);
+		Unzip(latestFile, tmpDir);
 
-		Unzip(latestFile, tmpDir, "*");
+		// Move from the sub directory to the intended directory
+		MoveDirectory(
+			GetNewestFolder(tmpDir),
+			tmpDir
+		);
 
 		ProjectDirectory = tmpDir;
 
