@@ -16,7 +16,8 @@ namespace SoftwareMonkeys.csAnt
 		
 		public IScript GetScriptFromPath(string scriptPath)
 		{
-			// TODO: Clean up
+			CSScript.CacheEnabled = false;
+
 			// Load the script assembly
 			Assembly a = CSScript.Load (scriptPath);
 
