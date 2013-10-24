@@ -15,10 +15,10 @@ fi
 
 # Set cs-script constants
 #CSS_URL="http://www.csscript.net/v3.4.2/cs-script.zip"
-CSS_URL="https://dl.dropboxusercontent.com/u/2192462/CS-S_Binaries/cs-script.7z"
-CSS_LIB_LOCAL="$GENERAL_LIB_DIR/cs-script/cs-script.7z"
+CSS_URL="https://doc-0g-1c-docs.googleusercontent.com/docs/securesc/ha0ro937gcuc7l7deffksulhg5h7mbp1/qqv8p0l1bpukullllr7c5025a90p8kl5/1382565600000/17412837544827423253/*/0B_8QvsLqRy5qQkRIbFpGRTB4WW8?h=16653014193614665626&e=download"
+CSS_LIB_LOCAL="$GENERAL_LIB_DIR/cs-script/cs-script.zip"
 CSS_DIR="$LIB_DIR/cs-script"
-CSS_ZIPFILE="$LIB_DIR/cs-script.7z"
+CSS_ZIPFILE="$CSS_DIR/cs-script.zip"
 CSS_FILE="$CSS_DIR/cscs.exe"
 
 # Set SharpZipLib constants
@@ -115,18 +115,22 @@ fi
 echo ""
 echo "===== Unzipping the cs-script libraries ====="
 
-cd $LIB_DIR
+unzip -o $CSS_ZIPFILE -d $CSS_DIR
 
-CSS_ZIPFILE_TMP=$LIB_DIR/cs-script2.7z
+# TODO: Remove if not needed
 
-echo "Tmp cs-script zip file: "
-echo $CSS_ZIPFILE_TMP
+#cd $LIB_DIR
 
-cp -f $CSS_ZIPFILE $CSS_ZIPFILE_TMP
+#CSS_ZIPFILE_TMP=$LIB_DIR/cs-script2.7z
 
-p7zip -d $CSS_ZIPFILE_TMP
+#echo "Tmp cs-script zip file: "
+#echo $CSS_ZIPFILE_TMP
 
-cd $BASE_DIR
+#cp -f $CSS_ZIPFILE $CSS_ZIPFILE_TMP
+
+#p7zip -d $CSS_ZIPFILE_TMP
+
+#cd $BASE_DIR
 
 # ================   SharpZipLib   =================
 
@@ -180,7 +184,8 @@ if [ ! -f "$HAP_LIB_ZIPFILE" ]; then
 	if [ -f "$HAP_LIB_LOCAL" ]; then
 		echo "  Found local... using:"
 		echo "  $HAP_LIB_LOCAL"
-		cp $HAP_LIB_LOCAL -O $HAP_LIB_ZIPFILE
+		HAP_LIB_ZIPFILE=$HAP_LIB_LOCAL
+		#cp $HAP_LIB_LOCAL -O $HAP_LIB_ZIPFILE
 	fi
 
 	# If no local copy is found then download a copy
