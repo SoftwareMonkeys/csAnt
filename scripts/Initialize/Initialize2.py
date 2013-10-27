@@ -19,7 +19,7 @@ if ".tmp" in sourceProjectsDir: # If .tmp is found in the path then adjust the s
 	sourceProjectsDir = os.path.abspath("../../..")
 
 # Script variables
-csInitializeScript = "scripts" + os.sep + "Initialize" + os.sep + "Initialize.cs"
+csInitializeScript = "scripts" + os.sep + "Initialize" + os.sep + "Initialize3.cs"
 createProjectNodeScript = "scripts" + os.sep + "CreateProjectNode.cs"
 
 # ==================================================
