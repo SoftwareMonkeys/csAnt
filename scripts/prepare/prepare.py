@@ -53,7 +53,7 @@ GetCSScript(libDir, generalLibDir)
 GetSharpZipLib(libDir, generalLibDir)
 
 # HtmlAgilityPack
-GetSharpZipLib(libDir, generalLibDir)
+GetHtmlAgilityPack(libDir, generalLibDir)
 
 # Launch the Prepare.cs script
 RunCSScript(csPrepareScript, sourceProjectsDir)
