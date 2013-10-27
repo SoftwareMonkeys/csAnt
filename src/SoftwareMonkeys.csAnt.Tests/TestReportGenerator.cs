@@ -29,7 +29,8 @@ namespace SoftwareMonkeys.csAnt.Tests
 				Console.WriteLine ("Report directory:");
 				Console.WriteLine (reportDir);
 			}
-
+			
+			// TODO: Check if this should be injected
 			var result = new TestScriptResult(
 				Script,
 				!Script.IsError,
