@@ -7,18 +7,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoftwareMonkeys.csAnt.UI.cs
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoftwareMonkeys.csAnt.Projects", "SoftwareMonkeys.csAnt.Projects\SoftwareMonkeys.csAnt.Projects.csproj", "{3BFB55C4-1247-49BD-AEC9-31BC3C0F1168}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoftwareMonkeys.csAnt.Projects.ProjectManager", "SoftwareMonkeys.csAnt.Projects.ProjectManager\SoftwareMonkeys.csAnt.Projects.ProjectManager.csproj", "{161C94C7-EE13-4FD7-9AF3-9C171ABA1752}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{161C94C7-EE13-4FD7-9AF3-9C171ABA1752}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{161C94C7-EE13-4FD7-9AF3-9C171ABA1752}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{161C94C7-EE13-4FD7-9AF3-9C171ABA1752}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{161C94C7-EE13-4FD7-9AF3-9C171ABA1752}.Release|Any CPU.Build.0 = Release|Any CPU
 		{16297BCB-0A8C-42E6-BE35-921085C3E238}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{16297BCB-0A8C-42E6-BE35-921085C3E238}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{16297BCB-0A8C-42E6-BE35-921085C3E238}.Release|Any CPU.ActiveCfg = Release|Any CPU

@@ -33,14 +33,14 @@
     <Reference Include="SoftwareMonkeys.FileNodes">
       <HintPath>..\..\lib\FileNodes\Release\SoftwareMonkeys.FileNodes.dll</HintPath>
     </Reference>
-    <Reference Include="nunit.framework, Version=2.5.10.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77">
-      <Private>False</Private>
-      <Package>mono-nunit</Package>
-    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="System.Web" />
     <Reference Include="HtmlAgilityPack">
       <HintPath>..\..\lib\HtmlAgilityPack\Net40\HtmlAgilityPack.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework, Version=2.5.10.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77">
+      <Private>False</Private>
+      <Package>mono-nunit</Package>
     </Reference>
   </ItemGroup>
   <ItemGroup>
