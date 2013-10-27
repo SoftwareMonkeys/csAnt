@@ -27,7 +27,7 @@ class Test_BuildAndTestFromSourceReleaseScript : BaseProjectTestScript
 		var tmpDir = CloneToTmpDirectory();
 
 		// Prepare the project (eg. download libs)
-		Prepare(tmpDir);
+		InitializeProject(tmpDir);
 
 		if (!IsError)
 		{
@@ -52,11 +52,6 @@ class Test_BuildAndTestFromSourceReleaseScript : BaseProjectTestScript
 		GitClone(ProjectDirectory, tmpDirectory);
 
 		return tmpDirectory;
-	}
-
-	public void Prepare(string tmpDir)
-	{
-		PrepareProject(tmpDir);
 	}
 
 	public void BuildAndTestClonedCopy(string tmpDir)
