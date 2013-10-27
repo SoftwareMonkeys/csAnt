@@ -95,7 +95,7 @@ namespace SoftwareMonkeys.csAnt
 		#region Start process functions
 		Process StartProcess(string command, string[] arguments);
 
-		Thread StartNewProcess(string command, string[] arguments);
+		Process StartNewProcess(string command, string[] arguments);
 		#endregion
 	}
 }
