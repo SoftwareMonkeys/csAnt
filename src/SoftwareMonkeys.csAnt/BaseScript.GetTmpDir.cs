@@ -12,16 +12,32 @@ namespace SoftwareMonkeys.csAnt
 
 		public virtual string GetTmpDir()
 		{
-			var tmpDir = Path.GetFullPath(
-				GetTmpRoot()
-				+ Path.DirectorySeparatorChar
-				+ Guid.NewGuid().ToString()
-			);
+			if (IsVerbose) {
+				Console.WriteLine ("");
+				Console.WriteLine ("Getting temporary directory...");
+			}
 
-			if (!Directory.Exists(tmpDir))
-				Directory.CreateDirectory(tmpDir);
-				
-			return tmpDir;
+			var root = GetTmpRoot ();
+
+			var name = Path.GetFileName(CurrentDirectory);
+
+			var path = root
+				+ Path.DirectorySeparatorChar
+				+ GetTimeStamp()
+				+ Path.DirectorySeparatorChar
+				+ name;
+
+			if (IsVerbose) {
+				Console.WriteLine ("Root:");
+				Console.WriteLine (root);
+				Console.WriteLine ("Path:");
+				Console.WriteLine (path);
+				Console.WriteLine ("");
+			}
+
+			EnsureDirectoryExists(path);
+
+			return path;
 		}
 	}
 }
