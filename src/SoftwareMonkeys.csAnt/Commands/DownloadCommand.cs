@@ -58,6 +58,8 @@ namespace SoftwareMonkeys.csAnt
 
 			Console.WriteLine ("  Please wait...(this may take some time)...");
 
+			Script.EnsureDirectoryExists(Path.GetDirectoryName(localDestination));
+
 			webClient.DownloadFile(
 				url,
 				toFile
