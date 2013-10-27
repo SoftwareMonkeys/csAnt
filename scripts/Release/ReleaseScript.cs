@@ -74,19 +74,7 @@ class ReleaseScript : BaseProjectScript
 
 			var variation = Path.GetFileNameWithoutExtension(listFile).Replace("-list", "");
 
-			var dateStamp = "["
-				+ DateTime.Now.Year
-				+  "-"
-				+ DateTime.Now.Month
-				+ "-"
-				+ DateTime.Now.Day
-				+ "--"
-				+ DateTime.Now.Hour
-				+ "-"
-				+ DateTime.Now.Minute
-				+ "-"
-				+ DateTime.Now.Second
-				+ "]";
+			var dateStamp = "[" + TimeStamp + "]";
 
 			var zipFileName = ProjectName
 				+ "-"
@@ -119,11 +107,63 @@ class ReleaseScript : BaseProjectScript
 			Console.WriteLine("----------------------------------------------------------------------");
 
 			AddSummary("Generated '" + zipFileName + "' release file from '" + Path.GetFileName(listFile) + "' list file.");
+
+			ExportToGeneralLibs(zipFilePath);
 		} 
 		else
 			Console.WriteLine("No files or patterns specified in the release file list.");
 
 		Console.WriteLine("");
+	}
+
+	public void ExportToGeneralLibs(string zipFilePath)
+	{
+		var generalLibsDir = Path.GetFullPath(
+			ProjectDirectory
+			+ Path.DirectorySeparatorChar
+			+ ".."
+			+ Path.DirectorySeparatorChar
+			+ "lib"
+		);
+
+		var generalProjectLibsDir = generalLibsDir
+			+ Path.DirectorySeparatorChar
+			+ ProjectName;
+
+		var toFile = generalProjectLibsDir
+			+ Path.DirectorySeparatorChar
+			+ Path.GetFileName(zipFilePath);
+
+		EnsureDirectoryExists(generalProjectLibsDir);
+
+		Console.WriteLine("Exporting release file:");
+		Console.WriteLine(zipFilePath);
+		Console.WriteLine("To:");
+		Console.WriteLine(toFile);
+
+		AddSummary("Exported release to: " + Path.GetDirectoryName(toFile));
+
+		File.Copy(zipFilePath, toFile);
+
+		// Create a copy without the timestamp (so its easy to know the path to the latest release)
+
+		//var shortFileName = Path.GetFileNameWithoutExtension(toFile);
+
+		//var pos1 = shortFileName.IndexOf("[")-1;
+
+		//var pos2 = shortFileName.IndexOf("]")+1;
+
+		var fileTimeStamp = "-[" + TimeStamp + "]";//shortFileName.Substring(pos1, pos2-pos1);
+
+		Console.WriteLine(fileTimeStamp);
+		var modifiedToFile = toFile.Replace(fileTimeStamp, "");
+
+		Console.WriteLine("");
+		Console.WriteLine("Modified file name:");
+		Console.WriteLine(modifiedToFile);
+		Console.WriteLine("");
+
+		File.Copy(toFile, modifiedToFile, true);
 	}
 
 	public string GetReleaseDir()
