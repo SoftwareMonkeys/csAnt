@@ -28,9 +28,9 @@ createProjectNodeScript = "scripts" + os.sep + "CreateProjectNode.cs"
 
 print ""
 print ""
-print "========================================"
-print "Preparing Project"
-print "========================================"
+print "// --------------------"
+print "// Preparing Project"
+print "// --------------------"
 print ""
 print "The project is being prepared for development, by downloading required files."
 print ""
@@ -72,7 +72,9 @@ GetRemainingLibs()
 
 
 print ""
-print "===== Preparation completed successfully! ====="
+print "----------------------------------------"
+print "Preparation completed successfully!"
+print "----------------------------------------"
 print ""
 print "You can now run scripts via csAnt."
 print ""

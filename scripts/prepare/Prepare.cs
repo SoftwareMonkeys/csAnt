@@ -417,7 +417,7 @@ class PrepareScript
 		// See if it's possible to have this function call the python one, or the other way around, so there's only one GetLib function to maintain
 
 		Console.WriteLine("");
-		Console.WriteLine("========================================");
+		Console.WriteLine("----------");
 		Console.WriteLine("Getting " + name + " library files");
 		Console.WriteLine("");
 
@@ -455,7 +455,7 @@ class PrepareScript
 
 		Console.WriteLine(name + " library files have been retrieved.");
 
-		Console.WriteLine("========================================");
+		Console.WriteLine("----------");
 		Console.WriteLine("");
 	}
 
