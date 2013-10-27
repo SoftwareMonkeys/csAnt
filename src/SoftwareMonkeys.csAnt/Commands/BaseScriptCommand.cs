@@ -2,7 +2,7 @@ using System;
 
 namespace SoftwareMonkeys.csAnt.Commands
 {
-	public abstract class BaseScriptCommand : IScriptCommand
+	public abstract class BaseScriptCommand : IScriptCommand, IDisposable
 	{
 		public IScript Script { get;set; }
 
@@ -19,6 +19,10 @@ namespace SoftwareMonkeys.csAnt.Commands
 		}
 
 		public abstract void Execute();
+
+		public virtual void Dispose()
+		{
+		}
 	}
 }
 
