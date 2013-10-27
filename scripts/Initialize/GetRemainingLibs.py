@@ -5,7 +5,7 @@ import os
 def GetRemainingLibs():
 
 	print ""
-	print "========================================"
+	print "----------------------------------------"
 	print "Getting remaining library files by scanning the .node files"
 	print ""
 
@@ -14,5 +14,5 @@ def GetRemainingLibs():
 	print ""
 	print "Done"
 
-	print "========================================"
+	print "----------------------------------------"
 	print ""
