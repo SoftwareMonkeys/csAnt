@@ -4,9 +4,13 @@ namespace SoftwareMonkeys.csAnt
 {
 	public partial class BaseScript
 	{
-		public virtual void SetUp()
+		public virtual void SetUp ()
 		{
-			Console.WriteLine ("Setting up '" + ScriptName + "' script.");
+			if (IsVerbose) {
+				Console.WriteLine ("");
+				Console.WriteLine ("Setting up '" + ScriptName + "' script.");
+				Console.WriteLine ("");
+			}
 		}
 	}
 }

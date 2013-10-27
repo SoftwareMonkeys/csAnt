@@ -4,9 +4,13 @@ namespace SoftwareMonkeys.csAnt
 {
 	public partial class BaseScript
 	{
-		public virtual void TearDown()
+		public virtual void TearDown ()
 		{
-			Console.WriteLine ("Tearing down '" + ScriptName + "' script.");
+			if (IsVerbose) {
+				Console.WriteLine ("");
+				Console.WriteLine ("Tearing down '" + ScriptName + "' script.");
+				Console.WriteLine ("");
+			}
 		}
 	}
 }

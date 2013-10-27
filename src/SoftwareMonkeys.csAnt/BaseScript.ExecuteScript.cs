@@ -22,10 +22,10 @@ namespace SoftwareMonkeys.csAnt
 			var parentScriptList = GetParentScriptList();
 
 			Console.WriteLine("");
-			Console.WriteLine("// --------------------------------------------------");
-			Console.WriteLine("// Executing script: " + scriptName);
-			WriteParentScriptList(parentScriptList);
-			Console.WriteLine("// Path: " + CurrentDirectory);
+			Console.WriteLine(GetIndentSpace(Indent) + "// --------------------------------------------------");
+			Console.WriteLine(GetIndentSpace(Indent) + "// Executing script: " + scriptName);
+			WriteScriptStack(parentScriptList);
+			Console.WriteLine(GetIndentSpace(Indent) + "// Directory: " + CurrentDirectory);
 			Console.WriteLine("");
 
 			string scriptFile = GetScriptPath(scriptName);
@@ -33,7 +33,10 @@ namespace SoftwareMonkeys.csAnt
 			if (!String.IsNullOrEmpty(scriptFile))
 			{
 				if (IsVerbose)
-					Console.WriteLine("Executing script: " + scriptName);
+				{
+					Console.WriteLine(GetIndentSpace(Indent) + "Script file:");
+					Console.WriteLine(GetIndentSpace(Indent) + scriptFile);
+				}
 			
 				ExecuteScriptFromFile(scriptFile, args);
 			}
@@ -45,18 +48,18 @@ namespace SoftwareMonkeys.csAnt
 			}
 			
 			Console.WriteLine("");
-			Console.WriteLine("// Finished executing script: " + scriptName);
-			WriteParentScriptList(parentScriptList);
-			Console.WriteLine("// --------------------------------------------------");
-			Console.WriteLine("");
+			Console.WriteLine(GetIndentSpace(Indent) + "// Finished executing script: " + scriptName);
+			WriteScriptStack(parentScriptList);
+			Console.WriteLine(GetIndentSpace(Indent) + "// --------------------------------------------------");
+
 		}
 
-		public void WriteParentScriptList (string[] list)
+		public void WriteScriptStack (string[] list)
 		{
 			var builder = new StringBuilder();
 
 			if (list.Length > 0) {
-				builder.Append("// Script stack: ");
+				builder.Append(GetIndentSpace(Indent) + "// Script stack: ");
 
 				for (var i = 0; i < list.Length; i++) {
 						if (i > 0)
@@ -65,7 +68,7 @@ namespace SoftwareMonkeys.csAnt
 						if (String.IsNullOrEmpty(list[i]))
 							throw new Exception("Item is null or empty.");
 
-						builder.Append(list [i]);
+						builder.Append(" ^ " + list [i]);
 				}
 			
 				builder.Append(Environment.NewLine);
@@ -83,7 +86,7 @@ namespace SoftwareMonkeys.csAnt
 			if (c is SubConsoleWriter) {
 				while (c is SubConsoleWriter) {
 					c = ((SubConsoleWriter)c).ParentWriter;
-					if (!list.Contains(c.ScriptName))
+					//if (!list.Contains(c.ScriptName))
 						list.Insert (0, c.ScriptName);
 				}
 			}
@@ -93,7 +96,7 @@ namespace SoftwareMonkeys.csAnt
 
 		public void ExecuteScriptFromFile (string scriptPath, string[] args)
 		{			
-			IScript script = GetScriptFromPath (scriptPath);
+			IScript script = ActivateScript (scriptPath);
 
 			// Get the original current directory
 			var originalCurrentDirectory = script.CurrentDirectory;

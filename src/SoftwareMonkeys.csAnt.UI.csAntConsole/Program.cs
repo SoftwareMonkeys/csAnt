@@ -53,31 +53,27 @@ namespace SoftwareMonkeys.csAnt.UI.csAntConsole
 			return output;
 		}*/
 
-		static public void Execute(string scriptName, string[] args)
+		static public void Execute (string scriptName, string[] args)
 		{
-			InitializeConsoleWriter(scriptName);
+			InitializeConsoleWriter (scriptName);
 
 			var startTime = DateTime.Now;
 
-			Console.WriteLine("");
-			Console.WriteLine("============================================");
-			Console.WriteLine(" Launching script: " + scriptName);
-			Console.WriteLine("============================================");
-			Console.WriteLine("");
+			var parser = new Arguments (args);
 
-			var parser = new Arguments(args);
-
-			var scr = new LauncherScript(scriptName);
+			var scr = new LauncherScript (scriptName);
 
 			scr.Console = Console;
 
-			if (parser.Contains("b"))
-				scr.CurrentDirectory = Path.GetFullPath(parser["b"]);
+			if (parser.Contains ("b"))
+				scr.CurrentDirectory = Path.GetFullPath (parser ["b"]);
 
-			Console.WriteLine("");
-			Console.WriteLine("Base directory:");
-			Console.WriteLine(scr.CurrentDirectory);
-			Console.WriteLine("");
+			if (scr.IsVerbose) {
+				Console.WriteLine ("");
+				Console.WriteLine ("Base directory:");
+				Console.WriteLine (scr.CurrentDirectory);
+				Console.WriteLine ("");
+			}
 
 			scr.IsVerbose = parser.Contains("verbose");
 			
@@ -101,18 +97,22 @@ namespace SoftwareMonkeys.csAnt.UI.csAntConsole
 				// Calculate the amount of time the script took to run
 				var totalTime = DateTime.Now.Subtract(startTime);
 
-				Console.WriteLine("");
-				Console.WriteLine("Duration: " + totalTime.ToString());
-				Console.WriteLine("Successful: " + !scr.IsError);
-				Console.WriteLine("");
-				
-				// Output the summaries to help the user see what happened
-				scr.OutputSummaries();
+
+				if (scr.IsVerbose)
+				{
+					// Output the summaries to help the user see what happened
+					scr.OutputSummaries();
+
+					Console.WriteLine("");
+					Console.WriteLine("Duration: " + totalTime.ToString());
+					Console.WriteLine("Successful: " + !scr.IsError);
+					Console.WriteLine("");
+				}
 
 				if (scr.IsError)
-					Console.WriteLine("!!!!!!!!!!  Failed  !!!!!!!!!!");
+					Console.WriteLine("// !!!!!!!!!!!!!!!!!!!!  Failed  !!!!!!!!!!!!!!!!!!!!");
 				else
-					Console.WriteLine("========== Success ==========");
+					Console.WriteLine("// ==================== Success! ====================");
 
 
 				Console.WriteLine("");
