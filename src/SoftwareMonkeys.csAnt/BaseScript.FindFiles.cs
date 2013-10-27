@@ -36,6 +36,13 @@ namespace SoftwareMonkeys.csAnt
 		/// </summary>
 		public string[] FindFiles (string baseDirectory, string pattern)
 		{
+			if (IsVerbose) {
+				Console.WriteLine ("");
+				Console.WriteLine ("Finding files...");
+				Console.WriteLine ("Directory:");
+				Console.WriteLine (baseDirectory);
+			}
+
 			List<string> foundFiles = new List<string> ();
 			
 			if (pattern.IndexOf (baseDirectory) == -1) {
@@ -69,118 +76,26 @@ namespace SoftwareMonkeys.csAnt
 
 			var searchOption = SearchOption.TopDirectoryOnly;
 
-			if (subPattern == "**") {
-				subPattern = "*";
+			if (subPattern.IndexOf("**") == 0) {
+				subPattern = subPattern.Replace("**", "*");
 				searchOption = SearchOption.AllDirectories;
 			}
+				
+			if (IsVerbose)
+				Console.WriteLine ("Fixed sub pattern: " + subPattern);
 
-			foreach (var file in Directory.GetFiles (subPath, subPattern, searchOption))
-			{
-				if (!foundFiles.Contains(file))
-					foundFiles.Add(file);
+			foreach (var file in Directory.GetFiles (subPath, subPattern, searchOption)) {
+				if (!foundFiles.Contains (file))
+					foundFiles.Add (file);
+			}
+			
+			if (IsVerbose) {
+				Console.WriteLine ("# files found: " + foundFiles.Count);
+				Console.WriteLine("");
 			}
 
 			return foundFiles.ToArray();
 
-
-	        // This method assumes that the application has discovery permissions 
-	        // for all folders under the specified path.
-	     //   IEnumerable<System.IO.FileInfo> fileList = dir.GetFiles(subPattern, System.IO.SearchOption.AllDirectories);
-			// TODO: Tidy up this function
-
-			/*if (IsVerbose) {
-				Console.WriteLine ("Finding files...");
-				Console.WriteLine ("Pattern: " + pattern);
-				Console.WriteLine ("Base directory: " + baseDirectory);
-			}
-
-			if (pattern.IndexOf (CurrentDirectory) == -1) {
-				pattern = baseDirectory.TrimEnd (Path.DirectorySeparatorChar)
-					+ Path.DirectorySeparatorChar
-					+ pattern.Trim (Path.DirectorySeparatorChar);
-			}
-
-			if (IsVerbose) 
-				Console.WriteLine ("Pattern: " + pattern);
-
-			var subPath = pattern.Substring(
-				0,
-				pattern.LastIndexOf (Path.DirectorySeparatorChar)
-			);
-			
-			if (IsVerbose)
-				Console.WriteLine ("Sub path: " + subPath);
-
-			var subPattern = pattern.Substring(
-				pattern.LastIndexOf (Path.DirectorySeparatorChar),
-				pattern.Length-pattern.LastIndexOf (Path.DirectorySeparatorChar)
-			).Trim (Path.DirectorySeparatorChar);
-				
-			if (IsVerbose)
-				Console.WriteLine ("Sub pattern: " + subPattern);
-
-			string[] files = new string[]{};
-
-			if (pattern.EndsWith("**"))
-			{
-				files = Directory.GetFiles (
-					subPath,
-				    subPattern.Replace ("**", "*"),
-					SearchOption.AllDirectories
-				);
-			}
-			// If no wild card was specified then use the pattern as-is, to specify a single file
-			else if (!pattern.EndsWith ("*")) {
-
-				files = new string[]{
-					CurrentDirectory
-					+ Path.DirectorySeparatorChar
-					+ pattern
-				};
-				
-				if (IsVerbose) {
-					Console.WriteLine ("Single file:");
-					Console.WriteLine (files [0]);
-				}
-			}
-			else
-			{
-				// If it starts with a slash
-				if (pattern.StartsWith("/"))
-				{
-					// Treat it as a full relative path (relative to the project directory)
-					// so no need for SearchOption.AllDirectories
-					files = Directory.GetFiles (
-						subPath,
-					    subPattern.TrimStart('/') // Trim the slash off the start to make it work
-					);
-					
-					if (IsVerbose) {
-						Console.WriteLine ("Begins with slash, therefore is relative path.");
-					}
-				}
-				// Otherwise
-				else
-				{
-					// Treat it only as a partial pattern to match anywhere, so it needs
-					// SearchOption.AllDirectories
-					files = Directory.GetFiles (
-						subPath,
-					   	subPattern,
-						SearchOption.AllDirectories
-					);
-					
-					if (IsVerbose) {
-						Console.WriteLine ("Partial path.");
-					}
-				}
-			}
-
-			if (IsVerbose)
-				foreach (string file in files)
-					Console.WriteLine (file);
-
-			return files;*/
 		}
 	}
 }
