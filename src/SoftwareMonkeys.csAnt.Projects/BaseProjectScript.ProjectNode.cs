@@ -73,6 +73,8 @@ namespace SoftwareMonkeys.csAnt.Projects
 			scanner.Listener.IsVerbose = IsVerbose;
 			
 			FileNode node = scanner.ScanDirectory(dir, false, true);
+
+			CurrentDirectory = Path.GetDirectoryName(node.FilePath);
 			
 			return node;
 		}
