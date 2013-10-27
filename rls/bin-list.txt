@@ -14,8 +14,6 @@
 /lib/FileNodes/*.zip
 /lib/HtmlAgilityPack/*.dll
 /lib/HtmlAgilityPack/*.zip
-/lib/GitSharp/*.dll
-/lib/GitSharp/*.zip
 /lib/GCUpload/*.dll
 /lib/GCUpload/*.zip
 /lib/*.zip
