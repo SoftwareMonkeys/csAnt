@@ -34,154 +34,79 @@ class PrepareScript
 
 		Console.WriteLine("Source projects dir: " + sourceProjectsDirectory);
 
-		var csAntZipFile = projectDirectory
+		string scriptsDir = projectDirectory
+			+ Path.DirectorySeparatorChar
+			+ "scripts";
+
+		string generalLibDir = Path.GetFullPath(
+			projectDirectory
+			+ Path.DirectorySeparatorChar
+			+ ".."
+			+ Path.DirectorySeparatorChar
+			+ "lib"
+		);
+
+		string name = "csAnt";
+
+		string csAntLibDir = projectDirectory
 			+ Path.DirectorySeparatorChar
 			+ "lib"
 			+ Path.DirectorySeparatorChar
-			+ "csAnt"
-			+ Path.DirectorySeparatorChar
-			+ "csAnt.zip";
+			+ name;
 
-		// If the csAnt zip file isn't already here, get it
-		if (!File.Exists(csAntZipFile))
-		{
-			var csAntDir = sourceProjectsDirectory
-				+ Path.DirectorySeparatorChar
-				+ "SoftwareMonkeys"
-				+ Path.DirectorySeparatorChar
-				+ "csAnt";
+		string csAntZipInternal = csAntLibDir + "/csAnt.zip";
+		string csAntZipLocal = generalLibDir + "/csAnt/csAnt-project-release.zip";
+		string csAntZipUrl = GetcsAntUrl();
 
-			Console.WriteLine("csAnt dir: " + csAntDir);
-
-			if (Directory.Exists(csAntDir))
-				GetLocalcsAnt(csAntDir);
-			else
-				GetRemotecsAnt();
-		}
-		else
-		{
-			UnzipExisting(csAntZipFile);
-		} 
-	}
-
-	public void UnzipExisting(string csAntZipFile)
-	{
-		var projectDirectory = GetProjectDirectory();
-
-		var scriptsDir = projectDirectory
-			+ Path.DirectorySeparatorChar
-			+ "scripts";
-
-		var libDir = projectDirectory
-			+ Path.DirectorySeparatorChar
-			+ "lib";
-
-		var csAntLibDir = libDir
-			+ Path.DirectorySeparatorChar
-			+ "csAnt";
-
-		var tmpDir = libDir
-			+ Path.DirectorySeparatorChar
-			+ "csAnt_tmp";
-
-		UnZipFile(csAntZipFile, tmpDir);
-
-		var subDir = Directory.GetDirectories(tmpDir)[0];
-
-		// Move libraries from the tmp directory to the destination
-		MoveLibsToDestination(subDir, csAntLibDir);
-
-		// Move scripts from the tmp directory to the destination
-		MoveScriptsToDestination(subDir, scriptsDir);
-
-		// Move launcher from the tmp directory to the destination
-		MoveLauncherToDestination(subDir, projectDirectory);
-
-		Directory.Delete(tmpDir, true);
-	}
-
-	public void GetLocalcsAnt(string csAntDir)
-	{
-		var projectDirectory = GetProjectDirectory();
-
-		var csAntReleaseDir = csAntDir 
-			+ Path.DirectorySeparatorChar
-			+ "rls"
-			+ Path.DirectorySeparatorChar
-			+ "project-release";
-
-		Console.WriteLine("csAnt release dir: " + csAntReleaseDir);
-
-		var csAntReleaseFile = GetNewestFile(csAntReleaseDir);
-
-		Console.WriteLine("csAnt release file: " + csAntReleaseFile);
-
-		var libDir = projectDirectory
-			+ Path.DirectorySeparatorChar
-			+ "lib";
-
-		var csAntLibDir = libDir
-			+ Path.DirectorySeparatorChar
-			+ "csAnt";
-
-		var tmpDir = libDir
-			+ Path.DirectorySeparatorChar
-			+ "csAnt_tmp";
-
-		Console.WriteLine("csAnt lib dir: " + csAntLibDir);
-
-		UnZipFile(csAntReleaseFile, tmpDir);
-
-		var scriptsDir = projectDirectory
-			+ Path.DirectorySeparatorChar
-			+ "scripts";
-
-		var subDir = Directory.GetDirectories(tmpDir)[0];
-
-		// Move libraries from the tmp directory to the destination
-		MoveLibsToDestination(subDir, csAntLibDir);
-
-		// Move scripts from the tmp directory to the destination
-		MoveScriptsToDestination(subDir, scriptsDir);
-
-		// Move launcher from the tmp directory to the destination
-		MoveLauncherToDestination(subDir, projectDirectory);
-
-		Directory.Delete(tmpDir, true);
-
-	}
-
-	public void GetRemotecsAnt()
-	{
-		var remotePath = GetRemotecsAntFilePath();
-
-		Console.WriteLine("Remote csAnt path: " + remotePath);
-
-		var projectDirectory = GetProjectDirectory();
-
-		var libDir = projectDirectory
-			+ Path.DirectorySeparatorChar
-			+ "lib";
-
-		var csAntLibDir = libDir
-			+ Path.DirectorySeparatorChar
-			+ "csAnt";
-
-		var tmpDir = libDir
-			+ Path.DirectorySeparatorChar
-			+ "csAnt_tmp";
-
-		Console.WriteLine("To: " + tmpDir);
-
-		var scriptsDir = projectDirectory
-			+ Path.DirectorySeparatorChar
-			+ "scripts";
-
-		DownloadAndUnzip(
-			remotePath,
-			tmpDir
+		GetLib(
+			name,
+			csAntLibDir,
+			csAntZipInternal,
+			csAntZipLocal,
+			csAntZipUrl,
+			generalLibDir
 		);
 
+
+		var subDir = Directory.GetDirectories(csAntLibDir, "csAnt*")[0];
+
+		Console.WriteLine("Sub dir: " + subDir);
+
+
+		// Move libraries from the tmp directory to the destination
+		MoveLibsToDestination(subDir, csAntLibDir);
+
+		// Move scripts from the tmp directory to the destination
+		//MoveScriptsToDestination(subDir, scriptsDir);
+
+		// Move launcher from the tmp directory to the destination
+		MoveLauncherToDestination(subDir, projectDirectory);
+
+		//Directory.Delete(subDir);
+	}
+
+	public void UnzipExisting(string csAntZipInternal)
+	{
+		var projectDirectory = GetProjectDirectory();
+
+		var scriptsDir = projectDirectory
+			+ Path.DirectorySeparatorChar
+			+ "scripts";
+
+		var libDir = projectDirectory
+			+ Path.DirectorySeparatorChar
+			+ "lib";
+
+		var csAntLibDir = libDir
+			+ Path.DirectorySeparatorChar
+			+ "csAnt";
+
+		var tmpDir = libDir
+			+ Path.DirectorySeparatorChar
+			+ "csAnt_tmp";
+
+		Unzip(csAntZipInternal, tmpDir);
+
 		var subDir = Directory.GetDirectories(tmpDir)[0];
 
 		// Move libraries from the tmp directory to the destination
@@ -193,10 +118,10 @@ class PrepareScript
 		// Move launcher from the tmp directory to the destination
 		MoveLauncherToDestination(subDir, projectDirectory);
 
-		Directory.Delete(tmpDir, true);
+		//Directory.Delete(tmpDir, true);
 	}
 
-	public string GetRemotecsAntFilePath()
+	public string GetcsAntUrl()
 	{
 		var url = "https://code.google.com/p/csant/downloads/list";
 
@@ -213,6 +138,8 @@ class PrepareScript
 		{
 			if (item.IndexOf("csAnt-project-release-") == 0)
 			{
+				Console.WriteLine("csAnt URL: " + prefix + item);
+
 				return prefix + item;
 			}
 		}
@@ -291,8 +218,9 @@ class PrepareScript
 		if (!Directory.Exists(csAntLibDir))
 			Directory.CreateDirectory(csAntLibDir);
 
-		if (Directory.Exists(csAntLibDir))
-			Directory.Delete(csAntLibDir, true);
+		// TODO: Check if needed
+		//if (Directory.Exists(csAntLibDir))
+		//	Directory.Delete(csAntLibDir, true);
 
 		string libDir = tmpDir
 			+ Path.DirectorySeparatorChar
@@ -305,7 +233,7 @@ class PrepareScript
 		Console.WriteLine(libDir);
 		Console.WriteLine("");
 
-		Directory.Move(libDir, csAntLibDir);
+		MoveDirectory(libDir, csAntLibDir);
 	}
 
 
@@ -337,7 +265,7 @@ class PrepareScript
 		return file;
 	}
 
-    	public static void UnZipFile(string zipFile, string outFolder)
+    	public static void Unzip(string zipFile, string outFolder)
 	{
 	    ZipFile zf = null;
 	    try {
@@ -378,7 +306,16 @@ class PrepareScript
 
 	public string GetProjectDirectory()
 	{
-		return Path.GetFullPath(".");
+		var path = Path.GetFullPath(".");
+
+		// TODO: Check if there's a more reliable way of doing this (which won't break if tmp paths change)
+
+		if (path.IndexOf(".tmp") > -1)
+			path = Path.GetFullPath("../../..");
+		else if (path.IndexOf("_tmp") > -1)
+			path = Path.GetFullPath("../../../..");
+
+		return path;
 	}
 
 
@@ -429,30 +366,6 @@ class PrepareScript
 		return toFile;
 	}
 
-	// This function is a copy of the BaseScript.DownloadAndUnzip function
-	public void DownloadAndUnzip(string zipFileUrl, string localDirectory)
-	{
-		// Create a temporary file name
-		var tmpFile = GetProjectDirectory()
-			+ Path.DirectorySeparatorChar
-			+ "_tmp"
-			+ Path.DirectorySeparatorChar
-			+ "tmp-" + Guid.NewGuid().ToString() + ".zip";
-
-		// Create the _tmp directory if it doesn't exist
-		if (!Directory.Exists(Path.GetDirectoryName(tmpFile)))
-			Directory.CreateDirectory(Path.GetDirectoryName(tmpFile));
-
-		// Download the zip file to the temporary location
-		Download (zipFileUrl, tmpFile);
-
-		// Unzip the zip file
-		UnZipFile (tmpFile, localDirectory);
-
-		// Delete the temporary file
-		File.Delete(tmpFile);
-	}
-
 	public string[] ScrapeXPathArray(
 		string url,
 		string xpath
@@ -484,5 +397,160 @@ class PrepareScript
 		}
 
 		return values.ToArray();
+	}
+
+	public void GetLib(
+		string name,
+		string libDir,
+		string zipInternal,
+		string zipLocal,
+		string zipUrl,
+		string generalLibDir
+	)
+	{
+		Console.WriteLine("");
+		Console.WriteLine("========================================");
+		Console.WriteLine(" Getting " + name + " library files");
+		Console.WriteLine("");
+
+		// Output constants
+		Console.WriteLine(name + " Lib Dir:");
+		Console.WriteLine(libDir);
+		Console.WriteLine("");
+
+		Console.WriteLine(name + " Lib Zip Local:");
+		Console.WriteLine(zipLocal);
+		Console.WriteLine("");
+
+		Console.WriteLine(name + " Lib Zip Internal:");
+		Console.WriteLine(zipInternal);
+		Console.WriteLine("");
+
+		Console.WriteLine(name + " Zip URL:");
+		Console.WriteLine(zipUrl);
+		Console.WriteLine("");
+
+		// If the lib directory doesn't exist then create it
+		if (!Directory.Exists(libDir))
+			Directory.CreateDirectory(libDir);
+
+		// If the internal css-scrip zip file isn't found try getting it from the local path
+		if (!File.Exists(zipInternal))
+			GetLibFromLocal(zipLocal, zipInternal);
+
+		// If the internal css-script zip file still isn't found try getting it from the URL
+		if (!File.Exists(zipInternal))
+			GetLibFromUrl(zipUrl, zipInternal);
+
+		// Extract the files from the internal zip file
+		ExtractInternalZipFile( zipInternal, libDir );
+
+		Console.WriteLine(name + " library files have been retrieved.");
+
+		Console.WriteLine("========================================");
+		Console.WriteLine("");
+	}
+
+	public void GetLibFromLocal(
+		string zipLocal,
+		string zipInternal
+	)
+	{
+		Console.WriteLine("");
+		Console.WriteLine("Getting lib from local location...");
+		Console.WriteLine("");
+
+		if (File.Exists(zipLocal))
+		{
+			Console.WriteLine("Copying from:");
+			Console.WriteLine(zipLocal);
+			Console.WriteLine("To:");
+			Console.WriteLine(zipInternal);
+			Console.WriteLine("");
+
+			File.Copy(zipLocal, zipInternal);
+		}
+		else
+		{
+			Console.WriteLine("Local zip file not found:");
+			Console.WriteLine(zipLocal);
+			Console.WriteLine("");
+		}
+	}
+
+	public void GetLibFromUrl(
+		string zipUrl,
+		string zipInternal
+	)
+	{
+		Console.WriteLine("");
+		Console.WriteLine("Getting lib from URL...");
+		Console.WriteLine("");
+
+		Console.WriteLine("Downloading from:");
+		Console.WriteLine(zipUrl);
+		Console.WriteLine("To:");
+		Console.WriteLine(zipInternal);
+		Console.WriteLine("");
+
+		Download(zipUrl, zipInternal);
+	}
+
+	public void ExtractInternalZipFile(
+		string zipInternal,
+		string libDir
+	)
+	{
+		Console.WriteLine("");
+		Console.WriteLine("Extracting files from:");
+		Console.WriteLine(zipInternal);
+		Console.WriteLine("To:");
+		Console.WriteLine(libDir);
+		Console.WriteLine("");
+
+		Unzip(zipInternal, libDir);
+	}
+
+	public void MoveDirectory(string source, string target)
+	{
+		Console.WriteLine ("");
+		Console.WriteLine ("Moving directory: ");
+		Console.WriteLine ("  " + source);
+		Console.WriteLine ("To: ");
+		Console.WriteLine ("  " + target);
+		Console.WriteLine ();
+
+	    var stack = new Stack<Folders>();
+	    stack.Push(new Folders(source, target));
+
+	    while (stack.Count > 0)
+	    {
+	        var folders = stack.Pop();
+	        Directory.CreateDirectory(folders.Target);
+	        foreach (var file in Directory.GetFiles(folders.Source, "*.*"))
+	        {
+	             string targetFile = Path.Combine(folders.Target, Path.GetFileName(file));
+	             if (File.Exists(targetFile)) File.Delete(targetFile);
+	             File.Move(file, targetFile);
+	        }
+
+	        foreach (var folder in Directory.GetDirectories(folders.Source))
+	        {
+	            stack.Push(new Folders(folder, Path.Combine(folders.Target, Path.GetFileName(folder))));
+	        }
+	    }
+	    Directory.Delete(source, true);
+	}
+
+	public class Folders
+	{
+	    public string Source { get; private set; }
+	    public string Target { get; private set; }
+
+	    public Folders(string source, string target)
+	    {
+	        Source = source;
+	        Target = target;
+	    }
 	}
 }
