@@ -27,7 +27,7 @@
 /lib/SharpZipLib/net-20/*.dll
 /lib/SharpZipLib/*.zip
 /lib/SharpZipLib/*.node
-/lib/FileNodes/Release/*.dll
+/lib/FileNodes/bin/Release/*.dll
 /lib/FileNodes/*.zip
 /lib/FileNodes/*.node
 /lib/HtmlAgilityPack/*.dll
