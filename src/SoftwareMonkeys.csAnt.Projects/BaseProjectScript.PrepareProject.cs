@@ -6,52 +6,50 @@ namespace SoftwareMonkeys.csAnt.Projects
 	public partial class BaseProjectScript
 	{
 		/// <summary>
-		/// Launches the 'prepare-[linux|windows]' script in the specified external project directory.
+		/// Launches the initialization script in the specified external project directory.
 		/// </summary>
 		/// <param name='projectDirectory'>
 		/// 
 		/// </param>
-		public void PrepareProject(string projectDirectory)
+		public void InitializeProject(string projectDirectory)
 		{
 			Console.WriteLine ("");
 			Console.WriteLine ("Preparing project:");
 			Console.WriteLine (projectDirectory);
 			Console.WriteLine ("");
 
-			var prepareFile = "prepare-linux.sh";
+			var initFile = "";
+			if (!IsWindows)
+				initFile = "init-" + ProjectName + "-linux.sh";
+			else	
+				initFile = "init-" + ProjectName + "-windows.sh";
 
 			var cmdName = "bash";
 
-			if (IsWindows)
-			{
-				prepareFile = "prepare-windows.vbs";
-				cmdName = "cscript";
-			}
-			
 			ProjectDirectory = projectDirectory;
 
-			var preparePath = projectDirectory
+			var initPath = projectDirectory
 				+ Path.DirectorySeparatorChar
-				+ prepareFile;
+				+ initFile;
 			
 			Console.WriteLine("Command name:");
 			Console.WriteLine(cmdName);
 			Console.WriteLine("");
-			Console.WriteLine("Prepare script launcher:");
-			Console.WriteLine(preparePath);
+			Console.WriteLine("Initialize script launcher:");
+			Console.WriteLine(initPath);
 
-			if (File.Exists(preparePath))
+			if (File.Exists(initPath))
 			{
 				StartProcess(
 					cmdName,
-					"\"" + preparePath + "\""
+					"\"" + initPath + "\""
 				);
 			}
 			else
 			{
 				Console.WriteLine("");
-				Console.WriteLine("Can't find prepare file:");
-				Console.WriteLine(preparePath);
+				Console.WriteLine("Can't find initialization file:");
+				Console.WriteLine(initPath);
 				Console.WriteLine("");
 			}
 		}

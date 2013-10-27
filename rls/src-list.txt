@@ -49,9 +49,9 @@
 /scripts/**.cs
 /scripts/Release/*
 /scripts/Update/*
-/scripts/prepare/*
+/scripts/Initialize/*
 /scripts/RunUnitTests/*
 /scripts/RunTestScripts/*
 /prepare-linux.sh
-/csAnt.sh
+/*.sh
 /csAnt.node
