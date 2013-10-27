@@ -87,8 +87,11 @@ namespace SoftwareMonkeys.csAnt
 			Console.WriteLine ("  Full sub path:");
 			Console.WriteLine ("  " + fullSubPath);
 
+			if (fullSubPath.Trim (Path.DirectorySeparatorChar) != destinationPath.Trim (Path.DirectorySeparatorChar))
+			{
 			// Move the files in the sub path within the temporary folder into the final destination
-			MoveDirectory(fullSubPath, destinationPath);
+				MoveDirectory(fullSubPath, destinationPath);
+			}
 
 			Console.WriteLine ("Extraction complete.");
  
