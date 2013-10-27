@@ -14,7 +14,8 @@ namespace SoftwareMonkeys.csAnt
 		{
 			var cmd = new GetLibCommand(
 				this,
-				name
+				name,
+				force
 			);
 
 
