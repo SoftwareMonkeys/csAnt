@@ -79,16 +79,11 @@ class Test_BuildAndTestFromSourceReleaseScript : BaseProjectTestScript
 		if (!IsError)
 		{
 			Console.WriteLine("");
-			Console.WriteLine("Testing build...");
+			Console.WriteLine("Building and testing...");
 			Console.WriteLine("");
 
-			BuildAllSolutions(
-				ProjectDirectory
-				+ "/src"
-			);
+			ExecuteScript("CycleTests");
 		}
-
-		ExecuteScript("RunTests");
 
 		Utilities.CopyTestResults(ProjectDirectory, originalProjectDirectory);
 
