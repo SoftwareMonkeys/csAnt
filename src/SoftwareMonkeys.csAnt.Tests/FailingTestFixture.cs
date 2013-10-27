@@ -9,7 +9,7 @@ namespace SoftwareMonkeys.csAnt.Tests
 		[Test]
 		public void Test_Fail()
 		{
-			throw new Exception("Intentionally failing.");
+			throw new Exception("Intentionally failing, to show that an exception will show up as a failed test.");
 		}
 	}
 }
