@@ -9,6 +9,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>SoftwareMonkeys.csAnt</RootNamespace>
     <AssemblyName>SoftwareMonkeys.csAnt</AssemblyName>
+    <OutputPath>..\..\bin\$(Configuration)</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -121,7 +122,13 @@
     <Compile Include="Commands\StartNewProcessCommand.cs" />
     <Compile Include="BaseScript.Sync.cs" />
     <Compile Include="BaseScript.GitPush.cs" />
-    <Compile Include="BaseScript.CopyTestFiles.cs" />
+    <Compile Include="BaseScript.InitializeConsoleWriter.cs" />
+    <Compile Include="BaseScript.SetUp.cs" />
+    <Compile Include="BaseScript.TearDown.cs" />
+    <Compile Include="BaseScript.Start.cs" />
+    <Compile Include="BaseScript.FixScriptName.cs" />
+    <Compile Include="SubConsoleWriter.cs" />
+    <Compile Include="BaseScript.TimeStamp.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
