@@ -76,7 +76,6 @@ class Test_BuildFromSourceReleaseScript : BaseProjectTestScript
 			tmpDir
 		);
 
-		
 		var originalProjectDirectory = ProjectDirectory;
 
 		// Move to the tmp directory
@@ -91,13 +90,10 @@ class Test_BuildFromSourceReleaseScript : BaseProjectTestScript
 		if (!IsError)
 		{
 			Console.WriteLine("");
-			Console.WriteLine("Testing build...");
+			Console.WriteLine("Building...");
 			Console.WriteLine("");
 
-			BuildAllSolutions(
-				ProjectDirectory
-				+ "/src"
-			);
+			ExecuteScript("CycleBuild");
 		}
 
 		Directory.Delete(ProjectDirectory, true);
