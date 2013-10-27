@@ -37,6 +37,8 @@ namespace SoftwareMonkeys.csAnt
 			}
 		}
 
+		public Process SubProcess { get;set; }
+
 
 		public StartNewProcessCommand (
 			IScript script,
@@ -97,67 +99,12 @@ namespace SoftwareMonkeys.csAnt
 			Console.WriteLine(arguments);
 			Console.WriteLine("");
 
-			/*var threadStart = new ThreadStart(RunAsyncProcess);
-
-			var thread = new Thread(threadStart);
-
-			thread.Start();*/
-
-
-			// Create the process start information
-			ProcessStartInfo info = new ProcessStartInfo(
-				command,
-				arguments
+			ThreadPool.QueueUserWorkItem(
+				delegate
+				{
+					SubProcess = Process.Start( command );
+				}
 			);
-
-			// Configure the process
-			info.UseShellExecute = false;
-			info.RedirectStandardOutput = true;
-			info.RedirectStandardError = true;
-			info.CreateNoWindow = true;
-
-
-			info.ErrorDialog = false;
-
-			// Start the process
-			Process process = new Process();
-
-			ReturnValue = process;
-
-			CommandProcess = process;
-
-			process.StartInfo = info;
-
-			process.EnableRaisingEvents = true;
-
-			// Output the data to the console
-			process.OutputDataReceived += new DataReceivedEventHandler
-			(
-			    delegate(object sender, DataReceivedEventArgs e)
-			    {
-			        Console.WriteLine(e.Data);
-			    }
-			);
-			
-			// Output the errors to the console
-			process.ErrorDataReceived += new DataReceivedEventHandler
-			(
-			    delegate(object sender, DataReceivedEventArgs e)
-			    {
-			        Console.WriteLine(e.Data);
-			    }
-			);
-
-			process.Start();
-
-			process.BeginOutputReadLine();
-
-			process.WaitForExit();
-
-			Console.WriteLine("");
-			Console.WriteLine("--------------------------------------------------");
-			Console.WriteLine("");
-			
 		}
 
 		public string[] FixArguments(string[] arguments)
@@ -174,6 +121,14 @@ namespace SoftwareMonkeys.csAnt
 			}
 
 			return argsList.ToArray();
+		}
+
+		public override void Dispose ()
+		{
+			if (SubProcess != null) {
+				SubProcess.Kill ();
+				SubProcess = null;
+			}
 		}
 	}
 }
