@@ -70,8 +70,6 @@ namespace SoftwareMonkeys.csAnt
 						if (String.IsNullOrEmpty(list[i]))
 							throw new Exception("Item is null or empty.");
 
-						var 
-
 						builder.Append(list [i]);
 				}
 			
