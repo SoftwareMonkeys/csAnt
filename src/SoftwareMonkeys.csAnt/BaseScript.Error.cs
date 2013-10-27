@@ -9,10 +9,10 @@ namespace SoftwareMonkeys.csAnt
 			IsError = true;
 			
 			Console.WriteLine ("");
-			Console.WriteLine ("-------------------- !!! Error !!! --------------------");
-			Console.WriteLine ("Script: " + ScriptName);
-			Console.WriteLine (message);
-			Console.WriteLine ("-------------------------------------------------------");
+			Console.WriteLine (GetIndentSpace() + "-------------------- !!! Error !!! --------------------");
+			Console.WriteLine (GetIndentSpace() + "Script: " + ScriptName);
+			Console.WriteLine (GetIndentSpace() + message);
+			Console.WriteLine (GetIndentSpace() + "-------------------------------------------------------");
 			Console.WriteLine ("");
 		}
 	}
