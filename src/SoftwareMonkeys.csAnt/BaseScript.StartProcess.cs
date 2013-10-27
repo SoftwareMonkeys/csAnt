@@ -14,7 +14,7 @@ namespace SoftwareMonkeys.csAnt
 		/// </returns>
 		/// <param name='command'></param>
 		/// <param name='arguments'></param>
-		public StartProcessCommand StartProcess(string command, params string[] arguments)
+		public Process StartProcess(string command, params string[] arguments)
 		{
 			return StartProcess(command + " " + String.Join(" ", arguments));
 		}
@@ -27,7 +27,7 @@ namespace SoftwareMonkeys.csAnt
 		/// </returns>
 		/// <param name='command'></param>
 		/// <param name='arguments'></param>
-		public StartProcessCommand StartProcess(string command)
+		public Process StartProcess(string command)
 		{
 			var cmd = new StartProcessCommand(
 				this,
@@ -36,7 +36,7 @@ namespace SoftwareMonkeys.csAnt
 
 			ExecuteCommand(cmd);
 
-			return cmd;
+			return cmd.CommandProcess;
 		}
 	}
 }

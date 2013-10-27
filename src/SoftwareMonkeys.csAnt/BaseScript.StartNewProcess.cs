@@ -1,5 +1,7 @@
 using System;
 using System.Diagnostics;
+using System.ComponentModel;
+using System.Threading;
 
 namespace SoftwareMonkeys.csAnt
 {
@@ -18,6 +20,11 @@ namespace SoftwareMonkeys.csAnt
 			return StartNewProcess(command, String.Join (" ", arguments));
 		}
 
+		public Process StartNewProcess (string command, string arguments)
+		{
+			return StartNewProcess(command, arguments, true);
+		}
+
 		/// <summary>
 		/// Starts/executes a process in a new thread.
 		/// </summary>
@@ -26,7 +33,7 @@ namespace SoftwareMonkeys.csAnt
 		/// </returns>
 		/// <param name='command'></param>
 		/// <param name='arguments'></param>
-		public Process StartNewProcess(string command, string arguments)
+		public Process StartNewProcess(string command, string arguments, bool autoKill)
 		{
 			Console.WriteLine("");
 			Console.WriteLine("Starting new process: " + command);
@@ -34,27 +41,12 @@ namespace SoftwareMonkeys.csAnt
 			Console.WriteLine(arguments);
 			Console.WriteLine("");
 
-			// Create the process start info
-			ProcessStartInfo info = new ProcessStartInfo(command, arguments);
+			// TODO: Implement autokill parameter or remove it
+			var cmd = new StartNewProcessCommand(this, command, arguments.Split(' '));
+	
+			cmd.Execute();
 
-			// Configure the process
-			info.UseShellExecute = true;
-
-			info.RedirectStandardOutput = false;
-			info.RedirectStandardError = false;
-			info.RedirectStandardInput = false;
-
-			info.CreateNoWindow = false;
-
-			info.ErrorDialog = false;
-
-	        info.WindowStyle = ProcessWindowStyle.Normal;
-
-			// Start the process
-			Process process = Process.Start(info);
-
-			return process;
-
+			return (Process)cmd.ReturnValue;
 		}
 	}
 }
