@@ -204,6 +204,15 @@ namespace SoftwareMonkeys.csAnt.Tests
 			File.WriteAllText(file, indexTemplate);
 		}
 
+		public string GetIndexTemplate (string projectDirectory)
+		{
+			var output = GetIndexTemplate();
+
+			output = output.Replace("{{ProjectDirectory}}", projectDirectory);
+
+			return output;
+		}
+
 		public string GetIndexTemplate ()
 		{
 			var template = @"<html>
