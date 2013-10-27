@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.0</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{F1B8ACD3-E1A2-4F09-8931-288675A675C7}</ProjectGuid>
+    <ProjectGuid>{3BFB55C4-1247-49BD-AEC9-31BC3C0F1168}</ProjectGuid>
     <OutputType>Library</OutputType>
     <RootNamespace>SoftwareMonkeys.csAnt.Projects</RootNamespace>
     <AssemblyName>SoftwareMonkeys.csAnt.Projects</AssemblyName>
@@ -34,29 +34,30 @@
       <HintPath>..\..\lib\FileNodes\Release\SoftwareMonkeys.FileNodes.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Build.Engine" />
-    <Reference Include="Microsoft.Build.Framework" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="BaseProjectScript.BuildAllSolutions.cs" />
+    <Compile Include="BaseProjectScript.BuildSolution.cs" />
     <Compile Include="BaseProjectScript.cs" />
+    <Compile Include="BaseProjectScript.GoogleCodeUpload.cs" />
     <Compile Include="BaseProjectScript.GroupName.cs" />
     <Compile Include="BaseProjectScript.GroupNode.cs" />
+    <Compile Include="BaseProjectScript.ImportLocalLib.cs" />
+    <Compile Include="BaseProjectScript.ImportLocalWebApp.cs" />
+    <Compile Include="BaseProjectScript.PrepareProject.cs" />
     <Compile Include="BaseProjectScript.ProjectDirectory.cs" />
     <Compile Include="BaseProjectScript.ProjectName.cs" />
     <Compile Include="BaseProjectScript.ProjectNode.cs" />
-    <Compile Include="BaseProjectScript.ImportLocalLib.cs" />
-    <Compile Include="BaseProjectScript.ImportLocalWebApp.cs" />
-    <Compile Include="BaseProjectScript.GoogleCodeUpload.cs" />
-    <Compile Include="BaseProjectScript.PrepareProject.cs" />
-    <Compile Include="BaseProjectScript.BuildAllSolutions.cs" />
-    <Compile Include="BaseProjectScript.BuildSolution.cs" />
-    <Compile Include="BaseProjectScript.GetTmpDir.cs" />
-    <Compile Include="BaseProjectScript.CopyTestResults.cs" />
+    <Compile Include="GroupNodeNotFoundException.cs" />
+    <Compile Include="BaseProjectScript.ClearTmp.cs" />
+    <Compile Include="BaseProjectScript.GitImport.cs" />
+    <Compile Include="BaseProjectScript.GitSync.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <ProjectReference Include="..\SoftwareMonkeys.csAnt\SoftwareMonkeys.csAnt.csproj">
-      <Project>{B13BED0E-4F73-4F2A-8AA1-19273CFF9C47}</Project>
+      <Project>{16297BCB-0A8C-42E6-BE35-921085C3E238}</Project>
       <Name>SoftwareMonkeys.csAnt</Name>
     </ProjectReference>
   </ItemGroup>
