@@ -11,8 +11,8 @@ def GetHtmlAgilityPack(libDir, generalLibDir):
 
 	htmlAgilityPackLibDir = os.path.abspath(libDir + os.sep + "/HtmlAgilityPack")
 	
-	htmlAgilityPackZipUrl = "http://download-codeplex.sec.s-msft.com/Download/Release?ProjectName=htmlagilitypack&DownloadId=437941&FileTime=129893731308330000&Build=19692"
-	
+	htmlAgilityPackZipUrl = "https://docs.google.com/uc?export=download&id=0B_8QvsLqRy5qclRRRnNMTGJhalE"
+
 	htmlAgilityPackZipLocal = generalLibDir + "/HtmlAgilityPack/HtmlAgilityPack.zip"
 	
 	htmlAgilityPackZipInternal = htmlAgilityPackLibDir + "/HtmlAgilityPack.zip"
