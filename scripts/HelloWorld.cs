@@ -14,10 +14,16 @@ class HelloWorldScript : BaseScript
 	
 	public override bool Start(string[] args)
 	{
-		var cmd = new HelloWorldCommand(this);
+		Console.WriteLine("Hello world!");
+
+		AddSummary("Write the words 'Hello world!' to the console.");
+
+		// Or
+		/*var cmd = new HelloWorldCommand(this);
 
 		ExecuteCommand(cmd);
+		*/
 
-		return true;
+		return !IsError;
 	}
 }
