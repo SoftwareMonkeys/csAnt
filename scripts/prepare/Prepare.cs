@@ -39,12 +39,15 @@ class PrepareScript
 			+ "scripts";
 
 		string generalLibDir = Path.GetFullPath(
-			projectDirectory
-			+ Path.DirectorySeparatorChar
-			+ ".."
+			sourceProjectsDirectory
 			+ Path.DirectorySeparatorChar
 			+ "lib"
 		);
+
+		Console.WriteLine("");
+		Console.WriteLine("General lib dir:");
+		Console.WriteLine(generalLibDir);
+		Console.WriteLine("");
 
 		string name = "csAnt";
 
@@ -312,7 +315,7 @@ class PrepareScript
 
 		if (path.IndexOf(".tmp") > -1)
 			path = Path.GetFullPath("../../..");
-		else if (path.IndexOf("_tmp") > -1)
+		else if (path.IndexOf("_tmp") > -1) // TODO: Check if this is needed. The _tmp style shouldn't be used anymore
 			path = Path.GetFullPath("../../../..");
 
 		return path;
