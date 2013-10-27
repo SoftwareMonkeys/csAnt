@@ -5,35 +5,60 @@ using System.IO;
 namespace SoftwareMonkeys.csAnt.Tests
 {
 	[TestFixture]
-	public class DownloadTestFixture
+	public class DownloadTestFixture : BaseTestFixture
 	{
 		[Test]
 		public void Test_Download()
 		{
-			throw new NotImplementedException();
-			/*var script = new TestScript();
+			var testScript = GetTestScript();
 
-			var url = "http://www.google.com";
+			testScript.IsVerbose = true;
 
-			var f = "Test-" + Guid.NewGuid()
+			var testFile = testScript.CurrentDirectory
 				+ Path.DirectorySeparatorChar
-				+ "sdf.html";
+				+ "TestFile.txt";
 
-			var to = System.IO.Path.Combine(
-				Environment.GetFolderPath(
-					Environment.SpecialFolder.ApplicationData
-				),
-		    	f
-			);
+			var content = "Hello world";
 
-			Directory.CreateDirectory(to);
+			File.WriteAllText(testFile, content);
 
-			var toFile = script.Download(
-				url,
-				to
-			);
+			var host = "0.0.0.0";
 
-			Assert.AreEqual("", toFile);*/
+			var port = 8082;
+			throw new NotImplementedException();
+			testScript.StartHttp(testScript.CurrentDirectory, host, port, false);
+
+			// TODO: Remove if not needed
+			//testScript.StartNewProcess("http://localhost:8082/TestFile.txt");
+
+			try {
+				var url = String.Format (
+					"http://{0}:{1}/{2}",
+					"localhost", // Use localhost instead of 0.0.0.0
+					port,
+					Path.GetFileName (testFile)
+				);
+
+				var downloadDir = testScript.CurrentDirectory
+					+ Path.DirectorySeparatorChar
+					+ "Download";
+
+				var downloadFile = downloadDir
+					+ Path.DirectorySeparatorChar
+					+ Path.GetFileName (testFile);
+
+				testScript.Download(
+					url,
+					downloadFile
+				);
+			
+			} catch (Exception ex) {
+				Assert.Fail (ex.ToString ());
+			} finally {
+				//if (process != null)
+				//	process.Kill ();
+			}
+		//}
 		}
 	}
 }
