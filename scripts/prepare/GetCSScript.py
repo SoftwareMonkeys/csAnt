@@ -5,7 +5,7 @@ import sys
 import zipfile
 import shutil
 import urllib
-from getlib import GetLib
+from GetLib import GetLib
 
 def GetCSScript(libDir, generalLibDir):
 
