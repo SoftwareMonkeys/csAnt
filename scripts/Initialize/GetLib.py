@@ -9,7 +9,7 @@ import urllib
 def GetLib(name, libDir, zipInternal, zipLocal, zipUrl, generalLibDir):
 
 	print ""
-	print "========================================"
+	print "----------"
 	print "Getting " + name + " library files"
 	print ""
 
@@ -47,7 +47,7 @@ def GetLib(name, libDir, zipInternal, zipLocal, zipUrl, generalLibDir):
 
 	print name + " library files have been retrieved."
 
-	print "========================================"
+	print "----------"
 	print ""
 
 def GetLibFromLocal( zipLocal, zipInternal ):
@@ -89,5 +89,15 @@ def ExtractInternalZipFile( zipInternal, libDir ):
 	print libDir
 	print ""
 
+
 	zip = zipfile.ZipFile(zipInternal)
 	zip.extractall(libDir)
+
+	#tmpDir = libDir + os.sep + "_tmp"
+
+	#zip = zipfile.ZipFile(zipInternal)
+	#zip.extractall(tmpDir)
+
+	
+
+	#os.path.delete(tmpDir)
