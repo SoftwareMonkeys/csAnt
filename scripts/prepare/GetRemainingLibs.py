@@ -6,7 +6,7 @@ def GetRemainingLibs():
 
 	print ""
 	print "========================================"
-	print "Getting remaining library files by scanning the .node files
+	print "Getting remaining library files by scanning the .node files"
 	print ""
 
 	os.system("sh csAnt.sh GetLibs");
