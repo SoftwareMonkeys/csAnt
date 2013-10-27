@@ -21,6 +21,14 @@ class CycleBuildScript : BaseProjectScript
 		Console.WriteLine("Starting a full build cycle.");
 		Console.WriteLine("");
 
+		Console.WriteLine("Cleaning...");
+		Console.WriteLine("");
+
+		// Clean the project
+		ExecuteScript(
+			"Clean"
+		);
+
 		Console.WriteLine("Building...");
 		Console.WriteLine("");
 
