@@ -41,8 +41,6 @@ class CycleReleaseScript : BaseProjectScript
 			if (releaseName != String.Empty)
 				execArgs.Add(releaseName);
 
-			execArgs.Add("-mode:Release");
-
 			// Create the release
 			ExecuteScript(
 				"Release",
