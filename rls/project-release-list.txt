@@ -32,7 +32,6 @@
 /lib/NUnitResults/NUnitResults.node
 /lib/SharpZipLib/SharpZipLib.node
 /lib/HtmlAgilityPack/HtmlAgilityPack.node
-/lib/GitSharp/GitSharp.node
 /lib/GCUpload/GCUpload.node
 /lib/Newtonsoft.Json/Newtonsoft.Json.node
 /lib/Libraries.node

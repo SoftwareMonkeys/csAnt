@@ -5,6 +5,9 @@
 /src/SoftwareMonkeys.csAnt.Projects/**.cs
 /src/SoftwareMonkeys.csAnt.Projects/**.csproj
 /src/SoftwareMonkeys.csAnt.Projects/**.snk
+/src/SoftwareMonkeys.csAnt.Projects.Tests/**.cs
+/src/SoftwareMonkeys.csAnt.Projects.Tests/**.csproj
+/src/SoftwareMonkeys.csAnt.Projects.Tests/**.snk
 /src/SoftwareMonkeys.csAnt.Projects.ProjectManager/**.cs
 /src/SoftwareMonkeys.csAnt.Projects.ProjectManager/**.csproj
 /src/SoftwareMonkeys.csAnt.Projects.ProjectManager/**.snk
@@ -15,6 +18,15 @@
 /src/SoftwareMonkeys.csAnt.UI.csAntConsole/**.cs
 /src/SoftwareMonkeys.csAnt.UI.csAntConsole/**.csproj
 /src/SoftwareMonkeys.csAnt.UI.csAntConsole/**.snk
+/src/SoftwareMonkeys.csAnt.UI.Web/**.cs
+/src/SoftwareMonkeys.csAnt.UI.Web/**.csproj
+/src/SoftwareMonkeys.csAnt.UI.Web/**.snk
+/src/SoftwareMonkeys.csAnt.UI.Web.Application/**.cs
+/src/SoftwareMonkeys.csAnt.UI.Web.Application/**.csproj
+/src/SoftwareMonkeys.csAnt.UI.Web.Application/**.snk
+/src/SoftwareMonkeys.csAnt.UI.Web.Tests/**.cs
+/src/SoftwareMonkeys.csAnt.UI.Web.Tests/**.csproj
+/src/SoftwareMonkeys.csAnt.UI.Web.Tests/**.snk
 /src/**.sln
 /lib/*.dll
 /lib/*.exe
@@ -33,9 +45,6 @@
 /lib/HtmlAgilityPack/*.dll
 /lib/HtmlAgilityPack/*.zip
 /lib/HtmlAgilityPack/*.node
-/lib/GitSharp/*.dll
-/lib/GitSharp/*.zip
-/lib/GitSharp/*.node
 /lib/GCUpload/*.dll
 /lib/GCUpload/*.zip
 /lib/GCUpload/*.node
