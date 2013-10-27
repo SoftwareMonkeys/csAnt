@@ -14,6 +14,10 @@ libDir = currentDir + os.sep + "lib"
 sourceProjectsDir = os.path.abspath(currentDir + os.sep + ".." + os.sep)
 generalLibDir = os.path.abspath(currentDir + "/../lib")
 
+# Adjust basic variables
+if ".tmp" in sourceProjectsDir: # If .tmp is found in the path then adjust the source projects directory
+	sourceProjectsDir = os.path.abspath("../../..")
+
 # Script variables
 csPrepareScript = "scripts" + os.sep + "prepare" + os.sep + "Prepare.cs"
 createProjectNodeScript = "scripts" + os.sep + "CreateProjectNode.cs"
