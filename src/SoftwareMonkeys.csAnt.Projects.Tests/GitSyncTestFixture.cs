@@ -17,7 +17,7 @@ namespace SoftwareMonkeys.csAnt.Projects.Tests
 			// Sync the files
 			testScript.GitSync(
 				"csAnt",
-				ProjectDirectory // Use the actual project directory from the test fixture, not the temporary directory from the test script
+				GetOriginalDirectory(testScript) // Use the actual project directory from the test fixture, not the temporary directory from the test script
 			);
 
 			var tmpFile = testScript.ProjectDirectory
@@ -29,7 +29,7 @@ namespace SoftwareMonkeys.csAnt.Projects.Tests
 			// Sync the files again
 			testScript.GitSync(
 				"csAnt",
-				ProjectDirectory // Use the actual project directory from the test fixture, not the temporary directory from the test script
+				GetOriginalDirectory(testScript) // Use the actual project directory from the test fixture, not the temporary directory from the test script
 			);
 
 		}
