@@ -6,6 +6,7 @@ from GetCSScript import GetCSScript
 from GetSharpZipLib import GetSharpZipLib
 from GetHtmlAgilityPack import GetHtmlAgilityPack
 from RunCSScript import RunCSScript
+from GetRemainingLibs import GetRemainingLibs
 
 # Basic variables
 currentDir = os.getcwd()
@@ -60,3 +61,17 @@ RunCSScript(csPrepareScript, sourceProjectsDir)
 
 # Create the project node
 RunCSScript(createProjectNodeScript, "")
+
+# Get the remaining libs by checking the .node files in the /libs/ directory
+GetRemainingLibs()
+
+
+
+print ""
+print "===== Preparation completed successfully! ====="
+print ""
+print "You can now run scripts via csAnt."
+print ""
+print "Example:"
+print "sh csAnt.sh HelloWorld"
+print ""

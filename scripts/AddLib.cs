@@ -5,6 +5,8 @@ using Microsoft.CSharp;
 using System.Diagnostics;
 using SoftwareMonkeys.csAnt;
 
+[ExpectedArgument("name")]
+[ExpectedArgument("url")]
 class AddLibScript : BaseScript
 {
 	public static void Main(string[] args)

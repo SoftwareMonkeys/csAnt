@@ -10,7 +10,7 @@ def GetLib(name, libDir, zipInternal, zipLocal, zipUrl, generalLibDir):
 
 	print ""
 	print "========================================"
-	print " Getting " + name + " library files"
+	print "Getting " + name + " library files"
 	print ""
 
 	# Output constants
