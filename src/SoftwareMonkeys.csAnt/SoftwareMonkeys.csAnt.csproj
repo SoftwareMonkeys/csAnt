@@ -129,6 +129,8 @@
     <Compile Include="BaseScript.FixScriptName.cs" />
     <Compile Include="SubConsoleWriter.cs" />
     <Compile Include="BaseScript.TimeStamp.cs" />
+    <Compile Include="BaseScript.GetIndentSpace.cs" />
+    <Compile Include="BaseScript.ActivateScript.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
