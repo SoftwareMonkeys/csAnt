@@ -51,15 +51,7 @@ class Test_BuildFromSourceReleaseScript : BaseProjectTestScript
 		Console.WriteLine("Unzipping...");
 		Console.WriteLine("");
 
-		var tmpDir = ProjectDirectory
-			+ Path.DirectorySeparatorChar
-			+ "_tmp"
-			+ Path.DirectorySeparatorChar
-			+ "testing"
-			+ Path.DirectorySeparatorChar
-			+ Guid.NewGuid().ToString()
-			+ Path.DirectorySeparatorChar
-			+ ProjectName;
+		var tmpDir = GetTmpDir();
 
 		Unzip(latestFile, tmpDir);
 
@@ -96,7 +88,7 @@ class Test_BuildFromSourceReleaseScript : BaseProjectTestScript
 			ExecuteScript("CycleBuild");
 		}
 
-		Directory.Delete(ProjectDirectory, true);
+		//Directory.Delete(ProjectDirectory, true);
 
 		// Move back to the original project directory
 		ProjectDirectory = originalProjectDirectory;
