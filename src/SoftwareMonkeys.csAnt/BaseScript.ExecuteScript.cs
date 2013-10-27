@@ -24,8 +24,9 @@ namespace SoftwareMonkeys.csAnt
 			Console.WriteLine("");
 			Console.WriteLine(GetIndentSpace(Indent) + "// --------------------------------------------------");
 			Console.WriteLine(GetIndentSpace(Indent) + "// Executing script: " + scriptName);
-			WriteScriptStack(parentScriptList);
 			Console.WriteLine(GetIndentSpace(Indent) + "// Directory: " + CurrentDirectory);
+			if (IsVerbose)
+				WriteScriptStack(parentScriptList);
 			Console.WriteLine("");
 
 			string scriptFile = GetScriptPath(scriptName);
@@ -49,7 +50,8 @@ namespace SoftwareMonkeys.csAnt
 			
 			Console.WriteLine("");
 			Console.WriteLine(GetIndentSpace(Indent) + "// Finished executing script: " + scriptName);
-			WriteScriptStack(parentScriptList);
+			if (IsVerbose)
+				WriteScriptStack(parentScriptList);
 			Console.WriteLine(GetIndentSpace(Indent) + "// --------------------------------------------------");
 
 		}
@@ -68,7 +70,9 @@ namespace SoftwareMonkeys.csAnt
 						if (String.IsNullOrEmpty(list[i]))
 							throw new Exception("Item is null or empty.");
 
-						builder.Append(" ^ " + list [i]);
+						var 
+
+						builder.Append(list [i]);
 				}
 			
 				builder.Append(Environment.NewLine);
@@ -85,9 +89,8 @@ namespace SoftwareMonkeys.csAnt
 
 			if (c is SubConsoleWriter) {
 				while (c is SubConsoleWriter) {
+					list.Insert (0, c.ScriptName);
 					c = ((SubConsoleWriter)c).ParentWriter;
-					//if (!list.Contains(c.ScriptName))
-						list.Insert (0, c.ScriptName);
 				}
 			}
 
