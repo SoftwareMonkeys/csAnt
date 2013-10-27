@@ -2,7 +2,7 @@
 /lib/csAnt/bin/Release/*.exe
 /lib/csAnt/bin/Release/*.config
 /lib/csAnt/bin/Release/*.snk
-/scripts/prepare/*
+/scripts/Initialize/*
 /scripts/HelloWorld.cs
 /scripts/CreateProjectNode.cs
 /scripts/BuildSolution.cs
@@ -46,5 +46,4 @@
 /lib/GCUpload/*.dll
 /lib/GCUpload/*.zip
 /lib/*.zip
-/prepare-linux.sh
-/csAnt.sh
+/*.sh
