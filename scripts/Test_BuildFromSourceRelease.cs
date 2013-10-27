@@ -77,7 +77,7 @@ class Test_BuildFromSourceReleaseScript : BaseProjectTestScript
 		Console.WriteLine("Preparing...");
 		Console.WriteLine("");
 
-		PrepareProject(ProjectDirectory);
+		InitializeProject(ProjectDirectory);
 
 		if (!IsError)
 		{
