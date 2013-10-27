@@ -2,7 +2,7 @@
   "Name": "FileNodes",
   "Properties": {
     "Url": "https://filenodes.googlecode.com/files/FileNodes-bin-%5B2012-11-14--9-17-20%5D.zip",
-    "SubPath": "/"
+    "SubPath": "/*"
   }
   
 }
