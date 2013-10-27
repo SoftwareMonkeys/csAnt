@@ -19,7 +19,7 @@ if ".tmp" in sourceProjectsDir: # If .tmp is found in the path then adjust the s
 	sourceProjectsDir = os.path.abspath("../../..")
 
 # Script variables
-csPrepareScript = "scripts" + os.sep + "prepare" + os.sep + "Prepare.cs"
+csInitializeScript = "scripts" + os.sep + "Initialize" + os.sep + "Initialize.cs"
 createProjectNodeScript = "scripts" + os.sep + "CreateProjectNode.cs"
 
 # ==================================================
@@ -29,10 +29,10 @@ createProjectNodeScript = "scripts" + os.sep + "CreateProjectNode.cs"
 print ""
 print ""
 print "// --------------------"
-print "// Preparing Project"
+print "// Initializing Project"
 print "// --------------------"
 print ""
-print "The project is being prepared for development, by downloading required files."
+print "The project is being initialized ready for development, by downloading required files."
 print ""
 
 print("Current directory:");
@@ -60,8 +60,8 @@ GetSharpZipLib(libDir, generalLibDir)
 # HtmlAgilityPack
 GetHtmlAgilityPack(libDir, generalLibDir)
 
-# Launch the Prepare.cs script
-RunCSScript(csPrepareScript, sourceProjectsDir)
+# Launch the Initialize.cs script
+RunCSScript(csInitializeScript, sourceProjectsDir)
 
 # Create the project node
 RunCSScript(createProjectNodeScript, "")
@@ -73,7 +73,7 @@ GetRemainingLibs()
 
 print ""
 print "----------------------------------------"
-print "Preparation completed successfully!"
+print "Initialization complete!"
 print "----------------------------------------"
 print ""
 print "You can now run scripts via csAnt."
