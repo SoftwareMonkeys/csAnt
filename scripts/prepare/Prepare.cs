@@ -413,9 +413,12 @@ class PrepareScript
 		string generalLibDir
 	)
 	{
+		// TODO: This GetLib function is a duplicate of the python version /GetLib.py.
+		// See if it's possible to have this function call the python one, or the other way around, so there's only one GetLib function to maintain
+
 		Console.WriteLine("");
 		Console.WriteLine("========================================");
-		Console.WriteLine(" Getting " + name + " library files");
+		Console.WriteLine("Getting " + name + " library files");
 		Console.WriteLine("");
 
 		// Output constants
