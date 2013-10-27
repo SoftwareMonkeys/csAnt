@@ -42,7 +42,7 @@
 /lib/cs-script/Lib/Bin/NET 4.0/*.dll
 /lib/SharpZipLib/net-20/*.dll
 /lib/SharpZipLib/*.zip
-/lib/FileNodes/Release/*.dll
+/lib/FileNodes/bin/Release/*.dll
 /lib/FileNodes/*.zip
 /lib/HtmlAgilityPack/*.dll
 /lib/HtmlAgilityPack/*.zip
