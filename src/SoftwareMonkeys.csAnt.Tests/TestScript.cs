@@ -6,7 +6,7 @@ namespace SoftwareMonkeys.csAnt.Tests
 	{
 		public TestScript (string scriptName, BaseTestFixture fixture) : base(scriptName)
 		{
-			CurrentDirectory = fixture.GetProjectRoot();
+			CurrentDirectory = fixture.GetRoot();
 		}
 
 		public override bool Start (string[] args)
