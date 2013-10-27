@@ -1,7 +1,7 @@
 # Set general constants
 BASE_DIR=$PWD
 LIB_DIR="$BASE_DIR/lib"
-SOURCE_PROJECTS_DIR="../"
+SOURCE_PROJECTS_DIR=$(readlink -f "../")
 GENERAL_LIB_DIR="$BASE_DIR/../lib"
 
 if [ ! -d "$GENERAL_LIB_DIR" ]; then
@@ -57,6 +57,7 @@ echo "The project is being prepared for development, by downloading required lib
 echo ""
 
 echo "Base dir: $BASE_DIR"
+echo "Source projects dir: $SOURCE_PROJECTS_DIR"
 
 
 # ==================   lib directory   =================

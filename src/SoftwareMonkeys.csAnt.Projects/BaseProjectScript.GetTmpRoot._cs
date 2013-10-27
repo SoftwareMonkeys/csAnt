@@ -1,0 +1,23 @@
+using System;
+using System.IO;
+
+namespace SoftwareMonkeys.csAnt.Projects
+{
+	public partial class BaseProjectScript
+	{
+		public override string GetTmpRoot ()
+		{
+			var name = Path.GetFileName(CurrentDirectory);
+
+			return Path.GetFullPath(
+				CurrentDirectory
+				+ Path.DirectorySeparatorChar
+				+ ".."
+				+ Path.DirectorySeparatorChar
+				+ name
+				+ ".tmp"
+			);
+		}
+	}
+}
+
