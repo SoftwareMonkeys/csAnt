@@ -60,6 +60,8 @@ namespace SoftwareMonkeys.csAnt
 		string GetTmpFile();
 
 		void EnsureDirectoryExists(string path);
+
+		string[] FindFiles(string directory, string[] patterns);
 		#endregion
 
 		#region Downloads
