@@ -22,7 +22,6 @@
 /scripts/Update/*
 /scripts/RunUnitTests/*
 /scripts/RunTestScripts/*
-/scripts/ImportLocalWebApp/*
 /scripts/Test_*.cs
 /lib/csAnt/bin/Release/*.dll
 /lib/csAnt/bin/Release/*.exe
@@ -47,8 +46,6 @@
 /lib/FileNodes/*.zip
 /lib/HtmlAgilityPack/*.dll
 /lib/HtmlAgilityPack/*.zip
-/lib/GitSharp/*.dll
-/lib/GitSharp/*.zip
 /lib/GCUpload/*.dll
 /lib/GCUpload/*.zip
 /lib/*.zip
