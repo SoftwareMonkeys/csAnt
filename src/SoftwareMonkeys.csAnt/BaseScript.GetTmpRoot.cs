@@ -7,9 +7,16 @@ namespace SoftwareMonkeys.csAnt
 	{
 		public virtual string GetTmpRoot()
 		{
-			return CurrentDirectory
+			var name = Path.GetFileName(CurrentDirectory);
+
+			return Path.GetFullPath(
+				CurrentDirectory
 				+ Path.DirectorySeparatorChar
-				+ "_tmp";
+				+ ".."
+				+ Path.DirectorySeparatorChar
+				+ name
+				+ ".tmp"
+			);
 		}
 	}
 }
