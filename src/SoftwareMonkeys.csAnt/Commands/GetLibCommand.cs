@@ -96,7 +96,7 @@ namespace SoftwareMonkeys.csAnt
 				+ Path.DirectorySeparatorChar
 				+ name;
 
-			return Directory.GetFiles(libDir).Length > 0
+			return Directory.GetFiles(libDir).Length > 1
 				|| Directory.GetDirectories(libDir).Length > 0;
 		}
 
