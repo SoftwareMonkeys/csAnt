@@ -21,12 +21,12 @@ class ReleaseScript : BaseProjectScript
 	
 	public override bool Start(string[] args)
 	{
-		if (args.Length > 0)
+		if (args.Length > 0 && !args[0].StartsWith("-"))
 		{
-			var releaseList = args[0];
+			string releaseList = args[0];
 
 			Console.WriteLine("Release list: " + releaseList);
-
+			
 			CreateRelease(releaseList);
 		}
 		else
