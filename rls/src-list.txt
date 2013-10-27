@@ -52,6 +52,5 @@
 /scripts/Initialize/*
 /scripts/RunUnitTests/*
 /scripts/RunTestScripts/*
-/prepare-linux.sh
 /*.sh
 /csAnt.node
