@@ -24,9 +24,9 @@ class PrepareScript
 	
 	public void Start(string[] args)
 	{
-		var projectDirectory = GetProjectDirectory();
+		var originalDirectory = GetOriginalDirectory();
 
-		Console.WriteLine("Project directory: " + projectDirectory);
+		Console.WriteLine("Original directory: " + originalDirectory);
 
 		var sourceProjectsDirectory = args[0];
 
@@ -34,7 +34,9 @@ class PrepareScript
 
 		Console.WriteLine("Source projects dir: " + sourceProjectsDirectory);
 
-		string scriptsDir = projectDirectory
+		var currentDirectory = Environment.CurrentDirectory;
+
+		string scriptsDir = currentDirectory
 			+ Path.DirectorySeparatorChar
 			+ "scripts";
 
@@ -51,7 +53,7 @@ class PrepareScript
 
 		string name = "csAnt";
 
-		string csAntLibDir = projectDirectory
+		string csAntLibDir = currentDirectory
 			+ Path.DirectorySeparatorChar
 			+ "lib"
 			+ Path.DirectorySeparatorChar
@@ -83,20 +85,20 @@ class PrepareScript
 		//MoveScriptsToDestination(subDir, scriptsDir);
 
 		// Move launcher from the tmp directory to the destination
-		MoveLauncherToDestination(subDir, projectDirectory);
+		MoveLauncherToDestination(subDir, originalDirectory);
 
 		//Directory.Delete(subDir);
 	}
 
 	public void UnzipExisting(string csAntZipInternal)
 	{
-		var projectDirectory = GetProjectDirectory();
+		var originalDirectory = GetOriginalDirectory();
 
-		var scriptsDir = projectDirectory
+		var scriptsDir = originalDirectory
 			+ Path.DirectorySeparatorChar
 			+ "scripts";
 
-		var libDir = projectDirectory
+		var libDir = originalDirectory
 			+ Path.DirectorySeparatorChar
 			+ "lib";
 
@@ -119,7 +121,7 @@ class PrepareScript
 		MoveScriptsToDestination(subDir, scriptsDir);
 
 		// Move launcher from the tmp directory to the destination
-		MoveLauncherToDestination(subDir, projectDirectory);
+		MoveLauncherToDestination(subDir, originalDirectory);
 
 		//Directory.Delete(tmpDir, true);
 	}
@@ -307,7 +309,7 @@ class PrepareScript
 	    }
 	}  
 
-	public string GetProjectDirectory()
+	public string GetOriginalDirectory()
 	{
 		var path = Path.GetFullPath(".");
 
