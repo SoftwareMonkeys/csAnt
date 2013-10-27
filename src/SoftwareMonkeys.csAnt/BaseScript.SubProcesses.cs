@@ -1,12 +1,13 @@
 using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 
-namespace csAnt.MonoDevelop
+namespace SoftwareMonkeys.csAnt
 {
-	public class BaseScript
+	public partial class BaseScript
 	{
-		public BaseScript ()
-		{
-		}
+		// TODO: Check if needed
+		public List<Process> SubProcesses = new List<Process>();
 	}
 }
 
