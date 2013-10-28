@@ -1,14 +1,14 @@
-PrepareScriptFile="/scripts/Initialize/Initialize.py"
-PrepareScriptFile=$PWD$PrepareScriptFile
-PrepareScriptUrl="https://csant.googlecode.com/git/scripts/Initialize/Initialize.py"
+InitScriptFile="/scripts/Initialize/Initialize.py"
+InitScriptFile=$PWD$InitScriptFile
+InitScriptUrl="https://csant.googlecode.com/git/scripts/Initialize/Initialize.py"
 
-if [ ! -f $PrepareScriptFile ]; then
+if [ ! -f $InitScriptFile ]; then
 
 	mkdir $PWD"/scripts"
 
 	mkdir $PWD"/scripts/Initialize"
 
-	wget -O $PrepareScriptFile $PrepareScriptUrl
+	wget -O $InitScriptFile $InitScriptUrl
 fi
 
-python $PrepareScriptFile
+python $InitScriptFile
