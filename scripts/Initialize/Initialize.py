@@ -3,41 +3,41 @@ import urllib
 
 def Initialize():
 
-	DownloadScripts()
+        DownloadScripts()
 
-	NextStep()
+        NextStep()
 
 def NextStep():
 
-	os.system("python " + os.path.abspath("scripts/Initialize/Initialize2.py"))
+        os.system("python " + os.path.abspath("scripts/Initialize/Initialize2.py"))
 
 def DownloadScripts():
 
-	scripts = ['GetCSScript', 'GetHtmlAgilityPack', 'GetLib', 'GetRemainingLibs', 'GetSharpZipLib', 'Initialize2', 'Initialize3', 'RunCSScript', 'Utils']
+        scripts = ['GetCSScript', 'GetHtmlAgilityPack', 'GetLib', 'GetRemainingLibs', 'GetSharpZipLib', 'Initialize2', 'Initialize3', 'RunCSScript', 'Utils']
 
-	for script in scripts:
+        for script in scripts:
 
-		print("")
-		print("Script: " + script)
+                print("")
+                print("Script: " + script)
 
-	 	scriptPath = os.path.abspath("scripts/Initialize/" + script + ".py")
-		scriptUrl = "https://csant.googlecode.com/git/scripts/Initialize/" + script + ".py"
+                scriptPath = os.path.abspath("scripts/Initialize/" + script + ".py")
+                scriptUrl = "https://csant.googlecode.com/git/scripts/Initialize/" + script + ".py"
 
-		print("Script path: " + scriptPath)
-		print("Script URL: " + scriptUrl)
-	
-		CheckScript(scriptPath,scriptUrl)
+                print("Script path: " + scriptPath)
+                print("Script URL: " + scriptUrl)
+        
+                CheckScript(scriptPath,scriptUrl)
 
-		print("")
+                print("")
 
 
 def CheckScript( scriptPath, scriptUrl ):
-	if not os.path.isfile(scriptPath):
-		print("Downloading script")
-		urllib.urlretrieve (scriptUrl, scriptPath)
-	else:
-		
-		print("Skipping download")
+        if not os.path.isfile(scriptPath):
+                print("Downloading script")
+                urllib.urlretrieve (scriptUrl, scriptPath)
+        else:
+                
+                print("Skipping download")
 
 Initialize()
 

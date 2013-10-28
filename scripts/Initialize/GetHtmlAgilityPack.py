@@ -9,12 +9,12 @@ from GetLib import GetLib
 
 def GetHtmlAgilityPack(libDir, generalLibDir):
 
-	htmlAgilityPackLibDir = os.path.abspath(libDir + os.sep + "/HtmlAgilityPack")
-	
-	htmlAgilityPackZipUrl = "https://docs.google.com/uc?export=download&id=0B_8QvsLqRy5qclRRRnNMTGJhalE"
+        htmlAgilityPackLibDir = os.path.abspath(libDir + os.sep + "/HtmlAgilityPack")
+        
+        htmlAgilityPackZipUrl = "https://docs.google.com/uc?export=download&id=0B_8QvsLqRy5qclRRRnNMTGJhalE"
 
-	htmlAgilityPackZipLocal = generalLibDir + "/HtmlAgilityPack/HtmlAgilityPack.zip"
-	
-	htmlAgilityPackZipInternal = htmlAgilityPackLibDir + "/HtmlAgilityPack.zip"
+        htmlAgilityPackZipLocal = generalLibDir + "/HtmlAgilityPack/HtmlAgilityPack.zip"
+        
+        htmlAgilityPackZipInternal = htmlAgilityPackLibDir + "/HtmlAgilityPack.zip"
 
-	GetLib("HtmlAgilityPack", htmlAgilityPackLibDir, htmlAgilityPackZipInternal, htmlAgilityPackZipLocal, htmlAgilityPackZipUrl, generalLibDir)
+        GetLib("HtmlAgilityPack", htmlAgilityPackLibDir, htmlAgilityPackZipInternal, htmlAgilityPackZipLocal, htmlAgilityPackZipUrl, generalLibDir)
