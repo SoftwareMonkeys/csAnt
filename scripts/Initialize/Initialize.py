@@ -17,27 +17,27 @@ def DownloadScripts():
 
 	for script in scripts:
 
-		print ""
-		print "Script: " + script
+		print("")
+		print("Script: " + script)
 
 	 	scriptPath = os.path.abspath("scripts/Initialize/" + script + ".py")
 		scriptUrl = "https://csant.googlecode.com/git/scripts/Initialize/" + script + ".py"
 
-		print "Script path: " + scriptPath
-		print "Script URL: " + scriptUrl
+		print("Script path: " + scriptPath)
+		print("Script URL: " + scriptUrl)
 	
 		CheckScript(scriptPath,scriptUrl)
 
-		print ""
+		print("")
 
 
 def CheckScript( scriptPath, scriptUrl ):
 	if not os.path.isfile(scriptPath):
-		print "Downloading script"
+		print("Downloading script")
 		urllib.urlretrieve (scriptUrl, scriptPath)
 	else:
 		
-		print "Skipping download"
+		print("Skipping download")
 
 Initialize()
 
