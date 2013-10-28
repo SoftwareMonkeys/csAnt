@@ -1,4 +1,4 @@
 import os
 
 def IsLinux():
-	return os.sep == "/"
+        return os.sep == "/"
