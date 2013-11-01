@@ -47,6 +47,12 @@ namespace SoftwareMonkeys.csAnt.Projects
 
 			GitClone(sourceDirectory, importedDirectory);
 
+			var sourceFile = importedDirectory
+				+ Path.DirectorySeparatorChar
+					+ "source.txt";
+
+			File.WriteAllText(sourceFile, sourceDirectory);
+
 			return importedDirectory;
 		}
 	}

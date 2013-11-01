@@ -1,8 +1,8 @@
 using System;
 
-namespace SoftwareMonkeys.csAnt.Projects
+namespace SoftwareMonkeys.csAnt
 {
-	public partial class BaseProjectScript
+	public partial class BaseScript
 	{
 		public string ImportedDirectory { get;set; }
 	}

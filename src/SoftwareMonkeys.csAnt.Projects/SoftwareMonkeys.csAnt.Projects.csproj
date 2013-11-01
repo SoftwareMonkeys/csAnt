@@ -51,8 +51,14 @@
     <Compile Include="BaseProjectScript.ProjectNode.cs" />
     <Compile Include="GroupNodeNotFoundException.cs" />
     <Compile Include="BaseProjectScript.ClearTmp.cs" />
-    <Compile Include="BaseProjectScript.GitImport.cs" />
-    <Compile Include="BaseProjectScript.GitSync.cs" />
+    <Compile Include="BaseProjectScript.ImportExists.cs" />
+    <Compile Include="BaseProjectScript.CreateProjectNode.cs" />
+    <Compile Include="BaseProjectScript.Relocate.cs" />
+    <Compile Include="BaseProjectScript.ExportFile.cs" />
+    <Compile Include="BaseProjectScript.AddImport.cs" />
+    <Compile Include="BaseProjectScript.ImportFile.cs" />
+    <Compile Include="BaseProjectScript.AddImportPattern.cs" />
+    <Compile Include="BaseProjectScript.ImportSync.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
