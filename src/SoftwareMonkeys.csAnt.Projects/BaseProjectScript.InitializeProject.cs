@@ -20,9 +20,9 @@ namespace SoftwareMonkeys.csAnt.Projects
 
 			var initFile = "";
 			if (!IsWindows)
-				initFile = "init-" + ProjectName + "-linux.sh";
+				initFile = "init-" + ProjectName + "-project-linux.sh";
 			else	
-				initFile = "init-" + ProjectName + "-windows.sh";
+				initFile = "init-" + ProjectName + "-project-windows.sh";
 
 			var cmdName = "bash";
 
