@@ -38,11 +38,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
-    <Compile Include="GitSyncTestFixture.cs" />
     <Compile Include="BaseProjectsTestFixture.cs" />
     <Compile Include="TestProjectScript.cs" />
     <Compile Include="BaseProjectTestScript.cs" />
     <Compile Include="BuildAllSolutionsTestFixture.cs" />
+    <Compile Include="ImportFileTestFixture.cs" />
+    <Compile Include="ExportFileTestFixture.cs" />
+    <Compile Include="ImportSyncTestFixture.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
