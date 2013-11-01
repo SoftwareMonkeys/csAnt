@@ -61,7 +61,7 @@ namespace SoftwareMonkeys.csAnt.UI.csAntConsole
 
 			var parser = new Arguments (args);
 
-			var scr = new LauncherScript (scriptName);
+			var scr = new Script (scriptName);
 
 			scr.Console = Console;
 
