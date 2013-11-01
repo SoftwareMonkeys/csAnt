@@ -12,6 +12,8 @@ namespace SoftwareMonkeys.csAnt.Tests
 		{
 			var testScript = GetTestScript();
 
+			GrabOriginalFiles(testScript, "lib/*");
+
 			var dir = testScript.CurrentDirectory;
 
 			Console.WriteLine("Tmp dir: " + dir);
