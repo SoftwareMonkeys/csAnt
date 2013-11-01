@@ -45,7 +45,6 @@
     <Compile Include="BaseProjectScript.GroupNode.cs" />
     <Compile Include="BaseProjectScript.ImportLocalLib.cs" />
     <Compile Include="BaseProjectScript.ImportLocalWebApp.cs" />
-    <Compile Include="BaseProjectScript.PrepareProject.cs" />
     <Compile Include="BaseProjectScript.ProjectDirectory.cs" />
     <Compile Include="BaseProjectScript.ProjectName.cs" />
     <Compile Include="BaseProjectScript.ProjectNode.cs" />
@@ -59,6 +58,7 @@
     <Compile Include="BaseProjectScript.ImportFile.cs" />
     <Compile Include="BaseProjectScript.AddImportPattern.cs" />
     <Compile Include="BaseProjectScript.ImportSync.cs" />
+    <Compile Include="BaseProjectScript.InitializeProject.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
