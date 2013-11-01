@@ -26,7 +26,9 @@ class CleanScript : BaseProjectScript
 
 		CleanProjectDirectories();
 		
-		return true;
+		AddSummary("Cleaned the project of .dll files.");
+
+		return !IsError;
 	}
 
 	public void CleanBinDirectory()

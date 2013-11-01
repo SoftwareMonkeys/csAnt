@@ -27,6 +27,12 @@ namespace SoftwareMonkeys.csAnt
 		int Indent { get; set; }
 		#endregion
 
+		#region Imports properties
+		string ImportedDirectory { get;set; }
+
+		string GetImportedDirectory();
+		#endregion
+
 		#region Start
 		void SetUp();
 

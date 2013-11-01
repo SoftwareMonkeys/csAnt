@@ -4,11 +4,11 @@ using System.IO;
 namespace SoftwareMonkeys.csAnt.UI.csAntConsole
 {
 	/// <summary>
-	/// A simple concrete script used by the csAnt console, to launch other scripts.
+	/// A script that can be used programmatically.
 	/// </summary>
-	public class LauncherScript : BaseScript
+	public class Script : BaseScript
 	{
-		public LauncherScript(string scriptName) : base(scriptName)
+		public Script(string scriptName) : base(scriptName)
 		{
 		}
 
