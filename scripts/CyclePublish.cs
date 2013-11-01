@@ -24,7 +24,6 @@ class CycleReleaseScript : BaseProjectScript
 		// Build the whole project first
 		ExecuteScript("CycleBuild");
 
-
 		// Git clone the project to another directory
 		var tmpDir = CloneToTmpDirectory();
 
@@ -65,6 +64,8 @@ class CycleReleaseScript : BaseProjectScript
 	{
 		Console.WriteLine("Cloning to tmp directory...");
 
+		var originalDirectory = CurrentDirectory;
+
 		var tmpDirectory = GetTmpDir();
 
 		Console.WriteLine("Tmp directory:");
@@ -76,6 +77,25 @@ class CycleReleaseScript : BaseProjectScript
 
 		AddSummary("Cloned project to: " + tmpDirectory);
 
+		CopySecurityCode(originalDirectory, tmpDirectory);
+
 		return tmpDirectory;
+	}
+
+	public void CopySecurityCode(string fromDir, string toDir)
+	{
+		var fromFile = fromDir
+			+ Path.DirectorySeparatorChar
+			+ "_security"
+			+ Path.DirectorySeparatorChar
+			+ "GoogleCode"
+			+ Path.DirectorySeparatorChar
+			+ "GoogleCode.node";
+
+		var toFile = fromFile.Replace(fromDir, CurrentDirectory);
+
+		EnsureDirectoryExists(Path.GetDirectoryName(toFile));
+
+		File.Copy(fromFile, toFile);
 	}
 }
