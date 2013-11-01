@@ -2,10 +2,11 @@ using System;
 
 namespace SoftwareMonkeys.csAnt
 {
-	public class BaseScript
+	public partial class BaseScript
 	{
-		public BaseScript ()
+		public string ToRelative(string absolutePath)
 		{
+			return absolutePath.Replace(CurrentDirectory, "").TrimStart('/').TrimStart('\\');
 		}
 	}
 }

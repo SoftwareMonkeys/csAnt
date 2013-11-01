@@ -1,11 +1,13 @@
 using System;
+using System.IO;
 
 namespace SoftwareMonkeys.csAnt
 {
-	public class BaseScript
+	public partial class BaseScript
 	{
-		public BaseScript ()
+		public string ToAbsolute(string relativePath)
 		{
+			return Path.GetFullPath(relativePath);
 		}
 	}
 }

@@ -131,6 +131,13 @@
     <Compile Include="BaseScript.TimeStamp.cs" />
     <Compile Include="BaseScript.GetIndentSpace.cs" />
     <Compile Include="BaseScript.ActivateScript.cs" />
+    <Compile Include="Script.cs" />
+    <Compile Include="BaseScript.GitPull.cs" />
+    <Compile Include="BaseScript.ToRelative.cs" />
+    <Compile Include="BaseScript.ToAbsolute.cs" />
+    <Compile Include="BaseScript.GitAddRemote.cs" />
+    <Compile Include="BaseScript.GetImportedDirectory.cs" />
+    <Compile Include="BaseScript.ImportedDirectory.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
