@@ -21,6 +21,14 @@ namespace SoftwareMonkeys.csAnt
 			}
 			set
 			{
+				if (IsVerbose)
+				{
+					Console.WriteLine ("");
+					Console.WriteLine ("Setting current directory:");
+					Console.WriteLine (value);
+					Console.WriteLine ("");
+				}
+
 				currentDirectory = value;
 				Environment.CurrentDirectory = value;
 			}
