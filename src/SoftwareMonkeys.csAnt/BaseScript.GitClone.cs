@@ -24,11 +24,14 @@ namespace SoftwareMonkeys.csAnt
 				destinationDir
 			);*/
 
+			//var originalDirectory = CurrentDirectory;
+			
+			Console.WriteLine("");
 			Console.WriteLine ("Cloning...");
 			Console.WriteLine ("Source: " + sourceDir);
 			Console.WriteLine ("Destination: " + destinationDir);
 
-			CurrentDirectory = destinationDir;
+			//CurrentDirectory = destinationDir;
 
 			Git (
 				"clone",
@@ -36,8 +39,12 @@ namespace SoftwareMonkeys.csAnt
 				destinationDir,
 				"--verbose"
 			);
-
+			
+			Console.WriteLine("");
 			Console.WriteLine("Complete");
+			Console.WriteLine("");
+
+			//CurrentDirectory = originalDirectory;
 		}
 	}
 }

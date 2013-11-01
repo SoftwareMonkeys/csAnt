@@ -24,13 +24,7 @@ namespace SoftwareMonkeys.csAnt
 		{
 			Console.WriteLine ("Committing added/changed files...");
 
-			var originalDirectory = CurrentDirectory;
-
-			CurrentDirectory = directory;
-
-			Git ("commit", "-a", "-m:'" + message + "'");
-
-			CurrentDirectory = originalDirectory;
+			GitDirectory (directory, "commit", "-a", "-m:'" + message + "'");
 		}
 	}
 }

@@ -6,7 +6,7 @@ namespace SoftwareMonkeys.csAnt
 {
 	public partial class BaseScript
 	{
-		public Process StartDotNetExe(string exeFile, string[] arguments)
+		public Process StartDotNetExe(string exeFile, params string[] arguments)
 		{
 			string cmd = exeFile;
 			
@@ -19,8 +19,6 @@ namespace SoftwareMonkeys.csAnt
 			}
 
 			argsList.AddRange(arguments);
-
-			argsList.Add("--verbose");
 
 			return StartProcess(
 				cmd,
