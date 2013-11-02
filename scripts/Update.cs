@@ -8,7 +8,7 @@ using System.Diagnostics;
 using SoftwareMonkeys.csAnt;
 using SoftwareMonkeys.csAnt.Projects;
 
-class UpdateScript : BaseProjectsScript
+class UpdateScript : BaseProjectScript
 {
 	public static void Main(string[] args)
 	{
