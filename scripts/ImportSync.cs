@@ -8,20 +8,18 @@ using System.Diagnostics;
 using SoftwareMonkeys.csAnt;
 using SoftwareMonkeys.csAnt.Projects;
 
-class ExportFileScript : BaseProjectScript
+class ImportSyncScript : BaseProjectScript
 {
 	public static void Main(string[] args)
 	{
-		new ExportFileScript().Start(args);
+		new ImportSyncScript().Start(args);
 	}
 	
 	public override bool Start(string[] args)
 	{
                 var projectName = args[0];
 
-                var pattern = args[1];
-                
-                ExportFile(projectName, pattern);
+                ImportSync(projectName);
                 
 		return !IsError;
 	}
