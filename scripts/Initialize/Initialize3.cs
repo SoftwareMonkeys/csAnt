@@ -1,16 +1,17 @@
 //css_ref ../../lib/SharpZipLib/net-20/ICSharpCode.SharpZipLib.dll;
 //css_ref ../../lib/HtmlAgilityPack/Net40/HtmlAgilityPack.dll;
 using System;
-using System.IO;
-using Microsoft.CSharp;
 using System.Diagnostics;
-using System.Linq;
+using System.IO;
 using System.IO.Compression;
+using System.Linq;
+using System.Net;
+using System.Xml;
 using ICSharpCode.SharpZipLib.Zip;
 using ICSharpCode.SharpZipLib.Core;
-using System.Net;
 using HtmlAgilityPack;
 using System.Collections.Generic;
+using Microsoft.CSharp;
 
 /// <summary>
 /// Prepares the project for development by ensuring all necessary libraries etc. have been downloaded.
