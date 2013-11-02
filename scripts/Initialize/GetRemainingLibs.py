@@ -10,9 +10,9 @@ def GetRemainingLibs():
 	print("Getting remaining library files by scanning the .node files")
 	print("")
 
-        if (Utils.IsLinux():
+        if (Utils.IsLinux()):
                 os.system("sh csAnt.sh GetLibs")
-        else
+        else:
                 os.system("cscript csAnt.vbs GetLibs")
 
 	print("")

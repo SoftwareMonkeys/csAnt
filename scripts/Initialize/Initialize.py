@@ -9,7 +9,7 @@ def Initialize():
 
 def NextStep():
 
-        os.system(os.path.abspath("scripts/Initialize/Initialize2.py"))
+        execfile(os.path.abspath("scripts/Initialize/Initialize2.py"))
 
 def DownloadScripts():
 
