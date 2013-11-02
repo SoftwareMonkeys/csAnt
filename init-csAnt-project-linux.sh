@@ -11,4 +11,4 @@ if [ ! -f $InitScriptFile ]; then
 	wget -O $InitScriptFile $InitScriptUrl
 fi
 
-python $InitScriptFile
+python3 $InitScriptFile
