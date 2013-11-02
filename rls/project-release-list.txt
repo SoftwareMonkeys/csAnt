@@ -19,12 +19,15 @@
 /scripts/List.cs
 /scripts/RunTests.cs
 /scripts/Release/*
-/scripts/Update/*
 /scripts/RunUnitTests/*
 /scripts/RunTestScripts/*
 /scripts/Test_*.cs
 /scripts/ImportScript.cs
 /scripts/AddImport.cs
+/scripts/ImportFile.cs
+/scripts/ExportFile.cs
+/scripts/Update.cs
+/scripts/ImportSync.cs
 /lib/csAnt/bin/Release/*.dll
 /lib/csAnt/bin/Release/*.exe
 /lib/csAnt/bin/Release/*.config
