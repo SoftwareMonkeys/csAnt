@@ -14,7 +14,7 @@ namespace SoftwareMonkeys.csAnt.Projects
 		public void InitializeProject(string projectDirectory)
 		{
 			Console.WriteLine ("");
-			Console.WriteLine ("Preparing project:");
+			Console.WriteLine ("Initializing project:");
 			Console.WriteLine (projectDirectory);
 			Console.WriteLine ("");
 
@@ -31,7 +31,7 @@ namespace SoftwareMonkeys.csAnt.Projects
 			var initPath = projectDirectory
 				+ Path.DirectorySeparatorChar
 				+ initFile;
-			
+
 			Console.WriteLine("Command name:");
 			Console.WriteLine(cmdName);
 			Console.WriteLine("");
