@@ -93,7 +93,7 @@ namespace SoftwareMonkeys.csAnt.Projects.Tests
 			Console.WriteLine ("");
 
 			// Add project 2 as import
-			script.AddGitImport("ProjectTwo", project2Dir);
+			script.AddImport("ProjectTwo", project2Dir);
 
 			Console.WriteLine ("Importing test script to project from project two...");
 			Console.WriteLine ("");

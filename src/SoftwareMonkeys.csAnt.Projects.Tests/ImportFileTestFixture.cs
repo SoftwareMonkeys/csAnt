@@ -69,7 +69,7 @@ namespace SoftwareMonkeys.csAnt.Projects.Tests
 			script.Relocate(project1Dir);
 
 			// Add project 2 as import
-			script.AddGitImport("ProjectTwo", project2Dir);
+			script.AddImport("ProjectTwo", project2Dir);
 
 			script.ImportFile("ProjectTwo", "scripts/TestScript.cs", "scripts", false);
 

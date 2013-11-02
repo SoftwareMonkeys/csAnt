@@ -5,13 +5,17 @@ namespace SoftwareMonkeys.csAnt.Projects
 {
 	public partial class BaseProjectScript
 	{
-		public string AddGitImport (string importProject, string importProjectPath)
+		public string AddImport (string importProject, string importProjectPath)
 		{
 			var projectName = ProjectName;
 
 			var importProjectName = importProject;
 
-			var sourceDirectory = Path.GetFullPath (importProjectPath);
+			var sourceDirectory = importProjectPath;
+
+			if (!sourceDirectory.Contains("http")
+			    && !sourceDirectory.Contains (CurrentDirectory))
+				sourceDirectory = Path.GetFullPath (importProjectPath);
 
 			var currentDirectory = CurrentDirectory;
 
@@ -40,9 +44,9 @@ namespace SoftwareMonkeys.csAnt.Projects
 
 				Console.WriteLine ("Import directory: " + importedDirectory);
 
-			
 				Console.WriteLine ("");
 			}
+
 			Directory.CreateDirectory(importedDirectory);
 
 			GitClone(sourceDirectory, importedDirectory);
