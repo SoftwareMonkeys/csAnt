@@ -8,25 +8,16 @@ using System.Diagnostics;
 using SoftwareMonkeys.csAnt;
 using SoftwareMonkeys.csAnt.Projects;
 
-class AddCsAntImportScript : BaseProjectScript
+class UpdateScript : BaseProjectsScript
 {
 	public static void Main(string[] args)
 	{
-		new AddCsAntImportScript().Start(args);
+		new UpdateScript().Start(args);
 	}
 	
 	public override bool Start(string[] args)
 	{
-		Console.WriteLine("");
-		Console.WriteLine("Adding csAnt import...");
-		Console.WriteLine("");
-
-		AddSummary("Added csAnt import info");
-
-                AddImport(
-                        "csAnt",
-                        "https://code.google.com/p/csant/"
-                );
+	        ImportSync("csAnt");
 
 		return !IsError;
 	}
