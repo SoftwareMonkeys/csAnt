@@ -158,7 +158,8 @@ class PrepareScript
 		{
 			"HelloWorld.cs",
 			"CreateProjectNode.cs",
-			"GetLibs.cs"
+			"GetLibs.cs",
+			"ImportScript.cs"
 		};
 
 		var requiredScriptFolders = new string[]
