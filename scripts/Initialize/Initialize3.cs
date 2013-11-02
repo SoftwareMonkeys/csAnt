@@ -244,15 +244,23 @@ class PrepareScript
 
 	public void MoveLauncherToDestination(string tmpDir, string toDir)
 	{
-		var file = tmpDir
-			+ Path.DirectorySeparatorChar
-			+ "csAnt.sh";
+	        var files = new string[]{
+	                "csAnt.sh",
+	                "csAnt.bat"
+	        };
+	
+	        foreach (var f in files)
+	        {
+		        var file = tmpDir
+			        + Path.DirectorySeparatorChar
+			        + f;
 
-		var toFile = toDir
-			+ Path.DirectorySeparatorChar
-			+ "csAnt.sh";
+		        var toFile = toDir
+			        + Path.DirectorySeparatorChar
+			        + f;
 
-		File.Copy(file, toFile, true);
+		        File.Copy(file, toFile, true);
+		}
 	}
 
 	public string GetNewestFile(string directory)
