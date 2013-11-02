@@ -78,15 +78,14 @@ class PrepareScript
 
 		Console.WriteLine("Sub dir: " + subDir);
 
+		// Move launcher from the tmp directory to the destination
+		MoveLauncherToDestination(subDir, originalDirectory);
 
 		// Move libraries from the tmp directory to the destination
 		MoveLibsToDestination(subDir, csAntLibDir);
 
 		// Move scripts from the tmp directory to the destination
 		MoveScriptsToDestination(subDir, scriptsDir);
-
-		// Move launcher from the tmp directory to the destination
-		MoveLauncherToDestination(subDir, originalDirectory);
 
 		//Directory.Delete(subDir);
 	}
@@ -115,14 +114,14 @@ class PrepareScript
 
 		var subDir = Directory.GetDirectories(tmpDir)[0];
 
+
+		// Move launcher from the tmp directory to the destination
+		MoveLauncherToDestination(subDir, originalDirectory);
 		// Move libraries from the tmp directory to the destination
 		MoveLibsToDestination(subDir, csAntLibDir);
 
 		// Move scripts from the tmp directory to the destination
 		MoveScriptsToDestination(subDir, scriptsDir);
-
-		// Move launcher from the tmp directory to the destination
-		MoveLauncherToDestination(subDir, originalDirectory);
 
 		//Directory.Delete(tmpDir, true);
 	}
