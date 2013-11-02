@@ -8,26 +8,21 @@ using System.Diagnostics;
 using SoftwareMonkeys.csAnt;
 using SoftwareMonkeys.csAnt.Projects;
 
-class AddCsAntImportScript : BaseProjectScript
+class ExportFileScript : BaseProjectScript
 {
 	public static void Main(string[] args)
 	{
-		new AddCsAntImportScript().Start(args);
+		new ExportFileScript().Start(args);
 	}
 	
 	public override bool Start(string[] args)
 	{
-		Console.WriteLine("");
-		Console.WriteLine("Adding csAnt import...");
-		Console.WriteLine("");
+                var projectName = args[0];
 
-		AddSummary("Added csAnt import info");
-
-                AddImport(
-                        "csAnt",
-                        "https://code.google.com/p/csant/"
-                );
-
+                var pattern = args[1];
+                
+                ExportFile(projectName, pattern);
+                
 		return !IsError;
 	}
 }
