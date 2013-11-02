@@ -39,11 +39,11 @@ def CheckScript( scriptPath, scriptUrl ):
         if not os.path.isfile(scriptPath):
                 print("Downloading script")
 
-                # urllib.request.urlretrieve (scriptUrl, scriptPath)
-                
-                fp = urllib.request.urlopen(scriptUrl)
-                with open(scriptPath, "w") as fo:
-                    fo.write(fp.read())
+                urllib.request.urlretrieve (scriptUrl, scriptPath)
+                # TODO: Remove if not needed
+                # fp = urllib.request.urlopen(scriptUrl)
+                # with open(scriptPath, "w") as fo:
+                #    fo.write(fp.read())
         else:
                 
                 print("Skipping download")
