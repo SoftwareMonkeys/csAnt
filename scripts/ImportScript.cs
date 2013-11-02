@@ -36,15 +36,41 @@ class ImportScriptScript : BaseProjectScript
                         + Path.DirectorySeparatorChar
                         + "scripts";
 
-                foreach (var f in Directory.GetFiles(csAntScriptsPath, pattern))
-                        Console.WriteLine(f);
+		Console.WriteLine("");
+                Console.WriteLine("csAnt scripts path:");
+                Console.WriteLine(csAntScriptsPath);
+		Console.WriteLine("");
 
-		/*AddSummary("Imported: " + scriptName);
-
+                var i = 0;
+                
                 AddImport(
                         "csAnt",
                         "https://code.google.com/p/csant/"
-                );*/
+                );
+                
+                if (!pattern.Contains(".cs"))
+                        pattern = pattern + ".cs";
+                
+                var files = FindFiles(csAntScriptsPath, pattern);
+
+                foreach (var f in files)
+                {
+                        i++;
+                        
+                        var toFile = f.Replace(csAntImportPath, CurrentDirectory);
+                        
+                        Console.WriteLine("To file: " + toFile);
+                        
+                        if (File.Exists(toFile))
+                                BackupFile(toFile);
+                                
+                        File.Copy(f, toFile, true);
+                }
+                
+
+		Console.WriteLine("Imported " + i + " files.");
+                
+		AddSummary("Imported " + i + " files.");
 
 		return !IsError;
 	}

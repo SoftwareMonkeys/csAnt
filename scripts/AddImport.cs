@@ -6,29 +6,25 @@ using System.Diagnostics;
 using SoftwareMonkeys.csAnt;
 
 [ExpectedArgument("name")]
-[ExpectedArgument("url")]
-class AddLibScript : BaseScript
+[ExpectedArgument("path")]
+class AddImportScript : BaseScript
 {
 	public static void Main(string[] args)
 	{
-		new AddLibScript().Start(args);
+		new AddImportScript().Start(args);
 	}
 	
 	public override bool Start(string[] args)
 	{
 		if (args.Length < 2)
-			Console.WriteLine("Two arguments expected; name and URL (to zip file).");
+			Console.WriteLine("Two arguments expected; name and path.");
 		else
 		{
 			string name = args[0];
 
-			string url = args[1];
+			string path = args[1];
 
-			string subPath = String.Empty;
-			if (args.Length == 3)
-				subPath = args[2];
-
-			AddLib(name, url, subPath);
+			AddImport(name, url, subPath);
 		}
 
 		return !IsError;
