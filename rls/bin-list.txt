@@ -17,3 +17,6 @@
 /lib/GCUpload/*.dll
 /lib/GCUpload/*.zip
 /lib/*.zip
+/*.sh
+/*.bat
+/*.vbs
