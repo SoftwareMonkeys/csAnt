@@ -36,8 +36,14 @@ def DownloadScripts():
 
 
 def CheckScript( scriptPath, scriptUrl ):
+        print("Checking script:");
+        print(scriptPath);
+
         if not os.path.isfile(scriptPath):
                 print("Downloading script")
+                
+                # urllib.request.urlretrieve (scriptUrl, scriptPath)
+                
                 fp = urllib.request.urlopen(scriptUrl)
                 with open(scriptPath, "w") as fo:
                     fo.write(fp.read())
