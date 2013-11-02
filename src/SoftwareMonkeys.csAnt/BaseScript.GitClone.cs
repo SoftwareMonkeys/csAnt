@@ -19,32 +19,26 @@ namespace SoftwareMonkeys.csAnt
 			string destinationDir
 		)
 		{
-			/*Repository.Clone(
-				sourceDir,
-				destinationDir
-			);*/
-
-			//var originalDirectory = CurrentDirectory;
-			
 			Console.WriteLine("");
 			Console.WriteLine ("Cloning...");
 			Console.WriteLine ("Source: " + sourceDir);
 			Console.WriteLine ("Destination: " + destinationDir);
 
-			//CurrentDirectory = destinationDir;
+			var tmpDir = GetTmpDir();
 
 			Git (
 				"clone",
 				sourceDir,
-				destinationDir,
+				tmpDir,
 				"--verbose"
 			);
-			
+
+			MoveDirectory(tmpDir, destinationDir);
+
 			Console.WriteLine("");
 			Console.WriteLine("Complete");
 			Console.WriteLine("");
 
-			//CurrentDirectory = originalDirectory;
 		}
 	}
 }
