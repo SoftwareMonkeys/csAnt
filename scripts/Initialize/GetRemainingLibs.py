@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
 import os
+import Utils
 
 def GetRemainingLibs():
 
@@ -9,7 +10,10 @@ def GetRemainingLibs():
 	print("Getting remaining library files by scanning the .node files")
 	print("")
 
-	os.system("sh csAnt.sh GetLibs");
+        if (Utils.IsLinux():
+                os.system("sh csAnt.sh GetLibs")
+        else
+                os.system("cscript csAnt.vbs GetLibs")
 
 	print("")
 	print("Done")
