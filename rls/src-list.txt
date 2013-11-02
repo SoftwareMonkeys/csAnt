@@ -54,3 +54,5 @@
 /scripts/RunTestScripts/*
 /*.sh
 /csAnt.node
+/*.bat
+/*.vbs
