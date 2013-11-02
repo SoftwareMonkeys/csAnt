@@ -8,11 +8,11 @@ using System.Diagnostics;
 using SoftwareMonkeys.csAnt;
 using SoftwareMonkeys.csAnt.Projects;
 
-class CycleReleaseScript : BaseProjectScript
+class CyclePublishScript : BaseProjectScript
 {
 	public static void Main(string[] args)
 	{
-		new CycleReleaseScript().Start(args);
+		new CyclePublishScript().Start(args);
 	}
 	
 	public override bool Start(string[] args)
@@ -36,17 +36,20 @@ class CycleReleaseScript : BaseProjectScript
 		// Build the cloned source code
 		ExecuteScript("CycleBuild");
 
-		Console.WriteLine("");
-		Console.WriteLine("Creating release zip files...");
-		Console.WriteLine("");
+                if (!IsError)
+                {
+		        Console.WriteLine("");
+		        Console.WriteLine("Creating release zip files...");
+		        Console.WriteLine("");
 
-		// Create the release
-		ExecuteScript(
-			"Release",
-			new string[]{
-				"-mode:Release"
-			}
-		);
+		        // Create the release
+		        ExecuteScript(
+			        "Release",
+			        new string[]{
+				        "-mode:Release"
+			        }
+		        );
+                }
 
 		if (!IsError)
 		{
@@ -92,7 +95,12 @@ class CycleReleaseScript : BaseProjectScript
 			+ Path.DirectorySeparatorChar
 			+ "GoogleCode.node";
 
-		var toFile = fromFile.Replace(fromDir, CurrentDirectory);
+		var toFile = fromFile.Replace(fromDir, toDir);
+
+                Console.WriteLine("Copying security node to:");
+                Console.WriteLine(toFile);
+                Console.WriteLine("From:");
+                Console.WriteLine(fromFile);
 
 		EnsureDirectoryExists(Path.GetDirectoryName(toFile));
 
