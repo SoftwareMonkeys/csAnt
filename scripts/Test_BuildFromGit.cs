@@ -23,6 +23,9 @@ class Test_BuildFromGitScript : BaseProjectTestScript
 		Console.WriteLine("Test building solutions from git clone...");
 		Console.WriteLine("");
 
+                // Perform a release cycle to ensure the releases are available for use during initialization
+                ExecuteScript("CycleRelease");
+
 		// Clone the project to another directory
 		var tmpDir = CloneToTmpDirectory();
 
