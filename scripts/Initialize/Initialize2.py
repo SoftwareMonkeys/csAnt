@@ -16,7 +16,7 @@ generalLibDir = os.path.abspath(currentDir + "/../lib")
 
 # Adjust basic variables
 if ".tmp" in sourceProjectsDir: # If .tmp is found in the path then adjust the source projects directory
-        sourceProjectsDir = os.path.abspath("../../..")
+	sourceProjectsDir = os.path.abspath("../../..")
 
 # Script variables
 csInitializeScript = "scripts" + os.sep + "Initialize" + os.sep + "Initialize3.cs"
@@ -26,26 +26,26 @@ createProjectNodeScript = "scripts" + os.sep + "CreateProjectNode.cs"
 # Output header and variable values
 # ==================================================
 
-print("")
-print("")
-print("// --------------------")
-print("// Initializing Project")
-print("// --------------------")
-print("")
-print("The project is being initialized ready for development, by downloading required files.")
-print("")
+print ""
+print ""
+print "// --------------------"
+print "// Initializing Project"
+print "// --------------------"
+print ""
+print "The project is being initialized ready for development, by downloading required files."
+print ""
 
 print("Current directory:");
 print(currentDir);
-print("")
+print ""
 
 print("Lib dir:");
 print(libDir);
-print("")
+print ""
 
 print("Source projects dir:");
 print(sourceProjectsDir);
-print("")
+print ""
 
 # ==================================================
 # Get library files
@@ -71,13 +71,13 @@ GetRemainingLibs()
 
 
 
-print("")
-print("----------------------------------------")
-print("Initialization complete!")
-print("----------------------------------------")
-print("")
-print("You can now run scripts via csAnt.")
-print("")
-print("Example:")
-print("sh csAnt.sh HelloWorld")
-print("")
+print ""
+print "----------------------------------------"
+print "Initialization complete!"
+print "----------------------------------------"
+print ""
+print "You can now run scripts via csAnt."
+print ""
+print "Example:"
+print "sh csAnt.sh HelloWorld"
+print ""
