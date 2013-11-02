@@ -14,7 +14,9 @@ class HelloWorldScript : BaseScript
 	
 	public override bool Start(string[] args)
 	{
+		Console.WriteLine("");
 		Console.WriteLine("Hello world!");
+		Console.WriteLine("");
 
 		AddSummary("Write the words 'Hello world!' to the console.");
 
