@@ -1,5 +1,4 @@
 import os
-import urllib
 import urllib.request
 
 def Initialize():
@@ -14,7 +13,7 @@ def NextStep():
 
 def DownloadScripts():
 
-        scripts = ['GetCSScript', 'GetHtmlAgilityPack', 'GetLib', 'GetRemainingLibs', 'GetSharpZipLib', 'Initialize2', 'Initialize3', 'RunCSScript', 'Utils']
+        scripts = ['GetCSScript.py', 'GetHtmlAgilityPack.py', 'GetLib.py', 'GetRemainingLibs.py', 'GetSharpZipLib.py', 'Initialize2.py', 'Initialize3.cs', 'RunCSScript.py', 'Utils']
 
         for script in scripts:
 
@@ -22,7 +21,7 @@ def DownloadScripts():
                 print("Script: " + script)
 
                 scriptPath = os.path.abspath("scripts/Initialize/" + script + ".py")
-                scriptUrl = "https://csant.googlecode.com/git/scripts/Initialize/" + script + ".py"
+                scriptUrl = "https://csant.googlecode.com/git/scripts/Initialize/" + script
 
                 print("Script path: " + scriptPath)
                 print("Script URL: " + scriptUrl)
@@ -33,12 +32,11 @@ def DownloadScripts():
 
 
 def CheckScript( scriptPath, scriptUrl ):
-        print("Checking script:");
-        print(scriptPath);
-
         if not os.path.isfile(scriptPath):
                 print("Downloading script")
-                urllib.request.urlretrieve (scriptUrl, scriptPath)
+                fp = urllib.request.urlopen(scriptUrl)
+                with open(scriptPath, "w") as fo:
+                    fo.write(fp.read())
         else:
                 
                 print("Skipping download")
