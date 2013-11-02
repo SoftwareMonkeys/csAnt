@@ -135,6 +135,8 @@ namespace SoftwareMonkeys.csAnt.Tests
 				script,
 				"/*.node",
 				"/*.sh",
+				"/*.bat",
+				"/*.vbs",
 				"/lib/**.dll",
 				"/src/**.cs",
 				"/src/**.csproj",
