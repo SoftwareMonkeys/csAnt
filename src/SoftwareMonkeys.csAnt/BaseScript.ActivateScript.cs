@@ -9,12 +9,9 @@ namespace SoftwareMonkeys.csAnt
 	{
 		public IScript ActivateScript(string scriptPath)
 		{
-			// TODO: Check if needed
-			//CSScript.CacheEnabled = true;
-
-			// Load the script assembly
 			CSScript.GlobalSettings.DefaultArguments = "/nl"; // TODO: This doesn't seem to be working
-
+			
+			// Load the script assembly
 			Assembly a = CSScript.Load(scriptPath);
 
 			var scriptName = Path.GetFileNameWithoutExtension(scriptPath);
