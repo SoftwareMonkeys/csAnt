@@ -23,6 +23,8 @@
 /scripts/RunUnitTests/*
 /scripts/RunTestScripts/*
 /scripts/Test_*.cs
+/scripts/ImportScript.cs
+/scripts/AddImport.cs
 /lib/csAnt/bin/Release/*.dll
 /lib/csAnt/bin/Release/*.exe
 /lib/csAnt/bin/Release/*.config
