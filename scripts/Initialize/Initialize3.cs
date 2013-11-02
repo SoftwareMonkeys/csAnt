@@ -83,7 +83,7 @@ class PrepareScript
 		MoveLibsToDestination(subDir, csAntLibDir);
 
 		// Move scripts from the tmp directory to the destination
-		//MoveScriptsToDestination(subDir, scriptsDir);
+		MoveScriptsToDestination(subDir, scriptsDir);
 
 		// Move launcher from the tmp directory to the destination
 		MoveLauncherToDestination(subDir, originalDirectory);
@@ -157,6 +157,7 @@ class PrepareScript
 	{
 		var requiredScriptFiles = new string[]
 		{
+			"HelloWorld.cs",
 			"CreateProjectNode.cs",
 			"GetLibs.cs"
 		};
