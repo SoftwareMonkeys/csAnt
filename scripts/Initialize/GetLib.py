@@ -5,6 +5,7 @@ import sys
 import zipfile
 import shutil
 import urllib
+import urllib.request
 
 def GetLib(name, libDir, zipInternal, zipLocal, zipUrl, generalLibDir):
 
@@ -79,7 +80,7 @@ def GetLibFromUrl( zipUrl, zipInternal ):
         print(zipInternal)
         print("")
 
-        urllib.urlretrieve (zipUrl, zipInternal)
+        urllib.request.urlretrieve (zipUrl, zipInternal)
 
 def ExtractInternalZipFile( zipInternal, libDir ):
         print("")
