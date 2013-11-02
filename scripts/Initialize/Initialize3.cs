@@ -164,9 +164,7 @@ class PrepareScript
 
 		var requiredScriptFolders = new string[]
 		{
-			"Update",
-			"Release",
-			"RunTests"
+			"Update"
 		};
 
 		if (!Directory.Exists(scriptsDir))
