@@ -5,7 +5,6 @@ import sys
 import zipfile
 import shutil
 import urllib
-import urllib.request
 
 def GetLib(name, libDir, zipInternal, zipLocal, zipUrl, generalLibDir):
 
