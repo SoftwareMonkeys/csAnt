@@ -16,7 +16,7 @@ def NextStep():
 
 def DownloadScripts():
 
-        scripts = ['GetCSScript.py', 'GetHtmlAgilityPack.py', 'GetLib.py', 'GetRemainingLibs.py', 'GetSharpZipLib.py', 'Initialize2.py', 'Initialize3.cs', 'RunCSScript.py', 'Utils.py']
+        scripts = ['GetCSScript.py', 'GetHtmlAgilityPack.py', 'GetLib.py', 'GetRemainingLibs.py', 'GetSharpZipLib.py', 'GetFileNodes.py', 'Initialize2.py', 'Initialize3.cs', 'RunCSScript.py', 'Utils.py']
 
         for script in scripts:
 
