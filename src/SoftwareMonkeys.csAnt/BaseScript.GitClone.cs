@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 
 namespace SoftwareMonkeys.csAnt
 {
@@ -24,7 +25,7 @@ namespace SoftwareMonkeys.csAnt
 			Console.WriteLine ("Source: " + sourceDir);
 			Console.WriteLine ("Destination: " + destinationDir);
 
-			var tmpDir = GetTmpDir();
+			var tmpDir = GetTmpDir() + Path.DirectorySeparatorChar + "_clone";
 
 			Git (
 				"clone",
