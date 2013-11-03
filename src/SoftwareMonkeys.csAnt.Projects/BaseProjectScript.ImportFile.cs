@@ -62,6 +62,8 @@ namespace SoftwareMonkeys.csAnt.Projects
 							File.Copy(file, toFile, true);
 							Console.WriteLine ("File is newer. Using.");
 						}
+						else if (File.GetLastWriteTime(file) == File.GetLastWriteTime(toFile))
+							Console.WriteLine ("File is same age. Skipping.");
 						else
 							Console.WriteLine ("File is older. Skipping.");
 					}
