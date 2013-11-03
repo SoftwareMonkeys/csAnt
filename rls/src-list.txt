@@ -48,7 +48,6 @@
 /lib/Libraries.node
 /scripts/**.cs
 /scripts/Release/*
-/scripts/Update/*
 /scripts/Initialize/*
 /scripts/RunUnitTests/*
 /scripts/RunTestScripts/*

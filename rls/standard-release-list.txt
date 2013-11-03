@@ -19,8 +19,8 @@
 /scripts/SetGoogleCode.cs
 /scripts/RunTests.cs
 /scripts/List.cs
+/scripts/Update.cs
 /scripts/Release/*
-/scripts/Update/*
 /scripts/RunUnitTests/*
 /scripts/RunTestScripts/*
 /lib/NUnit/NUnit.node
