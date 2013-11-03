@@ -37,47 +37,35 @@ namespace SoftwareMonkeys.csAnt.UI.csAntConsole
 			Console = new ConsoleWriter("logs", scriptName);
 		}
 
-		// TODO: Check if needed
-		/*static public string GetOutputDirectory()
-		{
-			var output = Path.GetDirectoryName(
-				Assembly.GetExecutingAssembly().FullName
-				);
-
-			output = Path.GetFullPath(
-				output
-				+ "/../"
-				+ "scriptlogs"
-			);
-
-			return output;
-		}*/
-
 		static public void Execute (string scriptName, string[] args)
 		{
 			InitializeConsoleWriter (scriptName);
 
 			var startTime = DateTime.Now;
 
-			var parser = new Arguments (args);
+			var arguments = new Arguments (args);
 
-			var scr = new Script (scriptName);
+			var script = new Script (scriptName);
 
-			scr.Console = Console;
+			script.Console = Console;
 
-			if (parser.Contains ("b"))
-				scr.CurrentDirectory = Path.GetFullPath (parser ["b"]);
+			if (arguments.Contains ("b"))
+				script.CurrentDirectory = Path.GetFullPath (arguments ["b"]);
+			
+			if (arguments.Contains ("v")
+			    || arguments.Contains ("verbose"))
+				script.IsVerbose = true;
 
-			if (scr.IsVerbose) {
+			if (script.IsVerbose) {
 				Console.WriteLine ("");
 				Console.WriteLine ("Base directory:");
-				Console.WriteLine (scr.CurrentDirectory);
+				Console.WriteLine (script.CurrentDirectory);
 				Console.WriteLine ("");
 			}
 
-			scr.IsVerbose = parser.Contains("verbose");
+			script.IsVerbose = arguments.Contains("verbose");
 			
-			scr.CurrentDirectory = Path.GetFullPath(
+			script.CurrentDirectory = Path.GetFullPath(
 				Environment.CurrentDirectory
 			);
 
@@ -89,27 +77,27 @@ namespace SoftwareMonkeys.csAnt.UI.csAntConsole
 			}
 			else
 			{			
-				Environment.CurrentDirectory = scr.CurrentDirectory;
+				Environment.CurrentDirectory = script.CurrentDirectory;
 			
 				// Execute the script
-				scr.ExecuteScript(scriptName, args);
+				script.ExecuteScript(scriptName, args);
 
 				// Calculate the amount of time the script took to run
 				var totalTime = DateTime.Now.Subtract(startTime);
 
 
-				if (scr.IsVerbose)
+				if (script.IsVerbose)
 				{
 					// Output the summaries to help the user see what happened
-					scr.OutputSummaries();
+					script.OutputSummaries();
 
 					Console.WriteLine("");
 					Console.WriteLine("Duration: " + totalTime.ToString());
-					Console.WriteLine("Successful: " + !scr.IsError);
+					Console.WriteLine("Successful: " + !script.IsError);
 					Console.WriteLine("");
 				}
 
-				if (scr.IsError)
+				if (script.IsError)
 					Console.WriteLine("// !!!!!!!!!!!!!!!!!!!!  Failed  !!!!!!!!!!!!!!!!!!!!");
 				else
 					Console.WriteLine("// ==================== Success! ====================");
