@@ -52,8 +52,6 @@
 /scripts/Initialize/*
 /scripts/RunUnitTests/*
 /scripts/RunTestScripts/*
-/scripts/ImportScript.cs
-/scripts/AddImport.cs
 /*.sh
 /csAnt.node
 /*.bat

@@ -1,5 +1,6 @@
 //css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.dll;
 //css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.Projects.dll;
+//css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.FileNodes.dll;
 
 using System;
 using System.IO;
@@ -7,6 +8,7 @@ using Microsoft.CSharp;
 using System.Diagnostics;
 using SoftwareMonkeys.csAnt;
 using SoftwareMonkeys.csAnt.Projects;
+using SoftwareMonkeys.FileNodes;
 
 class CyclePublishScript : BaseProjectScript
 {
@@ -31,7 +33,7 @@ class CyclePublishScript : BaseProjectScript
 		InitializeProject(tmpDir);
 
 		// Move to the cloned directory
-		CurrentDirectory = tmpDir;
+		Relocate(tmpDir);
 
 		// Build the cloned source code
 		ExecuteScript("CycleBuild");
@@ -87,7 +89,9 @@ class CyclePublishScript : BaseProjectScript
 
 	public void CopySecurityCode(string fromDir, string toDir)
 	{
-		var fromFile = fromDir
+	        CopySecurityNode(fromDir, toDir);
+	
+		var file = fromDir
 			+ Path.DirectorySeparatorChar
 			+ "_security"
 			+ Path.DirectorySeparatorChar
@@ -95,15 +99,45 @@ class CyclePublishScript : BaseProjectScript
 			+ Path.DirectorySeparatorChar
 			+ "GoogleCode.node";
 
-		var toFile = fromFile.Replace(fromDir, toDir);
+		var tofile = file.Replace(fromDir, toDir);
 
                 Console.WriteLine("Copying security node to:");
-                Console.WriteLine(toFile);
+                Console.WriteLine(tofile);
                 Console.WriteLine("From:");
-                Console.WriteLine(fromFile);
+                Console.WriteLine(file);
 
-		EnsureDirectoryExists(Path.GetDirectoryName(toFile));
+		EnsureDirectoryExists(Path.GetDirectoryName(tofile));
 
-		File.Copy(fromFile, toFile);
+		File.Copy(file, tofile);
+		
+		CurrentNode.Nodes["Security"].Nodes[ProjectName] = new FileNode(
+	                tofile,
+	                new FileNodeSaver()
+		);
+	}
+	
+	public void CopySecurityNode(string fromDir, string toDir)
+	{
+		var nodeFile = fromDir
+			+ Path.DirectorySeparatorChar
+			+ "_security"
+			+ Path.DirectorySeparatorChar
+			+ "Security.node";
+
+		var toNodeFile = nodeFile.Replace(fromDir, toDir);
+
+                Console.WriteLine("Copying security node to:");
+                Console.WriteLine(toNodeFile);
+                Console.WriteLine("From:");
+                Console.WriteLine(nodeFile);
+
+		EnsureDirectoryExists(Path.GetDirectoryName(toNodeFile));
+
+		File.Copy(nodeFile, toNodeFile);
+		
+		CurrentNode.Nodes["Security"] = new FileNode(
+	                toNodeFile,
+	                new FileNodeSaver()
+		);
 	}
 }

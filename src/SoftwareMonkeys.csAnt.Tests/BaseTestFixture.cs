@@ -74,42 +74,6 @@ namespace SoftwareMonkeys.csAnt.Tests
 			//return Path.GetFullPath("../../");
 		}
 
-		// TODO: Check if this is needed. Should probably use GrabOriginalFiles instead.
-		public void CopyTestFiles (ITestScript script)
-		{
-			var originalDirectory = script.OriginalDirectory;
-
-			var currentDirectory = script.CurrentDirectory;
-
-			Console.WriteLine("Copying test files...");
-
-			Console.WriteLine ("Original directory: " + originalDirectory);
-			Console.WriteLine ("Current directory: " + currentDirectory);
-
-			var patterns = new string[]{
-				"/lib/**",
-				"/src/**"
-			};
-
-			foreach (var file in script.FindFiles (originalDirectory, patterns))
-			{
-				var shortFileName = file.Replace(originalDirectory, "");
-
-				var destinationFileName = currentDirectory
-					+ Path.DirectorySeparatorChar
-						+ shortFileName;
-
-				script.EnsureDirectoryExists(Path.GetDirectoryName(destinationFileName));
-
-				Console.WriteLine ("From:");
-				Console.WriteLine (file);
-				Console.WriteLine ("To:");
-				Console.WriteLine (destinationFileName);
-
-				File.Copy(file, destinationFileName);
-			}
-		}
-		
 
 		public void GrabOriginalScripts (
 			ITestScript script,
@@ -135,6 +99,8 @@ namespace SoftwareMonkeys.csAnt.Tests
 				script,
 				"/*.node",
 				"/*.sh",
+				"/*.bat",
+				"/*.vbs",
 				"/lib/**.dll",
 				"/src/**.cs",
 				"/src/**.csproj",

@@ -23,8 +23,6 @@
 /scripts/Update/*
 /scripts/RunUnitTests/*
 /scripts/RunTestScripts/*
-/scripts/ImportScript.cs
-/scripts/AddImport.cs
 /lib/NUnit/NUnit.node
 /lib/NUnitResults/NUnitResults.node
 /lib/SharpZipLib/SharpZipLib.node
