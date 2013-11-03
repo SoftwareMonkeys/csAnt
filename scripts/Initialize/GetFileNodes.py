@@ -13,7 +13,7 @@ def GetFileNodes(libDir, generalLibDir):
         # Set constants
         fileNodesLibDir = os.path.abspath(libDir + os.sep + "/FileNodes")
         
-        fileNodesLibZipUrl = "https://filenodes.googlecode.com/files/FileNodes-bin-%5B2012-11-14--9-17-20%5D.zip"
+        fileNodesLibZipUrl = "https://docs.google.com/uc?export=download&id=0B_8QvsLqRy5qalFoR2ZpdXN3alk"
         
         fileNodesLibZipLocal = generalLibDir + "/FileNodes/FileNodes.zip"
         

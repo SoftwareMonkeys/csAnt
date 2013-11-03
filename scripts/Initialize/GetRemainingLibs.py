@@ -13,7 +13,7 @@ def GetRemainingLibs():
         if (Utils.IsLinux()):
                 os.system("sh csAnt.sh GetLibs")
         else:
-                os.system("cscript csAnt.vbs GetLibs")
+                os.system("csAnt.bat GetLibs")
 
         print("")
         print("Done")
