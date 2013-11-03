@@ -157,6 +157,9 @@ class PrepareScript
 		var requiredScriptFiles = new string[]
 		{
 			"HelloWorld.cs",
+			"GetCsAntLib.cs",
+			"AddCsAntImport.cs",
+			"HelloWorld.cs",
 			"CreateProjectNode.cs",
 			"GetLibs.cs",
 			"ImportScript.cs",
