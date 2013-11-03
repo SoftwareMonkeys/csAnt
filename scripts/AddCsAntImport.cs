@@ -23,10 +23,13 @@ class AddCsAntImportScript : BaseProjectScript
 
 		AddSummary("Added csAnt import info");
 
+        if (!ImportExists("csAnt"))
+        {
                 AddImport(
                         "csAnt",
                         "https://code.google.com/p/csant/"
                 );
+        }
 
 		return !IsError;
 	}
