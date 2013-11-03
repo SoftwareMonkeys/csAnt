@@ -87,13 +87,13 @@ Function StartProcess( command )
 	WriteLine command
 	WriteLine ""
 
-	Dim tmpFile : tmpFile = MapPath("log-" + GetTimeStamp & ".txt")
-	
-	Set oShell = WScript.CreateObject ("WScript.Shell")
-	
-	command = "cmd /c " & command & " > " & tmpFile
-	
-	oShell.run command, 0, true 
+    Dim objShell, objCmdExec
+    Set objShell = CreateObject("WScript.Shell")
+    Set objCmdExec = objshell.exec(command)
+    output = objCmdExec.StdOut.ReadAll
+    
+    WriteLine output 
+    
 	
 	Set oShell = Nothing
 End Function
