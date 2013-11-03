@@ -22,6 +22,7 @@ class UpdateScript : BaseProjectScript
 	        ImportFile("csAnt", "scripts/HelloWorld.cs");
 	        ImportFile("csAnt", "scripts/Update.cs");
 	        ImportFile("csAnt", "scripts/AddImport.cs");
+	        ImportFile("csAnt", "scripts/GetCsAntLib.cs");
 	        ImportFile("csAnt", "scripts/AddCsAntImport.cs");
 	        ImportFile("csAnt", "scripts/ImportFile.cs");
 	        ImportFile("csAnt", "scripts/ImportScript.cs");
@@ -30,6 +31,10 @@ class UpdateScript : BaseProjectScript
 	        ImportFile("csAnt", "scripts/GetLibs.cs");
 	        ImportFile("csAnt", "scripts/InitSoftwareMonkeys.cs");
 	        ImportFile("csAnt", "scripts/Initialize/*");
+	        
+	        ExecuteScript("GetCsAntLib", "-f");
+	        
+	        GetLib("csAnt", true);
 
 		return !IsError;
 	}

@@ -1,9 +1,11 @@
 //css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.dll;
+//css_ref ../lib/FileNodes/bin/Release/SoftwareMonkeys.FileNodes.dll;
 using System;
 using System.IO;
 using Microsoft.CSharp;
 using System.Diagnostics;
 using SoftwareMonkeys.csAnt;
+using SoftwareMonkeys.FileNodes;
 
 class GetCsAntLibScript : BaseScript
 {
@@ -19,6 +21,8 @@ class GetCsAntLibScript : BaseScript
 	        var arguments = new Arguments(args);
 	        
 	        var force = arguments.Contains("f");
+	        
+	        CreateNode();
 	        
 	        var found = false;
 
@@ -41,6 +45,41 @@ class GetCsAntLibScript : BaseScript
                 
                 
 		return !IsError;
+	}
+	
+	public void CreateNode()
+	{
+	        var path = CurrentDirectory
+	                + Path.DirectorySeparatorChar
+	                + "lib"
+	                + Path.DirectorySeparatorChar
+	                + "csAnt"
+	                + Path.DirectorySeparatorChar
+	                + "csAnt.node";
+	
+	        if (!File.Exists(path))
+	        {
+	                Console.WriteLine("Creating node:");
+	                Console.WriteLine(path);
+	        
+	                var node = new FileNode(
+	                        path,
+	                        new FileNodeSaver()
+	                );
+
+	                node.Name = "csAnt";	        
+	                node.Properties.Add("ImportScript", "GetCsAntLib");
+	                
+	                node.Save();
+	                
+	                if (!CurrentNode.Nodes["Libraries"].Nodes.ContainsKey("csAnt"))
+                	        CurrentNode.Nodes["Libraries"].Nodes.Add("csAnt", node);
+        	}
+        	else
+        	{
+	                Console.WriteLine("Node already found:");
+	                Console.WriteLine(path);
+	        }
 	}
 	
 	public bool GetLocally(string name)
