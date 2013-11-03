@@ -18,12 +18,13 @@ namespace SoftwareMonkeys.csAnt.Projects
 			Console.WriteLine (projectName);
 			Console.WriteLine ("Path:");
 			Console.WriteLine (relativePath);
-			Console.WriteLine ("Destination:");
-			Console.WriteLine (destination);
-			Console.WriteLine ("Flatten path:");
-			Console.WriteLine (flattenHeirarchy);
-			Console.WriteLine ("");
-			Console.WriteLine ("Files:");
+			if (IsVerbose) {
+				Console.WriteLine ("Destination:");
+				Console.WriteLine (destination);
+				Console.WriteLine ("Flatten path:");
+				Console.WriteLine (flattenHeirarchy);
+				Console.WriteLine ("");
+			}
 			
 			AddImportPattern(projectName, relativePath);
 
@@ -44,15 +45,15 @@ namespace SoftwareMonkeys.csAnt.Projects
 						if (flattenHeirarchy)
 							fixedPath = Path.GetFileName(relativePath);
 
-						var toFile = CurrentDirectory
-							+ Path.DirectorySeparatorChar
-							+ fixedPath;
+						var toFile = file.Replace (importDir, CurrentDirectory);
 						
 						Console.WriteLine ("");
 						Console.WriteLine ("Copying file:");
 						Console.WriteLine (file);
-						Console.WriteLine ("To:");
-						Console.WriteLine (toFile);
+						if (IsVerbose) {
+							Console.WriteLine ("To:");
+							Console.WriteLine (toFile);
+						}
 						Console.WriteLine ("");
 
 						EnsureDirectoryExists(Path.GetDirectoryName(toFile));
@@ -60,12 +61,19 @@ namespace SoftwareMonkeys.csAnt.Projects
 						if (File.GetLastWriteTime(file) > File.GetLastWriteTime(toFile))
 						{
 							File.Copy(file, toFile, true);
-							Console.WriteLine ("File is newer. Using.");
+							if (IsVerbose)
+								Console.WriteLine ("File is newer. Using.");
 						}
 						else if (File.GetLastWriteTime(file) == File.GetLastWriteTime(toFile))
-							Console.WriteLine ("File is same age. Skipping.");
+						{
+							if (IsVerbose)
+								Console.WriteLine ("File is same age. Skipping.");
+						}
 						else
-							Console.WriteLine ("File is older. Skipping.");
+						{
+							if (IsVerbose)
+								Console.WriteLine ("File is older. Skipping.");
+						}
 					}
 				}
 				else

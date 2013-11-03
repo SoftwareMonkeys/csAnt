@@ -33,7 +33,9 @@ namespace SoftwareMonkeys.csAnt
 					Console.WriteLine(toFile.Replace(toDir, ""));
 					Console.WriteLine();
 
-					File.Copy(file, toFile);
+					BackupFile(toFile);
+
+					File.Copy(file, toFile, true);
 				}
 			}
 		}
