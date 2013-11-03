@@ -17,7 +17,19 @@ class UpdateScript : BaseProjectScript
 	
 	public override bool Start(string[] args)
 	{
-	        ImportSync("csAnt");
+	        ExecuteScript("AddCsAntImport");
+	        
+	        ImportFile("csAnt", "scripts/HelloWorld.cs");
+	        ImportFile("csAnt", "scripts/Update.cs");
+	        ImportFile("csAnt", "scripts/AddImport.cs");
+	        ImportFile("csAnt", "scripts/AddCsAntImport.cs");
+	        ImportFile("csAnt", "scripts/ImportFile.cs");
+	        ImportFile("csAnt", "scripts/ImportScript.cs");
+	        ImportFile("csAnt", "scripts/ImportSync.cs");
+	        ImportFile("csAnt", "scripts/ExportFile.cs");
+	        ImportFile("csAnt", "scripts/GetLibs.cs");
+	        ImportFile("csAnt", "scripts/InitSoftwareMonkeys.cs");
+	        ImportFile("csAnt", "scripts/Initialize/*");
 
 		return !IsError;
 	}
