@@ -42,16 +42,20 @@ If Not fso.FolderExists(MapPath(libsDir)) Then
 	CreateDirectory MapPath(libsDir)
 End If
 
-' Download 7-zip command line version
-CreateDirectory sevenZipDir
-Download sevenZipUrl, sevenZipFile, false
+If Not fso.FolderExists(sevenZipDir) Then
+        ' Download 7-zip command line version
+        CreateDirectory sevenZipDir
+        Download sevenZipUrl, sevenZipFile, false
+End If
 
-' Download portable python for windows
-CreateDirectory portablePythonDir
-Download portablePythonUrl, portablePythonZipFile, false
+If Not fso.FolderExists(portablePythonDir) Then
+        ' Download portable python for windows
+        CreateDirectory portablePythonDir
+        Download portablePythonUrl, portablePythonZipFile, false
 
-' Unzip portable python
-Unzip portablePythonZipFile, portablePythonDir, "PortablePython"
+        ' Unzip portable python
+        Unzip portablePythonZipFile, portablePythonDir, "PortablePython"
+End If
 
 ' Create the scripts directory if necessary
 If Not fso.FolderExists(MapPath(scriptsDir)) Then
