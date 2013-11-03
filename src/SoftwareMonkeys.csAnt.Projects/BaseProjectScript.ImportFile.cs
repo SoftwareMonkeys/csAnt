@@ -55,7 +55,13 @@ namespace SoftwareMonkeys.csAnt.Projects
 
 						EnsureDirectoryExists(Path.GetDirectoryName(toFile));
 
-						File.Copy(file, toFile);
+						if (File.GetLastWriteTime(file) > File.GetLastWriteTime(toFile))
+						{
+							File.Copy(file, toFile, true);
+							Console.WriteLine ("File is newer. Using.");
+						}
+						else
+							Console.WriteLine ("File is older. Skipping.");
 					}
 				}
 				else
