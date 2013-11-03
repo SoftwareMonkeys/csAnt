@@ -7,6 +7,7 @@ from GetSharpZipLib import GetSharpZipLib
 from GetHtmlAgilityPack import GetHtmlAgilityPack
 from RunCSScript import RunCSScript
 from GetRemainingLibs import GetRemainingLibs
+from GetFileNodes import GetFileNodes
 
 # Basic variables
 currentDir = os.getcwd()
@@ -59,6 +60,9 @@ GetSharpZipLib(libDir, generalLibDir)
 
 # HtmlAgilityPack
 GetHtmlAgilityPack(libDir, generalLibDir)
+
+# FileNodes
+GetFileNodes(libDir, generalLibDir)
 
 # Launch the Initialize.cs script
 RunCSScript(csInitializeScript, sourceProjectsDir)
