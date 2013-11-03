@@ -159,12 +159,12 @@ class PrepareScript
 			"HelloWorld.cs",
 			"CreateProjectNode.cs",
 			"GetLibs.cs",
-			"ImportScript.cs"
+			"ImportScript.cs",
+			"Update.cs"
 		};
 
 		var requiredScriptFolders = new string[]
 		{
-			"Update"
 		};
 
 		if (!Directory.Exists(scriptsDir))
