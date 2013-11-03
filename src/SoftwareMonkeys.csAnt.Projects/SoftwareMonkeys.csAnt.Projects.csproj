@@ -59,6 +59,7 @@
     <Compile Include="BaseProjectScript.AddImportPattern.cs" />
     <Compile Include="BaseProjectScript.ImportSync.cs" />
     <Compile Include="BaseProjectScript.InitializeProject.cs" />
+    <Compile Include="BaseProjectScript.ImportRefresh.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

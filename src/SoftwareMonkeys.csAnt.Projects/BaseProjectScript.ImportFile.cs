@@ -30,6 +30,8 @@ namespace SoftwareMonkeys.csAnt.Projects
 			if (!ImportExists (projectName))
 				Error ("Import project '" + projectName + "' not found.");
 			else {
+				ImportRefresh(projectName);
+
 				var importDir = ImportedDirectory
 					+ Path.DirectorySeparatorChar
 						+ projectName;
