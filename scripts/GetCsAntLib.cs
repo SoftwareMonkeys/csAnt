@@ -5,32 +5,154 @@ using Microsoft.CSharp;
 using System.Diagnostics;
 using SoftwareMonkeys.csAnt;
 
-[ExpectedArgument("name")]
-[ExpectedArgument("url")]
-class AddLibScript : BaseScript
+class GetCsAntLibScript : BaseScript
 {
 	public static void Main(string[] args)
 	{
-		new AddLibScript().Start(args);
+		new GetCsAntLibScript().Start(args);
 	}
 	
 	public override bool Start(string[] args)
 	{
-		if (args.Length < 2)
-			Console.WriteLine("Two arguments expected; name and URL (to zip file).");
-		else
-		{
-			string name = args[0];
+	        string name = "csAnt";
+	        
+	        var arguments = new Arguments(args);
+	        
+	        var force = arguments.Contains("f");
+	        
+	        var found = false;
 
-			string url = args[1];
-
-			string subPath = String.Empty;
-			if (args.Length == 3)
-				subPath = args[2];
-
-			AddLib(name, url, subPath);
-		}
-
+                if (LibExists(name) && !force)
+                {
+                        Console.WriteLine("csAnt libraries already exist. Skipping.");
+                }
+                else
+                {
+                        if (LibExists(name) && force)
+                                Console.WriteLine("csAnt libraries already exist. Overwriting.");
+                
+	                // Try locally
+                        found = GetLocally(name);
+                                
+                        // Try from the web
+                        if (!found)
+                                found = GetFromWeb(name);
+                }
+                
+                
 		return !IsError;
 	}
+	
+	public bool GetLocally(string name)
+	{
+	        var found = false;
+	
+	        var groupLibDir = Path.GetFullPath(
+	                CurrentDirectory
+	                + "/../lib"
+	        );
+	        
+	        var groupCsAntLibZip = Path.GetFullPath(
+	                groupLibDir
+	                + "/csAnt/csAnt.zip"
+	        );
+	
+	        if (File.Exists(groupCsAntLibZip))
+	        {
+	                Console.WriteLine("Found csAnt lib zip file locally:");
+	                Console.WriteLine(groupCsAntLibZip);
+	        
+	                var toFile = GetCsAntLibZip();
+	                File.Copy(groupCsAntLibZip, toFile, true);
+	                
+	                found = true;
+	        }
+	        else
+	                Console.WriteLine("csAnt lib zip file not found in group libraries direcory.");
+	        
+	        if (!found)
+	        {
+                        var projectsLibDir = Path.GetFullPath(
+	                        CurrentDirectory
+	                        + "/../../lib"
+	                );
+	                
+	                var projectsCsAntLibZip = Path.GetFullPath(
+	                        projectsLibDir
+	                        + "/csAnt/csAnt.zip"
+	                );
+	
+	                if (File.Exists(projectsCsAntLibZip))
+	                {
+	                        Console.WriteLine("Found csAnt lib zip file locally:");
+	                        Console.WriteLine(projectsCsAntLibZip);
+	                
+	                        var toFile = GetCsAntLibZip();
+	                        File.Copy(projectsCsAntLibZip, toFile, true);
+	                        
+	                        found = true;
+	                }
+	        }
+	        
+	        if (!found)
+	                Console.WriteLine("csAnt lib zip file not found in general libraries direcory.");
+	        
+	        return found;
+	}
+	
+	public bool GetFromWeb(string name)
+	{
+	        string url = GetcsAntUrl();
+
+	        Console.WriteLine("Retrieving csAnt files from:");
+	        Console.WriteLine(url);
+	        
+                var dir = CurrentDirectory
+                        + Path.DirectorySeparatorChar
+                        + "libs"
+                        + Path.DirectorySeparatorChar
+                        + name;
+
+                DownloadAndUnzip(url, dir, true);
+                
+                return !IsError;
+	}
+	
+	public string GetCsAntLibZip()
+	{
+	        return CurrentDirectory
+	                + Path.DirectorySeparatorChar
+	                + "lib"
+	                + Path.DirectorySeparatorChar
+	                + "csAnt"
+	                + Path.DirectorySeparatorChar
+	                + "csAnt.zip";
+	}
+	
+	public string GetcsAntUrl()
+	{
+		var url = "https://code.google.com/p/csant/downloads/list";
+
+		var xpath = "//table[@id='resultstable']/tr/td[3]";
+
+		var prefix = "https://csant.googlecode.com/files/";
+
+		var data = ScrapeXPathArray(
+			url,
+			xpath
+		);
+
+		foreach (string item in data)
+		{
+			if (item.IndexOf("csAnt-project-release-") == 0)
+			{
+				Console.WriteLine("csAnt URL: " + prefix + item);
+
+				return prefix + item;
+			}
+		}
+
+		return String.Empty;
+	}
+
 }
