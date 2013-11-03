@@ -83,5 +83,8 @@ print("")
 print("You can now run scripts via csAnt.")
 print("")
 print("Example:")
-print("sh csAnt.sh HelloWorld")
+if (Utils.IsLinux()):
+        print("sh csAnt.sh HelloWorld")
+else:
+        print("csAnt.bat HelloWorld")
 print("")
