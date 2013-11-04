@@ -14,13 +14,13 @@ using System.Collections.Generic;
 using Microsoft.CSharp;
 
 /// <summary>
-/// Prepares the project for development by ensuring all necessary libraries etc. have been downloaded.
+/// Initializes the project for development by ensuring all necessary libraries etc. have been downloaded.
 /// </summary>
-class PrepareScript
+class InitializeScript
 {
 	public static void Main(string[] args)
 	{
-		new PrepareScript().Start(args);
+		new InitializeScript().Start(args);
 	}
 	
 	public void Start(string[] args)
@@ -230,18 +230,18 @@ class PrepareScript
 		if (!Directory.Exists(csAntLibDir))
 			Directory.CreateDirectory(csAntLibDir);
 
-		string binDir = tmpDir
+		string libDir = tmpDir
 			+ Path.DirectorySeparatorChar
-			+ "bin"
+			+ "lib"
 			+ Path.DirectorySeparatorChar
 			+ "csAnt";
 
 		Console.WriteLine("");
 		Console.WriteLine("Getting csAnt libraries from:");
-		Console.WriteLine(binDir);
+		Console.WriteLine(libDir);
 		Console.WriteLine("");
 
-		MoveDirectory(binDir, csAntLibDir);
+		MoveDirectory(libDir, csAntLibDir);
 	}
 
 
