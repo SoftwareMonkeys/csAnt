@@ -22,6 +22,8 @@ class Test_BuildFromGitScript : BaseProjectTestScript
 		Console.WriteLine("");
 		Console.WriteLine("Test building solutions from git clone...");
 		Console.WriteLine("");
+		
+		Grabber.GrabOriginalFiles();
 
                 // Perform a release cycle to ensure the releases are available for use during initialization
                 ExecuteScript("CycleRelease");
@@ -52,7 +54,7 @@ class Test_BuildFromGitScript : BaseProjectTestScript
 
 		Directory.CreateDirectory(tmpDirectory);
 
-		GitClone(ProjectDirectory, tmpDirectory);
+		GitClone(OriginalDirectory, tmpDirectory);
 
 		return tmpDirectory;
 	}

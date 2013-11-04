@@ -16,6 +16,8 @@ class Test_HelloWorldScript : BaseTestScript
 	
 	public override bool Start(string[] args)
 	{
+	        Grabber.GrabOriginalScriptingFiles();
+	
 		ExecuteScript("HelloWorld");
 
 		return !IsError;
