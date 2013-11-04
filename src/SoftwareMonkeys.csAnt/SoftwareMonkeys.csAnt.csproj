@@ -139,6 +139,7 @@
     <Compile Include="BaseScript.GetImportedDirectory.cs" />
     <Compile Include="BaseScript.ImportedDirectory.cs" />
     <Compile Include="BaseScript.LibExists.cs" />
+    <Compile Include="BaseScript.IsDebug.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

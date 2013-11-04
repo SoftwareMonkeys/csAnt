@@ -55,6 +55,10 @@ namespace SoftwareMonkeys.csAnt.UI.csAntConsole
 			if (arguments.Contains ("v")
 			    || arguments.Contains ("verbose"))
 				script.IsVerbose = true;
+			
+			if (arguments.Contains ("dbg")
+			    || arguments.Contains ("debug"))
+				script.IsDebug = true;
 
 			if (script.IsVerbose) {
 				Console.WriteLine ("");
