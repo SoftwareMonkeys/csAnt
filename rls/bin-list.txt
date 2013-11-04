@@ -2,10 +2,6 @@
 /bin/Release/*.exe
 /bin/Release/*.config
 /bin/Release/*.snk
-/bin/Debug/*.dll
-/bin/Debug/*.exe
-/bin/Debug/*.config
-/bin/Debug/*.snk
 /lib/cs-script/*.dll
 /lib/cs-script/*.exe
 /lib/cs-script/Lib/Bin/NET 4.0/*.dll
