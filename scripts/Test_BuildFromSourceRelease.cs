@@ -22,6 +22,8 @@ class Test_BuildFromSourceReleaseScript : BaseProjectTestScript
 		Console.WriteLine("");
 		Console.WriteLine("Test building solutions from the release files...");
 		Console.WriteLine("");
+		
+		Grabber.GrabOriginalFiles();
 
 		ExecuteScript("CycleBuild");
 
