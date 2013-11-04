@@ -18,10 +18,11 @@ class CycleTestsScript : BaseProjectScript
 	public override bool Start(string[] args)
 	{
 		Console.WriteLine("");
-		Console.WriteLine("Starting a full release cycle.");
+		Console.WriteLine("Starting a full test cycle.");
 		Console.WriteLine("");
 
-		ExecuteScript("CycleBuild");
+        // Run a release cycle so the latest binaries and release zips are available
+		ExecuteScript("CycleRelease");
 
 		if (!IsError)
 		{
