@@ -10,19 +10,9 @@ namespace SoftwareMonkeys.csAnt.Projects
 		/// </summary>
 		public void Relocate(string newLocationPath)
 		{
-			CurrentDirectory = Path.GetFullPath(newLocationPath);
 			CreateProjectNode(Path.GetFileName(newLocationPath));
-			CurrentNode = GetCurrentNode();
 
-			ImportedDirectory = GetImportedDirectory();
-			
-			Console.WriteLine ("");
-			Console.WriteLine ("Relocating to:");
-			Console.WriteLine (newLocationPath);
-			Console.WriteLine ("");
-			Console.WriteLine ("Imports directory:");
-			Console.WriteLine (ImportedDirectory);
-			Console.WriteLine ("");
+            base.Relocate(newLocationPath);
 		}
 	}
 }

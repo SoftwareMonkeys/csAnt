@@ -14,6 +14,10 @@ namespace SoftwareMonkeys.csAnt.Projects.Tests
 
 		public TestUtilities Utilities { get;set; }
 
+		public TestRelocator Relocator { get;set; }
+
+		public TestFilesGrabber Grabber { get; set; }
+
 		public BaseProjectTestScript () : base()
 		{
 			IsVerbose = true;
@@ -22,6 +26,10 @@ namespace SoftwareMonkeys.csAnt.Projects.Tests
 			// TODO: Check if these should be injected
 			ReportGenerator = new TestReportGenerator(this);
 			TestSummarizer = new TestSummarizer(this);
+			
+			Grabber = new TestFilesGrabber(this);
+			
+			Relocator = new TestRelocator(this);
 		}
 
 		public override abstract bool Start(string[] args);
@@ -39,6 +47,7 @@ namespace SoftwareMonkeys.csAnt.Projects.Tests
 			if (IsVerbose)
 				Console.WriteLine ("Actual directory: " + OriginalDirectory);
 
+			Relocator.Relocate();
 		}
 
 		public override void TearDown ()
@@ -54,6 +63,8 @@ namespace SoftwareMonkeys.csAnt.Projects.Tests
 				CurrentDirectory = OriginalDirectory;
 				Console.WriteLine ("Actual directory: " + OriginalDirectory);
 			}
+
+			Relocator.Return();
 		}
 	}
 }

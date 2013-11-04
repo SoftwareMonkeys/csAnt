@@ -70,6 +70,8 @@
     <Compile Include="TestHtmlReportGenerator.cs" />
     <Compile Include="TestUtilities.cs" />
     <Compile Include="StartProcessTestFixture.cs" />
+    <Compile Include="TestRelocator.cs" />
+    <Compile Include="TestFilesGrabber.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

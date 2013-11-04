@@ -9,14 +9,31 @@ namespace SoftwareMonkeys.csAnt
 		{
 			var name = Path.GetFileName(CurrentDirectory);
 
-			return Path.GetFullPath(
-				CurrentDirectory
-				+ Path.DirectorySeparatorChar
-				+ ".."
-				+ Path.DirectorySeparatorChar
-				+ name
-				+ ".tmp"
-			);
+            var path = String.Empty;
+
+            if (!CurrentDirectory.Contains(".tmp"))
+            {
+                path = Path.GetFullPath(
+                    CurrentDirectory
+                    + Path.DirectorySeparatorChar
+                    + ".."
+                    + Path.DirectorySeparatorChar
+                    + name
+                    + ".tmp"
+                );
+            }
+            else
+            {
+                path = Path.GetFullPath(
+                    CurrentDirectory
+                    + Path.DirectorySeparatorChar
+                    + ".."
+                    + Path.DirectorySeparatorChar
+                    + ".."
+                );
+            }
+
+            return path;
 		}
 	}
 }

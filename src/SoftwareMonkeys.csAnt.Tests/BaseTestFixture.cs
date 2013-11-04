@@ -69,66 +69,6 @@ namespace SoftwareMonkeys.csAnt.Tests
 		public string GetOriginalDirectory(ITestScript script)
 		{
 			return Path.GetDirectoryName(script.CurrentNode.FilePath);
-			// TODO: Clean up
-			//ProjectDirectory = Path.GetFullPath("../../../../");
-			//return Path.GetFullPath("../../");
-		}
-
-
-		public void GrabOriginalScripts (
-			ITestScript script,
-			params string[] scriptNames
-		)
-		{
-			List<string> list = new List<string> ();
-
-			foreach (var name in scriptNames) {
-				list.Add ("/scripts/" + name + ".cs");
-				list.Add ("/scripts/" + name + "/**");
-			}
-
-			GrabOriginalFiles(
-				script,
-				list.ToArray()
-			);
-		}
-
-		public void GrabOriginalScriptingFiles (ITestScript script)
-		{
-			GrabOriginalFiles(
-				script,
-				"/*.node",
-				"/*.sh",
-				"/*.bat",
-				"/*.vbs",
-				"/lib/**.dll",
-				"/src/**.cs",
-				"/src/**.csproj",
-				"/src/**.sln",
-				"/scripts/**"
-			);
-		}
-
-		public void GrabOriginalFiles (ITestScript script, params string[] patterns)
-		{
-			Console.WriteLine ("");
-			Console.WriteLine ("Grabbing original project files...");
-			Console.WriteLine ("From:");
-			Console.WriteLine (script.OriginalDirectory);
-			Console.WriteLine ("To:");
-			Console.WriteLine (script.CurrentDirectory);
-			Console.WriteLine ("");
-
-			foreach (var file in script.FindFiles (script.OriginalDirectory, patterns)) {
-				Console.WriteLine (file.Replace(script.OriginalDirectory, ""));
-
-				var toFile = file.Replace(script.OriginalDirectory, script.CurrentDirectory);
-
-				if (!Directory.Exists(Path.GetDirectoryName(toFile)))
-					Directory.CreateDirectory(Path.GetDirectoryName(toFile));
-
-				File.Copy (file, toFile);
-			}
 		}
 	}
 }

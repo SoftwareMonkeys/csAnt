@@ -12,7 +12,7 @@ namespace SoftwareMonkeys.csAnt.Projects.Tests
 		{
 			var script = GetTestScript();
 
-			GrabOriginalScriptingFiles(script);
+			script.Grabber.GrabOriginalScriptingFiles();
 
 			script.ExecuteScript("Clean");
 			script.ExecuteScript("BuildAllSolutions");
