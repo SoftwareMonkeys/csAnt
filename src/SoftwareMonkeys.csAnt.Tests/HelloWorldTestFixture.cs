@@ -11,6 +11,8 @@ namespace SoftwareMonkeys.csAnt.Tests
 		{
 			var script = GetTestScript();
 
+			GrabOriginalScriptingFiles(script);
+
 			script.ExecuteScript("HelloWorld");
 
 			Assert.IsFalse(script.IsError);
