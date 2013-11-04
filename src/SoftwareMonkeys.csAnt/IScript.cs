@@ -103,6 +103,10 @@ namespace SoftwareMonkeys.csAnt
 
 		Process StartNewProcess(string command, string[] arguments);
 		#endregion
+
+                #region Relocation
+                void Relocate(string dir);
+                #endregion
 	}
 }
 

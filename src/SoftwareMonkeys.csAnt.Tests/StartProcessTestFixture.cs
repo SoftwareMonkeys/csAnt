@@ -12,8 +12,7 @@ namespace SoftwareMonkeys.csAnt.Tests
 		{
 			var script = GetTestScript();
 
-			GrabOriginalFiles(
-				script,
+			script.Grabber.GrabOriginalFiles(
 				"lib/cs-script/**",
 				"lib/csAnt/**",
 				"scripts/HelloWorld.cs"

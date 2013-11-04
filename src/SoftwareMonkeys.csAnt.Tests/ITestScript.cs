@@ -10,7 +10,9 @@ namespace SoftwareMonkeys.csAnt.Tests
 		// The group to put all tests in
 		string TestGroupName { get;set; }
 
-		TestUtilities Utilities { get;set; }
+		TestRelocator Relocator { get;set; }
+
+		TestFilesGrabber Grabber { get;set; }
 	}
 }
 
