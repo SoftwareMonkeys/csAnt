@@ -163,6 +163,10 @@ class PrepareScript
 			"CreateProjectNode.cs",
 			"GetLibs.cs",
 			"ImportScript.cs",
+			"ImportSync.cs",
+			"GetCsAntLib.cs",
+			"AddCsAntImport.cs",
+			"ExportFile.cs",
 			"Update.cs"
 		};
 
