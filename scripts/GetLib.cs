@@ -29,6 +29,9 @@ class GetLibScript : BaseScript
 
 		if (parser.Contains("force"))
 			force = Convert.ToBoolean(parser["force"]);
+			
+	        if (parser.Contains("f"))
+			force = Convert.ToBoolean(parser["f"]);
 
 		GetLib(name, force);
 
