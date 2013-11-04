@@ -10,25 +10,36 @@ namespace SoftwareMonkeys.csAnt
 		public IScript ActivateScript(string scriptPath)
 		{
 			CSScript.GlobalSettings.DefaultArguments = "/nl"; // TODO: This doesn't seem to be working
-			
+
+			var assemblyFile = CurrentDirectory
+				+ Path.DirectorySeparatorChar
+				+ "bin"
+				+ Path.DirectorySeparatorChar
+				+ "scripts"
+				+ Path.DirectorySeparatorChar
+				+ Path.GetFileName(scriptPath)
+				+ ".dll";
+
+			EnsureDirectoryExists(Path.GetDirectoryName(assemblyFile));
+
 			// Load the script assembly
-			Assembly a = CSScript.Load(scriptPath);
+			Assembly a = CSScript.Load(scriptPath, assemblyFile, IsDebug, new string[]{});
 
 			var scriptName = Path.GetFileNameWithoutExtension(scriptPath);
 
 			// Get the script type
 			var type = a.GetTypes () [0];
 
-			var b = (IScript)a.CreateInstance (type.Name);
+			var s = (IScript)a.CreateInstance (type.Name);
 
 			// TODO: See if it's possible to pass the scriptName via the constructor when creating the instance above
-			b.Initialize(
+			s.Initialize(
 				scriptName,
 				new SubConsoleWriter(Console, scriptName)
 			);
 
 			// Create an instance of the script
-			IScript script = b;//.AlignToInterface<IScript>(); // TODO: Remove if not needed
+			IScript script = s;
 
 			return script;
 		}
