@@ -2,20 +2,17 @@
 /bin/Release/*.exe
 /bin/Release/*.config
 /bin/Release/*.snk
-/lib/csAnt/bin/Release/*
-/lib/csAnt/*.zip
+/bin/Debug/*.dll
+/bin/Debug/*.exe
+/bin/Debug/*.config
+/bin/Debug/*.snk
 /lib/cs-script/*.dll
 /lib/cs-script/*.exe
-/lib/cs-script/*.zip
 /lib/cs-script/Lib/Bin/NET 4.0/*.dll
 /lib/SharpZipLib/net-20/*.dll
-/lib/SharpZipLib/*.zip
 /lib/FileNodes/bin/Release/*.dll
-/lib/FileNodes/*.zip
 /lib/HtmlAgilityPack/*.dll
-/lib/HtmlAgilityPack/*.zip
 /lib/GCUpload/*.dll
-/lib/GCUpload/*.zip
 /lib/*.zip
 /*.sh
 /*.bat

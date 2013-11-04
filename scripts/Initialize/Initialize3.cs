@@ -230,22 +230,18 @@ class PrepareScript
 		if (!Directory.Exists(csAntLibDir))
 			Directory.CreateDirectory(csAntLibDir);
 
-		// TODO: Check if needed
-		//if (Directory.Exists(csAntLibDir))
-		//	Directory.Delete(csAntLibDir, true);
-
-		string libDir = tmpDir
+		string binDir = tmpDir
 			+ Path.DirectorySeparatorChar
-			+ "lib"
+			+ "bin"
 			+ Path.DirectorySeparatorChar
 			+ "csAnt";
 
 		Console.WriteLine("");
 		Console.WriteLine("Getting csAnt libraries from:");
-		Console.WriteLine(libDir);
+		Console.WriteLine(binDir);
 		Console.WriteLine("");
 
-		MoveDirectory(libDir, csAntLibDir);
+		MoveDirectory(binDir, csAntLibDir);
 	}
 
 
