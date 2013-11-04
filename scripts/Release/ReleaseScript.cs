@@ -143,7 +143,7 @@ class ReleaseScript : BaseProjectScript
 
 		AddSummary("Exported release to: " + Path.GetDirectoryName(toFile));
 
-		File.Copy(zipFilePath, toFile);
+		File.Copy(zipFilePath, toFile, true);
 
 		// Create a copy without the timestamp (so its easy to know the path to the latest release)
 
