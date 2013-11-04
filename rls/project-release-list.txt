@@ -28,6 +28,8 @@
 /scripts/ExportFile.cs
 /scripts/Update.cs
 /scripts/ImportSync.cs
+/scripts/GetCsAntLib.cs
+/scripts/AddCsAntImport.cs
 /lib/csAnt/bin/Release/*.dll
 /lib/csAnt/bin/Release/*.exe
 /lib/csAnt/bin/Release/*.config
