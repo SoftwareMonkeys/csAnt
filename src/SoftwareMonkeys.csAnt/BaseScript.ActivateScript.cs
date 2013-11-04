@@ -29,7 +29,7 @@ namespace SoftwareMonkeys.csAnt
 				+ Path.DirectorySeparatorChar
 				+ "scripts"
 				+ Path.DirectorySeparatorChar
-				+ Path.GetFileName(scriptPath)
+				+ Path.GetFileNameWithoutExtension(scriptPath)
 				+ ".dll";
 
 			EnsureDirectoryExists(Path.GetDirectoryName(assemblyFile));
