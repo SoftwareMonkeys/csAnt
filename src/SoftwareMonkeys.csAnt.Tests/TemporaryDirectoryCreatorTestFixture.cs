@@ -18,9 +18,6 @@ namespace SoftwareMonkeys.csAnt.Tests
                 true
             );
 
-            // TODO: Remove if not needed
-            //script.CurrentDirectory = script.OriginalDirectory;
-
             var tmpDir = tdc.GetTmpDir();
 
 			Console.WriteLine ("");
@@ -36,37 +33,48 @@ namespace SoftwareMonkeys.csAnt.Tests
                 + Path.DirectorySeparatorChar
                 + "csAnt";
 
+            Console.WriteLine ("");
+            Console.WriteLine ("Expected dir:");
+            Console.WriteLine (expectedDir);
+            Console.WriteLine ("Actual dir:");
+            Console.WriteLine (tmpDir);
+            Console.WriteLine ("");
+
             Assert.AreEqual(expectedDir, tmpDir, "Paths don't match.");
         }
         
         [Test]
         public void Test_GetTmpDir_WithinTmp()
         {
-            var script = GetDummyScript ();
+            var timeStamp = GetTimeStamp();
 
-            var tmpDir = script.GetTmpDir();
+            var tdc = new TemporaryDirectoryCreator(
+                WorkingDirectory,
+                timeStamp,
+                true
+            );
+
+            var tmpDir = tdc.GetTmpDir();
 
             Console.WriteLine ("");
             Console.WriteLine ("Tmp dir:");
             Console.WriteLine (tmpDir);
             Console.WriteLine ("");
-            
-            Console.WriteLine ("");
-            Console.WriteLine ("Original dir:");
-            Console.WriteLine (script.OriginalDirectory);
-            Console.WriteLine ("");
 
-            var expectedDir = Path.GetDirectoryName(script.OriginalDirectory).TrimEnd(Path.DirectorySeparatorChar)
+            var expectedDir = Path.GetDirectoryName(WorkingDirectory).TrimEnd(Path.DirectorySeparatorChar)
                 + Path.DirectorySeparatorChar
                 + "csAnt.tmp"
                 + Path.DirectorySeparatorChar
-                + script.TimeStamp
-                + Path.DirectorySeparatorChar
-                + "csAnt.tmp"
-                + Path.DirectorySeparatorChar
-                + script.TimeStamp
+                + TimeStamp
                 + Path.DirectorySeparatorChar
                 + "csAnt";
+            
+            Console.WriteLine ("");
+            Console.WriteLine ("Expected dir:");
+            Console.WriteLine (expectedDir);
+            Console.WriteLine ("Actual dir:");
+            Console.WriteLine (tmpDir);
+            Console.WriteLine ("");
 
             Assert.AreEqual(expectedDir, tmpDir, "Paths don't match.");
         }
@@ -75,27 +83,36 @@ namespace SoftwareMonkeys.csAnt.Tests
         [Test]
         public void Test_GetTmpDir_DeepWithinTmp()
         {
-            var script = GetDummyScript ();
+            var timeStamp = GetTimeStamp();
 
-            var tmpDir = script.GetTmpDir();
-            tmpDir = script.GetTmpDir();
+            var tdc = new TemporaryDirectoryCreator(
+                WorkingDirectory,
+                timeStamp,
+                true
+            );
+
+            var tmpDir = tdc.GetTmpDir();
+            tmpDir = tdc.GetTmpDir();
 
             Console.WriteLine ("");
             Console.WriteLine ("Tmp dir:");
             Console.WriteLine (tmpDir);
             Console.WriteLine ("");
 
-            var expectedDir = Path.GetDirectoryName(script.OriginalDirectory)
+            var expectedDir = Path.GetDirectoryName(WorkingDirectory)
                 + Path.DirectorySeparatorChar
                 + "csAnt.tmp"
                 + Path.DirectorySeparatorChar
-                + script.TimeStamp
-                + Path.DirectorySeparatorChar
-                + "csAnt.tmp"
-                + Path.DirectorySeparatorChar
-                + script.TimeStamp
+                + TimeStamp
                 + Path.DirectorySeparatorChar
                 + "csAnt";
+            
+            Console.WriteLine ("");
+            Console.WriteLine ("Expected dir:");
+            Console.WriteLine (expectedDir);
+            Console.WriteLine ("Actual dir:");
+            Console.WriteLine (tmpDir);
+            Console.WriteLine ("");
 
             Assert.AreEqual(expectedDir, tmpDir, "Paths don't match.");
         }

@@ -2,26 +2,33 @@ using System;
 
 namespace SoftwareMonkeys.csAnt.Tests
 {
-    public class TestScriptTearDowner
+    public class DummyScriptTearDowner : BaseScriptTearDowner
     {
-        public void TearDown(ITestScript script)
+        public DummyScriptTearDowner(IDummyScript script) : base(script)
         {
-            Console.WriteLine ("Is verbose: " + script.IsVerbose.ToString());
+        }
 
-            script.TestSummarizer.Summarize();
+        public override void TearDown ()
+        {
+            if (Script.IsVerbose) {
+                Console.WriteLine ("");
+                Console.WriteLine ("--------------------------------------------------");
+                Console.WriteLine ("");
+                Console.WriteLine ("Tearing down '" + Script.ScriptName + "' dummy script...");
+                Console.WriteLine ("Component: " + GetType ().Name);
 
-            script.ReportGenerator.GenerateReports();
+                Console.WriteLine ("Script type: " + Script.GetType().Name);
+                Console.WriteLine ("");
             
-            script.Utilities.CopyTestResults(script.CurrentDirectory, script.OriginalDirectory);
-
-            if (script.IsVerbose) {
-                Console.WriteLine ("Current directory: " + script.CurrentDirectory);
-                Console.WriteLine ("Actual directory: " + script.OriginalDirectory);
+                Console.WriteLine ("Is verbose: " + Script.IsVerbose.ToString ());
+                Console.WriteLine ("Current directory: " + Script.CurrentDirectory);
+                Console.WriteLine ("Original directory: " + Script.OriginalDirectory);
+           
+                Console.WriteLine ("");
+                Console.WriteLine ("--------------------------------------------------");
+                Console.WriteLine ("");
+        
             }
-
-            script.CurrentDirectory = script.OriginalDirectory;
-
-            script.Relocator.Return();
         }
     }
 }

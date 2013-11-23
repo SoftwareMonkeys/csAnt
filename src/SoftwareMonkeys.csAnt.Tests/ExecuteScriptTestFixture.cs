@@ -10,7 +10,8 @@ namespace SoftwareMonkeys.csAnt.Tests
 		[Test]
 		public void Test_ExecuteScriptFromFile()
 		{
-			var script = GetScriptCode();
+            throw new NotImplementedException("Shouldn't be needed. Remove.");
+			/*var script = GetScriptCode();
 
 			var scriptFile = Path.GetTempPath()
 				+ Path.DirectorySeparatorChar
@@ -21,13 +22,13 @@ namespace SoftwareMonkeys.csAnt.Tests
 				script
 			);
 
-			var testScript = new TestScript("HelloWorld", this);
+			var testScript = new DummyScript("HelloWorld");
+*/
+			//testScript.ExecuteScriptFromFile(scriptFile, new string[]{});
 
-			testScript.ExecuteScriptFromFile(scriptFile, new string[]{});
+			//var success = !testScript.IsError;
 
-			var success = !testScript.IsError;
-
-			Assert.AreEqual(true, success);
+			//Assert.AreEqual(true, success);
 		}
 
 		private string GetScriptCode()

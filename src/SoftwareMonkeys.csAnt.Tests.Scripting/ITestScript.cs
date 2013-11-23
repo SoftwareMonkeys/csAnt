@@ -4,14 +4,13 @@ namespace SoftwareMonkeys.csAnt.Tests.Scripting
 {
     public interface ITestScript : IScript
     {
+        TestSummarizer TestSummarizer { get;set; }
+
+        TestAsserter Assert { get;set; }
+
+        // TODO: Check if needed
         // The group to put all tests in
         string TestGroupName { get;set; }
-
-        TestSummarizer Summarizer { get;set; }
-        
-        ScriptReportGenerator ReportGenerator { get;set; }
-
-        ScriptingTestUtilities Utilities { get;set; }
     }
 }
 

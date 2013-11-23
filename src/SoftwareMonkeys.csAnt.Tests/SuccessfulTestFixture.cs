@@ -1,11 +1,22 @@
 using System;
+using NUnit.Framework;
 
 namespace SoftwareMonkeys.csAnt.Tests
 {
-    public class SuccessfulTestFixture
+    [TestFixture]
+    public class SuccessfulTestFixture : BaseTestFixture
     {
-        public SuccessfulTestFixture ()
+        [Test]
+        public void Test_Succeed()
         {
+            Console.WriteLine ("");
+            Console.WriteLine ("Starting successful test...");
+
+            var script = GetDummyScript("TestScript");
+
+            script.Console.WriteLine ("...");
+
+            Assert.IsTrue(true);
         }
     }
 }

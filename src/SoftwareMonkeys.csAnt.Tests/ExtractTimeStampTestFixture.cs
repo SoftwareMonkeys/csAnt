@@ -4,7 +4,7 @@ using NUnit.Framework;
 namespace SoftwareMonkeys.csAnt.Tests
 {
     [TestFixture]
-    public class ParseTimeStampTestFixture : BaseTestFixture
+    public class ExtractTimeStampTestFixture : BaseTestFixture
     {
         [Test]
         public void Test_ExtractTimeStamp()

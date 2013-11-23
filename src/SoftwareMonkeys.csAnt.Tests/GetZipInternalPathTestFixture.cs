@@ -18,7 +18,7 @@ namespace SoftwareMonkeys.csAnt.Tests
 
 			string zipFileName = "MyZipFile";
 
-			var script = new TestScript("TestScript", this);
+			var script = new DummyScript("TestScript");
 
 			string internalPath = script.GetZipInternalPath(
 				zipFileName,

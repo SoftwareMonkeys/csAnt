@@ -1,10 +1,10 @@
 using System;
 using NUnit.Framework;
 
-namespace SoftwareMonkeys.csAnt.Tests
+namespace SoftwareMonkeys.csAnt.Tests.Scripting
 {
 	[TestFixture]
-	public class HelloWorldTestFixture : BaseTestFixture
+	public class HelloWorldScriptTestFixture : BaseTestFixture
 	{
 		[Test]
 		public void Test_TestHelloWorldScript()

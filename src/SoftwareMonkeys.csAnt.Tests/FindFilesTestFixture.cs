@@ -10,7 +10,7 @@ namespace SoftwareMonkeys.csAnt.Tests
 		[Test]
 		public void Test_FindFiles_Star()
 		{
-			var testScript = GetTestScript();
+			var testScript = GetDummyScript();
 
 			var patterns = new string[]{
 				"*"
@@ -32,7 +32,7 @@ namespace SoftwareMonkeys.csAnt.Tests
 		[Test]
 		public void Test_FindFiles_DoubleStar()
 		{
-			var testScript = GetTestScript();
+			var testScript = GetDummyScript();
 
 			var patterns = new string[]{
 				"**"
@@ -62,7 +62,7 @@ namespace SoftwareMonkeys.csAnt.Tests
 		[Test]
 		public void Test_FindFiles_DoubleStarAndExtension()
 		{
-			var testScript = GetTestScript();
+			var testScript = GetDummyScript();
 
 			var patterns = new string[]{
 				"**.txt"

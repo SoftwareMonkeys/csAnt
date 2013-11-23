@@ -2,10 +2,17 @@ using System;
 
 namespace SoftwareMonkeys.csAnt.Tests
 {
-    public class BaseTestFixture
+    public partial class BaseTestFixture
     {
-        public BaseTestFixture ()
+        public virtual string GetWorkingDirectory()
         {
+            var tdc = new TemporaryDirectoryCreator (
+                Environment.CurrentDirectory,
+                TimeStamp,
+                IsVerbose
+            );
+
+            return tdc.GetTmpDir ();
         }
     }
 }

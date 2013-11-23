@@ -15,11 +15,11 @@ namespace SoftwareMonkeys.csAnt.Tests.Scripting
                     Console.WriteLine ("");
                     Console.WriteLine ("--------------------------------------------------");
                     Console.WriteLine ("");
-                    Console.WriteLine ("Tearing down scripting test script...");
+                    Console.WriteLine ("Tearing down '" + Script.ScriptName + "' script...");
 
                     Console.WriteLine ("Component: " + GetType ().Name);
 
-                    Console.WriteLine ("Script name: " + Script.ScriptName);
+                    Console.WriteLine ("Script type: " + Script.GetType().Name);
                     Console.WriteLine ("");
                 }
 
@@ -28,11 +28,7 @@ namespace SoftwareMonkeys.csAnt.Tests.Scripting
                 if (Script.IsVerbose)
                     Console.WriteLine ("Is verbose: " + Script.IsVerbose.ToString ());
 
-                script.Summarizer.Summarize ();
-
-                script.ReportGenerator.GenerateReports ();
-
-                script.Utilities.CopyTestResults (Script.CurrentDirectory, Script.OriginalDirectory);
+                script.TestSummarizer.Summarize ();
 
                 if (Script.IsVerbose) {
                     Console.WriteLine ("Current directory: " + Script.CurrentDirectory);
@@ -49,7 +45,11 @@ namespace SoftwareMonkeys.csAnt.Tests.Scripting
                 }
             } else {
                 if (Script.IsVerbose)
-                    Console.WriteLine ("Already torn down. Skipping tear down.");
+                {
+                    Console.WriteLine ("");
+                    Console.WriteLine ("'" + Script.ScriptName + "' script has already been torn down. Not tearing down again.");
+                    Console.WriteLine ("");
+                }
             }
         }
     }

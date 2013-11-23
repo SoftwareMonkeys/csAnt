@@ -1,6 +1,6 @@
 using System;
 
-namespace SoftwareMonkeys.csAnt.Tests.Scripting
+namespace SoftwareMonkeys.csAnt.Tests
 {
 	public class TestSummarizer
 	{

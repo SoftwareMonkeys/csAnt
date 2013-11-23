@@ -10,9 +10,7 @@ namespace SoftwareMonkeys.csAnt.Tests
 		[Test]
 		public void Test_Download()
 		{
-			var testScript = GetTestScript();
-
-			testScript.IsVerbose = true;
+			var testScript = GetDummyScript(true);
 
 			var testFile = testScript.CurrentDirectory
 				+ Path.DirectorySeparatorChar

@@ -2,68 +2,39 @@ using System;
 
 namespace SoftwareMonkeys.csAnt.Tests
 {
-    public class TestScriptSetUpper
+    public class DummyScriptSetUpper : BaseScriptSetUpper
     {
-        public void SetUp (ITestScript script, string workingDirectory)
+        public DummyScriptSetUpper (IScript script) : base(script)
         {
-            Console.WriteLine ("");
-            Console.WriteLine ("Setting up test script...");
-            Console.WriteLine ("Script name:");
-            Console.WriteLine (script.ScriptName);
-            Console.WriteLine ("Working directory:");
-            Console.WriteLine (workingDirectory);
+        }
 
-            if (script.IsVerbose) {
-                Console.WriteLine ("Test group name:");
-                Console.WriteLine (script.TestGroupName);
+        public override void SetUp ()
+        {
+            if (Script.IsVerbose) {
+                Console.WriteLine ("");
+                Console.WriteLine ("--------------------------------------------------");
+                Console.WriteLine ("");
             }
-            // Grab the node file
-            script.Grabber.GrabOriginalFiles(workingDirectory, "*.node", "../*.node");
 
-            script.TestGroupName = script.ScriptName;
+            base.SetUp ();   
 
-            script.OriginalDirectory = script.GetOriginalDirectory();
+            if (Script.IsVerbose) {
+                Console.WriteLine ("");
+                Console.WriteLine ("Setting up '" + Script.ScriptName + "' script...");
+                Console.WriteLine ("Script type: " + Script.GetType().Name);
+                Console.WriteLine ("Time: " + Script.Time.ToString ());
+                Console.WriteLine ("Time stamp: " + Script.TimeStamp);
+            }
 
-            if (script.IsVerbose)
-                Console.WriteLine ("Original directory: " + script.OriginalDirectory);
+            Script.OriginalDirectory = Script.GetOriginalDirectory ();
 
-            script.TestGroupName = script.ScriptName;
-
-            script.Relocator.Relocate(testFixture.WorkingDirectory);
-
-            
-            
-            // TODO: Remove if not needed
-            /*Utilities = new TestUtilities(this);
-
-            StopOnFail = false;
-            
-            var xmlReportFileNamer = new ScriptXmlReportFileNamer();
-            var htmlReportFileNamer = new ScriptHtmlReportFileNamer();
-
-            // TODO: Check if these should be injected
-            ReportGenerator = new ScriptReportGenerator(
-                this,
-                xmlReportFileNamer,
-                htmlReportFileNamer,
-                new ScriptHtmlReportGenerator(
-                    this,
-                    xmlReportFileNamer,
-                    htmlReportFileNamer
-                )
-            );
-            
-            TestSummarizer = new TestSummarizer(this);
-
-            // Set the group name to the name of the script. If tests are executed within the script they'll be placed in that group.
-            TestGroupName = ScriptName;
-
-            if (IsVerbose)
-                Console.WriteLine ("Original directory: " + OriginalDirectory);
-
-            Relocator.Relocate();
-
-            base.SetUp();*/
+            if (Script.IsVerbose) {
+                Console.WriteLine ("Original directory: " + Script.OriginalDirectory);
+                     
+                Console.WriteLine ("");
+                Console.WriteLine ("--------------------------------------------------");
+                Console.WriteLine ("");
+            }
         }
     }
 }
