@@ -6,9 +6,13 @@ namespace SoftwareMonkeys.csAnt
 	{
 		public virtual void Dispose ()
 		{
-			if (!IsVerbose) {
-				Console.WriteLine ("Disposing '" + ScriptName + "' script.");
+			if (IsVerbose) {
+                Console.WriteLine ("");
+                Console.WriteLine ("Disposing '" + ScriptName + "' script.");
+                Console.WriteLine ("");
 			}
+
+            TearDown();
 
 			ClearTmp ();
 

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace SoftwareMonkeys.csAnt.UI.csAntConsole
+namespace SoftwareMonkeys.csAnt
 {
 	/// <summary>
 	/// A script that can be used programmatically.
@@ -12,7 +12,7 @@ namespace SoftwareMonkeys.csAnt.UI.csAntConsole
 		{
 		}
 
-		public override bool Start (string[] args)
+		public override bool Run (string[] args)
 		{
 			throw new System.NotImplementedException ();
 		}

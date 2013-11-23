@@ -38,24 +38,40 @@ namespace SoftwareMonkeys.csAnt.UI.csAntConsole
 		}
 
 		static public void Execute (string scriptName, string[] args)
-		{
-			InitializeConsoleWriter (scriptName);
+        {
+            InitializeConsoleWriter (scriptName);
+            
+            var arguments = new Arguments (args);
 
-			var startTime = DateTime.Now;
+            var script = new Script (scriptName);
 
-			var arguments = new Arguments (args);
+            script.Indent = -1; // Set the launcher script indent to -1 so it doesn't increase the indent of the script it calls
 
-			var script = new Script (scriptName);
+            script.Console = Console;
 
-			script.Console = Console;
+            if (arguments.Contains ("v")
+                || arguments.Contains ("verbose"))
+                script.IsVerbose = true;
 
-			if (arguments.Contains ("b"))
-				script.CurrentDirectory = Path.GetFullPath (arguments ["b"]);
+            if (script.IsVerbose) {
+                Console.WriteLine ("");
+                Console.WriteLine ("Launching script...");
+                Console.WriteLine ("Script name:");
+                Console.WriteLine (scriptName);
+                Console.WriteLine ("");
+            }
+
+            var startTime = script.Time;
+
+            if (arguments.Contains ("b"))
+                script.CurrentDirectory = Path.GetFullPath (arguments ["b"]);
 			
-			if (arguments.Contains ("v")
-			    || arguments.Contains ("verbose"))
-				script.IsVerbose = true;
-			
+
+            if (arguments.Contains ("t")) {
+                script.Time = DateTime.Parse (arguments ["t"]);
+                script.TimeStamp = arguments ["t"];
+            }
+
 			if (arguments.Contains ("dbg")
 			    || arguments.Contains ("debug"))
 				script.IsDebug = true;
@@ -66,8 +82,6 @@ namespace SoftwareMonkeys.csAnt.UI.csAntConsole
 				Console.WriteLine (script.CurrentDirectory);
 				Console.WriteLine ("");
 			}
-
-			script.IsVerbose = arguments.Contains("verbose");
 			
 			script.CurrentDirectory = Path.GetFullPath(
 				Environment.CurrentDirectory
@@ -83,12 +97,15 @@ namespace SoftwareMonkeys.csAnt.UI.csAntConsole
 			{			
 				Environment.CurrentDirectory = script.CurrentDirectory;
 			
+                script.SetUp();
+
 				// Execute the script
 				script.ExecuteScript(scriptName, args);
 
+                script.TearDown();
+
 				// Calculate the amount of time the script took to run
 				var totalTime = DateTime.Now.Subtract(startTime);
-
 
 				if (script.IsVerbose)
 				{
@@ -96,18 +113,15 @@ namespace SoftwareMonkeys.csAnt.UI.csAntConsole
 					script.OutputSummaries();
 
 					Console.WriteLine("");
-					Console.WriteLine("Duration: " + totalTime.ToString());
-					Console.WriteLine("Successful: " + !script.IsError);
-					Console.WriteLine("");
+					Console.WriteLine(script.GetIndentSpace() + "// Duration: " + totalTime.ToString());
 				}
 
 				if (script.IsError)
-					Console.WriteLine("// !!!!!!!!!!!!!!!!!!!!  Failed  !!!!!!!!!!!!!!!!!!!!");
+					Console.WriteLine(script.GetIndentSpace() + "// !!!!!!!!!!!!!!!!!!!!  Failed  !!!!!!!!!!!!!!!!!!!!");
 				else
-					Console.WriteLine("// ==================== Success! ====================");
+					Console.WriteLine(script.GetIndentSpace() + "// ==================== Success! ====================");
 
 
-				Console.WriteLine("");
 				Console.WriteLine("");
 			}
 		}

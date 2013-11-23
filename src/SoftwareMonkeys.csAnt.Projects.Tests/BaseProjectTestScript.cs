@@ -1,35 +1,35 @@
 using System;
 using SoftwareMonkeys.csAnt.Tests;
+using SoftwareMonkeys.csAnt.Tests.Scripts;
 
-namespace SoftwareMonkeys.csAnt.Projects.Tests
+namespace SoftwareMonkeys.csAnt.Projects.Tests.Scripts
 {
-	public abstract class BaseProjectTestScript : BaseProjectScript, ITestScript
+	public abstract class BaseProjectTestScript : BaseProjectScript, IDummyScript
 	{
-		public string OriginalDirectory { get;set; }
-
-		public TestReportGenerator ReportGenerator { get;set; }
 		public TestSummarizer TestSummarizer { get;set; }
 
 		public string TestGroupName { get; set; }
 
-		public TestUtilities Utilities { get;set; }
+		public ScriptingTestUtilities Utilities { get;set; }
 
-		public TestRelocator Relocator { get;set; }
+		public DummyScriptRelocator Relocator { get;set; }
 
 		public TestFilesGrabber Grabber { get; set; }
 
-		public BaseProjectTestScript () : base()
-		{
-			IsVerbose = true;
-			StopOnFail = false;
+        public DummyScriptConstructor Constructor { get; set; }
 
-			// TODO: Check if these should be injected
-			ReportGenerator = new TestReportGenerator(this);
-			TestSummarizer = new TestSummarizer(this);
-			
-			Grabber = new TestFilesGrabber(this);
-			
-			Relocator = new TestRelocator(this);
+        public BaseTestFixture TestFixture { get; set; }
+
+        public DummyScriptSetUpper SetUpper { get;set; }
+
+        public DummyScriptTearDowner TearDowner { get;set; }
+
+		public BaseProjectTestScript (BaseTestFixture testFixture) : base()
+		{
+            TestFixture = testFixture;
+
+            Constructor = new DummyScriptConstructor();
+            Constructor.Construct(this); 
 		}
 
 		public override abstract bool Start(string[] args);
@@ -38,33 +38,14 @@ namespace SoftwareMonkeys.csAnt.Projects.Tests
 		{
 			base.SetUp ();
 
-			TestGroupName = ScriptName;
-			
-			Utilities = new TestUtilities(this);
-
-			OriginalDirectory = CurrentDirectory;
-
-			if (IsVerbose)
-				Console.WriteLine ("Actual directory: " + OriginalDirectory);
-
-			Relocator.Relocate();
+            SetUpper.SetUp(this, TestFixture.WorkingDirectory);
 		}
 
 		public override void TearDown ()
 		{
 			base.TearDown ();
 			
-			TestSummarizer.Summarize();
-
-			ReportGenerator.GenerateReports();
-			
-			if (IsVerbose) {
-				Console.WriteLine ("Current directory: " + CurrentDirectory);
-				CurrentDirectory = OriginalDirectory;
-				Console.WriteLine ("Actual directory: " + OriginalDirectory);
-			}
-
-			Relocator.Return();
+            TearDowner.TearDown(this);
 		}
 	}
 }

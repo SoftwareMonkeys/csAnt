@@ -1,0 +1,49 @@
+using System;
+using System.Xml.Serialization;
+
+namespace SoftwareMonkeys.csAnt.Tests.Scripting
+{
+	[Serializable]
+	public class ScriptResult
+	{
+		[XmlIgnore]
+		public IScript Script { get;set; }
+
+		public string ScriptName { get; set; }
+
+		public bool Succeeded { get;set; }
+
+		public string Log { get; set; }
+		
+		[XmlIgnore]
+		public ScriptResultSaver Saver { get; set; }
+		
+		public ScriptResult ()
+		{
+		}
+
+		public ScriptResult (
+			IScript script,
+			bool succeeded,
+			string logOutput,
+			ScriptResultSaver saver
+		)
+		{
+            if (String.IsNullOrEmpty(script.ScriptName))
+                throw new ArgumentException("The script.ScriptName property is empty.");
+
+			Succeeded = succeeded;
+			ScriptName = script.ScriptName;
+			Script = script;
+			Log = logOutput;
+			Saver = saver;
+		}
+
+		public void Save()
+		{
+			Saver.Save (this);
+		}
+
+	}
+}
+

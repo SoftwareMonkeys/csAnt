@@ -17,123 +17,57 @@ namespace SoftwareMonkeys.csAnt
 			ExecuteScript(scriptName, new string[]{});
 		}
 		
-		public void ExecuteScript(string scriptName, params string[] args)
-		{
-			var parentScriptList = GetParentScriptList();
+		public void ExecuteScript (string scriptName, params string[] args)
+        {
+            var script = ActivateScript(scriptName);
+         
+            ExecuteScript(script, args);
+        }
 
-			Console.WriteLine("");
-			Console.WriteLine(GetIndentSpace(Indent) + "// --------------------------------------------------");
-			Console.WriteLine(GetIndentSpace(Indent) + "// Executing script: " + scriptName);
-			Console.WriteLine(GetIndentSpace(Indent) + "// Directory: " + CurrentDirectory);
-			if (IsVerbose)
-				WriteScriptStack(parentScriptList);
-			Console.WriteLine("");
+        public IScript ExecuteScript (IScript script, params string[] args)
+        {
+            script.Start (args);
 
-			string scriptFile = GetScriptPath(scriptName);
+            // Add the summaries from the sub script to the outer script
+            if (script.Summaries != null) {
+                foreach (string summary in script.Summaries) {
+                    AddSummary (summary);
+                }
+            }
 
-			if (!String.IsNullOrEmpty(scriptFile))
-			{
-				if (IsVerbose)
-				{
-					Console.WriteLine(GetIndentSpace(Indent) + "Script file:");
-					Console.WriteLine(GetIndentSpace(Indent) + scriptFile);
-				}
+            // If the target script ran into an error then recognize that error in the current script
+            IsError = script.IsError;
+
+            Console.AppendOutput (script.Console.Output);
+
+            return script;
+        }
+
+		public void WriteScriptStack (Stack<string> stack)
+        {
+            var builder = new StringBuilder ();
+
+            if (stack.Count > 0) {
+                builder.Append (GetIndentSpace (Indent) + "// Script stack: ");
+
+                int i = 0;
+
+                foreach (var s in stack) {
+                    if (i > 0)
+                        builder.Append (", ");
+
+                    if (String.IsNullOrEmpty (s))
+                        throw new Exception ("Item is null or empty.");
+
+                    builder.Append (s);
+				
+                    i++;
+                }
 			
-				ExecuteScriptFromFile(scriptFile, args);
-			}
-			else
-			{
-				IsError = true;
+                builder.Append (Environment.NewLine);
 
-				Console.WriteLine ("Cannot find '" + scriptName + "' script.");
-			}
-			
-			Console.WriteLine("");
-			Console.WriteLine(GetIndentSpace(Indent) + "// Finished executing script: " + scriptName);
-			if (IsVerbose)
-				WriteScriptStack(parentScriptList);
-			Console.WriteLine(GetIndentSpace(Indent) + "// --------------------------------------------------");
-
-		}
-
-		public void WriteScriptStack (string[] list)
-		{
-			var builder = new StringBuilder();
-
-			if (list.Length > 0) {
-				builder.Append(GetIndentSpace(Indent) + "// Script stack: ");
-
-				for (var i = 0; i < list.Length; i++) {
-						if (i > 0)
-							builder.Append(", ");
-
-						if (String.IsNullOrEmpty(list[i]))
-							throw new Exception("Item is null or empty.");
-
-						builder.Append(list [i]);
-				}
-			
-				builder.Append(Environment.NewLine);
-
-				Console.Write(builder.ToString());
-			}
-		}
-
-		public string[] GetParentScriptList ()
-		{
-			var c = Console;
-
-			List<string> list = new List<string> ();
-
-			if (c is SubConsoleWriter) {
-				while (c is SubConsoleWriter) {
-					list.Insert (0, c.ScriptName);
-					c = ((SubConsoleWriter)c).ParentWriter;
-				}
-			}
-
-			return list.ToArray ();
-		}
-
-		public void ExecuteScriptFromFile (string scriptPath, string[] args)
-		{			
-			IScript script = ActivateScript (scriptPath);
-
-			// Get the original current directory
-			var originalCurrentDirectory = script.CurrentDirectory;
-
-			// Set the indent of the new script to be one more than the current script
-			script.Indent = Indent + 1;
-
-			script.SetUp (); // TODO: Check if this should be automatically run by the script itself
-		
-			// Give the sub script the same time stamp (so all sub scripts can be marked with the same time, helping to organize them)
-			script.TimeStamp = TimeStamp;	// Start the target script
-
-			// Run the Start function inside a try...catch block 
-			try {
-				script.Start (args);
-			} catch (Exception ex) {
-				script.Error (ex.ToString());
-			}
-			finally{
-				script.TearDown (); // TODO: Check if this should be automatically run by the script itself
-			}
-
-			// Ensure the script's current directory is reset back to its original value (in case it was modified in a script)
-			script.CurrentDirectory = originalCurrentDirectory;
-
-			// If the target script ran into an error then recognize that error in the current script
-			IsError = script.IsError;
-
-			Console.AppendOutput(script.Console.Output);
-
-			// Add the summaries from the sub script to the outer script
-			if (script.Summaries != null) {
-				foreach (string summary in script.Summaries) {
-					AddSummary (summary);
-				}
-			}
-		}
-	}
+                Console.Write (builder.ToString ());
+            }
+        }
+    }
 }

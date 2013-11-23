@@ -5,8 +5,13 @@ namespace SoftwareMonkeys.csAnt
 {
 	public partial class BaseScript
 	{
-		public string GetScriptPath(string scriptName)
-		{
+		public string GetScriptPath (string scriptName)
+        {
+            return GetScriptPath(scriptName, CurrentDirectory);
+        }
+
+        public string GetScriptPath(string scriptName, string workingDirectory)
+        {
 			string scriptPath = string.Empty;
 			
 			string scriptsDir = GetScriptsPath();
@@ -23,8 +28,7 @@ namespace SoftwareMonkeys.csAnt
 
 			if (String.IsNullOrEmpty(scriptPath))
 			{
-				if (IsVerbose)
-					Console.WriteLine("Can't find script file.");
+                throw new ScriptNotFoundException(scriptName);
 			}
 						
 			return scriptPath;

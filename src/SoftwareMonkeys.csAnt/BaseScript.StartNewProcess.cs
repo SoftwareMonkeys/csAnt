@@ -35,12 +35,6 @@ namespace SoftwareMonkeys.csAnt
 		/// <param name='arguments'></param>
 		public Process StartNewProcess(string command, string arguments, bool autoKill)
 		{
-			Console.WriteLine("");
-			Console.WriteLine("Starting new process: " + command);
-			Console.WriteLine("Arguments:");
-			Console.WriteLine(arguments);
-			Console.WriteLine("");
-
 			// TODO: Implement autokill parameter or remove it
 			var cmd = new StartNewProcessCommand(this, command, arguments.Split(' '));
 	

@@ -4,7 +4,7 @@ namespace SoftwareMonkeys.csAnt
 {
 	public partial class BaseScript
 	{
-		public bool StopOnFail = true;
+        public bool StopOnFail { get; set; }
 	}
 }
 

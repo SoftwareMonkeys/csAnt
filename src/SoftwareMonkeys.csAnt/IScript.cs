@@ -15,37 +15,60 @@ namespace SoftwareMonkeys.csAnt
 
 		bool IsVerbose { get;set; }
 
-		string TimeStamp { get;set; }
-
 		FileNode CurrentNode { get;set; }
 
 		bool IsError { get;set; }
 
 		ConsoleWriter Console { get; set; }
 
-		// TODO: Check if needed
 		int Indent { get; set; }
+
+        bool StopOnFail { get;set; }
 		#endregion
+
+        #region Parent and stack
+        IScript ParentScript { get;set; }
+
+        Stack<string> ScriptStack { get;set; }
+        #endregion
+
+        #region Construct
+        void Construct(string scriptName);
+
+        void Construct(string scriptName, IScript parentScript);
+        #endregion
+
+        #region Original directory
+        string GetOriginalDirectory();
+
+        string OriginalDirectory { get;set; }
+        #endregion
 
 		#region Imports properties
-		string ImportedDirectory { get;set; }
+		string ImportStagingDirectory { get;set; }
 
-		string GetImportedDirectory();
+		string GetImportStagingDirectory();
 		#endregion
 
-		#region Start
-		void SetUp();
+        #region Set up
+        bool IsSetUp { get;set; }
 
-		bool Start(string[] args);
+        IScriptSetUpper SetUpper { get;set; }
+
+		void SetUp();
+        #endregion
+        
+        #region Start
+		bool Start(params string[] args);
+        #endregion
+
+        #region Tear down
+        bool IsTornDown { get;set; }
+
+        IScriptTearDowner TearDowner { get;set; }
 
 		void TearDown();
-		#endregion
-
-		#region Initialize
-		void Initialize(string scriptName);
-
-		void Initialize(string scriptName, ConsoleWriter consoleWriter);
-		#endregion
+        #endregion
 
 		#region Summaries
 		List<string> Summaries { get;set; }
@@ -58,7 +81,10 @@ namespace SoftwareMonkeys.csAnt
 		#region IO
 		void MoveDirectory(string from, string to);
 
-		void CopyDirectory(string from, string to);
+        void CopyDirectory(string from, string to);
+        void CopyDirectory(string from, string to, bool overwrite);
+        
+        string GetTmpRoot();
 
 		string GetTemporaryDirectory();
 		string GetTmpDir();
@@ -68,6 +94,10 @@ namespace SoftwareMonkeys.csAnt
 		void EnsureDirectoryExists(string path);
 
 		string[] FindFiles(string directory, string[] patterns);
+
+        FilesGrabber FilesGrabber { get;set; }
+
+        TemporaryDirectoryCreator TemporaryDirectoryCreator { get;set; }
 		#endregion
 
 		#region Downloads
@@ -90,23 +120,69 @@ namespace SoftwareMonkeys.csAnt
 		void Error(string message);
 		#endregion
 
-		#region Execute functions
+		#region Script functions
+        T ActivateScript<T>(string scriptName)
+            where T : IScript;
+
+        IScript ActivateScript(string scriptName);
+
+        IScript ActivateScriptFromFile(string scriptFilePath);
+
 		void ExecuteScript(string scriptName);
 		#endregion
 
-		#region Time stamp functions
+		#region Time stamp
+        string TimeStamp { get;set; }
+
+        DateTime Time { get;set; }
+
 		string GetTimeStamp();
 		#endregion
 
 		#region Start process functions
-		Process StartProcess(string command, string[] arguments);
+		Process StartProcess(string command, params string[] arguments);
 
-		Process StartNewProcess(string command, string[] arguments);
+		Process StartNewProcess(string command, params string[] arguments);
 		#endregion
 
-                #region Relocation
-                void Relocate(string dir);
-                #endregion
-	}
+        #region Relocation
+        IScriptRelocator Relocator { get;set; }
+
+        void Relocate(string dir);
+        #endregion
+
+        #region Start HTTP
+        void StartHttp(string dir, string host, int port, bool autoKill);
+        #endregion
+
+        #region Sync
+        void Sync(string dir1, string dir2);
+        #endregion
+
+        #region Libs
+        void GetLib(string name);
+        #endregion
+
+        #region Compile
+        void CompileScripts();
+        #endregion
+
+        #region Build mode
+        bool IsDebug { get;set; }
+
+        string GetBuildMode();
+        #endregion
+
+        #region Git
+        void GitInit();
+        void GitAdd(string filePath);
+        void GitCommit();
+        #endregion
+
+        #region Nodes
+        void RefreshCurrentNode();
+        #endregion
+	
+    }
 }
 

@@ -11,7 +11,7 @@ namespace SoftwareMonkeys.csAnt
 		{
 			var scriptPath = GetScriptPath(scriptName);
 
-			return ActivateScript(scriptPath);
+			return ActivateScriptFromFile(scriptPath);
 		}
 	}
 }

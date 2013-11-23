@@ -36,7 +36,6 @@ namespace SoftwareMonkeys.csAnt
 			}
 		}
 
-
 		public StartProcessCommand (
 			IScript script,
 			string command,
@@ -78,7 +77,7 @@ namespace SoftwareMonkeys.csAnt
 		{
 			arguments = FixArguments(arguments);
 
-			 StartProcess(command, String.Join(" ", arguments));
+            StartProcess(command, String.Join(" ", arguments));
 		}
 		
 		/// <summary>
@@ -91,9 +90,8 @@ namespace SoftwareMonkeys.csAnt
 			Console.WriteLine("");
 			Console.WriteLine("--------------------------------------------------");
 			Console.WriteLine("");
-			Console.WriteLine("Starting process: " + command);
-			Console.WriteLine("Arguments:");
-			Console.WriteLine(arguments);
+			Console.WriteLine("Starting process:");
+			Console.WriteLine(command + " " + arguments);
 			Console.WriteLine("");
 
 			// Create the process start information

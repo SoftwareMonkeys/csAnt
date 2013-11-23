@@ -15,23 +15,31 @@ namespace SoftwareMonkeys.csAnt
 
 		public int Indent { get;set; }
 
-		public BaseScript ()
-		{
-			var scriptName = GetType ().Name;
+		protected BaseScript ()
+        {
+            // The parameterless constructor shouldn't call the Construct function. It needs to be called explicitly if using this constructor.
 
-			scriptName = FixScriptName(scriptName);
-
-			Initialize(scriptName);
-		}
+            Constructor = new ScriptConstructor(this);
+        }
 
 		public BaseScript(string scriptName)
 		{
 			if (String.IsNullOrEmpty(scriptName))
 				throw new ArgumentException("The script name must be provided.", "scriptName");
+            
+            Constructor = new ScriptConstructor(this);
 
-			ScriptName = scriptName;
-
-			Initialize(scriptName);
+            Construct(scriptName);
 		}
+        
+        public BaseScript(string scriptName, IScript parentScript)
+        {
+            if (String.IsNullOrEmpty(scriptName))
+                throw new ArgumentException("The script name must be provided.", "scriptName");
+            
+            Constructor = new ScriptConstructor(this);
+
+            Construct(scriptName, parentScript);
+        }
 	}
 }
