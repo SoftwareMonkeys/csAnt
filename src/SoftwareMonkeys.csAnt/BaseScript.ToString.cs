@@ -2,10 +2,11 @@ using System;
 
 namespace SoftwareMonkeys.csAnt
 {
-    public class BaseScript
+    public partial class BaseScript
     {
-        public BaseScript ()
+        public override string ToString ()
         {
+            return string.Format (GetType().Name + " - '" + ScriptName + "'");
         }
     }
 }

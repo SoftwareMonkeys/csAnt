@@ -1,9 +1,12 @@
 using System;
 
-namespace SoftwareMonkeys.csAnt.Tests
+namespace SoftwareMonkeys.csAnt
 {
     public interface IScriptRelocator
     {
+        void Relocate(string path);
+
+        void Return();
     }
 }
 

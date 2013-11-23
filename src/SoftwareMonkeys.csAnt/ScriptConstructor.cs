@@ -2,9 +2,9 @@ using System;
 
 namespace SoftwareMonkeys.csAnt
 {
-    public class ScriptConstructor
+    public class ScriptConstructor : BaseScriptConstructor
     {
-        public ScriptConstructor ()
+        public ScriptConstructor (IScript script) : base(script)
         {
         }
     }

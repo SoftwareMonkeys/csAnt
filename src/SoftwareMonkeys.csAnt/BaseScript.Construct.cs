@@ -2,10 +2,18 @@ using System;
 
 namespace SoftwareMonkeys.csAnt
 {
-    public class BaseScript
+    public partial class BaseScript
     {
-        public BaseScript ()
+        public virtual void Construct(string scriptName)
         {
+            Construct(scriptName, null);
+        }
+
+        public virtual void Construct(string scriptName, IScript parentScript)
+        {
+            Constructor.Construct(scriptName, parentScript);
+
+            SetUp();
         }
     }
 }

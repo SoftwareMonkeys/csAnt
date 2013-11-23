@@ -2,9 +2,9 @@ using System;
 
 namespace SoftwareMonkeys.csAnt
 {
-    public class ScriptRelocator
+    public class ScriptRelocator : BaseScriptRelocator
     {
-        public ScriptRelocator ()
+        public ScriptRelocator (IScript script) : base(script)
         {
         }
     }

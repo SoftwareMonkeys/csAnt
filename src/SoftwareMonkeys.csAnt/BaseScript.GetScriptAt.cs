@@ -2,10 +2,13 @@ using System;
 
 namespace SoftwareMonkeys.csAnt
 {
-    public class BaseScript
+    public partial class BaseScript
     {
-        public BaseScript ()
+        public IScript GetScriptAt(string scriptName, string workingDirectory)
         {
+            var script = ActivateScriptAt(scriptName, workingDirectory);
+
+            return script;
         }
     }
 }

@@ -11,12 +11,20 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoftwareMonkeys.csAnt.Tests
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoftwareMonkeys.csAnt.Projects.Tests", "SoftwareMonkeys.csAnt.Projects.Tests\SoftwareMonkeys.csAnt.Projects.Tests.csproj", "{5B5A328E-6F70-498A-AB13-26E48CBE3BA1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoftwareMonkeys.csAnt.Projects.Tests.Scripting", "SoftwareMonkeys.csAnt.Projects.Tests.Scripting\SoftwareMonkeys.csAnt.Projects.Tests.Scripting.csproj", "{0C5A149B-A2A7-47E0-9C3F-4DBE34745845}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoftwareMonkeys.csAnt.Tests.Scripting", "SoftwareMonkeys.csAnt.Tests.Scripting\SoftwareMonkeys.csAnt.Tests.Scripting.csproj", "{98C7EEC8-1AD5-4570-8EA5-76FE959F3B58}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0C5A149B-A2A7-47E0-9C3F-4DBE34745845}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C5A149B-A2A7-47E0-9C3F-4DBE34745845}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C5A149B-A2A7-47E0-9C3F-4DBE34745845}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C5A149B-A2A7-47E0-9C3F-4DBE34745845}.Release|Any CPU.Build.0 = Release|Any CPU
 		{16297BCB-0A8C-42E6-BE35-921085C3E238}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{16297BCB-0A8C-42E6-BE35-921085C3E238}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{16297BCB-0A8C-42E6-BE35-921085C3E238}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -33,6 +41,10 @@ Global
 		{5B5A328E-6F70-498A-AB13-26E48CBE3BA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5B5A328E-6F70-498A-AB13-26E48CBE3BA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5B5A328E-6F70-498A-AB13-26E48CBE3BA1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{98C7EEC8-1AD5-4570-8EA5-76FE959F3B58}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{98C7EEC8-1AD5-4570-8EA5-76FE959F3B58}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{98C7EEC8-1AD5-4570-8EA5-76FE959F3B58}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{98C7EEC8-1AD5-4570-8EA5-76FE959F3B58}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E79918A1-F275-4073-9968-77DAB04622A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E79918A1-F275-4073-9968-77DAB04622A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E79918A1-F275-4073-9968-77DAB04622A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -40,5 +52,14 @@ Global
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = SoftwareMonkeys.csAnt.UI.csAntConsole\SoftwareMonkeys.csAnt.UI.csAntConsole.csproj
+		Policies = $0
+		$0.DotNetNamingPolicy = $1
+		$1.DirectoryNamespaceAssociation = None
+		$1.ResourceNamePolicy = FileFormatDefault
+		$0.TextStylePolicy = $2
+		$2.FileWidth = 120
+		$2.inheritsSet = VisualStudio
+		$2.inheritsScope = text/plain
+		$2.scope = text/plain
 	EndGlobalSection
 EndGlobal
