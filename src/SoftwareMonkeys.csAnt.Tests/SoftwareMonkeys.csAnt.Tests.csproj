@@ -70,7 +70,6 @@
     <Compile Include="DummyScriptSetUpper.cs" />
     <Compile Include="DummyScriptTearDowner.cs" />
     <Compile Include="IDummyScript.cs" />
-    <Compile Include="DummyScriptRelocator.cs" />
     <Compile Include="GetDummyScriptTestFixture.cs" />
     <Compile Include="TemporaryDirectoryCreatorTestFixture.cs" />
     <Compile Include="FixCurrentDirectoryTestFixture.cs" />
