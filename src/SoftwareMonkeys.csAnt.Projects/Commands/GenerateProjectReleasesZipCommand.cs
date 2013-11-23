@@ -3,9 +3,9 @@ using System.IO;
 
 namespace SoftwareMonkeys.csAnt.Projects
 {
-    public class GenerateProjectReleasesCommand : BaseProjectScriptCommand
+    public class GenerateProjectReleasesZipCommand : BaseProjectScriptCommand
     {
-        public GenerateProjectReleasesZipCommand (IScript script) : base(script)
+        public GenerateProjectReleasesZipCommand (BaseProjectScript script) : base(script)
         {
         }
 

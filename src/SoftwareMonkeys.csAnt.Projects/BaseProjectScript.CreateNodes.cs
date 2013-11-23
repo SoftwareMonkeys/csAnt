@@ -2,10 +2,14 @@ using System;
 
 namespace SoftwareMonkeys.csAnt.Projects
 {
-    public class BaseProjectScript
+    public partial class BaseProjectScript
     {
-        public BaseProjectScript ()
+        public void CreateNodes()
         {
+            CreateGroupNode();
+            CreateProjectNode();
+
+            RefreshCurrentNode();
         }
     }
 }

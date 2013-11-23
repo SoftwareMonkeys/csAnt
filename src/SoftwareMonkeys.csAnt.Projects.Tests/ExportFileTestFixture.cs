@@ -10,11 +10,13 @@ namespace SoftwareMonkeys.csAnt.Projects.Tests
 		[Test]
 		public void Test_ExportFile()
 		{
-			var script = GetTestScript();
+			var script = (BaseProjectScript)GetDummyScript();
+
+            script.FilesGrabber.GrabOriginalFiles();
 
 			script.IsVerbose = true;
 
-			var dir = script.CurrentDirectory;
+			var dir = Path.GetDirectoryName(script.CurrentDirectory);
 
 			var projectsDir = dir
 				+ Path.DirectorySeparatorChar
@@ -88,6 +90,9 @@ namespace SoftwareMonkeys.csAnt.Projects.Tests
 
 			// Switch back to project one
 			script.Relocate(project1Dir);
+
+            // Create the required file nodes
+            script.CreateNodes();
 			
 			Console.WriteLine ("Adding project 2 as an import project...");
 			Console.WriteLine ("");
@@ -132,7 +137,7 @@ namespace SoftwareMonkeys.csAnt.Projects.Tests
 
 			script.ExportFile("ProjectTwo", script2File);
 			
-			var expectedFile2 = script.ImportedDirectory
+			var expectedFile2 = script.ImportStagingDirectory
 				+ Path.DirectorySeparatorChar
 				+ "ProjectTwo"
 				+ Path.DirectorySeparatorChar

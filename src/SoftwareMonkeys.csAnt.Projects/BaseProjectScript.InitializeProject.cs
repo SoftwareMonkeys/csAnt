@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Collections.Generic;
 
 namespace SoftwareMonkeys.csAnt.Projects
 {
@@ -40,9 +41,16 @@ namespace SoftwareMonkeys.csAnt.Projects
 
 			if (File.Exists(initPath))
 			{
+                List<string> args = new List<string>();
+
+                args.Add("\"" + initPath + "\"");
+                args.Add ("-t:" + TimeStamp);
+                if (IsVerbose)
+                    args.Add ("-v");
+
 				StartProcess(
 					cmdName,
-					"\"" + initPath + "\""
+					args.ToArray()
 				);
 			}
 			else

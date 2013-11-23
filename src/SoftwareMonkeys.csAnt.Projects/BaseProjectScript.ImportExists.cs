@@ -7,7 +7,7 @@ namespace SoftwareMonkeys.csAnt.Projects
 	{
 		public bool ImportExists(string importProjectName)
 		{
-			var path = ImportedDirectory
+			var path = ImportStagingDirectory
 				+ Path.DirectorySeparatorChar
 					+ importProjectName;
 

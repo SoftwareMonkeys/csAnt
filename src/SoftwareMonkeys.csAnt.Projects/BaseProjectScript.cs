@@ -9,21 +9,18 @@ namespace SoftwareMonkeys.csAnt.Projects
 		{
 		}
 
-		public BaseProjectScript (string scriptName) : base(scriptName)
+		public BaseProjectScript (string scriptName)
 		{
+            Constructor = new ProjectScriptConstructor(this);
+
+            Construct(scriptName);
 		}
+        
+        public BaseProjectScript (string scriptName, IScript parentScript)
+        {
+            Constructor = new ProjectScriptConstructor(this);
 
-		public override void Initialize (string scriptName)
-		{
-
-			base.Initialize (scriptName);
-
-			ImportedDirectory = GetImportedDirectory();
-
-			Console.WriteLine ("");
-			Console.WriteLine ("Imported directory:");
-			Console.WriteLine (ImportedDirectory);
-			Console.WriteLine ("");
-		}
+            Construct(scriptName, parentScript);
+        }
 	}
 }

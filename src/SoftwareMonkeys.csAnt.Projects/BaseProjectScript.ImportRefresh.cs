@@ -7,7 +7,7 @@ namespace SoftwareMonkeys.csAnt.Projects
 	{
 		public void ImportRefresh (string name)
 		{
-			var dir = ImportedDirectory
+			var dir = ImportStagingDirectory
 				+ Path.DirectorySeparatorChar
 					+ name;
 

@@ -1,10 +1,17 @@
 using System;
+using SoftwareMonkeys.csAnt.Commands;
 
 namespace SoftwareMonkeys.csAnt.Projects
 {
-    public class BaseProjectScriptCommand
+    public abstract class BaseProjectScriptCommand : BaseScriptCommand
     {
-        public BaseProjectScriptCommand ()
+        public new BaseProjectScript Script {
+            get {
+                return (BaseProjectScript)base.Script;
+            }
+        }
+
+        public BaseProjectScriptCommand (BaseProjectScript script) : base(script)
         {
         }
     }
