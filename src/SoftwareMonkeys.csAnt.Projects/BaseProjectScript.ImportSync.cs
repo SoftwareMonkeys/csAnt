@@ -16,7 +16,7 @@ namespace SoftwareMonkeys.csAnt.Projects
 			Console.WriteLine (projectPath);
 			Console.WriteLine ("");
 
-			var importedProjectPath = ImportedDirectory
+			var importedProjectPath = ImportStagingDirectory
 				+ Path.DirectorySeparatorChar
 				+ projectName;
 

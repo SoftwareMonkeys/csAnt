@@ -8,11 +8,11 @@ namespace SoftwareMonkeys.csAnt.Projects
 	{
 		public void AddImportPattern(string projectName, string pattern)
 		{
-			var listPath = ImportedDirectory
+			var listPath = ImportStagingDirectory
 				+ Path.DirectorySeparatorChar
 				+ projectName
 				+ Path.DirectorySeparatorChar
-					+ "patterns.txt";
+				+ "patterns.txt";
 
 			var patterns = new List<string>();
 
@@ -24,7 +24,7 @@ namespace SoftwareMonkeys.csAnt.Projects
 			if (!patterns.Contains(pattern))
 				patterns.Add (pattern);
 
-			File.WriteAllLines(listPath, patterns);
+			File.WriteAllLines(listPath, patterns.ToArray());
 		}
 	}
 }

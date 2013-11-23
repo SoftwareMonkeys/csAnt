@@ -5,21 +5,21 @@ using System.Collections.Generic;
 
 namespace SoftwareMonkeys.csAnt.Projects
 {
-    public class ReleaseProjectCommand : BaseProjectScriptCommand
+    public class GenerateProjectReleaseZipCommand : BaseProjectScriptCommand
     {
-        public ReleaseProjectCommand (IScript script) : base(script)
+        public string ReleaseList { get;set; }
+
+        public GenerateProjectReleaseZipCommand (BaseProjectScript script, string releaseList) : base(script)
         {
+            ReleaseList = releaseList;
         }
 
         public override void Execute ()
         {
-            var listDir = GetReleaseDir();
+            var rlsDir = GetReleaseDir ();
 
-            // Loop through the folder containing release list files
-            foreach (string listFile in Directory.GetFiles(listDir, "*-list.txt"))
-            {
+            foreach (var listFile in Directory.GetFiles (rlsDir, "*.txt")) {
                 CreateRelease(listFile);
-
             }
         }
         
@@ -31,8 +31,10 @@ namespace SoftwareMonkeys.csAnt.Projects
                     + listFile
                     + "-list.txt";
             }
-
-            Console.WriteLine("----------------------------------------------------------------------");
+            
+            Console.WriteLine("");
+            Console.WriteLine("------------------------------");
+            Console.WriteLine("");
             Console.WriteLine("Release list file: " + listFile.Replace(Script.ProjectDirectory, ""));
 
             var files = new List<string>(File.ReadLines(listFile)).ToArray();       
@@ -80,8 +82,10 @@ namespace SoftwareMonkeys.csAnt.Projects
 
                 Console.WriteLine("  Release file: " + zipFilePath.Replace(Script.ProjectDirectory, ""));
                 Console.WriteLine("Release zip file created successfully.");
+                
                 Console.WriteLine("");
-                Console.WriteLine("----------------------------------------------------------------------");
+                Console.WriteLine("------------------------------");
+                Console.WriteLine("");
 
                 Script.AddSummary("Generated '" + zipFileName + "' release file from '" + Path.GetFileName(listFile) + "' list file.");
 

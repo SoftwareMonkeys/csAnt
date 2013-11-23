@@ -6,19 +6,20 @@ namespace SoftwareMonkeys.csAnt.Projects
 {
 	public partial class BaseProjectScript
 	{
-		public void CreateProjectNode(string projectName)
-		{
-			var path = CurrentDirectory
-				+ Path.DirectorySeparatorChar
-				+ projectName
-					+ ".node";
+        public void CreateProjectNode ()
+        {
+            CreateProjectNode(CurrentDirectory);
+        }
 
-			var node = new FileNode(
-				path,
-				new FileNodeSaver()
-			);
+        public void CreateProjectNode (string path)
+        {
+            var name = Path.GetFileNameWithoutExtension(path);
+            CreateProjectNode(path, name);
+        }
 
-			node.Save();
+		public void CreateProjectNode (string location, string projectName)
+        {
+            CreateNode(location, projectName);
 		}
 	}
 }

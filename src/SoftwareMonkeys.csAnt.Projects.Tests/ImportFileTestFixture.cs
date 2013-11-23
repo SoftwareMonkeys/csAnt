@@ -10,15 +10,15 @@ namespace SoftwareMonkeys.csAnt.Projects.Tests
 		[Test]
 		public void Test_ImportFile()
 		{
-			var script = GetTestScript();
+			var script = (DummyProjectScript)GetDummyScript();
+
+            script.FilesGrabber.GrabOriginalFiles();
 
 			script.IsVerbose = true;
 
-			var dir = script.CurrentDirectory;
+			var dir = Path.GetDirectoryName(script.CurrentDirectory);
 
-			var projectsDir = dir
-				+ Path.DirectorySeparatorChar
-					+ "Projects";
+            var projectsDir = dir;
 
 			var project1Dir = projectsDir
 				+ Path.DirectorySeparatorChar
@@ -40,6 +40,9 @@ namespace SoftwareMonkeys.csAnt.Projects.Tests
 
 			// Move to second project
 			script.Relocate(project2Dir);
+
+            // Create files nodes
+            script.CreateNodes();
 
 			// Initialize git
 			script.GitInit();
@@ -68,9 +71,13 @@ namespace SoftwareMonkeys.csAnt.Projects.Tests
 			// Switch back to project one
 			script.Relocate(project1Dir);
 
+            // Create the required file nodes
+            script.CreateNodes ();
+
 			// Add project 2 as import
 			script.AddImport("ProjectTwo", project2Dir);
 
+            // Import the file
 			script.ImportFile("ProjectTwo", "scripts/TestScript.cs", "scripts", false);
 
 			var expectedFile = project1Dir

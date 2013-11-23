@@ -8,7 +8,7 @@
     <ProjectGuid>{0C5A149B-A2A7-47E0-9C3F-4DBE34745845}</ProjectGuid>
     <OutputType>Library</OutputType>
     <RootNamespace>SoftwareMonkeys.csAnt.Projects.Tests.Scripting</RootNamespace>
-    <AssemblyName>SoftwareMonkeys.csAnt.Projects.Tests.Scripts</AssemblyName>
+    <AssemblyName>SoftwareMonkeys.csAnt.Projects.Tests.Scripting</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -39,6 +39,9 @@
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="TestProjectScript.cs" />
     <Compile Include="BaseProjectTestScript.cs" />
+    <Compile Include="ProjectTestScriptTearDowner.cs" />
+    <Compile Include="ProjectTestScriptSetUpper.cs" />
+    <Compile Include="ProjectTestScriptConstructor.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -58,7 +61,7 @@
       <Project>{5B5A328E-6F70-498A-AB13-26E48CBE3BA1}</Project>
       <Name>SoftwareMonkeys.csAnt.Projects.Tests</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SoftwareMonkeys.csAnt.Tests.Scripts\SoftwareMonkeys.csAnt.Tests.Scripting.csproj">
+    <ProjectReference Include="..\SoftwareMonkeys.csAnt.Tests.Scripting\SoftwareMonkeys.csAnt.Tests.Scripting.csproj">
       <Project>{98C7EEC8-1AD5-4570-8EA5-76FE959F3B58}</Project>
       <Name>SoftwareMonkeys.csAnt.Tests.Scripting</Name>
     </ProjectReference>

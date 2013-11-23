@@ -34,7 +34,7 @@ namespace SoftwareMonkeys.csAnt.Projects
 			else {
 				ImportRefresh(projectName);
 
-				var importedProjectDirectory = ImportedDirectory
+				var importedProjectDirectory = ImportStagingDirectory
 					+ Path.DirectorySeparatorChar
 						+ projectName;
 				

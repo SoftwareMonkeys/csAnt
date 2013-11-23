@@ -1,41 +1,29 @@
 using System;
 using SoftwareMonkeys.csAnt.Tests;
 
-namespace SoftwareMonkeys.csAnt.Projects.Tests.Scripts
+namespace SoftwareMonkeys.csAnt.Projects.Tests.Scripting
 {
-	public abstract class BaseProjectTestScript : BaseProjectScript, IDummyScript
+	public abstract class BaseProjectDummyScript : BaseProjectScript, IDummyScript
 	{
 		public TestSummarizer TestSummarizer { get;set; }
 
 		public string TestGroupName { get; set; }
 
-		public DummyScriptRelocator Relocator { get;set; }
-
-        public BaseTestFixture TestFixture { get; set; }
-
-		public BaseProjectTestScript (BaseTestFixture testFixture) : base()
+		public BaseProjectDummyScript (string scriptName) : base(scriptName)
 		{
-            TestFixture = testFixture;
+            Constructor = new DummyScriptConstructor(this);
 
-            Constructor = new DummyScriptConstructor();
-            Constructor.Construct(this); 
+            Construct(scriptName);
 		}
 
-		public override abstract bool Start(string[] args);
+        public override void Construct(string scriptName)
+        {
+            base.Construct(scriptName);
 
-		public override void SetUp ()
-		{
-			base.SetUp ();
+            Constructor.Construct(scriptName); 
 
-            SetUpper.SetUp(this, TestFixture.WorkingDirectory);
-		}
-
-		public override void TearDown ()
-		{
-			base.TearDown ();
-			
-            TearDowner.TearDown(this);
-		}
+            SetUp();
+        }
 	}
 }
 

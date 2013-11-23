@@ -31,27 +31,24 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
-    <Reference Include="nunit.framework, Version=2.5.10.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77">
-      <Private>False</Private>
-      <Package>mono-nunit</Package>
+    <Reference Include="nunit.framework">
+      <HintPath>..\..\lib\NUnit\bin\nunit.framework.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="BaseProjectsTestFixture.cs" />
-    <Compile Include="TestProjectScript.cs" />
-    <Compile Include="BaseProjectTestScript.cs" />
     <Compile Include="BuildAllSolutionsTestFixture.cs" />
     <Compile Include="ImportFileTestFixture.cs" />
     <Compile Include="ExportFileTestFixture.cs" />
     <Compile Include="ImportSyncTestFixture.cs" />
+    <Compile Include="DummyProjectScript.cs" />
+    <Compile Include="BaseProjectDummyScript.cs" />
+    <Compile Include="BaseProjectsTestFixture.GetDummyScript.cs" />
+    <Compile Include="BaseProjectsTestFixture.GetWorkingDirectory.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
-    <ProjectReference Include="..\SoftwareMonkeys.csAnt\SoftwareMonkeys.csAnt.csproj">
-      <Project>{16297BCB-0A8C-42E6-BE35-921085C3E238}</Project>
-      <Name>SoftwareMonkeys.csAnt</Name>
-    </ProjectReference>
     <ProjectReference Include="..\SoftwareMonkeys.csAnt.Projects\SoftwareMonkeys.csAnt.Projects.csproj">
       <Project>{3BFB55C4-1247-49BD-AEC9-31BC3C0F1168}</Project>
       <Name>SoftwareMonkeys.csAnt.Projects</Name>
@@ -59,6 +56,10 @@
     <ProjectReference Include="..\SoftwareMonkeys.csAnt.Tests\SoftwareMonkeys.csAnt.Tests.csproj">
       <Project>{E79918A1-F275-4073-9968-77DAB04622A9}</Project>
       <Name>SoftwareMonkeys.csAnt.Tests</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SoftwareMonkeys.csAnt\SoftwareMonkeys.csAnt.csproj">
+      <Project>{16297BCB-0A8C-42E6-BE35-921085C3E238}</Project>
+      <Name>SoftwareMonkeys.csAnt</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>

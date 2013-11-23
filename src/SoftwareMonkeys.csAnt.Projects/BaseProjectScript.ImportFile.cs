@@ -33,7 +33,7 @@ namespace SoftwareMonkeys.csAnt.Projects
 			else {
 				ImportRefresh(projectName);
 
-				var importDir = ImportedDirectory
+				var importDir = ImportStagingDirectory
 					+ Path.DirectorySeparatorChar
 						+ projectName;
 
@@ -41,11 +41,11 @@ namespace SoftwareMonkeys.csAnt.Projects
 				{
 					foreach (var file in FindFiles(importDir, relativePath))
 					{
-						var fixedPath = relativePath;
-						if (flattenHeirarchy)
-							fixedPath = Path.GetFileName(relativePath);
-
 						var toFile = file.Replace (importDir, CurrentDirectory);
+
+                        // TODO: Implement flattenHeirarchy
+                        //if (flattenHeirarchy)
+                            //toFile = toFile.Replace (
 						
 						Console.WriteLine ("");
 						Console.WriteLine ("Copying file:");
