@@ -14,7 +14,7 @@ class AddLibScript : BaseScript
 		new AddLibScript().Start(args);
 	}
 	
-	public override bool Start(string[] args)
+	public override bool Run(string[] args)
 	{
 		if (args.Length < 2)
 			Console.WriteLine("Two arguments expected; name and URL (to zip file).");

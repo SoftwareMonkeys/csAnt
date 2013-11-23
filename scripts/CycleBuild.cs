@@ -15,27 +15,55 @@ class CycleBuildScript : BaseProjectScript
 		new CycleBuildScript().Start(args);
 	}
 	
-	public override bool Start(string[] args)
+	public override bool Run(string[] args)
 	{
 		Console.WriteLine("");
 		Console.WriteLine("Starting a full build cycle.");
 		Console.WriteLine("");
 
+                var mode = "Release";
+                
+                var arguments = new Arguments(args);
+                
+                if (arguments.Contains("mode"))
+                        mode = arguments["mode"];
+                        
+                Console.WriteLine("");
+                Console.WriteLine("Build mode: " + mode);
+                Console.WriteLine("");
+
 		Console.WriteLine("Cleaning...");
 		Console.WriteLine("");
 
-		// Clean the project
+		// Clear the dlls
 		ExecuteScript(
-			"Clean"
+			"ClearDlls"
 		);
 
 		Console.WriteLine("Building...");
 		Console.WriteLine("");
 
-		// Build the solutions
-		ExecuteScript(
-			"BuildAllSolutions"
-		);
+                // If the mode is "all" then build both Debug and Release modes
+                if (mode == "all")
+                {
+		        ExecuteScript(
+			        "BuildAllSolutions",
+			        "-mode:Release"
+		        );
+		        
+		        ExecuteScript(
+			        "BuildAllSolutions",
+			        "-mode:Debug"
+		        );
+		}
+		else
+		{
+		        // Build the solutions
+		        ExecuteScript(
+			        "BuildAllSolutions",
+			        "-mode:" + mode
+		        );
+		}
 
 		if (!IsError)
 		{

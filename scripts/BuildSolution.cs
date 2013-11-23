@@ -14,7 +14,7 @@ class BuildSolutionScript : BaseProjectScript
 		new BuildSolutionScript().Start(args);
 	}
 	
-	public override bool Start(string[] args)
+	public override bool Run(string[] args)
 	{
 		Console.WriteLine("Looking for solution (*.sln) files...");
 				

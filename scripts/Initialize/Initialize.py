@@ -2,7 +2,16 @@ import os
 import urllib.request
 import Utils
 
+timeStamp = ""
+isVerbose = False
+
 def Initialize():
+
+        timeStamp = Utils.GetArgument("t")
+        isVerbose = Utils.ContainsArgument("v")
+        
+        print("Time stamp:")
+        print(timeStamp)
 
         DownloadScripts()
 
@@ -10,7 +19,15 @@ def Initialize():
 
 def NextStep():
 
-        f = os.path.abspath("scripts/Initialize/Initialize2.py")
+        args = ""
+        
+        if not (timeStamp) == "":
+                args = " -t:" + timeStamp
+        
+        if (isVerbose):
+                args = " -v"
+
+        f = os.path.abspath("scripts/Initialize/Initialize2.py" + args)
 
         exec(open(f).read())
 

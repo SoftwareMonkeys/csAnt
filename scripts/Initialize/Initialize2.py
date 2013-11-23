@@ -8,8 +8,10 @@ from GetHtmlAgilityPack import GetHtmlAgilityPack
 from RunCSScript import RunCSScript
 from GetRemainingLibs import GetRemainingLibs
 from GetFileNodes import GetFileNodes
+import Utils
 
 # Basic variables
+timeStamp = ""
 currentDir = os.getcwd()
 libDir = currentDir + os.sep + "lib"
 sourceProjectsDir = os.path.abspath(currentDir + os.sep + ".." + os.sep)
@@ -34,6 +36,17 @@ print("// Initializing Project")
 print("// --------------------")
 print("")
 print("The project is being initialized ready for development, by downloading required files.")
+print("")
+
+timeStamp = Utils.GetArgument("t")
+isVerbose = Utils.ContainsArgument("v")
+
+print("Time stamp:");
+print(timeStamp);
+print("")
+
+print("Is verbose");
+print(isVerbose);
 print("")
 
 print("Current directory:");
@@ -65,7 +78,12 @@ GetHtmlAgilityPack(libDir, generalLibDir)
 GetFileNodes(libDir, generalLibDir)
 
 # Launch the Initialize.cs script
-RunCSScript(csInitializeScript, sourceProjectsDir)
+initArgs = sourceProjectsDir;
+if (isVerbose):
+        initArgs = initArgs + " -v"
+
+initArgs = initArgs + " -t:" + timeStamp
+RunCSScript(csInitializeScript, initArgs)
 
 # Create the project node
 RunCSScript(createProjectNodeScript, "")

@@ -12,14 +12,14 @@ class BuildAllSolutionsScript : BaseProjectScript
 		new BuildAllSolutionsScript().Start(args);
 	}
 	
-	public override bool Start(string[] args)
+	public override bool Run(string[] args)
 	{
-		var parser = new Arguments(args);
+		var arguments = new Arguments(args);
 
 		var mode = "Release";
 
-		if (parser.Contains("mode"))
-			mode = parser["mode"];
+		if (arguments.Contains("mode"))
+			mode = arguments["mode"];
 
 		BuildAllSolutions("src", mode);
 

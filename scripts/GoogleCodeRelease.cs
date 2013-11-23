@@ -15,7 +15,7 @@ class GoogleCodeReleaseScript : BaseProjectScript
 		new GoogleCodeReleaseScript().Start(args);
 	}
 	
-	public override bool Start(string[] args)
+	public override bool Run(string[] args)
 	{
 		Console.WriteLine("");
 		Console.WriteLine("Uploading the project release files to Google Code...");

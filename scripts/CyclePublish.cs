@@ -17,7 +17,7 @@ class CyclePublishScript : BaseProjectScript
 		new CyclePublishScript().Start(args);
 	}
 	
-	public override bool Start(string[] args)
+	public override bool Run(string[] args)
 	{
 		Console.WriteLine("");
 		Console.WriteLine("Starting a full release cycle.");

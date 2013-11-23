@@ -17,13 +17,13 @@ class Test_BuildFromGitScript : BaseProjectTestScript
 		new Test_BuildFromGitScript().Start(args);
 	}
 	
-	public override bool Start(string[] args)
+	public override bool Run(string[] args)
 	{
 		Console.WriteLine("");
 		Console.WriteLine("Test building solutions from git clone...");
 		Console.WriteLine("");
 		
-		Grabber.GrabOriginalFiles();
+		FilesGrabber.GrabOriginalFiles();
 
                 // Perform a release cycle to ensure the releases are available for use during initialization
                 ExecuteScript("CycleRelease");

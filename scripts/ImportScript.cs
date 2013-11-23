@@ -15,7 +15,7 @@ class ImportScriptScript : BaseProjectScript
 		new ImportScriptScript().Start(args);
 	}
 	
-	public override bool Start(string[] args)
+	public override bool Run(string[] args)
 	{
 		Console.WriteLine("");
 		Console.WriteLine("Importing scripts...");

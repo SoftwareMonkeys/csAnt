@@ -15,13 +15,18 @@ class DeployLocalScript : BaseProjectScript
 		new DeployLocalScript().Start(args);
 	}
 	
-	public override bool Start(string[] args)
+	public override bool Run(string[] args)
 	{
 		Console.WriteLine("");
 		Console.WriteLine("Deploying essential files to a local destination...");
 		Console.WriteLine("");
 
 		var destination = GetDestination(args);
+		
+		var releaseList = "project-release";
+		
+		if (args.Length >= 2)
+                    releaseList = args[1];
 
 		Console.WriteLine("Destination:");
 		Console.WriteLine(destination);
@@ -29,13 +34,11 @@ class DeployLocalScript : BaseProjectScript
 		// Run the CycleRelease script
 		ExecuteScript("CycleRelease");
 
-		// TODO: Make it possible to specify either ProjectRelease or StandardRelease, depending on how
-		// csAnt is to be used
 		var releaseDir = ProjectDirectory
 			+ Path.DirectorySeparatorChar
 			+ "rls"
 			+ Path.DirectorySeparatorChar
-			+ "project-release";
+			+ releaseList;
 
 		var releaseFile = GetNewestFile(releaseDir);
 
@@ -52,7 +55,7 @@ class DeployLocalScript : BaseProjectScript
 		);
 
 		// Run the prepare script in the new location
-		PrepareProject(destination);
+		InitializeProject(destination);
 
 		return !IsError;
 	}

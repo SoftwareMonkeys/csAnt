@@ -19,7 +19,7 @@ class GetLibScript : BaseScript
 		new GetLibScript().Start(args);
 	}
 	
-	public override bool Start(string[] args)
+	public override bool Run(string[] args)
 	{
 		var name = args[0];
 

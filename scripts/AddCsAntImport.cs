@@ -15,7 +15,7 @@ class AddCsAntImportScript : BaseProjectScript
 		new AddCsAntImportScript().Start(args);
 	}
 	
-	public override bool Start(string[] args)
+	public override bool Run(string[] args)
 	{
 		Console.WriteLine("");
 		Console.WriteLine("Adding csAnt import...");
