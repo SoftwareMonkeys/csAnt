@@ -10,8 +10,6 @@ namespace SoftwareMonkeys.csAnt.Tests
 
 		public string TestGroupName { get;set; }
 
-		public new DummyScriptRelocator Relocator { get;set; }
-
 		public BaseDummyScript () : base()
 		{
 		}

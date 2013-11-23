@@ -117,13 +117,11 @@
     <Compile Include="DynamicLinq.cs" />
     <Compile Include="BaseScript.SubProcesses.cs" />
     <Compile Include="BaseScript.GetTmpRoot.cs" />
-    <Compile Include="BaseScript.Initialize.cs" />
     <Compile Include="BaseScript.GetScript.cs" />
     <Compile Include="ExpectedArgumentAttribute.cs" />
     <Compile Include="Commands\StartNewProcessCommand.cs" />
     <Compile Include="BaseScript.Sync.cs" />
     <Compile Include="BaseScript.GitPush.cs" />
-    <Compile Include="BaseScript.InitializeConsoleWriter.cs" />
     <Compile Include="BaseScript.SetUp.cs" />
     <Compile Include="BaseScript.TearDown.cs" />
     <Compile Include="BaseScript.Start.cs" />
