@@ -2,15 +2,18 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 
-namespace SoftwareMonkeys.csAnt.Tests
+namespace SoftwareMonkeys.csAnt
 {
-    public class TestFilesGrabber
+    public class FilesGrabber
     {
-        public IDummyScript Script { get;set; }
+        public IScript Script { get;set; }
 
-        public TestFilesGrabber (IDummyScript script)
+        public IConsoleWriter Console { get; set; }
+
+        public FilesGrabber (IScript script)
         {
             Script = script;
+            Console = script.Console;
         }
 
         public void GrabOriginalScripts (
@@ -25,7 +28,6 @@ namespace SoftwareMonkeys.csAnt.Tests
             }
 
             GrabOriginalFiles(
-                Script.CurrentDirectory,
                 list.ToArray()
             );
         }
@@ -34,11 +36,13 @@ namespace SoftwareMonkeys.csAnt.Tests
         {
             GrabOriginalFiles(
                 Script.CurrentDirectory,
+                "../*.node",
                 "/*.node",
                 "/*.sh",
                 "/*.bat",
                 "/*.vbs",
-                "/lib/**.dll",
+                "/bin/**",
+                "/lib/**",
                 "/src/**.cs",
                 "/src/**.csproj",
                 "/src/**.sln",
@@ -52,15 +56,18 @@ namespace SoftwareMonkeys.csAnt.Tests
                 Script.CurrentDirectory,
                 "/*",
                 "/lib/**",
+                "/bin/**",
                 "/src/**.cs",
                 "/src/**.csproj",
                 "/src/**.sln",
                 "/scripts/**",
-                "/rls/*.txt"
+                "/rls/*.txt",
+                "/rls/*.zip",
+                "../*.node"
             );
         }
 
-        public void GrabOriginalFiles (string workingDirectory, params string[] patterns)
+        public void GrabOriginalFiles (params string[] patterns)
         {
             if (Script.IsVerbose) {
                 Console.WriteLine ("");
@@ -68,20 +75,31 @@ namespace SoftwareMonkeys.csAnt.Tests
                 Console.WriteLine ("From:");
                 Console.WriteLine (Script.OriginalDirectory);
                 Console.WriteLine ("To:");
-                Console.WriteLine (workingDirectory);
+                Console.WriteLine (Script.CurrentDirectory);
                 Console.WriteLine ("");
             }
 
-            foreach (var file in Script.FindFiles (Script.OriginalDirectory, patterns)) {
-                Console.WriteLine (file.Replace(Script.OriginalDirectory, ""));
+            if (Script.CurrentDirectory != Script.OriginalDirectory) {
+                foreach (var file in Script.FindFiles (Script.OriginalDirectory, patterns)) {
 
-                var toFile = file.Replace(Script.OriginalDirectory, workingDirectory);
+                    var toFile = file.Replace (Script.OriginalDirectory, Script.CurrentDirectory);
 
-                if (!Directory.Exists(Path.GetDirectoryName(toFile)))
-                    Directory.CreateDirectory(Path.GetDirectoryName(toFile));
+                    if (!Directory.Exists (Path.GetDirectoryName (toFile)))
+                        Directory.CreateDirectory (Path.GetDirectoryName (toFile));
 
-                File.Copy (file, toFile, true);
+                    if (Script.IsVerbose)
+                    {
+                        Console.WriteLine ("From:");
+                        Console.WriteLine (file);
+                        Console.WriteLine ("To:");
+                        Console.WriteLine (toFile);
+                    }
+
+                    File.Copy (file, toFile, true);
+                }
             }
+            else
+                Console.WriteLine ("OriginalDirectory is the same as CurrentDirectory. No need to grab files.");
         }
     }
 }

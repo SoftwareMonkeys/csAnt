@@ -1,12 +1,11 @@
 using System;
+using System.Collections.Generic;
 
 namespace SoftwareMonkeys.csAnt
 {
-    public class BaseScript
+    public partial class BaseScript
     {
-        public BaseScript ()
-        {
-        }
+        public Stack<string> ScriptStack { get;set; }
     }
 }
 

@@ -1,12 +1,15 @@
 using System;
+using System.IO;
 
-namespace SoftwareMonkeys.csAnt.Tests
+namespace SoftwareMonkeys.csAnt
 {
-    public class BaseScriptRelocator
+    public class BaseScriptRelocator : IScriptRelocator
     {
         public IScript Script { get;set; }
 
         bool HasReturned = false;
+
+        bool AutoReturn = true;
 
         public BaseScriptRelocator (IScript script)
         {
@@ -23,11 +26,19 @@ namespace SoftwareMonkeys.csAnt.Tests
         {
             if (Script.IsVerbose) {
                 Console.WriteLine ("");
-                Console.WriteLine ("Relocating to test directory:");
+                Console.WriteLine ("Relocating to directory:");
                 Console.WriteLine (workingDirectory);
                 Console.WriteLine ("");
             }
-            Script.Relocate(workingDirectory);
+            
+            // TODO: Clean up
+            Script.CurrentDirectory = Path.GetFullPath (workingDirectory);
+            //CurrentNode = GetCurrentNode ();
+
+            // Clear the import staging directory and it will refresh when it's needed
+            Script.ImportStagingDirectory = "";
+
+            Script.RefreshCurrentNode();
         }
 
         public void Return ()
@@ -40,7 +51,8 @@ namespace SoftwareMonkeys.csAnt.Tests
 
         public void Dispose()
         {
-            Return ();
+            if (AutoReturn)
+                Return ();
         }
     }
 }

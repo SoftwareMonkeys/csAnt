@@ -2,10 +2,14 @@ using System;
 
 namespace SoftwareMonkeys.csAnt
 {
-    public class BaseScript
+    public partial class BaseScript
     {
-        public BaseScript ()
+        /// <summary>
+        /// Refreshes/reloads the current node.
+        /// </summary>
+        public void RefreshCurrentNode()
         {
+            CurrentNode = GetCurrentNode();
         }
     }
 }

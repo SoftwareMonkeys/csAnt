@@ -4,7 +4,7 @@ namespace SoftwareMonkeys.csAnt
 {
     public partial class BaseScript
     {
-        public FilesGrabber FileGrabber { get;set; }
+        public FilesGrabber FilesGrabber { get;set; }
     }
 }
 
