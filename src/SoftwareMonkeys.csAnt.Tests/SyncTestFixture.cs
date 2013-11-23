@@ -10,9 +10,9 @@ namespace SoftwareMonkeys.csAnt.Tests
 		[Test]
 		public void Test_Sync()
 		{
-			var testScript = GetTestScript();
+			var testScript = GetDummyScript();
 
-			testScript.Grabber.GrabOriginalFiles("lib/*");
+			testScript.FilesGrabber.GrabOriginalFiles();
 
 			var dir = testScript.CurrentDirectory;
 

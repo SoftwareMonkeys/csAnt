@@ -1,42 +1,22 @@
 using System;
 
-namespace SoftwareMonkeys.csAnt.Tests.Scripts
+namespace SoftwareMonkeys.csAnt.Tests
 {
-    public class TestScriptConstructor
+    public class DummyScriptConstructor : BaseScriptConstructor
     {
-        public void Construct(ITestScript script)
+        public DummyScriptConstructor (IDummyScript script) : base(script)
         {
-            script.IsVerbose = true;
-            script.StopOnFail = false;
-            
-            script.Utilities =  new TestUtilities(script);
+        }
 
-            var xmlFileNamer = new TestScriptXmlReportFileNamer();
+        public override void Construct(string scriptName, IScript parentScript)
+        {
+            base.Construct(scriptName, parentScript);
 
-            var htmlFileNamer = new TestScriptHtmlReportFileNamer();
-            var generator = new TestScriptReportGenerator(
-                script,
-                xmlFileNamer,
-                htmlFileNamer,
-                new TestScriptHtmlReportGenerator(
-                    script,
-                    xmlFileNamer,
-                    htmlFileNamer
-                )
-            );
+            Script.FilesGrabber = new FilesGrabber((IDummyScript)Script);
 
-            // TODO: Check if these should be injected
-            script.ReportGenerator = generator;
+            Script.SetUpper = new DummyScriptSetUpper((IDummyScript)Script);
 
-            script.TestSummarizer = new TestSummarizer(script);
-            
-            script.Grabber = new TestFilesGrabber(script);
-            
-            script.Relocator = new TestRelocator(script);
-
-            script.SetUpper = new TestScriptSetUpper();
-
-            script.TearDowner = new TestScriptTearDowner();
+            Script.TearDowner = new DummyScriptTearDowner((IDummyScript)Script);
         }
     }
 }

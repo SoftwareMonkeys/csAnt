@@ -16,9 +16,8 @@ namespace SoftwareMonkeys.csAnt.Tests
 		[Test]
 		public void Test_DownloadAndUnzip ()
 		{
-			var testScript = new TestScript (
-				"TestDownloadAndUnzip",
-				this
+			var testScript = new DummyScript (
+				"TestDownloadAndUnzip"
 			);
 
 			testScript.IsVerbose = true;

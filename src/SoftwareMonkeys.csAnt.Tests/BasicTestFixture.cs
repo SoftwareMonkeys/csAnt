@@ -1,11 +1,17 @@
 using System;
+using NUnit.Framework;
 
 namespace SoftwareMonkeys.csAnt.Tests
 {
-    public class BasicTestFixture
+    [TestFixture]
+    public class BasicTestFixture : BaseTestFixture
     {
-        public BasicTestFixture ()
+        [Test]
+        public void Test_Succeed_OutputResults()
         {
+            var fixture = new SuccessfulTestFixture();
+
+            fixture.Test_Succeed();
         }
     }
 }

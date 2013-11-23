@@ -10,9 +10,8 @@ namespace SoftwareMonkeys.csAnt.Tests
 		[Test]
 		public void Test_ClearTmp()
 		{
-			var testScript = new TestScript(
-				"ClearTmpTest",
-				this
+			var testScript = new DummyScript(
+				"ClearTmpTest"
 			);
 
 			var tmpRoot = testScript.GetTmpRoot();

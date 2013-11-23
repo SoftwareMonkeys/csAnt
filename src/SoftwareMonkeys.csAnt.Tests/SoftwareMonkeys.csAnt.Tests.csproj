@@ -38,9 +38,11 @@
     <Reference Include="HtmlAgilityPack">
       <HintPath>..\..\lib\HtmlAgilityPack\Net40\HtmlAgilityPack.dll</HintPath>
     </Reference>
-    <Reference Include="nunit.framework, Version=2.5.10.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77">
-      <Private>False</Private>
-      <Package>mono-nunit</Package>
+    <Reference Include="nunit.framework">
+      <HintPath>..\..\lib\NUnit\bin\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="CSScriptLibrary">
+      <HintPath>..\..\lib\cs-script\Lib\Bin\NET 4.0\CSScriptLibrary.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -48,30 +50,43 @@
     <Compile Include="AddLibTestFixture.cs" />
     <Compile Include="ArgumentsTestFixture.cs" />
     <Compile Include="BaseTestFixture.cs" />
-    <Compile Include="BaseTestScript.cs" />
     <Compile Include="DownloadTestFixture.cs" />
     <Compile Include="ExecuteScriptTestFixture.cs" />
     <Compile Include="FailingTestFixture.cs" />
     <Compile Include="GetLibTestFixture.cs" />
     <Compile Include="GetZipInternalPathTestFixture.cs" />
     <Compile Include="GitCloneTestFixture.cs" />
-    <Compile Include="HelloWorldTestFixture.cs" />
-    <Compile Include="TestScript.cs" />
     <Compile Include="DownloadAndUnzipTestFixture.cs" />
     <Compile Include="ClearTmpTestFixture.cs" />
     <Compile Include="SyncTestFixture.cs" />
     <Compile Include="FindFilesTestFixture.cs" />
-    <Compile Include="TestScriptResult.cs" />
-    <Compile Include="TestScriptResultSaver.cs" />
-    <Compile Include="TestScriptResultLoader.cs" />
-    <Compile Include="TestReportGenerator.cs" />
-    <Compile Include="TestSummarizer.cs" />
-    <Compile Include="ITestScript.cs" />
-    <Compile Include="TestHtmlReportGenerator.cs" />
-    <Compile Include="TestUtilities.cs" />
     <Compile Include="StartProcessTestFixture.cs" />
-    <Compile Include="TestRelocator.cs" />
-    <Compile Include="TestFilesGrabber.cs" />
+    <Compile Include="GetOriginalDirectoryTestFixture.cs" />
+    <Compile Include="BasicTestFixture.cs" />
+    <Compile Include="SuccessfulTestFixture.cs" />
+    <Compile Include="DummyScript.cs" />
+    <Compile Include="DummyScriptConstructor.cs" />
+    <Compile Include="BaseDummyScript.cs" />
+    <Compile Include="DummyScriptSetUpper.cs" />
+    <Compile Include="DummyScriptTearDowner.cs" />
+    <Compile Include="IDummyScript.cs" />
+    <Compile Include="DummyScriptRelocator.cs" />
+    <Compile Include="GetDummyScriptTestFixture.cs" />
+    <Compile Include="TemporaryDirectoryCreatorTestFixture.cs" />
+    <Compile Include="FixCurrentDirectoryTestFixture.cs" />
+    <Compile Include="ActivateScriptTestFixture.cs" />
+    <Compile Include="TestSummarizer.cs" />
+    <Compile Include="BaseTestFixture.GetDummyScript.cs" />
+    <Compile Include="NUnitTestRunner.cs" />
+    <Compile Include="NUnitTestRunnerTestFixture.cs" />
+    <Compile Include="NUnitTestResultReturner.cs" />
+    <Compile Include="HelloWorldTestFixture.cs" />
+    <Compile Include="CompileScriptsTestFixture.cs" />
+    <Compile Include="BaseTestFixture.ParseTimeStamp.cs" />
+    <Compile Include="ExtractTimeStampTestFixture.cs" />
+    <Compile Include="BaseTestFixture.GetWorkingDirectory.cs" />
+    <Compile Include="HtmlResultFileNamer.cs" />
+    <Compile Include="XmlResultFileNamer.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

@@ -10,35 +10,34 @@ namespace SoftwareMonkeys.csAnt.Tests.Scripting
 
         public override void Construct (string scriptName, IScript parentScript)
         {
-            if (Script.IsVerbose) {
-                Console.WriteLine ("");
-                Console.WriteLine ("--------------------------------------------------");
-                Console.WriteLine ("");
-                Console.WriteLine ("Constructing '" + Script.ScriptName + "' script...");
-                Console.WriteLine ("Script type: '" + Script.GetType ().Name + "'");
-                Console.WriteLine ("Component: " + GetType ().Name);
-                Console.WriteLine ("");
-            }
-
             base.Construct (scriptName, parentScript);
 
+            ConstructSummarizer();
+
+            ConstructAsserter();
+        }
+
+        public override void ConstructLifecycle ()
+        {
             var script = (ITestScript)Script;
-
-            script.Summarizer = new TestSummarizer (script);
-
-            script.ReportGenerator = new ScriptReportGenerator (script);
 
             script.SetUpper = new ScriptingTestScriptSetUpper (script);
 
             script.TearDowner = new ScriptingTestScriptTearDowner (script);
+        }
 
-            script.Utilities = new ScriptingTestUtilities (script);
-            
-            if (Script.IsVerbose) {
-                Console.WriteLine ("");
-                Console.WriteLine ("--------------------------------------------------");
-                Console.WriteLine ("");
-            }
+        public void ConstructSummarizer()
+        {
+            var s = (ITestScript)Script;
+
+            s.TestSummarizer = new TestSummarizer(Script);
+        }
+
+        public void ConstructAsserter()
+        {
+            var s = (ITestScript)Script;
+
+            s.Assert = new TestAsserter(s);
         }
     }
 }

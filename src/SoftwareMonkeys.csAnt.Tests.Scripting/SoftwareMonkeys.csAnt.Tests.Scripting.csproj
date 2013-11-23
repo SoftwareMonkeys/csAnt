@@ -8,7 +8,7 @@
     <ProjectGuid>{98C7EEC8-1AD5-4570-8EA5-76FE959F3B58}</ProjectGuid>
     <OutputType>Library</OutputType>
     <RootNamespace>SoftwareMonkeys.csAnt.Tests.Scripting</RootNamespace>
-    <AssemblyName>SoftwareMonkeys.csAnt.Tests.Scripts</AssemblyName>
+    <AssemblyName>SoftwareMonkeys.csAnt.Tests.Scripting</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -43,36 +43,24 @@
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="TestScriptStackDetector.cs" />
     <Compile Include="TestScriptStackDetectorTestFixture.cs" />
-    <Compile Include="ScriptsDummyScript.cs" />
-    <Compile Include="ScriptReportGeneratorTestFixture.cs" />
-    <Compile Include="ScriptReportGenerator.cs" />
-    <Compile Include="ScriptResult.cs" />
-    <Compile Include="ScriptResultLoader.cs" />
-    <Compile Include="ScriptResultSaver.cs" />
-    <Compile Include="IScriptingDummyScript.cs" />
     <Compile Include="BaseScriptingDummyScript.cs" />
     <Compile Include="BaseScriptingTestFixture.cs" />
     <Compile Include="ScriptingDummyScriptTearDowner.cs" />
     <Compile Include="ITestScript.cs" />
-    <Compile Include="ScriptingTestUtilities.cs" />
     <Compile Include="ScriptingTestScript.cs" />
     <Compile Include="ScriptingDummyScriptConstructor.cs" />
     <Compile Include="ScriptingTestScriptConstructor.cs" />
     <Compile Include="ScriptingTestScriptSetUpper.cs" />
     <Compile Include="ScriptingTestScriptTearDowner.cs" />
     <Compile Include="ScriptingTestScriptRelocator.cs" />
-    <Compile Include="ScriptHtmlResultGenerator.cs" />
-    <Compile Include="ScriptXmlResultFileNamer.cs" />
-    <Compile Include="ScriptXmlResultFileNamerTestFixture.cs" />
-    <Compile Include="ScriptHtmlResultFileNamer.cs" />
-    <Compile Include="ScriptHtmlResultGeneratorTestFixture.cs" />
     <Compile Include="GetTestScriptTestFixture.cs" />
     <Compile Include="BaseTestScript.cs" />
-    <Compile Include="StartTestFixture.cs" />
     <Compile Include="BaseTestScriptTearDowner.cs" />
     <Compile Include="BaseTestScriptSetUpper.cs" />
     <Compile Include="BaseTestScriptConstructor.cs" />
-    <Compile Include="Internal\ScriptingTestUtilitiesTestFixture.cs" />
+    <Compile Include="LifecycleTestFixture.cs" />
+    <Compile Include="TestAsserter.cs" />
+    <Compile Include="HelloWorldScriptTestFixture.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

@@ -8,35 +8,6 @@ namespace SoftwareMonkeys.csAnt.Tests.Scripting
         {
         }
         
-        public ScriptHtmlResultGenerator GetHtmlReportGenerator(ITestScript script)
-        {
-            var htmlReportFileNamer = new ScriptHtmlResultFileNamer();
-            var xmlReportFileNamer = new ScriptXmlResultFileNamer();
-
-            var generator = new ScriptHtmlResultGenerator(
-                script,
-                xmlReportFileNamer,
-                htmlReportFileNamer
-            );
-
-            return generator;
-        }
-
-        public ScriptReportGenerator GetReportGenerator(ITestScript script)
-        {
-            var htmlGenerator = GetHtmlReportGenerator(script);
-
-            var generator = new ScriptReportGenerator(
-                script,
-                htmlGenerator.XmlResultFileNamer,
-                htmlGenerator.HtmlResultFileNamer,
-                htmlGenerator
-            );
-
-            return generator;
-        }
-        
-        
         public virtual ITestScript GetTestScript ()
         {
             return GetTestScript("TestScript");
@@ -52,12 +23,12 @@ namespace SoftwareMonkeys.csAnt.Tests.Scripting
             return GetTestScript(scriptName, null, IsVerbose);
         }
         
-        public virtual ITestScript GetTestScript (string scriptName, ITestScript parentScript)
+        public virtual ITestScript GetTestScript (string scriptName, IScript parentScript)
         {
             return GetTestScript(scriptName, parentScript, IsVerbose);
         }
 
-        public virtual ITestScript GetTestScript(string scriptName, ITestScript parentScript, bool isVerbose)
+        public virtual ITestScript GetTestScript(string scriptName, IScript parentScript, bool isVerbose)
         {
             Console.WriteLine ("");
             Console.WriteLine ("Getting test script: " + scriptName);
@@ -68,7 +39,8 @@ namespace SoftwareMonkeys.csAnt.Tests.Scripting
             Console.WriteLine ("");
 
             var testScript = new ScriptingTestScript(
-                scriptName
+                scriptName,
+                parentScript
             );
 
             Scripts.Add (testScript);
@@ -77,6 +49,7 @@ namespace SoftwareMonkeys.csAnt.Tests.Scripting
 
             testScript.CurrentDirectory = WorkingDirectory;
 
+			// TODO: Check if needed. Shouldn't be needed while SetUp is called during Construct
             //testScript.SetUp ();
 
             return testScript;

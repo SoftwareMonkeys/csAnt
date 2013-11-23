@@ -13,14 +13,16 @@ namespace SoftwareMonkeys.csAnt.Tests
 		{
 			// TODO: Create a dummy lib file during the test script and check that it's found
 
-			var applicationPath = GetRoot();
-
-			var testImportScriptPath = CreateRunTestImportScript(applicationPath);
+			var applicationPath = WorkingDirectory;
 
 			Console.WriteLine ("Application path:");
 			Console.WriteLine (applicationPath);
 
-			var script = new TestScript("TestScript", this);
+            var script = GetDummyScript("DummyScript");
+
+            script.FilesGrabber.GrabOriginalScriptingFiles();
+            
+            var testImportScriptPath = CreateRunTestImportScript(applicationPath);
 
 			script.CurrentDirectory = applicationPath;
 

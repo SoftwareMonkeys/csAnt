@@ -8,6 +8,10 @@ namespace SoftwareMonkeys.csAnt.Tests.Scripting
         {
         }
 
+        public ScriptingTestScript (string scriptName, IScript parentScript) : base(scriptName, parentScript)
+        {
+        }
+
         public override bool Run (string[] args)
         {
             throw new System.NotImplementedException ();

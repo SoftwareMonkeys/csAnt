@@ -10,15 +10,16 @@ namespace SoftwareMonkeys.csAnt.Tests
 		[Test]
 		public void Test_StartProcess()
 		{
-			var script = GetTestScript();
+			var script = GetDummyScript();
 
-			script.Grabber.GrabOriginalFiles(
-				"lib/cs-script/**",
-				"lib/csAnt/**",
-				"scripts/HelloWorld.cs"
+            // TODO: Clean up
+			script.FilesGrabber.GrabOriginalFiles(
+				//"lib/cs-script/**",
+				"lib/NUnit/**"//,
+				//"scripts/HelloWorld.cs"
 			);
 
-			var csscriptExe = script.CurrentDirectory
+			/*var csscriptExe = script.CurrentDirectory
 				+ Path.DirectorySeparatorChar
 				+ "lib"
 				+ Path.DirectorySeparatorChar
@@ -33,8 +34,12 @@ namespace SoftwareMonkeys.csAnt.Tests
 					+ "HelloWorld.cs";
 
 			script.StartProcess("mono", csscriptExe, helloWorldScript);
+*/
+            script.StartProcess ("echo", "Hello world!");
+            
+            //script.StartProcess ("mono", "lib/NUnit/bin/nunit-console.exe");
 
-			Assert.IsTrue(script.Console.Output.Contains ("Hello world!"));
+			Assert.IsTrue(script.Console.Output.Contains ("Hello world!"), "The output is incorrect.");
 		}
 	}
 }
