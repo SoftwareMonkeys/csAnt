@@ -15,7 +15,7 @@ class ImportSyncScript : BaseProjectScript
 		new ImportSyncScript().Start(args);
 	}
 	
-	public override bool Start(string[] args)
+	public override bool Run(string[] args)
 	{
                 var projectName = args[0];
 

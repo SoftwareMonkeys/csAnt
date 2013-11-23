@@ -14,38 +14,48 @@ class CopyBinToLibScript : BaseProjectScript
 		new CopyBinToLibScript().Start(args);
 	}
 	
-	public override bool Start(string[] args)
+	public override bool Run(string[] args)
 	{
 		string binDirectory = ProjectDirectory
 			+ Path.DirectorySeparatorChar
-			+ "bin"
-			+ Path.DirectorySeparatorChar
-			+ "Release";
+			+ "bin";
+	
+	        Console.WriteLine("");
+	        Console.WriteLine("Bin directory:");
+	        Console.WriteLine(binDirectory);
+	        Console.WriteLine("");
 
 		int i = 0;
 
-		foreach (string file in Directory.GetFiles(binDirectory))
-		{
-			i++;
+                foreach (string dir in Directory.GetDirectories(binDirectory))
+                {
+                        var mode = Path.GetFileName(dir);
+                
+		        foreach (string file in Directory.GetFiles(dir))
+		        {
+			        i++;
 
-			string toFile = GetLibDir()
-				+ Path.DirectorySeparatorChar
-				+ Path.GetFileName(file);
+			        string toFile = GetLibDir()
+				        + Path.DirectorySeparatorChar
+				        + mode
+				        + Path.DirectorySeparatorChar
+				        + Path.GetFileName(file);
 		
-			if (!Directory.Exists(Path.GetDirectoryName(toFile)))
-				Directory.CreateDirectory(Path.GetDirectoryName(toFile));
+			        if (!Directory.Exists(Path.GetDirectoryName(toFile)))
+				        Directory.CreateDirectory(Path.GetDirectoryName(toFile));
 
-			Console.WriteLine("Copying: "
-				+ file.Replace(ProjectDirectory, "")
-			);
+			        Console.WriteLine("Copying: "
+				        + file.Replace(ProjectDirectory, "")
+			        );
 
-			Console.WriteLine("To: "
-				+ toFile.Replace(ProjectDirectory, "")
-			);
+			        Console.WriteLine("To: "
+				        + toFile.Replace(ProjectDirectory, "")
+			        );
 
-			RenameExisting(toFile);
+			        RenameExisting(toFile);
 
-			File.Copy(file, toFile, true);
+			        File.Copy(file, toFile, true);
+		        }
 		}
 
 		ClearBackups();
@@ -88,8 +98,6 @@ class CopyBinToLibScript : BaseProjectScript
 			+ Path.DirectorySeparatorChar
 			+ ProjectName
 			+ Path.DirectorySeparatorChar
-			+ "bin"
-			+ Path.DirectorySeparatorChar
-			+ "Release";
+			+ "bin";
 	}
 }

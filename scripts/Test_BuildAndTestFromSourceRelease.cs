@@ -17,11 +17,13 @@ class Test_BuildAndTestFromSourceReleaseScript : BaseProjectTestScript
 		new Test_BuildAndTestFromSourceReleaseScript().Start(args);
 	}
 	
-	public override bool Start(string[] args)
+	public override bool Run(string[] args)
 	{
 		Console.WriteLine("");
 		Console.WriteLine("Test building solutions from the release files...");
 		Console.WriteLine("");
+		
+		FilesGrabber.GrabOriginalFiles();
 
 		ExecuteScript("CycleBuild");
 
@@ -71,10 +73,10 @@ class Test_BuildAndTestFromSourceReleaseScript : BaseProjectTestScript
 		ProjectDirectory = tmpDir;
 
 		Console.WriteLine("");
-		Console.WriteLine("Preparing...");
+		Console.WriteLine("Initializing...");
 		Console.WriteLine("");
 
-		PrepareProject(ProjectDirectory);
+		InitializeProject(ProjectDirectory);
 
 		if (!IsError)
 		{
@@ -84,8 +86,6 @@ class Test_BuildAndTestFromSourceReleaseScript : BaseProjectTestScript
 
 			ExecuteScript("CycleTests");
 		}
-
-		Utilities.CopyTestResults(ProjectDirectory, originalProjectDirectory);
 
 		//Directory.Delete(ProjectDirectory, true);
 

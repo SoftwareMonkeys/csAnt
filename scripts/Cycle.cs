@@ -15,7 +15,7 @@ class CycleScript : BaseProjectScript
 		new CycleScript().Start(args);
 	}
 	
-	public override bool Start(string[] args)
+	public override bool Run(string[] args)
 	{
 		Console.WriteLine("");
 		Console.WriteLine("Starting a full local cycle.");
@@ -32,7 +32,7 @@ class CycleScript : BaseProjectScript
 
 		if (!IsError)
 		{
-			Console.WriteLine("Testing and creating reports	...");
+			Console.WriteLine("Testing and creating reports...");
 			Console.WriteLine("");
 
 			// Run tests

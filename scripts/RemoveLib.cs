@@ -12,7 +12,7 @@ class RemoveLibScript : BaseScript
 		new RemoveLibScript().Start(args);
 	}
 	
-	public override bool Start(string[] args)
+	public override bool Run(string[] args)
 	{
 		if (args.Length < 1)
 		{

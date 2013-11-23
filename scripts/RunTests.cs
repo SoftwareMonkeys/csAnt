@@ -1,26 +1,44 @@
 //css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.dll;
+//css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.Tests.dll;
+//css_ref ../lib/NUnit/bin/nunit.framework.dll;
+
 using System;
 using System.IO;
 using Microsoft.CSharp;
 using System.Diagnostics;
 using SoftwareMonkeys.csAnt;
-using System.Collections.Generic;
+using SoftwareMonkeys.csAnt.Tests;
 
-class RunTestsScript : BaseScript
+class RunScriptTestsScript : BaseScript
 {
 	public static void Main(string[] args)
 	{
-		new RunTestsScript().Start(args);
+		new RunScriptTestsScript().Start(args);
 	}
 	
-	public override bool Start(string[] args)
+	public override bool Run(string[] args)
 	{
-		ExecuteScript("RunUnitTests");
+            CompileScripts();
+            
+            RunScriptTests();
+        
 
-		ExecuteScript("RunTestScripts");
-
-		// TODO: Add functional testing
-		return !IsError;
+            return !IsError;
 	}
-
+	
+	public void RunScriptTests()
+	{
+            var runner = new NUnitTestRunner(
+                this,
+                "Release"
+            );
+            
+            var dir = CurrentDirectory
+                + Path.DirectorySeparatorChar
+                + "bin"
+                + Path.DirectorySeparatorChar
+                + "Release";
+            
+            runner.RunTestsInDirectory(dir);
+	}
 }

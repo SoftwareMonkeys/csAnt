@@ -8,25 +8,24 @@ using System.Diagnostics;
 using SoftwareMonkeys.csAnt;
 using SoftwareMonkeys.csAnt.Projects;
 
-class CleanScript : BaseProjectScript
+class ClearDllsScript : BaseProjectScript
 {
 	public static void Main(string[] args)
 	{
-		new CleanScript().Start(args);
+		new ClearDllsScript().Start(args);
 	}
 	
-	public override bool Start(string[] args)
+	public override bool Run(string[] args)
 	{
 		Console.WriteLine("");
-		Console.WriteLine("Cleaning project...");
-		Console.WriteLine("(removing directories and files)");
+		Console.WriteLine("Clearing DLLs from project...");
 		Console.WriteLine("");
 
 		CleanBinDirectory();
 
 		CleanProjectDirectories();
 		
-		AddSummary("Cleaned the project of .dll files.");
+		AddSummary("Cleared the project of .dll files.");
 
 		return !IsError;
 	}

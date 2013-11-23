@@ -17,13 +17,13 @@ class Test_BuildFromSourceReleaseScript : BaseProjectTestScript
 		new Test_BuildFromSourceReleaseScript().Start(args);
 	}
 	
-	public override bool Start(string[] args)
+	public override bool Run(string[] args)
 	{
 		Console.WriteLine("");
 		Console.WriteLine("Test building solutions from the release files...");
 		Console.WriteLine("");
 		
-		Grabber.GrabOriginalFiles();
+		FilesGrabber.GrabOriginalFiles();
 
 		ExecuteScript("CycleBuild");
 
@@ -32,7 +32,7 @@ class Test_BuildFromSourceReleaseScript : BaseProjectTestScript
 
 		if (!IsError)
 		{
-			var rlsDir = ProjectDirectory
+			var rlsDir = OriginalDirectory
 				+ Path.DirectorySeparatorChar
 				+ "rls"
 				+ Path.DirectorySeparatorChar

@@ -1,6 +1,8 @@
 //css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.dll;
 //css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.Projects.dll;
 //css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.Projects.Tests.dll;
+//css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.Tests.Scripting.dll;
+//css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.Projects.Tests.Scripting.dll;
 
 using System;
 using System.IO;
@@ -9,6 +11,7 @@ using System.Diagnostics;
 using SoftwareMonkeys.csAnt;
 using SoftwareMonkeys.csAnt.Projects;
 using SoftwareMonkeys.csAnt.Projects.Tests;
+using SoftwareMonkeys.csAnt.Projects.Tests.Scripting;
 
 class Test_BuildAndTestFromSourceReleaseScript : BaseProjectTestScript
 {
@@ -17,11 +20,13 @@ class Test_BuildAndTestFromSourceReleaseScript : BaseProjectTestScript
 		new Test_BuildAndTestFromSourceReleaseScript().Start(args);
 	}
 	
-	public override bool Start(string[] args)
+	public override bool Run(string[] args)
 	{
 		Console.WriteLine("");
 		Console.WriteLine("Test building solutions from git clone...");
 		Console.WriteLine("");
+		
+		FilesGrabber.GrabOriginalFiles();
 
 		// Clone the project to another directory
 		var tmpDir = CloneToTmpDirectory();
@@ -49,7 +54,7 @@ class Test_BuildAndTestFromSourceReleaseScript : BaseProjectTestScript
 
 		Directory.CreateDirectory(tmpDirectory);
 
-		GitClone(ProjectDirectory, tmpDirectory);
+		GitClone(OriginalDirectory, tmpDirectory);
 
 		return tmpDirectory;
 	}

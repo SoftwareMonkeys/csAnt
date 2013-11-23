@@ -17,7 +17,7 @@ class ListScript : BaseScript
 		new ListScript().Start(args);
 	}
 	
-	public override bool Start(string[] args)
+	public override bool Run(string[] args)
 	{
 		var scriptsDir = CurrentDirectory
 			+ Path.DirectorySeparatorChar

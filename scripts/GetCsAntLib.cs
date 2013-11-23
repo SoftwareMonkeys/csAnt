@@ -14,7 +14,7 @@ class GetCsAntLibScript : BaseScript
 		new GetCsAntLibScript().Start(args);
 	}
 	
-	public override bool Start(string[] args)
+	public override bool Run(string[] args)
 	{
 	        string name = "csAnt";
 	        

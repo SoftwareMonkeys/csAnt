@@ -1,11 +1,13 @@
 //css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.dll;
 //css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.Tests.dll;
+//css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.Tests.Scripting.dll;
 using System;
 using System.IO;
 using Microsoft.CSharp;
 using System.Diagnostics;
 using SoftwareMonkeys.csAnt;
 using SoftwareMonkeys.csAnt.Tests;
+using SoftwareMonkeys.csAnt.Tests.Scripting;
 
 class Test_RemoveLibScript : BaseTestScript
 {
@@ -14,8 +16,10 @@ class Test_RemoveLibScript : BaseTestScript
 		new Test_RemoveLibScript().Start(args);
 	}
 	
-	public override bool Start(string[] args)
+	public override bool Run(string[] args)
 	{
+	        FilesGrabber.GrabOriginalFiles();
+	
 		var libName = "TestLib";
 
 		ExecuteScript("AddLib", libName, "http://www.nowhere.com/lib.zip");
@@ -47,9 +51,6 @@ class Test_RemoveLibScript : BaseTestScript
 		{
 			Error("Library directory wasn't removed.");
 		}
-
-		if (!IsError)
-			Console.WriteLine("Test successful.");
 
 		return !IsError;
 	}

@@ -12,7 +12,7 @@ class GetLibsScript : BaseScript
 		new GetLibsScript().Start(args);
 	}
 	
-	public override bool Start(string[] args)
+	public override bool Run(string[] args)
 	{
 		var force = false;
 

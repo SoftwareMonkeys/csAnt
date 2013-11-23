@@ -15,7 +15,7 @@ class UpdateScript : BaseProjectScript
 		new UpdateScript().Start(args);
 	}
 	
-	public override bool Start(string[] args)
+	public override bool Run(string[] args)
 	{
 	        ExecuteScript("AddCsAntImport");
 	        

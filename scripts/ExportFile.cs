@@ -15,7 +15,7 @@ class ExportFileScript : BaseProjectScript
 		new ExportFileScript().Start(args);
 	}
 	
-	public override bool Start(string[] args)
+	public override bool Run(string[] args)
 	{
                 var projectName = args[0];
 

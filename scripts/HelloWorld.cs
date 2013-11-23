@@ -12,13 +12,13 @@ class HelloWorldScript : BaseScript
 		new HelloWorldScript().Start(args);
 	}
 	
-	public override bool Start(string[] args)
+	public override bool Run(string[] args)
 	{
 		Console.WriteLine("");
 		Console.WriteLine("Hello world!");
 		Console.WriteLine("");
 
-		AddSummary("Write the words 'Hello world!' to the console.");
+		AddSummary("Wrote the words 'Hello world!' to the console.");
 
 		// Or
 		/*var cmd = new HelloWorldCommand(this);

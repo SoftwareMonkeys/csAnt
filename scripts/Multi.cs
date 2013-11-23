@@ -12,7 +12,7 @@ class MultiScript : BaseScript
 		new MultiScript().Start(args);
 	}
 	
-	public override bool Start(string[] args)
+	public override bool Run(string[] args)
 	{
 		Console.WriteLine("");
 		Console.WriteLine("Executing multiple scripts in a row...");
