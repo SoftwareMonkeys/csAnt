@@ -79,7 +79,7 @@ namespace SoftwareMonkeys.csAnt
 		/// <param name='arguments'></param>
 		public void StartProcess(string command, string[] arguments)
 		{
-			arguments = FixArguments(arguments);
+			 arguments = FixArguments(arguments);
 
 			 StartProcess(command, String.Join(" ", arguments));
 		}
@@ -91,13 +91,12 @@ namespace SoftwareMonkeys.csAnt
 		/// <param name='arguments'></param>
 		public void StartProcess(string command, string arguments)
 		{
-			Console.WriteLine("");
-			Console.WriteLine("--------------------------------------------------");
-			Console.WriteLine("");
-			Console.WriteLine("Starting process: " + command);
-			Console.WriteLine("Arguments:");
-			Console.WriteLine(arguments);
-			Console.WriteLine("");
+            Console.WriteLine("");
+            Console.WriteLine("--------------------------------------------------");
+            Console.WriteLine("");
+            Console.WriteLine("Starting new process:");
+            Console.WriteLine(command + " " + arguments);
+            Console.WriteLine("");
 
 			ThreadPool.QueueUserWorkItem(
 				delegate
@@ -105,6 +104,10 @@ namespace SoftwareMonkeys.csAnt
 					SubProcess = Process.Start( command );
 				}
 			);
+
+            Console.WriteLine("");
+            Console.WriteLine("--------------------------------------------------");
+            Console.WriteLine("");
 		}
 
 		public string[] FixArguments(string[] arguments)

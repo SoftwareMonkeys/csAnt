@@ -8,20 +8,11 @@ namespace SoftwareMonkeys.csAnt
         /// <summary>
         /// Changes the CurrentDirectory to the new location and updates other properties.
         /// </summary>
-        public void Relocate(string newLocationPath)
+        public virtual void Relocate (string path)
         {
-            CurrentDirectory = Path.GetFullPath(newLocationPath);
-            CurrentNode = GetCurrentNode();
+            Relocator.Relocate(path);
 
-            ImportedDirectory = GetImportedDirectory();
-            
-            Console.WriteLine ("");
-            Console.WriteLine ("Relocating to:");
-            Console.WriteLine (newLocationPath);
-            Console.WriteLine ("");
-            Console.WriteLine ("Imported directory:");
-            Console.WriteLine (ImportedDirectory);
-            Console.WriteLine ("");
+
         }
     }
 }

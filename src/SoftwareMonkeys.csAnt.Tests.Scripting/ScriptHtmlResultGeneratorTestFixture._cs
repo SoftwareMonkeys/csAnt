@@ -1,0 +1,50 @@
+using System;
+using NUnit.Framework;
+using System.IO;
+
+namespace SoftwareMonkeys.csAnt.Tests.Scripting
+{
+    [TestFixture]
+    public class ScriptHtmlResultGeneratorTestFixture : BaseScriptingTestFixture
+    {
+        [Test]
+        public void Test_GetHtmlReportFile()
+        {
+            var s = GetTestScript();
+
+            var generator = GetHtmlReportGenerator(s);
+            var htmlReportFileNamer = generator.HtmlResultFileNamer;
+            var xmlReportFileNamer = generator.XmlResultFileNamer;
+
+            var xmlFile = xmlReportFileNamer.GetXmlResultsDirectory(s)
+                + Path.DirectorySeparatorChar
+                + "scripts"
+                + Path.DirectorySeparatorChar
+                + s.TimeStamp
+                + Path.DirectorySeparatorChar
+                + "xml"
+                + Path.DirectorySeparatorChar
+                + "Test_HelloWorld.xml";
+
+            var f = generator.GetHtmlFileForXmlFile(xmlFile);
+
+            var expectedHtmlFile = htmlReportFileNamer.GetHtmlResultsDirectory(s)
+                + Path.DirectorySeparatorChar
+                + "scripts"
+                + Path.DirectorySeparatorChar
+                + s.TimeStamp
+                + Path.DirectorySeparatorChar
+                + "html"
+                + Path.DirectorySeparatorChar
+                + "Test_HelloWorld.html";
+
+            Console.WriteLine ("Expected file path:");
+            Console.WriteLine (expectedHtmlFile);
+            Console.WriteLine ("File path:");
+            Console.WriteLine (f);
+
+            Assert.AreEqual(expectedHtmlFile, f);
+        }
+    }
+}
+

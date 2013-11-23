@@ -7,9 +7,7 @@ namespace SoftwareMonkeys.csAnt
 	{
 		public void Sync(string fromDir, string toDir)
 		{
-			var exeFile = "lib/blinksync.exe";
-
-			StartDotNetExe(exeFile, fromDir, toDir);
+            Sync (fromDir, toDir, "**");
 		}
 		
 		public void Sync (string fromDir, string toDir, string pattern)

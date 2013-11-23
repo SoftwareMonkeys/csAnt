@@ -1,13 +1,13 @@
 using System;
 
-namespace SoftwareMonkeys.csAnt.Tests
+namespace SoftwareMonkeys.csAnt.Tests.Scripting
 {
 	public class TestSummarizer
 	{
-		public ITestScript Script { get; set; }
+		public IScript Script { get; set; }
 
 		public TestSummarizer (
-			ITestScript script
+			IScript script
 		)
 		{
 			Script = script;

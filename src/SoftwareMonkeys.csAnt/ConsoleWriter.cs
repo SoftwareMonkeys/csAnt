@@ -4,7 +4,7 @@ using System.Text;
 
 namespace SoftwareMonkeys.csAnt
 {
-	public class ConsoleWriter : TextWriter
+	public class ConsoleWriter : TextWriter, IConsoleWriter
 	{
 		public string Output { get;set; }
 
@@ -13,8 +13,6 @@ namespace SoftwareMonkeys.csAnt
 		public StreamWriter LogFileWriter { get;set; }
 
 		public string ScriptName { get;set; }
-		
-		public IScript Script { get;set; }
 
 		public override Encoding Encoding
 		{
@@ -124,7 +122,7 @@ namespace SoftwareMonkeys.csAnt
 
 		protected override void Dispose (bool disposing)
 		{
-			if (disposing)
+			if (disposing && LogFileWriter != null)
 				LogFileWriter.Close();
 
 			base.Dispose (disposing);

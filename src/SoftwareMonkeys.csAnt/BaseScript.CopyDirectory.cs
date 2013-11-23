@@ -6,11 +6,23 @@ namespace SoftwareMonkeys.csAnt
 	public partial class BaseScript
 	{
 		public void CopyDirectory (string source, string destination)
-		{
-			Console.WriteLine ("Copying directory:");
-			Console.WriteLine (source);
-			Console.WriteLine ("To:");
-			Console.WriteLine (destination);
+        {
+            CopyDirectory(source, destination, false);
+        }
+
+        public void CopyDirectory (string source, string destination, bool overwrite)
+        {
+            if (source == destination)
+                throw new ArgumentException("Cannot copy. The source and destination paths are both: " + source);
+
+            if (IsVerbose) {
+                Console.WriteLine ("");
+                Console.WriteLine ("Copying directory:");
+                Console.WriteLine (source);
+                Console.WriteLine ("To:");
+                Console.WriteLine (destination);
+                Console.WriteLine ("");
+            }
 
 			// Create all of the directories
 			foreach (string dirPath in Directory.GetDirectories(source, "*", 
@@ -24,9 +36,13 @@ namespace SoftwareMonkeys.csAnt
 
 				EnsureDirectoryExists(Path.GetDirectoryName(destinationFile));
 
-				Console.WriteLine ("Copying: " + newPath);
-				Console.WriteLine ("To: " + destinationFile);
-				File.Copy (newPath, destinationFile);
+                if (IsVerbose)
+                {
+                    Console.WriteLine ("Copying: " + newPath);
+                    Console.WriteLine ("To: " + destinationFile);
+                }
+
+                File.Copy (newPath, destinationFile, overwrite);
 			}
 		}
 	}

@@ -4,7 +4,7 @@ namespace SoftwareMonkeys.csAnt
 {
 	public partial class BaseScript
 	{
-		public string ImportedDirectory { get;set; }
+		public string ImportStagingDirectory { get;set; }
 	}
 }
 

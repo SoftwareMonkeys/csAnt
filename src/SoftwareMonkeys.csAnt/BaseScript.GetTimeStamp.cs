@@ -6,7 +6,7 @@ namespace SoftwareMonkeys.csAnt
 	{
 		public string GetTimeStamp()
 		{
-			return GetTimeStamp(DateTime.Now);
+			return GetTimeStamp(Time);
 
 		}
 		

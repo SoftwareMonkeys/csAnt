@@ -1,0 +1,411 @@
+using System;
+using System.IO;
+using System.Web;
+using HtmlAgilityPack;
+
+namespace SoftwareMonkeys.csAnt.Tests.Scripting
+{
+	public class ScriptHtmlResultGenerator
+	{
+		public ITestScript Script { get; set; }
+
+        public ScriptHtmlResultFileNamer HtmlResultFileNamer { get; set; }
+        
+        public ScriptXmlResultFileNamer XmlResultFileNamer { get; set; }
+
+		public ScriptHtmlResultGenerator (
+			ITestScript script,
+            ScriptXmlResultFileNamer xmlReportFileNamer,
+            ScriptHtmlResultFileNamer htmlReportFileNamer
+        )
+        {
+            Script = script;
+
+            if (script.IsVerbose) {
+                Console.WriteLine ("");
+                Console.WriteLine ("Constructing ScriptHtmlResultGenerator...");
+                Console.WriteLine ("");
+            }
+
+            HtmlResultFileNamer = htmlReportFileNamer;
+            XmlResultFileNamer = xmlReportFileNamer;
+        }
+
+        public void Generate()
+        {
+            Generate (XmlResultFileNamer.GetXmlResultsDirectory(Script));
+        }
+
+        public void Generate (string xmlResultsDir)
+        {
+            if (Script.IsVerbose) {
+                Console.WriteLine ("");
+                Console.WriteLine ("--------------------");
+                Console.WriteLine ("");
+                Console.WriteLine ("Generating test script HTML reports...");
+
+                Console.WriteLine ("Xml results directory:");
+                Console.WriteLine (xmlResultsDir);
+                Console.WriteLine ("");
+            }
+
+            var htmlResultsDir = HtmlResultFileNamer.GetHtmlResultsDirectory (Script);
+        
+            if (Script.IsVerbose) {
+                Console.WriteLine ("Html results directory:");
+                Console.WriteLine (htmlResultsDir);
+                Console.WriteLine ("");
+
+                Console.WriteLine ("");
+                Console.WriteLine ("Xml results:");
+                Console.WriteLine (xmlResultsDir);
+                Console.WriteLine ("");
+                Console.WriteLine ("HTML results:");
+                Console.WriteLine (htmlResultsDir);
+                Console.WriteLine ("");
+                Console.WriteLine ("Looping through files in folder looking for XML files to convert into HTML files...");
+                Console.WriteLine ("Xml reports dir:");
+                Console.WriteLine (xmlResultsDir);
+                Console.WriteLine ("");
+                Console.WriteLine ("Found:");
+            }
+
+            foreach (var file in Directory.GetFiles (xmlResultsDir)) {
+                if (Script.IsVerbose)
+                    Console.WriteLine (file);
+                GenerateHtmlFromXml (file);
+            }
+            
+            if (Script.IsVerbose) {
+                Console.WriteLine ("");
+                Console.WriteLine ("Looping through subfolders in folder looking for XML files to convert into HTML files.");
+                Console.WriteLine ("XML reports dir:");
+                Console.WriteLine (xmlResultsDir);
+            }
+
+            foreach (var dir in Directory.GetDirectories(xmlResultsDir)) {
+                if (Script.IsVerbose) {
+                    Console.WriteLine ("Sub tests dir:");
+                    Console.WriteLine (dir);
+                }
+
+                Generate (dir);
+            }
+
+            if (Script.IsVerbose) {
+                Console.WriteLine ("");
+                Console.WriteLine ("--------------------");
+                Console.WriteLine ("");
+            }
+        }
+
+		public void GenerateHtmlFromXml (string xmlResultFile)
+		{
+			if (Script.IsVerbose) {
+                Console.WriteLine ("");
+				Console.WriteLine ("Html results dir:");
+				Console.WriteLine (HtmlResultFileNamer.GetHtmlResultsDirectory(Script));
+			}
+
+            var htmlReportFile = GetHtmlFileForXmlFile(xmlResultFile);
+            
+            if (Script.IsVerbose) {
+				Console.WriteLine ("Html report file:");
+				Console.WriteLine (htmlReportFile);
+			}
+
+            var testResultLoader = new ScriptResultLoader(
+                Script
+            );
+
+            var testResult = testResultLoader.Load(xmlResultFile);
+
+			var title = testResult.ScriptName;
+
+			var successful = testResult.Succeeded;
+
+			var log = testResult.Log;
+
+			var output = GetHtmlTemplate(
+				title,
+				successful,
+				log
+			);
+
+			Script.EnsureDirectoryExists(Path.GetDirectoryName(htmlReportFile));
+
+			File.WriteAllText(htmlReportFile, output);
+
+			UpdateIndex(xmlResultFile, testResult);
+		}
+
+        public void UpdateIndex (string xmlResultFile, ScriptResult testResult)
+        {
+            if (Script.IsVerbose) {
+                Console.WriteLine ("");
+                Console.WriteLine ("Updating index...");
+                Console.WriteLine ("");
+            }
+
+            var htmlResultFile = GetHtmlFileForXmlFile (xmlResultFile);
+
+            // TODO: Fix this to include sub directory
+            var indexFile = GetIndexFileForHtmlResultFile (htmlResultFile);
+
+            if (Script.IsVerbose) {
+                Console.WriteLine ("");
+                Console.WriteLine ("Index file:");
+                Console.WriteLine (indexFile);
+                Console.WriteLine ("");
+            }
+
+			if (!File.Exists(indexFile))
+				CreateIndexFile(indexFile);
+
+			var doc = new HtmlDocument();
+
+			doc.Load(indexFile);
+
+			CreateIndexItemNode(doc, testResult);
+
+			doc.Save(indexFile);
+		}
+
+        public string GetIndexFileForHtmlResultFile(string htmlResultFile)
+        {
+            var xmlResultsDir = XmlResultFileNamer.GetXmlResultsDirectory(Script);
+
+            var htmlResultsDir = HtmlResultFileNamer.GetHtmlResultsDirectory(Script);
+
+            return htmlResultFile
+                .Replace(xmlResultsDir, htmlResultsDir)
+                    .Replace (Path.GetFileName(htmlResultFile), "index.html");
+        }
+
+		public HtmlNode CreateIndexItemNode (HtmlDocument doc, ScriptResult result)
+		{
+			return CreateIndexItemNode(doc, result.ScriptName, result.Succeeded, result.Log);
+		}
+		
+		public HtmlNode CreateIndexItemNode (HtmlDocument doc, string name, bool successful, string log)
+		{
+
+			var tableElement = doc.DocumentNode.SelectSingleNode ("//table[@id='ReportsTable']");
+
+			if (tableElement == null)
+				throw new Exception ("Failed to located TABLE element.");
+
+			var existingItemNode = tableElement.SelectSingleNode ("//tr[@id='" + name + "']");
+
+			HtmlNode itemNode = null;
+
+			if (existingItemNode == null) {
+				if (Script.IsVerbose)
+					Console.WriteLine ("No existing item '" + name + "' found in index....adding...");
+
+				itemNode = doc.CreateElement ("tr");
+
+				tableElement.AppendChild (itemNode);
+
+				// Name column
+				var nameNode = doc.CreateElement ("td");
+
+				itemNode.SetAttributeValue ("id", name);
+
+				itemNode.AppendChild (
+					nameNode
+				);
+
+				var nameLinkNode = doc.CreateElement ("a");
+
+				var href = name + ".html";
+
+				nameLinkNode.SetAttributeValue ("href", href);
+
+				var nameTextNode = doc.CreateTextNode (name);
+
+				nameLinkNode.AppendChild (nameTextNode);
+
+				nameNode.AppendChild (nameLinkNode);
+
+				// Status column
+				var statusNode = doc.CreateElement ("td");
+
+				var statusText = "Succeeded: <span style='color: " + GetStatusColor (successful) + ";'>" + successful.ToString () + "</span>";
+
+				var statusTextNode = doc.CreateTextNode (statusText);
+
+				statusNode.AppendChild (statusTextNode);
+
+				itemNode.AppendChild (statusNode);
+
+				// Sub tests column
+				if (SubTestsExist(name))
+				{
+					var subTestsNode = doc.CreateElement ("td");
+
+					var subTestsText = "<a href='" + name + "/index.html'>Sub Tests</a>";
+
+					var subTestsTextNode = doc.CreateTextNode (subTestsText);
+
+					subTestsNode.AppendChild (subTestsTextNode);
+
+					itemNode.AppendChild (subTestsNode);
+				}
+			} else {
+				itemNode = existingItemNode;
+				if (Script.IsVerbose)
+					Console.WriteLine ("Existing item '" + name + "' found in index....skipping...");
+			}
+
+			return itemNode;
+		}
+
+		public bool SubTestsExist (string scriptName)
+        {
+            var subTestsFolder = HtmlResultFileNamer.GetHtmlResultsDirectory(Script)
+                + Path.DirectorySeparatorChar
+                + scriptName;
+
+
+			var doesExist = Directory.Exists(subTestsFolder);
+            
+            if (Script.IsVerbose) {
+                Console.WriteLine ("");
+                Console.WriteLine ("Checking if sub tests exist...");
+                Console.WriteLine ("Script name:");
+                Console.WriteLine (scriptName);
+                Console.WriteLine ("Sub tests dir:");
+                Console.WriteLine (subTestsFolder);
+                Console.WriteLine ("Does exist:");
+                Console.WriteLine (doesExist.ToString());
+                Console.WriteLine ("");
+            }
+
+            return doesExist;
+		}
+
+		public void CreateIndexFile (String file)
+        {
+            if (Script.IsVerbose) {
+                Console.WriteLine ("");
+                Console.WriteLine ("Creating index file...");
+                Console.WriteLine ("Path:");
+                Console.WriteLine (file);
+                Console.WriteLine ("");
+            }
+
+            Script.EnsureDirectoryExists(Path.GetDirectoryName(file));
+
+			var indexTemplate = GetIndexTemplate();
+
+			indexTemplate.Replace("{{ProjectDirectory}}", Script.OriginalDirectory);
+
+			File.WriteAllText(file, indexTemplate);
+		}
+
+		public string GetIndexTemplate (string projectDirectory)
+		{
+			var output = GetIndexTemplate();
+
+			output = output.Replace("{{ProjectDirectory}}", projectDirectory);
+
+			return output;
+		}
+
+		public string GetIndexTemplate ()
+		{
+			var template = @"<html>
+	<head>
+		<title>
+			Test Script Reports
+		</title>
+		<LINK href='{{ProjectDirectory}}/styles/general.css' rel='stylesheet' type='text/css'>
+	</head>
+	<body>
+		<h1>Test Script Reports</h1>
+		<table id='ReportsTable' width='100%'>
+		</table>
+	</body>
+</html>";
+
+			return template;
+		}
+
+		public string GetHtmlTemplate(
+			string name,
+			bool successful,
+			string log
+		)
+		{
+            if (String.IsNullOrEmpty(name))
+                throw new ArgumentException("name", "A name is required.");
+
+			var output = GetHtmlTemplate();
+
+			var statusColor = GetStatusColor(successful);
+			
+			output = output.Replace("{{ProjectDirectory}}", Script.CurrentDirectory);
+			output = output.Replace("{{Name}}", name);
+			output = output.Replace("{{Successful}}", successful.ToString());
+			output = output.Replace("{{Log}}", log != null ? HttpUtility.HtmlEncode(log).Replace("\n", "<br/>") : "");
+			output = output.Replace("{{StatusColor}}", statusColor);
+
+			return output;
+		
+		}
+
+		public string GetStatusColor (bool successful)
+		{
+			var statusColor = "green";
+			if (!successful)
+				statusColor = "red";
+
+			return statusColor;
+		}
+
+		public string GetHtmlTemplate()
+		{
+			var template = @"<html>
+	<head>
+		<title>
+			{{Name}}
+		</title>
+		<LINK href='{{ProjectDirectory}}/styles/general.css' rel='stylesheet' type='text/css'>
+	</head>
+	<body>
+		<h1>{{Name}}</h1>
+		<p>Successful: <span style='color:{{StatusColor}}'>{{Successful}}</span></p>
+		<p>{{Log}}</p>
+	</body>
+</html>";
+
+			return template;
+		}
+
+        public string GetHtmlFileForXmlFile (string xmlFile)
+        {
+            
+            if (Script.IsVerbose) {
+                Console.WriteLine ("");
+                Console.WriteLine ("Getting HTML report file path for:");
+                Console.WriteLine (xmlFile);
+                Console.WriteLine ("");
+            }
+
+            var htmlFilePath = xmlFile.Replace (
+                XmlResultFileNamer.GetXmlResultsDirectory (Script),
+                HtmlResultFileNamer.GetHtmlResultsDirectory (Script)
+            ).Replace ("xml", "html");
+
+            if (Script.IsVerbose) {
+                Console.WriteLine ("Html file path:");
+                Console.WriteLine (htmlFilePath);
+                Console.WriteLine ("");
+            }
+
+            return htmlFilePath;
+        }
+	}
+}
+

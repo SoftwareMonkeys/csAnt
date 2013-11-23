@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.0</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{98C7EEC8-1AD5-4570-8EA5-76FE959F3B58}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>SoftwareMonkeys.csAnt.Tests.Scripting</RootNamespace>
+    <AssemblyName>SoftwareMonkeys.csAnt.Tests.Scripts</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="HtmlAgilityPack">
+      <HintPath>..\..\lib\HtmlAgilityPack\Net40\HtmlAgilityPack.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework">
+      <HintPath>..\..\lib\NUnit\bin\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="TestScriptStackDetector.cs" />
+    <Compile Include="TestScriptStackDetectorTestFixture.cs" />
+    <Compile Include="ScriptsDummyScript.cs" />
+    <Compile Include="ScriptReportGeneratorTestFixture.cs" />
+    <Compile Include="ScriptReportGenerator.cs" />
+    <Compile Include="ScriptResult.cs" />
+    <Compile Include="ScriptResultLoader.cs" />
+    <Compile Include="ScriptResultSaver.cs" />
+    <Compile Include="IScriptingDummyScript.cs" />
+    <Compile Include="BaseScriptingDummyScript.cs" />
+    <Compile Include="BaseScriptingTestFixture.cs" />
+    <Compile Include="ScriptingDummyScriptTearDowner.cs" />
+    <Compile Include="ITestScript.cs" />
+    <Compile Include="ScriptingTestUtilities.cs" />
+    <Compile Include="ScriptingTestScript.cs" />
+    <Compile Include="ScriptingDummyScriptConstructor.cs" />
+    <Compile Include="ScriptingTestScriptConstructor.cs" />
+    <Compile Include="ScriptingTestScriptSetUpper.cs" />
+    <Compile Include="ScriptingTestScriptTearDowner.cs" />
+    <Compile Include="ScriptingTestScriptRelocator.cs" />
+    <Compile Include="ScriptHtmlResultGenerator.cs" />
+    <Compile Include="ScriptXmlResultFileNamer.cs" />
+    <Compile Include="ScriptXmlResultFileNamerTestFixture.cs" />
+    <Compile Include="ScriptHtmlResultFileNamer.cs" />
+    <Compile Include="ScriptHtmlResultGeneratorTestFixture.cs" />
+    <Compile Include="GetTestScriptTestFixture.cs" />
+    <Compile Include="BaseTestScript.cs" />
+    <Compile Include="StartTestFixture.cs" />
+    <Compile Include="BaseTestScriptTearDowner.cs" />
+    <Compile Include="BaseTestScriptSetUpper.cs" />
+    <Compile Include="BaseTestScriptConstructor.cs" />
+    <Compile Include="Internal\ScriptingTestUtilitiesTestFixture.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <ProjectReference Include="..\SoftwareMonkeys.csAnt\SoftwareMonkeys.csAnt.csproj">
+      <Project>{16297BCB-0A8C-42E6-BE35-921085C3E238}</Project>
+      <Name>SoftwareMonkeys.csAnt</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SoftwareMonkeys.csAnt.Tests\SoftwareMonkeys.csAnt.Tests.csproj">
+      <Project>{E79918A1-F275-4073-9968-77DAB04622A9}</Project>
+      <Name>SoftwareMonkeys.csAnt.Tests</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Internal\" />
+  </ItemGroup>
+</Project>

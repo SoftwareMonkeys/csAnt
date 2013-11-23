@@ -5,17 +5,17 @@ namespace SoftwareMonkeys.csAnt
 {
 	public partial class BaseScript
 	{
-		public string GetImportedDirectory()
+		public string GetImportStagingDirectory()
 		{
 			var parentDirectory = Path.GetDirectoryName(Path.GetDirectoryName(CurrentNode.FilePath));
 
-			var importsDirectory = parentDirectory
+			var stagingDirectory = parentDirectory
 				+ Path.DirectorySeparatorChar
 				+ Path.GetFileName(CurrentDirectory)
 					+ "-Imports";
 
 
-			return importsDirectory;
+			return stagingDirectory;
 		}
 	}
 }

@@ -43,6 +43,7 @@
     <Reference Include="HtmlAgilityPack">
       <HintPath>..\..\lib\HtmlAgilityPack\Net40\HtmlAgilityPack.dll</HintPath>
     </Reference>
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
@@ -136,11 +137,52 @@
     <Compile Include="BaseScript.ToRelative.cs" />
     <Compile Include="BaseScript.ToAbsolute.cs" />
     <Compile Include="BaseScript.GitAddRemote.cs" />
-    <Compile Include="BaseScript.GetImportedDirectory.cs" />
-    <Compile Include="BaseScript.ImportedDirectory.cs" />
     <Compile Include="BaseScript.LibExists.cs" />
     <Compile Include="BaseScript.IsDebug.cs" />
     <Compile Include="BaseScript.Relocate.cs" />
+    <Compile Include="BaseScript.Time.cs" />
+    <Compile Include="BaseScript.OriginalDirectory.cs" />
+    <Compile Include="BaseScript.GetScriptStack.cs" />
+    <Compile Include="BaseScript.ScriptStack.cs" />
+    <Compile Include="BaseScript.GetOriginalDirectory.cs" />
+    <Compile Include="BaseScript.ParentScript.cs" />
+    <Compile Include="IScriptSetUpper.cs" />
+    <Compile Include="IScriptTearDowner.cs" />
+    <Compile Include="IScriptConstructor.cs" />
+    <Compile Include="BaseScript.TearDowner.cs" />
+    <Compile Include="ScriptTearDowner.cs" />
+    <Compile Include="BaseScriptConstructor.cs" />
+    <Compile Include="BaseScriptSetUpper.cs" />
+    <Compile Include="BaseScriptTearDowner.cs" />
+    <Compile Include="BaseScript.SetUpper.cs" />
+    <Compile Include="FilesGrabber.cs" />
+    <Compile Include="BaseScript.FilesGrabber.cs" />
+    <Compile Include="BaseScript.Constructor.cs" />
+    <Compile Include="IScriptRelocator.cs" />
+    <Compile Include="BaseScript.Relocator.cs" />
+    <Compile Include="ScriptConstructor.cs" />
+    <Compile Include="ScriptSetUpper.cs" />
+    <Compile Include="TemporaryDirectoryCreator.cs" />
+    <Compile Include="BaseScript.TemporaryDirectoryCreator.cs" />
+    <Compile Include="BaseScriptRelocator.cs" />
+    <Compile Include="ScriptRelocator.cs" />
+    <Compile Include="BaseScript.Run.cs" />
+    <Compile Include="BaseScript.WriteHeader.cs" />
+    <Compile Include="BaseScript.WriteFooter.cs" />
+    <Compile Include="BaseScript.Construct.cs" />
+    <Compile Include="BaseScript.TornDown.cs" />
+    <Compile Include="BaseScript.IsSetUp.cs" />
+    <Compile Include="ScriptStackDetector.cs" />
+    <Compile Include="ScriptNotFoundException.cs" />
+    <Compile Include="BaseScript.RefreshCurrentNode.cs" />
+    <Compile Include="BaseScript.ActivateScriptAt.cs" />
+    <Compile Include="BaseScript.GetScriptAt.cs" />
+    <Compile Include="BaseScript.ToString.cs" />
+    <Compile Include="IConsoleWriter.cs" />
+    <Compile Include="BaseScript.CompileScripts.cs" />
+    <Compile Include="BaseScript.GetBuildMode.cs" />
+    <Compile Include="BaseScript.ImportStagingDirectory.cs" />
+    <Compile Include="BaseScript.GetImportStagingDirectory.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

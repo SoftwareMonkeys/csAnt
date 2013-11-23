@@ -4,7 +4,20 @@ namespace SoftwareMonkeys.csAnt
 {
 	public partial class BaseScript
 	{
-		public abstract bool Start(string[] args);
+		public bool Start(params string[] args)
+        {
+            WriteHeader();
+
+            SetUp();
+
+            Run(args);
+
+            TearDown();
+
+            WriteFooter();
+
+            return !IsError;
+        }
 	}
 }
 
