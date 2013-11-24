@@ -6,8 +6,6 @@ namespace SoftwareMonkeys.csAnt.Tests.Scripting
     {
         TestSummarizer TestSummarizer { get;set; }
 
-        TestAsserter Assert { get;set; }
-
         // TODO: Check if needed
         // The group to put all tests in
         string TestGroupName { get;set; }

@@ -13,8 +13,6 @@ namespace SoftwareMonkeys.csAnt.Tests.Scripting
             base.Construct (scriptName, parentScript);
 
             ConstructSummarizer();
-
-            ConstructAsserter();
         }
 
         public override void ConstructLifecycle ()
@@ -31,13 +29,6 @@ namespace SoftwareMonkeys.csAnt.Tests.Scripting
             var s = (ITestScript)Script;
 
             s.TestSummarizer = new TestSummarizer(Script);
-        }
-
-        public void ConstructAsserter()
-        {
-            var s = (ITestScript)Script;
-
-            s.Assert = new TestAsserter(s);
         }
     }
 }
