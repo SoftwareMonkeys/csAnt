@@ -1,6 +1,9 @@
 //css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.dll;
+//css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.Tests.dll;
+//css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.Tests.Scripting.dll;
 //css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.Projects.dll;
 //css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.Projects.Tests.dll;
+//css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.Projects.Tests.Scripting.dll;
 
 using System;
 using System.IO;
@@ -9,6 +12,7 @@ using System.Diagnostics;
 using SoftwareMonkeys.csAnt;
 using SoftwareMonkeys.csAnt.Projects;
 using SoftwareMonkeys.csAnt.Projects.Tests;
+using SoftwareMonkeys.csAnt.Projects.Tests.Scripting;
 
 class Test_BuildFromSourceReleaseScript : BaseProjectTestScript
 {
@@ -25,58 +29,31 @@ class Test_BuildFromSourceReleaseScript : BaseProjectTestScript
 		
 		FilesGrabber.GrabOriginalFiles();
 
-		ExecuteScript("CycleBuild");
-
-		if (!IsError)
-			ExecuteScript("Release", "src");
+		ExecuteScript("CycleRelease", "src");
 
 		if (!IsError)
 		{
-			var rlsDir = OriginalDirectory
-				+ Path.DirectorySeparatorChar
-				+ "rls"
-				+ Path.DirectorySeparatorChar
-				+ "src";
-
-			var latest = GetNewestFile(rlsDir);
-
-			UnzipAndBuild(latest);
+			DeployAndBuild();
 		}
 		
 		return !IsError;
 	}
 
-	public void UnzipAndBuild(string latestFile)
+	public void DeployAndBuild()
 	{
-
-		Console.WriteLine("");
-		Console.WriteLine("Unzipping...");
-		Console.WriteLine("");
-
-		var tmpDir = GetTmpDir();
-
-		Unzip(latestFile, tmpDir);
+                var tmpDir = GetTmpDir();
+                
+                DeployRelease("src", tmpDir);
 
 		Console.WriteLine("");
 		Console.WriteLine("Tmp dir:");
 		Console.WriteLine(" " + tmpDir);
 		Console.WriteLine("");
 
-		var subDir = GetNewestFolder(tmpDir); 
-
-		// Move from the sub directory to the intended directory
-		MoveDirectory(
-			subDir,
-			tmpDir
-		);
-
-		var originalProjectDirectory = ProjectDirectory;
-
-		// Move to the tmp directory
-		ProjectDirectory = tmpDir;
+		Relocate(tmpDir);
 
 		Console.WriteLine("");
-		Console.WriteLine("Preparing...");
+		Console.WriteLine("Initializing...");
 		Console.WriteLine("");
 
 		InitializeProject(ProjectDirectory);
@@ -90,9 +67,7 @@ class Test_BuildFromSourceReleaseScript : BaseProjectTestScript
 			ExecuteScript("CycleBuild");
 		}
 
-		//Directory.Delete(ProjectDirectory, true);
-
 		// Move back to the original project directory
-		ProjectDirectory = originalProjectDirectory;
+		Relocate(OriginalDirectory);
 	}
 }
