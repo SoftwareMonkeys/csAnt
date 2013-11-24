@@ -18,60 +18,23 @@ class ClearDllsScript : BaseProjectScript
 	public override bool Run(string[] args)
 	{
 		Console.WriteLine("");
-		Console.WriteLine("Clearing DLLs from project...");
+		Console.WriteLine("Clearing .bak files from project...");
 		Console.WriteLine("");
 
-		CleanBinDirectory();
-
-		CleanProjectDirectories();
+		Clear();
 		
-		AddSummary("Cleared the project of .dll files.");
+		AddSummary("Cleared the project of .bak files.");
 
 		return !IsError;
 	}
-
-	public void CleanBinDirectory()
-	{
-		var binDir = CurrentDirectory
-			+ Path.DirectorySeparatorChar
-			+ "bin";
-
-		if (Directory.Exists(binDir))
-		{
-			foreach (var dir in Directory.GetDirectories(binDir))
-			{
-				Console.WriteLine(dir);
-
-				Directory.Delete(dir, true);
-			}
-		}
-	}
-
-	public void CleanProjectDirectories()
-	{
-		var srcDir = CurrentDirectory
-			+ Path.DirectorySeparatorChar
-			+ "src";
-
-		foreach (var dir in Directory.GetDirectories(srcDir))
-		{
-			var binDir = dir
-				+ Path.DirectorySeparatorChar
-				+ "bin";
-
-			Console.WriteLine(binDir);
-
-			if (Directory.Exists(binDir))
-				Directory.Delete(binDir, true);
-
-			var objDir = dir
-				+ Path.DirectorySeparatorChar
-				+ "obj";
-
-			Console.WriteLine(objDir);
 	
-			if (Directory.Exists(binDir))
-				Directory.Delete(objDir, true);
-		}
-	}
+	public void Clear()
+	{
+            foreach (var file in Directory.GetFiles(CurrentDirectory, "*.bak", SearchOption.AllDirectories))
+            {
+                Console.WriteLine(file);
+                
+                File.Delete(file);
+            }	
+        }
 }
