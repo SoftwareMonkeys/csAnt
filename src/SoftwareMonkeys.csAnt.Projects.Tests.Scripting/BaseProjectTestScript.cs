@@ -12,8 +12,6 @@ namespace SoftwareMonkeys.csAnt.Projects.Tests.Scripting
         public TestSummarizer TestSummarizer { get;set; }
 
         public string TestGroupName { get;set; }
-  
-        public TestAsserter Assert { get;set; }
 
         public BaseProjectTestScript () : base()
         {
