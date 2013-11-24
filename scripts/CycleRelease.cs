@@ -30,6 +30,8 @@ class CycleReleaseScript : BaseProjectScript
 		}
 
 		ExecuteScript("CycleBuild");
+		
+		ExecuteScript("ClearBak");
 
 		if (!IsError)
 		{
