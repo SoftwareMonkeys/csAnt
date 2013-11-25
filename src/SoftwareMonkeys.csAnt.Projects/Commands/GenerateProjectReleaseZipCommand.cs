@@ -100,7 +100,7 @@ namespace SoftwareMonkeys.csAnt.Projects
         public void ExportToGeneralLibs(string zipFilePath)
         {
             var generalLibsDir = Path.GetFullPath(
-                Script.CurrentDirectory
+                Script.OriginalDirectory
                 + Path.DirectorySeparatorChar
                 + ".."
                 + Path.DirectorySeparatorChar
