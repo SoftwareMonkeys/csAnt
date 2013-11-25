@@ -7,11 +7,11 @@ namespace SoftwareMonkeys.csAnt.Projects
 {
     public class GenerateProjectReleaseZipCommand : BaseProjectScriptCommand
     {
-        public string ReleaseList { get;set; }
+        public string ReleaseName { get;set; }
 
         public GenerateProjectReleaseZipCommand (BaseProjectScript script, string releaseList) : base(script)
         {
-            ReleaseList = releaseList;
+            ReleaseName = releaseList;
         }
 
         public override void Execute ()

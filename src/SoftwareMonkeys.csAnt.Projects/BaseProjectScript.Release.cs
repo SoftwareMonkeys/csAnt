@@ -11,11 +11,11 @@ namespace SoftwareMonkeys.csAnt.Projects
             );
         }
         
-        public void Release(string releaseList)
+        public void Release(string releaseName)
         {
-            var cmd = new GenerateProjectReleaseZipCommand(this, releaseList);
+            var cmd = new GenerateProjectReleaseZipCommand(this, releaseName);
 
-            cmd.ReleaseList = releaseList;
+            cmd.ReleaseName = releaseName;
 
             ExecuteCommand(
                 cmd

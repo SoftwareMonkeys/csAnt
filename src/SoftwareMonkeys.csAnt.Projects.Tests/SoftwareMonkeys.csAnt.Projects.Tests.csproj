@@ -46,6 +46,7 @@
     <Compile Include="BaseProjectDummyScript.cs" />
     <Compile Include="BaseProjectsTestFixture.GetDummyScript.cs" />
     <Compile Include="BaseProjectsTestFixture.GetWorkingDirectory.cs" />
+    <Compile Include="ReleaseTestFixture.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
