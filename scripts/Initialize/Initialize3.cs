@@ -349,13 +349,15 @@ class InitializeScript
 
                 var projectName = Path.GetFileName(path);
 
-                while (path.Contains(".tmp"))
-                    path = Path.GetDirectoryName(path);
-                    
-                path = path
-                    + Path.DirectorySeparatorChar
-                    + projectName;
-
+                if (path.Contains(".tmp"))
+                {
+                    while (path.Contains(".tmp"))
+                        path = Path.GetDirectoryName(path);
+                        
+                    path = path
+                        + Path.DirectorySeparatorChar
+                        + projectName;
+                }
 		return path;
 	}
 
