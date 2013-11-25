@@ -342,18 +342,14 @@ class InitializeScript
 	{
 		var path = Path.GetFullPath(".");
 
-		// TODO: Remove if not needed
-		/*if (path.IndexOf(".tmp") > -1)
-			path = Path.GetFullPath("../../..");
-		else if (path.IndexOf("_tmp") > -1) // TODO: Check if this is needed. The _tmp style shouldn't be used anymore
-			path = Path.GetFullPath("../../../..");
-*/
+                var projectName = Path.GetFileName(path);
+
                 while (path.Contains(".tmp"))
                     path = Path.GetDirectoryName(path);
                     
                 path = path
                     + Path.DirectorySeparatorChar
-                    + ProjectName;
+                    + projectName;
 
 		return path;
 	}
