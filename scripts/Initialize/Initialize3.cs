@@ -41,6 +41,11 @@ class InitializeScript
                 // Handle arguments
 		var sourceProjectsDirectory = args[0];
 		
+		if (String.IsNullOrEmpty(sourceProjectsDirectory))
+                    sourceProjectsDirectory = originalDirectory
+                        + Path.DirectorySeparatorChar
+                        + "/..";
+		
 		var arguments = new Arguments(args);
 		
 		IsVerbose = arguments.Contains("v");
