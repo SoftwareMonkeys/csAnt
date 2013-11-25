@@ -85,14 +85,21 @@ namespace SoftwareMonkeys.csAnt
 		/// </summary>
 		/// <param name='command'></param>
 		/// <param name='arguments'></param>
-		public void StartProcess(string command, string arguments)
-		{
-			Console.WriteLine("");
-			Console.WriteLine("--------------------------------------------------");
-			Console.WriteLine("");
-			Console.WriteLine("Starting process:");
-			Console.WriteLine(command + " " + arguments);
-			Console.WriteLine("");
+		public void StartProcess (string command, string arguments)
+        {
+            Console.WriteLine ("");
+            Console.WriteLine ("--------------------------------------------------");
+            Console.WriteLine ("");
+            Console.WriteLine ("Starting process:");
+            Console.WriteLine (command + " " + arguments);
+            Console.WriteLine ("");
+
+            // If the command has an extension (and is therefore an actual file)
+            if (Path.GetExtension (command) != String.Empty) {
+                // If the file doesn't exist
+                if (!File.Exists(Path.GetFullPath(command)))
+                    throw new ArgumentException("Cannot find the file '" + Path.GetFullPath(command) + "'.");
+            }
 
 			// Create the process start information
 			ProcessStartInfo info = new ProcessStartInfo(
