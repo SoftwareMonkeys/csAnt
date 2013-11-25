@@ -99,22 +99,10 @@ namespace SoftwareMonkeys.csAnt.Tests
             }
         }
 
-		public string GetRoot()
-		{
-			var path = Path.GetDirectoryName(
-				Environment.CurrentDirectory
-			);
-
-			path = Path.GetDirectoryName(
-				path
-			);
-
-			return path;
-		}
-
         public string GetTimeStamp()
         {
-            Time = DateTime.Now;
+            if (Time == DateTime.MinValue)
+                Time = DateTime.Now;
 
             return Time.Year
                 + "-"

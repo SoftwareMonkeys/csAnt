@@ -10,10 +10,14 @@ namespace SoftwareMonkeys.csAnt.Tests
         [Test]
         public void Test_GetTmpDir_Standard()
         {
-            var timeStamp = GetTimeStamp();
+            var dummyScript = GetDummyScript();
+
+            dummyScript.Relocate(dummyScript.OriginalDirectory);
+
+            var timeStamp = TimeStamp;
 
             var tdc = new TemporaryDirectoryCreator(
-                WorkingDirectory,
+                dummyScript.CurrentDirectory,
                 timeStamp,
                 true
             );
@@ -25,7 +29,7 @@ namespace SoftwareMonkeys.csAnt.Tests
 			Console.WriteLine (tmpDir);
 			Console.WriteLine ("");
 
-            var expectedDir = Path.GetDirectoryName(WorkingDirectory)
+            var expectedDir = Path.GetDirectoryName(dummyScript.CurrentDirectory)
                 + Path.DirectorySeparatorChar
                 + "csAnt.tmp"
                 + Path.DirectorySeparatorChar
@@ -46,7 +50,7 @@ namespace SoftwareMonkeys.csAnt.Tests
         [Test]
         public void Test_GetTmpDir_WithinTmp()
         {
-            var timeStamp = GetTimeStamp();
+            var timeStamp = TimeStamp;
 
             var tdc = new TemporaryDirectoryCreator(
                 WorkingDirectory,
@@ -83,15 +87,21 @@ namespace SoftwareMonkeys.csAnt.Tests
         [Test]
         public void Test_GetTmpDir_DeepWithinTmp()
         {
-            var timeStamp = GetTimeStamp();
+            var script = GetDummyScript();
 
-            var tdc = new TemporaryDirectoryCreator(
-                WorkingDirectory,
+            var timeStamp = TimeStamp;
+
+            var tdc = script.TemporaryDirectoryCreator;
+            /*new TemporaryDirectoryCreator(
+                script.CurrentDirectory,
                 timeStamp,
                 true
-            );
+            );*/
 
             var tmpDir = tdc.GetTmpDir();
+
+            script.Relocate(tmpDir);
+
             tmpDir = tdc.GetTmpDir();
 
             Console.WriteLine ("");
@@ -100,6 +110,10 @@ namespace SoftwareMonkeys.csAnt.Tests
             Console.WriteLine ("");
 
             var expectedDir = Path.GetDirectoryName(WorkingDirectory)
+                + Path.DirectorySeparatorChar
+                + "csAnt.tmp"
+                + Path.DirectorySeparatorChar
+                + TimeStamp
                 + Path.DirectorySeparatorChar
                 + "csAnt.tmp"
                 + Path.DirectorySeparatorChar

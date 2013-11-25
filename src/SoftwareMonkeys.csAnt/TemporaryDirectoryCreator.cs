@@ -5,7 +5,20 @@ namespace SoftwareMonkeys.csAnt
 {
     public class TemporaryDirectoryCreator
     {
-        public string CurrentDirectory { get;set; }
+        public IScript Script { get;set; }
+
+        private string currentDirectory;
+        public string CurrentDirectory {
+            get {
+                if (Script != null)
+                    return Script.CurrentDirectory;
+                else
+                    return currentDirectory;
+            }
+            set {
+                currentDirectory = value;
+            }
+        }
 
         public bool IsVerbose { get;set; }
 
@@ -20,6 +33,16 @@ namespace SoftwareMonkeys.csAnt
                 throw new ArgumentException("timeStamp");
 
             CurrentDirectory = currentDirectory;
+            IsVerbose = isVerbose;
+            TimeStamp = timeStamp;
+        }
+        
+        public TemporaryDirectoryCreator (IScript script, string timeStamp, bool isVerbose)
+        {
+            if (String.IsNullOrEmpty(timeStamp))
+                throw new ArgumentException("timeStamp");
+
+            Script = script;
             IsVerbose = isVerbose;
             TimeStamp = timeStamp;
         }
@@ -74,27 +97,15 @@ namespace SoftwareMonkeys.csAnt
                 Console.WriteLine ("Name:");
                 Console.WriteLine (name);
             }
-            // TODO: Clean up
-           // var isTmp = CurrentDirectory.Contains(".tmp");
 
-            //if (!isTmp) {
-            //    Console.WriteLine ("Not already in tmp dir.");
-                path = Path.GetFullPath (
-                    CurrentDirectory
-                    + Path.DirectorySeparatorChar
-                    + ".."
-                    + Path.DirectorySeparatorChar
-                    + name
-                    + ".tmp"
-                );
-            /*} else {
-                Console.WriteLine ("Already in tmp dir.");
-                path = Path.GetFullPath (
-                    CurrentDirectory
-                    + Path.DirectorySeparatorChar
-                    + "_tmp"
-                );
-            }*/
+            path = Path.GetFullPath (
+                CurrentDirectory
+                + Path.DirectorySeparatorChar
+                + ".."
+                + Path.DirectorySeparatorChar
+                + name
+                + ".tmp"
+            );
 
             if (IsVerbose) {
                 Console.WriteLine ("Path");

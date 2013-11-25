@@ -108,7 +108,7 @@ namespace SoftwareMonkeys.csAnt
         {
             // Temporary directory creator
             Script.TemporaryDirectoryCreator = new TemporaryDirectoryCreator (
-                Script.CurrentDirectory,
+                Script,
                 Script.TimeStamp,
                 Script.IsVerbose
             );
