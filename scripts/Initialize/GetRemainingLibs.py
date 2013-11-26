@@ -9,7 +9,7 @@ def GetRemainingLibs():
         print("----------------------------------------")
         print("Getting remaining library files by scanning the .node files...")
         print("Current directory:")
-        print(os.path.getcwd())
+        print(os.getcwd())
         print("")
 
         if (Utils.IsLinux()):
