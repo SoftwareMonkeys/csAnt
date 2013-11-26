@@ -21,9 +21,9 @@ def Initialize():
         print("Current dir: " + currentDir)
         print("Time stamp: " + timeStamp)
 
-        #DownloadScripts()
+        DownloadScripts()
 
-        #NextStep()
+        NextStep()
 
 def NextStep():
 
