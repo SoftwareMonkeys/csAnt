@@ -42,7 +42,7 @@ def DownloadScripts():
 
                 internalScriptPath = os.path.abspath("scripts/Initialize/" + script)
 
-                localScriptPath = Utils.GetOriginalDirectory() + "/../../SoftwareMonkeys/csAnt/scripts/Initialize" + script
+                localScriptPath = os.path.abspath(Utils.GetOriginalDirectory() + "/../../SoftwareMonkeys/csAnt/scripts/Initialize" + script)
 
                 onlineScriptUrl = "https://csant.googlecode.com/git/scripts/Initialize/" + script
 
@@ -50,26 +50,27 @@ def DownloadScripts():
                 print("Script URL: " + onlineScriptUrl)
                 print("Script local file: " + localScriptPath)
         
-                if not CheckLocalScript(internalScriptPath, localScriptPath):
-                        CheckOnlineScript(internalScriptPath, onlineScriptUrl)
-
+                if not os.path.isfile(internalScriptPath):
+                        if not CheckLocalScript(internalScriptPath, localScriptPath):
+                                CheckOnlineScript(internalScriptPath, onlineScriptUrl)
+                
                 print("")
 
 
 def CheckLocalScript( internalScriptPath, localScriptPath ):
         if not os.path.isfile(internalScriptPath):
                 print("Grabbing script")
-
                 shutil.copy(localScriptPath, internalScriptPath)
+                return True
         else:
+                print("Skipping retrieve from local")
+                return False
                 
-                print("Skipping retrieve")
-                
-def CheckOnlineScript( scriptPath, scriptUrl ):
-        if not os.path.isfile(scriptPath):
+def CheckOnlineScript( internalScriptPath, scriptUrl ):
+        if not os.path.isfile(internalScriptPath):
                 print("Downloading script")
 
-                urllib.request.urlretrieve (scriptUrl, scriptPath)
+                urllib.request.urlretrieve (scriptUrl, internalScriptPath)
         else:
                 
                 print("Skipping download")

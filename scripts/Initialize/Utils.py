@@ -2,6 +2,7 @@ import os
 import argparse
 import sys
 import getopt
+import datetime
 
 # IsLinux
 def IsLinux():
@@ -62,4 +63,7 @@ def GetOriginalDirectory():
                         path = os.path.dirname(path)
                 path = path + os.path.sep + os.path.dirname(os.getcwd())
         return path
+        
+def GetTimeStamp():
+        return datetime.datetime.now().strftime("%Y-%m-%d--%H-%S-%M")
 

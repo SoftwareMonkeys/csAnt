@@ -8,7 +8,7 @@ if [ ! -f $InitScriptFile ]; then
 
 	mkdir $PWD"/scripts/Initialize"
 
-	wget -O $InitScriptFile $InitScriptUrl
+	wget -O $InitScriptFile $InitScriptUrl %1 %2 %3
 fi
 
 python3 $InitScriptFile
