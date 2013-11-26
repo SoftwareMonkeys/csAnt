@@ -6,6 +6,10 @@ namespace SoftwareMonkeys.csAnt.Projects
 {
 	public partial class BaseProjectScript
 	{
+        public void InitializeProject ()
+        {
+            InitializeProject(CurrentDirectory);
+        }
 		/// <summary>
 		/// Launches the initialization script in the specified external project directory.
 		/// </summary>
