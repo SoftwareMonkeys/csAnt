@@ -1,5 +1,9 @@
 //css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.dll;
+//css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.Tests.dll;
+//css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.Tests.Scripting.dll;
 //css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.Projects.dll;
+//css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.Projects.Tests.dll;
+//css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.Projects.Tests.Scripting.dll;
 
 using System;
 using System.IO;
@@ -7,69 +11,32 @@ using Microsoft.CSharp;
 using System.Diagnostics;
 using SoftwareMonkeys.csAnt;
 using SoftwareMonkeys.csAnt.Projects;
+using SoftwareMonkeys.csAnt.Projects.Tests;
+using SoftwareMonkeys.csAnt.Projects.Tests.Scripting;
 
-class TestBuildFromStandardReleaseScript : BaseProjectScript
+class Test_InitializeScript : BaseProjectTestScript
 {
 	public static void Main(string[] args)
 	{
-		new TestBuildFromStandardReleaseScript().Start(args);
+		new Test_InitializeScript().Start(args);
 	}
 	
 	public override bool Run(string[] args)
 	{
-	        FilesGrabber.GrabOriginalFiles();
+                var initFile = "";
+                
+                if (IsLinux)
+                    initFile = "init-csAnt-project-linux.sh";
+                else
+                    initFile = "init-csAnt-project-windows.vbs";
+	
+	        FilesGrabber.GrabOriginalFiles(initFile);
 	        
-		Console.WriteLine("");
-		Console.WriteLine("Test building solutions from the release files...");
-		Console.WriteLine("");
-
-		Console.WriteLine("Building...");
-		Console.WriteLine("");
-
-		// Build and create release zips for the solution
-		ExecuteScript("Release");
-
-		if (!IsError)
-		{
-			var rlsDir = ProjectDirectory
-				+ Path.DirectorySeparatorChar
-				+ "rls"
-				+ Path.DirectorySeparatorChar
-				+ "standard-release";
-
-			var latest = GetNewestFile(rlsDir);
-
-			UnzipAndPrepare(latest);
-		}
-
-		return !IsError;
+	        CreateNodes();
+	        
+		InitializeProject();
 		
+		return !IsError;
 	}
 
-	public void UnzipAndPrepare(string latestFile)
-	{
-		var tmpDir = ProjectDirectory
-			+ Path.DirectorySeparatorChar
-			+ "_tmp"
-			+ Path.DirectorySeparatorChar
-			+ Guid.NewGuid().ToString()
-			+ Path.DirectorySeparatorChar
-			+ ProjectName;
-
-		Unzip(latestFile, tmpDir);
-
-		// Move from the sub directory to the intended directory
-		MoveDirectory(
-			GetNewestFolder(tmpDir),
-			tmpDir
-		);
-
-		ProjectDirectory = tmpDir;
-
-		// Run the prepare scripts
-		PrepareProject(ProjectDirectory);
-
-		// Delete the temporary directory
-		Directory.Delete(tmpDir, true);
-	}
 }

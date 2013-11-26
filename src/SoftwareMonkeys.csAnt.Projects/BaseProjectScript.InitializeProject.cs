@@ -10,12 +10,7 @@ namespace SoftwareMonkeys.csAnt.Projects
         {
             InitializeProject(CurrentDirectory);
         }
-		/// <summary>
-		/// Launches the initialization script in the specified external project directory.
-		/// </summary>
-		/// <param name='projectDirectory'>
-		/// 
-		/// </param>
+
 		public void InitializeProject(string projectDirectory)
 		{
 			Console.WriteLine ("");
@@ -49,6 +44,8 @@ namespace SoftwareMonkeys.csAnt.Projects
 
                 args.Add("\"" + initPath + "\"");
                 args.Add ("-t:" + TimeStamp);
+                args.Add ("-d:'" + ProjectDirectory + "'");
+
                 if (IsVerbose)
                     args.Add ("-v");
 
