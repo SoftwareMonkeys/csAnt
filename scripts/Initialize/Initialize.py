@@ -42,7 +42,7 @@ def DownloadScripts():
 
                 internalScriptPath = os.path.abspath("scripts/Initialize/" + script)
 
-                localScriptPath = os.path.abspath(Utils.GetOriginalDirectory() + "/../../SoftwareMonkeys/csAnt/scripts/Initialize" + script)
+                localScriptPath = os.path.abspath(Utils.GetOriginalDirectory() + "../../SoftwareMonkeys/csAnt/scripts/Initialize/" + script)
 
                 onlineScriptUrl = "https://csant.googlecode.com/git/scripts/Initialize/" + script
 
@@ -53,7 +53,9 @@ def DownloadScripts():
                 if not os.path.isfile(internalScriptPath):
                         if not CheckLocalScript(internalScriptPath, localScriptPath):
                                 CheckOnlineScript(internalScriptPath, onlineScriptUrl)
-                
+                else:
+                        print("Script already found internally. Skipping.")
+                        
                 print("")
 
 
