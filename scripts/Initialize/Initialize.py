@@ -10,8 +10,7 @@ def Initialize():
         timeStamp = Utils.GetArgument("t")
         isVerbose = Utils.ContainsArgument("v")
         
-        print("Time stamp:")
-        print(timeStamp)
+        print("Time stamp: " + timeStamp)
 
         DownloadScripts()
 
@@ -41,27 +40,36 @@ def DownloadScripts():
                 print("")
                 print("Script: " + script)
 
-                scriptPath = os.path.abspath("scripts/Initialize/" + script)
+                internalScriptPath = os.path.abspath("scripts/Initialize/" + script)
 
-                scriptUrl = "https://csant.googlecode.com/git/scripts/Initialize/" + script
+                localScriptPath = Utils.GetOriginalDirectory() + "/../../SoftwareMonkeys/csAnt/scripts/Initialize" + script
 
-                print("Script path: " + scriptPath)
-                print("Script URL: " + scriptUrl)
+                onlineScriptUrl = "https://csant.googlecode.com/git/scripts/Initialize/" + script
+
+                print("Script path: " + internalScriptPath)
+                print("Script URL: " + onlineScriptUrl)
+                print("Script local file: " + localScriptPath)
         
-                CheckScript(scriptPath,scriptUrl)
+                if not CheckLocalScript(internalScriptPath, localScriptPath):
+                        CheckOnlineScript(internalScriptPath, onlineScriptUrl)
 
                 print("")
 
 
-def CheckScript( scriptPath, scriptUrl ):
+def CheckLocalScript( internalScriptPath, localScriptPath ):
+        if not os.path.isfile(internalScriptPath):
+                print("Grabbing script")
+
+                shutil.copy(localScriptPath, internalScriptPath)
+        else:
+                
+                print("Skipping retrieve")
+                
+def CheckOnlineScript( scriptPath, scriptUrl ):
         if not os.path.isfile(scriptPath):
                 print("Downloading script")
 
                 urllib.request.urlretrieve (scriptUrl, scriptPath)
-                # TODO: Remove if not needed
-                # fp = urllib.request.urlopen(scriptUrl)
-                # with open(scriptPath, "w") as fo:
-                #    fo.write(fp.read())
         else:
                 
                 print("Skipping download")

@@ -35,11 +35,10 @@ def GetLib(name, libDir, zipInternal, zipLocal, zipUrl, generalLibDir):
         if not os.path.isdir(libDir):
                 os.makedirs(libDir)
 
-        # If the internal css-scrip zip file isn't found try getting it from the local path
-        if not (os.path.exists(zipInternal)):
-                GetLibFromLocal(zipLocal, zipInternal)
+        # Try getting it from the local path
+        GetLibFromLocal(zipLocal, zipInternal)
 
-        # If the internal css-script zip file still isn't found try getting it from the URL
+        # If the internal zip file still isn't found try getting it from the URL
         if not (os.path.exists(zipInternal)):
                 GetLibFromUrl(zipUrl, zipInternal)
 
