@@ -14,12 +14,8 @@ import Utils
 timeStamp = ""
 currentDir = os.getcwd()
 libDir = currentDir + os.sep + "lib"
-sourceProjectsDir = os.path.abspath(currentDir + os.sep + ".." + os.sep)
-generalLibDir = os.path.abspath(currentDir + "/../lib")
-
-# Adjust basic variables
-if ".tmp" in sourceProjectsDir: # If .tmp is found in the path then adjust the source projects directory
-	sourceProjectsDir = os.path.abspath("../../..")
+sourceProjectsDir = os.path.dirname(Utils.GetOriginalDirectory())
+generalLibDir = os.path.dirname(Utils.GetOriginalDirectory()) + os.path.sep "lib"
 
 # Script variables
 csInitializeScript = "scripts" + os.sep + "Initialize" + os.sep + "Initialize3.cs"
