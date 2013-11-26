@@ -54,7 +54,7 @@ namespace SoftwareMonkeys.csAnt
 				+ GetBuildMode()
 				+ Path.DirectorySeparatorChar
 				+ Path.GetFileNameWithoutExtension(scriptPath)
-				+ ".dll";
+				+ ".exe";
 
 			EnsureDirectoryExists(Path.GetDirectoryName(assemblyFile));
 			

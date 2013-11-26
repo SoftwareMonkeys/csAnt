@@ -10,12 +10,22 @@ from GetRemainingLibs import GetRemainingLibs
 from GetFileNodes import GetFileNodes
 import Utils
 
+# Current directory
+currentDir = ""
+if (Utils.ContainsArgument("d")):
+        currentDir = Utils.GetArgument("d")
+else:
+        currentDir = os.getcwd()
+
 # Basic variables
 timeStamp = ""
-currentDir = os.getcwd()
+
 libDir = currentDir + os.sep + "lib"
 sourceProjectsDir = os.path.dirname(Utils.GetOriginalDirectory())
 generalLibDir = os.path.dirname(Utils.GetOriginalDirectory()) + os.path.sep + "lib"
+
+timeStamp = Utils.GetArgument("t")
+isVerbose = Utils.ContainsArgument("v")
 
 # Script variables
 csInitializeScript = "scripts" + os.sep + "Initialize" + os.sep + "Initialize3.cs"
@@ -33,9 +43,6 @@ print("// --------------------")
 print("")
 print("The project is being initialized ready for development, by downloading required files.")
 print("")
-
-timeStamp = Utils.GetArgument("t")
-isVerbose = Utils.ContainsArgument("v")
 
 print("Time stamp:");
 print(timeStamp);

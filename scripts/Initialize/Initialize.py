@@ -4,10 +4,16 @@ import Utils
 
 timeStamp = ""
 isVerbose = False
+currentDir = ""
 
 def Initialize():
 
         timeStamp = Utils.GetArgument("t")
+
+        if (Utils.ContainsArgument("d")):
+                currentDir = Utils.GetArgument("d")
+                os.chdir(currentDir)
+                
         isVerbose = Utils.ContainsArgument("v")
         
         print("Time stamp: " + timeStamp)
@@ -21,10 +27,13 @@ def NextStep():
         args = ""
         
         if not (timeStamp) == "":
-                args = " -t:" + timeStamp
+                args = args + " -t:" + timeStamp
         
         if (isVerbose):
-                args = " -v"
+                args = args + " -v"
+        
+        if not currentDir == "":
+                args = args + " -d:'" + currentDir + "'"
 
         f = os.path.abspath("scripts/Initialize/Initialize2.py" + args)
 
