@@ -55,6 +55,11 @@ def ContainsArgument(arg):
         
         return not (output == "")
 
-
-
+def GetOriginalDirectory():
+        path = os.getcwd()
+        if (path.find('.tmp') != -1):
+                while (path.find('.tmp') != -1):
+                        path = os.path.dirname(path)
+                path = path + os.path.sep + os.path.dirname(os.getcwd())
+        return path
 
