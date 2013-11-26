@@ -13,14 +13,17 @@ def Initialize():
         if (Utils.ContainsArgument("d")):
                 currentDir = Utils.GetArgument("d")
                 os.chdir(currentDir)
+        else:
+                currentDir = os.getcwd()
                 
         isVerbose = Utils.ContainsArgument("v")
         
+        print("Current dir: " + currentDir)
         print("Time stamp: " + timeStamp)
 
-        DownloadScripts()
+        #DownloadScripts()
 
-        NextStep()
+        #NextStep()
 
 def NextStep():
 
