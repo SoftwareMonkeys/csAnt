@@ -23,9 +23,6 @@ class CyclePublishScript : BaseProjectScript
 		Console.WriteLine("Starting a full release cycle.");
 		Console.WriteLine("");
 
-		// Build the whole project first
-		ExecuteScript("CycleBuild");
-
 		// Git clone the project to another directory
 		var tmpDir = CloneToTmpDirectory();
 
@@ -36,22 +33,7 @@ class CyclePublishScript : BaseProjectScript
 		Relocate(tmpDir);
 
 		// Build the cloned source code
-		ExecuteScript("CycleBuild");
-
-                if (!IsError)
-                {
-		        Console.WriteLine("");
-		        Console.WriteLine("Creating release zip files...");
-		        Console.WriteLine("");
-
-		        // Create the release
-		        ExecuteScript(
-			        "Release",
-			        new string[]{
-				        "-mode:Release"
-			        }
-		        );
-                }
+		ExecuteScript("CycleRelease");
 
 		if (!IsError)
 		{
