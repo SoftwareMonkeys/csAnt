@@ -1,0 +1,18 @@
+/csAnt.bat, https://docs.google.com/uc?export=download&id=0B_8QvsLqRy5qNFBBdGNtdmw0aUE
+/csAnt.node, https://docs.google.com/uc?export=download&id=0B_8QvsLqRy5qMXJzZ2g0TlBYM0U
+/csAnt.sh, https://docs.google.com/uc?export=download&id=0B_8QvsLqRy5qVWtENHBmSkJuWG8
+/lib/csAnt/bin/Release/csAnt.exe, https://docs.google.com/uc?export=download&id=0B_8QvsLqRy5qNzZvZlZqbmxDMDg
+/lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.dll, https://docs.google.com/uc?export=download&id=0B_8QvsLqRy5qNEo3TUNaRk9nSTA
+/lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.Projects.dll, https://docs.google.com/uc?export=download&id=0B_8QvsLqRy5qMU9tcUpiclVmNEU
+/lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.Projects.Tests.dll, https://docs.google.com/uc?export=download&id=0B_8QvsLqRy5qakRRWkU2YldOX0k
+/lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.Projects.Tests.Scripting.dll, https://docs.google.com/uc?export=download&id=0B_8QvsLqRy5qZXN5VTdKdS1nSWc
+/lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.Tests.dll, https://docs.google.com/uc?export=download&id=0B_8QvsLqRy5qWHBQSXdUcDVXRms
+/lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.Tests.Scripting.dll, https://docs.google.com/uc?export=download&id=0B_8QvsLqRy5qSk9qOVZDaXBHRUU
+/lib/csAnt/bin/Release/SoftwareMonkeys.FileNodes.dll, https://docs.google.com/uc?export=download&id=0B_8QvsLqRy5qa2k4eXc5NVpvQW8
+/lib/csAnt/bin/Release/Newtonsoft.Json.dll, https://docs.google.com/uc?export=download&id=0B_8QvsLqRy5qa2k4eXc5NVpvQW8
+/lib/csAnt/bin/Release/CSScriptLibrary.dll, https://docs.google.com/uc?export=download&id=0B_8QvsLqRy5qZExlZEVYemVjaVk
+/lib/cs-script/Lib/Bin/NET 4.0/CSScriptLibrary.dll, https://docs.google.com/uc?export=download&id=0B_8QvsLqRy5qME9LNk9xTW5JNzg
+/lib/cs-script/cscs.exe, https://docs.google.com/uc?export=download&id=0B_8QvsLqRy5qVnhfY1lMRWU3Zms
+/scripts/AddCsAntImport.cs, https://csant.googlecode.com/git/scripts/AddCsAntImport.cs
+/scripts/HelloWorld.cs, https://csant.googlecode.com/git/scripts/HelloWorld.cs
+/scripts/Update.cs, https://csant.googlecode.com/git/scripts/Update.cs
