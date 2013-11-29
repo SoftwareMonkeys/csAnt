@@ -1,11 +1,16 @@
 using System;
-using System.IO;
 using SoftwareMonkeys.FileNodes;
+using System.IO;
 
-namespace SoftwareMonkeys.csAnt.Projects
+namespace SoftwareMonkeys.csAnt
 {
-    public partial class BaseProjectScript
+    public partial class BaseScript
     {
+        public void CreateNode()
+        {
+            CreateNode (CurrentDirectory, Path.GetFileName(CurrentDirectory));
+        }
+
         public FileNode CreateNode(string location, string name)
         {
             if (IsVerbose) {

@@ -37,6 +37,7 @@ namespace SoftwareMonkeys.csAnt
             GrabOriginalFiles(
                 Script.CurrentDirectory,
                 "../*.node",
+                "/*.exe",
                 "/*.node",
                 "/*.sh",
                 "/*.bat",

@@ -4,7 +4,7 @@ namespace SoftwareMonkeys.csAnt.Projects
 {
     public partial class BaseProjectScript
     {
-        public void CreateNodes()
+        public override void CreateNodes()
         {
             CreateGroupNode();
             CreateProjectNode();

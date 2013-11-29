@@ -2,15 +2,15 @@ using System;
 using NUnit.Framework;
 using System.IO;
 
-namespace SoftwareMonkeys.csAnt.Projects.Tests
+namespace SoftwareMonkeys.csAnt.Tests
 {
 	[TestFixture]
-	public class ExportFileTestFixture : BaseProjectsTestFixture
+	public class ExportFileTestFixture : BaseTestFixture
 	{
 		[Test]
 		public void Test_ExportFile()
 		{
-			var script = (BaseProjectScript)GetDummyScript();
+			var script = (BaseScript)GetDummyScript();
 
             script.FilesGrabber.GrabOriginalFiles();
 
