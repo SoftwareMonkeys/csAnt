@@ -5,10 +5,10 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.0</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{5B5A328E-6F70-498A-AB13-26E48CBE3BA1}</ProjectGuid>
+    <ProjectGuid>{F932547D-773F-46C6-8223-E27233A4CBDE}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>SoftwareMonkeys.csAnt.Projects.Tests</RootNamespace>
-    <AssemblyName>SoftwareMonkeys.csAnt.Projects.Tests</AssemblyName>
+    <RootNamespace>SoftwareMonkeys.csAnt.InstallConsole.Tests</RootNamespace>
+    <AssemblyName>SoftwareMonkeys.csAnt.InstallConsole.Tests</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -30,34 +30,31 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.Xml" />
     <Reference Include="nunit.framework">
       <HintPath>..\..\lib\NUnit\bin\nunit.framework.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
-    <Compile Include="BaseProjectsTestFixture.cs" />
-    <Compile Include="BuildAllSolutionsTestFixture.cs" />
-    <Compile Include="DummyProjectScript.cs" />
-    <Compile Include="BaseProjectDummyScript.cs" />
-    <Compile Include="BaseProjectsTestFixture.GetDummyScript.cs" />
-    <Compile Include="BaseProjectsTestFixture.GetWorkingDirectory.cs" />
-    <Compile Include="ReleaseTestFixture.cs" />
+    <Compile Include="csAntInstallerTestFixture.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
-    <ProjectReference Include="..\SoftwareMonkeys.csAnt.Projects\SoftwareMonkeys.csAnt.Projects.csproj">
-      <Project>{3BFB55C4-1247-49BD-AEC9-31BC3C0F1168}</Project>
-      <Name>SoftwareMonkeys.csAnt.Projects</Name>
+    <ProjectReference Include="..\SoftwareMonkeys.csAnt.InstallConsole\SoftwareMonkeys.csAnt.InstallConsole.csproj">
+      <Project>{68579EC1-35A8-4923-9C3B-75CE6BC0D0CA}</Project>
+      <Name>SoftwareMonkeys.csAnt.InstallConsole</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SoftwareMonkeys.csAnt\SoftwareMonkeys.csAnt.csproj">
+      <Project>{16297BCB-0A8C-42E6-BE35-921085C3E238}</Project>
+      <Name>SoftwareMonkeys.csAnt</Name>
     </ProjectReference>
     <ProjectReference Include="..\SoftwareMonkeys.csAnt.Tests\SoftwareMonkeys.csAnt.Tests.csproj">
       <Project>{E79918A1-F275-4073-9968-77DAB04622A9}</Project>
       <Name>SoftwareMonkeys.csAnt.Tests</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SoftwareMonkeys.csAnt\SoftwareMonkeys.csAnt.csproj">
-      <Project>{16297BCB-0A8C-42E6-BE35-921085C3E238}</Project>
-      <Name>SoftwareMonkeys.csAnt</Name>
+    <ProjectReference Include="..\SoftwareMonkeys.csAnt.Tests.Scripting\SoftwareMonkeys.csAnt.Tests.Scripting.csproj">
+      <Project>{98C7EEC8-1AD5-4570-8EA5-76FE959F3B58}</Project>
+      <Name>SoftwareMonkeys.csAnt.Tests.Scripting</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>

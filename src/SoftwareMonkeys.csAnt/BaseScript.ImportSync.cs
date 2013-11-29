@@ -1,11 +1,10 @@
 using System;
 using System.IO;
 
-namespace SoftwareMonkeys.csAnt.Projects
+namespace SoftwareMonkeys.csAnt
 {
-	public partial class BaseProjectScript
+	public partial class BaseScript
 	{
-
 		public void ImportSync (string projectName, string projectPath)
 		{
 			Console.WriteLine ("");
@@ -42,7 +41,7 @@ namespace SoftwareMonkeys.csAnt.Projects
 				var sourcePath = File.ReadAllText (importedProjectPath + Path.DirectorySeparatorChar + "source.txt");
 					
 				// Commit import project
-				GitCommitDirectory (importedProjectPath, "Sync from '" + ProjectName + "' project.");
+				GitCommitDirectory (importedProjectPath, "Sync from '" + CurrentNode.Name + "'.");
 
 				// Get the remote name
 				var remoteName = Path.GetFileName (importedProjectPath);

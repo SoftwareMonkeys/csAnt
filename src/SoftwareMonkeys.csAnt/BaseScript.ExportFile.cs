@@ -1,9 +1,9 @@
 using System;
 using System.IO;
 
-namespace SoftwareMonkeys.csAnt.Projects
+namespace SoftwareMonkeys.csAnt
 {
-	public partial class BaseProjectScript
+	public partial class BaseScript
 	{
 		public void ExportFile (string projectName, string relativePath)
 		{
@@ -76,7 +76,7 @@ namespace SoftwareMonkeys.csAnt.Projects
 
 					GitAddToDirectory(importedProjectDirectory, toFile);
 
-					GitCommitDirectory (importedProjectDirectory, "Exported from '" + ProjectName + "' project.");
+					GitCommitDirectory (importedProjectDirectory, "Exported from '" + CurrentNode.Name + "' project.");
 
 					// Get the remote name
 					var remoteName = Path.GetFileName(importedProjectDirectory);
