@@ -19,8 +19,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoftwareMonkeys.csAnt.Insta
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoftwareMonkeys.csAnt.InstallConsole.Tests", "SoftwareMonkeys.csAnt.InstallConsole.Tests\SoftwareMonkeys.csAnt.InstallConsole.Tests.csproj", "{F932547D-773F-46C6-8223-E27233A4CBDE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoftwareMonkeys.csAnt.UI.Common", "SoftwareMonkeys.csAnt.UI.Common\SoftwareMonkeys.csAnt.UI.Common.csproj", "{7C045347-6F5C-4078-BA26-C5430002B60F}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,10 +49,6 @@ Global
 		{68579EC1-35A8-4923-9C3B-75CE6BC0D0CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{68579EC1-35A8-4923-9C3B-75CE6BC0D0CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{68579EC1-35A8-4923-9C3B-75CE6BC0D0CA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7C045347-6F5C-4078-BA26-C5430002B60F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7C045347-6F5C-4078-BA26-C5430002B60F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7C045347-6F5C-4078-BA26-C5430002B60F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7C045347-6F5C-4078-BA26-C5430002B60F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{98C7EEC8-1AD5-4570-8EA5-76FE959F3B58}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{98C7EEC8-1AD5-4570-8EA5-76FE959F3B58}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{98C7EEC8-1AD5-4570-8EA5-76FE959F3B58}.Release|Any CPU.ActiveCfg = Release|Any CPU
