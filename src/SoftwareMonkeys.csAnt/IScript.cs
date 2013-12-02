@@ -182,6 +182,17 @@ namespace SoftwareMonkeys.csAnt
         #region Nodes
         void RefreshCurrentNode();
         #endregion
+
+        #region Install
+        void Install(string name);
+        void Install(string name, bool overwriteFiles);
+        #endregion
+
+        #region Import/Export
+        void ImportFile(string projectName, string filePattern);
+
+        void ExportFile(string projectName, string filePattern);
+        #endregion
+    
     }
 }
-
