@@ -59,7 +59,6 @@
     <Compile Include="BaseTestScriptSetUpper.cs" />
     <Compile Include="BaseTestScriptConstructor.cs" />
     <Compile Include="LifecycleTestFixture.cs" />
-    <Compile Include="TestAsserter.cs" />
     <Compile Include="HelloWorldScriptTestFixture.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
