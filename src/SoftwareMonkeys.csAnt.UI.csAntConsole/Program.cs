@@ -99,8 +99,15 @@ namespace SoftwareMonkeys.csAnt.UI.csAntConsole
 			
                 script.SetUp();
 
-				// Execute the script
-				script.ExecuteScript(scriptName, args);
+                try
+                {
+				    // Execute the script
+				    script.ExecuteScript(scriptName, args);
+                }
+                catch(ScriptNotFoundException ex)
+                {
+                    script.Error ("Cannot find '" + scriptName + "' script.");
+                }
 
                 script.TearDown();
 
