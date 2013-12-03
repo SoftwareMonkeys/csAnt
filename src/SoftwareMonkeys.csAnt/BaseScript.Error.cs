@@ -14,10 +14,11 @@ namespace SoftwareMonkeys.csAnt
 			IsError = true;
 			
 			Console.WriteLine ("");
-			Console.WriteLine (GetIndentSpace() + "-------------------- !!! Error !!! --------------------");
-			Console.WriteLine (GetIndentSpace() + "Script: " + ScriptName);
+			Console.WriteLine (GetIndentSpace() + "// -------------------- !!! Error !!! --------------------");
+			Console.WriteLine (GetIndentSpace() + "// Script: " + ScriptName);
+            WriteScriptStack(GetScriptStack());
 			Console.WriteLine (GetIndentSpace() + message);
-			Console.WriteLine (GetIndentSpace() + "-------------------------------------------------------");
+			Console.WriteLine (GetIndentSpace() + "// -------------------------------------------------------");
 			Console.WriteLine ("");
 
             AddSummary("Error in script '" + ScriptName + "': " + message);
