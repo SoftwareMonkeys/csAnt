@@ -67,10 +67,7 @@ class CycleBuildScript : BaseProjectScript
 
 		if (!IsError)
 		{
-			// Copy the binaries to the libraries folder
-			ExecuteScript(
-				"CopyBinToLib"
-			);
+			RaiseEvent("Build");
 		}
 		
 		return true;

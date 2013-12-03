@@ -24,7 +24,7 @@ namespace SoftwareMonkeys.csAnt
 
             foreach (var name in scriptNames) {
                 list.Add ("/scripts/" + name + ".cs");
-                list.Add ("/scripts/" + name + "/**");
+                list.Add ("/scripts/" + name + "/**.cs");
             }
 
             GrabOriginalFiles(
@@ -100,6 +100,8 @@ namespace SoftwareMonkeys.csAnt
             }
             else
                 Console.WriteLine ("OriginalDirectory is the same as CurrentDirectory. No need to grab files.");
+
+            Console.WriteLine ("");
         }
     }
 }
