@@ -4,6 +4,7 @@
 //css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.Projects.dll;
 //css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.Projects.Tests.dll;
 //css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.Projects.Tests.Scripting.dll;
+//css_ref ../lib/NUnit/bin/nunit.framework.dll;
 
 using System;
 using System.IO;
@@ -13,6 +14,7 @@ using SoftwareMonkeys.csAnt;
 using SoftwareMonkeys.csAnt.Projects;
 using SoftwareMonkeys.csAnt.Projects.Tests;
 using SoftwareMonkeys.csAnt.Projects.Tests.Scripting;
+using NUnit.Framework;
 
 class Test_InitializeScript : BaseProjectTestScript
 {
@@ -23,18 +25,15 @@ class Test_InitializeScript : BaseProjectTestScript
 	
 	public override bool Run(string[] args)
 	{
-                var initFile = "";
-                
-                if (IsLinux)
-                    initFile = "init-csAnt-project-linux.sh";
-                else
-                    initFile = "init-csAnt-project-windows.vbs";
-	
-	        FilesGrabber.GrabOriginalFiles(initFile);
-	        
-	        CreateNodes();
-	        
-		InitializeProject();
+                Console.WriteLine("");
+                Console.WriteLine("Testing whether all the scripts can compile...");
+                Console.WriteLine("");
+
+                FilesGrabber.GrabOriginalScriptingFiles();
+
+                CompileScripts(true);
+
+                Assert.IsFalse(IsError, "An error occurred.");
 		
 		return !IsError;
 	}
