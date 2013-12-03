@@ -1,40 +1,50 @@
 //css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.dll;
+//css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.Projects.dll;
 using System;
 using System.IO;
 using Microsoft.CSharp;
 using System.Diagnostics;
 using SoftwareMonkeys.csAnt;
+using SoftwareMonkeys.csAnt.Projects;
 using SoftwareMonkeys.FileNodes;
 
-class SetGoogleCodeScript : BaseScript
+class SetGoogleCodeScript : BaseProjectScript
 {
 	public static void Main(string[] args)
 	{
-		new SetGoogleCodeScript().Start(new Arguments(args));
+		new SetGoogleCodeScript().Start(args);
 	}
 	
-	public void Start(Arguments args)
+	public override bool Run(string[] args)
 	{
 		EnsureGoogleCodeSecurityNodeExists();
+		
+		var arguments = new Arguments(args);
 
 		var gcNode = ProjectNode.Nodes["Security"].Nodes["GoogleCode"];
 
-		if (args.Contains("Username"))
+		if (arguments.Contains("Username"))
 		{
-			gcNode.Properties["Username"] = args["Username"];
+			gcNode.Properties["Username"] = arguments["Username"];
 
 			Console.WriteLine("Setting 'Username' to: " + gcNode.Properties["Username"]);
 		}
+		else
+			Error("A username must be provided as an argument.");
 
 
-		if (args.Contains("Password"))
+		if (arguments.Contains("Password"))
 		{
-			gcNode.Properties["Password"] = args["Password"];
+			gcNode.Properties["Password"] = arguments["Password"];
 
 			Console.WriteLine("Setting 'Password' (hidden)");
 		}
+		else
+			Error("A password must be provided as an argument.");
 
 		gcNode.Save();
+		
+		return !IsError;
 	}
 
 	public void EnsureGoogleCodeSecurityNodeExists()

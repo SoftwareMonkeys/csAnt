@@ -7,7 +7,7 @@ using Microsoft.CSharp;
 using System.Diagnostics;
 using SoftwareMonkeys.csAnt;
 using SoftwareMonkeys.csAnt.Tests;
-using SoftwareMonkeys.csAnt.Tests;
+using SoftwareMonkeys.csAnt.Tests.Scripting;
 
 class Test_BackupFileScript : BaseTestScript
 {

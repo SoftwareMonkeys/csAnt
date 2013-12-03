@@ -28,7 +28,7 @@ class ImportScriptScript : BaseProjectScript
                 Console.WriteLine(pattern);
 		Console.WriteLine("");
 
-                var csAntImportPath = ImportedDirectory
+                var csAntImportPath = ImportStagingDirectory
                         + Path.DirectorySeparatorChar
                         + "csAnt";
 
