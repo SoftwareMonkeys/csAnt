@@ -8,10 +8,20 @@ namespace SoftwareMonkeys.csAnt
     {
         public void CompileScripts ()
         {
-            CompileScripts(new string[]{});
+            CompileScripts(false);
+        }
+        
+        public void CompileScripts (bool force)
+        {
+            CompileScripts(force, new string[]{});
+        }
+        
+        public void CompileScripts (params string[] scriptNames)
+        {
+            CompileScripts(false, scriptNames);
         }
 
-        public void CompileScripts (params string[] scriptNames)
+        public void CompileScripts (bool force, params string[] scriptNames)
         {
             var binDir = CurrentDirectory
                 + Path.DirectorySeparatorChar
@@ -57,9 +67,9 @@ namespace SoftwareMonkeys.csAnt
                     }
 
                     try {
-                        if (!File.Exists(assemblyFile))
+                        if (!File.Exists(assemblyFile) || force)
                         {
-                            Console.WriteLine ("Assembly file not found. Compiling...");
+                            Console.WriteLine ("Compiling...");
                             CSScript.Compile (scriptPath, assemblyFile, IsDebug, new string[]{});
                         }
                         else
