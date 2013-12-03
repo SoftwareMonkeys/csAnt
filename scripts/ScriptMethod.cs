@@ -14,18 +14,37 @@ class HelloWorldScript : BaseScript
 	
 	public override bool Run(string[] args)
 	{
+        // TODO: Add support for method parameters
+        // TODO: Add support for specifying a script type
+                
 		Console.WriteLine("");
-		Console.WriteLine("Hello world!");
+		Console.WriteLine("Running script method...");
 		Console.WriteLine("");
+		
+		var methodName = "";
+		
+		if (args.Length == 1)
+		  methodName = args[0];
+		  
+		var scriptType = GetType();
+		
+		var methods = scriptType.GetMethods();
 
-		AddSummary("Wrote the words 'Hello world!' to the console.");
+		var foundMethod = false;
+		
+		foreach (var method in methods)
+		{
+                    if (method.Name == methodName
+                        && method.GetParameters().Length == 0)
+                    {
+                        foundMethod = true;
+                        method.Invoke(this, new object[]{});
+                    }
+                }
 
-		// Or
-		/*var cmd = new HelloWorldCommand(this);
-
-		ExecuteCommand(cmd);
-		*/
-
+                if (!foundMethod)
+                    Error("Cannot find a method '" + methodName + "' on the script type '" + scriptType.Name + "' with no parameters.");
+                
 		return !IsError;
 	}
 }
