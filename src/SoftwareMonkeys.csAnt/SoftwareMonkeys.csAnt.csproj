@@ -181,6 +181,9 @@
     <Compile Include="BaseScript.GetBuildMode.cs" />
     <Compile Include="BaseScript.ImportStagingDirectory.cs" />
     <Compile Include="BaseScript.GetImportStagingDirectory.cs" />
+    <Compile Include="BaseScript.RaiseEvent.cs" />
+    <Compile Include="BaseScript.FindScripts.cs" />
+    <Compile Include="BaseScript.GetEventScripts.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

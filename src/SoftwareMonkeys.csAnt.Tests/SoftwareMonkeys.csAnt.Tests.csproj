@@ -86,6 +86,7 @@
     <Compile Include="BaseTestFixture.GetWorkingDirectory.cs" />
     <Compile Include="HtmlResultFileNamer.cs" />
     <Compile Include="XmlResultFileNamer.cs" />
+    <Compile Include="RaiseEventTestFixture.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

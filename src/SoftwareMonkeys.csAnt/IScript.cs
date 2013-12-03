@@ -183,6 +183,11 @@ namespace SoftwareMonkeys.csAnt
         void RefreshCurrentNode();
         #endregion
 	
+        #region Events
+        void RaiseEvent(string eventName);
+
+        string[] GetEventScripts(string eventName);
+        #endregion
     }
 }
 
