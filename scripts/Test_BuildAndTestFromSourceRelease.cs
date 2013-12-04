@@ -82,7 +82,7 @@ class Test_BuildAndTestFromSourceReleaseScript : BaseProjectTestScript
 		Console.WriteLine("Initializing...");
 		Console.WriteLine("");
 
-		InitializeProject(ProjectDirectory);
+		InstallTo("csAnt", ProjectDirectory);
 
 		if (!IsError)
 		{

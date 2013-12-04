@@ -34,8 +34,8 @@ class Test_BuildAndTestFromSourceReleaseScript : BaseProjectTestScript
 		// Clone the project to another directory
 		var tmpDir = CloneToTmpDirectory();
 
-		// Prepare the project (eg. download libs)
-		InitializeProject(tmpDir);
+		// Prepare the project
+		InstallTo("csAnt", tmpDir);
 
 		if (!IsError)
 		{

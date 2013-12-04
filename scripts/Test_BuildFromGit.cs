@@ -36,7 +36,7 @@ class Test_BuildFromGitScript : BaseProjectTestScript
 		var tmpDir = CloneToTmpDirectory();
 
 		// Prepare the project (eg. download libs)
-		InitializeProject(tmpDir);
+		InstallTo("csAnt", tmpDir);
 
 		if (!IsError)
 		{
