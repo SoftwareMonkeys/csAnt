@@ -22,10 +22,7 @@ namespace SoftwareMonkeys.csAnt
 			var parentDirectory = Path.GetDirectoryName (currentDirectory);
 
 			// Create the path to the directory containing the local copy of the import
-			var importedDirectory = parentDirectory
-				+ Path.DirectorySeparatorChar
-				+ folderName
-				+ "-Imports"
+			var importStagingDirectory = ImportStagingDirectory
 				+ Path.DirectorySeparatorChar
 				+ importProjectName;
 
@@ -42,22 +39,22 @@ namespace SoftwareMonkeys.csAnt
 
 				Console.WriteLine ("Parent directory: " + parentDirectory);
 
-				Console.WriteLine ("Import directory: " + importedDirectory);
+				Console.WriteLine ("Import directory: " + importStagingDirectory);
 
 				Console.WriteLine ("");
 			}
 
-			Directory.CreateDirectory(importedDirectory);
+			Directory.CreateDirectory(importStagingDirectory);
 
-			GitClone(sourceDirectory, importedDirectory);
+			GitClone(sourceDirectory, importStagingDirectory);
 
-			var sourceFile = importedDirectory
+			var sourceFile = importStagingDirectory
 				+ Path.DirectorySeparatorChar
 					+ "source.txt";
 
 			File.WriteAllText(sourceFile, sourceDirectory);
 
-			return importedDirectory;
+			return importStagingDirectory;
 		}
 	}
 }
