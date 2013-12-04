@@ -106,7 +106,7 @@ namespace SoftwareMonkeys.csAnt.UI.csAntConsole
                 }
                 catch(ScriptNotFoundException ex)
                 {
-                    script.Error ("Cannot find '" + scriptName + "' script.");
+                    script.Error ("Cannot find '" + ex.ScriptName + "' script.\nCurrent directory: " + script.CurrentDirectory + "\n" + ex.ToString());
                 }
 
                 script.TearDown();
