@@ -26,7 +26,7 @@ class AddImportScript : BaseProjectScript
 
 			string path = args[1];
 
-			AddImport(name, url, subPath);
+			AddImport(name, path);
 		}
 
 		return !IsError;

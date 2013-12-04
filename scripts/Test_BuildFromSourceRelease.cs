@@ -43,7 +43,7 @@ class Test_BuildFromSourceReleaseScript : BaseProjectTestScript
 	{
                 var tmpDir = GetTmpDir();
                 
-                DeployRelease("src", tmpDir);
+                InstallTo("csAnt", tmpDir);
 
 		Console.WriteLine("");
 		Console.WriteLine("Tmp dir:");
@@ -51,12 +51,6 @@ class Test_BuildFromSourceReleaseScript : BaseProjectTestScript
 		Console.WriteLine("");
 
 		Relocate(tmpDir);
-
-		Console.WriteLine("");
-		Console.WriteLine("Initializing...");
-		Console.WriteLine("");
-
-		InitializeProject(ProjectDirectory);
 
 		if (!IsError)
 		{

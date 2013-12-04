@@ -27,7 +27,7 @@ class CyclePublishScript : BaseProjectScript
 		var tmpDir = CloneToTmpDirectory();
 
 		// Prepare the project (eg. download libs)
-		InitializeProject(tmpDir);
+		InstallTo("csAnt", tmpDir);
 
 		// Move to the cloned directory
 		Relocate(tmpDir);
