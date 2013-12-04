@@ -292,6 +292,65 @@ namespace SoftwareMonkeys.csAnt.InstallConsole.Tests
             Directory.Delete (tmpDir, true);
 		}
 
+        [Test]
+        public void Test_GetFileList_OneFilePlusOneInclude()
+        {
+            var originalDir = Environment.CurrentDirectory;
+
+            var tmpDir = Environment.CurrentDirectory
+                + Path.DirectorySeparatorChar
+                    + "_tmp"
+                    + Path.DirectorySeparatorChar
+                    + Guid.NewGuid().ToString();
+
+            var installDir = tmpDir
+                + Path.DirectorySeparatorChar
+                    + "install";
+
+            Directory.CreateDirectory(installDir);
+
+            var fileOne = installDir
+                + Path.DirectorySeparatorChar
+                    + "File1.txt";
+
+            var line1 = "Test1.dll, http://somewhere.com/Test1.dll";
+
+            var fileOneContent = new string[]{
+                "# Comment", // A comment to be ignored
+                line1,
+                "" // White space to be ignored
+            };
+
+            File.WriteAllLines(fileOne, fileOneContent);
+            
+            var fileTwo = installDir
+                + Path.DirectorySeparatorChar
+                    + "File2.txt";
+
+            var line2 = "Test2.dll, http://somewhere.com/Test2.dll";
+
+            var fileTwoContent = new string[]{
+                "+File1", // Include reference
+                "", // White space to be ignored
+                "# Comment", // Comment to be ignored
+                line2
+            };
+
+            File.WriteAllLines(fileTwo, fileTwoContent);
+
+            var installer = new csAntInstaller(
+                tmpDir,
+                true,
+                true
+            );
+
+            var foundLines = installer.GetFileList(fileTwo);
+
+            Assert.AreEqual(2, foundLines.Length, "Wrong number of lines found.");
+            
+            Assert.AreEqual(line1, foundLines[0], "Line one was incorrect.");
+            Assert.AreEqual(line2, foundLines[1], "Line two was incorrect.");
+        }
 
         public string CreateInstallListFile()
         {
