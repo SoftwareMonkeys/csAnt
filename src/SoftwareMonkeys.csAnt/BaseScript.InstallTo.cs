@@ -28,27 +28,6 @@ namespace SoftwareMonkeys.csAnt
 
             installer.Install(name);
 
-            /*var exeFile = CurrentDirectory
-                + Path.DirectorySeparatorChar
-                    + "csAnt-Install.exe";
-
-            List<string> args = new List<string>();
-
-            args.Add("-l " + name);
-
-            args.Add("-d '" + directory + "'");
-
-            if (overwriteFiles)
-                args.Add("-o");
-
-            if (IsVerbose)
-                args.Add("-v");
-
-            StartProcess(
-                exeFile,
-                args.ToArray()
-            );*/
-
             Console.WriteLine ("");
         }
     }
