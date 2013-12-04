@@ -10,8 +10,6 @@ namespace SoftwareMonkeys.csAnt.Tests.Scripting
         public TestSummarizer TestSummarizer { get;set; }
 
         public string TestGroupName { get;set; }
-  
-        public TestAsserter Assert { get;set; }
 
         public BaseTestScript ()
         {

@@ -1,13 +1,13 @@
 using System;
 using System.IO;
 
-namespace SoftwareMonkeys.csAnt.Projects
+namespace SoftwareMonkeys.csAnt
 {
-	public partial class BaseProjectScript
+	public partial class BaseScript
 	{
 		public string AddImport (string importProject, string importProjectPath)
 		{
-			var projectName = ProjectName;
+			var folderName = Path.GetFileName(CurrentDirectory);
 
 			var importProjectName = importProject;
 
@@ -24,7 +24,7 @@ namespace SoftwareMonkeys.csAnt.Projects
 			// Create the path to the directory containing the local copy of the import
 			var importedDirectory = parentDirectory
 				+ Path.DirectorySeparatorChar
-				+ projectName
+				+ folderName
 				+ "-Imports"
 				+ Path.DirectorySeparatorChar
 				+ importProjectName;

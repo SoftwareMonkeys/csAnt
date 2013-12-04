@@ -86,7 +86,10 @@
     <Compile Include="BaseTestFixture.GetWorkingDirectory.cs" />
     <Compile Include="HtmlResultFileNamer.cs" />
     <Compile Include="XmlResultFileNamer.cs" />
-    <Compile Include="RaiseEventTestFixture.cs" />
+    <Compile Include="InstallTestFixture.cs" />
+    <Compile Include="ImportFileTestFixture.cs" />
+    <Compile Include="ExportFileTestFixture.cs" />
+    <Compile Include="ImportSyncTestFixture.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

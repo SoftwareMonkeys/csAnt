@@ -20,7 +20,7 @@ namespace SoftwareMonkeys.csAnt
                 if (Script.IsVerbose) {
                     Console.WriteLine ("");
                     Console.WriteLine ("Tearing down '" + Script.ScriptName + "' script...");
-                    Console.WriteLine ("Script type: '" + Script.GetType ().Name);
+                    Console.WriteLine ("Script type: '" + Script.GetType ().Name + "'");
                     Console.WriteLine ("Component: '" + GetType ().Name + "'");
                     Console.WriteLine ("");
                 }

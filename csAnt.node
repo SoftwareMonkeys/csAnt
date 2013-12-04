@@ -1,7 +1,4 @@
 {
-  "Properties": {
-    "Context": "Project",
-    "ProjectsDirectory": "/home/j/Projects/SoftwareMonkeys"
-  },
-  "Name": "csAnt"
+  "Properties": {},
+  "Name": null
 }

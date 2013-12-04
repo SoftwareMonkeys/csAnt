@@ -17,12 +17,16 @@ class UpdateScript : BaseProjectScript
 	
 	public override bool Run(string[] args)
 	{
+	        Console.WriteLine("");
+	        Console.WriteLine("Updating...");
+	        Console.WriteLine("");
+
 	        ExecuteScript("AddCsAntImport");
 	        
 	        ImportFile("csAnt", "scripts/HelloWorld.cs");
 	        ImportFile("csAnt", "scripts/Update.cs");
 	        ImportFile("csAnt", "scripts/AddImport.cs");
-	        ImportFile("csAnt", "scripts/GetCsAntLib.cs");
+	        //ImportFile("csAnt", "scripts/GetCsAntLib.cs");
 	        ImportFile("csAnt", "scripts/AddCsAntImport.cs");
 	        ImportFile("csAnt", "scripts/ImportFile.cs");
 	        ImportFile("csAnt", "scripts/ImportScript.cs");
@@ -35,6 +39,10 @@ class UpdateScript : BaseProjectScript
 	        ExecuteScript("GetCsAntLib", "-f");
 	        
 	        GetLib("csAnt", true);
+	        
+	        Console.WriteLine("");
+	        Console.WriteLine("Update complete!");
+	        Console.WriteLine("");
 
 		return !IsError;
 	}

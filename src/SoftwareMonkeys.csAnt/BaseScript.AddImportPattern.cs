@@ -2,9 +2,9 @@ using System;
 using System.IO;
 using System.Collections.Generic;
 
-namespace SoftwareMonkeys.csAnt.Projects
+namespace SoftwareMonkeys.csAnt
 {
-	public partial class BaseProjectScript
+	public partial class BaseScript
 	{
 		public void AddImportPattern(string projectName, string pattern)
 		{
@@ -23,6 +23,8 @@ namespace SoftwareMonkeys.csAnt.Projects
 
 			if (!patterns.Contains(pattern))
 				patterns.Add (pattern);
+
+            EnsureDirectoryExists(Path.GetDirectoryName(listPath));
 
 			File.WriteAllLines(listPath, patterns.ToArray());
 		}
