@@ -2,15 +2,15 @@ using System;
 using System.IO;
 using NUnit.Framework;
 
-namespace SoftwareMonkeys.csAnt.Projects.Tests
+namespace SoftwareMonkeys.csAnt.Tests
 {
 	[TestFixture]
-	public class ImportSyncTestFixture : BaseProjectsTestFixture
+	public class ImportSyncTestFixture : BaseTestFixture
 	{
 		[Test]
 		public void Test_ImportSync()
 		{
-			var script = (BaseProjectScript)GetDummyScript();
+			var script = (BaseScript)GetDummyScript();
 
             script.FilesGrabber.GrabOriginalFiles();
 

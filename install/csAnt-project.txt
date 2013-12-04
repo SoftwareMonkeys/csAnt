@@ -1,0 +1,10 @@
+# Include
++csAnt
+
+# Binaries
+/lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.Projects.dll, https://docs.google.com/uc?export=download&id=0B_8QvsLqRy5qMU9tcUpiclVmNEU
+/lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.Projects.Tests.dll, https://docs.google.com/uc?export=download&id=0B_8QvsLqRy5qakRRWkU2YldOX0k
+/lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.Projects.Tests.Scripting.dll, https://docs.google.com/uc?export=download&id=0B_8QvsLqRy5qZXN5VTdKdS1nSWc
+
+# Scripts
+/scripts/CycleBuild.cs, https://csant.googlecode.com/git/scripts/CycleBuild.cs

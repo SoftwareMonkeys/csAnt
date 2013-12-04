@@ -50,35 +50,24 @@
     <Compile Include="BaseProjectScript.ProjectName.cs" />
     <Compile Include="BaseProjectScript.ProjectNode.cs" />
     <Compile Include="GroupNodeNotFoundException.cs" />
-    <Compile Include="BaseProjectScript.ImportExists.cs" />
     <Compile Include="BaseProjectScript.CreateProjectNode.cs" />
-    <Compile Include="BaseProjectScript.ExportFile.cs" />
-    <Compile Include="BaseProjectScript.AddImport.cs" />
-    <Compile Include="BaseProjectScript.ImportFile.cs" />
-    <Compile Include="BaseProjectScript.AddImportPattern.cs" />
-    <Compile Include="BaseProjectScript.ImportSync.cs" />
-    <Compile Include="BaseProjectScript.InitializeProject.cs" />
-    <Compile Include="BaseProjectScript.ImportRefresh.cs" />
     <Compile Include="BaseProjectScript.GetTmpDir.cs" />
     <Compile Include="BaseProjectScript.CreateGroupNode.cs" />
-    <Compile Include="BaseProjectScript.DeployRelease.cs" />
     <Compile Include="BaseProjectScript.Release.cs" />
     <Compile Include="Commands\BaseProjectScriptCommand.cs" />
     <Compile Include="Commands\GenerateProjectReleaseZipCommand.cs" />
     <Compile Include="Commands\GenerateProjectReleasesZipCommand.cs" />
-    <Compile Include="Commands\DeployReleaseCommand.cs" />
     <Compile Include="BaseProjectScript.CreateNodes.cs" />
-    <Compile Include="BaseProjectScript.CreateNode.cs" />
     <Compile Include="ProjectScriptConstructor.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Folder Include="Commands\" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SoftwareMonkeys.csAnt\SoftwareMonkeys.csAnt.csproj">
       <Project>{16297BCB-0A8C-42E6-BE35-921085C3E238}</Project>
       <Name>SoftwareMonkeys.csAnt</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Commands\" />
   </ItemGroup>
 </Project>

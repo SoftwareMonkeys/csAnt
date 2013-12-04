@@ -22,7 +22,7 @@ class GetCsAntLibScript : BaseScript
 	        
 	        var force = arguments.Contains("f");
 	        
-	        CreateNode();
+	        CreateLibNode();
 	        
 	        var found = false;
 
@@ -47,7 +47,7 @@ class GetCsAntLibScript : BaseScript
 		return !IsError;
 	}
 	
-	public void CreateNode()
+	public void CreateLibNode()
 	{
 	        var path = CurrentDirectory
 	                + Path.DirectorySeparatorChar

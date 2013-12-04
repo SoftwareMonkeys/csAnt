@@ -39,9 +39,6 @@
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="BaseProjectsTestFixture.cs" />
     <Compile Include="BuildAllSolutionsTestFixture.cs" />
-    <Compile Include="ImportFileTestFixture.cs" />
-    <Compile Include="ExportFileTestFixture.cs" />
-    <Compile Include="ImportSyncTestFixture.cs" />
     <Compile Include="DummyProjectScript.cs" />
     <Compile Include="BaseProjectDummyScript.cs" />
     <Compile Include="BaseProjectsTestFixture.GetDummyScript.cs" />
