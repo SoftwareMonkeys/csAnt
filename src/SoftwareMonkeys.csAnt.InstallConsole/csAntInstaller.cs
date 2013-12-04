@@ -73,7 +73,7 @@ namespace SoftwareMonkeys.csAnt.InstallConsole
                 Console.WriteLine (listFilePath);
                 Console.WriteLine ("");
 
-            var lines = File.ReadAllLines (listFilePath);
+            var lines = GetFileList(listFilePath);
 
             var localCsAntDir = GetLocalCsAntDir();
 
@@ -180,6 +180,42 @@ namespace SoftwareMonkeys.csAnt.InstallConsole
             }
 
             return csAntDir;
+        }
+
+        public string[] GetFileList(string listFilePath)
+        {
+            var list = new List<string>();
+
+            var fileLines = File.ReadAllLines (listFilePath);
+
+            for (int i = 0; i < fileLines.Length; i++)
+            {
+                var line = fileLines[i];
+
+                // If the line starts with a plus then it's including another install file
+                if (line.StartsWith("+"))
+                {
+                    var includeListFilePath = Path.GetDirectoryName(listFilePath)
+                        + Path.DirectorySeparatorChar
+                            + line.Trim ('+').Trim();
+
+                    if (!includeListFilePath.EndsWith(".txt"))
+                        includeListFilePath += ".txt";
+
+                    foreach (var l in GetFileList (includeListFilePath))
+                        if (!list.Contains(l))
+                            list.Add (l);
+                }
+                else if (
+                        !line.StartsWith("#") // # symbol denotes a comment
+                        && !String.IsNullOrWhiteSpace(line)
+                    )
+                {
+                    list.Add (line);
+                }
+            }
+
+            return list.ToArray();
         }
 	}
 }
