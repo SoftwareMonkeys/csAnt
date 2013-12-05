@@ -1,12 +1,15 @@
 using System;
+using System.Collections.Generic;
 
 namespace SoftwareMonkeys.csAnt
 {
-    public class IScript
+    public partial interface IScript
     {
-        public IScript ()
-        {
-        }
+        #region Parent and stack
+        IScript ParentScript { get;set; }
+
+        Stack<string> ScriptStack { get;set; }
+        #endregion
     }
 }
 

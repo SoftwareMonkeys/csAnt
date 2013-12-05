@@ -2,11 +2,13 @@ using System;
 
 namespace SoftwareMonkeys.csAnt
 {
-    public class IScript
+    public partial interface IScript
     {
-        public IScript ()
-        {
-        }
+        #region Build mode
+        bool IsDebug { get;set; }
+
+        string GetBuildMode();
+        #endregion
     }
 }
 

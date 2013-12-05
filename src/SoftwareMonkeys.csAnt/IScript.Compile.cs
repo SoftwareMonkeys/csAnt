@@ -4,9 +4,9 @@ namespace SoftwareMonkeys.csAnt
 {
     public class IScript
     {
-        public IScript ()
-        {
-        }
+        #region Compile
+        void CompileScripts();
+        #endregion
     }
 }
 

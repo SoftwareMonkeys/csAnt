@@ -2,11 +2,14 @@ using System;
 
 namespace SoftwareMonkeys.csAnt
 {
-    public class IScript
+    public partial interface IScript
     {
-        public IScript ()
-        {
-        }
+        
+        #region Events
+        void RaiseEvent(string eventName);
+
+        string[] GetEventScripts(string eventName);
+        #endregion
     }
 }
 

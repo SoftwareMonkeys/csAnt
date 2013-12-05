@@ -2,11 +2,15 @@ using System;
 
 namespace SoftwareMonkeys.csAnt
 {
-    public class IScript
+    public partial interface IScript
     {
-        public IScript ()
-        {
-        }
+        #region Set up
+        bool IsSetUp { get;set; }
+
+        IScriptSetUpper SetUpper { get;set; }
+
+        void SetUp();
+        #endregion
     }
 }
 

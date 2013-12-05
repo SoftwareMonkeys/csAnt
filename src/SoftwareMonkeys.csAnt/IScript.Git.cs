@@ -2,11 +2,13 @@ using System;
 
 namespace SoftwareMonkeys.csAnt
 {
-    public class IScript
+    public partial interface IScript
     {
-        public IScript ()
-        {
-        }
+        #region Git
+        void GitInit();
+        void GitAdd(string filePath);
+        void GitCommit();
+        #endregion
     }
 }
 

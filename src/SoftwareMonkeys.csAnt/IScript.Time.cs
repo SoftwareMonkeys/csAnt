@@ -2,11 +2,15 @@ using System;
 
 namespace SoftwareMonkeys.csAnt
 {
-    public class IScript
+    public partial interface IScript
     {
-        public IScript ()
-        {
-        }
+        #region Time
+        string TimeStamp { get;set; }
+
+        DateTime Time { get;set; }
+
+        string GetTimeStamp();
+        #endregion
     }
 }
 
