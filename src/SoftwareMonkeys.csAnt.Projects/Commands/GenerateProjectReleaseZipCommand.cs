@@ -76,8 +76,8 @@ namespace SoftwareMonkeys.csAnt.Projects
                 Console.WriteLine("Zip file path: " + zipFilePath);
 
                 Script.Zip(
-                    files,
-                    zipFilePath
+                    zipFilePath,
+                    files
                 );
 
                 Console.WriteLine("  Release file: " + zipFilePath.Replace(Script.ProjectDirectory, ""));
