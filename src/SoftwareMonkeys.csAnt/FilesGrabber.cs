@@ -74,9 +74,9 @@ namespace SoftwareMonkeys.csAnt
                 Console.WriteLine ("");
                 Console.WriteLine ("Grabbing original project files...");
                 Console.WriteLine ("From:");
-                Console.WriteLine (Script.OriginalDirectory);
+                Console.WriteLine ("  " + Script.OriginalDirectory);
                 Console.WriteLine ("To:");
-                Console.WriteLine (Script.CurrentDirectory);
+                Console.WriteLine ("  " + Script.CurrentDirectory);
                 Console.WriteLine ("");
             }
 
@@ -91,9 +91,9 @@ namespace SoftwareMonkeys.csAnt
                     if (Script.IsVerbose)
                     {
                         Console.WriteLine ("From:");
-                        Console.WriteLine (file);
+                        Console.WriteLine ("  " + file);
                         Console.WriteLine ("To:");
-                        Console.WriteLine (toFile);
+                        Console.WriteLine ("  " + toFile);
                     }
 
                     File.Copy (file, toFile, true);
