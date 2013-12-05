@@ -6,7 +6,7 @@ namespace SoftwareMonkeys.csAnt
 {
 	public partial class BaseScript
 	{
-		public string[] FindFiles (string[] patterns)
+        public string[] FindFiles (params string[] patterns)
 		{
 			return FindFiles(CurrentDirectory, patterns);
 		}
