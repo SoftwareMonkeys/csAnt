@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using SoftwareMonkeys.csAnt.Commands;
 
 namespace SoftwareMonkeys.csAnt
 {
@@ -18,5 +19,10 @@ namespace SoftwareMonkeys.csAnt
 			// Use the StartProcess function (this Execute function is just an alias)
 			return StartProcess(command + " " + arguments);
 		}
+        
+        public void Execute(BaseScriptCommand command)
+        {
+            ExecuteCommand(command);
+        }
 	}
 }
