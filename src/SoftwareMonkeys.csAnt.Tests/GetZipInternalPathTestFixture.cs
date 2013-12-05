@@ -20,7 +20,13 @@ namespace SoftwareMonkeys.csAnt.Tests
 
 			var script = new DummyScript("TestScript");
 
-			string internalPath = script.GetZipInternalPath(
+            var cmd = new ZipCommand(
+                script,
+                zipFileName,
+                pattern
+            );
+
+			string internalPath = cmd.GetZipInternalPath(
 				zipFileName,
 				fileName,
 				pattern

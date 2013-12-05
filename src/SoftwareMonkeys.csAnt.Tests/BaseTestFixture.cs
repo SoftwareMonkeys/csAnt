@@ -17,7 +17,7 @@ namespace SoftwareMonkeys.csAnt.Tests
         public string WorkingDirectory {
             get {
                 if (String.IsNullOrEmpty(workingDirectory))
-                    return Environment.CurrentDirectory;
+                    return GetWorkingDirectory();
                 return workingDirectory; }
             set { workingDirectory = value; }
         }
