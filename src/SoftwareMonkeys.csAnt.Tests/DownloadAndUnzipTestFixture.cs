@@ -42,7 +42,7 @@ namespace SoftwareMonkeys.csAnt.Tests
 				+ Path.DirectorySeparatorChar
 				+ "TestZipFile.zip";
 
-			testScript.Zip (tmpFile, tmpZipFile);
+			testScript.Zip (tmpZipFile, tmpFile);
 
 			Console.WriteLine ("Test zip file created.");
 
