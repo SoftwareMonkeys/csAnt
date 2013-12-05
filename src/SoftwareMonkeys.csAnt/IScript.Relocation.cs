@@ -2,11 +2,13 @@ using System;
 
 namespace SoftwareMonkeys.csAnt
 {
-    public class IScript
+    public partial interface IScript
     {
-        public IScript ()
-        {
-        }
+        #region Relocation
+        IScriptRelocator Relocator { get;set; }
+
+        void Relocate(string dir);
+        #endregion
     }
 }
 

@@ -2,11 +2,15 @@ using System;
 
 namespace SoftwareMonkeys.csAnt
 {
-    public class IScript
+    public partial interface IScript
     {
-        public IScript ()
-        {
-        }
+        #region Tear down
+        bool IsTornDown { get;set; }
+
+        IScriptTearDowner TearDowner { get;set; }
+
+        void TearDown();
+        #endregion
     }
 }
 

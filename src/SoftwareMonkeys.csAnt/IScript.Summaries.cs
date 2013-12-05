@@ -1,12 +1,17 @@
 using System;
+using System.Collections.Generic;
 
 namespace SoftwareMonkeys.csAnt
 {
-    public class IScript
+    public partial interface IScript
     {
-        public IScript ()
-        {
-        }
+        #region Summaries
+        List<string> Summaries { get;set; }
+
+        void AddSummary(string text);
+
+        void OutputSummaries();
+        #endregion
     }
 }
 

@@ -2,11 +2,11 @@ using System;
 
 namespace SoftwareMonkeys.csAnt
 {
-    public class IScript
+    public partial interface IScript
     {
-        public IScript ()
-        {
-        }
+        #region Start HTTP
+        void StartHttp(string dir, string host, int port, bool autoKill);
+        #endregion
     }
 }
 

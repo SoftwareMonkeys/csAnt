@@ -2,11 +2,15 @@ using System;
 
 namespace SoftwareMonkeys.csAnt
 {
-    public class IScript
+    public partial interface IScript
     {
-        public IScript ()
-        {
-        }
+        #region Error
+        bool StopOnFail { get;set; }
+
+        bool IsError { get;set; }
+
+        void Error(string message);
+        #endregion
     }
 }
 

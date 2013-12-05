@@ -2,11 +2,12 @@ using System;
 
 namespace SoftwareMonkeys.csAnt
 {
-    public class IScript
+    public partial interface IScript
     {
-        public IScript ()
-        {
-        }
+        #region Install
+        void Install(string name);
+        void Install(string name, bool overwriteFiles);
+        #endregion
     }
 }
 

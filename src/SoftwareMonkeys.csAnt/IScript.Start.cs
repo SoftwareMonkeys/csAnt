@@ -2,11 +2,11 @@ using System;
 
 namespace SoftwareMonkeys.csAnt
 {
-    public class IScript
+    public partial interface IScript
     {
-        public IScript ()
-        {
-        }
+        #region Start
+        bool Start(params string[] args);
+        #endregion
     }
 }
 

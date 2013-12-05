@@ -2,11 +2,11 @@ using System;
 
 namespace SoftwareMonkeys.csAnt
 {
-    public class IScript
+    public partial interface IScript
     {
-        public IScript ()
-        {
-        }
+        #region Sync
+        void Sync(string dir1, string dir2);
+        #endregion
     }
 }
 

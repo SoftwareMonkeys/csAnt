@@ -2,11 +2,13 @@ using System;
 
 namespace SoftwareMonkeys.csAnt
 {
-    public class IScript
+    public partial interface IScript
     {
-        public IScript ()
-        {
-        }
+        #region Construct
+        void Construct(string scriptName);
+
+        void Construct(string scriptName, IScript parentScript);
+        #endregion
     }
 }
 

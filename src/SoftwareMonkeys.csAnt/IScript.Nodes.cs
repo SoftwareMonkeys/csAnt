@@ -1,12 +1,15 @@
 using System;
+using SoftwareMonkeys.FileNodes;
 
 namespace SoftwareMonkeys.csAnt
 {
-    public class IScript
+    public partial interface IScript
     {
-        public IScript ()
-        {
-        }
+        #region Nodes
+        FileNode CurrentNode { get;set; }
+
+        void RefreshCurrentNode();
+        #endregion
     }
 }
 
