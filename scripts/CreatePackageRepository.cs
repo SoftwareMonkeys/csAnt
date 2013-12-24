@@ -1,12 +1,13 @@
 //css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.dll;
-//css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.PackageManager.dll;
+//css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.Packages.dll;
+//css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.Packages.Contracts.dll;
 
 using System;
 using System.IO;
 using Microsoft.CSharp;
 using System.Diagnostics;
 using SoftwareMonkeys.csAnt;
-using SoftwareMonkeys.csAnt.PackageManager;
+using SoftwareMonkeys.csAnt.Packages;
 
 class CreatePackageScript : BaseScript
 {
@@ -17,28 +18,48 @@ class CreatePackageScript : BaseScript
 	
 	public override bool Run(string[] args)
 	{
-		Console.WriteLine("");
-		Console.WriteLine("Creating new package repository...");
-		Console.WriteLine("");
+                if (Arguments.Contains("h")
+                    || Arguments.Contains("help"))
+                {
+                    Help();
+                }
+                else
+                {
+                    Console.WriteLine("");
+                    Console.WriteLine("Creating new package repository...");
+                    Console.WriteLine("");
 
-                var name = args[0];
+                    var name = args[0];
 
-                Console.WriteLine("Name: " + name);
-                Console.WriteLine("");
+                    Console.WriteLine("Name: " + name);
+                    Console.WriteLine("");
 
-                var path = Path.GetFullPath(
-                    OriginalDirectory
-                    + "../../../pkgs"
-                );
+                    var path = ToAbsolute(
+                        OriginalDirectory
+                        + "../../../pkgs"
+                    );
 
-                if (args.Length > 1)
-                    path = Path.GetFullPath(args[1]);
+                    if (args.Length > 1)
+                    {
+                        path = ToAbsolute(args[1]);
+                    }
 
-                Console.WriteLine("Path: " + path);
-                Console.WriteLine("");
+                    Console.WriteLine("Path: " + path);
+                    Console.WriteLine("");
 
-		Packages.Repositories.Create(name, path);
+                    var packages = new PackageManager(CurrentDirectory);
+
+                    packages.Repositories.Create(name, path);
+		}
 
 		return !IsError;
+	}
+
+	public void Help()
+	{
+            Console.WriteLine("");
+            Console.WriteLine("Help");
+            Console.WriteLine("");
+            Console.WriteLine("Two arguments are expected; repository name, and repository path.");
 	}
 }
