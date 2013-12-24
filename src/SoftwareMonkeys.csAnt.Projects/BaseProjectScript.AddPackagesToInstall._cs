@@ -1,0 +1,13 @@
+using System;
+
+namespace SoftwareMonkeys.csAnt.Projects
+{
+    public partial class BaseProjectScript
+    {
+        public void AddPackagesToInstall(string installName, params string[] packageNames)
+        {
+            Packages.Installers.AddPackages(CurrentDirectory, installName, packageNames);
+        }
+    }
+}
+

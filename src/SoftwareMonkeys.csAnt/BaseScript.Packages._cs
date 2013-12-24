@@ -1,0 +1,19 @@
+using System;
+using SoftwareMonkeys.csAnt.Packages;
+using SoftwareMonkeys.csAnt.Packages.Schema;
+
+namespace SoftwareMonkeys.csAnt
+{
+    public partial class BaseScript
+    {
+        private IPackageManager packages;
+        public IPackageManager Packages {
+            get {
+                if (packages == null)
+                    throw new PackageManagerNotInitializedException ();
+                return packages;
+            }
+        }
+    }
+}
+

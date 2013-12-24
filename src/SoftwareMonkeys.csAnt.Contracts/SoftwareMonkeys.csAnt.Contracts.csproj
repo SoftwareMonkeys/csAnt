@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.0</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{EA178299-9D1E-482E-B3CD-D3CEBF62CADF}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>SoftwareMonkeys.csAnt</RootNamespace>
+    <AssemblyName>SoftwareMonkeys.csAnt.Contracts.cs</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="MyClass.cs" />
+    <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="PackageManager\IPackageManager.cs" />
+    <Compile Include="IScript.Zip.cs" />
+    <Compile Include="IScript.Time.cs" />
+    <Compile Include="IScript.TearDown.cs" />
+    <Compile Include="IScript.Sync.cs" />
+    <Compile Include="IScript.Summaries.cs" />
+    <Compile Include="IScript.Start.cs" />
+    <Compile Include="IScript.Mode.cs" />
+    <Compile Include="IScript.Scripts.cs" />
+    <Compile Include="IScript.Compile.cs" />
+    <Compile Include="IScript.Process.cs" />
+    <Compile Include="IScript.Relocation.cs" />
+    <Compile Include="IScript.SetUp.cs" />
+    <Compile Include="IScript.Stack.cs" />
+    <Compile Include="IScript.Console.cs" />
+    <Compile Include="IScript.Construct.cs" />
+    <Compile Include="IScript.cs" />
+    <Compile Include="IScript.Download.cs" />
+    <Compile Include="IScript.Error.cs" />
+    <Compile Include="IScript.Events.cs" />
+    <Compile Include="IScript.Git.cs" />
+    <Compile Include="IScript.Http.cs" />
+    <Compile Include="IScript.Import.cs" />
+    <Compile Include="IScript.Install.cs" />
+    <Compile Include="IScript.IO.cs" />
+    <Compile Include="IScript.Libs.cs" />
+    <Compile Include="IScript.Nodes.cs" />
+    <Compile Include="IScript.OriginalDirectory.cs" />
+    <Compile Include="IScriptSetUpper.cs" />
+    <Compile Include="IConsoleWriter.cs" />
+    <Compile Include="IScriptCommand.cs" />
+    <Compile Include="IScriptConstructor.cs" />
+    <Compile Include="IScriptRelocator.cs" />
+    <Compile Include="IScriptTearDowner.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Folder Include="PackageManager\" />
+  </ItemGroup>
+</Project>

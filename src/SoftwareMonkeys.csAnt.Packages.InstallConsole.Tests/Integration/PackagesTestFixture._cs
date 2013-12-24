@@ -1,0 +1,77 @@
+using System;
+using NUnit.Framework;
+using SoftwareMonkeys.csAnt.Packages.Schema;
+using System.IO;
+using SoftwareMonkeys.csAnt.IO;
+
+namespace SoftwareMonkeys.csAnt.Packages.Tests.Integration
+{
+    [TestFixture]
+    public class PackagesTestFixture : BasePackagesTestFixture
+    {
+        [Test]
+        public void Test_CreateRepositoryAndPackageThenAddToRepository()
+        {
+            var script = GetDummyScript();
+
+            new FilesGrabber(
+                script.OriginalDirectory,
+                script.CurrentDirectory
+                ).GrabOriginalScriptingFiles();
+
+            var packages = new PackageManager();
+
+            var packageName = "TestPackage";
+
+            var groupName = "TestCompany";
+
+            // Create a package
+            packages.Create(
+                script.CurrentDirectory,
+                packageName,
+                groupName
+            );
+
+            // Add files to package
+            packages.AddFile(
+                script.CurrentDirectory,
+                packageName,
+                "script/*.cs"
+            );
+
+            var repoPath = Path.GetDirectoryName(script.CurrentDirectory)
+                + Path.DirectorySeparatorChar
+                    + "pkgs";
+
+            Console.WriteLine ("Repository path:");
+            Console.WriteLine(repoPath);
+
+            // Create the repository
+            packages.Repositories.Create(
+                "Local",
+                repoPath
+                );
+
+            packages.Build (
+                packageName,
+                groupName,
+                "1.0.0.0"
+                );
+
+            packages.Send(
+                packageName,
+                groupName,
+                repoPath
+                );
+
+            var outputDir = repoPath
+                + Path.DirectorySeparatorChar
+                + groupName
+                + Path.DirectorySeparatorChar
+                    + packageName;
+
+            Assert.AreEqual(1, Directory.GetFiles(outputDir).Length, "Wrong number of package files found.");
+        }
+    }
+}
+
