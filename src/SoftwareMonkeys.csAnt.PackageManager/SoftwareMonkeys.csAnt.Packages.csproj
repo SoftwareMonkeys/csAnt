@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.0</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{089D0473-0CB0-458B-AFDF-428D83B5CC6A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>SoftwareMonkeys.csAnt.PackageManager</RootNamespace>
+    <AssemblyName>SoftwareMonkeys.csAnt.PackageManager</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="SoftwareMonkeys.FileNodes">
+      <HintPath>..\..\lib\FileNodes\bin\Release\SoftwareMonkeys.FileNodes.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="PackageCreator.cs" />
+    <Compile Include="PackageInstaller.cs" />
+    <Compile Include="PackageParser.cs" />
+    <Compile Include="ProcessUtility.cs" />
+    <Compile Include="Arguments.cs" />
+    <Compile Include="DownloadUtility.cs" />
+    <Compile Include="ZipUtility.cs" />
+    <Compile Include="PackageSaver.cs" />
+    <Compile Include="PackageFileScanner.cs" />
+    <Compile Include="Schema\Install\InstallInfo.cs" />
+    <Compile Include="PackageFileAdder.cs" />
+    <Compile Include="PackageManager.cs" />
+    <Compile Include="PackageFileRemover.cs" />
+    <Compile Include="PackageNotFoundException.cs" />
+    <Compile Include="PackageEventAdder.cs" />
+    <Compile Include="PackageBuilder.cs" />
+    <Compile Include="InstallCreator.cs" />
+    <Compile Include="InstallSaver.cs" />
+    <Compile Include="InstallLoader.cs" />
+    <Compile Include="InstallManager.cs" />
+    <Compile Include="InstallPackageAdder.cs" />
+    <Compile Include="InstallExistsException.cs" />
+    <Compile Include="LocalRepositoryLoader.cs" />
+    <Compile Include="HttpRepositoryLoader.cs" />
+    <Compile Include="LocalPackageLoader.cs" />
+    <Compile Include="RepositoryLoader.cs" />
+    <Compile Include="HttpUtility.cs" />
+    <Compile Include="RepositoryCreator.cs" />
+    <Compile Include="RepositorySaver.cs" />
+    <Compile Include="RepositoryManager.cs" />
+    <Compile Include="RepositoryFileNamer.cs" />
+    <Compile Include="Schema\PackageEventInfo.cs" />
+    <Compile Include="Schema\PackageEventInfoCollection.cs" />
+    <Compile Include="Schema\PackageFileInfo.cs" />
+    <Compile Include="Schema\PackageFileInfoCollection.cs" />
+    <Compile Include="Schema\PackageInfo.cs" />
+    <Compile Include="Schema\PackageInfoCollection.cs" />
+    <Compile Include="Schema\PackageScriptInfo.cs" />
+    <Compile Include="Schema\PackageScriptInfoCollection.cs" />
+    <Compile Include="Schema\RepositoryInfoCollection.cs" />
+    <Compile Include="Schema\RepositoryInfo.cs" />
+    <Compile Include="PackageFileNamer.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Folder Include="Schema\Package\" />
+    <Folder Include="Schema\Install\" />
+    <Folder Include="Schema\Repository\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SoftwareMonkeys.csAnt.Contracts\SoftwareMonkeys.csAnt.Contracts.csproj">
+      <Project>{EA178299-9D1E-482E-B3CD-D3CEBF62CADF}</Project>
+      <Name>SoftwareMonkeys.csAnt.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SoftwareMonkeys.csAnt.IO\SoftwareMonkeys.csAnt.IO.csproj">
+      <Project>{749ED083-15BD-4522-8FBE-847870434680}</Project>
+      <Name>SoftwareMonkeys.csAnt.IO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SoftwareMonkeys.csAnt.Versions\SoftwareMonkeys.csAnt.Versions.csproj">
+      <Project>{9B72A2B8-0BC4-40BE-B242-AC79A080CEB6}</Project>
+      <Name>SoftwareMonkeys.csAnt.Versions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SoftwareMonkeys.csAnt.IO.Compression\SoftwareMonkeys.csAnt.IO.Compression.csproj">
+      <Project>{AFCDC47D-D8CE-4541-AED1-8E8A598EF651}</Project>
+      <Name>SoftwareMonkeys.csAnt.IO.Compression</Name>
+    </ProjectReference>
+  </ItemGroup>
+</Project>

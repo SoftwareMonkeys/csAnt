@@ -1,0 +1,36 @@
+using System;
+using System.IO;
+using System.Collections.Generic;
+using SoftwareMonkeys.csAnt.Packages;
+
+namespace SoftwareMonkeys.csAnt
+{
+    public partial class BaseScript
+    {
+        public void InstallTo (string name, string directory)
+        {
+            InstallTo (name, directory, false);
+        }
+
+        public void InstallTo(string name, string directory, bool overwriteFiles)
+        {
+            Console.WriteLine ("");
+            Console.WriteLine ("Installing '" + name + "' install to...");
+            Console.WriteLine (directory);
+
+            EnsureDirectoryExists(directory);
+
+            throw new NotImplementedException();
+           /* var installer = new PackageInstaller(
+                directory,
+                overwriteFiles,
+                IsVerbose
+            );
+
+            installer.Install(name);
+*/
+            Console.WriteLine ("");
+        }
+    }
+}
+

@@ -20,6 +20,11 @@ namespace SoftwareMonkeys.csAnt
         {
             CompileScripts(false, scriptNames);
         }
+        
+        public void CompileScripts (string[] scriptNames, bool force)
+        {
+            CompileScripts (force, scriptNames);
+        }
 
         public void CompileScripts (bool force, params string[] scriptNames)
         {
@@ -71,11 +76,12 @@ namespace SoftwareMonkeys.csAnt
                         {
                             Console.WriteLine ("Compiling...");
                             CSScript.Compile (scriptPath, assemblyFile, IsDebug, new string[]{});
+                            Console.WriteLine ("Successful");
                         }
                         else
                             Console.WriteLine ("Assembly file found. Skipping compile...");
                     } catch (Exception ex) {
-                        Error (ex);
+                        Error ("Cannot compile '" + name + "' script.", ex);
                     }
                 }
             }

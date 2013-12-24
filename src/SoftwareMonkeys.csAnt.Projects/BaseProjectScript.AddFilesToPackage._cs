@@ -1,0 +1,13 @@
+using System;
+
+namespace SoftwareMonkeys.csAnt.Projects
+{
+    public partial class BaseProjectScript
+    {
+        public void AddFilesToPackage(string packageName, params string[] filePatterns)
+        {
+            Packages.AddFile(CurrentDirectory, packageName, filePatterns);
+        }
+    }
+}
+
