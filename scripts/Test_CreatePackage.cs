@@ -9,58 +9,19 @@ using SoftwareMonkeys.csAnt;
 using SoftwareMonkeys.csAnt.Tests;
 using SoftwareMonkeys.csAnt.Tests.Scripting;
 
-class Test_AddLibScript : BaseTestScript
+class Test_CreatePackageScript : BaseTestScript
 {
 	public static void Main(string[] args)
 	{
-		new Test_AddLibScript().Start(args);
+		new Test_CreatePackageScript().Start(args);
 	}
 	
 	public override bool Run(string[] args)
 	{
-	        FilesGrabber.GrabOriginalFiles();
-	        
-	        CurrentNode = GetCurrentNode();
+            FilesGrabber.GrabOriginalScriptingFiles();
 	
-		var libName = "TestLib";
+            ExecuteScript("CreatePackage", "TestPackage");
 
-		var dir = CurrentDirectory
-			+ Path.DirectorySeparatorChar
-			+ "lib"
-			+ Path.DirectorySeparatorChar
-			+ libName;
-
-		var nodePath = dir
-			+ Path.DirectorySeparatorChar
-			+ libName
-			+ ".node";
-
-		// If the node file already exists then delete it
-		if (File.Exists(nodePath))
-		{
-			Directory.Delete(dir, true);
-		}
-
-		// If the node already exists in memory then delete it
-		if (CurrentNode.Nodes["Libraries"].Nodes.ContainsKey(libName))
-		{
-			CurrentNode.Nodes["Libraries"].Nodes.Remove(libName);
-		}
-
-		ExecuteScript("AddLib", libName, "http://www.nowhere.com/lib.zip");
-
-		if (!Directory.Exists(dir))
-		{
-			Error("Library directory wasn't created/found.");
-		}
-
-		if (!File.Exists(nodePath))
-		{
-			Error("Library node wasn't created/found.");
-		}
-
-		Directory.Delete(dir, true);
-
-		return !IsError;
+            return !IsError;
 	}
 }

@@ -1,12 +1,13 @@
 //css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.dll;
-//css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.PackageManager.dll;
+//css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.Packages.dll;
+//css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.Packages.Contracts.dll;
 
 using System;
 using System.IO;
 using Microsoft.CSharp;
 using System.Diagnostics;
 using SoftwareMonkeys.csAnt;
-using SoftwareMonkeys.csAnt.PackageManager;
+using SoftwareMonkeys.csAnt.Packages;
 
 class BuildPackageScript : BaseScript
 {
@@ -29,13 +30,19 @@ class BuildPackageScript : BaseScript
                 {
                     var name = args[0];
 
-
                     Console.WriteLine("Name: " + name);
                     Console.WriteLine("");
 
-                    Packages.Build(name);
+                    var groupName = args[1];
 
-			RaiseEvent("BuildPackage");
+                    Console.WriteLine("Group name: " + groupName);
+                    Console.WriteLine("");
+
+                    var packages = new PackageManager(CurrentDirectory);
+                    
+                    packages.Build(name, groupName);
+
+                    RaiseEvent("BuildPackage");
                 }
 
 		return !IsError;
