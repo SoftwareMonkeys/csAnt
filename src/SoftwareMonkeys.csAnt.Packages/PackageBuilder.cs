@@ -50,18 +50,20 @@ namespace SoftwareMonkeys.csAnt.Packages
 
             var files = new List<string> ();
 
-            var installScriptFile = Path.GetDirectoryName (zipFilePath)
+            var installScriptFile = "scripts"
                 + Path.DirectorySeparatorChar
-                + "scripts"
+                    + "Install.cs";
+            
+            var installScriptFilePath = Path.GetDirectoryName (zipFilePath)
                 + Path.DirectorySeparatorChar
-                + "InstallPackage.cs";
+                + installScriptFile;
 
             Console.WriteLine ("Install file:");
-            Console.WriteLine (installScriptFile);
+            Console.WriteLine (installScriptFilePath);
 
-            if (File.Exists (installScriptFile)) {
+            if (File.Exists (installScriptFilePath)) {
                 Console.WriteLine ("Install file found.");
-                files.Add (installScriptFile.Replace (workingDirectory, ""));
+                files.Add (installScriptFilePath.Replace(workingDirectory, "") + "|scripts/");
             }
             else
                 Console.WriteLine ("Install file not found.");

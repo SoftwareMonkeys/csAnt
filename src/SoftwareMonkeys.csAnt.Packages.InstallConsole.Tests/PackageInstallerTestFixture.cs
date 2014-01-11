@@ -68,7 +68,8 @@ namespace SoftwareMonkeys.csAnt.Packages.Tests
         [Test]
         public void Test_Install_FromLocal()
         {
-            var originalDir = Environment.CurrentDirectory;
+            throw new NotImplementedException();
+            /*var originalDir = Environment.CurrentDirectory;
 
             var projectDir = WorkingDirectory
                 + Path.DirectorySeparatorChar
@@ -132,13 +133,13 @@ namespace SoftwareMonkeys.csAnt.Packages.Tests
 
             script.StartProcess(cmd);
 
-            Assert.IsTrue(script.Console.Output.Contains("Hello world!"));
+            Assert.IsTrue(script.ConsoleWriter.Output.Contains("Hello world!"));
 
             Assert.IsFalse(script.IsError, "An error occurred.");
 
             Environment.CurrentDirectory = originalDir;
 
-            Directory.Delete (WorkingDirectory, true);
+            Directory.Delete (WorkingDirectory, true);*/
         }
         
         [Test]
@@ -300,7 +301,7 @@ namespace SoftwareMonkeys.csAnt.Packages.Tests
 
             Environment.CurrentDirectory = WorkingDirectory;
 
-            var listFile = CreateInstallListFile();
+            //var listFile = CreateInstallListFile();
 
 			/*var installer = new PackageInstaller(
 				WorkingDirectory,
@@ -350,7 +351,8 @@ namespace SoftwareMonkeys.csAnt.Packages.Tests
 
             script.StartProcess(cmd);
 
-            Assert.IsTrue(script.Console.Output.Contains("Hello world!"));
+            //Assert.IsTrue(script.Console.Output.Contains("Hello world!"));
+            Assert.IsTrue(Console.Out.ToString ().Contains("Hello world!"));
 
             Assert.IsFalse(script.IsError, "An error occurred.");
             

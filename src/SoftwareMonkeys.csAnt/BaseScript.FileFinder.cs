@@ -1,11 +1,17 @@
 using System;
+using SoftwareMonkeys.csAnt.IO;
 
 namespace SoftwareMonkeys.csAnt
 {
-    public class BaseScript
+    public partial class BaseScript
     {
-        public BaseScript ()
-        {
+        private IFileFinder fileFinder;
+        public IFileFinder FileFinder {
+            get {
+                if (fileFinder == null)
+                    throw new FileFinderNotInitializedException ();
+                return fileFinder;
+            }
         }
     }
 }

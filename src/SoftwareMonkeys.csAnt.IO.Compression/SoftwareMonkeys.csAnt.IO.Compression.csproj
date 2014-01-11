@@ -7,8 +7,8 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{AFCDC47D-D8CE-4541-AED1-8E8A598EF651}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>SoftwareMonkeys.csAnt.Compression</RootNamespace>
-    <AssemblyName>SoftwareMonkeys.csAnt.Compression</AssemblyName>
+    <RootNamespace>SoftwareMonkeys.csAnt.IO.Compression</RootNamespace>
+    <AssemblyName>SoftwareMonkeys.csAnt.IO.Compression</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -36,8 +36,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
-    <Compile Include="FileZipper.cs" />
-    <Compile Include="IFileZipper.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -45,9 +43,9 @@
       <Project>{749ED083-15BD-4522-8FBE-847870434680}</Project>
       <Name>SoftwareMonkeys.csAnt.IO</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SoftwareMonkeys.csAnt.Contracts\SoftwareMonkeys.csAnt.Contracts.csproj">
-      <Project>{EA178299-9D1E-482E-B3CD-D3CEBF62CADF}</Project>
-      <Name>SoftwareMonkeys.csAnt.Contracts</Name>
+    <ProjectReference Include="..\SoftwareMonkeys.csAnt.IO.Contracts\SoftwareMonkeys.csAnt.IO.Contracts.csproj">
+      <Project>{53E3AFEA-3627-4846-B2E4-5A8091E96BC6}</Project>
+      <Name>SoftwareMonkeys.csAnt.IO.Contracts</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>

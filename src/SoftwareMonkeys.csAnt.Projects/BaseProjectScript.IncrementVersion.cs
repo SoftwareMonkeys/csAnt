@@ -2,10 +2,16 @@ using System;
 
 namespace SoftwareMonkeys.csAnt.Projects
 {
-    public class BaseProjectScript
+    public partial class BaseProjectScript
     {
-        public BaseProjectScript ()
+        public void IncrementVersion()
         {
+            Version.IncrementVersion(CurrentNode, 4);
+        }
+
+        public void IncrementVersion(int position)
+        {
+            Version.IncrementVersion(CurrentNode, position);
         }
     }
 }

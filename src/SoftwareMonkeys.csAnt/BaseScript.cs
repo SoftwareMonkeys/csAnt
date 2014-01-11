@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Reflection;
 
@@ -9,7 +9,7 @@ namespace SoftwareMonkeys.csAnt
 	/// </summary>
 	public abstract partial class BaseScript : IScript
 	{
-		public ConsoleWriter Console { get;set; }
+		public IConsoleWriter ConsoleWriter { get;set; }
 
 		public string ScriptName { get; set; }
 

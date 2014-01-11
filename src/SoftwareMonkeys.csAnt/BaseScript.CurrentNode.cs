@@ -28,18 +28,9 @@ namespace SoftwareMonkeys.csAnt
 				Console.WriteLine("Getting current node...");
 				Console.WriteLine("");
 			}
-			
+
 			// TODO: See if this should be injected via constructor
-			var listener = new ConsoleListener();
-			
-			// TODO: See if this should be injected via constructor
-			var scanner = new FileNodeScanner(
-				new FileNodeLoader(
-					new FileNodeSaver(),
-					listener
-				),
-				listener
-			);
+			var fileNodes = new FileNodeManager();
 
 			string dir = CurrentDirectory;
 			
@@ -61,9 +52,7 @@ namespace SoftwareMonkeys.csAnt
 				foundPropertiesFile = Directory.GetFiles(dir, "*.node").Length > 0;
 			}
 
-			scanner.Listener.IsVerbose = IsVerbose;
-			
-			FileNode node = scanner.ScanDirectory(dir, false, true);
+			FileNode node = fileNodes.Get (dir, false, true);
 			
 			return node;
 		}

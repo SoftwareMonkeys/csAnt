@@ -14,15 +14,14 @@ namespace SoftwareMonkeys.csAnt
 		{
 			Console.WriteLine ("");
 			Console.WriteLine ("Importing files...");
-			Console.WriteLine ("Project name:");
-			Console.WriteLine (projectName);
+			Console.WriteLine ("Project name: " + projectName);
 			Console.WriteLine ("Path:");
 			Console.WriteLine (relativePath);
 			if (IsVerbose) {
 				Console.WriteLine ("Destination:");
 				Console.WriteLine (destination);
 				Console.WriteLine ("Flatten path:");
-				Console.WriteLine (flattenHeirarchy);
+				Console.WriteLine (flattenHeirarchy.ToString());
 				Console.WriteLine ("");
 			}
 			

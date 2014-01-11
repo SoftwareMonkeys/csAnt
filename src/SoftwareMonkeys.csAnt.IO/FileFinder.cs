@@ -2,41 +2,27 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 
-namespace SoftwareMonkeys.csAnt
+namespace SoftwareMonkeys.csAnt.IO
 {
     public class FileFinder : IFileFinder
     {
-        public string WorkingDirectory { get; set; }
-
         public bool IsVerbose { get;set; }
 
-        public IConsoleWriter Console { get; set; }
-
-        public FileFinder (string workingDirectory)
+        public FileFinder ()
         {
-            WorkingDirectory = workingDirectory;
         }
 
         public FileFinder (
-            string workingDirectory,
-            bool isVerbose,
-            IConsoleWriter console
+            bool isVerbose
         )
         {
-            WorkingDirectory = workingDirectory;
             IsVerbose = isVerbose;
-            Console = console;
         }
 
-        public string[] FindFiles (params string[] patterns)
+        public string[] FindFiles (string workingDirectory, params string[] patterns)
         {
-            return FindFiles(WorkingDirectory, patterns);
-        }
-
-        public string[] FindFiles (string baseDirectory, params string[] patterns)
-        {
-            if (String.IsNullOrEmpty(baseDirectory))
-                throw new ArgumentException("baseDirectory", "The base directory must be specified.");
+            if (String.IsNullOrEmpty(workingDirectory))
+                throw new ArgumentException("workingDirectory", "The working directory must be specified.");
 
             if (patterns == null || patterns.Length == 0)
                 throw new ArgumentException("patterns", "At least one pattern must be specified.");
@@ -45,17 +31,12 @@ namespace SoftwareMonkeys.csAnt
 
             foreach (string pattern in patterns) {
                 if (!String.IsNullOrEmpty (pattern)) {
-                    foreach (string file in FindFiles(baseDirectory, pattern))
+                    foreach (string file in FindFilesFromPattern(workingDirectory, pattern))
                         if (!files.Contains (file))
                             files.Add (file);
                 }
             }
             return files.ToArray();
-        }
-
-        public string[] FindFiles (string pattern)
-        {
-            return FindFiles(WorkingDirectory, pattern);
         }
 
         /// <summary>
@@ -64,9 +45,9 @@ namespace SoftwareMonkeys.csAnt
         /// If the pattern starts with a slash then the SearchOption.AllDirectories option is NOT used.
         /// If the pattern does NOT start with a slash then the SearchOption.AllDirectories option IS used.
         /// </summary>
-        public string[] FindFiles (string baseDirectory, string pattern)
+        public string[] FindFilesFromPattern (string workingDirectory, string pattern)
         {
-            if (String.IsNullOrEmpty (baseDirectory))
+            if (String.IsNullOrEmpty (workingDirectory))
                 throw new ArgumentException ("baseDirectory", "The base directory must be specified.");
 
             if (String.IsNullOrEmpty (pattern))
@@ -76,13 +57,13 @@ namespace SoftwareMonkeys.csAnt
                 Console.WriteLine ("");
                 Console.WriteLine ("Finding files...");
                 Console.WriteLine ("  Directory:");
-                Console.WriteLine ("  " + baseDirectory);
+                Console.WriteLine ("  " + workingDirectory);
             }
 
             List<string> foundFiles = new List<string> ();
             
-            if (pattern.IndexOf (baseDirectory) == -1) {
-                pattern = baseDirectory.TrimEnd (Path.DirectorySeparatorChar)
+            if (pattern.IndexOf (workingDirectory) == -1) {
+                pattern = workingDirectory.TrimEnd (Path.DirectorySeparatorChar)
                     + Path.DirectorySeparatorChar
                     + pattern.Trim (Path.DirectorySeparatorChar);
             }

@@ -113,10 +113,10 @@ namespace SoftwareMonkeys.csAnt.Tests
                 + Path.DirectorySeparatorChar
                 + "csAnt.tmp"
                 + Path.DirectorySeparatorChar
-                + TimeStamp
-                + Path.DirectorySeparatorChar
-                + "csAnt.tmp"
-                + Path.DirectorySeparatorChar
+                //+ TimeStamp // TODO: Check if needed. There may be issues without it
+                //+ Path.DirectorySeparatorChar
+                //+ "csAnt.tmp"
+                //+ Path.DirectorySeparatorChar
                 + TimeStamp
                 + Path.DirectorySeparatorChar
                 + "csAnt";

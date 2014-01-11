@@ -1,5 +1,6 @@
 using System;
 using NUnit.Framework;
+using SoftwareMonkeys.csAnt.IO;
 
 namespace SoftwareMonkeys.csAnt.Tests.Scripting
 {
@@ -12,7 +13,10 @@ namespace SoftwareMonkeys.csAnt.Tests.Scripting
             // Get a test script
             var script = GetTestScript ("TestScript");
 
-            script.FilesGrabber.GrabOriginalScriptingFiles();
+            new FilesGrabber(
+                script.OriginalDirectory,
+                script.CurrentDirectory
+                ).GrabOriginalScriptingFiles();
 
             // Create a sub script
             var subScript = script.ActivateScript("HelloWorld");
@@ -21,7 +25,7 @@ namespace SoftwareMonkeys.csAnt.Tests.Scripting
             subScript.Start();
 
             // Check that the parent script output contains the tearing down console output
-            Assert.IsTrue (script.Console.Output.Contains("Setting up 'HelloWorld' script..."));
+            Assert.IsTrue (script.ConsoleWriter.Output.Contains("Setting up 'HelloWorld' script..."));
         }
 
         [Test]
@@ -30,7 +34,10 @@ namespace SoftwareMonkeys.csAnt.Tests.Scripting
             // Get a test script
             var script = GetTestScript ("TestScript");
             
-            script.FilesGrabber.GrabOriginalScriptingFiles();
+            new FilesGrabber(
+                script.OriginalDirectory,
+                script.CurrentDirectory
+                ).GrabOriginalScriptingFiles();
 
             // Create a sub script
             using (var subScript = script.ActivateScript("HelloWorld")) {
@@ -39,7 +46,7 @@ namespace SoftwareMonkeys.csAnt.Tests.Scripting
             }// Let the sub script dispose, and be torn down
 
             // Check that the parent script output contains the tearing down console output
-            Assert.IsTrue (script.Console.Output.Contains("Tearing down 'HelloWorld' script..."));
+            Assert.IsTrue (script.ConsoleWriter.Output.Contains("Tearing down 'HelloWorld' script..."));
         }
     }
 }

@@ -17,8 +17,8 @@ namespace SoftwareMonkeys.csAnt
         )
             : base(script)
         {
-            zipFilePath = zipFilePath;
-            filePatterns = filePatterns;
+            ZipFilePath = zipFilePath;
+            FilePatterns = filePatterns;
         }
 
         public override void Execute ()

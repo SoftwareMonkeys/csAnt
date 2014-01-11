@@ -12,10 +12,10 @@ class TemplateScript : BaseScript
 		new TemplateScript().Start(args);
 	}
 	
-	public override bool Start(string[] args)
+	public override bool Run(string[] args)
 	{
 		// Add code here
 
-		return true;
+		return !IsError;
 	}
 }

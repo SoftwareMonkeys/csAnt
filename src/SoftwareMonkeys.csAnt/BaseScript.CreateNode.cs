@@ -18,8 +18,7 @@ namespace SoftwareMonkeys.csAnt
                 Console.WriteLine ("Creating node...");
                 Console.WriteLine ("Location:");
                 Console.WriteLine (location);
-                Console.WriteLine ("Name:");
-                Console.WriteLine (name);
+                Console.WriteLine ("Name: " + name);
             }
 
             var path = location

@@ -1,22 +1,30 @@
 using System;
 using SoftwareMonkeys.FileNodes;
 
-namespace SoftwareMonkeys.csAnt.Projects
+namespace SoftwareMonkeys.csAnt.Versions
 {
-    public class VersionManager : IcsAntComponent
+    public class VersionManager
     {
-        public string WorkingDirectory { get; set; }
-
-        public FileNode CurrentNode { get; set; }
-
-        public VersionManager (string workingDirectory, FileNode currentNode)
+        public VersionManager ()
         {
-            WorkingDirectory = workingDirectory;
-
-            CurrentNode = currentNode;
         }
 
-        public void SetVersion(Version version)
+        public string GetVersion(string workingDirectory)
+        {
+            var scanner = new FileNodeScanner();
+
+            var node = scanner.ScanDirectory(workingDirectory, false, false);
+
+            if (node == null)
+                throw new Exception("File node not found in working directory.");
+
+            if (node.Properties.ContainsKey("Version"))
+                return node.Properties["Version"];
+            else
+                throw new VersionNotFoundException();
+        }
+
+        public void SetVersion(FileNode currentNode, Version version)
         {
             Console.WriteLine ("");
 
@@ -24,19 +32,19 @@ namespace SoftwareMonkeys.csAnt.Projects
             
             Console.WriteLine ("");
 
-            CurrentNode.Properties["Version"] = version.ToString();
-            CurrentNode.Save();
+            currentNode.Properties["Version"] = version.ToString();
+            currentNode.Save();
 
-            if (!CurrentNode.Nodes.ContainsKey("Source"))
+            if (!currentNode.Nodes.ContainsKey("Source"))
                 throw new Exception("Can't find 'Source' node.");
 
-            foreach (var node in CurrentNode.Nodes["Source"].Nodes.Values) {
+            foreach (var node in currentNode.Nodes["Source"].Nodes.Values) {
                 node.Properties["Version"] = version.ToString();
                 node.Save();
             }
         }
 
-        public void IncrementVersion (int position)
+        public void IncrementVersion (FileNode currentNode, int position)
         {
             Console.WriteLine ("");
             
@@ -45,7 +53,7 @@ namespace SoftwareMonkeys.csAnt.Projects
             
             Console.WriteLine ("");
 
-            var versionString = CurrentNode.Properties ["Version"];
+            var versionString = currentNode.Properties ["Version"];
 
             var version = new Version (versionString);
 
@@ -71,7 +79,7 @@ namespace SoftwareMonkeys.csAnt.Projects
 
             version = new Version(major, minor, build, revision);
            
-            SetVersion(version);
+            SetVersion(currentNode, version);
         }
     }
 }

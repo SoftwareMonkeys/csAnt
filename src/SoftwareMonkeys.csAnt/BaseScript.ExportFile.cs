@@ -25,7 +25,7 @@ namespace SoftwareMonkeys.csAnt
 			Console.WriteLine ("Destination:");
 			Console.WriteLine (destination);
 			Console.WriteLine ("Flatten path:");
-			Console.WriteLine (flattenHeirarchy);
+			Console.WriteLine (flattenHeirarchy.ToString());
 			Console.WriteLine ("");
 			Console.WriteLine ("Files:");
 

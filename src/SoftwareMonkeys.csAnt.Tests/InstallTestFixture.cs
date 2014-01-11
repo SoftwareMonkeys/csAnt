@@ -1,6 +1,7 @@
 using System;
 using NUnit.Framework;
 using System.IO;
+using SoftwareMonkeys.csAnt.IO;
 
 namespace SoftwareMonkeys.csAnt.Tests
 {
@@ -12,9 +13,13 @@ namespace SoftwareMonkeys.csAnt.Tests
         {
             var script = GetDummyScript();
 
-            script.FilesGrabber.GrabOriginalScriptingFiles();
+            new FilesGrabber(
+                script.OriginalDirectory,
+                script.CurrentDirectory
+                ).GrabOriginalScriptingFiles();
 
-            script.Install("csAnt", true);
+            throw new NotImplementedException();
+            /*script.Install("csAnt", true);
 
             Assert.IsFalse(script.IsError, "An error occurred.");
             
@@ -28,7 +33,7 @@ namespace SoftwareMonkeys.csAnt.Tests
                 + Path.DirectorySeparatorChar
                 + "scripts";
 
-            Assert.IsTrue(Directory.Exists(scriptsDir), "scripts dir not found.");
+            Assert.IsTrue(Directory.Exists(scriptsDir), "scripts dir not found.");*/
         }
     }
 }

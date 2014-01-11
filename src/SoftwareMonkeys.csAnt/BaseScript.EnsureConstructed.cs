@@ -2,10 +2,14 @@ using System;
 
 namespace SoftwareMonkeys.csAnt
 {
-    public class BaseScript
+    public partial class BaseScript
     {
-        public BaseScript ()
+        public void EnsureConstructed (string scriptName)
         {
+            if (!IsConstructed) {
+                Construct (scriptName);
+                IsConstructed = true;
+            }
         }
     }
 }

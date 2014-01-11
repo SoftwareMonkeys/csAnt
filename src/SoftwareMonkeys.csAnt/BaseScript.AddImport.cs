@@ -7,8 +7,6 @@ namespace SoftwareMonkeys.csAnt
 	{
 		public string AddImport (string importProject, string importProjectPath)
 		{
-			var folderName = Path.GetFileName(CurrentDirectory);
-
 			var importProjectName = importProject;
 
 			var sourceDirectory = importProjectPath;

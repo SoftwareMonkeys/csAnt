@@ -26,7 +26,11 @@ namespace SoftwareMonkeys.csAnt
 
         public IScript ExecuteScript (IScript script, params string[] args)
         {
+            script.SetUp();
+
             script.Start (args);
+
+            script.TearDown();
 
             // Add the summaries from the sub script to the outer script
             if (script.Summaries != null) {
@@ -38,12 +42,12 @@ namespace SoftwareMonkeys.csAnt
             // If the target script ran into an error then recognize that error in the current script
             IsError = script.IsError;
 
-            Console.AppendOutput (script.Console.Output);
+            ConsoleWriter.AppendOutput (script.ConsoleWriter.Output);
 
             return script;
         }
 
-		public void WriteScriptStack (Stack<string> stack)
+		public void WriteScriptStack (Stack<IScript> stack)
         {
             var builder = new StringBuilder ();
 
@@ -56,10 +60,7 @@ namespace SoftwareMonkeys.csAnt
                     if (i > 0)
                         builder.Append (", ");
 
-                    if (String.IsNullOrEmpty (s))
-                        throw new Exception ("Item is null or empty.");
-
-                    builder.Append (s);
+                    builder.Append (s.ScriptName);
 				
                     i++;
                 }

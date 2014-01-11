@@ -88,7 +88,7 @@ namespace SoftwareMonkeys.csAnt
 		public void StartProcess (string command, string arguments)
         {
             Console.WriteLine ("");
-            Console.WriteLine ("--------------------------------------------------");
+            Console.WriteLine ("--------------------");
             Console.WriteLine ("");
             Console.WriteLine ("Starting process:");
             Console.WriteLine (command + " " + arguments);
@@ -109,12 +109,13 @@ namespace SoftwareMonkeys.csAnt
 
 			// Configure the process
 			info.UseShellExecute = false;
+            info.RedirectStandardInput = true;
 			info.RedirectStandardOutput = true;
 			info.RedirectStandardError = true;
 			info.CreateNoWindow = true;
 
-
-			info.ErrorDialog = false;
+            // TODO: Remove if not needed
+			info.ErrorDialog = true;
 
 			// Start the process
 			Process process = new Process();
@@ -125,32 +126,59 @@ namespace SoftwareMonkeys.csAnt
 
 			process.EnableRaisingEvents = true;
 
+            var c = Console.Out;
+
+            // Output the errors to the console
+            process.ErrorDataReceived += new DataReceivedEventHandler
+            (
+                delegate(object sender, DataReceivedEventArgs e)
+                {
+                    Console.SetOut (c);
+                    c.WriteLine(e.Data);
+                }
+            );
+
 			// Output the data to the console
 			process.OutputDataReceived += new DataReceivedEventHandler
 			(
 			    delegate(object sender, DataReceivedEventArgs e)
 			    {
-			        Console.WriteLine(e.Data);
-			    }
-			);
-			
-			// Output the errors to the console
-			process.ErrorDataReceived += new DataReceivedEventHandler
-			(
-			    delegate(object sender, DataReceivedEventArgs e)
-			    {
-			        Console.WriteLine(e.Data);
+                    Console.SetOut (c);
+			        c.WriteLine(e.Data);
 			    }
 			);
 
-			process.Start();
+            try
+            {
+    			process.Start();
 
-			process.BeginOutputReadLine();
+                /*process.BeginOutputReadLine();
 
-			process.WaitForExit();
+                while (!process.StandardOutput.EndOfStream) {
+                    string line = process.StandardOutput.ReadLine();
+                    Console.WriteLine (line);
+                }
+
+                process.BeginOutputReadLine();
+                
+                while (!process.StandardError.EndOfStream) {
+                    string line = process.StandardOutput.ReadLine();
+                    Console.WriteLine (line);
+                }*/
+
+    			process.BeginOutputReadLine();
+                process.BeginErrorReadLine();
+
+                process.WaitForExit();
+            }
+            catch (Exception ex)
+            {
+                Script.Error ("Error starting process.", ex);
+            }
+
 
 			Console.WriteLine("");
-			Console.WriteLine("--------------------------------------------------");
+			Console.WriteLine("--------------------");
 			Console.WriteLine("");
 			
 		}

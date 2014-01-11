@@ -18,7 +18,7 @@ namespace SoftwareMonkeys.csAnt.Packages.Tests
 
             var saver = new PackageSaver();
 
-            var pkg = new PackageInfo("TestPackage");
+            var pkg = new PackageInfo("TestPackage", "TestCompany");
 
             var filePath = saver.Save (dir, pkg);
 

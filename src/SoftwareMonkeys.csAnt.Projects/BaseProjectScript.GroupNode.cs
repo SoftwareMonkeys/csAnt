@@ -31,18 +31,7 @@ namespace SoftwareMonkeys.csAnt.Projects
 			}
 			
 			// TODO: See if this should be injected via constructor
-			var listener = new ConsoleListener();
-			
-			// TODO: See if this should be injected via constructor
-			var scanner = new FileNodeScanner(
-				new FileNodeLoader(
-					new FileNodeSaver(),
-					listener
-				),
-				listener
-			);
-
-			scanner.Listener.IsVerbose = IsVerbose;
+            var fileNodes = new FileNodeManager(IsVerbose);
 
 			// Get the group directory (one step up from the project directory)
 			string dir = Path.GetFullPath(
@@ -52,7 +41,7 @@ namespace SoftwareMonkeys.csAnt.Projects
 			);
 
 			// Scan for the group node
-			FileNode node = scanner.ScanDirectory(dir, false, true);
+			FileNode node = fileNodes.Get(dir, false, true);
 			
 			if (node == null)
 				throw new GroupNodeNotFoundException();

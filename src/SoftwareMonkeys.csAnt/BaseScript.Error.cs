@@ -4,6 +4,11 @@ namespace SoftwareMonkeys.csAnt
 {
 	public partial class BaseScript
 	{
+        public void Error (string message, Exception ex)
+        {
+            Error (message + Environment.NewLine + ex.ToString());
+        }
+
         public void Error (Exception ex)
         {
             Error(ex.ToString());

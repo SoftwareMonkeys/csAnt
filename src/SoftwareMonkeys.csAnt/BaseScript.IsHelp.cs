@@ -8,8 +8,8 @@ namespace SoftwareMonkeys.csAnt
 		{
 			get
 			{
-				return Args.Contains("h")
-					|| Args.Contains("help");
+				return Arguments.Contains("h")
+					|| Arguments.Contains("help");
 			}
 		}
 	}

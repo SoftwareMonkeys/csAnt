@@ -9,12 +9,14 @@ namespace SoftwareMonkeys.csAnt.Tests
         [Test]
         public void Test_Succeed()
         {
+            SetUp ();
+
             Console.WriteLine ("");
             Console.WriteLine ("Starting successful test...");
 
             var script = GetDummyScript("TestScript");
 
-            script.Console.WriteLine ("...");
+            script.ConsoleWriter.WriteLine ("...");
 
             Assert.IsTrue(true);
         }

@@ -7,14 +7,16 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{C3C8D4B3-1659-4307-A7B1-DAE98C15250D}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>SoftwareMonkeys.csAnt.Packages.Contracts</RootNamespace>
+    <RootNamespace>SoftwareMonkeys.csAnt.Packages</RootNamespace>
     <AssemblyName>SoftwareMonkeys.csAnt.Packages.Contracts</AssemblyName>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>SoftwareMonkeys.csAnt.Packages.Contracts.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug</OutputPath>
+    <OutputPath>..\..\bin\Debug</OutputPath>
     <DefineConstants>DEBUG;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -23,7 +25,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>none</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release</OutputPath>
+    <OutputPath>..\..\bin\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
@@ -32,8 +34,14 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MyClass.cs" />
     <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="Schema\IInstallManager.cs" />
+    <Compile Include="Schema\IInstallInfo.cs" />
+    <Compile Include="Schema\IPackageInfoCollection.cs" />
+    <Compile Include="Schema\IPackageManager.cs" />
+    <Compile Include="Schema\IPackageInfo.cs" />
+    <Compile Include="Schema\IRepositoryManager.cs" />
+    <Compile Include="Schema\IRepositoryInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -16,5 +16,14 @@ namespace SoftwareMonkeys.csAnt
 		{
 			throw new System.NotImplementedException ();
 		}
+
+        static public void StartFile(string scriptFile)
+        {
+            var launcherScript = new Script(
+                Path.GetFileNameWithoutExtension(scriptFile)
+                );
+
+            launcherScript.ExecuteScriptFile(scriptFile);
+        }
 	}
 }

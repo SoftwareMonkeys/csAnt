@@ -29,26 +29,32 @@ namespace SoftwareMonkeys.csAnt.Tests
         {
             if (IsVerbose) {
                 Console.WriteLine ("Getting dummy script: " + scriptName);
+
                 if (parentScript != null)
                     Console.WriteLine ("Parent script: " + parentScript.ScriptName);
 
             }
 
-            var testScript = new DummyScript(
+            var script = new DummyScript (
                 scriptName,
                 parentScript
             );
 
-            testScript.IsVerbose = isVerbose;
+            script.IsVerbose = isVerbose;
 
-            testScript.TimeStamp = TimeStamp;
-            testScript.Time = Time;
+            script.TimeStamp = TimeStamp;
+            script.Time = Time;
+            
+            if (IsVerbose) {
+                Console.WriteLine ("Time stamp: " + TimeStamp);
+                Console.WriteLine ("Time: " + Time.ToString ());
+            }
 
-            Scripts.Add (testScript);
+            Scripts.Add (script);
 
-            testScript.CurrentDirectory = WorkingDirectory;
+            script.CurrentDirectory = WorkingDirectory;
 
-            return testScript;
+            return script;
         }
     }
 }

@@ -5,7 +5,7 @@ namespace SoftwareMonkeys.csAnt.Packages.Schema
 {
     public interface IPackageInfoCollection : IList<IPackageInfo>
     {
-        void Add(IPackageInfo package);
+        new void Add(IPackageInfo package);
 
         bool Contains(string query);
     }
