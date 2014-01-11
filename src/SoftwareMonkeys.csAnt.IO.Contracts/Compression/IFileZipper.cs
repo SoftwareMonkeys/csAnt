@@ -6,7 +6,7 @@ namespace SoftwareMonkeys.csAnt.IO.Compression
     {
         void Zip(string workingDirectory, string zipFilePath, params string[] filePatterns);
 
-        void Unzip(string destinationDirectory);
+        int Unzip(string zipFilePath, string destinationDirectory, string subPath);
     }
 }
 

@@ -10,6 +10,7 @@ namespace SoftwareMonkeys.csAnt
         DateTime Time { get;set; }
 
         string GetTimeStamp();
+        string GetTimeStamp(DateTime dateTime);
         #endregion
     }
 }

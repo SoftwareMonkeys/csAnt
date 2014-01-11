@@ -3,7 +3,6 @@ using SoftwareMonkeys.FileNodes;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading;
-using SoftwareMonkeys.csAnt.Contracts.cs;
 
 namespace SoftwareMonkeys.csAnt
 {
@@ -16,7 +15,5 @@ namespace SoftwareMonkeys.csAnt
 
 		int Indent { get; set; }
 		#endregion
-
-        IPackageManager Packages { get;set; }
     }
 }

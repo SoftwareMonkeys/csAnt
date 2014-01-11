@@ -4,7 +4,7 @@ namespace SoftwareMonkeys.csAnt
 {
     public partial interface IScript
     {
-        IConsoleWriter Console { get; set; }
+        IConsoleWriter ConsoleWriter { get; set; }
     }
 }
 

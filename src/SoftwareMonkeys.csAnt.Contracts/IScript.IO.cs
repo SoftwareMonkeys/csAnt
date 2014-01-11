@@ -1,4 +1,5 @@
 using System;
+using SoftwareMonkeys.csAnt.IO;
 
 namespace SoftwareMonkeys.csAnt
 {
@@ -24,9 +25,10 @@ namespace SoftwareMonkeys.csAnt
         string[] FindFiles(params string[] patterns);
         string[] FindFiles(string directory, params string[] patterns);
 
-        FilesGrabber FilesGrabber { get;set; }
+        IFileFinder FileFinder { get; }
+        void InitializeFileFinder(IFileFinder finder);
 
-        TemporaryDirectoryCreator TemporaryDirectoryCreator { get;set; }
+        ITemporaryDirectoryCreator TemporaryDirectoryCreator { get;set; }
         #endregion
     }
 }

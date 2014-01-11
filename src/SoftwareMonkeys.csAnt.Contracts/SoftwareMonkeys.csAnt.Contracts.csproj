@@ -8,13 +8,15 @@
     <ProjectGuid>{EA178299-9D1E-482E-B3CD-D3CEBF62CADF}</ProjectGuid>
     <OutputType>Library</OutputType>
     <RootNamespace>SoftwareMonkeys.csAnt</RootNamespace>
-    <AssemblyName>SoftwareMonkeys.csAnt.Contracts.cs</AssemblyName>
+    <AssemblyName>SoftwareMonkeys.csAnt.Contracts</AssemblyName>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\SoftwareMonkeys.csAnt\SoftwareMonkeys.csAnt.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug</OutputPath>
+    <OutputPath>..\..\bin\Debug</OutputPath>
     <DefineConstants>DEBUG;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -23,18 +25,19 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>none</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release</OutputPath>
+    <OutputPath>..\..\bin\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="SoftwareMonkeys.FileNodes">
+      <HintPath>..\..\lib\FileNodes\bin\Release\SoftwareMonkeys.FileNodes.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MyClass.cs" />
     <Compile Include="AssemblyInfo.cs" />
-    <Compile Include="PackageManager\IPackageManager.cs" />
     <Compile Include="IScript.Zip.cs" />
     <Compile Include="IScript.Time.cs" />
     <Compile Include="IScript.TearDown.cs" />
@@ -48,7 +51,6 @@
     <Compile Include="IScript.Relocation.cs" />
     <Compile Include="IScript.SetUp.cs" />
     <Compile Include="IScript.Stack.cs" />
-    <Compile Include="IScript.Console.cs" />
     <Compile Include="IScript.Construct.cs" />
     <Compile Include="IScript.cs" />
     <Compile Include="IScript.Download.cs" />
@@ -57,7 +59,6 @@
     <Compile Include="IScript.Git.cs" />
     <Compile Include="IScript.Http.cs" />
     <Compile Include="IScript.Import.cs" />
-    <Compile Include="IScript.Install.cs" />
     <Compile Include="IScript.IO.cs" />
     <Compile Include="IScript.Libs.cs" />
     <Compile Include="IScript.Nodes.cs" />
@@ -68,9 +69,13 @@
     <Compile Include="IScriptConstructor.cs" />
     <Compile Include="IScriptRelocator.cs" />
     <Compile Include="IScriptTearDowner.cs" />
+    <Compile Include="IScript.ConsoleWriter.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
-    <Folder Include="PackageManager\" />
+    <ProjectReference Include="..\SoftwareMonkeys.csAnt.IO.Contracts\SoftwareMonkeys.csAnt.IO.Contracts.csproj">
+      <Project>{53E3AFEA-3627-4846-B2E4-5A8091E96BC6}</Project>
+      <Name>SoftwareMonkeys.csAnt.IO.Contracts</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>
