@@ -40,6 +40,11 @@ class CycleBuildScript : BaseProjectScript
 			"ClearDlls"
 		);
 
+		// Increment the version
+		ExecuteScript(
+			"IncrementVersion"
+		);
+
 		Console.WriteLine("Building...");
 		Console.WriteLine("");
 
@@ -63,6 +68,11 @@ class CycleBuildScript : BaseProjectScript
 			        "BuildAllSolutions",
 			        "-mode:" + mode
 		        );
+		}
+
+		if (!IsError)
+		{
+                    ExecuteScript("Repack");
 		}
 
 		if (!IsError)

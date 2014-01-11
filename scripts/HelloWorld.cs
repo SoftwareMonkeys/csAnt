@@ -1,11 +1,12 @@
 //css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.dll;
+//css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.Contracts.dll;
 using System;
 using System.IO;
 using Microsoft.CSharp;
 using System.Diagnostics;
 using SoftwareMonkeys.csAnt;
 
-class HelloWorldScript : BaseScript
+public class HelloWorldScript : BaseScript
 {
 	public static void Main(string[] args)
 	{

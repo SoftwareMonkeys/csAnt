@@ -52,42 +52,15 @@ class CopyBinToLibScript : BaseProjectScript
 				        + toFile.Replace(ProjectDirectory, "")
 			        );
 
-			        RenameExisting(toFile);
-
 			        File.Copy(file, toFile, true);
 		        }
 		}
-
-		ClearBackups();
 
 		Console.WriteLine(i + " files copied.");
 
 		AddSummary("Moved " + i + " files from '/bin/' to '/lib/" + ProjectName + "'");
 
 		return true;
-	}
-
-	public void RenameExisting(string file)
-	{
-		if (File.Exists(file))
-		{
-			var toFile = file + ".bak";		
-
-			if (File.Exists(toFile))
-				File.Delete(toFile);
-
-			File.Move(file, toFile);
-		}
-	}
-
-	public void ClearBackups()
-	{
-		var dir = GetLibDir();
-
-		foreach (string file in Directory.GetFiles(dir, "*.bak"))
-		{
-			File.Delete(file);
-		}
 	}
 
 	public string GetLibDir()

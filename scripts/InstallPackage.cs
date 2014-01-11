@@ -1,5 +1,7 @@
 //css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.dll;
 //css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.Projects.dll;
+//css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.Packages.dll;
+//css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.Packages.Contracts.dll;
 
 using System;
 using System.IO;
@@ -46,8 +48,6 @@ class InstallPackageScript : BaseProjectScript
                     var packages = new PackageManager(CurrentDirectory);
 
                     packages.Install(packageName, groupName, repositoryPath);
-
-                    
                 }
 		return !IsError;
 	}

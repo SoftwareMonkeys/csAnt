@@ -16,27 +16,28 @@ class CopyPackageToRepositoryScript : BaseProjectScript
 	
 	public override bool Run(string[] args)
 	{
-		string pkgDirectory = ProjectDirectory
+		string pkgsDirectory = ProjectDirectory
 			+ Path.DirectorySeparatorChar
-			+ "pkg";
+			+ "pkgs";
 	
 	        Console.WriteLine("");
 	        Console.WriteLine("Packages directory:");
-	        Console.WriteLine(pkgDirectory);
+	        Console.WriteLine(pkgsDirectory);
 	        Console.WriteLine("");
 
 		int i = 0;
 
+                // TODO: Figure out a centralized way of generating the path
 		var repoDir = Path.GetFullPath(
 			OriginalDirectory
-			+ "/../../pkg"		
+			+ "/../../pkgs"		
 		);
 
 		Console.WriteLine("Repo dir:");
 		Console.WriteLine(repoDir);
 	        Console.WriteLine("");
 
-                foreach (string dir in Directory.GetDirectories(pkgDirectory))
+                foreach (string dir in Directory.GetDirectories(pkgsDirectory))
                 {
                         var packageName = Path.GetFileName(dir);
                 
@@ -64,13 +65,16 @@ class CopyPackageToRepositoryScript : BaseProjectScript
 				        + toFile
 			        );
 
-			        //File.Copy(file, toFile, true);
+				EnsureDirectoryExists(Path.GetDirectoryName(toFile));
+
+				if (!File.Exists(toFile))
+			        	File.Copy(file, toFile, true);
 		        }
 		}
 
 		Console.WriteLine(i + " files copied.");
 
-		AddSummary("Moved " + i + " files from '/bin/' to '/../../pkg/'");
+		AddSummary("Moved " + i + " files from '/bin/' to '" + repoDir + "'");
 
 		return true;
 	}
