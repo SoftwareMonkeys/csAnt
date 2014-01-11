@@ -1,6 +1,6 @@
 using System;
 
-namespace SoftwareMonkeys.csAnt
+namespace SoftwareMonkeys.csAnt.IO
 {
     public interface IFilesGrabber
     {

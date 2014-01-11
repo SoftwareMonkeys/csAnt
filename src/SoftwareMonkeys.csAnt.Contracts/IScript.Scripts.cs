@@ -13,6 +13,7 @@ namespace SoftwareMonkeys.csAnt
         IScript ActivateScriptFromFile(string scriptFilePath);
 
         void ExecuteScript(string scriptName);
+        void ExecuteScriptFile(string scriptFileName);
         #endregion
 
     }
