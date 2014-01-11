@@ -27,7 +27,7 @@ class Test_PackagesIntegration : BaseTestScript
 	        new FilesGrabber(
                     OriginalDirectory,
                     CurrentDirectory
-                ).GrabOriginalScriptingFiles();
+                ).GrabOriginalFiles();
 
                 var packageName = "TestPackage";
 
@@ -41,9 +41,9 @@ class Test_PackagesIntegration : BaseTestScript
                 // Add files to package
                 ExecuteScript("AddFilesToPackage", packageName, groupName, "scripts/*.cs");
 
-                var repoPath = GetTmpDir()
+                var repoPath = Path.GetDirectoryName(GetTmpDir())
                     + Path.DirectorySeparatorChar
-                    + "pkgs";
+                    + "pkgs-repo";
 
                 // Send the package to the repository
                 ExecuteScript("CreatePackageRepository", "local", repoPath);
@@ -54,14 +54,26 @@ class Test_PackagesIntegration : BaseTestScript
                 // Send the package to the repository
                 ExecuteScript("SendPackage", packageName, groupName, repoPath);
 
+               // var newDir = Path.GetDirectoryName(GetTmpDir())
+               //     + Path.DirectorySeparatorChar
+               //     + "TestProject";
+
+                //Directory.CreateDirectory(newDir);
+
+               // Relocate(newDir);
+
                 ExecuteScript(
                     "InstallPackage",
                     "-p:" + packageName,
                     "-g:" + groupName,
-                    "-r:" + ToRelative(repoPath)
+                    "-r:" + repoPath
                 );
 
-                Assert.IsTrue(Console.Out.ToString().Contains("Executed package install script."), "The install script didn't execute.");
+                Console.Out.Flush();
+
+                var console = (ConsoleWriter)Console.Out;
+
+                Assert.IsTrue(console.Output.Contains("Executed package install script."), "The install script didn't execute.");
                 
 		return !IsError;
 	}
@@ -88,7 +100,7 @@ public class InstallScript : BaseScript
                 Console.WriteLine("""");
                 Console.WriteLine(""Installed the test package."");
                 Console.WriteLine(""Executed package install script."");
-                Console.WriteLine("");
+                Console.WriteLine("""");
 
                 AddSummary(""Installed the test package."");
 
@@ -107,7 +119,7 @@ public class InstallScript : BaseScript
                 + Path.DirectorySeparatorChar
                 + "scripts"
                 + Path.DirectorySeparatorChar
-                + "InstallPackage.cs";
+                + "Install.cs";
 
              EnsureDirectoryExists(Path.GetDirectoryName(filePath));
 
