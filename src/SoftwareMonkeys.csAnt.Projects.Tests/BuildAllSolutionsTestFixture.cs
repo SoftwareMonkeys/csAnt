@@ -1,6 +1,7 @@
 using System;
 using NUnit.Framework;
 using System.IO;
+using SoftwareMonkeys.csAnt.IO;
 
 namespace SoftwareMonkeys.csAnt.Projects.Tests
 {
@@ -12,7 +13,10 @@ namespace SoftwareMonkeys.csAnt.Projects.Tests
 		{
 			var script = GetDummyScript();
 
-			script.FilesGrabber.GrabOriginalFiles();
+			new FilesGrabber(
+                script.OriginalDirectory,
+                script.CurrentDirectory
+                ).GrabOriginalFiles();
 
             // Break a file so it won't build
             var brokenFile = script.CurrentDirectory

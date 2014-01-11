@@ -1,4 +1,5 @@
 using System;
+using SoftwareMonkeys.csAnt.IO;
 
 namespace SoftwareMonkeys.csAnt.Tests
 {
@@ -12,7 +13,11 @@ namespace SoftwareMonkeys.csAnt.Tests
         {
             base.Construct(scriptName, parentScript);
 
-            Script.FilesGrabber = new FilesGrabber((IDummyScript)Script);
+            // TODO: Remove if not needed. Should be obsolete
+            /*Script.FilesGrabber = new FilesGrabber(
+                Script.OriginalDirectory,
+                Script.CurrentDirectory
+            );*/
 
             Script.SetUpper = new DummyScriptSetUpper((IDummyScript)Script);
 

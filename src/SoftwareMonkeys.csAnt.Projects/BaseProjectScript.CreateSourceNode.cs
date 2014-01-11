@@ -1,11 +1,18 @@
 using System;
+using System.IO;
 
 namespace SoftwareMonkeys.csAnt.Projects
 {
-    public class BaseProjectScript
+    public partial class BaseProjectScript
     {
-        public BaseProjectScript ()
+        public void CreateSourceNode()
         {
+            CreateNode (
+                CurrentDirectory
+                + Path.DirectorySeparatorChar
+                + "src",
+                "Source"
+            );
         }
     }
 }

@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 
 namespace SoftwareMonkeys.csAnt.Commands
 {
@@ -8,14 +9,12 @@ namespace SoftwareMonkeys.csAnt.Commands
 
 		public object ReturnValue { get;set; }
 
-		public ConsoleWriter Console { get; set; }
-
 		public BaseScriptCommand(
 			IScript script
 		)
 		{
 			Script = script;
-			Console = script.Console;
+            Console.SetOut ((TextWriter)Script.ConsoleWriter);
 		}
 
 		public abstract void Execute();

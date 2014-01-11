@@ -2,10 +2,16 @@ using System;
 
 namespace SoftwareMonkeys.csAnt
 {
-    public class BaseScript
+    public partial class BaseScript
     {
-        public BaseScript ()
+        public void CompileScript(string scriptName)
         {
+            CompileScripts (scriptName);
+        }
+        
+        public void CompileScript(string scriptName, bool force)
+        {
+            CompileScripts (force, scriptName);
         }
     }
 }

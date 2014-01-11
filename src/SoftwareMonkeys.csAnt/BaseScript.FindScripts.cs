@@ -21,6 +21,9 @@ namespace SoftwareMonkeys.csAnt
                 + Path.DirectorySeparatorChar
                 + "scripts";
 
+            if (!pattern.EndsWith(".cs"))
+                pattern += ".cs";
+
             var scripts = FindFiles (scriptsDir, pattern);
 
             var scriptNames = new List<string>();

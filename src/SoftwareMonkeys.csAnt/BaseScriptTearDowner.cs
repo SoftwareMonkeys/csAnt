@@ -6,12 +6,12 @@ namespace SoftwareMonkeys.csAnt
     {
         public IScript Script { get;set; }
 
-        public ConsoleWriter Console { get;set; }
+        public IConsoleWriter Console { get;set; }
 
         public BaseScriptTearDowner(IScript script)
         {
             Script = script;
-            Console = Script.Console;
+            Console = Script.ConsoleWriter;
         }
 
         public virtual void TearDown ()

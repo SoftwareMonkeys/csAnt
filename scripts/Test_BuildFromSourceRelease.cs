@@ -43,7 +43,7 @@ class Test_BuildFromSourceReleaseScript : BaseProjectTestScript
 	{
                 var tmpDir = GetTmpDir();
                 
-                InstallTo("csAnt", tmpDir);
+                InstallTo("csAnt-project", tmpDir);
 
 		Console.WriteLine("");
 		Console.WriteLine("Tmp dir:");

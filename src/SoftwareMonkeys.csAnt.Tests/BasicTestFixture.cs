@@ -11,6 +11,8 @@ namespace SoftwareMonkeys.csAnt.Tests
         {
             var fixture = new SuccessfulTestFixture();
 
+            fixture.EnsureSetUp();
+
             fixture.Test_Succeed();
         }
     }

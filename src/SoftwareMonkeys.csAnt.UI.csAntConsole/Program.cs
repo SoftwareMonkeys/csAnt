@@ -3,12 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
+using SoftwareMonkeys.csAnt.Packages;
+using SoftwareMonkeys.csAnt.IO;
 
 namespace SoftwareMonkeys.csAnt.UI.csAntConsole
 {
 	class Program
 	{
-		static public ConsoleWriter Console { get; set; }
+        static public ConsoleWriter ConsoleWriter { get;set; }
 
 		public static void Main(string[] args)
 		{
@@ -34,7 +36,8 @@ namespace SoftwareMonkeys.csAnt.UI.csAntConsole
 
 		static public void InitializeConsoleWriter(string scriptName)
 		{	
-			Console = new ConsoleWriter("logs", scriptName);
+            ConsoleWriter = new ConsoleWriter(Console.Out, "logs", scriptName);
+			Console.SetOut (ConsoleWriter);
 		}
 
 		static public void Execute (string scriptName, string[] args)
@@ -47,7 +50,7 @@ namespace SoftwareMonkeys.csAnt.UI.csAntConsole
 
             script.Indent = -1; // Set the launcher script indent to -1 so it doesn't increase the indent of the script it calls
 
-            script.Console = Console;
+            script.ConsoleWriter = ConsoleWriter;
 
             if (arguments.Contains ("v")
                 || arguments.Contains ("verbose"))
@@ -65,7 +68,6 @@ namespace SoftwareMonkeys.csAnt.UI.csAntConsole
 
             if (arguments.Contains ("b"))
                 script.CurrentDirectory = Path.GetFullPath (arguments ["b"]);
-			
 
             if (arguments.Contains ("t")) {
                 script.Time = DateTime.Parse (arguments ["t"]);
@@ -86,6 +88,9 @@ namespace SoftwareMonkeys.csAnt.UI.csAntConsole
 			script.CurrentDirectory = Path.GetFullPath(
 				Environment.CurrentDirectory
 			);
+            
+            InitializeComponents(script);
+
 
 			if (String.IsNullOrEmpty(scriptName))
 			{
@@ -132,5 +137,17 @@ namespace SoftwareMonkeys.csAnt.UI.csAntConsole
 				Console.WriteLine("");
 			}
 		}
+
+        static public void InitializeComponents(IScript script)
+        {
+            // TODO: Remove obsolete code
+            /*script.InitializePackageManager(
+                new PackageManager()
+            );*/
+
+            script.InitializeFileFinder(
+                new FileFinder()
+            );
+        }
 	}
 }

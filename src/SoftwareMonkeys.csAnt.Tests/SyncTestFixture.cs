@@ -1,6 +1,7 @@
 using System;
 using NUnit.Framework;
 using System.IO;
+using SoftwareMonkeys.csAnt.IO;
 
 namespace SoftwareMonkeys.csAnt.Tests
 {
@@ -10,11 +11,14 @@ namespace SoftwareMonkeys.csAnt.Tests
 		[Test]
 		public void Test_Sync()
 		{
-			var testScript = GetDummyScript();
+			var script = GetDummyScript();
 
-			testScript.FilesGrabber.GrabOriginalFiles();
+			new FilesGrabber(
+                script.OriginalDirectory,
+                script.CurrentDirectory
+                ).GrabOriginalFiles();
 
-			var dir = testScript.CurrentDirectory;
+			var dir = script.CurrentDirectory;
 
 			Console.WriteLine("Tmp dir: " + dir);
 
@@ -22,13 +26,13 @@ namespace SoftwareMonkeys.csAnt.Tests
 				+ Path.DirectorySeparatorChar
 					+ "One";
 
-			testScript.EnsureDirectoryExists(subDir1);
+			script.EnsureDirectoryExists(subDir1);
 
 			var subDir2 = dir
 				+ Path.DirectorySeparatorChar
 					+ "Two";
 
-			testScript.EnsureDirectoryExists(subDir2);
+			script.EnsureDirectoryExists(subDir2);
 
 			var tmpFile = subDir1
 				+ Path.DirectorySeparatorChar
@@ -38,7 +42,7 @@ namespace SoftwareMonkeys.csAnt.Tests
 
 			File.WriteAllText(tmpFile, content);
 
-			testScript.Sync(subDir1, subDir2);
+			script.Sync(subDir1, subDir2);
 
 			Assert.AreEqual(1, Directory.GetFiles(subDir2).Length, "Wrong number of files found in second directory.");
 		}

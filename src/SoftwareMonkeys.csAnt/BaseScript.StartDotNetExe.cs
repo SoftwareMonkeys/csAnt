@@ -15,6 +15,10 @@ namespace SoftwareMonkeys.csAnt
 			if (IsMono)
 			{
 				cmd = "mono";
+
+                // If the script is in debug mode then use --debug when executing 'mono [program.exe]'
+                if (IsDebug)
+                    argsList.Add ("--debug");
 				argsList.Add(exeFile);
 			}
 

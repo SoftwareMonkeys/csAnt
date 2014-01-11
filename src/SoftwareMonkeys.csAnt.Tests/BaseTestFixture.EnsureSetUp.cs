@@ -2,10 +2,12 @@ using System;
 
 namespace SoftwareMonkeys.csAnt.Tests
 {
-    public class BaseTestFixture
+    public partial class BaseTestFixture
     {
-        public BaseTestFixture ()
+        public void EnsureSetUp()
         {
+            if (!IsSetUp)
+                SetUp();
         }
     }
 }

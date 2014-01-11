@@ -5,8 +5,9 @@ namespace SoftwareMonkeys.csAnt.Projects
 {
 	public abstract partial class BaseProjectScript : BaseScript
 	{
-		public BaseProjectScript () : base()
+		public BaseProjectScript ()
 		{
+            Constructor = new ProjectScriptConstructor(this);
 		}
 
 		public BaseProjectScript (string scriptName)

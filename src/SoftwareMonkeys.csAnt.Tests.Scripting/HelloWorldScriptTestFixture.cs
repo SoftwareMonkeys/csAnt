@@ -1,5 +1,6 @@
 using System;
 using NUnit.Framework;
+using SoftwareMonkeys.csAnt.IO;
 
 namespace SoftwareMonkeys.csAnt.Tests.Scripting
 {
@@ -11,7 +12,10 @@ namespace SoftwareMonkeys.csAnt.Tests.Scripting
 		{
 			var script = GetDummyScript();
 
-			script.FilesGrabber.GrabOriginalScriptingFiles();
+			new FilesGrabber(
+                script.OriginalDirectory,
+                script.CurrentDirectory
+                ).GrabOriginalScriptingFiles();
 
 			script.ExecuteScript("Test_HelloWorld");
 
@@ -23,7 +27,10 @@ namespace SoftwareMonkeys.csAnt.Tests.Scripting
         {
             var script = GetDummyScript();
 
-            script.FilesGrabber.GrabOriginalScriptingFiles();
+            new FilesGrabber(
+                script.OriginalDirectory,
+                script.CurrentDirectory
+                ).GrabOriginalScriptingFiles();
 
             script.ExecuteScript("HelloWorld");
 

@@ -2,11 +2,9 @@ using System;
 
 namespace SoftwareMonkeys.csAnt.IO
 {
-    public class FileFinderOutput
+    static public class FileFinderOutput
     {
-        public FileFinderOutput ()
-        {
-        }
+        static public bool IsVerbose { get;set; }
     }
 }
 

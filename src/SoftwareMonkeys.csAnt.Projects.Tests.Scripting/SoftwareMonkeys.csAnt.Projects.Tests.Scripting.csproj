@@ -57,13 +57,17 @@
       <Project>{E79918A1-F275-4073-9968-77DAB04622A9}</Project>
       <Name>SoftwareMonkeys.csAnt.Tests</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SoftwareMonkeys.csAnt.Projects.Tests\SoftwareMonkeys.csAnt.Projects.Tests.csproj">
-      <Project>{5B5A328E-6F70-498A-AB13-26E48CBE3BA1}</Project>
-      <Name>SoftwareMonkeys.csAnt.Projects.Tests</Name>
-    </ProjectReference>
     <ProjectReference Include="..\SoftwareMonkeys.csAnt.Tests.Scripting\SoftwareMonkeys.csAnt.Tests.Scripting.csproj">
       <Project>{98C7EEC8-1AD5-4570-8EA5-76FE959F3B58}</Project>
       <Name>SoftwareMonkeys.csAnt.Tests.Scripting</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SoftwareMonkeys.csAnt.Contracts\SoftwareMonkeys.csAnt.Contracts.csproj">
+      <Project>{EA178299-9D1E-482E-B3CD-D3CEBF62CADF}</Project>
+      <Name>SoftwareMonkeys.csAnt.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SoftwareMonkeys.csAnt.Projects.Tests\SoftwareMonkeys.csAnt.Projects.Tests.csproj">
+      <Project>{5B5A328E-6F70-498A-AB13-26E48CBE3BA1}</Project>
+      <Name>SoftwareMonkeys.csAnt.Projects.Tests</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>

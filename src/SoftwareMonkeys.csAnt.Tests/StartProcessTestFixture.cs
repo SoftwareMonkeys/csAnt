@@ -14,8 +14,18 @@ namespace SoftwareMonkeys.csAnt.Tests
 
             script.StartProcess ("echo", "Hello world!");
 
-			Assert.IsTrue(script.Console.Output.Contains ("Hello world!"), "The output is incorrect.");
+			Assert.IsTrue(script.ConsoleWriter.Output.Contains ("\nHello world!\n"), "The output is incorrect.");
 		}
+        
+        [Test]
+        public void Test_StartProcess_Error()
+        {
+            var script = GetDummyScript();
+
+            script.StartProcess ("missingcommand", "Hello world!");
+
+            Assert.IsTrue(script.ConsoleWriter.Output.Contains ("Win32Exception: ApplicationName='missingcommand'"), "The output is incorrect.");
+        }
 	}
 }
 

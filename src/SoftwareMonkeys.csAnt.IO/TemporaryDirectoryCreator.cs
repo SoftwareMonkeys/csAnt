@@ -5,14 +5,9 @@ namespace SoftwareMonkeys.csAnt
 {
     public class TemporaryDirectoryCreator : ITemporaryDirectoryCreator
     {
-        public IScript Script { get;set; }
-
         private string currentDirectory;
         public string CurrentDirectory {
             get {
-                if (Script != null)
-                    return Script.CurrentDirectory;
-                else
                     return currentDirectory;
             }
             set {
@@ -27,22 +22,12 @@ namespace SoftwareMonkeys.csAnt
         public TemporaryDirectoryCreator (string currentDirectory, string timeStamp, bool isVerbose)
         {
             if (String.IsNullOrEmpty(currentDirectory))
-                throw new ArgumentException("currentDirectory");
+                throw new ArgumentException("currentDirectory", "The current directory must be provided.");
 
             if (String.IsNullOrEmpty(timeStamp))
-                throw new ArgumentException("timeStamp");
+                throw new ArgumentException("timeStamp", "A time stamp must be provided.");
 
             CurrentDirectory = currentDirectory;
-            IsVerbose = isVerbose;
-            TimeStamp = timeStamp;
-        }
-        
-        public TemporaryDirectoryCreator (IScript script, string timeStamp, bool isVerbose)
-        {
-            if (String.IsNullOrEmpty(timeStamp))
-                throw new ArgumentException("timeStamp");
-
-            Script = script;
             IsVerbose = isVerbose;
             TimeStamp = timeStamp;
         }
@@ -94,8 +79,7 @@ namespace SoftwareMonkeys.csAnt
                 Console.WriteLine ("Getting temporary root...");
                 Console.WriteLine ("Current directory:");
                 Console.WriteLine (CurrentDirectory);
-                Console.WriteLine ("Name:");
-                Console.WriteLine (name);
+                Console.WriteLine ("Name: " + name);
             }
 
             path = Path.GetFullPath (

@@ -21,8 +21,6 @@ namespace SoftwareMonkeys.csAnt
 				process.Kill();
 			}
 
-			Console.Dispose();
-
 			if (IsError && StopOnFail)
 				Environment.Exit(1);
 		}

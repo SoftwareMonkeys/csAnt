@@ -10,6 +10,8 @@
     <RootNamespace>SoftwareMonkeys.csAnt</RootNamespace>
     <AssemblyName>SoftwareMonkeys.csAnt</AssemblyName>
     <OutputPath>..\..\bin\$(Configuration)</OutputPath>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>SoftwareMonkeys.csAnt.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -103,8 +105,6 @@
     <Compile Include="BaseScript.Unzip.cs" />
     <Compile Include="BaseScript.Zip.cs" />
     <Compile Include="ConsoleWriter.cs" />
-    <Compile Include="IScript.cs" />
-    <Compile Include="IScriptCommand.cs" />
     <Compile Include="Arguments.cs" />
     <Compile Include="Commands\AddLibCommand.cs" />
     <Compile Include="Commands\BackupFileCommand.cs" />
@@ -126,7 +126,6 @@
     <Compile Include="BaseScript.TearDown.cs" />
     <Compile Include="BaseScript.Start.cs" />
     <Compile Include="BaseScript.FixScriptName.cs" />
-    <Compile Include="SubConsoleWriter.cs" />
     <Compile Include="BaseScript.TimeStamp.cs" />
     <Compile Include="BaseScript.GetIndentSpace.cs" />
     <Compile Include="BaseScript.ActivateScript.cs" />
@@ -144,23 +143,16 @@
     <Compile Include="BaseScript.ScriptStack.cs" />
     <Compile Include="BaseScript.GetOriginalDirectory.cs" />
     <Compile Include="BaseScript.ParentScript.cs" />
-    <Compile Include="IScriptSetUpper.cs" />
-    <Compile Include="IScriptTearDowner.cs" />
-    <Compile Include="IScriptConstructor.cs" />
     <Compile Include="BaseScript.TearDowner.cs" />
     <Compile Include="ScriptTearDowner.cs" />
     <Compile Include="BaseScriptConstructor.cs" />
     <Compile Include="BaseScriptSetUpper.cs" />
     <Compile Include="BaseScriptTearDowner.cs" />
     <Compile Include="BaseScript.SetUpper.cs" />
-    <Compile Include="FilesGrabber.cs" />
-    <Compile Include="BaseScript.FilesGrabber.cs" />
     <Compile Include="BaseScript.Constructor.cs" />
-    <Compile Include="IScriptRelocator.cs" />
     <Compile Include="BaseScript.Relocator.cs" />
     <Compile Include="ScriptConstructor.cs" />
     <Compile Include="ScriptSetUpper.cs" />
-    <Compile Include="TemporaryDirectoryCreator.cs" />
     <Compile Include="BaseScript.TemporaryDirectoryCreator.cs" />
     <Compile Include="BaseScriptRelocator.cs" />
     <Compile Include="ScriptRelocator.cs" />
@@ -176,7 +168,6 @@
     <Compile Include="BaseScript.ActivateScriptAt.cs" />
     <Compile Include="BaseScript.GetScriptAt.cs" />
     <Compile Include="BaseScript.ToString.cs" />
-    <Compile Include="IConsoleWriter.cs" />
     <Compile Include="BaseScript.CompileScripts.cs" />
     <Compile Include="BaseScript.GetBuildMode.cs" />
     <Compile Include="BaseScript.ImportStagingDirectory.cs" />
@@ -184,8 +175,6 @@
     <Compile Include="BaseScript.RaiseEvent.cs" />
     <Compile Include="BaseScript.FindScripts.cs" />
     <Compile Include="BaseScript.GetEventScripts.cs" />
-    <Compile Include="BaseScript.Install.cs" />
-    <Compile Include="BaseScript.InstallTo.cs" />
     <Compile Include="BaseScript.AddImport.cs" />
     <Compile Include="BaseScript.AddImportPattern.cs" />
     <Compile Include="BaseScript.ImportExists.cs" />
@@ -197,38 +186,35 @@
     <Compile Include="BaseScript.ExportFile.cs" />
     <Compile Include="Commands\UnzipCommand.cs" />
     <Compile Include="Commands\ZipCommand.cs" />
-    <Compile Include="IScript.Zip.cs" />
-    <Compile Include="IScript.Download.cs" />
-    <Compile Include="IScript.Scripts.cs" />
-    <Compile Include="IScript.IO.cs" />
-    <Compile Include="IScript.Process.cs" />
-    <Compile Include="IScript.Relocation.cs" />
-    <Compile Include="IScript.Git.cs" />
-    <Compile Include="IScript.Install.cs" />
-    <Compile Include="IScript.Import.cs" />
-    <Compile Include="IScript.Events.cs" />
-    <Compile Include="IScript.Nodes.cs" />
-    <Compile Include="IScript.Time.cs" />
-    <Compile Include="IScript.Error.cs" />
-    <Compile Include="IScript.Summaries.cs" />
-    <Compile Include="IScript.TearDown.cs" />
-    <Compile Include="IScript.SetUp.cs" />
-    <Compile Include="IScript.Start.cs" />
-    <Compile Include="IScript.OriginalDirectory.cs" />
-    <Compile Include="IScript.Construct.cs" />
-    <Compile Include="IScript.Stack.cs" />
-    <Compile Include="IScript.Console.cs" />
-    <Compile Include="IScript.Mode.cs" />
-    <Compile Include="IScript.Http.cs" />
-    <Compile Include="IScript.Sync.cs" />
-    <Compile Include="IScript.Libs.cs" />
-    <Compile Include="IScript.Compile.cs" />
+    <Compile Include="PackageManagerNotInitializedException.cs" />
+    <Compile Include="BaseScript.FileFinder.cs" />
+    <Compile Include="BaseScript.InitializeFileFinder.cs" />
+    <Compile Include="BaseScript.CurrentDirectoryChanged.cs" />
+    <Compile Include="BaseScript.EnsureTimeStamp.cs" />
+    <Compile Include="BaseScript.EnsureConstructed.cs" />
+    <Compile Include="BaseScript.IsConstructed.cs" />
+    <Compile Include="BaseScript.CompileScript.cs" />
+    <Compile Include="BaseScript.IsAbsolute.cs" />
+    <Compile Include="ConsoleVerbosity.cs" />
+    <Compile Include="BaseScript.ExecuteScriptFile.cs" />
+    <Compile Include="BaseScript.BuildMode.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
-    <ProjectReference Include="..\SoftwareMonkeys.csAnt.InstallConsole\SoftwareMonkeys.csAnt.InstallConsole.csproj">
-      <Project>{68579EC1-35A8-4923-9C3B-75CE6BC0D0CA}</Project>
-      <Name>SoftwareMonkeys.csAnt.InstallConsole</Name>
+    <ProjectReference Include="..\SoftwareMonkeys.csAnt.Contracts\SoftwareMonkeys.csAnt.Contracts.csproj">
+      <Project>{EA178299-9D1E-482E-B3CD-D3CEBF62CADF}</Project>
+      <Name>SoftwareMonkeys.csAnt.Contracts</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SoftwareMonkeys.csAnt.IO\SoftwareMonkeys.csAnt.IO.csproj">
+      <Project>{749ED083-15BD-4522-8FBE-847870434680}</Project>
+      <Name>SoftwareMonkeys.csAnt.IO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SoftwareMonkeys.csAnt.IO.Contracts\SoftwareMonkeys.csAnt.IO.Contracts.csproj">
+      <Project>{53E3AFEA-3627-4846-B2E4-5A8091E96BC6}</Project>
+      <Name>SoftwareMonkeys.csAnt.IO.Contracts</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Components\" />
   </ItemGroup>
 </Project>

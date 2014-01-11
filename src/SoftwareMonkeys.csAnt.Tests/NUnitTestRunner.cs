@@ -24,7 +24,7 @@ namespace SoftwareMonkeys.csAnt.Tests
         /// </summary>
         public bool AutoFinish = true;
 
-        public ConsoleWriter Console { get; set; }
+        public IConsoleWriter Console { get; set; }
         
         public NUnitTestRunner (
             IScript script,
@@ -66,7 +66,7 @@ namespace SoftwareMonkeys.csAnt.Tests
             Script = script;
             Returner = returner;
             Mode = mode;
-            Console = Script.Console;
+            Console = Script.ConsoleWriter;
             XmlFileNamer = xmlFileNamer;
             HtmlFileNamer = htmlFileNamer;
         }

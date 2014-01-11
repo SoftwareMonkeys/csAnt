@@ -1,11 +1,13 @@
 using System;
+using SoftwareMonkeys.csAnt.IO;
 
 namespace SoftwareMonkeys.csAnt
 {
-    public class BaseScript
+    public partial class BaseScript
     {
-        public BaseScript ()
+        public void InitializeFileFinder(IFileFinder finder)
         {
+            fileFinder = finder;
         }
     }
 }

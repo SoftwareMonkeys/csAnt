@@ -2,7 +2,7 @@ using System;
 using System.IO;
 using System.Net;
 
-namespace SoftwareMonkeys.csAnt.PackageManager
+namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole
 {
     public class DownloadUtility
     {

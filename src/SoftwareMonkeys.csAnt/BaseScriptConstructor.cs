@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using SoftwareMonkeys.csAnt.IO;
+using System.IO;
 
 namespace SoftwareMonkeys.csAnt
 {
@@ -21,17 +23,22 @@ namespace SoftwareMonkeys.csAnt
 
         public virtual void Construct (string scriptName, IScript parentScript)
         {
+            // TODO: Reorganize code
+            if (parentScript != null) {
+                //Script.InitializePackageManager (parentScript.Packages); // TODO: Remove if not needed
+                Script.InitializeFileFinder(parentScript.FileFinder);
+            }
+            else
+                Script.InitializeFileFinder(new FileFinder());
+
             // Construct the property values first so script can be used
             ConstructBasicProperties(scriptName, parentScript);
 
-            // Construct the console next so it can be used
-            ConstructConsole();
+            ConstructConsoleWriter(scriptName, parentScript);
 
             ConstructScriptStack();
 
             OutputHeader();
-
-            ConstructFilesGrabber();
 
             ConstructTDC();
 
@@ -67,20 +74,16 @@ namespace SoftwareMonkeys.csAnt
             }
         }
 
-        public void ConstructConsole ()
+        public void ConstructConsoleWriter (string scriptName, IScript parentScript)
         {
-            if (Script.IsVerbose)
-                Console.WriteLine ("Setting console writer:");
-
-            if (Script.ParentScript != null) {
-                Script.Console = new SubConsoleWriter (Script.ParentScript.Console, Script.ScriptName);
-                if (Script.IsVerbose)
-                    Console.WriteLine ("  SubConsoleWriter");
-            } else {
-                Script.Console = new ConsoleWriter ("logs", Script.ScriptName);
-                if (Script.IsVerbose)
-                    Console.WriteLine ("  ConsoleWriter");
+            // If the parent script has a console writer then use it
+            if (parentScript != null && parentScript.ConsoleWriter != null) {
+                Script.ConsoleWriter = Script.ParentScript.ConsoleWriter;
+            } else { // Otherwise construct a new one
+                Script.ConsoleWriter = new ConsoleWriter(Console.Out, "logs", scriptName);
             }
+            
+            Console.SetOut ((TextWriter)Script.ConsoleWriter);
         }
 
         public void ConstructScriptStack()
@@ -98,17 +101,21 @@ namespace SoftwareMonkeys.csAnt
             Script.TearDowner = new ScriptTearDowner (Script);
         }
 
-        public void ConstructFilesGrabber()
+        // TODO: Remove if not needed. Should be obsolete
+        /*public void ConstructFilesGrabber()
         {
             // Files grabber
-            Script.FilesGrabber = new FilesGrabber (Script);
-        }
+            Script.FilesGrabber = new FilesGrabber (
+                Script.OriginalDirectory,
+                Script.CurrentDirectory
+                );
+        }*/
 
         public void ConstructTDC()
         {
             // Temporary directory creator
             Script.TemporaryDirectoryCreator = new TemporaryDirectoryCreator (
-                Script,
+                Script.CurrentDirectory,
                 Script.TimeStamp,
                 Script.IsVerbose
             );

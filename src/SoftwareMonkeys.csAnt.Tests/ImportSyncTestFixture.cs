@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using NUnit.Framework;
+using SoftwareMonkeys.csAnt.IO;
 
 namespace SoftwareMonkeys.csAnt.Tests
 {
@@ -12,7 +13,10 @@ namespace SoftwareMonkeys.csAnt.Tests
 		{
 			var script = (BaseScript)GetDummyScript();
 
-            script.FilesGrabber.GrabOriginalFiles();
+            new FilesGrabber(
+                script.OriginalDirectory,
+                script.CurrentDirectory
+                ).GrabOriginalFiles();
 
 			script.IsVerbose = true;
 

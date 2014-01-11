@@ -2,18 +2,37 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 
-namespace SoftwareMonkeys.csAnt
+namespace SoftwareMonkeys.csAnt.IO
 {
     public class FilesGrabber : IFilesGrabber
     {
-        public IScript Script { get;set; }
+        public string OriginalDirectory { get; set; }
 
-        public IConsoleWriter Console { get; set; }
+        public string CurrentDirectory { get;set; }
 
-        public FilesGrabber (IScript script)
+        public IFileFinder Finder { get; set; }
+
+        public bool IsVerbose { get;set; }
+
+        public FilesGrabber (
+            string originalDirectory,
+            string currentDirectory
+        )
         {
-            Script = script;
-            Console = script.ConsoleWriter;
+            OriginalDirectory = originalDirectory;
+            CurrentDirectory = currentDirectory;
+            Finder = new FileFinder();
+        }
+        
+        public FilesGrabber (
+            string originalDirectory,
+            string currentDirectory,
+            IFileFinder finder
+        )
+        {
+            OriginalDirectory = originalDirectory;
+            CurrentDirectory = currentDirectory;
+            Finder = finder;
         }
 
         public void GrabOriginalScripts (
@@ -35,7 +54,7 @@ namespace SoftwareMonkeys.csAnt
         public void GrabOriginalScriptingFiles ()
         {
             GrabOriginalFiles(
-                Script.CurrentDirectory,
+                CurrentDirectory,
                 "../*.node",
                 "/*.exe",
                 "/*.node",
@@ -54,7 +73,7 @@ namespace SoftwareMonkeys.csAnt
         public void GrabOriginalFiles ()
         {
             GrabOriginalFiles(
-                Script.CurrentDirectory,
+                CurrentDirectory,
                 "/*",
                 "/lib/**",
                 "/bin/**",
@@ -73,23 +92,25 @@ namespace SoftwareMonkeys.csAnt
             Console.WriteLine ("");
             Console.WriteLine ("Grabbing original project files...");
 
-            if (Script.IsVerbose) {
+            if (IsVerbose) {
                 Console.WriteLine ("From:");
-                Console.WriteLine ("  " + Script.OriginalDirectory);
+                Console.WriteLine ("  " + OriginalDirectory);
                 Console.WriteLine ("To:");
-                Console.WriteLine ("  " + Script.CurrentDirectory);
+                Console.WriteLine ("  " + CurrentDirectory);
                 Console.WriteLine ("");
             }
 
-            if (Script.CurrentDirectory != Script.OriginalDirectory) {
-                foreach (var file in Script.FindFiles (Script.OriginalDirectory, patterns)) {
+            int i = 0;
 
-                    var toFile = file.Replace (Script.OriginalDirectory, Script.CurrentDirectory);
+            if (CurrentDirectory != OriginalDirectory) {
+                foreach (var file in Finder.FindFiles (OriginalDirectory, patterns)) {
+                    i++;
+                    var toFile = file.Replace (OriginalDirectory, CurrentDirectory);
 
                     if (!Directory.Exists (Path.GetDirectoryName (toFile)))
                         Directory.CreateDirectory (Path.GetDirectoryName (toFile));
 
-                    if (Script.IsVerbose)
+                    if (IsVerbose)
                     {
                         Console.WriteLine ("From:");
                         Console.WriteLine ("  " + file);
@@ -102,6 +123,8 @@ namespace SoftwareMonkeys.csAnt
             }
             else
                 Console.WriteLine ("OriginalDirectory is the same as CurrentDirectory. No need to grab files.");
+
+            Console.WriteLine("Total files: " + i);
 
             Console.WriteLine ("");
         }

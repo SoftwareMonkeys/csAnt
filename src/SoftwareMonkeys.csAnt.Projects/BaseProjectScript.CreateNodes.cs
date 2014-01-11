@@ -8,6 +8,7 @@ namespace SoftwareMonkeys.csAnt.Projects
         {
             CreateGroupNode();
             CreateProjectNode();
+            CreateSourceNode();
 
             RefreshCurrentNode();
         }

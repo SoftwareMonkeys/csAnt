@@ -15,9 +15,25 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoftwareMonkeys.csAnt.Proje
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoftwareMonkeys.csAnt.Tests.Scripting", "SoftwareMonkeys.csAnt.Tests.Scripting\SoftwareMonkeys.csAnt.Tests.Scripting.csproj", "{98C7EEC8-1AD5-4570-8EA5-76FE959F3B58}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoftwareMonkeys.csAnt.InstallConsole", "SoftwareMonkeys.csAnt.InstallConsole\SoftwareMonkeys.csAnt.InstallConsole.csproj", "{68579EC1-35A8-4923-9C3B-75CE6BC0D0CA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoftwareMonkeys.csAnt.Packages.Tests", "SoftwareMonkeys.csAnt.Packages.InstallConsole.Tests\SoftwareMonkeys.csAnt.Packages.Tests.csproj", "{F932547D-773F-46C6-8223-E27233A4CBDE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoftwareMonkeys.csAnt.InstallConsole.Tests", "SoftwareMonkeys.csAnt.InstallConsole.Tests\SoftwareMonkeys.csAnt.InstallConsole.Tests.csproj", "{F932547D-773F-46C6-8223-E27233A4CBDE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoftwareMonkeys.csAnt.Packages", "SoftwareMonkeys.csAnt.Packages\SoftwareMonkeys.csAnt.Packages.csproj", "{089D0473-0CB0-458B-AFDF-428D83B5CC6A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoftwareMonkeys.csAnt.Packages.CreatorConsole", "SoftwareMonkeys.csAnt.Packages.CreatorConsole\SoftwareMonkeys.csAnt.Packages.CreatorConsole.csproj", "{04D276AA-0E7F-47EE-9E78-325F6873F8A0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoftwareMonkeys.csAnt.Contracts", "SoftwareMonkeys.csAnt.Contracts\SoftwareMonkeys.csAnt.Contracts.csproj", "{EA178299-9D1E-482E-B3CD-D3CEBF62CADF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoftwareMonkeys.csAnt.SetUpFromLocalConsole", "SoftwareMonkeys.csAnt.SetUpFromLocalConsole\SoftwareMonkeys.csAnt.SetUpFromLocalConsole.csproj", "{9401F463-C823-4F52-9774-5311CB33B402}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoftwareMonkeys.csAnt.SetUpFromWebConsole.cs", "SoftwareMonkeys.csAnt.SetUpFromWebConsole.cs\SoftwareMonkeys.csAnt.SetUpFromWebConsole.cs.csproj", "{CF6B425F-5FCD-4E77-B9C1-196DB6A71BE1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoftwareMonkeys.csAnt.IO", "SoftwareMonkeys.csAnt.IO\SoftwareMonkeys.csAnt.IO.csproj", "{749ED083-15BD-4522-8FBE-847870434680}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoftwareMonkeys.csAnt.Versions", "SoftwareMonkeys.csAnt.Versions\SoftwareMonkeys.csAnt.Versions.csproj", "{9B72A2B8-0BC4-40BE-B242-AC79A080CEB6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoftwareMonkeys.csAnt.Packages.Contracts", "SoftwareMonkeys.csAnt.Packages.Contracts\SoftwareMonkeys.csAnt.Packages.Contracts.csproj", "{C3C8D4B3-1659-4307-A7B1-DAE98C15250D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoftwareMonkeys.csAnt.IO.Contracts", "SoftwareMonkeys.csAnt.IO.Contracts\SoftwareMonkeys.csAnt.IO.Contracts.csproj", "{53E3AFEA-3627-4846-B2E4-5A8091E96BC6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,6 +41,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{04D276AA-0E7F-47EE-9E78-325F6873F8A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04D276AA-0E7F-47EE-9E78-325F6873F8A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04D276AA-0E7F-47EE-9E78-325F6873F8A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04D276AA-0E7F-47EE-9E78-325F6873F8A0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{089D0473-0CB0-458B-AFDF-428D83B5CC6A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{089D0473-0CB0-458B-AFDF-428D83B5CC6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{089D0473-0CB0-458B-AFDF-428D83B5CC6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{089D0473-0CB0-458B-AFDF-428D83B5CC6A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0C5A149B-A2A7-47E0-9C3F-4DBE34745845}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0C5A149B-A2A7-47E0-9C3F-4DBE34745845}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0C5A149B-A2A7-47E0-9C3F-4DBE34745845}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -41,29 +65,53 @@ Global
 		{3BFB55C4-1247-49BD-AEC9-31BC3C0F1168}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3BFB55C4-1247-49BD-AEC9-31BC3C0F1168}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3BFB55C4-1247-49BD-AEC9-31BC3C0F1168}.Release|Any CPU.Build.0 = Release|Any CPU
+		{53E3AFEA-3627-4846-B2E4-5A8091E96BC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53E3AFEA-3627-4846-B2E4-5A8091E96BC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53E3AFEA-3627-4846-B2E4-5A8091E96BC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53E3AFEA-3627-4846-B2E4-5A8091E96BC6}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5B5A328E-6F70-498A-AB13-26E48CBE3BA1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5B5A328E-6F70-498A-AB13-26E48CBE3BA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5B5A328E-6F70-498A-AB13-26E48CBE3BA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5B5A328E-6F70-498A-AB13-26E48CBE3BA1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{68579EC1-35A8-4923-9C3B-75CE6BC0D0CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{68579EC1-35A8-4923-9C3B-75CE6BC0D0CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{68579EC1-35A8-4923-9C3B-75CE6BC0D0CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{68579EC1-35A8-4923-9C3B-75CE6BC0D0CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{749ED083-15BD-4522-8FBE-847870434680}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{749ED083-15BD-4522-8FBE-847870434680}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{749ED083-15BD-4522-8FBE-847870434680}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{749ED083-15BD-4522-8FBE-847870434680}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9401F463-C823-4F52-9774-5311CB33B402}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9401F463-C823-4F52-9774-5311CB33B402}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9401F463-C823-4F52-9774-5311CB33B402}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9401F463-C823-4F52-9774-5311CB33B402}.Release|Any CPU.Build.0 = Release|Any CPU
 		{98C7EEC8-1AD5-4570-8EA5-76FE959F3B58}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{98C7EEC8-1AD5-4570-8EA5-76FE959F3B58}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{98C7EEC8-1AD5-4570-8EA5-76FE959F3B58}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{98C7EEC8-1AD5-4570-8EA5-76FE959F3B58}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9B72A2B8-0BC4-40BE-B242-AC79A080CEB6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B72A2B8-0BC4-40BE-B242-AC79A080CEB6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B72A2B8-0BC4-40BE-B242-AC79A080CEB6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B72A2B8-0BC4-40BE-B242-AC79A080CEB6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C3C8D4B3-1659-4307-A7B1-DAE98C15250D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3C8D4B3-1659-4307-A7B1-DAE98C15250D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3C8D4B3-1659-4307-A7B1-DAE98C15250D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3C8D4B3-1659-4307-A7B1-DAE98C15250D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF6B425F-5FCD-4E77-B9C1-196DB6A71BE1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF6B425F-5FCD-4E77-B9C1-196DB6A71BE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF6B425F-5FCD-4E77-B9C1-196DB6A71BE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF6B425F-5FCD-4E77-B9C1-196DB6A71BE1}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E79918A1-F275-4073-9968-77DAB04622A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E79918A1-F275-4073-9968-77DAB04622A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E79918A1-F275-4073-9968-77DAB04622A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E79918A1-F275-4073-9968-77DAB04622A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA178299-9D1E-482E-B3CD-D3CEBF62CADF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA178299-9D1E-482E-B3CD-D3CEBF62CADF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA178299-9D1E-482E-B3CD-D3CEBF62CADF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA178299-9D1E-482E-B3CD-D3CEBF62CADF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F932547D-773F-46C6-8223-E27233A4CBDE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F932547D-773F-46C6-8223-E27233A4CBDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F932547D-773F-46C6-8223-E27233A4CBDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F932547D-773F-46C6-8223-E27233A4CBDE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = SoftwareMonkeys.csAnt.UI.csAntConsole\SoftwareMonkeys.csAnt.UI.csAntConsole.csproj
+		StartupItem = SoftwareMonkeys.csAnt.SetUpFromLocalConsole\SoftwareMonkeys.csAnt.SetUpFromLocalConsole.csproj
 		Policies = $0
 		$0.DotNetNamingPolicy = $1
 		$1.DirectoryNamespaceAssociation = None

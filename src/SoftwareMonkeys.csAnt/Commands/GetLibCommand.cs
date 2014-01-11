@@ -84,7 +84,7 @@ namespace SoftwareMonkeys.csAnt
 						Script.Error ("Library not found: '" + name + "'. Add it using 'AddLib [name] [url]'.");
 				}
 				else
-					Script.Console.WriteLine("'" + name + "' lib is already found. Skipping retrieval.");
+					Script.ConsoleWriter.WriteLine("'" + name + "' lib is already found. Skipping retrieval.");
 			}
 		}
 

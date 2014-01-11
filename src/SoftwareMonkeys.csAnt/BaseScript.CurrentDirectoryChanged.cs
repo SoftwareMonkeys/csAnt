@@ -2,10 +2,14 @@ using System;
 
 namespace SoftwareMonkeys.csAnt
 {
-    public class BaseScript
+    public partial class BaseScript
     {
-        public BaseScript ()
+        public event EventHandler<EventArgs> CurrentDirectoryChanged;
+
+        public virtual void OnCurrentDirectoryChanged()
         {
+            if (CurrentDirectoryChanged != null)
+                CurrentDirectoryChanged(this, EventArgs.Empty);
         }
     }
 }

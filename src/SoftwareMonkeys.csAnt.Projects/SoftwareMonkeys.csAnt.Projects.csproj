@@ -9,6 +9,8 @@
     <OutputType>Library</OutputType>
     <RootNamespace>SoftwareMonkeys.csAnt.Projects</RootNamespace>
     <AssemblyName>SoftwareMonkeys.csAnt.Projects</AssemblyName>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\SoftwareMonkeys.csAnt.Packages.Contracts\SoftwareMonkeys.csAnt.Packages.Contracts.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -59,6 +61,11 @@
     <Compile Include="Commands\GenerateProjectReleasesZipCommand.cs" />
     <Compile Include="BaseProjectScript.CreateNodes.cs" />
     <Compile Include="ProjectScriptConstructor.cs" />
+    <Compile Include="BaseProjectScript.CreateSourceNode.cs" />
+    <Compile Include="BaseProjectScript.InitializeVersionManager.cs" />
+    <Compile Include="BaseProjectScript.Version.cs" />
+    <Compile Include="BaseProjectScript.IncrementVersion.cs" />
+    <Compile Include="BaseProjectScript.SetVersion.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -68,6 +75,14 @@
     <ProjectReference Include="..\SoftwareMonkeys.csAnt\SoftwareMonkeys.csAnt.csproj">
       <Project>{16297BCB-0A8C-42E6-BE35-921085C3E238}</Project>
       <Name>SoftwareMonkeys.csAnt</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SoftwareMonkeys.csAnt.Contracts\SoftwareMonkeys.csAnt.Contracts.csproj">
+      <Project>{EA178299-9D1E-482E-B3CD-D3CEBF62CADF}</Project>
+      <Name>SoftwareMonkeys.csAnt.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SoftwareMonkeys.csAnt.Versions\SoftwareMonkeys.csAnt.Versions.csproj">
+      <Project>{9B72A2B8-0BC4-40BE-B242-AC79A080CEB6}</Project>
+      <Name>SoftwareMonkeys.csAnt.Versions</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>

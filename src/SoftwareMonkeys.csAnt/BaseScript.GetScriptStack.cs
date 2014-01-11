@@ -5,18 +5,30 @@ namespace SoftwareMonkeys.csAnt
 {
     public partial class BaseScript
     {
-        public Stack<string> GetScriptStack ()
+        public Stack<IScript> GetScriptStack ()
         {
-            var c = Console;
+            // TODO: Clean up
+            //var c = ConsoleWriter;
 
-            Stack<string> stack = new Stack<string> ();
+            Stack<IScript> stack = new Stack<IScript> ();
 
-            if (c is SubConsoleWriter) {
+            if (ParentScript != null) {
+                IScript script = this;
+
+                while (script.ParentScript != null)
+                {
+                    script = script.ParentScript;
+
+                    stack.Push(script);
+                }
+            }
+
+            /*if (c is SubConsoleWriter) {
                 while (c is SubConsoleWriter) {
                     stack.Push(c.ScriptName);
                     c = ((SubConsoleWriter)c).ParentWriter;
                 }
-            }
+            }*/
 
             return stack;
         }

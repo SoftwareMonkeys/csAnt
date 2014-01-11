@@ -44,7 +44,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
-    <ProjectReference Include="..\SoftwareMonkeys.csAnt.PackageManager\SoftwareMonkeys.csAnt.Packages.csproj">
+    <ProjectReference Include="..\SoftwareMonkeys.csAnt.Packages\SoftwareMonkeys.csAnt.Packages.csproj">
       <Project>{089D0473-0CB0-458B-AFDF-428D83B5CC6A}</Project>
       <Name>SoftwareMonkeys.csAnt.Packages</Name>
     </ProjectReference>

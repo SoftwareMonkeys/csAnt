@@ -14,7 +14,7 @@ namespace SoftwareMonkeys.csAnt
 			Console.WriteLine ("");
 			Console.WriteLine ("Import exists:");
 			Console.WriteLine (path);
-			Console.WriteLine (Directory.Exists(path));
+			Console.WriteLine (Directory.Exists(path).ToString());
 			Console.WriteLine ("");
 
 			return Directory.Exists(path);

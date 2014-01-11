@@ -40,45 +40,49 @@
     <Compile Include="PackageInstallerTestFixture.cs" />
     <Compile Include="PackageBuilderTestFixture.cs" />
     <Compile Include="PackagesTestUtilities.cs" />
-    <Compile Include="Integration\PackagesTestFixture.cs" />
     <Compile Include="BasePackagesTestFixture.cs" />
+    <Compile Include="Integration\PackagesTestFixture.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
-    <ProjectReference Include="..\SoftwareMonkeys.csAnt\SoftwareMonkeys.csAnt.csproj">
-      <Project>{16297BCB-0A8C-42E6-BE35-921085C3E238}</Project>
-      <Name>SoftwareMonkeys.csAnt</Name>
+    <Folder Include="Integration\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SoftwareMonkeys.csAnt.Packages\SoftwareMonkeys.csAnt.Packages.csproj">
+      <Project>{089D0473-0CB0-458B-AFDF-428D83B5CC6A}</Project>
+      <Name>SoftwareMonkeys.csAnt.Packages</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SoftwareMonkeys.csAnt.Packages.CreatorConsole\SoftwareMonkeys.csAnt.Packages.CreatorConsole.csproj">
+      <Project>{04D276AA-0E7F-47EE-9E78-325F6873F8A0}</Project>
+      <Name>SoftwareMonkeys.csAnt.Packages.CreatorConsole</Name>
     </ProjectReference>
     <ProjectReference Include="..\SoftwareMonkeys.csAnt.Tests\SoftwareMonkeys.csAnt.Tests.csproj">
       <Project>{E79918A1-F275-4073-9968-77DAB04622A9}</Project>
       <Name>SoftwareMonkeys.csAnt.Tests</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SoftwareMonkeys.csAnt.Tests.Scripting\SoftwareMonkeys.csAnt.Tests.Scripting.csproj">
-      <Project>{98C7EEC8-1AD5-4570-8EA5-76FE959F3B58}</Project>
-      <Name>SoftwareMonkeys.csAnt.Tests.Scripting</Name>
+    <ProjectReference Include="..\SoftwareMonkeys.csAnt.IO\SoftwareMonkeys.csAnt.IO.csproj">
+      <Project>{749ED083-15BD-4522-8FBE-847870434680}</Project>
+      <Name>SoftwareMonkeys.csAnt.IO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SoftwareMonkeys.csAnt.IO.Contracts\SoftwareMonkeys.csAnt.IO.Contracts.csproj">
+      <Project>{53E3AFEA-3627-4846-B2E4-5A8091E96BC6}</Project>
+      <Name>SoftwareMonkeys.csAnt.IO.Contracts</Name>
     </ProjectReference>
     <ProjectReference Include="..\SoftwareMonkeys.csAnt.Contracts\SoftwareMonkeys.csAnt.Contracts.csproj">
       <Project>{EA178299-9D1E-482E-B3CD-D3CEBF62CADF}</Project>
       <Name>SoftwareMonkeys.csAnt.Contracts</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SoftwareMonkeys.csAnt.IO\SoftwareMonkeys.csAnt.IO.csproj">
-      <Project>{749ED083-15BD-4522-8FBE-847870434680}</Project>
-      <Name>SoftwareMonkeys.csAnt.IO</Name>
+    <ProjectReference Include="..\SoftwareMonkeys.csAnt.Packages.Contracts\SoftwareMonkeys.csAnt.Packages.Contracts.csproj">
+      <Project>{C3C8D4B3-1659-4307-A7B1-DAE98C15250D}</Project>
+      <Name>SoftwareMonkeys.csAnt.Packages.Contracts</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SoftwareMonkeys.csAnt.IO.Compression\SoftwareMonkeys.csAnt.IO.Compression.csproj">
-      <Project>{AFCDC47D-D8CE-4541-AED1-8E8A598EF651}</Project>
-      <Name>SoftwareMonkeys.csAnt.IO.Compression</Name>
+    <ProjectReference Include="..\SoftwareMonkeys.csAnt\SoftwareMonkeys.csAnt.csproj">
+      <Project>{16297BCB-0A8C-42E6-BE35-921085C3E238}</Project>
+      <Name>SoftwareMonkeys.csAnt</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SoftwareMonkeys.csAnt.PackageManager\SoftwareMonkeys.csAnt.Packages.csproj">
-      <Project>{089D0473-0CB0-458B-AFDF-428D83B5CC6A}</Project>
-      <Name>SoftwareMonkeys.csAnt.Packages</Name>
+    <ProjectReference Include="..\SoftwareMonkeys.csAnt.Versions\SoftwareMonkeys.csAnt.Versions.csproj">
+      <Project>{9B72A2B8-0BC4-40BE-B242-AC79A080CEB6}</Project>
+      <Name>SoftwareMonkeys.csAnt.Versions</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SoftwareMonkeys.csAnt.PackageManager.InstallConsole\SoftwareMonkeys.csAnt.Packages.InstallConsole.csproj">
-      <Project>{68579EC1-35A8-4923-9C3B-75CE6BC0D0CA}</Project>
-      <Name>SoftwareMonkeys.csAnt.Packages.InstallConsole</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Integration\" />
   </ItemGroup>
 </Project>

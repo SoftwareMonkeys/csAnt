@@ -6,16 +6,19 @@ namespace SoftwareMonkeys.csAnt
     {
         public IScript Script { get; set; }
 
-        public ConsoleWriter Console { get; set; }
-
         public BaseScriptSetUpper(IScript script)
         {
             Script = script;
-            Console = Script.Console;
         }
 
         public virtual void SetUp ()
         {
+            if (Script.Time == DateTime.MinValue
+                || String.IsNullOrEmpty (Script.TimeStamp)) {
+                Script.Time = DateTime.Now;
+                Script.TimeStamp = Script.GetTimeStamp(Script.Time);
+            }
+
             if (Script.IsVerbose) {
                 Console.WriteLine ("");
                 Console.WriteLine ("--------------------------------------------------");

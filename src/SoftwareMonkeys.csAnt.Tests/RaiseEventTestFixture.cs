@@ -1,6 +1,7 @@
 using System;
 using NUnit.Framework;
 using System.IO;
+using SoftwareMonkeys.csAnt.IO;
 
 namespace SoftwareMonkeys.csAnt.Tests
 {
@@ -12,7 +13,10 @@ namespace SoftwareMonkeys.csAnt.Tests
         {
             var script = GetDummyScript();
 
-            script.FilesGrabber.GrabOriginalScriptingFiles();
+            new FilesGrabber(
+                script.OriginalDirectory,
+                script.CurrentDirectory
+                ).GrabOriginalScriptingFiles();
 
             var eventName = "CustomEvent";
 
@@ -24,7 +28,7 @@ namespace SoftwareMonkeys.csAnt.Tests
 
             Assert.IsFalse(script.IsError, "An error occurred.");
 
-            Assert.IsTrue(script.Console.Output.Contains(messageOutput), "Expected output not found.");
+            Assert.IsTrue(Console.Out.ToString().Contains(messageOutput), "Expected output not found.");
         }
 
         public void CreateEventScript(string eventName, string messageOutput)

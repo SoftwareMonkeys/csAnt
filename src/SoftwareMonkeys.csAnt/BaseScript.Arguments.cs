@@ -4,7 +4,7 @@ namespace SoftwareMonkeys.csAnt
 {
 	public partial class BaseScript
 	{
-		public Arguments Args { get;set; }
+		public Arguments Arguments { get;set; }
 	}
 }
 

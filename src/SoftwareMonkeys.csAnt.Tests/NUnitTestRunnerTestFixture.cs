@@ -2,6 +2,7 @@ using System;
 using NUnit.Framework;
 using System.IO;
 using CSScriptLibrary;
+using SoftwareMonkeys.csAnt.IO;
 
 namespace SoftwareMonkeys.csAnt.Tests
 {
@@ -13,9 +14,16 @@ namespace SoftwareMonkeys.csAnt.Tests
         {
             var script = GetDummyScript();
             
-            script.FilesGrabber.GrabOriginalFiles("bin/**");
-            script.FilesGrabber.GrabOriginalFiles("lib/NUnit/bin/**");
-            script.FilesGrabber.GrabOriginalFiles("lib/NUnitResults/**");
+            var grabber = new FilesGrabber(
+                script.OriginalDirectory,
+                script.CurrentDirectory
+                );
+
+            grabber.GrabOriginalFiles(
+                "bin/**",
+                "lib/NUnit/bin/**",
+                "lib/NUnitResults/**"
+            );
 
             CreateDummyTest();
 

@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 using System.Text;
 using System.Collections.Specialized;
 
-namespace SoftwareMonkeys.csAnt.PackageManager
+namespace SoftwareMonkeys.csAnt.SetUpFromLocalConsole
 {
 	/// <summary>
 	/// Arguments class

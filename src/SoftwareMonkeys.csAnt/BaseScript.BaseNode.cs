@@ -32,22 +32,11 @@ namespace SoftwareMonkeys.csAnt
 			}
 
 			// TODO: See if this should be injected via constructor
-			var listener = new ConsoleListener();
-			
-			// TODO: See if this should be injected via constructor
-			var scanner = new FileNodeScanner(
-				new FileNodeLoader(
-					new FileNodeSaver(),
-					listener
-				),
-				listener
-			);
+            var fileNodes = new FileNodeManager();
 
-			listener.IsVerbose = IsVerbose;
-			
 			string dir = CurrentDirectory;
 			
-			FileNode node = scanner.ScanDirectory(dir, true, true);
+			FileNode node = fileNodes.Get(dir, true, true);
 
 			return node;
 		}

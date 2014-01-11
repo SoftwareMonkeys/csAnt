@@ -2,6 +2,7 @@ using System;
 using NUnit.Framework;
 using SoftwareMonkeys.FileNodes;
 using System.IO;
+using SoftwareMonkeys.csAnt.IO;
 
 namespace SoftwareMonkeys.csAnt.Tests
 {
@@ -20,7 +21,10 @@ namespace SoftwareMonkeys.csAnt.Tests
 
             var script = GetDummyScript("DummyScript");
 
-            script.FilesGrabber.GrabOriginalScriptingFiles();
+            new FilesGrabber(
+                script.OriginalDirectory,
+                script.CurrentDirectory
+                ).GrabOriginalScriptingFiles();
             
             var testImportScriptPath = CreateRunTestImportScript(applicationPath);
 

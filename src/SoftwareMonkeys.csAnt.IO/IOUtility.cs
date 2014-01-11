@@ -1,7 +1,7 @@
 using System;
 using System.IO;
 
-namespace SoftwareMonkeys.csAnt.PackageManager
+namespace SoftwareMonkeys.csAnt.IO
 {
     public class IOUtility
     {

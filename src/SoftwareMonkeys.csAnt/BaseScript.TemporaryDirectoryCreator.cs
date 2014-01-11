@@ -4,7 +4,7 @@ namespace SoftwareMonkeys.csAnt
 {
     public partial class BaseScript
     {
-        public TemporaryDirectoryCreator TemporaryDirectoryCreator { get;set; }
+        public ITemporaryDirectoryCreator TemporaryDirectoryCreator { get;set; }
     }
 }
 

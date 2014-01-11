@@ -19,11 +19,16 @@ namespace SoftwareMonkeys.csAnt
 			get { return Encoding.ASCII; }
 		}
 
+        public bool IsVerbose { get;set; }
+
+        public TextWriter StandardWriter { get; set; }
+
 		public ConsoleWriter ()
 		{
 		}
 
 		public ConsoleWriter(
+            TextWriter standardWriter,
 			string outputDirectory,
 			string scriptName
 		)
@@ -33,6 +38,8 @@ namespace SoftwareMonkeys.csAnt
 				+ GetTimeStamp()
 				+ "-" + scriptName
 				+ ".txt";
+
+            StandardWriter = standardWriter;
 
 			LogFile = logFile;
 
@@ -46,7 +53,10 @@ namespace SoftwareMonkeys.csAnt
 
 			// TODO: Increase the indent depending on the indent of the script
 
-			System.Console.WriteLine(text);
+            // TODO: Check if needed
+			//System.Console.WriteLine(text);
+
+            StandardWriter.WriteLine (text);
 
 			AppendOutput(text + "\n");
 			
@@ -61,8 +71,11 @@ namespace SoftwareMonkeys.csAnt
 			if (text == null)
 				text = String.Empty;
 
-			System.Console.Write(text);
+            // TODO: Check if needed
+			//System.Console.Write(text);
 			
+            StandardWriter.Write (text);
+
 			AppendOutput(text);
 
 			AppendOutputFile(text);

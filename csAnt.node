@@ -1,4 +1,6 @@
 {
-  "Properties": {},
-  "Name": null
+  "Properties": {
+    "Version": "0.1.0.21000"
+  },
+  "Name": "csAnt"
 }

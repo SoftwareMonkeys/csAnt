@@ -16,9 +16,9 @@ if [ -d "$csAntDir" ]; then
         mkdir $csAntLibDir
     fi
         
-        cp $csAntDir/bin/Release/SetUpFromLocal.exe lib/csAnt/bin/Release/SetUpFromLocal.exe
-        cp $csAntDir/bin/Release/SoftwareMonkeys.csAnt.dll lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.dll
-        cp $csAntDir/bin/Release/SoftwareMonkeys.csAnt.Contracts.dll lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.Contracts.dll
-        
-        mono lib/csAnt/bin/Release/SetUpFromLocal.exe
+	cp $csAntDir/bin/Release/SoftwareMonkeys.csAnt.IO.dll lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.IO.dll
+	cp $csAntDir/bin/Release/SoftwareMonkeys.csAnt.IO.Contracts.dll lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.IO.Contracts.dll
+	cp $csAntDir/bin/Release/SetUpFromLocal.exe lib/csAnt/bin/Release/SetUpFromLocal.exe
+
+	mono lib/csAnt/bin/Release/SetUpFromLocal.exe
  fi
