@@ -1,12 +1,13 @@
 using System;
+using SoftwareMonkeys.FileNodes;
 
 namespace SoftwareMonkeys.csAnt
 {
-    public class INodeState
+    public interface INodeState
     {
-        public INodeState ()
-        {
-        }
+        FileNode CurrentNode { get;set; }
+
+        void Refresh();
     }
 }
 

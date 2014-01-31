@@ -70,6 +70,8 @@
     <Compile Include="IScriptRelocator.cs" />
     <Compile Include="IScriptTearDowner.cs" />
     <Compile Include="IScript.ConsoleWriter.cs" />
+    <Compile Include="INodeManager.cs" />
+    <Compile Include="INodeState.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
