@@ -1,0 +1,7 @@
+{
+  "Properties": {
+    "Context": "Assembly",
+    "Version": "0.1.0.30000"
+  },
+  "Name": "SoftwareMonkeys.csAnt.Packages.CreatorConsole"
+}
