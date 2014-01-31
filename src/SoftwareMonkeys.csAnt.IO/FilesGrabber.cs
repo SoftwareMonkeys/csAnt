@@ -63,9 +63,10 @@ namespace SoftwareMonkeys.csAnt.IO
                 "/*.vbs",
                 "/bin/**",
                 "/lib/**",
-                "/src/**.cs",
-                "/src/**.csproj",
-                "/src/**.sln",
+                //"/src/**.node", // TODO: Check if needed
+                //"/src/**.cs",
+                //"/src/**.csproj",
+                //"/src/**.sln",
                 "/scripts/**"
             );
         }
@@ -77,9 +78,11 @@ namespace SoftwareMonkeys.csAnt.IO
                 "/*",
                 "/lib/**",
                 "/bin/**",
+                "/src/**.node",
                 "/src/**.cs",
                 "/src/**.csproj",
                 "/src/**.sln",
+                "/src/**.snk",
                 "/scripts/**",
                 "/rls/*.txt",
                 "/rls/*.zip",
