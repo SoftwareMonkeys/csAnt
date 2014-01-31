@@ -9,7 +9,7 @@ namespace SoftwareMonkeys.csAnt
         /// </summary>
         public void RefreshCurrentNode()
         {
-            CurrentNode = GetCurrentNode();
+            Nodes.Refresh();
         }
     }
 }
