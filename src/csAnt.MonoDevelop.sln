@@ -17,7 +17,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoftwareMonkeys.csAnt.Contr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoftwareMonkeys.csAnt.SetUpFromLocalConsole", "SoftwareMonkeys.csAnt.SetUpFromLocalConsole\SoftwareMonkeys.csAnt.SetUpFromLocalConsole.csproj", "{9401F463-C823-4F52-9774-5311CB33B402}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoftwareMonkeys.csAnt.SetUpFromWebConsole.cs", "SoftwareMonkeys.csAnt.SetUpFromWebConsole.cs\SoftwareMonkeys.csAnt.SetUpFromWebConsole.cs.csproj", "{CF6B425F-5FCD-4E77-B9C1-196DB6A71BE1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoftwareMonkeys.csAnt.SetUpFromWebConsole", "SoftwareMonkeys.csAnt.SetUpFromWebConsole\SoftwareMonkeys.csAnt.SetUpFromWebConsole.csproj", "{CF6B425F-5FCD-4E77-B9C1-196DB6A71BE1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoftwareMonkeys.csAnt.IO", "SoftwareMonkeys.csAnt.IO\SoftwareMonkeys.csAnt.IO.csproj", "{749ED083-15BD-4522-8FBE-847870434680}"
 EndProject
@@ -26,6 +26,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoftwareMonkeys.csAnt.Packages.Contracts", "SoftwareMonkeys.csAnt.Packages.Contracts\SoftwareMonkeys.csAnt.Packages.Contracts.csproj", "{C3C8D4B3-1659-4307-A7B1-DAE98C15250D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoftwareMonkeys.csAnt.IO.Contracts", "SoftwareMonkeys.csAnt.IO.Contracts\SoftwareMonkeys.csAnt.IO.Contracts.csproj", "{53E3AFEA-3627-4846-B2E4-5A8091E96BC6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoftwareMonkeys.csAnt.SetUp.Common", "SoftwareMonkeys.csAnt.SetUp.Common\SoftwareMonkeys.csAnt.SetUp.Common.csproj", "{485BCC0F-7E4F-4430-9174-3A1ADA428E71}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,6 +55,10 @@ Global
 		{3BFB55C4-1247-49BD-AEC9-31BC3C0F1168}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3BFB55C4-1247-49BD-AEC9-31BC3C0F1168}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3BFB55C4-1247-49BD-AEC9-31BC3C0F1168}.Release|Any CPU.Build.0 = Release|Any CPU
+		{485BCC0F-7E4F-4430-9174-3A1ADA428E71}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{485BCC0F-7E4F-4430-9174-3A1ADA428E71}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{485BCC0F-7E4F-4430-9174-3A1ADA428E71}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{485BCC0F-7E4F-4430-9174-3A1ADA428E71}.Release|Any CPU.Build.0 = Release|Any CPU
 		{53E3AFEA-3627-4846-B2E4-5A8091E96BC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{53E3AFEA-3627-4846-B2E4-5A8091E96BC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{53E3AFEA-3627-4846-B2E4-5A8091E96BC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -91,7 +97,7 @@ Global
 		{AFCDC47D-D8CE-4541-AED1-8E8A598EF651}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = SoftwareMonkeys.csAnt.SetUpFromWebConsole.cs\SoftwareMonkeys.csAnt.SetUpFromWebConsole.cs.csproj
+		StartupItem = SoftwareMonkeys.csAnt\SoftwareMonkeys.csAnt.csproj
 		Policies = $0
 		$0.DotNetNamingPolicy = $1
 		$1.DirectoryNamespaceAssociation = None
