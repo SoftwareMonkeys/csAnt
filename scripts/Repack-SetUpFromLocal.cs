@@ -51,6 +51,7 @@ class Repack_SetUpFromLocalScript : BaseScript
 	{
             var dependencies = new string[]{
                 "bin/Release/SoftwareMonkeys.csAnt.IO.dll",
+                "bin/Release/SoftwareMonkeys.csAnt.SetUp.Common.dll",
                 "bin/Release/SoftwareMonkeys.csAnt.IO.Contracts.dll"
             };
 
