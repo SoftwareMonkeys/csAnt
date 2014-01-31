@@ -2,14 +2,14 @@ using System;
 
 namespace SoftwareMonkeys.csAnt.Projects
 {
-    public class ProjectNodesManager : NodeManager
+    public class ProjectNodeManager : NodeManager
     {
         public new ProjectNodesCreator Creator {
             get { return (ProjectNodesCreator)base.Creator; }
             set { base.Creator = value; }
         }
 
-        public ProjectNodesManager () : base()
+        public ProjectNodeManager () : base()
         {
             Creator = new ProjectNodesCreator(State);
         }
