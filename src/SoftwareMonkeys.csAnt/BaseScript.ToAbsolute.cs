@@ -14,6 +14,18 @@ namespace SoftwareMonkeys.csAnt
                 return absolutePath;
             }
 		}
+        
+        public string ToAbsolute (string basePath, string relativePath)
+        {
+            if (!IsAbsolute (relativePath)) {
+                return basePath.TrimEnd(Path.DirectorySeparatorChar)
+                    + Path.DirectorySeparatorChar
+                        + relativePath.TrimStart(Path.DirectorySeparatorChar);
+            } else {
+                var absolutePath = relativePath;
+                return absolutePath;
+            }
+        }
 	}
 }
 
