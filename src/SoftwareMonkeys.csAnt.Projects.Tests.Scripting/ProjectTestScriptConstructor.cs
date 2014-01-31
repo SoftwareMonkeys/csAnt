@@ -1,6 +1,7 @@
 using System;
 using SoftwareMonkeys.csAnt.Tests.Scripting;
 using SoftwareMonkeys.csAnt.Tests;
+using SoftwareMonkeys.csAnt.Versions;
 
 namespace SoftwareMonkeys.csAnt.Projects.Tests.Scripting
 {
@@ -24,14 +25,17 @@ namespace SoftwareMonkeys.csAnt.Projects.Tests.Scripting
 
             base.Construct (scriptName, parentScript);
 
-
-            var script = (ITestScript)Script;
+            var script = (BaseProjectTestScript)Script;
 
             script.TestSummarizer = new TestSummarizer (script);
 
             script.SetUpper = new ProjectTestScriptSetUpper (script);
 
             script.TearDowner = new ProjectTestScriptTearDowner (script);
+            
+            script.InitializeVersionManager(new VersionManager());
+
+            script.InitializeNodeManager(new ProjectNodeManager());
             
             if (Script.IsVerbose) {
                 Console.WriteLine ("");
