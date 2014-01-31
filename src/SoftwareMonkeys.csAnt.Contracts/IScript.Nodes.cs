@@ -6,9 +6,11 @@ namespace SoftwareMonkeys.csAnt
     public partial interface IScript
     {
         #region Nodes
-        FileNode CurrentNode { get;set; }
+        INodeManager Nodes { get;set; }
 
-        void RefreshCurrentNode();
+        void InitializeNodeManager(INodeManager nodeManager);
+
+        FileNode CurrentNode { get;set; }
         #endregion
     }
 }
