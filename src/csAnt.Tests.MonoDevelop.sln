@@ -25,7 +25,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoftwareMonkeys.csAnt.Contr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoftwareMonkeys.csAnt.SetUpFromLocalConsole", "SoftwareMonkeys.csAnt.SetUpFromLocalConsole\SoftwareMonkeys.csAnt.SetUpFromLocalConsole.csproj", "{9401F463-C823-4F52-9774-5311CB33B402}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoftwareMonkeys.csAnt.SetUpFromWebConsole.cs", "SoftwareMonkeys.csAnt.SetUpFromWebConsole.cs\SoftwareMonkeys.csAnt.SetUpFromWebConsole.cs.csproj", "{CF6B425F-5FCD-4E77-B9C1-196DB6A71BE1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoftwareMonkeys.csAnt.SetUpFromWebConsole", "SoftwareMonkeys.csAnt.SetUpFromWebConsole\SoftwareMonkeys.csAnt.SetUpFromWebConsole.csproj", "{CF6B425F-5FCD-4E77-B9C1-196DB6A71BE1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoftwareMonkeys.csAnt.IO", "SoftwareMonkeys.csAnt.IO\SoftwareMonkeys.csAnt.IO.csproj", "{749ED083-15BD-4522-8FBE-847870434680}"
 EndProject
