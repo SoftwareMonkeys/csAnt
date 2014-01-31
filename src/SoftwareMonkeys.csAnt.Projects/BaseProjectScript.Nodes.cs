@@ -2,10 +2,13 @@ using System;
 
 namespace SoftwareMonkeys.csAnt.Projects
 {
-    public class BaseProjectScript
+    public partial class BaseProjectScript
     {
-        public BaseProjectScript ()
-        {
+        public new ProjectNodeManager Nodes {
+            get {
+                return (ProjectNodeManager)base.Nodes;
+            }
+            set { base.Nodes = value; }
         }
     }
 }
