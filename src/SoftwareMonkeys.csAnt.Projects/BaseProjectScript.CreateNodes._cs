@@ -1,0 +1,20 @@
+using System;
+
+namespace SoftwareMonkeys.csAnt.Projects
+{
+    public partial class BaseProjectScript
+    {
+        public override void CreateNodes()
+        {
+            // TODO: Remove function if not needed
+            base.CreateNodes();
+
+            /*CreateGroupNode();
+            CreateProjectNode();
+            CreateSourceNode();
+*/
+            /*RefreshCurrentNode();*/
+        }
+    }
+}
+
