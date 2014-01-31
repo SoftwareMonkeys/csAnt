@@ -36,6 +36,8 @@ namespace SoftwareMonkeys.csAnt
 
             ConstructConsoleWriter(scriptName, parentScript);
 
+            ConstructNodeManager();
+
             ConstructScriptStack();
 
             OutputHeader();
@@ -86,7 +88,12 @@ namespace SoftwareMonkeys.csAnt
             Console.SetOut ((TextWriter)Script.ConsoleWriter);
         }
 
-        public void ConstructScriptStack()
+        public virtual void ConstructNodeManager()
+        {
+            Script.InitializeNodeManager(new NodeManager());
+        }
+
+        public virtual void ConstructScriptStack()
         {
             // Script stack
             Script.ScriptStack = GetScriptStack();
@@ -111,7 +118,7 @@ namespace SoftwareMonkeys.csAnt
                 );
         }*/
 
-        public void ConstructTDC()
+        public virtual void ConstructTDC()
         {
             // Temporary directory creator
             Script.TemporaryDirectoryCreator = new TemporaryDirectoryCreator (
@@ -121,13 +128,13 @@ namespace SoftwareMonkeys.csAnt
             );
         }
 
-        public void ConstructRelocator()
+        public virtual void ConstructRelocator()
         {
             // Relocator
             Script.Relocator = new ScriptRelocator (Script);
         }
 
-        public void OutputHeader ()
+        public virtual void OutputHeader ()
         {
             
             if (Script.IsVerbose) {
@@ -150,7 +157,7 @@ namespace SoftwareMonkeys.csAnt
 
         }
 
-        public void OutputFooter()
+        public virtual void OutputFooter()
         {
             if (Script.IsVerbose) {
                 Console.WriteLine ("");
@@ -159,7 +166,7 @@ namespace SoftwareMonkeys.csAnt
             }
         }
 
-        public Stack<string> GetScriptStack()
+        public virtual Stack<string> GetScriptStack()
         {
             // TODO: Inject this instance
             return new ScriptStackDetector(Script).Detect();
