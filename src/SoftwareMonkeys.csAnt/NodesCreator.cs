@@ -8,14 +8,22 @@ namespace SoftwareMonkeys.csAnt
     {
         public NodeRefresher Refresher { get;set; }
 
-        public NodesCreator ()
+        public NodesCreator (INodeState state)
         {
-            Refresher = new NodeRefresher();
+            Refresher = new NodeRefresher(state);
         }
         
-        public void CreateNode()
+        public FileNode CreateNode()
         {
-            CreateNode (Environment.CurrentDirectory, Path.GetFileName(Environment.CurrentDirectory));
+            return CreateNode (Environment.CurrentDirectory, Path.GetFileName(Environment.CurrentDirectory));
+        }
+        
+        public FileNode CreateNode (string location)
+        {
+            return CreateNode (
+                location,
+                Path.GetFileName(location)
+                );
         }
 
         public FileNode CreateNode(string location, string name)
