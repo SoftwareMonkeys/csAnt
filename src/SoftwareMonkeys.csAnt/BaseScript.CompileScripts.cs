@@ -61,7 +61,7 @@ namespace SoftwareMonkeys.csAnt
                     var assemblyFile = binDir
                         + Path.DirectorySeparatorChar
                         + Path.GetFileNameWithoutExtension (scriptPath)
-                        + ".dll";
+                        + ".exe";
                 
                     Console.WriteLine ("  " + name);
                     if (IsVerbose) {
@@ -74,12 +74,12 @@ namespace SoftwareMonkeys.csAnt
                     try {
                         if (!File.Exists(assemblyFile) || force)
                         {
-                            Console.WriteLine ("Compiling...");
+                            Console.WriteLine ("    Compiling...");
                             CSScript.Compile (scriptPath, assemblyFile, IsDebug, new string[]{});
-                            Console.WriteLine ("Successful");
+                            Console.WriteLine ("    Successful");
                         }
                         else
-                            Console.WriteLine ("Assembly file found. Skipping compile...");
+                            Console.WriteLine ("    Assembly file found. Skipping compile...");
                     } catch (Exception ex) {
                         Error ("Cannot compile '" + name + "' script.", ex);
                     }
