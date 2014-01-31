@@ -8,6 +8,13 @@ namespace SoftwareMonkeys.csAnt.Projects.Tests.Scripting
         public ProjectTestScriptSetUpper (IScript script) : base(script)
         {
         }
+
+        public override void SetUp ()
+        {
+            base.SetUp ();
+
+
+        }
     }
 }
 

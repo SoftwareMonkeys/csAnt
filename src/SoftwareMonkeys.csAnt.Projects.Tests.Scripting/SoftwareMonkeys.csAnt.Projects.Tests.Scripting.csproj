@@ -69,5 +69,9 @@
       <Project>{5B5A328E-6F70-498A-AB13-26E48CBE3BA1}</Project>
       <Name>SoftwareMonkeys.csAnt.Projects.Tests</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SoftwareMonkeys.csAnt.Versions\SoftwareMonkeys.csAnt.Versions.csproj">
+      <Project>{9B72A2B8-0BC4-40BE-B242-AC79A080CEB6}</Project>
+      <Name>SoftwareMonkeys.csAnt.Versions</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>
