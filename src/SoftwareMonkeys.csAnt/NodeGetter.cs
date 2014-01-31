@@ -4,18 +4,19 @@ using System.IO;
 
 namespace SoftwareMonkeys.csAnt
 {
-    public class FileNodeGetter
+    public class NodeGetter
     {
-        public FileNodeGetter ()
+        public NodeGetter ()
         {
         }
-        public FileNode GetNode(string relativePath)
+
+        public FileNode GetNode(NodeState state, string relativePath)
         {
             var parts = relativePath.Replace("\"", "/").Trim('/').Split('/');
 
             FileNode node = null;
 
-            node = CurrentNode;
+            node = state.CurrentNode;
 
             foreach (string part in parts)
             {
@@ -26,30 +27,29 @@ namespace SoftwareMonkeys.csAnt
             return node;
         }
         
-        public FileNode GetCurrentNode()
+        public FileNode GetCurrentNode ()
         {
-                Console.WriteLine("");
-                Console.WriteLine("Getting current node...");
-                Console.WriteLine("");
+            Console.WriteLine ("");
+            Console.WriteLine ("Getting current node...");
+            Console.WriteLine ("");
 
             // TODO: See if this should be injected via constructor
-            var fileNodes = new FileNodeManager();
+            var fileNodes = new FileNodeManager ();
 
             string dir = Environment.CurrentDirectory;
 
-                Console.WriteLine("");
-                Console.WriteLine("Current node directory: " + dir);
-                Console.WriteLine("");
+            Console.WriteLine ("");
+            Console.WriteLine ("Current node directory: " + dir);
+            Console.WriteLine ("");
             
-            bool foundPropertiesFile = Directory.GetFiles(dir, "*.node").Length > 0;
+            bool foundPropertiesFile = Directory.GetFiles (dir, "*.node").Length > 0;
             
             // Step up the directories looking for .node file
             while (!foundPropertiesFile
-                   || dir.IndexOf('/') == dir.LastIndexOf('/'))
-            {
-                dir = Path.GetDirectoryName(dir);
+                   || dir.IndexOf('/') == dir.LastIndexOf('/')) {
+                dir = Path.GetDirectoryName (dir);
                 
-                foundPropertiesFile = Directory.GetFiles(dir, "*.node").Length > 0;
+                foundPropertiesFile = Directory.GetFiles (dir, "*.node").Length > 0;
             }
 
             FileNode node = fileNodes.Get (dir, false, true);
