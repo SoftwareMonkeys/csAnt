@@ -80,7 +80,6 @@
     <Compile Include="Schema\RepositoryInfo.cs" />
     <Compile Include="PackageSender.cs" />
     <Compile Include="PackageLoader.cs" />
-    <Compile Include="Schema\InstallInfo.cs" />
     <Compile Include="PackageInfoFileNamer.cs" />
     <Compile Include="PackageZipFileNamer.cs" />
     <Compile Include="PackageInstaller.cs" />
