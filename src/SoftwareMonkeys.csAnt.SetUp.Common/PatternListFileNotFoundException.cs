@@ -2,9 +2,9 @@ using System;
 
 namespace SoftwareMonkeys.csAnt.SetUp.Common
 {
-    public class MyClass
+    public class PatternListFileNotFoundException : Exception
     {
-        public MyClass ()
+        public PatternListFileNotFoundException (string filePath) : base(filePath)
         {
         }
     }
