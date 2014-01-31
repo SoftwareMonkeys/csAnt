@@ -11,18 +11,20 @@ namespace SoftwareMonkeys.csAnt
 		{
 			get
 			{
-				if (currentNode == null)
+                return Nodes.State.CurrentNode;
+				/*if (currentNode == null)
 				{
 					currentNode = GetCurrentNode();
 				}
-				return currentNode;
+				return currentNode;*/
 			}
-			set { currentNode = value; }
+			set { Nodes.State.CurrentNode = value; }
 		}
 		
 		public FileNode GetCurrentNode()
 		{
-			if (IsVerbose)
+            throw new Exception("Obsolete");
+			/*if (IsVerbose)
 			{
 				Console.WriteLine("");
 				Console.WriteLine("Getting current node...");
@@ -54,7 +56,7 @@ namespace SoftwareMonkeys.csAnt
 
 			FileNode node = fileNodes.Get (dir, false, true);
 			
-			return node;
+			return node;*/
 		}
 	}
 }
