@@ -4,21 +4,26 @@ using SoftwareMonkeys.csAnt.IO;
 
 namespace SoftwareMonkeys.csAnt.SetUpFromLocalConsole
 {
-    public class LocalSetupper
+    public class LocalInstaller
     {
-        public LocalSetupper ()
+        public FileFinder Finder { get; set; }
+
+        public LocalInstaller ()
         {
+            Finder = new FileFinder();
+        }
+        
+        public void Install (string sourceDir, string destinationDir, string patternListFile, bool overwrite)
+        {
+            Install (sourceDir, destinationDir, File.ReadAllLines(Path.GetFullPath(patternListFile)), overwrite); 
         }
 
-        public void SetUp (string sourceDir, string destinationDir, string[] patternList, bool overwrite)
+        public void Install (string sourceDir, string destinationDir, string[] patternList, bool overwrite)
         {
             if (!Directory.Exists (destinationDir))
                 Directory.CreateDirectory (destinationDir);
 
-            // TODO: Inject/construct in constructor
-            var fileFinder = new FileFinder();
-
-            var files = fileFinder.FindFiles(sourceDir, patternList);
+            var files = Finder.FindFiles(sourceDir, patternList);
 
             Console.WriteLine ("Total files: " + files.Length);
 
@@ -38,16 +43,6 @@ namespace SoftwareMonkeys.csAnt.SetUpFromLocalConsole
                 else
                     Console.WriteLine ("  Skipping copy.");
             }
-        }
-
-        public string[] GetDefaultFileList()
-        {
-            return new string[]{
-                "lib/csAnt/**",
-                "lib/cs-script/**",
-                "scripts/*.cs",
-                "csAnt.sh"
-            };
         }
     }
 }

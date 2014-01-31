@@ -59,8 +59,24 @@ namespace SoftwareMonkeys.csAnt.SetUpFromLocalConsole
                 if (!String.IsNullOrEmpty (fileListFile))
                     fileList = File.ReadAllLines (fileListFile);
 
-                CopyFiles (sourceDir, destinationDir, fileList, overwrite);
+                var installer = new LocalInstaller();
+                installer.Install(
+                    sourceDir,
+                    destinationDir,
+                    fileList,
+                    overwrite
+                    );
             }
+        }
+
+        static public string[] GetDefaultFileList()
+        {
+            return new string[]{
+                "lib/csAnt/**",
+                "lib/cs-script/**",
+                "scripts/*.cs",
+                "csAnt.sh"
+            };
         }
 
         static string DetectSourceDirectory ()
@@ -91,45 +107,6 @@ namespace SoftwareMonkeys.csAnt.SetUpFromLocalConsole
             Console.WriteLine (sourceDir);
 
             return sourceDir;
-        }
-
-        static public void CopyFiles (string sourceDir, string destinationDir, string[] patternList, bool overwrite)
-        {
-            if (!Directory.Exists (destinationDir))
-                Directory.CreateDirectory (destinationDir);
-
-            var fileFinder = new FileFinder();
-
-            var files = fileFinder.FindFiles(sourceDir, patternList);
-
-            Console.WriteLine ("Total files: " + files.Length);
-
-            foreach (var file in files) {
-                var toFile = file.Replace (sourceDir, destinationDir);
-            
-                if (!Directory.Exists (Path.GetDirectoryName (toFile)))
-                    Directory.CreateDirectory (Path.GetDirectoryName (toFile));
-
-                Console.WriteLine ("  Copying:");
-                Console.WriteLine ("    " + file);
-                Console.WriteLine ("  To:");
-                Console.WriteLine ("    " + toFile);
-
-                if (overwrite || !File.Exists (toFile))
-                    File.Copy (file, toFile);
-                else
-                    Console.WriteLine ("  Skipping copy.");
-            }
-        }
-
-        static public string[] GetDefaultFileList()
-        {
-            return new string[]{
-                "lib/csAnt/**",
-                "lib/cs-script/**",
-                "scripts/*.cs",
-                "csAnt.sh"
-            };
         }
 
         static public void Help()
