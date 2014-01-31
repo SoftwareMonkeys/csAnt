@@ -6,9 +6,7 @@ namespace SoftwareMonkeys.csAnt
     {
         public virtual void CreateNodes()
         {
-            CreateNode();
-
-            RefreshCurrentNode();
+            Nodes.CreateNodes ();
         }
     }
 }
