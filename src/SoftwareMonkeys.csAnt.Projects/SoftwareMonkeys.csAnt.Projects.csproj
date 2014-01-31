@@ -52,20 +52,20 @@
     <Compile Include="BaseProjectScript.ProjectName.cs" />
     <Compile Include="BaseProjectScript.ProjectNode.cs" />
     <Compile Include="GroupNodeNotFoundException.cs" />
-    <Compile Include="BaseProjectScript.CreateProjectNode.cs" />
     <Compile Include="BaseProjectScript.GetTmpDir.cs" />
-    <Compile Include="BaseProjectScript.CreateGroupNode.cs" />
     <Compile Include="BaseProjectScript.Release.cs" />
     <Compile Include="Commands\BaseProjectScriptCommand.cs" />
     <Compile Include="Commands\GenerateProjectReleaseZipCommand.cs" />
     <Compile Include="Commands\GenerateProjectReleasesZipCommand.cs" />
-    <Compile Include="BaseProjectScript.CreateNodes.cs" />
     <Compile Include="ProjectScriptConstructor.cs" />
-    <Compile Include="BaseProjectScript.CreateSourceNode.cs" />
     <Compile Include="BaseProjectScript.InitializeVersionManager.cs" />
     <Compile Include="BaseProjectScript.Version.cs" />
     <Compile Include="BaseProjectScript.IncrementVersion.cs" />
     <Compile Include="BaseProjectScript.SetVersion.cs" />
+    <Compile Include="ProjectCreator.cs" />
+    <Compile Include="ProjectNodesCreator.cs" />
+    <Compile Include="BaseProjectScript.Nodes.cs" />
+    <Compile Include="ProjectNodeManager.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
