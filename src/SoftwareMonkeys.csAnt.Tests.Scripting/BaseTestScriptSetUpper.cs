@@ -21,6 +21,8 @@ namespace SoftwareMonkeys.csAnt.Tests.Scripting
                     Console.WriteLine ("CurrentDirectory is the same as ParentScript.CurrentDirectory. Relocating.");
                 
                 Script.Relocator.Relocate (tmpDir);
+
+                CreateNodes();
             }
             else if (Script.CurrentDirectory == Script.OriginalDirectory)
             {
@@ -28,6 +30,8 @@ namespace SoftwareMonkeys.csAnt.Tests.Scripting
                     Console.WriteLine ("CurrentDirectory is the same as OriginalDirectory. Relocating.");
 
                 Script.Relocator.Relocate (tmpDir);
+
+                CreateNodes();
             }
             else
             {
@@ -35,6 +39,19 @@ namespace SoftwareMonkeys.csAnt.Tests.Scripting
                 {
                     Console.WriteLine("Already in a new location. Skipping relocation. ");
                 }
+            }
+        }
+
+        public void CreateNodes ()
+        {
+            if (Script.IsVerbose) {
+                Console.WriteLine ("");
+                Console.WriteLine ("Creating nodes for test location...");
+                Console.WriteLine ("  Node manager type: " + Script.Nodes.GetType ().Name);
+                Console.WriteLine ("");
+
+                // Create the nodes necessary to function in the temporary test location
+                Script.Nodes.CreateNodes ();
             }
         }
     }
