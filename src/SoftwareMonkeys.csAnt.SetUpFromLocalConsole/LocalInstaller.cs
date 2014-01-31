@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using SoftwareMonkeys.csAnt.IO;
+using SoftwareMonkeys.csAnt.SetUp.Common;
 
 namespace SoftwareMonkeys.csAnt.SetUpFromLocalConsole
 {
@@ -15,7 +16,14 @@ namespace SoftwareMonkeys.csAnt.SetUpFromLocalConsole
         
         public void Install (string sourceDir, string destinationDir, string patternListFile, bool overwrite)
         {
-            Install (sourceDir, destinationDir, File.ReadAllLines(Path.GetFullPath(patternListFile)), overwrite); 
+            var patternListFilePath = Path.GetFullPath(patternListFile);
+
+            if (!File.Exists (patternListFilePath))
+                throw new PatternListFileNotFoundException(patternListFilePath);
+
+            var patterns = File.ReadAllLines(patternListFilePath);
+
+            Install (sourceDir, destinationDir, patterns, overwrite); 
         }
 
         public void Install (string sourceDir, string destinationDir, string[] patternList, bool overwrite)
