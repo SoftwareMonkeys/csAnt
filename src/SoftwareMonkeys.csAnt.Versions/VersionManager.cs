@@ -46,6 +46,9 @@ namespace SoftwareMonkeys.csAnt.Versions
 
         public void IncrementVersion (FileNode currentNode, int position)
         {
+            if (currentNode == null)
+                throw new ArgumentNullException("currentNode");
+
             Console.WriteLine ("");
             
             Console.WriteLine ("Incrementing version...");
@@ -53,7 +56,12 @@ namespace SoftwareMonkeys.csAnt.Versions
             
             Console.WriteLine ("");
 
-            var versionString = currentNode.Properties ["Version"];
+            var versionString = "";
+
+            if (!currentNode.Properties.ContainsKey("Version"))
+                versionString = "0.0.0.1";
+            else
+                versionString = currentNode.Properties ["Version"];
 
             var version = new Version (versionString);
 
