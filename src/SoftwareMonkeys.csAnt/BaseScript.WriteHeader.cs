@@ -14,7 +14,9 @@ namespace SoftwareMonkeys.csAnt
             {
                 Console.WriteLine (GetIndentSpace (Indent) + "// Directory: " + CurrentDirectory);
 
-                Console.WriteLine (GetIndentSpace (Indent) + "// Original directory: " + OriginalDirectory);
+                // If the current directory is different from the original directory then output the original directory
+                if (CurrentDirectory != OriginalDirectory)
+                    Console.WriteLine (GetIndentSpace (Indent) + "// Original directory: " + OriginalDirectory);
             
                 Console.WriteLine (GetIndentSpace (Indent) + "// Time stamp: " + TimeStamp);
 
