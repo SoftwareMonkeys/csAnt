@@ -30,25 +30,21 @@ class Test_BuildFromGitScript : BaseProjectTestScript
 		Console.WriteLine("Test building solutions from git clone...");
 		Console.WriteLine("");
 
-                var testDir = CurrentDirectory;
-		
+		EnsureReleases();
+
 		new FilesGrabber(
                     OriginalDirectory,
                     CurrentDirectory
                 ).GrabOriginalFiles();
 
-                ExecuteScript("CycleRelease", "project-release");
-
 		// Clone the project to another directory
 		var dummyProjectDir = CloneToTmpDirectory();
-
-		Relocate(dummyProjectDir);
-
-		CreateNodes();
 
 		var fileList = ToAbsolute(OriginalDirectory, "install/csAnt-installer.txt");
 
 		var installer = new LocalInstaller();
+
+		// Install csAnt to the dummy project directory
                 installer.Install (
                     OriginalDirectory,
                     dummyProjectDir,
@@ -56,13 +52,26 @@ class Test_BuildFromGitScript : BaseProjectTestScript
                     true
                 );
 
-		if (!IsError)
+		/*if (!IsError)
 		{
 			// Build and test the cloned copy of the project
-			BuildClonedCopy(dummyProjectDir);
-		}
+			SetUpClonedCopy(dummyProjectDir);
+		}*/
 
 		return !IsError;
+	}
+
+	public void EnsureReleases()
+	{
+                var testDir = CurrentDirectory;
+
+		// Relocate back to the original directory to ensure that the releases have been created
+		Relocate(OriginalDirectory);
+
+                ExecuteScript("EnsureRelease");
+
+		// Relocated back to the test directory
+		Relocate(testDir);
 	}
 
 	public string CloneToTmpDirectory()
@@ -80,10 +89,14 @@ class Test_BuildFromGitScript : BaseProjectTestScript
 
 		GitClone(OriginalDirectory, projectDirectory);
 
+		Relocate(projectDirectory);
+
+		CreateNodes();
+
 		return projectDirectory;
 	}
 
-	public void BuildClonedCopy(string dummyProjectDir)
+	public void SetUpClonedCopy(string dummyProjectDir)
 	{
 		CurrentDirectory = dummyProjectDir;
 
