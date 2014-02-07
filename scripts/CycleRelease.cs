@@ -29,7 +29,7 @@ class CycleReleaseScript : BaseProjectScript
 			Console.WriteLine("Release name: " + releaseName);
 		}
 
-		ExecuteScript("CycleBuild");
+		ExecuteScript("EnsureBuild");
 		
 		ExecuteScript("ClearBak");
 
