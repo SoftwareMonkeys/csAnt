@@ -81,7 +81,7 @@ namespace SoftwareMonkeys.csAnt.Versions
                 build += 1;
                 break;
             case 4:
-                revision += 1000;
+                revision += 100;
                 break;
             }
 
