@@ -21,8 +21,10 @@ class CycleTestsScript : BaseProjectScript
 		Console.WriteLine("Starting a full test cycle.");
 		Console.WriteLine("");
 
+		ExecuteScript("EnsureBuild");
+
                 // Run a release cycle so the latest binaries and release zips are available
-		ExecuteScript("CycleRelease");
+		ExecuteScript("EnsureRelease");
 
 		if (!IsError)
 		{
