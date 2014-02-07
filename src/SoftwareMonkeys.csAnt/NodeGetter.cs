@@ -39,7 +39,8 @@ namespace SoftwareMonkeys.csAnt
             string dir = Environment.CurrentDirectory;
 
             Console.WriteLine ("");
-            Console.WriteLine ("Current node directory: " + dir);
+            Console.WriteLine ("Current node directory");
+            Console.WriteLine (dir);
             Console.WriteLine ("");
             
             bool foundPropertiesFile = Directory.GetFiles (dir, "*.node").Length > 0;
