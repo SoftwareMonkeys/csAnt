@@ -23,7 +23,7 @@ namespace SoftwareMonkeys.csAnt.Tests
                 + script.GetBuildMode()
                 + Path.DirectorySeparatorChar
                 + Path.GetFileNameWithoutExtension(scriptPath)
-                    + ".dll";
+                    + ".exe";
 
             Assert.IsTrue(File.Exists(assemblyFile), "Assembly file not found.");
         }
