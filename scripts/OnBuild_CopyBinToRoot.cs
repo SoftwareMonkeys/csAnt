@@ -5,16 +5,16 @@ using Microsoft.CSharp;
 using System.Diagnostics;
 using SoftwareMonkeys.csAnt;
 
-class OnBuild_CopyBinToLibScript : BaseScript
+class OnBuild_CopyBinToRootScript : BaseScript
 {
 	public static void Main(string[] args)
 	{
-		new OnBuild_CopyBinToLibScript().Start(args);
+		new OnBuild_CopyBinToRootScript().Start(args);
 	}
 	
 	public override bool Run(string[] args)
 	{
-		ExecuteScript("CopyBinToLib");
+		ExecuteScript("CopyBinToRoot");
 
 		return !IsError;
 	}
