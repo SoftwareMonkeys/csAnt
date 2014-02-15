@@ -40,23 +40,12 @@ class Test_BuildFromGitScript : BaseProjectTestScript
 		// Clone the project to another directory
 		var dummyProjectDir = CloneToTmpDirectory();
 
-		var fileList = ToAbsolute(OriginalDirectory, "install/csAnt-installer.txt");
+		SetUpClonedCopy(dummyProjectDir);
 
-		var installer = new LocalInstaller();
-
-		// Install csAnt to the dummy project directory
-                installer.Install (
-                    OriginalDirectory,
-                    dummyProjectDir,
-                    fileList,
-                    true
-                );
-
-		/*if (!IsError)
-		{
-			// Build and test the cloned copy of the project
-			SetUpClonedCopy(dummyProjectDir);
-		}*/
+		if (IsLinux)
+			StartProcess("sh csAnt.sh HelloWorld");
+		else
+			StartProcess("csAnt.bat HelloWorld");
 
 		return !IsError;
 	}
@@ -98,10 +87,8 @@ class Test_BuildFromGitScript : BaseProjectTestScript
 
 	public void SetUpClonedCopy(string dummyProjectDir)
 	{
-		CurrentDirectory = dummyProjectDir;
+		StartProcess("SetUpFromLocal.exe");
 
-		// Build and test
-		ExecuteScript("CycleBuild");
 	}
 
 }
