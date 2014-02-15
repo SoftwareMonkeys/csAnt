@@ -1,4 +1,3 @@
-//css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.dll;
 using System;
 using System.IO;
 using Microsoft.CSharp;
@@ -21,7 +20,7 @@ class Repack_SetUpFromLocalScript : BaseScript
 	
             var exeFile = "lib/ILRepack.1.23.0/tools/ILRepack.exe";
 
-            var packedDir = "bin/Release/Packed";
+            var packedDir = "bin/Release/packed";
 
             var outFile = packedDir + "/SetUpFromLocal.exe";
             
