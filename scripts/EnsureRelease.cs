@@ -33,7 +33,7 @@ class EnsureReleaseScript : BaseProjectScript
 
 		var releaseDirectoryCount = Directory.GetDirectories(rlsDir).Length;
 
-		var releaseListCount = Directory.GetFiles(rlsDir).Length;
+		var releaseListCount = Directory.GetFiles(rlsDir, "*.cs").Length;
 
 		// If any release zip directories are missing then the release cycle is started
 		if (releaseListCount > releaseDirectoryCount)
@@ -84,20 +84,24 @@ class EnsureReleaseScript : BaseProjectScript
 		var variation = Path.GetFileName(releaseSubDir);
 
 		var prefix = ProjectName + "-" + variation + "-";
-
-		Console.WriteLine("Prefix: " + prefix);
-
-		var startPos = 0;
-
-		var endPos = latestFileName.IndexOf("[")-2;
+		
+		if (IsVerbose)
+			Console.WriteLine("Prefix: " + prefix);
 
 		var withoutPrefix = latestFileName.Replace(prefix, "");
+		
+		if (IsVerbose)
+			Console.WriteLine("Without prefix: " + withoutPrefix);
+		
 
-		Console.WriteLine("Without prefix: " + withoutPrefix);
+		var versionStartPos = 0;
 
-		var withoutTimestamp = withoutPrefix.Substring(startPos, endPos);
+		var versionEndPos = withoutPrefix.IndexOf("[")-2;
 
-		Console.WriteLine("Without time stamp: " + withoutPrefix);
+		var withoutTimestamp = withoutPrefix.Substring(versionStartPos, versionEndPos);
+
+		if (IsVerbose)
+			Console.WriteLine("Without time stamp: " + withoutTimestamp);
 
 		var version = withoutTimestamp.Replace("-", ".");
 
