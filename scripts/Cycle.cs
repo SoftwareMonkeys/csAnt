@@ -24,10 +24,9 @@ class CycleScript : BaseProjectScript
 		Console.WriteLine("Building...");
 		Console.WriteLine("");
 
-		// TODO: Check if needed. Shouldn't be needed because CycleTests calls it
 		// Build the solutions
 		ExecuteScript(
-			"CycleBuild"
+			"EnsureBuild"
 		);
 
 		if (!IsError)
@@ -46,9 +45,9 @@ class CycleScript : BaseProjectScript
 			Console.WriteLine("Creating release zip files locally...");
 			Console.WriteLine("");
 
-			// Run tests
+			// Run release scripts
 			ExecuteScript(
-				"Release"
+				"CycleRelease"
 			);
 		}
 		
