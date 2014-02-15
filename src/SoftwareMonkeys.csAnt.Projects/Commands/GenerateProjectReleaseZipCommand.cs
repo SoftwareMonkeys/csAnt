@@ -54,10 +54,16 @@ namespace SoftwareMonkeys.csAnt.Projects
                 var variation = Path.GetFileNameWithoutExtension(listFile).Replace("-list", "");
 
                 var dateStamp = "[" + Script.TimeStamp + "]";
-
+    
+                var version = Script.CurrentNode.Properties.ContainsKey("Version")
+                    ? Script.CurrentNode.Properties["Version"]
+                    : "0.0.0.0";
+                
                 var zipFileName = Script.ProjectName
                     + "-"
                     + variation
+                    + "-"
+                    + version.Replace (".", "-")
                     + "-"
                     + dateStamp
                     + ".zip";
@@ -130,14 +136,13 @@ namespace SoftwareMonkeys.csAnt.Projects
 
             var fileTimeStamp = "-[" + Script.TimeStamp + "]";
 
-            Console.WriteLine(fileTimeStamp);
             var modifiedToFile = toFile.Replace(fileTimeStamp, "");
-
+ 
             Console.WriteLine("");
             Console.WriteLine("Modified file name:");
             Console.WriteLine(modifiedToFile);
             Console.WriteLine("");
-
+            
             File.Copy(toFile, modifiedToFile, true);
         }
 
