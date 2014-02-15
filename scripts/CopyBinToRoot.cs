@@ -28,8 +28,7 @@ class CopyBinToRootScript : BaseProjectScript
 		int i = 0;
 
 		var patterns = new string[]{
-			"bin/Release/Packed/SetUpFromLocal.exe",
-			"bin/Release/Packed/csAnt.exe"		
+			"bin/Release/packed/SetUpFromLocal.exe"
 		};
 
 	        foreach (string file in FindFiles(patterns))
