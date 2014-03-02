@@ -11,6 +11,15 @@
 /src/SoftwareMonkeys.csAnt.Projects.Tests.Scripting/**.cs
 /src/SoftwareMonkeys.csAnt.Projects.Tests.Scripting/**.csproj
 /src/SoftwareMonkeys.csAnt.Projects.Tests.Scripting/**.snk
+/src/SoftwareMonkeys.csAnt.SetUp.Common/**.cs
+/src/SoftwareMonkeys.csAnt.SetUp.Common/**.csproj
+/src/SoftwareMonkeys.csAnt.SetUp.Common/**.snk
+/src/SoftwareMonkeys.csAnt.SetUpFromLocal/**.cs
+/src/SoftwareMonkeys.csAnt.SetUpFromLocal/**.csproj
+/src/SoftwareMonkeys.csAnt.SetUpFromLocal/**.snk
+/src/SoftwareMonkeys.csAnt.SetUpFromWeb/**.cs
+/src/SoftwareMonkeys.csAnt.SetUpFromWeb/**.csproj
+/src/SoftwareMonkeys.csAnt.SetUpFromWeb/**.snk
 /src/SoftwareMonkeys.csAnt.Tests/**.cs
 /src/SoftwareMonkeys.csAnt.Tests/**.csproj
 /src/SoftwareMonkeys.csAnt.Tests/**.snk
