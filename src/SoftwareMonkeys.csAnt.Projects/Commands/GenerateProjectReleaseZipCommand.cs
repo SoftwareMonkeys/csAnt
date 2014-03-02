@@ -17,9 +17,14 @@ namespace SoftwareMonkeys.csAnt.Projects
         public override void Execute ()
         {
             var rlsDir = GetReleaseDir ();
-
-            foreach (var listFile in Directory.GetFiles (rlsDir, "*.txt")) {
-                CreateRelease(listFile);
+   
+            if (!String.IsNullOrEmpty(ReleaseName))
+                CreateRelease (ReleaseName);
+            else
+            {
+                foreach (var listFile in Directory.GetFiles (rlsDir, "*.txt")) {
+                    CreateRelease(listFile);
+                }    
             }
         }
         
