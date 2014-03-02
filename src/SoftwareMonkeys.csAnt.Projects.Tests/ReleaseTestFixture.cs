@@ -42,7 +42,7 @@ namespace SoftwareMonkeys.csAnt.Projects.Tests
 
             File.WriteAllText(releaseListFile, releaseListFileContent);
 
-            script.Release("Test");
+            script.Release("test");
 
             var releaseFileName = script.CurrentDirectory
                 + Path.DirectorySeparatorChar
@@ -50,7 +50,9 @@ namespace SoftwareMonkeys.csAnt.Projects.Tests
                 + Path.DirectorySeparatorChar
                 + "test"
                 + Path.DirectorySeparatorChar
-                + "csAnt-test-["
+                + "csAnt-test-"
+                + script.CurrentNode.Properties["Version"].Replace(".", "-")
+                + "-["
                 + script.TimeStamp
                     + "].zip";
 
@@ -61,9 +63,9 @@ namespace SoftwareMonkeys.csAnt.Projects.Tests
                     + "unzip";
 
             script.EnsureDirectoryExists(unzipPath);
-
+   
             script.Unzip(releaseFileName, unzipPath);
-
+            
             Assert.AreEqual(1, Directory.GetFiles(unzipPath, "*", SearchOption.AllDirectories).Length, "Wrong number of files found.");
         }
     }
