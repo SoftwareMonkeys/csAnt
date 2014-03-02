@@ -6,7 +6,7 @@ namespace SoftwareMonkeys.csAnt
     {
         string ScriptName { get;set; }
 
-        string Output { get;set; }
+        string Output { get; }
 
         void Write(string message);
 
