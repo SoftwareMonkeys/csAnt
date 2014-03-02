@@ -26,6 +26,8 @@ class Test_BuildFromGitScript : BaseProjectTestScript
 	
 	public override bool Run(string[] args)
 	{
+		// TODO: Better organize this script
+
 		Console.WriteLine("");
 		Console.WriteLine("Test building solutions from git clone...");
 		Console.WriteLine("");
@@ -57,7 +59,7 @@ class Test_BuildFromGitScript : BaseProjectTestScript
 		// Relocate back to the original directory to ensure that the releases have been created
 		Relocate(OriginalDirectory);
 
-                ExecuteScript("EnsureRelease");
+                ExecuteScript("EnsureRelease", "standard-release");
 
 		// Relocated back to the test directory
 		Relocate(testDir);
@@ -87,8 +89,10 @@ class Test_BuildFromGitScript : BaseProjectTestScript
 
 	public void SetUpClonedCopy(string dummyProjectDir)
 	{
-		StartProcess("SetUpFromLocal.exe");
-
+		if (IsLinux)
+			StartProcess("sh csAnt-setup-local.sh");
+		else
+			throw new NotImplementedException("Windows support hasn't yet been implemented");
 	}
 
 }
