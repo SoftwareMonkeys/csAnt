@@ -6,7 +6,12 @@ namespace SoftwareMonkeys.csAnt
 {
 	public class ConsoleWriter : TextWriter, IConsoleWriter
 	{
-		public string Output { get;set; }
+        public StringBuilder OutputBuilder { get;set; }
+        
+		public string Output
+        {
+            get { return OutputBuilder.ToString(); }
+        }
 
 		public string LogFile { get;set; }
 
@@ -44,6 +49,8 @@ namespace SoftwareMonkeys.csAnt
 			LogFile = logFile;
 
 			ScriptName = scriptName;
+            
+            OutputBuilder = new StringBuilder();
 		}
 		
 		public override void WriteLine(string text)
@@ -89,7 +96,7 @@ namespace SoftwareMonkeys.csAnt
 			if (text == null)
 				text = String.Empty;
 
-			Output += text;
+			OutputBuilder.Append(text);
 		}
 		
 		public void AppendOutputFile(string text)
