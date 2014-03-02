@@ -16,16 +16,27 @@ class EnsureReleaseScript : BaseProjectScript
 	
 	public override bool Run(string[] args)
 	{
+		Console.WriteLine("");
+		Console.WriteLine("Ensuring release has been created...");
+		Console.WriteLine("");
+
+		var releaseName = "";
+		if (args.Length > 0)
+		{
+			releaseName = args[0];
+			Console.WriteLine("Release name: " + releaseName);
+		}
+
 		var currentVersion = CurrentNode.Properties["Version"];
 
 		Console.WriteLine("Current version: " + currentVersion);
 
-		CheckReleaseVersions(currentVersion);
+		CheckReleaseVersions(releaseName, currentVersion);
 
 		return !IsError;
 	}
 
-	public void CheckReleaseVersions(string currentVersion)
+	public void CheckReleaseVersions(string releaseName, string currentVersion)
 	{
 		var rlsDir = CurrentDirectory
 			+ Path.DirectorySeparatorChar
@@ -43,32 +54,48 @@ class EnsureReleaseScript : BaseProjectScript
 			Console.WriteLine("");
 
 			// TODO: Perform release cycle only on missing releases instead of all of them
-			ExecuteScript("CycleRelease");
+			if (!String.IsNullOrEmpty(releaseName))
+				ExecuteScript("CycleRelease", releaseName);
+			else
+				ExecuteScript("CycleRelease");
 		}
 		else
 		{
 			// Loop through each release zip directory and check whether it's up to date
 			foreach (var dir in Directory.GetDirectories(rlsDir))
 			{
-				var version = GetReleaseVersion(dir);
+				var dirName = Path.GetFileName(dir);
 
-				Console.WriteLine(version);
-
-				var variation = Path.GetFileName(dir);
-
-				Console.WriteLine("");
-				Console.WriteLine("Release: " + variation);
-				Console.WriteLine("Release version: " + version);
-				Console.WriteLine("Current version: " + currentVersion);
-
-				if (new Version(version) < new Version(currentVersion))
+				if (String.IsNullOrEmpty(releaseName)
+					|| dirName.ToLower() == releaseName.ToLower())
 				{
-					Console.WriteLine("Current version is later than the latest release. Running release script again...");
+					var version = GetReleaseVersion(dir);
 
-					ExecuteScript("CycleRelease", variation);
+					Console.WriteLine(version);
+
+					releaseName = Path.GetFileName(dir);
+
+					Console.WriteLine("");
+					Console.WriteLine("Release: " + releaseName);
+					Console.WriteLine("Release version: " + version);
+					Console.WriteLine("Current version: " + currentVersion);
+
+					if (new Version(version) < new Version(currentVersion))
+					{
+						Console.WriteLine("Current version is later than the latest release. Running release script again...");
+
+						if (!String.IsNullOrEmpty(releaseName))
+							ExecuteScript("CycleRelease", releaseName);
+						else
+							ExecuteScript("CycleRelease");
+					}
+					else
+					{
+						Console.WriteLine("Release version matches current version. Skipping release generation.");
+					}
+
+					Console.WriteLine("");
 				}
-
-				Console.WriteLine("");
 			}
 		}
 	}
@@ -96,7 +123,7 @@ class EnsureReleaseScript : BaseProjectScript
 
 		var versionStartPos = 0;
 
-		var versionEndPos = withoutPrefix.IndexOf("[")-2;
+		var versionEndPos = withoutPrefix.IndexOf("[")-1;
 
 		var withoutTimestamp = withoutPrefix.Substring(versionStartPos, versionEndPos);
 
