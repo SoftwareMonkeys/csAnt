@@ -1,4 +1,5 @@
 using System;
+using System.Text;
 
 namespace SoftwareMonkeys.csAnt
 {
@@ -11,13 +12,13 @@ namespace SoftwareMonkeys.csAnt
 
 		public string GetIndentSpace (int indent)
 		{
-			var indentSpace = String.Empty;
+			var indentSpaceBuilder = new StringBuilder();
 
 			for (int i = 0; i < indent; i++) {
-				indentSpace += "    ";
+				indentSpaceBuilder.Append("    ");
 			}
 
-			return indentSpace;
+			return indentSpaceBuilder.ToString();
 		}
 	}
 }
