@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Text;
 
 namespace SoftwareMonkeys.csAnt.Tests
 {
@@ -171,13 +172,13 @@ namespace SoftwareMonkeys.csAnt.Tests
         
         public string GetGroupPath ()
         {
-            var output = "";
+            var outputBuilder = new StringBuilder();
 
             foreach (var s in Script.ScriptStack) {
-                output += s + "/";
+                outputBuilder.Append(s + "/");
             }
 
-            return output.TrimEnd('/');
+            return outputBuilder.ToString().TrimEnd('/');
         }
     }
 }
