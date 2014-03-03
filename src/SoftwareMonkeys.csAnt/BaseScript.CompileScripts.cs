@@ -28,6 +28,7 @@ namespace SoftwareMonkeys.csAnt
 
         public void CompileScripts (bool force, params string[] scriptNames)
         {
+            // TODO: Remove binDir variable if not needed. Use ScriptAssembliesDirectory property instead
             var binDir = CurrentDirectory
                 + Path.DirectorySeparatorChar
                 + "bin"
@@ -37,6 +38,7 @@ namespace SoftwareMonkeys.csAnt
             if (!Directory.Exists (binDir))
                 Directory.CreateDirectory(binDir);
                     
+            // TODO: Move to a ScriptsDirectory property
             var scriptsDir = CurrentDirectory
                 + Path.DirectorySeparatorChar
                 + "scripts";
@@ -53,17 +55,19 @@ namespace SoftwareMonkeys.csAnt
             }
 
             foreach (var scriptPath in Directory.GetFiles(scriptsDir, "*.cs")) {
-                var name = Path.GetFileNameWithoutExtension (scriptPath);
+                //bool didCompile = false; // TODO: Finish
+                
+                var scriptName = Path.GetFileNameWithoutExtension (scriptPath);
 
                 if (scriptNames == null
                     || scriptNames.Length == 0
-                    || Array.IndexOf (scriptNames, name) > -1) {
-                    var assemblyFile = binDir
-                        + Path.DirectorySeparatorChar
-                        + Path.GetFileNameWithoutExtension (scriptPath)
-                        + ".exe";
+                    || Array.IndexOf (scriptNames, scriptName) > -1) {
+                    var assemblyFile = GetScriptAssemblyPath(scriptName);
+                    
+                    EnsureDirectoryExists(ScriptAssembliesDirectory);
                 
-                    Console.WriteLine ("  " + name);
+                    Console.WriteLine ("  " + scriptName);
+                    
                     if (IsVerbose) {
                         Console.WriteLine ("  Script path:");
                         Console.WriteLine ("  " + scriptPath);
@@ -77,13 +81,20 @@ namespace SoftwareMonkeys.csAnt
                             Console.WriteLine ("    Compiling...");
                             CSScript.Compile (scriptPath, assemblyFile, IsDebug, new string[]{});
                             Console.WriteLine ("    Successful");
+                            
+                            //didCompile = true;
                         }
                         else
                             Console.WriteLine ("    Assembly file found. Skipping compile...");
                     } catch (Exception ex) {
-                        Error ("Cannot compile '" + name + "' script.", ex);
+                        Error ("Cannot compile '" + scriptName + "' script.", ex);
+                        //didCompile = false;
                     }
                 }
+                
+                // TODO: Finish
+                //var scriptInfo = new ScriptInfo(scriptName);
+                //script.LatestCompiled = didCompile;
             }
                 
             if (IsVerbose) {
