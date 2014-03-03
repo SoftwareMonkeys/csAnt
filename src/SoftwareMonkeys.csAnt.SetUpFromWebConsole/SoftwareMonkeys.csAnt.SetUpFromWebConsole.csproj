@@ -7,8 +7,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{CF6B425F-5FCD-4E77-B9C1-196DB6A71BE1}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>SoftwareMonkeys.csAnt.SetUpFromWebConsole.cs</RootNamespace>
-    <AssemblyName>SoftwareMonkeys.csAnt.SetUpFromWebConsole.cs</AssemblyName>
+    <RootNamespace>SoftwareMonkeys.csAnt.SetUpFromWebConsole</RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -19,14 +18,33 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Externalconsole>true</Externalconsole>
+    <AssemblyName>SoftwareMonkeys.csAnt.SetUpFromWebConsole.cs</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>none</DebugType>
+    <DebugType>full</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release</OutputPath>
+    <OutputPath>..\..\bin\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Externalconsole>true</Externalconsole>
+    <AssemblyName>SetUp</AssemblyName>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
+    <DebugType>none</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\x64\Debug</OutputPath>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x64</PlatformTarget>
+    <AssemblyName>SoftwareMonkeys.csAnt.SetUpFromWebConsole</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x64' ">
+    <DebugType>none</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\x64\Release</OutputPath>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x64</PlatformTarget>
+    <AssemblyName>SoftwareMonkeys.csAnt.SetUpFromWebConsole</AssemblyName>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
