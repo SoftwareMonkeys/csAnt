@@ -36,7 +36,7 @@ class Test_SetUpFromLocalScript : BaseTestScript
                     + Path.DirectorySeparatorChar
                     + "Release"
                     + Path.DirectorySeparatorChar
-                    + "Packed"
+                    + "packed"
                     + Path.DirectorySeparatorChar
                     + "SetUpFromLocal.exe";
 
