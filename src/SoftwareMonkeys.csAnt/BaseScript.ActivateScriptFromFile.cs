@@ -27,17 +27,10 @@ namespace SoftwareMonkeys.csAnt
                 Console.WriteLine ("");
             }
 
-            CSScript.GlobalSettings.DefaultArguments = "/nl /dbg"; // TODO: This doesn't seem to be working
-            CSScript.GlobalSettings.ReportDetailedErrorInfo = IsDebug;
+            CSScript.GlobalSettings.DefaultArguments = "/nl"; // TODO: Check if this is working
+            //CSScript.GlobalSettings.ReportDetailedErrorInfo = IsDebug; // TODO: Check if needed
 
-            var assemblyFile = CurrentDirectory
-                + Path.DirectorySeparatorChar
-                + "bin"
-                + Path.DirectorySeparatorChar
-                + GetBuildMode ()
-                + Path.DirectorySeparatorChar
-                + Path.GetFileNameWithoutExtension (scriptPath)
-                + ".exe";
+            var assemblyFile = GetScriptAssemblyPath (scriptName);
 
             EnsureDirectoryExists (Path.GetDirectoryName (assemblyFile));
          
@@ -50,6 +43,7 @@ namespace SoftwareMonkeys.csAnt
 
             // TODO: Check if settings are needed
             var scriptSettings = new Settings ();
+            //scriptSettings.InMemoryAsssembly = true; // TODO: Check if needed
 
             var compilerOptions = "";
 
@@ -58,8 +52,10 @@ namespace SoftwareMonkeys.csAnt
                 File.Exists (assemblyFile)
                 && File.GetLastWriteTime (scriptPath) > File.GetLastWriteTime (assemblyFile)
             ) {
+                CSScript.GlobalSettings = scriptSettings;
+                
                 // Compile the script
-                CSScript.Compile (scriptPath, assemblyFile, IsDebug);
+                CSScript.Compile(scriptPath, assemblyFile, IsDebug);
 
                 // Set the assembly file last write time to the same as the script file, so it's easy to know they're matching
                 File.SetLastWriteTime(assemblyFile, File.GetLastWriteTime(scriptPath));
