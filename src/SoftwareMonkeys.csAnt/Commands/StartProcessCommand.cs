@@ -151,7 +151,8 @@ namespace SoftwareMonkeys.csAnt
             try
             {
     			process.Start();
-
+    
+                // TODO: Clean up
                 /*process.BeginOutputReadLine();
 
                 while (!process.StandardOutput.EndOfStream) {
@@ -185,15 +186,23 @@ namespace SoftwareMonkeys.csAnt
 
 		public string[] FixArguments(string[] arguments)
 		{
-			List<string> argsList = new List<string>(arguments);
+			List<string> argsList = new List<string>();
+            
+            if (arguments != null && arguments.Length > 0)
+                argsList.AddRange(arguments);
 
 			for (int i = 0; i < argsList.Count; i++)
 			{
-				if (
-					argsList[0].IndexOf(" ") > -1
-				    && argsList[0].IndexOf("\"") != 0
-				)
-					argsList[0] = @"""" + argsList[0] + @"""";
+                if (!String.IsNullOrEmpty (argsList[0]))
+                {
+    				if (
+    					argsList[0].IndexOf(" ") > -1
+    				    && argsList[0].IndexOf("\"") != 0
+    				)
+                    {
+    				    argsList[0] = @"""" + argsList[0] + @"""";
+                    }
+                }
 			}
 
 			return argsList.ToArray();
