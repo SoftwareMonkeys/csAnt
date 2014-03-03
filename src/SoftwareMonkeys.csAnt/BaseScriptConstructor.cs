@@ -23,30 +23,16 @@ namespace SoftwareMonkeys.csAnt
 
         public virtual void Construct (string scriptName, IScript parentScript)
         {
-            // TODO: Reorganize code
-            if (parentScript != null) {
-                //Script.InitializePackageManager (parentScript.Packages); // TODO: Remove if not needed
-                Script.InitializeFileFinder(parentScript.FileFinder);
-            }
-            else
-                Script.InitializeFileFinder(new FileFinder());
-
             // Construct the property values first so script can be used
             ConstructBasicProperties(scriptName, parentScript);
 
             ConstructConsoleWriter(scriptName, parentScript);
 
-            ConstructNodeManager();
-
             ConstructScriptStack();
 
             OutputHeader();
 
-            ConstructTDC();
-
             ConstructLifecycle();
-
-            ConstructRelocator();
 
             OutputFooter();
         }
@@ -64,6 +50,12 @@ namespace SoftwareMonkeys.csAnt
                 Script.OriginalDirectory = Script.ParentScript.OriginalDirectory;
                 Script.IsVerbose = Script.ParentScript.IsVerbose;
                 Script.IsDebug = Script.ParentScript.IsDebug;
+                
+                // TODO: Improve consistency in this code
+                Script.TemporaryDirectoryCreator = Script.ParentScript.TemporaryDirectoryCreator;
+                Script.InitializeNodeManager(Script.ParentScript.Nodes);
+                Script.Relocator = Script.ParentScript.Relocator;
+                Script.InitializeFileFinder(Script.ParentScript.FileFinder);
             } else {
                 Script.Time = DateTime.Now;
                 Script.TimeStamp = Script.GetTimeStamp ();
@@ -73,6 +65,11 @@ namespace SoftwareMonkeys.csAnt
                 Script.IsDebug = true;
                 Script.IsVerbose = true;
 #endif
+                
+                ConstructTDC();
+                ConstructNodeManager();
+                ConstructRelocator();
+                ConstructFileFinder();
             }
         }
 
@@ -97,6 +94,12 @@ namespace SoftwareMonkeys.csAnt
         {
             // Script stack
             Script.ScriptStack = GetScriptStack();
+        }
+
+        public virtual void ConstructFileFinder()
+        {
+            // File finder
+            Script.InitializeFileFinder(new FileFinder());
         }
 
         public virtual void ConstructLifecycle()
