@@ -29,6 +29,11 @@ public class Test_IncrementVersionScript : BaseProjectTestScript
 	
 	public override bool Run(string[] args)
 	{	
+		new FilesGrabber(
+			OriginalDirectory,
+			CurrentDirectory
+		).GrabOriginalFiles();
+
 	        IncrementVersion();
 
 		Assert.IsTrue(!IsError);
