@@ -23,12 +23,13 @@
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>none</DebugType>
+    <DebugType>full</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>..\..\bin\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
+    <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -100,6 +101,10 @@
       <Project>{9B72A2B8-0BC4-40BE-B242-AC79A080CEB6}</Project>
       <Name>SoftwareMonkeys.csAnt.Versions</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SoftwareMonkeys.csAnt\SoftwareMonkeys.csAnt.csproj">
+      <Project>{16297BCB-0A8C-42E6-BE35-921085C3E238}</Project>
+      <Name>SoftwareMonkeys.csAnt</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SoftwareMonkeys.csAnt.Packages.Contracts\SoftwareMonkeys.csAnt.Packages.Contracts.csproj">
       <Project>{C3C8D4B3-1659-4307-A7B1-DAE98C15250D}</Project>
       <Name>SoftwareMonkeys.csAnt.Packages.Contracts</Name>
@@ -107,10 +112,6 @@
     <ProjectReference Include="..\SoftwareMonkeys.csAnt.IO.Contracts\SoftwareMonkeys.csAnt.IO.Contracts.csproj">
       <Project>{53E3AFEA-3627-4846-B2E4-5A8091E96BC6}</Project>
       <Name>SoftwareMonkeys.csAnt.IO.Contracts</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SoftwareMonkeys.csAnt\SoftwareMonkeys.csAnt.csproj">
-      <Project>{16297BCB-0A8C-42E6-BE35-921085C3E238}</Project>
-      <Name>SoftwareMonkeys.csAnt</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>
