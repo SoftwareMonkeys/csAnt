@@ -67,7 +67,7 @@ namespace SoftwareMonkeys.csAnt
             // Get the script type
             var type = a.GetTypes () [0];
 
-            var s = (IScript)Activator.CreateInstance(type);
+            var s = Activator.CreateInstance(type).TryAlignToInterface<IScript>();
 
             IScript script = s;
 
