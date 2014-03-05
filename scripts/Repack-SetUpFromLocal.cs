@@ -22,14 +22,14 @@ class Repack_SetUpFromLocalScript : BaseScript
 
             var packedDir = "bin/Release/packed";
 
-            var outFile = packedDir + "/SetUpFromLocal.exe";
+            var outFile = packedDir + "/csAnt-SetUpFromLocal.exe";
             
             var arguments = new List<string>();
 
             arguments.Add("/out:" + outFile);
             arguments.Add("/target:exe");
             arguments.Add("/verbose");
-            arguments.Add("bin/Release/SetUpFromLocal.exe");
+            arguments.Add("bin/Release/csAnt-SetUpFromLocal.exe");
 
             AddDependencies(arguments);
             

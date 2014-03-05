@@ -22,14 +22,14 @@ class Repack_SetUpScript : BaseScript
 
             var packedDir = "bin/Release/packed";
 
-            var outFile = packedDir + "/SetUp.exe";
+            var outFile = packedDir + "/csAnt-SetUp.exe";
             
             var arguments = new List<string>();
 
             arguments.Add("/out:" + outFile);
             arguments.Add("/target:exe");
             arguments.Add("/verbose");
-            arguments.Add("bin/Release/SetUp.exe");
+            arguments.Add("bin/Release/csAnt-SetUp.exe");
 
             AddDependencies(arguments);
             
