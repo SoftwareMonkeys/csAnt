@@ -25,9 +25,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoftwareMonkeys.csAnt.Versi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoftwareMonkeys.csAnt.Packages.Contracts", "SoftwareMonkeys.csAnt.Packages.Contracts\SoftwareMonkeys.csAnt.Packages.Contracts.csproj", "{C3C8D4B3-1659-4307-A7B1-DAE98C15250D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoftwareMonkeys.csAnt.IO.Contracts", "SoftwareMonkeys.csAnt.IO.Contracts\SoftwareMonkeys.csAnt.IO.Contracts.csproj", "{53E3AFEA-3627-4846-B2E4-5A8091E96BC6}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoftwareMonkeys.csAnt.SetUp.Common", "SoftwareMonkeys.csAnt.SetUp.Common\SoftwareMonkeys.csAnt.SetUp.Common.csproj", "{485BCC0F-7E4F-4430-9174-3A1ADA428E71}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoftwareMonkeys.csAnt.IO.Contracts", "SoftwareMonkeys.csAnt.IO.Contracts\SoftwareMonkeys.csAnt.IO.Contracts.csproj", "{53E3AFEA-3627-4846-B2E4-5A8091E96BC6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -91,10 +91,6 @@ Global
 		{EA178299-9D1E-482E-B3CD-D3CEBF62CADF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EA178299-9D1E-482E-B3CD-D3CEBF62CADF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EA178299-9D1E-482E-B3CD-D3CEBF62CADF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AFCDC47D-D8CE-4541-AED1-8E8A598EF651}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AFCDC47D-D8CE-4541-AED1-8E8A598EF651}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AFCDC47D-D8CE-4541-AED1-8E8A598EF651}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AFCDC47D-D8CE-4541-AED1-8E8A598EF651}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = SoftwareMonkeys.csAnt\SoftwareMonkeys.csAnt.csproj
