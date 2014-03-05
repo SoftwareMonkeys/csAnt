@@ -117,7 +117,7 @@ Global
 		{F932547D-773F-46C6-8223-E27233A4CBDE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = SoftwareMonkeys.csAnt.SetUpFromLocalConsole\SoftwareMonkeys.csAnt.SetUpFromLocalConsole.csproj
+		StartupItem = SoftwareMonkeys.csAnt.SetUpFromWebConsole\SoftwareMonkeys.csAnt.SetUpFromWebConsole.csproj
 		Policies = $0
 		$0.DotNetNamingPolicy = $1
 		$1.DirectoryNamespaceAssociation = None
