@@ -34,6 +34,8 @@ namespace SoftwareMonkeys.csAnt
 
             ConstructLifecycle();
 
+            ConstructRelocator();
+
             OutputFooter();
         }
 
@@ -54,7 +56,7 @@ namespace SoftwareMonkeys.csAnt
                 // TODO: Improve consistency in this code
                 Script.TemporaryDirectoryCreator = Script.ParentScript.TemporaryDirectoryCreator;
                 Script.InitializeNodeManager(Script.ParentScript.Nodes);
-                Script.Relocator = Script.ParentScript.Relocator;
+                //Script.Relocator = Script.ParentScript.Relocator; // TODO: Remove if not needed. At the moment each script must have its own relocator. Could possibly change relocator so it doesn't need one per script
                 Script.InitializeFileFinder(Script.ParentScript.FileFinder);
             } else {
                 Script.Time = DateTime.Now;
@@ -68,7 +70,6 @@ namespace SoftwareMonkeys.csAnt
                 
                 ConstructTDC();
                 ConstructNodeManager();
-                ConstructRelocator();
                 ConstructFileFinder();
             }
         }
