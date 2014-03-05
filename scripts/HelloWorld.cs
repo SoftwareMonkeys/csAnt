@@ -1,5 +1,3 @@
-//css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.dll;
-//css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.Contracts.dll;
 using System;
 using System.IO;
 using Microsoft.CSharp;
