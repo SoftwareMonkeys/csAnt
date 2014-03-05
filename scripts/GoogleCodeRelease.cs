@@ -18,9 +18,10 @@ class GoogleCodeReleaseScript : BaseProjectScript
 	public override bool Run(string[] args)
 	{
 		Console.WriteLine("");
-		Console.WriteLine("Uploading the project release files to Google Code...");
+		Console.WriteLine("Uploading the setup and project release files to Google Code...");
 		Console.WriteLine("");
 	
+		UploadSetupFiles();
 		UploadReleaseFiles();
 
 		return !IsError;
@@ -42,6 +43,30 @@ class GoogleCodeReleaseScript : BaseProjectScript
 		}
 	}
 
+
+	public void UploadSetupFiles()
+	{
+		var binDir = ProjectDirectory
+			+ Path.DirectorySeparatorChar
+			+ "bin"
+			+ Path.DirectorySeparatorChar
+			+ "Release"
+			+ Path.DirectorySeparatorChar
+			+ "packed";
+
+		var files = new string[]{
+			"csAnt.exe",
+			"SetUp.exe"
+		};
+
+		foreach (string file in FindFiles(binDir, files))
+		{
+			UploadSetupFile(
+				file
+			);
+		}
+	}
+
 	public void UploadReleaseFile(string latestRelease)
 	{
 		string toPath = Path.GetFileName(latestRelease);
@@ -51,5 +76,28 @@ class GoogleCodeReleaseScript : BaseProjectScript
 			latestRelease,
 			toPath
 		);
+	}
+
+	public void UploadSetupFile(string file)
+	{
+
+		string targetName = Path.GetFileNameWithoutExtension(file)
+			+ "-" + CurrentNode.Properties["Version"].Replace(".", "-")
+			+ "-[" + TimeStamp + "]"
+			+ Path.GetExtension(file);
+
+		var tmpFilePath = GetTmpDir()
+			+ Path.DirectorySeparatorChar
+			+ targetName;
+
+		File.Copy(file, tmpFilePath);
+
+		GoogleCodeUpload(
+			ProjectName,
+			tmpFilePath,
+			targetName
+		);
+
+		File.Delete(tmpFilePath);
 	}
 }
