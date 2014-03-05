@@ -56,7 +56,7 @@ class GoogleCodeReleaseScript : BaseProjectScript
 
 		var files = new string[]{
 			"csAnt.exe",
-			"SetUp.exe"
+			"csAnt-SetUp.exe"
 		};
 
 		foreach (string file in FindFiles(binDir, files))
