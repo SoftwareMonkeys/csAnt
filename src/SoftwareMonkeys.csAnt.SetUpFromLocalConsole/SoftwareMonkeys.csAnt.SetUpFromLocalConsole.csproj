@@ -8,12 +8,12 @@
     <ProjectGuid>{9401F463-C823-4F52-9774-5311CB33B402}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>SoftwareMonkeys.csAnt.SetUpFromLocalConsole</RootNamespace>
-    <AssemblyName>SetUpFromLocal</AssemblyName>
+    <AssemblyName>csAnt-SetUpFromLocal</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
+    <Optimize>true</Optimize>
     <OutputPath>..\..\bin\Debug</OutputPath>
     <DefineConstants>DEBUG;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
@@ -21,13 +21,14 @@
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>none</DebugType>
+    <DebugType>full</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>..\..\bin\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
     <Commandlineparameters>../../ TestProject</Commandlineparameters>
+    <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -43,13 +44,13 @@
       <Project>{749ED083-15BD-4522-8FBE-847870434680}</Project>
       <Name>SoftwareMonkeys.csAnt.IO</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SoftwareMonkeys.csAnt.IO.Contracts\SoftwareMonkeys.csAnt.IO.Contracts.csproj">
-      <Project>{53E3AFEA-3627-4846-B2E4-5A8091E96BC6}</Project>
-      <Name>SoftwareMonkeys.csAnt.IO.Contracts</Name>
-    </ProjectReference>
     <ProjectReference Include="..\SoftwareMonkeys.csAnt.SetUp.Common\SoftwareMonkeys.csAnt.SetUp.Common.csproj">
       <Project>{485BCC0F-7E4F-4430-9174-3A1ADA428E71}</Project>
       <Name>SoftwareMonkeys.csAnt.SetUp.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SoftwareMonkeys.csAnt.IO.Contracts\SoftwareMonkeys.csAnt.IO.Contracts.csproj">
+      <Project>{53E3AFEA-3627-4846-B2E4-5A8091E96BC6}</Project>
+      <Name>SoftwareMonkeys.csAnt.IO.Contracts</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>
