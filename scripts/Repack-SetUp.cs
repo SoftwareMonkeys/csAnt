@@ -49,6 +49,9 @@ class Repack_SetUpScript : BaseScript
 	public void AddDependencies(List<string> arguments)
 	{
             var dependencies = new string[]{
+                "lib/HtmlAgilityPack/Net40/HtmlAgilityPack.dll",
+                "bin/Release/SoftwareMonkeys.csAnt.dll",
+                "bin/Release/SoftwareMonkeys.csAnt.Contracts.dll",
                 "bin/Release/SoftwareMonkeys.csAnt.IO.dll",
                 "bin/Release/SoftwareMonkeys.csAnt.SetUp.Common.dll",
                 "bin/Release/SoftwareMonkeys.csAnt.IO.Contracts.dll"
