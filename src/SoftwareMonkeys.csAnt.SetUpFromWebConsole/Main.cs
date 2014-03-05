@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using HtmlAgilityPack;
 
 namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole.cs
 {
@@ -9,7 +10,7 @@ namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole.cs
         public static void Main (string[] args)
         {
             Console.WriteLine ("");
-            Console.WriteLine ("Setting up csAnt and the package manager from online files...");
+            Console.WriteLine ("Setting up csAnt from online files...");
             Console.WriteLine ("");
 
             var destinationPath = Environment.CurrentDirectory;
@@ -38,23 +39,68 @@ namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole.cs
         {
             var list = new Dictionary<string, string>();
 
-            list.Add ("/csAnt.bat", "https://docs.google.com/uc?export=download&id=0B_8QvsLqRy5qNFBBdGNtdmw0aUE");
-            list.Add ("/csAnt.node", "https://docs.google.com/uc?export=download&id=0B_8QvsLqRy5qMXJzZ2g0TlBYM0U");
-            list.Add ("/csAnt.sh", "https://docs.google.com/uc?export=download&id=0B_8QvsLqRy5qVWtENHBmSkJuWG8");
-            list.Add ("/lib/csAnt/bin/Release/csAnt.exe", "https://docs.google.com/uc?export=download&id=0B_8QvsLqRy5qNzZvZlZqbmxDMDg");
-            list.Add ("/lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.dll", "https://docs.google.com/uc?export=download&id=0B_8QvsLqRy5qNEo3TUNaRk9nSTA");
-            list.Add ("/lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.Tests.dll", "https://docs.google.com/uc?export=download&id=0B_8QvsLqRy5qWHBQSXdUcDVXRms");
-            list.Add ("/lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.Tests.Scripting.dll", "https://docs.google.com/uc?export=download&id=0B_8QvsLqRy5qSk9qOVZDaXBHRUU");
-            list.Add ("/lib/csAnt/bin/Release/SoftwareMonkeys.FileNodes.dll"," https://docs.google.com/uc?export=download&id=0B_8QvsLqRy5qa2k4eXc5NVpvQW8");
-            list.Add ("/lib/csAnt/bin/Release/Newtonsoft.Json.dll", "https://docs.google.com/uc?export=download&id=0B_8QvsLqRy5qME9LNk9xTW5JNzg");
-            list.Add ("/lib/csAnt/bin/Release/CSScriptLibrary.dll", "https://docs.google.com/uc?export=download&id=0B_8QvsLqRy5qZExlZEVYemVjaVk");
-            list.Add ("/lib/cs-script/Lib/Bin/NET 4.0/CSScriptLibrary.dll", "https://docs.google.com/uc?export=download&id=0B_8QvsLqRy5qME9LNk9xTW5JNzg");
-            list.Add ("/lib/cs-script/cscs.exe", "https://docs.google.com/uc?export=download&id=0B_8QvsLqRy5qVnhfY1lMRWU3Zms");
-            list.Add ("/scripts/AddCsAntImport.cs", "https://csant.googlecode.com/git/scripts/AddCsAntImport.cs");
+            // Launcher files
+            list.Add ("/csAnt.bat", "https://csant.googlecode.com/git/csAnt.bat");
+            list.Add ("/csAnt.sh", "https://csant.googlecode.com/git/csAnt.sh");
+
+            // Repacked binary (contains all dependencies)
+            list.Add ("/lib/csAnt/bin/Release/csAnt.exe", GetUrl("csAnt"));
+
+            // Hello world script
             list.Add ("/scripts/HelloWorld.cs", "https://csant.googlecode.com/git/scripts/HelloWorld.cs");
-            list.Add ("/scripts/Update.cs", "https://csant.googlecode.com/git/scripts/Update.cs");
+
+            // TODO: Add other default scripts
 
             return list;
+        }
+
+        static public string GetUrl(string key)
+        {
+            var url = "https://code.google.com/p/csant/downloads/list";
+    
+            var xpath = "//table[@id='resultstable']/tr/td[3]";
+    
+            var prefix = "https://csant.googlecode.com/files/";
+    
+            var data = ScrapeXPathArray(
+                url,
+                xpath
+            );
+    
+            foreach (string item in data)
+            {
+                if (item.IndexOf(key + "-") == 0)
+                {    
+                    return prefix + item;
+                }
+            }
+    
+            return String.Empty;
+        }
+        
+        static public string[] ScrapeXPathArray(
+            string url,
+            string xpath
+        )
+        {
+            var web = new HtmlWeb();
+    
+            var doc = web.Load(url);
+    
+            var nodes = doc.DocumentNode.SelectNodes(xpath);
+    
+            List<string> values = new List<string>();
+    
+            if (nodes != null)
+            {    
+                foreach (var node in nodes)
+                {
+                    if (!String.IsNullOrEmpty(node.InnerText.Trim ()))
+                        values.Add (node.InnerText.Trim ());
+                }
+            }
+    
+            return values.ToArray();
         }
     }
 }
