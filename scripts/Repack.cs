@@ -1,4 +1,3 @@
-//css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.dll;
 using System;
 using System.IO;
 using Microsoft.CSharp;
@@ -14,6 +13,8 @@ class RepackScript : BaseScript
 	
 	public override bool Run(string[] args)
 	{
+		//ExecuteScript("EnsureBuild");
+
                 foreach (var script in FindScripts("Repack-*.cs"))
                 {
                     Console.WriteLine(script);
