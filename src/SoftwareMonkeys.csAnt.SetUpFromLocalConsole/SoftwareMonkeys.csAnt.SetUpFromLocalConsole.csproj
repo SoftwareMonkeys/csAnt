@@ -8,7 +8,6 @@
     <ProjectGuid>{9401F463-C823-4F52-9774-5311CB33B402}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>SoftwareMonkeys.csAnt.SetUpFromLocalConsole</RootNamespace>
-    <AssemblyName>csAnt-SetUpFromLocal</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -19,6 +18,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
+    <AssemblyName>csAnt-SetUpFromLocal</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>full</DebugType>
@@ -29,6 +29,23 @@
     <ConsolePause>false</ConsolePause>
     <Commandlineparameters>../../ TestProject</Commandlineparameters>
     <DebugSymbols>true</DebugSymbols>
+    <AssemblyName>csAnt-SetUpFromLocal</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugType>none</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\x86\Debug</OutputPath>
+    <WarningLevel>4</WarningLevel>
+    <AssemblyName>SoftwareMonkeys.csAnt.SetUpFromLocalConsole</AssemblyName>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <DebugType>none</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\x86\Release</OutputPath>
+    <WarningLevel>4</WarningLevel>
+    <AssemblyName>SoftwareMonkeys.csAnt.SetUpFromLocalConsole</AssemblyName>
+    <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />

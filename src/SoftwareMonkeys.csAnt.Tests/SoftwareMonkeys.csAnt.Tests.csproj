@@ -29,11 +29,22 @@
     <ConsolePause>false</ConsolePause>
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugType>none</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\x86\Debug</OutputPath>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <DebugType>none</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\x86\Release</OutputPath>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="SoftwareMonkeys.FileNodes">
-      <HintPath>..\..\lib\FileNodes\bin\Release\SoftwareMonkeys.FileNodes.dll</HintPath>
-    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="System.Web" />
     <Reference Include="HtmlAgilityPack">
@@ -45,6 +56,9 @@
     <Reference Include="CSScriptLibrary">
       <HintPath>..\..\lib\cs-script\Lib\Bin\NET 4.0\CSScriptLibrary.dll</HintPath>
     </Reference>
+    <Reference Include="SoftwareMonkeys.FileNodes">
+      <HintPath>..\..\lib\FileNodes\bin\Release\SoftwareMonkeys.FileNodes.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
@@ -52,7 +66,6 @@
     <Compile Include="ArgumentsTestFixture.cs" />
     <Compile Include="BaseTestFixture.cs" />
     <Compile Include="DownloadTestFixture.cs" />
-    <Compile Include="ExecuteScriptTestFixture.cs" />
     <Compile Include="FailingTestFixture.cs" />
     <Compile Include="GetLibTestFixture.cs" />
     <Compile Include="GetZipInternalPathTestFixture.cs" />
