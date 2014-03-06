@@ -14,12 +14,7 @@ namespace SoftwareMonkeys.csAnt.Tests
                 Console.WriteLine ("");
             }
 
-            var modes = new string[]{"Debug", "Release"};
-
-            foreach (var mode in modes) {
-                if (Environment.CurrentDirectory.EndsWith ("/bin/" + mode))
-                    Environment.CurrentDirectory = Environment.CurrentDirectory.Replace ("/bin/" + mode, "");
-            }
+        	Environment.CurrentDirectory = new CurrentDirectoryFixer().Fix(Environment.CurrentDirectory);
             
             if (IsVerbose) {
                 Console.WriteLine ("New current directory:");
