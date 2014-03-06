@@ -37,7 +37,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <DebugType>none</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\x86\Debug</OutputPath>
+    <OutputPath>..\..\bin\x86\Debug</OutputPath>
     <WarningLevel>4</WarningLevel>
     <AssemblyName>SoftwareMonkeys.csAnt.Packages.InstallConsole</AssemblyName>
     <PlatformTarget>x86</PlatformTarget>
@@ -45,7 +45,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <DebugType>none</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\x86\Release</OutputPath>
+    <OutputPath>..\..\bin\x86\Release</OutputPath>
     <WarningLevel>4</WarningLevel>
     <AssemblyName>SoftwareMonkeys.csAnt.Packages.InstallConsole</AssemblyName>
     <PlatformTarget>x86</PlatformTarget>
