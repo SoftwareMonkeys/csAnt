@@ -4,6 +4,7 @@ using System.IO;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Reflection;
+using SoftwareMonkeys.csAnt.IO;
 
 namespace SoftwareMonkeys.csAnt.Tests
 {
@@ -25,6 +26,8 @@ namespace SoftwareMonkeys.csAnt.Tests
         public bool AutoFinish = true;
 
         public IConsoleWriter Console { get; set; }
+        
+        public IFileFinder FileFinder { get;set; }
         
         public NUnitTestRunner (
             IScript script,
@@ -69,6 +72,7 @@ namespace SoftwareMonkeys.csAnt.Tests
             Console = Script.ConsoleWriter;
             XmlFileNamer = xmlFileNamer;
             HtmlFileNamer = htmlFileNamer;
+            FileFinder = new FileFinder();
         }
         
         public void RunTests ()
@@ -91,13 +95,16 @@ namespace SoftwareMonkeys.csAnt.Tests
         {
             EnsureDirectories ();
     
-            var binPath = directory;
-
             Console.WriteLine ("Test assemblies:");
 
             List<string> executedAssemblies = new List<string> ();
+            
+            var extensions = new string[]{
+                "*.dll",
+                "*.exe"
+            };
 
-            foreach (string assemblyFile in Directory.GetFiles(binPath, "*.dll", SearchOption.AllDirectories)) {
+            foreach (string assemblyFile in FileFinder.FindFiles(directory, extensions)) {
                 if (AssemblyContainsTestFixtures (assemblyFile, testNames)) {
                     var assemblyFileName = Path.GetFileName (assemblyFile);
 
