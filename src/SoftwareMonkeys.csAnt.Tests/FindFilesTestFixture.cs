@@ -96,6 +96,32 @@ namespace SoftwareMonkeys.csAnt.Tests
 			Assert.AreEqual(1, files.Length, "Wrong number of files.");
 		}
 		
+		[Test]
+		public void Test_FindFiles_StepUpOneLevel()
+		{
+			var testScript = GetDummyScript();
+
+			var patterns = new string[]{
+				"../*.txt"
+			};
+
+			var tmpDir = testScript.GetTmpDir();
+
+			var tmpFile = tmpDir
+				+ Path.DirectorySeparatorChar
+					+ "TestFile.txt";
+			
+			var tmpSubDir = tmpDir
+				+ Path.DirectorySeparatorChar
+				+ "SubDir";
+
+			File.WriteAllText(tmpFile, "Test content");
+
+			var files = testScript.FindFiles(tmpSubDir, patterns);
+
+			Assert.AreEqual(1, files.Length, "Wrong number of files.");
+		}
+		
 		// TODO: Remove if not needed
 		/*[Test]
 		public void Test_FindFiles_StartsWithSlash()
