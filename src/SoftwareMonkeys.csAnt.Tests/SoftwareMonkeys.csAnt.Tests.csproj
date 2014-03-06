@@ -79,6 +79,8 @@
     <Compile Include="AddLibTestFixture.cs" />
     <Compile Include="ArgumentsTestFixture.cs" />
     <Compile Include="BaseTestFixture.cs" />
+    <Compile Include="BaseTestFixture.IsLinux.cs" />
+    <Compile Include="CurrentDirectoryFixer.cs" />
     <Compile Include="DownloadTestFixture.cs" />
     <Compile Include="FailingTestFixture.cs" />
     <Compile Include="GetLibTestFixture.cs" />
@@ -86,6 +88,9 @@
     <Compile Include="GitCloneTestFixture.cs" />
     <Compile Include="DownloadAndUnzipTestFixture.cs" />
     <Compile Include="ClearTmpTestFixture.cs" />
+    <Compile Include="Sanity\BaseSanityTestFixture.cs" />
+    <Compile Include="Sanity\CurrentDirectoryFixerTestFixture.cs" />
+    <Compile Include="Sanity\WorkingDirectoryTestFixture.cs" />
     <Compile Include="SyncTestFixture.cs" />
     <Compile Include="FindFilesTestFixture.cs" />
     <Compile Include="StartProcessTestFixture.cs" />
@@ -154,6 +159,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="New Folder" />
+    <Folder Include="Sanity" />
   </ItemGroup>
 </Project>
