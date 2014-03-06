@@ -33,7 +33,7 @@ class CyclePublishScript : BaseProjectScript
 		Relocate(tmpDir);
 
 		// Build the cloned source code
-		ExecuteScript("CycleRelease");
+		ExecuteScript("EnsureRelease");
 
 		if (!IsError)
 		{
