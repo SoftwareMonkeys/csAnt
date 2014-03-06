@@ -18,7 +18,7 @@ class Repack_SetUpFromLocalScript : BaseScript
             Console.WriteLine("Repacking SetUpFromLocal.exe file to include dependencies.");
             Console.WriteLine("");
 	
-            var exeFile = "lib/ILRepack.1.23.0/tools/ILRepack.exe";
+            var exeFile = "lib/ILRepack.1.25.0/tools/ILRepack.exe";
 
             var packedDir = "bin/Release/packed";
 
