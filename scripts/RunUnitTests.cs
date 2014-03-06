@@ -9,19 +9,16 @@ using System.Diagnostics;
 using SoftwareMonkeys.csAnt;
 using SoftwareMonkeys.csAnt.Tests;
 
-class RunTestsScript : BaseScript
+class RunUnitTestsScript : BaseScript
 {
 	public static void Main(string[] args)
 	{
-		new RunTestsScript().Start(args);
+		new RunUnitTestsScript().Start(args);
 	}
 	
 	public override bool Run(string[] args)
 	{
-	    // Compile the scripts so they can run as unit tests
-            CompileScripts();
-            
-            // Run all tests including scripts and standard unit tests
+            // Run tests
             RunTests();
 
             return !IsError;
