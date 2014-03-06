@@ -6,6 +6,7 @@ namespace SoftwareMonkeys.csAnt.Projects
 {
 	public partial class BaseProjectScript
 	{
+        // TODO: Move to ProjectNodeState component
 		private FileNode groupNode;
 		/// <summary>
 		/// Gets information node of the group/company/organization that the project belongs to.

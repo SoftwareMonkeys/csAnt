@@ -1,6 +1,3 @@
-//css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.dll;
-//css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.Projects.dll;
-
 using System;
 using System.IO;
 using System.Diagnostics;
@@ -28,7 +25,8 @@ class CopyBinToRootScript : BaseProjectScript
 		int i = 0;
 
 		var patterns = new string[]{
-			"bin/Release/packed/SetUpFromLocal.exe"
+			"bin/Release/packed/csAnt-SetUpFromLocal.exe",
+			"bin/Release/packed/csAnt-SetUp.exe"
 		};
 
 	        foreach (string file in FindFiles(patterns))

@@ -23,37 +23,6 @@ namespace SoftwareMonkeys.csAnt.Tests
         }
         
         [Test]
-        public void Test_ActivateScript_ConsolePropertyIsSet()
-        {
-            throw new NotImplementedException("This should be obsolete. Remove if not needed.");
-            /*
-            var s = GetDummyScript();
-
-            s.FilesGrabber.GrabOriginalScriptingFiles();
-
-            var s2 = s.ActivateScript("HelloWorld");
-
-            Assert.AreEqual(typeof(SubConsoleWriter).FullName, s2.ConsoleWriter.GetType().FullName, "The Console property isn't a SubConsoleWriter as it should be.");
-            
-            Assert.IsNotNull(
-                ((SubConsoleWriter)s2.ConsoleWriter).ParentWriter,
-                "The parent writer is null."
-                );
-
-            Assert.AreEqual(
-                s.ScriptName,
-                ((SubConsoleWriter)s2.ConsoleWriter).ParentWriter.ScriptName,
-                "The script name for the parent writer is incorrect."
-                );
-
-            Assert.AreEqual(
-                s.ScriptName,
-                ((SubConsoleWriter)s2.ConsoleWriter).ParentWriter.ScriptName,
-                "The script for the parent writer isn't as expected."
-                );*/
-        }
-        
-        [Test]
         public void Test_ActivateScript_TimePropertyIsSet()
         {
             var script = GetDummyScript();

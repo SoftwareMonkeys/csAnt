@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using HtmlAgilityPack;
+using System.Diagnostics;
 
 namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole.cs
 {
@@ -33,6 +34,39 @@ namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole.cs
 
                 DownloadUtility.Download(url, file, overwrite);
             }
+
+            GetDependencies();
+        }
+
+        static public void GetDependencies()
+        {
+
+            var libs = new string[]{
+            //    "SharpZipLib", // TODO: Check if needed (shouldn't be at the moment because they're embedded in csAnt.exe)
+            //    "Newtonsoft.Json",
+            //    "CSScriptLibrary.dll"
+            };
+
+            Environment.CurrentDirectory = Environment.CurrentDirectory
+                + Path.DirectorySeparatorChar
+                    + "lib";
+
+            if (libs.Length > 0)
+            {
+                Console.WriteLine ("");
+                Console.WriteLine ("Getting dependencies...");
+                Console.WriteLine ("");
+
+                foreach (var lib in libs)
+                {
+                    Console.WriteLine (lib);
+                    Process.Start("nuget.exe", "install " + lib);
+                    Console.WriteLine ("Done");
+                    
+                }
+            }
+
+            Environment.CurrentDirectory = Path.GetDirectoryName(Environment.CurrentDirectory);
         }
 
         static public Dictionary<string, string> GetFileList()
@@ -42,6 +76,9 @@ namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole.cs
             // Launcher files
             list.Add ("/csAnt.bat", "https://csant.googlecode.com/git/csAnt.bat");
             list.Add ("/csAnt.sh", "https://csant.googlecode.com/git/csAnt.sh");
+
+            // TODO: Check if needed. Isn't currently, but could be useful to be included.
+            //list.Add ("/lib/nuget.exe", "http://nuget.org/nuget.exe");
 
             // Repacked binary (contains all dependencies)
             list.Add ("/lib/csAnt/bin/Release/csAnt.exe", GetUrl("csAnt"));

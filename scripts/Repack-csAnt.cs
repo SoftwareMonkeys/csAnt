@@ -18,7 +18,7 @@ class Repack_csAntScript : BaseScript
             Console.WriteLine("Repacking csAnt.exe file to include dependencies.");
             Console.WriteLine("");
 	
-            var exeFile = "lib/ILRepack.1.23.0/tools/ILRepack.exe";
+            var exeFile = "lib/ILRepack.1.25.0/tools/ILRepack.exe";
 
             var packedDir = "bin/Release/packed";
 
@@ -51,12 +51,12 @@ class Repack_csAntScript : BaseScript
             var dependencies = new string[]{
                 "lib/FileNodes/bin/Release/SoftwareMonkeys.FileNodes.dll",
                 "lib/SharpZipLib/net-20/ICSharpCode.SharpZipLib.dll",
-                "lib/Newtonsoft.Json/Bin/Net40/Newtonsoft.Json.dll",
+                "lib/Newtonsoft.Json.6.0.1/lib/net40/Newtonsoft.Json.dll",
                 "\"lib/cs-script/Lib/Bin/NET 4.0/CSScriptLibrary.dll\"",
-                "bin/Release/SoftwareMonkeys.csAnt.dll",
                 "bin/Release/SoftwareMonkeys.csAnt.Contracts.dll",
-                "bin/Release/SoftwareMonkeys.csAnt.IO.dll",
                 "bin/Release/SoftwareMonkeys.csAnt.IO.Contracts.dll",
+                "bin/Release/SoftwareMonkeys.csAnt.dll",
+                "bin/Release/SoftwareMonkeys.csAnt.IO.dll",
                 "bin/Release/SoftwareMonkeys.csAnt.Packages.dll",
                 "bin/Release/SoftwareMonkeys.csAnt.Packages.Contracts.dll",
                 //"bin/Release/SoftwareMonkeys.csAnt.Projects.dll",

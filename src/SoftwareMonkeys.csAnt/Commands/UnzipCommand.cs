@@ -110,7 +110,7 @@ namespace SoftwareMonkeys.csAnt
 
             if (fullSubPath.Trim (Path.DirectorySeparatorChar) != DestinationPath.Trim (Path.DirectorySeparatorChar))
             {
-            // Move the files in the sub path within the temporary folder into the final destination
+                // Move the files in the sub path within the temporary folder into the final destination
                 Script.MoveDirectory(fullSubPath, DestinationPath);
             }
 

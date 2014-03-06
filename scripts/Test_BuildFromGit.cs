@@ -30,12 +30,25 @@ class Test_BuildFromGitScript : BaseProjectTestScript
 		Console.WriteLine("Test building solutions from git clone...");
 		Console.WriteLine("");
 
+		var dummyProjectDir = PrepareTest();
+
+		if (!IsError)
+		{
+			// Build and test the cloned copy of the project
+			BuildClonedCopy(dummyProjectDir);
+		}
+
+		return !IsError;
+	}
+
+	public string PrepareTest()
+	{
                 var testDir = CurrentDirectory;
 		
 		new FilesGrabber(
                     OriginalDirectory,
                     CurrentDirectory
-                ).GrabOriginalFiles();
+                ).GrabOriginalScriptingFiles();
 
 		// Clone the project to another directory
 		var dummyProjectDir = CloneToTmpDirectory();
@@ -50,15 +63,11 @@ class Test_BuildFromGitScript : BaseProjectTestScript
 		new FilesGrabber(
                     testDir,
                     dummyProjectDir
-               ).GrabOriginalFiles("lib/**");
+                ).GrabOriginalFiles(
+			"lib/**"
+		);
 
-		if (!IsError)
-		{
-			// Build and test the cloned copy of the project
-			BuildClonedCopy(dummyProjectDir);
-		}
-
-		return !IsError;
+		return dummyProjectDir;
 	}
 
 	public string CloneToTmpDirectory()
