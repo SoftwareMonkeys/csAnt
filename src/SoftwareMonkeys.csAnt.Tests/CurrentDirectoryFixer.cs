@@ -27,19 +27,25 @@ namespace SoftwareMonkeys.csAnt.Tests
             		+ mode;
             	
                 if (currentDirectory.EndsWith (key))
+                {
                     currentDirectory = currentDirectory.Replace (key, "");
+                    break;
+                }
                 
                 foreach (var target in targets)
                 {
             		var subKey = Path.DirectorySeparatorChar
 	            		+ "bin"
 	            		+ Path.DirectorySeparatorChar
-	            		+ mode
+	            		+ target
 	            		+ Path.DirectorySeparatorChar
-	            		+ target;
+	            		+ mode;
             	
 	                if (currentDirectory.EndsWith (subKey))
+	                {
 	                    currentDirectory = currentDirectory.Replace (subKey, "");
+	                    break;
+	                }
                 }
             }
             

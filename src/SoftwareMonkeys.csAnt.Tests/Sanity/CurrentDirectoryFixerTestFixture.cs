@@ -41,9 +41,9 @@ namespace SoftwareMonkeys.csAnt.Tests.Sanity
 			var startingDir = "";
 			
 			if (IsLinux)
-				startingDir = "/home/user/projects/group/project/bin/Release/x86";
+				startingDir = "/home/user/projects/group/project/bin/x86/Release";
 			else
-				startingDir = @"c:\projects\group\project\bin\Release\x86";
+				startingDir = @"c:\projects\group\project\bin\x86\Release";
 			
 			
 			var fixedDir = new CurrentDirectoryFixer().Fix(startingDir);
@@ -52,9 +52,9 @@ namespace SoftwareMonkeys.csAnt.Tests.Sanity
 					Path.DirectorySeparatorChar
 					+ "bin"
 					+ Path.DirectorySeparatorChar
-					+ "Release"
+					+ "x86"
 					+ Path.DirectorySeparatorChar
-					+ "x86",
+					+ "Release",
 					""
 				);
 			

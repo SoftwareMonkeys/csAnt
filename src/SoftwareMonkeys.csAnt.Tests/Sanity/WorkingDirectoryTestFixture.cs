@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using NUnit.Framework;
 
 namespace SoftwareMonkeys.csAnt.Tests.Sanity
@@ -11,6 +12,8 @@ namespace SoftwareMonkeys.csAnt.Tests.Sanity
 	{
 		public WorkingDirectoryTestFixture()
 		{
+			// Enable auto initialization so the results of initialization can be checked.
+			AutoInitialize = true;
 		}
 		
 		[Test]
@@ -21,7 +24,10 @@ namespace SoftwareMonkeys.csAnt.Tests.Sanity
 			Console.WriteLine(WorkingDirectory);
 			Console.WriteLine("");
 			
-			Assert.IsTrue(WorkingDirectory.EndsWith("/csAnt/"), "Invalid working directory. Does not end with '/csAnt/' as expected.");
+			var key = Path.DirectorySeparatorChar
+				+ "csAnt";
+			
+			Assert.IsTrue(WorkingDirectory.EndsWith(key), "Invalid working directory. Does not end with '/csAnt/' as expected.");
 		}
 	}
 }
