@@ -1,0 +1,7 @@
+{
+  "Properties": {
+    "Context": "Assembly",
+    "Version": "0.1.0.26000"
+  },
+  "Name": "SoftwareMonkeys.csAnt.PackageManager.Tests"
+}
