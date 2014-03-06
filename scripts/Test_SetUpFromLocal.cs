@@ -22,13 +22,14 @@ class Test_SetUpFromLocalScript : BaseTestScript
 	
 	public override bool Run(string[] args)
 	{
-	        new FilesGrabber(
-                    OriginalDirectory,
-                    CurrentDirectory
-                    ).GrabOriginalFiles();
+		var testDir = CurrentDirectory;
+
+		Relocate(OriginalDirectory);
 
                 ExecuteScript("Repack-SetUpFromLocal");
 
+		Relocate(testDir);
+		
                 // TODO: Add windows support
 	        var originalSetUpFile = OriginalDirectory
                     + Path.DirectorySeparatorChar
@@ -38,7 +39,7 @@ class Test_SetUpFromLocalScript : BaseTestScript
                     + Path.DirectorySeparatorChar
                     + "packed"
                     + Path.DirectorySeparatorChar
-                    + "SetUpFromLocal.exe";
+                    + "csAnt-SetUpFromLocal.exe";
 
                 Console.WriteLine("Set up file original:");
                 Console.WriteLine(originalSetUpFile);
