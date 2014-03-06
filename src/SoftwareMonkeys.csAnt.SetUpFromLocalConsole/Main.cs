@@ -75,6 +75,7 @@ namespace SoftwareMonkeys.csAnt.SetUpFromLocalConsole
             return new string[]{
                 "lib/csAnt/**",
                 "lib/cs-script/**",
+                "lib/FileNodes/**",
                 "scripts/*.cs",
                 "csAnt.sh"
             };
