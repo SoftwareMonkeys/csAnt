@@ -100,7 +100,7 @@ namespace SoftwareMonkeys.csAnt
         public virtual void ConstructFileFinder()
         {
             // File finder
-            Script.InitializeFileFinder(new FileFinder());
+            Script.InitializeFileFinder(new FileFinder(Script.IsVerbose));
         }
 
         public virtual void ConstructLifecycle()
