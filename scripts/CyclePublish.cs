@@ -1,6 +1,7 @@
 //css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.dll;
 //css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.Projects.dll;
 //css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.FileNodes.dll;
+//css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.IO.dll;
 
 using System;
 using System.IO;
@@ -9,6 +10,7 @@ using System.Diagnostics;
 using SoftwareMonkeys.csAnt;
 using SoftwareMonkeys.csAnt.Projects;
 using SoftwareMonkeys.FileNodes;
+using SoftwareMonkeys.csAnt.IO;
 
 class CyclePublishScript : BaseProjectScript
 {
@@ -26,8 +28,7 @@ class CyclePublishScript : BaseProjectScript
 		// Git clone the project to another directory
 		var tmpDir = CloneToTmpDirectory();
 
-		// Prepare the project (eg. download libs)
-		InstallTo("csAnt", tmpDir);
+		GrabLibs(tmpDir);
 
 		// Move to the cloned directory
 		Relocate(tmpDir);
@@ -37,14 +38,28 @@ class CyclePublishScript : BaseProjectScript
 
 		if (!IsError)
 		{
-			Console.WriteLine("Uploading the release zip file to GoogleCode...");
-			Console.WriteLine("");
 
-			// Upload to GoogleCode
-			ExecuteScript("GoogleCodeRelease");
+			// Publish files
+			ExecuteScript("Publish");
 		}
 
 		return !IsError;
+	}
+
+	public void GrabLibs(string tmpDir)
+	{
+		new FilesGrabber(
+			OriginalDirectory,
+			tmpDir
+		).GrabOriginalFiles(
+			"bin/**",
+			"src/TimeStamps.txt",
+			"lib/csAnt/**",
+			"lib/cs-script/**",
+			"lib/HtmlAgilityPack/**",
+			"lib/ILRepack.1.25.0/**",
+			"lib/FileNodes/**"
+		);
 	}
 
 	public string CloneToTmpDirectory()
