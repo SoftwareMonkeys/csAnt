@@ -27,7 +27,8 @@ public class Test_HelloWorldScript : BaseTestScript
 	{
 	        new FilesGrabber(
                     OriginalDirectory,
-                    CurrentDirectory
+                    CurrentDirectory,
+		    		IsVerbose
                 ).GrabOriginalScriptingFiles();
 	
 		ExecuteScript("HelloWorld");
