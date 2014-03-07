@@ -142,6 +142,30 @@ namespace SoftwareMonkeys.csAnt.Tests.Unit
 
             Assert.AreEqual(pattern, fixedPattern, "Invalid pattern.");
         }
+
+        [Test]
+        public void Test_FixPathAndPattern_PatternStartsWithSlash()
+        {
+            var path = WorkingDirectory;
+
+            var pattern = "/*.txt";
+
+            var fixedPath = path;
+
+            var fixedPattern = pattern;
+
+            var finder = new FileFinder();
+
+            finder.FixPathAndPattern(ref fixedPath, ref fixedPattern);
+
+            var expectedPath = path;
+
+            var expectedPattern = "*.txt";
+
+            Assert.AreEqual (expectedPath, fixedPath, "Invalid path.");
+
+            Assert.AreEqual(expectedPattern, fixedPattern, "Invalid pattern.");
+        }
         
 
         [Test]
@@ -166,36 +190,7 @@ namespace SoftwareMonkeys.csAnt.Tests.Unit
             Assert.AreEqual (expectedPath, fixedPath, "Invalid path.");
 
             Assert.AreEqual(expectedPattern, fixedPattern, "Invalid pattern.");
-        }
-		
-		// TODO: Remove if not needed
-		/*[Test]
-		public void Test_FindFiles_StartsWithSlash()
-		{
-			var testScript = GetTestScript();
-
-			var patterns = new string[]{
-				"/test/*"
-			};
-
-			var dir = testScript.CurrentDirectory;
-
-			var tmpFile = dir
-				+ Path.DirectorySeparatorChar
-				+ "test"
-				+ Path.DirectorySeparatorChar
-				+ "TestFile.txt";
-
-			Console.WriteLine ("Tmp file: " + tmpFile);
-
-			testScript.EnsureDirectoryExists(Path.GetDirectoryName(tmpFile));
-
-			File.WriteAllText(tmpFile, "Test content");
-
-			var files = testScript.FindFiles(dir, patterns);
-
-			Assert.AreEqual(1, files.Length, "Wrong number of files.");
-		}*/
+        }		
 	}
 }
 
