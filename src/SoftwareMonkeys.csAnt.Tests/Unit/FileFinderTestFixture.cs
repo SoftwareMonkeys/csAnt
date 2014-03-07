@@ -167,35 +167,6 @@ namespace SoftwareMonkeys.csAnt.Tests.Unit
 
             Assert.AreEqual(expectedPattern, fixedPattern, "Invalid pattern.");
         }
-		
-		// TODO: Remove if not needed
-		/*[Test]
-		public void Test_FindFiles_StartsWithSlash()
-		{
-			var testScript = GetTestScript();
-
-			var patterns = new string[]{
-				"/test/*"
-			};
-
-			var dir = testScript.CurrentDirectory;
-
-			var tmpFile = dir
-				+ Path.DirectorySeparatorChar
-				+ "test"
-				+ Path.DirectorySeparatorChar
-				+ "TestFile.txt";
-
-			Console.WriteLine ("Tmp file: " + tmpFile);
-
-			testScript.EnsureDirectoryExists(Path.GetDirectoryName(tmpFile));
-
-			File.WriteAllText(tmpFile, "Test content");
-
-			var files = testScript.FindFiles(dir, patterns);
-
-			Assert.AreEqual(1, files.Length, "Wrong number of files.");
-		}*/
 	}
 }
 

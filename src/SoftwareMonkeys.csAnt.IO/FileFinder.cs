@@ -102,6 +102,9 @@ namespace SoftwareMonkeys.csAnt.IO
         {
             var tmp = string.Empty;
 
+            // Fix slashes
+            pattern = pattern.Replace('/', Path.DirectorySeparatorChar);
+            
             // The following functionality takes the ".." off the pattern so it can be appended to the path
             // TODO: Check if there's a better way to do this
 
