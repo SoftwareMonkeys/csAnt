@@ -61,55 +61,31 @@ namespace SoftwareMonkeys.csAnt.IO
             }
 
             List<string> foundFiles = new List<string> ();
-            
-            if (pattern.IndexOf (workingDirectory) == -1) {
-                pattern = workingDirectory.TrimEnd (Path.DirectorySeparatorChar)
-                    + Path.DirectorySeparatorChar
-                    + pattern.Trim (Path.DirectorySeparatorChar);
-            }
+
+            FixPathAndPattern(ref workingDirectory, ref pattern);
 
             if (IsVerbose) 
-                Console.WriteLine ("  Pattern: " + pattern);
-
-            var subPath = pattern.Substring (
-                0,
-                pattern.LastIndexOf (Path.DirectorySeparatorChar)
-            );
-            
-            if (IsVerbose)
-                Console.WriteLine ("  Sub path: " + subPath);
-
-            var subPattern = pattern;
-
-            if (subPattern.IndexOf (Path.DirectorySeparatorChar) > -1) {
-                subPattern = pattern.Substring (
-                pattern.LastIndexOf (Path.DirectorySeparatorChar),
-                pattern.Length - pattern.LastIndexOf (Path.DirectorySeparatorChar)
-                ).Trim (Path.DirectorySeparatorChar);
+            {
+                Console.WriteLine ("  Specified path: " + workingDirectory);
+                Console.WriteLine ("  Specified pattern: " + pattern);
             }
-                
-            if (IsVerbose)
-                Console.WriteLine ("  Sub pattern: " + subPattern);
 
             var searchOption = SearchOption.TopDirectoryOnly;
 
-            if (subPattern.IndexOf ("**") == 0) {
-                subPattern = subPattern.Replace ("**", "*");
+            if (pattern.IndexOf ("**") == 0) {
+                pattern = pattern.Replace ("**", "*");
                 searchOption = SearchOption.AllDirectories;
             }
-                
-            if (IsVerbose)
-                Console.WriteLine ("  Fixed sub pattern: " + subPattern);
 
-            if (Directory.Exists (subPath)) {
-                foreach (var file in Directory.GetFiles (subPath, subPattern, searchOption)) {
+            if (Directory.Exists (workingDirectory)) {
+                foreach (var file in Directory.GetFiles (workingDirectory, pattern, searchOption)) {
                     if (!foundFiles.Contains (file))
                         foundFiles.Add (file);
                 }
             } else {
                 if (IsVerbose) {
                     Console.WriteLine ("Can't find directory:");
-                    Console.WriteLine (subPath);
+                    Console.WriteLine (workingDirectory);
                 }
             }
             
@@ -120,6 +96,36 @@ namespace SoftwareMonkeys.csAnt.IO
 
             return foundFiles.ToArray();
 
+        }
+
+        public void FixPathAndPattern(ref string path, ref string pattern)
+        {
+            var tmp = string.Empty;
+
+            // The following functionality takes the ".." off the pattern so it can be appended to the path
+            // TODO: Check if there's a better way to do this
+
+            // Add the working directory to the beginning of the pattern
+            if (pattern.IndexOf (path) == -1) {
+                tmp = path.TrimEnd (Path.DirectorySeparatorChar)
+                    + Path.DirectorySeparatorChar
+                    + pattern.Trim (Path.DirectorySeparatorChar);
+            }
+
+            // Grab the last section of the value to use as the pattern
+            if (tmp.IndexOf (Path.DirectorySeparatorChar) > -1) {
+                pattern = tmp.Substring (
+                tmp.LastIndexOf (Path.DirectorySeparatorChar),
+                tmp.Length - tmp.LastIndexOf (Path.DirectorySeparatorChar)
+                ).Trim (Path.DirectorySeparatorChar);
+            }
+
+            path = tmp.Substring (
+                0,
+                tmp.LastIndexOf (Path.DirectorySeparatorChar)
+            );
+
+            path = Path.GetFullPath(path);
         }
     }
 }
