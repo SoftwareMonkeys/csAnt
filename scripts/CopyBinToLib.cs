@@ -49,7 +49,14 @@ class CopyBinToLibScript : BaseProjectScript
 				        + toFile.Replace(ProjectDirectory, "")
 			        );
 
-			        File.Copy(file, toFile, true);
+				try
+				{
+			        	File.Copy(file, toFile, true);
+				}
+				catch (Exception)
+				{
+					Console.WriteLine("Can't copy: " + file);
+				}
 		        }
 		}
 
