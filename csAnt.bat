@@ -1,1 +1,1 @@
-"lib/csAnt/bin/Release/csAnt.exe" %1
+"lib/csAnt/bin/Release/csAnt.exe" %*
