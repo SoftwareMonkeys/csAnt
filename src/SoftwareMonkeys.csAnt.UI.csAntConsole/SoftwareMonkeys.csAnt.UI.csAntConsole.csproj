@@ -26,6 +26,7 @@
     <AssemblyName>csAnt</AssemblyName>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>SoftwareMonkeys.csAnt.UI.csAntConsole.snk</AssemblyOriginatorKeyFile>
+    <BaseIntermediateOutputPath>obj\</BaseIntermediateOutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>full</DebugType>
@@ -47,6 +48,11 @@
     <WarningLevel>4</WarningLevel>
     <AssemblyName>SoftwareMonkeys.csAnt.UI.csAntConsole</AssemblyName>
     <PlatformTarget>x86</PlatformTarget>
+    <BaseIntermediateOutputPath>obj\</BaseIntermediateOutputPath>
+    <BaseAddress>4194304</BaseAddress>
+    <RegisterForComInterop>False</RegisterForComInterop>
+    <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
+    <FileAlignment>4096</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <DebugType>none</DebugType>
@@ -55,6 +61,10 @@
     <WarningLevel>4</WarningLevel>
     <AssemblyName>SoftwareMonkeys.csAnt.UI.csAntConsole</AssemblyName>
     <PlatformTarget>x86</PlatformTarget>
+    <BaseAddress>4194304</BaseAddress>
+    <RegisterForComInterop>False</RegisterForComInterop>
+    <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
+    <FileAlignment>4096</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
@@ -72,7 +82,7 @@
       <HintPath>..\..\lib\SharpZipLib\net-20\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
     <Reference Include="SoftwareMonkeys.FileNodes">
-      <HintPath>..\..\lib\FileNodes\bin\SoftwareMonkeys.FileNodes.dll</HintPath>
+      <HintPath>..\..\lib\FileNodes\bin\Release\SoftwareMonkeys.FileNodes.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

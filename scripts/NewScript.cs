@@ -16,6 +16,8 @@ class NewScriptScript : BaseScript
 	{
 		var name = args[0];
 
+		var open = Arguments.Contains("o");
+
 		Console.WriteLine("Creating new script...");
 		Console.WriteLine("Name: " + name);
 
@@ -37,7 +39,8 @@ class NewScriptScript : BaseScript
 
 			FixName(name, destScript);
 
-			StartNewProcess(destScript);
+			if (open)
+				StartNewProcess(destScript);
 
 			Console.WriteLine("Finished.");
 		}

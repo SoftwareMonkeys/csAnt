@@ -6,6 +6,8 @@ namespace SoftwareMonkeys.csAnt
     {
         #region Compile
         void CompileScripts();
+
+        string GetScriptAssemblyPath(string scriptName);
         #endregion
     }
 }
