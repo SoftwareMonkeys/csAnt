@@ -28,17 +28,19 @@ class CyclePublishScript : BaseProjectScript
 		// Git clone the project to another directory
 		var tmpDir = CloneToTmpDirectory();
 
-		GrabLibs(tmpDir);
+
+		GrabFiles(tmpDir);
 
 		// Move to the cloned directory
 		Relocate(tmpDir);
+
+		CreateNodes();
 
 		// Build the cloned source code
 		ExecuteScript("EnsureRelease");
 
 		if (!IsError)
 		{
-
 			// Publish files
 			ExecuteScript("Publish");
 		}
@@ -46,7 +48,7 @@ class CyclePublishScript : BaseProjectScript
 		return !IsError;
 	}
 
-	public void GrabLibs(string tmpDir)
+	public void GrabFiles(string tmpDir)
 	{
 		new FilesGrabber(
 			OriginalDirectory,
@@ -58,6 +60,7 @@ class CyclePublishScript : BaseProjectScript
 			"lib/cs-script/**",
 			"lib/HtmlAgilityPack/**",
 			"lib/ILRepack.1.25.0/**",
+			"lib/GCUpload/**",
 			"lib/FileNodes/**"
 		);
 	}
