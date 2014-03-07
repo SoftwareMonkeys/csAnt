@@ -38,6 +38,8 @@ class EnsureReleaseScript : BaseProjectScript
 
 	public void CheckReleaseVersions(string releaseName, string currentVersion)
 	{
+		// TODO: Completely reorganize this function and break it into smaller functions
+
 		var rlsDir = CurrentDirectory
 			+ Path.DirectorySeparatorChar
 			+ "rls";
@@ -61,40 +63,56 @@ class EnsureReleaseScript : BaseProjectScript
 		}
 		else
 		{
-			// Loop through each release zip directory and check whether it's up to date
-			foreach (var dir in Directory.GetDirectories(rlsDir))
+			// Check whether the releases are up to date
+			foreach (var listFile in Directory.GetFiles(rlsDir, "*.txt"))
 			{
-				var dirName = Path.GetFileName(dir);
+				var name = Path.GetFileNameWithoutExtension(listFile).Replace("-list", "");
 
-				if (String.IsNullOrEmpty(releaseName)
-					|| dirName.ToLower() == releaseName.ToLower())
+				var dir = rlsDir
+					+ Path.DirectorySeparatorChar
+					+ name;
+
+				bool needsRelease = false;
+
+				if (Directory.Exists(dir))
 				{
-					var version = GetReleaseVersion(dir);
-
-					Console.WriteLine(version);
-
-					releaseName = Path.GetFileName(dir);
-
-					Console.WriteLine("");
-					Console.WriteLine("Release: " + releaseName);
-					Console.WriteLine("Release version: " + version);
-					Console.WriteLine("Current version: " + currentVersion);
-
-					if (new Version(version) < new Version(currentVersion))
+					if (String.IsNullOrEmpty(releaseName)
+						|| name.ToLower() == releaseName.ToLower())
 					{
-						Console.WriteLine("Current version is later than the latest release. Running release script again...");
+						var version = GetReleaseVersion(dir);
 
-						if (!String.IsNullOrEmpty(releaseName))
-							ExecuteScript("CycleRelease", releaseName);
+						Console.WriteLine(version);
+
+						releaseName = Path.GetFileName(dir);
+
+						Console.WriteLine("");
+						Console.WriteLine("Release: " + releaseName);
+						Console.WriteLine("Release version: " + version);
+						Console.WriteLine("Current version: " + currentVersion);
+
+						if (new Version(version) < new Version(currentVersion))
+						{
+							Console.WriteLine("Current version is later than the latest release. Running release script again...");
+
+							needsRelease = true;
+						}
 						else
-							ExecuteScript("CycleRelease");
-					}
-					else
-					{
-						Console.WriteLine("Release version matches current version. Skipping release generation.");
-					}
+						{
+							Console.WriteLine("Release version matches current version. Skipping release generation.");
+						}
 
-					Console.WriteLine("");
+						Console.WriteLine("");
+					}
+				}
+				else
+					needsRelease = true;
+
+				if (needsRelease)
+				{
+					if (!String.IsNullOrEmpty(releaseName))
+						ExecuteScript("CycleRelease", releaseName);
+					else
+						ExecuteScript("CycleRelease");
 				}
 			}
 		}
