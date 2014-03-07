@@ -1,11 +1,12 @@
 using System;
 using NUnit.Framework;
 using System.IO;
+using SoftwareMonkeys.csAnt.IO;
 
 namespace SoftwareMonkeys.csAnt.Tests.Unit
 {
 	[TestFixture]
-	public class FindFilesTestFixture : BaseTestFixture
+	public class FileFinderTestFixture : BaseTestFixture
 	{
 		[Test]
 		public void Test_FindFiles_Star()
@@ -121,6 +122,51 @@ namespace SoftwareMonkeys.csAnt.Tests.Unit
 
 			Assert.AreEqual(1, files.Length, "Wrong number of files.");
 		}
+
+        [Test]
+        public void Test_FixPathAndPattern_Normal()
+        {
+            var path = WorkingDirectory;
+
+            var pattern = "*";
+
+            var fixedPath = path;
+
+            var fixedPattern = pattern;
+
+            var finder = new FileFinder();
+
+            finder.FixPathAndPattern(ref fixedPath, ref fixedPattern);
+
+            Assert.AreEqual (path, fixedPath, "Invalid path.");
+
+            Assert.AreEqual(pattern, fixedPattern, "Invalid pattern.");
+        }
+        
+
+        [Test]
+        public void Test_FixPathAndPattern_StepUp()
+        {
+            var path = WorkingDirectory;
+
+            var pattern = "../*";
+
+            var fixedPath = path;
+
+            var fixedPattern = pattern;
+
+            var finder = new FileFinder();
+
+            finder.FixPathAndPattern(ref fixedPath, ref fixedPattern);
+
+            var expectedPath = Path.GetDirectoryName(path);
+
+            var expectedPattern = "*";
+
+            Assert.AreEqual (expectedPath, fixedPath, "Invalid path.");
+
+            Assert.AreEqual(expectedPattern, fixedPattern, "Invalid pattern.");
+        }
 		
 		// TODO: Remove if not needed
 		/*[Test]
