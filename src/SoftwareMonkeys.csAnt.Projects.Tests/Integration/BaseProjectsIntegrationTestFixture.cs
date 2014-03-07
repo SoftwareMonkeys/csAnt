@@ -1,7 +1,7 @@
 using System;
 namespace SoftwareMonkeys.csAnt.Projects.Tests
 {
-    public class ProjectsIntegrationTestFixture : BaseProjectsTestFixture
+    public class BaseProjectsIntegrationTestFixture : BaseProjectsTestFixture
     {
     }
 }
