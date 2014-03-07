@@ -146,7 +146,7 @@ namespace SoftwareMonkeys.csAnt.UI.csAntConsole
             );*/
 
             script.InitializeFileFinder(
-                new FileFinder()
+                new FileFinder(script.IsVerbose)
             );
         }
 	}
