@@ -16,14 +16,7 @@ namespace SoftwareMonkeys.csAnt.Tests
 
             script.CompileScripts();
 
-            var assemblyFile = script.CurrentDirectory
-                + Path.DirectorySeparatorChar
-                + "bin"
-                + Path.DirectorySeparatorChar
-                + script.GetBuildMode()
-                + Path.DirectorySeparatorChar
-                + Path.GetFileNameWithoutExtension(scriptPath)
-                    + ".exe";
+            var assemblyFile = script.GetScriptAssemblyPath("HelloWorld");
 
             Assert.IsTrue(File.Exists(assemblyFile), "Assembly file not found.");
         }
