@@ -128,7 +128,7 @@ class EnsureReleaseScript : BaseProjectScript
 
 		var variation = Path.GetFileName(releaseSubDir);
 
-		var prefix = ProjectName + "-" + variation + "-";
+		var prefix = ProjectName + "-" + variation + "--";
 		
 		if (IsVerbose)
 			Console.WriteLine("Prefix: " + prefix);
