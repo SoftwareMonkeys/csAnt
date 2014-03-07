@@ -27,6 +27,18 @@ namespace SoftwareMonkeys.csAnt.IO
         public FilesGrabber (
             string originalDirectory,
             string currentDirectory,
+            bool isVerbose
+        )
+        {
+            OriginalDirectory = originalDirectory;
+            CurrentDirectory = currentDirectory;
+            Finder = new FileFinder(isVerbose);
+            IsVerbose = isVerbose;
+        }
+        
+        public FilesGrabber (
+            string originalDirectory,
+            string currentDirectory,
             IFileFinder finder
         )
         {
@@ -54,39 +66,37 @@ namespace SoftwareMonkeys.csAnt.IO
         public void GrabOriginalScriptingFiles ()
         {
             GrabOriginalFiles(
-                CurrentDirectory,
-                "../*.node",
-                "/*.exe",
-                "/*.node",
-                "/*.sh",
-                "/*.bat",
-                "/*.vbs",
-                "/bin/**",
-                "/lib/**",
+                //"../*.node" // TODO: Check if needed. Not currently supported
+                "*.exe",
+                "*.node",
+                "*.sh",
+                "*.bat",
+                "*.vbs",
+                "bin/**",
+                "lib/**",
                 //"/src/**.node", // TODO: Check if needed
                 //"/src/**.cs",
                 //"/src/**.csproj",
                 //"/src/**.sln",
-                "/scripts/**"
+                "scripts/**"
             );
         }
         
         public void GrabOriginalFiles ()
         {
             GrabOriginalFiles(
-                CurrentDirectory,
-                "/*",
-                "/lib/**",
-                "/bin/**",
-                "/src/**.node",
-                "/src/**.cs",
-                "/src/**.csproj",
-                "/src/**.sln",
-                "/src/**.snk",
-                "/scripts/**",
-                "/rls/*.txt",
-                "/rls/*.zip",
-                "../*.node"
+                "*",
+                "lib/**",
+                "bin/**",
+                "src/**.node",
+                "src/**.cs",
+                "src/**.csproj",
+                "src/**.sln",
+                "src/**.snk",
+                "scripts/**",
+                "rls/*.txt",
+                "rls/*.zip"//,
+                //"../*.node" // TODO: Check if needed. Not currently supported
             );
         }
 
@@ -101,12 +111,23 @@ namespace SoftwareMonkeys.csAnt.IO
                 Console.WriteLine ("To:");
                 Console.WriteLine ("  " + CurrentDirectory);
                 Console.WriteLine ("");
+
+                Console.WriteLine ("Patterns:");
+                foreach (var pattern in patterns)
+                {
+                    Console.WriteLine (pattern);
+                }
+                
+                Console.WriteLine ("");
             }
 
             int i = 0;
 
             if (CurrentDirectory != OriginalDirectory) {
                 foreach (var file in Finder.FindFiles (OriginalDirectory, patterns)) {
+                    if (file.IndexOf(OriginalDirectory) == -1)
+                        throw new NotSupportedException("Paths outside the project aren't yet supported.");
+
                     i++;
                     var toFile = file.Replace (OriginalDirectory, CurrentDirectory);
 
