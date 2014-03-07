@@ -7,6 +7,7 @@ namespace SoftwareMonkeys.csAnt.Tests.Sanity
 	/// <summary>
 	/// 
 	/// </summary>
+    [TestFixture]
 	public class CurrentDirectoryFixerTestFixture : BaseSanityTestFixture
 	{
 		public CurrentDirectoryFixerTestFixture()
