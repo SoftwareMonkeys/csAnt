@@ -43,7 +43,8 @@ namespace SoftwareMonkeys.csAnt.Projects
             Console.WriteLine ("  Version: " + node.Properties["Version"]);
             Console.WriteLine ("");
 
-            node.Save();
+            if (!File.Exists(node.FilePath))
+                node.Save();
         }
 
         public void CreateSourceNode ()
@@ -69,8 +70,9 @@ namespace SoftwareMonkeys.csAnt.Projects
 
             Console.WriteLine ("  Source (src) directory:");
             Console.WriteLine ("  " + srcDirectory);
-
-            node.Save();
+            
+            if (!File.Exists(node.FilePath))
+                node.Save();
         }
 
         public void CreateGroupNode ()
