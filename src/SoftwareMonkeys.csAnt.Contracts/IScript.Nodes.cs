@@ -11,6 +11,8 @@ namespace SoftwareMonkeys.csAnt
         void InitializeNodeManager(INodeManager nodeManager);
 
         FileNode CurrentNode { get;set; }
+
+        void CreateNodes();
         #endregion
     }
 }
