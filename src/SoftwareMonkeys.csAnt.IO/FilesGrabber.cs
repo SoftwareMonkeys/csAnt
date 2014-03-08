@@ -72,8 +72,9 @@ namespace SoftwareMonkeys.csAnt.IO
                 "*.sh",
                 "*.bat",
                 "*.vbs",
-                "bin/**",
-                "lib/**",
+                //"bin/**",
+                "lib/csAnt/**",
+                //"lib/**",
                 //"/src/**.node", // TODO: Check if needed
                 //"/src/**.cs",
                 //"/src/**.csproj",
