@@ -67,7 +67,7 @@ namespace SoftwareMonkeys.csAnt.Projects
                 var zipFileName = Script.ProjectName
                     + "-"
                     + variation
-                    + "-"
+                    + "--"
                     + version.Replace (".", "-")
                     + "-"
                     + dateStamp

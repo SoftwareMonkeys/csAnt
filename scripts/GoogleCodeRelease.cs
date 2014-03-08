@@ -22,7 +22,7 @@ class GoogleCodeReleaseScript : BaseProjectScript
 		Console.WriteLine("");
 	
 		UploadSetupFiles();
-		UploadReleaseFiles();
+		//UploadReleaseFiles();
 
 		return !IsError;
 	}
@@ -82,7 +82,7 @@ class GoogleCodeReleaseScript : BaseProjectScript
 	{
 
 		string targetName = Path.GetFileNameWithoutExtension(file)
-			+ "-" + CurrentNode.Properties["Version"].Replace(".", "-")
+			+ "--" + CurrentNode.Properties["Version"].Replace(".", "-")
 			+ "-[" + TimeStamp + "]"
 			+ Path.GetExtension(file);
 

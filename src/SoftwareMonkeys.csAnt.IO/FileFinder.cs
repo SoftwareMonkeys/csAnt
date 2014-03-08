@@ -58,6 +58,8 @@ namespace SoftwareMonkeys.csAnt.IO
                 Console.WriteLine ("Finding files...");
                 Console.WriteLine ("  Directory:");
                 Console.WriteLine ("  " + workingDirectory);
+                Console.WriteLine ("  Pattern:");
+                Console.WriteLine ("  " + pattern);
             }
 
             List<string> foundFiles = new List<string> ();
@@ -100,36 +102,73 @@ namespace SoftwareMonkeys.csAnt.IO
 
         public void FixPathAndPattern(ref string path, ref string pattern)
         {
+            if (string.IsNullOrEmpty(path))
+                throw new ArgumentException("A path must be provided.", "path");
+
+            if (string.IsNullOrEmpty(pattern))
+                throw new ArgumentException("A pattern must be provided.", "pattern");
+
             var tmp = string.Empty;
 
-            // Fix slashes
-            pattern = pattern.Replace('/', Path.DirectorySeparatorChar);
-            
+            if (IsVerbose)
+            {
+                Console.WriteLine ("");
+                Console.WriteLine ("Fixing path and pattern");
+                Console.WriteLine ("");
+                Console.WriteLine ("  Provided...");
+                Console.WriteLine ("  Path: " + path);
+                Console.WriteLine ("  Pattern: " + pattern);
+            }
+
+            var fixedPath = path;
+            var fixedPattern = pattern;
+
             // The following functionality takes the ".." off the pattern so it can be appended to the path
             // TODO: Check if there's a better way to do this
 
             // Add the working directory to the beginning of the pattern
-            if (pattern.IndexOf (path) == -1) {
-                tmp = path.TrimEnd (Path.DirectorySeparatorChar)
+            if (fixedPattern.IndexOf (fixedPath) == -1) {
+                tmp = fixedPath.TrimEnd (Path.DirectorySeparatorChar)
                     + Path.DirectorySeparatorChar
-                    + pattern.Trim (Path.DirectorySeparatorChar);
+                    + fixedPattern.Trim (Path.DirectorySeparatorChar);
             }
 
             // Grab the last section of the value to use as the pattern
             if (tmp.IndexOf (Path.DirectorySeparatorChar) > -1) {
-                pattern = tmp.Substring (
+                fixedPattern = tmp.Substring (
                 tmp.LastIndexOf (Path.DirectorySeparatorChar),
                 tmp.Length - tmp.LastIndexOf (Path.DirectorySeparatorChar)
                 ).Trim (Path.DirectorySeparatorChar);
             }
 
-            path = tmp.Substring (
-                0,
-                tmp.LastIndexOf (Path.DirectorySeparatorChar)
-            );
+            if (tmp.LastIndexOf(Path.DirectorySeparatorChar) > -1)
+            {
+                fixedPath = tmp.Substring (
+                    0,
+                    tmp.LastIndexOf (Path.DirectorySeparatorChar)
+                );
+            }
+            else
+                fixedPath = tmp;
 
-            path = Path.GetFullPath(path);
+            if (string.IsNullOrEmpty(fixedPath))
+            {
+                throw new Exception("Failed to fix path '" + path + "' and pattern '" + fixedPattern + "'. The fixed path was empty.");
+            }
+
+            fixedPath = Path.GetFullPath(fixedPath);
+            
+            if (IsVerbose)
+            {
+                Console.WriteLine ("");
+                Console.WriteLine ("  Fixed...");
+                Console.WriteLine ("  Path: " + fixedPath);
+                Console.WriteLine ("  Pattern: " + fixedPattern);
+                Console.WriteLine ("");
+            }
+
+            path = fixedPath;
+            pattern = fixedPattern;
         }
     }
 }
-
