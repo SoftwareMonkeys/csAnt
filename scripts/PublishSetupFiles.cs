@@ -8,41 +8,23 @@ using System.Diagnostics;
 using SoftwareMonkeys.csAnt;
 using SoftwareMonkeys.csAnt.Projects;
 
-class GoogleCodeReleaseScript : BaseProjectScript
+class PublishSetupFilesScript : BaseProjectScript
 {
 	public static void Main(string[] args)
 	{
-		new GoogleCodeReleaseScript().Start(args);
+		new PublishSetupFilesScript().Start(args);
 	}
 	
 	public override bool Run(string[] args)
 	{
 		Console.WriteLine("");
-		Console.WriteLine("Uploading the setup and project release files to Google Code...");
+		Console.WriteLine("Uploading the setup files to Google Code...");
 		Console.WriteLine("");
 	
 		UploadSetupFiles();
-		//UploadReleaseFiles();
 
 		return !IsError;
 	}
-
-	public void UploadReleaseFiles()
-	{
-		var releaseDir = ProjectDirectory
-			+ Path.DirectorySeparatorChar
-			+ "rls";
-
-		foreach (string dir in Directory.GetDirectories(releaseDir))
-		{
-			string latestRelease = GetNewestFile(dir);
-
-			UploadReleaseFile(
-				latestRelease
-			);
-		}
-	}
-
 
 	public void UploadSetupFiles()
 	{
@@ -65,17 +47,6 @@ class GoogleCodeReleaseScript : BaseProjectScript
 				file
 			);
 		}
-	}
-
-	public void UploadReleaseFile(string latestRelease)
-	{
-		string toPath = Path.GetFileName(latestRelease);
-
-		GoogleCodeUpload(
-			ProjectName,
-			latestRelease,
-			toPath
-		);
 	}
 
 	public void UploadSetupFile(string file)
