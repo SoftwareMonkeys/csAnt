@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using HtmlAgilityPack;
 using System.Diagnostics;
+using SoftwareMonkeys.csAnt.IO.Compression;
 
 namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole.cs
 {
@@ -23,72 +24,93 @@ namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole.cs
 
             var overwrite = arguments.Contains("o");
 
-            var list = GetFileList ();
+            var url = GetUrl ("csAnt-standard-release");
 
-            foreach (var key in list.Keys) {
-                var file = destinationPath
-                    + Path.DirectorySeparatorChar
-                        + key;
+            Console.WriteLine (url);
 
-                var url = list[key];
+            DownloadReleaseZip(url);
 
-                DownloadUtility.Download(url, file, overwrite);
-            }
-
-            GetDependencies();
+            ShowIntro();
         }
 
-        static public void GetDependencies()
+        static public void ShowIntro()
         {
-
-            var libs = new string[]{
-            //    "SharpZipLib", // TODO: Check if needed (shouldn't be at the moment because they're embedded in csAnt.exe)
-            //    "Newtonsoft.Json",
-            //    "CSScriptLibrary.dll"
-            };
-
-            Environment.CurrentDirectory = Environment.CurrentDirectory
-                + Path.DirectorySeparatorChar
-                    + "lib";
-
-            if (libs.Length > 0)
+            var prefix = "";
+            if (Path.DirectorySeparatorChar == '/')
             {
-                Console.WriteLine ("");
-                Console.WriteLine ("Getting dependencies...");
-                Console.WriteLine ("");
+                prefix = "sh csAnt.sh";
+            }
+            else
+            {
+                prefix = "csAnt.bat";
+            }
+         
 
-                foreach (var lib in libs)
+            Console.WriteLine ("");
+            Console.WriteLine ("You can now launch scripts...");
+
+            Console.WriteLine ("Syntax:");
+            Console.WriteLine ("  {0} [ScriptName]", prefix);
+            Console.WriteLine ("");
+            Console.WriteLine ("Example:");
+            Console.WriteLine ("  {0} HelloWorld", prefix);
+
+            Console.WriteLine ("");
+            Console.WriteLine ("To create a new script...");
+            Console.WriteLine ("");
+
+            Console.WriteLine ("1) Call the 'NewScript' command:");
+            Console.WriteLine ("  {0} NewScript [YourScriptName]", prefix);
+            Console.WriteLine ("");
+
+            Console.WriteLine ("2) Open your script at '/scripts/[YourScriptName].cs' to add your code, then save.");
+            Console.WriteLine ("");
+
+            Console.WriteLine ("3) Launch your script:");
+            Console.WriteLine ("  {0} [YourScriptName]", prefix);
+            Console.WriteLine ("");
+        }
+
+        static public void DownloadReleaseZip(string url)
+        {
+            var zipFile = Environment.CurrentDirectory
+                + Path.DirectorySeparatorChar
+                    + "csAnt.zip";
+
+            DownloadUtility.Download(url, zipFile, true);
+
+            var zipper = new FileZipper();
+
+            var unzippedPath = Environment.CurrentDirectory
+                + Path.DirectorySeparatorChar
+                    + "_csAnt-Unzipped";
+
+            zipper.Unzip(zipFile, unzippedPath, "/");
+
+            InstallFilesFromRelease(unzippedPath);
+        }
+
+        static public void InstallFilesFromRelease(string unzippedPath)
+        {
+            Console.WriteLine ("");
+            Console.WriteLine ("Installing files:");
+
+            foreach (var file in Directory.GetFiles (unzippedPath, "*", SearchOption.AllDirectories))
+            {
+                var toFile = file.Replace(unzippedPath, Environment.CurrentDirectory);
+
+                if (!File.Exists (toFile))
                 {
-                    Console.WriteLine (lib);
-                    Process.Start("nuget.exe", "install " + lib);
-                    Console.WriteLine ("Done");
-                    
+                    File.Copy(file, toFile);
+
+                    Console.WriteLine (toFile.Replace(Environment.CurrentDirectory, ""));
+                }
+                else
+                {
+                    Console.WriteLine ("Skipped: " + toFile.Replace(Environment.CurrentDirectory, ""));
                 }
             }
-
-            Environment.CurrentDirectory = Path.GetDirectoryName(Environment.CurrentDirectory);
-        }
-
-        static public Dictionary<string, string> GetFileList()
-        {
-            var list = new Dictionary<string, string>();
-
-            // Launcher files
-            list.Add ("/csAnt.bat", "https://csant.googlecode.com/git/csAnt.bat");
-            list.Add ("/csAnt.sh", "https://csant.googlecode.com/git/csAnt.sh");
-
-            // TODO: Check if needed. Isn't currently, but could be useful to be included.
-            //list.Add ("/lib/nuget.exe", "http://nuget.org/nuget.exe");
-
-            // Repacked binary (contains all dependencies)
-            list.Add ("/lib/csAnt/bin/Release/csAnt.exe", GetUrl("csAnt"));
-
-            // Hello world script
-            list.Add ("/scripts/HelloWorld.cs", "https://csant.googlecode.com/git/scripts/HelloWorld.cs");
-
-            // TODO: Add other default scripts
-
-            return list;
+            Console.WriteLine ("");
         }
 
         static public string GetUrl(string key)
@@ -106,7 +128,7 @@ namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole.cs
     
             foreach (string item in data)
             {
-                if (item.IndexOf(key + "--") == 0)
+                if (item.IndexOf(key + "-") == 0)
                 {    
                     return prefix + item;
                 }
