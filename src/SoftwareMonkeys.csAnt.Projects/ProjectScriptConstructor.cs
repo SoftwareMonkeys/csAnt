@@ -13,16 +13,11 @@ namespace SoftwareMonkeys.csAnt.Projects
         {
             var script = (BaseProjectScript)Script;
 
+            base.Construct (scriptName, parentScript);
+
             script.InitializeVersionManager(new VersionManager());
 
             script.InitializeNodeManager(new ProjectNodeManager());
-
-            base.Construct (scriptName, parentScript);
-        }
-
-        public override void ConstructNodeManager ()
-        {
-            Script.Nodes = new ProjectNodeManager();
         }
     }
 }
