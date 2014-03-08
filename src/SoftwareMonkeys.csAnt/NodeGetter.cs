@@ -47,10 +47,12 @@ namespace SoftwareMonkeys.csAnt
             
             // Step up the directories looking for .node file
             while (!foundPropertiesFile
-                   || dir.IndexOf('/') == dir.LastIndexOf('/')) {
+                   || dir.IndexOf(Path.DirectorySeparatorChar) == dir.LastIndexOf(Path.DirectorySeparatorChar)) {
                 dir = Path.GetDirectoryName (dir);
                 
-                foundPropertiesFile = Directory.GetFiles (dir, "*.node").Length > 0;
+                var nodeCount = Directory.GetFiles (dir, "*.node").Length;
+                
+                foundPropertiesFile = nodeCount > 0;
             }
 
             FileNode node = fileNodes.Get (dir, false, true);
