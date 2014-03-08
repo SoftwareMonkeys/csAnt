@@ -120,10 +120,17 @@ class EnsureBuildScript : BaseScript
 
 		foreach (var file in files)
 		{
-			timeStamps.Add(
-				file.Replace(CurrentDirectory, ""),
-				File.GetLastWriteTime(file).ToString()
-			);
+			var objKey = Path.DirectorySeparatorChar
+				+ "obj"
+				+ Path.DirectorySeparatorChar;
+
+			if (file.IndexOf(objKey) == -1)
+			{
+				timeStamps.Add(
+					file.Replace(CurrentDirectory, ""),
+					File.GetLastWriteTime(file).ToString()
+				);
+			}
 		}
 
 		return timeStamps;
