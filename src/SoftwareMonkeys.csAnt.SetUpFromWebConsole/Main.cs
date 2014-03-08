@@ -15,6 +15,7 @@ namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole.cs
             Console.WriteLine ("Setting up csAnt from online files...");
             Console.WriteLine ("");
 
+            // TODO: Clean up and reorganise code
             var destinationPath = Environment.CurrentDirectory;
 
             var arguments = new Arguments(args);
@@ -24,11 +25,19 @@ namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole.cs
 
             var overwrite = arguments.Contains("o");
 
-            var url = GetUrl ("csAnt-standard-release");
+            var releaseName = "standard";
+
+            if (arguments.Contains ("r"))
+                releaseName = arguments["r"];
+
+            if (releaseName.IndexOf("-release") > -1)
+                releaseName = releaseName.Replace("-release", "");
+
+            var url = GetUrl ("csAnt-" + releaseName + "-release");
 
             Console.WriteLine (url);
 
-            DownloadReleaseZip(url);
+            DownloadReleaseZip(url, overwrite);
 
             ShowIntro();
         }
@@ -71,13 +80,13 @@ namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole.cs
             Console.WriteLine ("");
         }
 
-        static public void DownloadReleaseZip(string url)
+        static public void DownloadReleaseZip(string url, bool overwrite)
         {
             var zipFile = Environment.CurrentDirectory
                 + Path.DirectorySeparatorChar
                     + "csAnt.zip";
 
-            DownloadUtility.Download(url, zipFile, true);
+            DownloadUtility.Download(url, zipFile, overwrite);
 
             var zipper = new FileZipper();
 
@@ -87,10 +96,10 @@ namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole.cs
 
             zipper.Unzip(zipFile, unzippedPath, "/");
 
-            InstallFilesFromRelease(unzippedPath);
+            InstallFilesFromRelease(unzippedPath, overwrite);
         }
 
-        static public void InstallFilesFromRelease(string unzippedPath)
+        static public void InstallFilesFromRelease(string unzippedPath, bool overwrite)
         {
             Console.WriteLine ("");
             Console.WriteLine ("Installing files:");
@@ -99,7 +108,7 @@ namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole.cs
             {
                 var toFile = file.Replace(unzippedPath, Environment.CurrentDirectory);
 
-                if (!File.Exists (toFile))
+                if (!File.Exists (toFile) || overwrite)
                 {
                     File.Copy(file, toFile);
 
