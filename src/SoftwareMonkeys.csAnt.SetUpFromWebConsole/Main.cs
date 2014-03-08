@@ -106,7 +106,7 @@ namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole.cs
     
             foreach (string item in data)
             {
-                if (item.IndexOf(key + "-") == 0)
+                if (item.IndexOf(key + "--") == 0)
                 {    
                     return prefix + item;
                 }

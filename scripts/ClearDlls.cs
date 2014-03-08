@@ -87,7 +87,7 @@ class ClearDllsScript : BaseProjectScript
                 {
                         File.Delete(file);
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                         Console.WriteLine("Can't delete: " + file);
                 }

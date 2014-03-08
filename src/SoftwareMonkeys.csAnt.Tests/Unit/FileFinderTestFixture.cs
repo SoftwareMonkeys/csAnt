@@ -142,7 +142,30 @@ namespace SoftwareMonkeys.csAnt.Tests.Unit
 
             Assert.AreEqual(pattern, fixedPattern, "Invalid pattern.");
         }
-        
+
+        [Test]
+        public void Test_FixPathAndPattern_PatternStartsWithSlash()
+        {
+            var path = WorkingDirectory;
+
+            var pattern = "/*.txt";
+
+            var fixedPath = path;
+
+            var fixedPattern = pattern;
+
+            var finder = new FileFinder();
+
+            finder.FixPathAndPattern(ref fixedPath, ref fixedPattern);
+
+            var expectedPath = path;
+
+            var expectedPattern = "*.txt";
+
+            Assert.AreEqual (expectedPath, fixedPath, "Invalid path.");
+
+            Assert.AreEqual(expectedPattern, fixedPattern, "Invalid pattern.");
+        }
 
         [Test]
         public void Test_FixPathAndPattern_StepUp()
@@ -166,7 +189,7 @@ namespace SoftwareMonkeys.csAnt.Tests.Unit
             Assert.AreEqual (expectedPath, fixedPath, "Invalid path.");
 
             Assert.AreEqual(expectedPattern, fixedPattern, "Invalid pattern.");
-        }
+        }		
 	}
 }
 
