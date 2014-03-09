@@ -57,8 +57,6 @@ class Repack_csAntScript : BaseScript
                 "bin/Release/SoftwareMonkeys.csAnt.IO.Contracts.dll",
                 "bin/Release/SoftwareMonkeys.csAnt.dll",
                 "bin/Release/SoftwareMonkeys.csAnt.IO.dll",
-                "bin/Release/SoftwareMonkeys.csAnt.Packages.dll",
-                "bin/Release/SoftwareMonkeys.csAnt.Packages.Contracts.dll",
                 //"bin/Release/SoftwareMonkeys.csAnt.Projects.dll",
                 "bin/Release/SoftwareMonkeys.csAnt.Versions.dll",
                 "bin/Release/SoftwareMonkeys.csAnt.SetUp.Common.dll"
