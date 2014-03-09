@@ -8,6 +8,7 @@ using System.IO;
 using Microsoft.CSharp;
 using System.Diagnostics;
 using SoftwareMonkeys.csAnt;
+using SoftwareMonkeys.csAnt.IO;
 using SoftwareMonkeys.csAnt.Projects;
 using SoftwareMonkeys.csAnt.Projects.Tests;
 using SoftwareMonkeys.csAnt.Projects.Tests.Scripting;
@@ -21,7 +22,10 @@ class Test_BuildAllSolutionsScript : BaseProjectTestScript
 	
 	public override bool Run(string[] args)
 	{
-		FilesGrabber.GrabOriginalFiles();
+		new FilesGrabber(
+			OriginalDirectory,
+			CurrentDirectory
+		).GrabOriginalFiles();
 		
 		ExecuteScript("BuildAllSolutions");
 
