@@ -8,6 +8,7 @@ using System.IO;
 using Microsoft.CSharp;
 using System.Diagnostics;
 using SoftwareMonkeys.csAnt;
+using SoftwareMonkeys.csAnt.IO;
 using SoftwareMonkeys.csAnt.Tests;
 using SoftwareMonkeys.csAnt.Tests.Scripting;
 using NUnit.Framework;
@@ -21,18 +22,21 @@ class Test_StartProcessScript : BaseTestScript
 	
 	public override bool Run(string[] args)
 	{
-	    FilesGrabber.GrabOriginalScriptingFiles();
-	
-            ExecuteScript("Update");
+        new FilesGrabber(
+		    OriginalDirectory,
+		    CurrentDirectory
+	    ).GrabOriginalScriptingFiles();
 
-	    Assert.IsTrue(!IsError, "An error occurred.");
+        ExecuteScript("Update");
 
-            Assert.IsTrue(Console != null, "Console is null");
-            
-            Assert.IsTrue(Console.Output != null, "Console.Output is null");
-            
-            Assert.IsTrue(Console.Output.Contains("Update complete!"), "Invalid output.");
+        Assert.IsTrue(!IsError, "An error occurred.");
 
-            return !IsError;
+        Assert.IsTrue(ConsoleWriter != null, "Console is null");
+        
+        Assert.IsTrue(ConsoleWriter.Output != null, "Console.Output is null");
+        
+        Assert.IsTrue(ConsoleWriter.Output.Contains("Update complete!"), "Invalid output.");
+
+        return !IsError;
 	}
 }

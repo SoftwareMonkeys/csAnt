@@ -10,17 +10,18 @@ using System.IO;
 using Microsoft.CSharp;
 using System.Diagnostics;
 using SoftwareMonkeys.csAnt;
+using SoftwareMonkeys.csAnt.IO;
 using SoftwareMonkeys.csAnt.Tests;
 using SoftwareMonkeys.csAnt.Tests.Scripting;
 using SoftwareMonkeys.csAnt.Projects;
 using SoftwareMonkeys.csAnt.Projects.Tests;
 using SoftwareMonkeys.csAnt.Projects.Tests.Scripting;
 
-class Test_BuildAndTestFromSourceReleaseScript : BaseProjectTestScript
+class Test_BuildAndTestFromGitScript : BaseProjectTestScript
 {
 	public static void Main(string[] args)
 	{
-		new Test_BuildAndTestFromSourceReleaseScript().Start(args);
+		new Test_BuildAndTestFromGitScript().Start(args);
 	}
 	
 	public override bool Run(string[] args)
@@ -29,43 +30,33 @@ class Test_BuildAndTestFromSourceReleaseScript : BaseProjectTestScript
 		Console.WriteLine("Test building solutions from git clone...");
 		Console.WriteLine("");
 		
-		FilesGrabber.GrabOriginalFiles();
-
 		// Clone the project to another directory
-		var tmpDir = CloneToTmpDirectory();
+		Clone();
 
-		// Prepare the project
-		InstallTo("csAnt", tmpDir);
+		// TODO: Check the use of FilesGrabber. It's used to grab libraries, but also grabs scripts. It might be better to specify just the libraries and not the scripts, so the test is more comprehensive
+		new FilesGrabber(
+			OriginalDirectory,
+			CurrentDirectory
+		).GrabOriginalScriptingFiles();
 
 		if (!IsError)
 		{
 			// Build and test the cloned copy of the project
-			BuildAndTestClonedCopy(tmpDir);
+			BuildAndTestClonedCopy();
 		}
 
 		return !IsError;
 	}
 
-	public string CloneToTmpDirectory()
+	public void Clone()
 	{
 		Console.WriteLine("Cloning to tmp directory...");
 
-		var tmpDirectory = GetTmpDir();
-
-		Console.WriteLine("Tmp directory:");
-		Console.WriteLine(tmpDirectory);
-
-		Directory.CreateDirectory(tmpDirectory);
-
-		GitClone(OriginalDirectory, tmpDirectory);
-
-		return tmpDirectory;
+		GitClone(OriginalDirectory, CurrentDirectory);
 	}
 
-	public void BuildAndTestClonedCopy(string tmpDir)
+	public void BuildAndTestClonedCopy()
 	{
-		CurrentDirectory = tmpDir;
-
 		// Build and test
 		ExecuteScript("CycleTests");
 	}

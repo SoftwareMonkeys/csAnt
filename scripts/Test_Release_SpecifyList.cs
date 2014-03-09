@@ -6,6 +6,7 @@ using System.IO;
 using Microsoft.CSharp;
 using System.Diagnostics;
 using SoftwareMonkeys.csAnt;
+using SoftwareMonkeys.csAnt.IO;
 using SoftwareMonkeys.csAnt.Tests;
 using SoftwareMonkeys.csAnt.Tests.Scripting;
 
@@ -18,12 +19,15 @@ class Test_Release_SpecifyList_Script : BaseTestScript
 	
 	public override bool Run(string[] args)
 	{
-	        FilesGrabber.GrabOriginalFiles();
+	    new FilesGrabber(
+			OriginalDirectory,
+			CurrentDirectory
+		).GrabOriginalFiles();
 	        
-	        ExecuteScript("CycleBuild", "-mode:all");
+	    ExecuteScript("CycleBuild", "-mode:all");
 	        
-	        if (!IsError)
-                    ExecuteScript("Release", "bin");
+	    if (!IsError)
+            ExecuteScript("Release", "bin");
 
 		if (Summaries.Count > 1)
 			Error("Multiple releases were generated when only one should have been.");

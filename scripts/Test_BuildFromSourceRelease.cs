@@ -1,7 +1,5 @@
-//css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.dll;
 //css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.Tests.dll;
 //css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.Tests.Scripting.dll;
-//css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.Projects.dll;
 //css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.Projects.Tests.dll;
 //css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.Projects.Tests.Scripting.dll;
 
@@ -10,6 +8,7 @@ using System.IO;
 using Microsoft.CSharp;
 using System.Diagnostics;
 using SoftwareMonkeys.csAnt;
+using SoftwareMonkeys.csAnt.IO;
 using SoftwareMonkeys.csAnt.Projects;
 using SoftwareMonkeys.csAnt.Projects.Tests;
 using SoftwareMonkeys.csAnt.Projects.Tests.Scripting;
@@ -27,9 +26,13 @@ class Test_BuildFromSourceReleaseScript : BaseProjectTestScript
 		Console.WriteLine("Test building solutions from the release files...");
 		Console.WriteLine("");
 		
-		FilesGrabber.GrabOriginalFiles();
+		var testDir = CurrentDirectory;
 
-		ExecuteScript("CycleRelease", "src");
+		Relocate(OriginalDirectory);
+
+		ExecuteScript("EnsureRelease", "src");
+
+		Relocate(testDir);
 
 		if (!IsError)
 		{
@@ -42,8 +45,16 @@ class Test_BuildFromSourceReleaseScript : BaseProjectTestScript
 	public void DeployAndBuild()
 	{
                 var tmpDir = GetTmpDir();
-                
-                InstallTo("csAnt-project", tmpDir);
+
+		var releaseZipFile = GetNewestFile(
+			OriginalDirectory
+			+ Path.DirectorySeparatorChar
+			+ "rls"
+			+ Path.DirectorySeparatorChar
+			+ "src"
+		);
+
+		Unzip(releaseZipFile, tmpDir, "*");			
 
 		Console.WriteLine("");
 		Console.WriteLine("Tmp dir:");

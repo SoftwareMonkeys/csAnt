@@ -26,19 +26,20 @@ class Test_BuildAndTestFromSourceReleaseScript : BaseProjectTestScript
 	public override bool Run(string[] args)
 	{
 		Console.WriteLine("");
-		Console.WriteLine("Test building solutions from the release files...");
+		Console.WriteLine("Building and testing source release...");
 		Console.WriteLine("");
 		
-		FilesGrabber.GrabOriginalFiles();
+		var testDir = CurrentDirectory;
 
-		ExecuteScript("CycleBuild");
+		Relocate(OriginalDirectory);
 
-		if (!IsError)
-			ExecuteScript("Release", "src");
+		ExecuteScript("EnsureRelease", "src");
+
+		Relocate(testDir);
 
 		if (!IsError)
 		{
-			var rlsDir = ProjectDirectory
+			var rlsDir = OriginalDirectory
 				+ Path.DirectorySeparatorChar
 				+ "rls"
 				+ Path.DirectorySeparatorChar
@@ -59,30 +60,10 @@ class Test_BuildAndTestFromSourceReleaseScript : BaseProjectTestScript
 		Console.WriteLine("Unzipping...");
 		Console.WriteLine("");
 
-		var tmpDir = GetTmpDir();
+		Unzip(latestFile, CurrentDirectory, "*");
 
-		var subDir = Path.GetFileNameWithoutExtension(latestFile);
-
-		Unzip(latestFile, tmpDir, subDir);
-
-		Console.WriteLine("");
-		Console.WriteLine("Tmp dir:");
-		Console.WriteLine(" " + tmpDir);
-		Console.WriteLine("");
-
-		var originalProjectDirectory = ProjectDirectory;
-
-		Console.WriteLine("Project directory:");
-		Console.WriteLine(originalProjectDirectory);
-
-		// Move to the tmp directory
-		ProjectDirectory = tmpDir;
-
-		Console.WriteLine("");
-		Console.WriteLine("Initializing...");
-		Console.WriteLine("");
-
-		InstallTo("csAnt", ProjectDirectory);
+		// Refresh the nodes so it picks up on those that were unzipped
+		Nodes.Refresh();
 
 		if (!IsError)
 		{
@@ -92,10 +73,5 @@ class Test_BuildAndTestFromSourceReleaseScript : BaseProjectTestScript
 
 			ExecuteScript("CycleTests");
 		}
-
-		//Directory.Delete(ProjectDirectory, true);
-
-		// Move back to the original project directory
-		ProjectDirectory = originalProjectDirectory;
 	}
 }
