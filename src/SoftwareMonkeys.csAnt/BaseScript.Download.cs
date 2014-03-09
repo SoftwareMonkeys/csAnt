@@ -7,23 +7,13 @@ namespace SoftwareMonkeys.csAnt
 {
 	public partial class BaseScript
 	{
-		public string Download(
+		public void Download(
 			string url,
-			string localDestination
+			string toFile
 		)
 		{
             // TODO: Check if this should be injected or an instance kept on a property
-            return new FileDownloader().Download(url, localDestination);
-
-			/*var cmd = new DownloadCommand(
-				this,
-				url,
-				localDestination
-			);
-
-			ExecuteCommand(cmd);
-
-			return (string)cmd.ReturnValue;*/
+            new FileDownloader().Download(url, toFile);
 		}
 	}
 }

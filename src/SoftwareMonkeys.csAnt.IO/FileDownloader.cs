@@ -11,53 +11,70 @@ namespace SoftwareMonkeys.csAnt.IO
         {
         }
         
-        public string Download(
-            string url,
-            string localDestination
-        )
+        public void Download (string url, string toFile)
         {
-            Console.WriteLine ("Downloading...");
-            Console.WriteLine ("  From URL: " + url);
+            Download (url, toFile, false);
+        }
 
-            var fileName = Path.GetFileName(url);
+        public void Download (string url, string toFile, bool overwriteFile)
+        {
+        
+            if (
+                !File.Exists (toFile)
+                || overwriteFile
+            ) {
 
-            var toFile = localDestination;
+                if (Path.GetFullPath (toFile) != toFile)
+                    toFile = Path.GetFullPath (toFile);
 
-            if (localDestination.IndexOf("/") == localDestination.Length-1)
-                toFile = localDestination + fileName;
-            
-            Console.WriteLine ("  To file: " + toFile);
+                Console.WriteLine ("Downloading:");
+                Console.WriteLine ("  " + url);
+                Console.WriteLine ("To:");
+                Console.WriteLine ("  " + toFile);
 
-            WebClient webClient = new WebClient();
+                WebClient webClient = new WebClient ();
 
-            webClient.Headers.Add("USER-AGENT", "csAnt");
+                webClient.Headers.Add ("USER-AGENT", "csAnt");
 
-            webClient.Credentials = CredentialCache.DefaultCredentials;
+                webClient.Credentials = CredentialCache.DefaultCredentials;
 
-            Console.WriteLine ("  Please wait...(this may take some time)...");
+                Console.WriteLine ("  Please wait...(this may take some time)...");
 
-            DirectoryChecker.EnsureDirectoryExists(Path.GetDirectoryName(localDestination));
+                DirectoryChecker.EnsureDirectoryExists (Path.GetDirectoryName (toFile));
 
-            webClient.DownloadFile(
-                url,
-                toFile
-            );
+                webClient.DownloadFile (
+                    url,
+                    toFile
+                );
 
-            var size = Convert.ToInt32(webClient.ResponseHeaders["Content-Length"]);
+                OutputSize (webClient);
 
+                Console.WriteLine ("Download complete.");
+                Console.WriteLine ("");
+            }
+        }
+        
+        public void OutputSize(WebClient webClient)
+        {
+            var size = Convert.ToInt32 (webClient.ResponseHeaders ["Content-Length"]);
+
+            var sizeString = GetSizeString(size);
+
+            Console.WriteLine ("  Size: " + sizeString);
+        }
+
+        public string GetSizeString(int size)
+        {
             var sizeString = size + "b";
 
-            if (size > 1000*1000)
+            if (size > 1000 * 1000)
                 sizeString = size / 1000 / 1000 + "mb";
             else if (size > 1000)
                 sizeString = size / 1000 + "kb";
 
-            Console.WriteLine ("  Size: " + sizeString);
-
-            Console.WriteLine ("Download complete.");
-
-            return toFile;
+            return sizeString;
         }
+
     }
 }
 
