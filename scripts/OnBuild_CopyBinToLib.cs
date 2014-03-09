@@ -1,4 +1,3 @@
-//css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.dll;
 using System;
 using System.IO;
 using Microsoft.CSharp;

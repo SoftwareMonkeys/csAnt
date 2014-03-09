@@ -1,4 +1,3 @@
-//css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.dll;
 using System;
 using System.IO;
 using Microsoft.CSharp;
@@ -36,18 +35,6 @@ class EnsureBuildScript : BaseScript
 			foreach (KeyValuePair<string, string> entry in timeStampsData)
 			{
 				var key = entry.Key;
-
-				/*var key2 = latestTimeStamps.Keys.ElementAt(i);
-
-				if (key1 != key2)
-				{
-					Console.WriteLine("Files don't match (likely one was added or removed:");
-					Console.WriteLine("File 1: " + key1);
-					Console.WriteLine("File 2: " + key2);
-
-					needsBuild = true;
-					break;
-				}*/
 
 				var timeStamp1 = timeStampsData[key];
 
