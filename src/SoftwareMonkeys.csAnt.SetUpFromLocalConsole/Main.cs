@@ -76,6 +76,7 @@ namespace SoftwareMonkeys.csAnt.SetUpFromLocalConsole
                 "lib/csAnt/**",
                 "lib/cs-script/**",
                 "lib/FileNodes/**",
+                "lib/HtmlAgilityPack/**",
                 "scripts/*.cs",
                 "csAnt.sh"
             };

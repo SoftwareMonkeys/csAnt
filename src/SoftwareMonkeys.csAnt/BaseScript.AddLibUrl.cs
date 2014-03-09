@@ -7,26 +7,20 @@ namespace SoftwareMonkeys.csAnt
 {
 	public partial class BaseScript
 	{
-		public void AddLib(string name, string zipFileUrl)
+		public void AddLibUrl(string name, string zipFileUrl)
 		{
-			AddLib(name, zipFileUrl, String.Empty);
+			AddLibUrl(name, zipFileUrl, String.Empty);
 		}
 
-		public void AddLib (string name, string zipFileUrl, string subPath)
+		public void AddLibUrl (string name, string zipFileUrl, string subPath)
 		{
 			Console.WriteLine ("Adding library...");
 			Console.WriteLine ("Name: " + name);
 			Console.WriteLine ("Url: " + zipFileUrl);
 			Console.WriteLine ("Sub path: " + subPath);
 
-			var cmd = new AddLibCommand(
-				this,
-				name,
-				zipFileUrl,
-				subPath
-			);
-
-			ExecuteCommand(cmd);
+            // TODO: Check if this should be injected or an instance kept on the script class
+            new LibraryManager(Nodes.State).AddUrl(name, zipFileUrl, subPath);
 		}
 
 	}

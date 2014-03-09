@@ -8,7 +8,7 @@ namespace SoftwareMonkeys.csAnt
 		{
 			get
 			{
-		    	return Type.GetType("Mono.Runtime") != null;
+		    	return Platform.IsMono;
 			}
 		}
 	}

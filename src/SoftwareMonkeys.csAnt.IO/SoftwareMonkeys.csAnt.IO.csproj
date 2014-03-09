@@ -87,6 +87,8 @@
     <Compile Include="Compression\FileZipper.cs" />
     <Compile Include="FilesGrabber.cs" />
     <Compile Include="DirectoryMover.cs" />
+    <Compile Include="FileDownloader.cs" />
+    <Compile Include="DirectoryChecker.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

@@ -1,6 +1,7 @@
 using System;
 using System.Net;
 using System.IO;
+using SoftwareMonkeys.csAnt.IO;
 
 namespace SoftwareMonkeys.csAnt
 {
@@ -11,7 +12,10 @@ namespace SoftwareMonkeys.csAnt
 			string localDestination
 		)
 		{
-			var cmd = new DownloadCommand(
+            // TODO: Check if this should be injected or an instance kept on a property
+            return new FileDownloader().Download(url, localDestination);
+
+			/*var cmd = new DownloadCommand(
 				this,
 				url,
 				localDestination
@@ -19,7 +23,7 @@ namespace SoftwareMonkeys.csAnt
 
 			ExecuteCommand(cmd);
 
-			return (string)cmd.ReturnValue;
+			return (string)cmd.ReturnValue;*/
 		}
 	}
 }
