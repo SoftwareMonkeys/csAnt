@@ -37,8 +37,8 @@
     <Commandlineparameters>d:../../</Commandlineparameters>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
-    <DebugType>Full</DebugType>
-    <Optimize>False</Optimize>
+    <DebugType>none</DebugType>
+    <Optimize>false</Optimize>
     <OutputPath>bin\x86\Debug</OutputPath>
     <WarningLevel>4</WarningLevel>
     <AssemblyName>SoftwareMonkeys.csAnt.SetUpFromWebConsole</AssemblyName>
@@ -90,14 +90,6 @@
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
-    <ProjectReference Include="..\SoftwareMonkeys.csAnt.Packages\SoftwareMonkeys.csAnt.Packages.csproj">
-      <Project>{089D0473-0CB0-458B-AFDF-428D83B5CC6A}</Project>
-      <Name>SoftwareMonkeys.csAnt.Packages</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SoftwareMonkeys.csAnt.Packages.Contracts\SoftwareMonkeys.csAnt.Packages.Contracts.csproj">
-      <Project>{C3C8D4B3-1659-4307-A7B1-DAE98C15250D}</Project>
-      <Name>SoftwareMonkeys.csAnt.Packages.Contracts</Name>
-    </ProjectReference>
     <ProjectReference Include="..\SoftwareMonkeys.csAnt.IO\SoftwareMonkeys.csAnt.IO.csproj">
       <Project>{749ED083-15BD-4522-8FBE-847870434680}</Project>
       <Name>SoftwareMonkeys.csAnt.IO</Name>
