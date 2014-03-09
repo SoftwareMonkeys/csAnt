@@ -34,12 +34,14 @@ class RunTestsScript : BaseScript
 		// (without doing this, the scripts don't execute as tests because the general csAnt binaries aren't in the same folder)
 		var workingDir = PrepareTests();
 
-            var runner = new NUnitTestRunner(
-                this,
-                BuildMode
-            );
+                var runner = new NUnitTestRunner(
+                    this,
+                    BuildMode
+                );
             
-            runner.RunTestsInDirectory(workingDir);
+                runner.RunTestsInDirectory(workingDir);
+
+		Directory.Delete(workingDir, true);
 	}
 
 	public string PrepareTests()
