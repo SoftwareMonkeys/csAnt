@@ -75,6 +75,8 @@ namespace SoftwareMonkeys.csAnt.IO
                 //"bin/**",
                 "lib/csAnt/**",
                 "lib/FileNodes/**",
+                "lib/HtmlAgilityPack/**",
+                "lib/cs-script/**",
                 //"lib/**",
                 //"/src/**.node", // TODO: Check if needed
                 //"/src/**.cs",
