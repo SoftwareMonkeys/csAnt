@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
-using SoftwareMonkeys.csAnt.Packages;
 using SoftwareMonkeys.csAnt.IO;
 
 namespace SoftwareMonkeys.csAnt.UI.csAntConsole
