@@ -74,6 +74,7 @@ namespace SoftwareMonkeys.csAnt.IO
                 "*.vbs",
                 //"bin/**",
                 "lib/csAnt/**",
+                "lib/FileNodes/**",
                 //"lib/**",
                 //"/src/**.node", // TODO: Check if needed
                 //"/src/**.cs",
