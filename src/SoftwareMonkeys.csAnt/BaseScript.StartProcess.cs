@@ -30,7 +30,23 @@ namespace SoftwareMonkeys.csAnt
 		/// <param name='arguments'></param>
 		public Process StartProcess(string command)
 		{
-            return new ProcessStarter().Start(command, "");
+            var parts = command.Split(' ');
+
+            var cmd = "";
+            var arguments = new string[]{};
+
+            if (parts.Length > 0)
+                cmd = parts[0];
+
+            if (parts.Length > 1)
+            {
+                var list = new List<string>(parts);
+                list.RemoveAt(0);
+
+                arguments = list.ToArray();
+            }
+
+            return new ProcessStarter().Start(cmd, String.Join(" ", arguments));
 		}
 	}
 }
