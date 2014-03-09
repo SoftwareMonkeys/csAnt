@@ -54,8 +54,11 @@ namespace SoftwareMonkeys.csAnt
                 Console.WriteLine ("");
             }
 
+            var totalCompiled = 0;
+            var totalFailed = 0;
+            var totalSkipped = 0;
+
             foreach (var scriptPath in Directory.GetFiles(scriptsDir, "*.cs")) {
-                //bool didCompile = false; // TODO: Finish
                 
                 var scriptName = Path.GetFileNameWithoutExtension (scriptPath);
 
@@ -82,24 +85,27 @@ namespace SoftwareMonkeys.csAnt
                             CSScript.Compile (scriptPath, assemblyFile, IsDebug, new string[]{});
                             Console.WriteLine ("    Successful");
                             
-                            //didCompile = true;
+                            totalCompiled++;
                         }
                         else
+                        {
                             Console.WriteLine ("    Assembly file found. Skipping compile...");
+                            totalSkipped++;
+                        }
                     } catch (Exception ex) {
                         Error ("Cannot compile '" + scriptName + "' script.", ex);
-                        //didCompile = false;
+                        totalFailed++;
                     }
                 }
-                
-                // TODO: Finish
-                //var scriptInfo = new ScriptInfo(scriptName);
-                //script.LatestCompiled = didCompile;
             }
-                
-            if (IsVerbose) {
-                Console.WriteLine ("");
-            }
+            
+            Console.WriteLine ("");
+            Console.WriteLine ("Total compiled: " + totalCompiled);
+            Console.WriteLine ("Total skipped: " + totalSkipped);
+            Console.WriteLine ("Total failed: " + totalFailed);
+            Console.WriteLine ("");
+            Console.WriteLine ("Finished!");
+            Console.WriteLine ("");
         }
     }
 }
