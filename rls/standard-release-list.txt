@@ -1,7 +1,3 @@
-/lib/csAnt/bin/Release/*.dll
-/lib/csAnt/bin/Release/*.exe
-/lib/csAnt/bin/Release/*.config
-/lib/csAnt/bin/Release/*.snk
 /scripts/Initialize/*
 /scripts/HelloWorld.cs
 /scripts/CreateProjectNode.cs
@@ -31,7 +27,10 @@
 /lib/GCUpload/*.zip
 /lib/Newtonsoft.Json/Newtonsoft.Json.node
 /lib/Libraries.node
-/lib/csAnt/bin/Release/*
+/lib/csAnt/bin/Release/*.dll
+/lib/csAnt/bin/Release/*.exe
+/lib/csAnt/bin/Release/*.config
+/lib/csAnt/bin/Release/*.snk
 /lib/csAnt/*.zip
 /lib/cs-script/*.dll
 /lib/cs-script/*.exe
