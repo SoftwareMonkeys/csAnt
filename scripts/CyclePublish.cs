@@ -61,7 +61,9 @@ class CyclePublishScript : BaseProjectScript
 			"lib/HtmlAgilityPack/**",
 			"lib/ILRepack.1.25.0/**",
 			"lib/GCUpload/**",
-			"lib/FileNodes/**"
+			"lib/FileNodes/**",
+			"lib/Newtonsoft.Json.6.0.1/lib/net40/**",
+			"lib/SharpZipLib/**"
 		);
 	}
 
