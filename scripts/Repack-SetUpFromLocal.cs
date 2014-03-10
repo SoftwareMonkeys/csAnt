@@ -15,7 +15,7 @@ class Repack_SetUpFromLocalScript : BaseScript
 	public override bool Run(string[] args)
 	{
             Console.WriteLine("");
-            Console.WriteLine("Repacking SetUpFromLocal.exe file to include dependencies.");
+            Console.WriteLine("Repacking csAnt-SetUpFromLocal.exe file to include dependencies.");
             Console.WriteLine("");
 	
             var exeFile = "lib/ILRepack.1.25.0/tools/ILRepack.exe";

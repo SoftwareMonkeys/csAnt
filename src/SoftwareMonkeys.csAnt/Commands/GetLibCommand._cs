@@ -1,0 +1,33 @@
+using System;
+using SoftwareMonkeys.csAnt.Commands;
+using System.IO;
+using System.Linq;
+using SoftwareMonkeys.FileNodes;
+
+namespace SoftwareMonkeys.csAnt
+{
+	public class GetLibCommand : BaseScriptCommand
+	{
+		public string LibName { get;set; }
+
+		public bool ForceDownload { get;set; }
+
+		public GetLibCommand (
+			IScript script,
+			string libName,
+			bool force
+		)
+			: base(script)
+		{
+			LibName = libName;
+			ForceDownload = force;
+		}
+
+		public override void Execute ()
+		{
+			GetLib(LibName);
+		}
+
+	}
+}
+

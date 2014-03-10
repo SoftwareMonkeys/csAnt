@@ -1,13 +1,22 @@
 using System;
-using System.IO;
 using System.Net;
+using System.IO;
 
-namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole
+
+namespace SoftwareMonkeys.csAnt.IO
 {
-    public class DownloadUtility
+    public class FileDownloader
     {
+        public FileDownloader ()
+        {
+        }
+        
+        public void Download (string url, string toFile)
+        {
+            Download (url, toFile, false);
+        }
 
-        static public void Download (string url, string toFile, bool overwriteFile)
+        public void Download (string url, string toFile, bool overwriteFile)
         {
         
             if (
@@ -31,7 +40,7 @@ namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole
 
                 Console.WriteLine ("  Please wait...(this may take some time)...");
 
-                IOUtility.EnsureDirectoryExists (Path.GetDirectoryName (toFile));
+                DirectoryChecker.EnsureDirectoryExists (Path.GetDirectoryName (toFile));
 
                 webClient.DownloadFile (
                     url,
@@ -44,8 +53,8 @@ namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole
                 Console.WriteLine ("");
             }
         }
-
-        static public void OutputSize(WebClient webClient)
+        
+        public void OutputSize(WebClient webClient)
         {
             var size = Convert.ToInt32 (webClient.ResponseHeaders ["Content-Length"]);
 
@@ -54,7 +63,7 @@ namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole
             Console.WriteLine ("  Size: " + sizeString);
         }
 
-        static public string GetSizeString(int size)
+        public string GetSizeString(int size)
         {
             var sizeString = size + "b";
 

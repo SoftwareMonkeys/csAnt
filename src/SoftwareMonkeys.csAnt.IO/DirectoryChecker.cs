@@ -1,9 +1,10 @@
 using System;
 using System.IO;
 
-namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole
+
+namespace SoftwareMonkeys.csAnt.IO
 {
-    public class IOUtility
+    static public class DirectoryChecker
     {
         static public void EnsureDirectoryExists(
             string directoryPath
