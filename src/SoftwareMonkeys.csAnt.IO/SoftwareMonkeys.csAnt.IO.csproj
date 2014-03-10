@@ -89,6 +89,9 @@
     <Compile Include="DirectoryMover.cs" />
     <Compile Include="FileDownloader.cs" />
     <Compile Include="DirectoryChecker.cs" />
+    <Compile Include="FileBackup.cs" />
+    <Compile Include="FileSync.cs" />
+    <Compile Include="DynamicLinq.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

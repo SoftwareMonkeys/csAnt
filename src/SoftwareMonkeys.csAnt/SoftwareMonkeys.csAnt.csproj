@@ -150,7 +150,6 @@
     <Compile Include="Commands\BaseScriptCommand.cs" />
     <Compile Include="Commands\DownloadAndUnzipCommand.cs" />
     <Compile Include="Commands\HelloWorldCommand.cs" />
-    <Compile Include="DynamicLinq.cs" />
     <Compile Include="BaseScript.SubProcesses.cs" />
     <Compile Include="BaseScript.GetTmpRoot.cs" />
     <Compile Include="BaseScript.GetScript.cs" />
@@ -274,8 +273,5 @@
       <Project>{53E3AFEA-3627-4846-B2E4-5A8091E96BC6}</Project>
       <Name>SoftwareMonkeys.csAnt.IO.Contracts</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Components\" />
   </ItemGroup>
 </Project>

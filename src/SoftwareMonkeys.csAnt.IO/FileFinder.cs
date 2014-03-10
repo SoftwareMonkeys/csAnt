@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Linq.Dynamic;
 
 namespace SoftwareMonkeys.csAnt.IO
 {
@@ -29,9 +31,12 @@ namespace SoftwareMonkeys.csAnt.IO
 
             List<string> files = new List<string> ();
 
+            var ignoredPatterns = GetIgnoredPatterns(patterns);
+
             foreach (string pattern in patterns) {
-                if (!String.IsNullOrEmpty (pattern)) {
-                    foreach (string file in FindFilesFromPattern(workingDirectory, pattern))
+                if (!String.IsNullOrEmpty (pattern) // If it's not empty
+                    && !pattern.StartsWith("!")) { // And it's not an exclude pattern
+                    foreach (string file in FindFilesFromPattern(workingDirectory, pattern, ignoredPatterns))
                         if (!files.Contains (file))
                             files.Add (file);
                 }
@@ -45,7 +50,7 @@ namespace SoftwareMonkeys.csAnt.IO
         /// If the pattern starts with a slash then the SearchOption.AllDirectories option is NOT used.
         /// If the pattern does NOT start with a slash then the SearchOption.AllDirectories option IS used.
         /// </summary>
-        public string[] FindFilesFromPattern (string workingDirectory, string pattern)
+        public string[] FindFilesFromPattern (string workingDirectory, string pattern, string[] ignoredPatterns)
         {
             if (String.IsNullOrEmpty (workingDirectory))
                 throw new ArgumentException ("baseDirectory", "The base directory must be specified.");
@@ -81,7 +86,10 @@ namespace SoftwareMonkeys.csAnt.IO
 
             if (Directory.Exists (workingDirectory)) {
                 foreach (var file in Directory.GetFiles (workingDirectory, pattern, searchOption)) {
-                    if (!foundFiles.Contains (file))
+                    if (
+                        !foundFiles.Contains (file)
+                        && !IsIgnored(file, ignoredPatterns)
+                        )
                         foundFiles.Add (file);
                 }
             } else {
@@ -169,6 +177,24 @@ namespace SoftwareMonkeys.csAnt.IO
 
             path = fixedPath;
             pattern = fixedPattern;
+        }
+
+        public bool IsIgnored(string file, params string[] ignoredPatterns)
+        {
+            var matchingPatterns = from p in ignoredPatterns
+                where file.Contains(p)
+                    select p;
+
+            return matchingPatterns.Count () > 0;
+        }
+
+        public string[] GetIgnoredPatterns(params string[] patterns)
+        {
+            var matchingPatterns = from p in patterns
+                where p.StartsWith("!")
+                    select p.Substring(1, p.Length-1).Trim('*').Trim('*');
+
+            return matchingPatterns.ToArray();
         }
     }
 }
