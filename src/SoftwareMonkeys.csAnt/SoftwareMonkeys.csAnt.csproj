@@ -90,7 +90,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
-    <Compile Include="BaseScript.AddLib.cs" />
     <Compile Include="BaseScript.Arguments.cs" />
     <Compile Include="BaseScript.BackupFile.cs" />
     <Compile Include="BaseScript.BaseNode.cs" />
@@ -147,14 +146,10 @@
     <Compile Include="BaseScript.Zip.cs" />
     <Compile Include="ConsoleWriter.cs" />
     <Compile Include="Arguments.cs" />
-    <Compile Include="Commands\AddLibCommand.cs" />
     <Compile Include="Commands\BackupFileCommand.cs" />
     <Compile Include="Commands\BaseScriptCommand.cs" />
     <Compile Include="Commands\DownloadAndUnzipCommand.cs" />
-    <Compile Include="Commands\DownloadCommand.cs" />
-    <Compile Include="Commands\GetLibCommand.cs" />
     <Compile Include="Commands\HelloWorldCommand.cs" />
-    <Compile Include="Commands\StartProcessCommand.cs" />
     <Compile Include="DynamicLinq.cs" />
     <Compile Include="BaseScript.SubProcesses.cs" />
     <Compile Include="BaseScript.GetTmpRoot.cs" />
@@ -250,6 +245,20 @@
     <Compile Include="BaseScript.ScriptAssembliesDirectory.cs" />
     <Compile Include="BaseScript.GetScriptAssemblyPath.cs" />
     <Compile Include="BaseScript.VersionAndTimeStamp.cs" />
+    <Compile Include="BaseScript.AddLibNuget.cs" />
+    <Compile Include="BaseScript.AddLibUrl.cs" />
+    <Compile Include="LibraryGetter.cs" />
+    <Compile Include="LibraryLocalZipGetter.cs" />
+    <Compile Include="LibraryManager.cs" />
+    <Compile Include="LibraryNugetAdder.cs" />
+    <Compile Include="LibraryNugetGetter.cs" />
+    <Compile Include="LibraryOnlineZipGetter.cs" />
+    <Compile Include="LibraryUrlAdder.cs" />
+    <Compile Include="NugetChecker.cs" />
+    <Compile Include="NugetDownloader.cs" />
+    <Compile Include="ProcessStarter.cs" />
+    <Compile Include="DotNetProcessStarter.cs" />
+    <Compile Include="Platform.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
