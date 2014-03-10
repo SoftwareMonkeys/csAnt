@@ -76,13 +76,12 @@ namespace SoftwareMonkeys.csAnt.SetUpFromLocalConsole
                 "lib/csAnt/**",
                 "lib/cs-script/**",
                 "lib/FileNodes/**",
+                "lib/HtmlAgilityPack/**",
+                "lib/SharpZipLib/**",
                 "lib/NUnit/**",
                 "lib/NUnitResults/**",
-                "lib/HtmlAgilityPack/Net40/**",
-                "lib/SharpZipLib/net-20/**",
-                "lib/ILRepack.1.25/**",
                 "lib/GCUpload/**",
-                "scripts/**",
+                "scripts/*.cs",
                 "csAnt.sh"
             };
         }

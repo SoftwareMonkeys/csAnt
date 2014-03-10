@@ -49,7 +49,6 @@ class Repack_SetUpScript : BaseScript
 	public void AddDependencies(List<string> arguments)
 	{
             var dependencies = new string[]{
-                "lib/SharpZipLib/net-20/ICSharpCode.SharpZipLib.dll",
                 "lib/HtmlAgilityPack/Net40/HtmlAgilityPack.dll",
                 "bin/Release/SoftwareMonkeys.csAnt.dll",
                 "bin/Release/SoftwareMonkeys.csAnt.Contracts.dll",

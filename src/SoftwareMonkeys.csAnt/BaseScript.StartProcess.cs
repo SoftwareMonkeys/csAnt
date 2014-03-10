@@ -16,8 +16,7 @@ namespace SoftwareMonkeys.csAnt
 		/// <param name='arguments'></param>
 		public Process StartProcess(string command, params string[] arguments)
 		{
-            // TODO: Move ProcessStarter to a property
-			return new ProcessStarter().Start(command, String.Join(" ", arguments));
+			return StartProcess(command + " " + String.Join(" ", arguments));
 		}
 		
 		/// <summary>
@@ -30,23 +29,14 @@ namespace SoftwareMonkeys.csAnt
 		/// <param name='arguments'></param>
 		public Process StartProcess(string command)
 		{
-            var parts = command.Split(' ');
+			var cmd = new StartProcessCommand(
+				this,
+				command
+			);
 
-            var cmd = "";
-            var arguments = new string[]{};
+			ExecuteCommand(cmd);
 
-            if (parts.Length > 0)
-                cmd = parts[0];
-
-            if (parts.Length > 1)
-            {
-                var list = new List<string>(parts);
-                list.RemoveAt(0);
-
-                arguments = list.ToArray();
-            }
-
-            return new ProcessStarter().Start(cmd, String.Join(" ", arguments));
+			return cmd.CommandProcess;
 		}
 	}
 }

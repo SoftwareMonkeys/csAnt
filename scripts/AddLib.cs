@@ -20,39 +20,17 @@ class AddLibScript : BaseScript
 			Console.WriteLine("Two arguments expected; name and URL (to zip file).");
 		else
 		{
-            var type = Arguments["t"];
+			string name = args[0];
 
-            switch (type.ToLower())
-            {
-                case "url":
-                    AddLibUrl();
-                    break;
-                case "nuget":
-                    AddLibNuget();
-                    break;
-            }
+			string url = args[1];
+
+			string subPath = String.Empty;
+			if (args.Length == 3)
+				subPath = args[2];
+
+			AddLib(name, url, subPath);
 		}
 
 		return !IsError;
 	}
-
-    public void AddLibUrl()
-    {
-        var name = Arguments["name"];
-
-        var url = Arguments["url"];
-
-        var subPath = Arguments["subpath"];
-
-        AddLibUrl(name, url, subPath);
-    }
-
-    public void AddLibNuget()
-    {
-        var name = Arguments["name"];
-
-        var package = Arguments["package"];
-
-        AddLibNuget(name, package);
-    }
 }

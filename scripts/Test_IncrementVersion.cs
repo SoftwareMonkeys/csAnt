@@ -34,9 +34,7 @@ public class Test_IncrementVersionScript : BaseProjectTestScript
 			CurrentDirectory
 		).GrabOriginalFiles();
 
-        Nodes.Refresh();
-
-	    IncrementVersion();
+	        IncrementVersion();
 
 		Assert.IsTrue(!IsError);
 

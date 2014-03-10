@@ -4,7 +4,6 @@ using System.IO;
 using HtmlAgilityPack;
 using System.Diagnostics;
 using SoftwareMonkeys.csAnt.IO.Compression;
-using SoftwareMonkeys.csAnt.IO;
 
 namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole.cs
 {
@@ -87,7 +86,7 @@ namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole.cs
                 + Path.DirectorySeparatorChar
                     + "csAnt.zip";
 
-            new FileDownloader().Download(url, zipFile, overwrite);
+            DownloadUtility.Download(url, zipFile, overwrite);
 
             var zipper = new FileZipper();
 

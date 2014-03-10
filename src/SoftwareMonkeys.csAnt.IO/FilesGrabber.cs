@@ -77,7 +77,6 @@ namespace SoftwareMonkeys.csAnt.IO
                 "lib/FileNodes/**",
                 "lib/HtmlAgilityPack/**",
                 "lib/cs-script/**",
-                "lib/SharpZipLib/**",
                 //"lib/**",
                 //"/src/**.node", // TODO: Check if needed
                 //"/src/**.cs",

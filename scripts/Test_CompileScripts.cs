@@ -23,18 +23,18 @@ class Test_InitializeScript : BaseProjectTestScript
 	
 	public override bool Run(string[] args)
 	{
-        Console.WriteLine("");
-        Console.WriteLine("Testing whether all the scripts can compile...");
-        Console.WriteLine("");
+                Console.WriteLine("");
+                Console.WriteLine("Testing whether all the scripts can compile...");
+                Console.WriteLine("");
 
-        new FilesGrabber(
-	        OriginalDirectory,
-	        CurrentDirectory
-        ).GrabOriginalScriptingFiles();
+                new FilesGrabber(
+			OriginalDirectory,
+			CurrentDirectory
+		).GrabOriginalScriptingFiles();
 
-        CompileScripts(true);
+                CompileScripts(true);
 
-        Assert.IsFalse(IsError, "An error occurred.");
+                Assert.IsFalse(IsError, "An error occurred.");
 		
 		return !IsError;
 	}

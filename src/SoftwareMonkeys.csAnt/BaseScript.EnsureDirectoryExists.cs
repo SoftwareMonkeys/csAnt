@@ -1,6 +1,5 @@
 using System;
 using System.IO;
-using SoftwareMonkeys.csAnt.IO;
 
 namespace SoftwareMonkeys.csAnt
 {
@@ -10,7 +9,12 @@ namespace SoftwareMonkeys.csAnt
 			string directoryPath
 		)
 		{
-            DirectoryChecker.EnsureDirectoryExists(directoryPath);
+			// Check parent directories, up to the last one
+			if (directoryPath.IndexOf(Path.DirectorySeparatorChar) != directoryPath.LastIndexOf(Path.DirectorySeparatorChar))
+				EnsureDirectoryExists(Path.GetDirectoryName(directoryPath));
+
+			if (!Directory.Exists(directoryPath))
+				Directory.CreateDirectory(directoryPath);
 		}
 	}
 }

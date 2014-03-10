@@ -1,6 +1,7 @@
 {
   "Name": "Newtonsoft.Json",
   "Properties": {
-    "nuget": "Newtonsoft.Json"
+    "Url": "https://docs.google.com/uc?export=download&id=0B_8QvsLqRy5qdUo5d0xjU3FuRXM",
+    "SubPath": "/"
   }
 }
