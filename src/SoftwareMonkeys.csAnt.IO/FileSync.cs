@@ -64,9 +64,9 @@ namespace SoftwareMonkeys.csAnt.IO
             }
             
             Console.WriteLine ("");
-            Console.WriteLine ("Total synced: {0}", totalSynced);
-            Console.WriteLine ("Total skipped: {0}", totalSkipped);
-            Console.WriteLine ("Total deleted: {0}", totalDeleted);
+            Console.WriteLine ("Total synced: " + totalSynced);
+            Console.WriteLine ("Total skipped: " + totalSkipped);
+            Console.WriteLine ("Total deleted: " + totalDeleted);
             Console.WriteLine ("");
             Console.WriteLine ("Sync finished!");
 
