@@ -21,7 +21,7 @@ namespace SoftwareMonkeys.csAnt
         {
             
             Console.WriteLine ("");
-            Console.WriteLine ("Installing from nunit: " + name);
+            Console.WriteLine ("Installing from nuget: " + name);
             Console.WriteLine ("");
 
             // Check that nuget is installed
