@@ -12,15 +12,7 @@ namespace SoftwareMonkeys.csAnt
 
 		public void GetLib(string name, bool force)
 		{
-			var cmd = new GetLibCommand(
-				this,
-				name,
-				force
-			);
-
-
-			ExecuteCommand(cmd);
+            new LibraryManager(Nodes.State).Get(name, force);
 		}
 	}
 }
-
