@@ -1,6 +1,7 @@
 {
   "Properties": {
-    "Version": "0.3.0.1300"
+    "Version": "0.3.0.2100",
+    "BackupDirectory": "/media/X-Drive/Sorted/Backup/Projects"
   },
   "Name": "csAnt"
 }
