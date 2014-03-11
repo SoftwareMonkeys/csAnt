@@ -8,6 +8,8 @@ namespace SoftwareMonkeys.csAnt
         FileNode CurrentNode { get;set; }
 
         void Refresh();
+
+        INodeGetter Getter { get;set; }
     }
 }
 

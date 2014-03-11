@@ -19,13 +19,12 @@ namespace SoftwareMonkeys.csAnt.Projects.Tests
                 parentScript
             );
 
+            testScript.Nodes = (ProjectNodeManager)Nodes;
+
             testScript.IsVerbose = isVerbose;
 
             testScript.TimeStamp = TimeStamp;
             testScript.Time = Time;
-
-            // TODO: Check if needed
-            //Scripts.Add (testScript);
 
             testScript.EnsureDirectoryExists(WorkingDirectory);
 

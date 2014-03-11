@@ -41,6 +41,8 @@ namespace SoftwareMonkeys.csAnt.Tests
 #else
             IsVerbose = false;
 #endif
+
+            Construct();
 		}
 
         public BaseTestFixture (bool autoSetUp)
@@ -50,6 +52,8 @@ namespace SoftwareMonkeys.csAnt.Tests
 #else
             IsVerbose = false;
 #endif
+            Construct();
+
             if (autoSetUp)
                 SetUp ();
         }

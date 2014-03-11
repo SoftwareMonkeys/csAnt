@@ -1,11 +1,11 @@
 using System;
+using SoftwareMonkeys.FileNodes;
+
 namespace SoftwareMonkeys.csAnt
 {
-    public class INodeGetter
+    public interface INodeGetter
     {
-        public INodeGetter ()
-        {
-        }
+        FileNode GetCurrentNode();
     }
 }
 

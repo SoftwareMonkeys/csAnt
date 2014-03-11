@@ -3,10 +3,28 @@ using System.IO;
 
 namespace SoftwareMonkeys.csAnt.Projects
 {
-    public class ProjectNodesCreator : NodesCreator
+    public class ProjectNodeCreator : NodesCreator
     {
-        public ProjectNodesCreator (INodeState nodeState) : base(nodeState)
+        public ProjectNodeState State
         {
+            get { return (ProjectNodeState)base.State; }
+            set { base.State = value; }
+        }
+
+        public ProjectNodeCreator (INodeState nodeState) : base(nodeState)
+        {
+        }
+
+        public override void EnsureNodes()
+        {
+            if (!State.CurrentNodeFound)
+                CreateProjectNode();
+
+            if (!State.GroupNodeFound)
+                CreateGroupNode();
+            
+            if (!State.SourceNodeFound)
+                CreateSourceNode();
         }
 
         public override void CreateNodes ()

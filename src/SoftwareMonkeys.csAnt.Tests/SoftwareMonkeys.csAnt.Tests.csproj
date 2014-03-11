@@ -142,6 +142,8 @@
     <Compile Include="Unit\FileFinderTestFixture.cs" />
     <Compile Include="Integration\BaseIntegrationTestFixture.cs" />
     <Compile Include="Integration\LibraryManagerTestFixture.cs" />
+    <Compile Include="BaseTestFixture.Nodes.cs" />
+    <Compile Include="BaseTestFixture.Construct.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

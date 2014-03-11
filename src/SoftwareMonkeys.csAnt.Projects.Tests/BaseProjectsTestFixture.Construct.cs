@@ -1,10 +1,11 @@
 using System;
 namespace SoftwareMonkeys.csAnt.Projects.Tests
 {
-    public class BaseProjectTestFixture
+    public partial class BaseProjectsTestFixture
     {
-        public BaseProjectTestFixture ()
+        public override void Construct()
         {
+            Nodes = new NodeManager();
         }
     }
 }

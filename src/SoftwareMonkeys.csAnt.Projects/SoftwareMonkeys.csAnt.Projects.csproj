@@ -106,9 +106,11 @@
     <Compile Include="BaseProjectScript.IncrementVersion.cs" />
     <Compile Include="BaseProjectScript.SetVersion.cs" />
     <Compile Include="ProjectCreator.cs" />
-    <Compile Include="ProjectNodesCreator.cs" />
     <Compile Include="BaseProjectScript.Nodes.cs" />
     <Compile Include="ProjectNodeManager.cs" />
+    <Compile Include="ProjectNodeState.cs" />
+    <Compile Include="ProjectNodeGetter.cs" />
+    <Compile Include="ProjectNodeCreator.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

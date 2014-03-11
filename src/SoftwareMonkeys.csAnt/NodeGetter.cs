@@ -4,19 +4,22 @@ using System.IO;
 
 namespace SoftwareMonkeys.csAnt
 {
-    public class NodeGetter
+    public class NodeGetter : INodeGetter
     {
-        public NodeGetter ()
+        public INodeState State { get;set; }
+
+        public NodeGetter (INodeState state)
         {
+            State = state;
         }
 
-        public FileNode GetNode(NodeState state, string relativePath)
+        public virtual FileNode GetNode(string relativePath)
         {
             var parts = relativePath.Replace("\"", "/").Trim('/').Split('/');
 
             FileNode node = null;
 
-            node = state.CurrentNode;
+            node = State.CurrentNode;
 
             foreach (string part in parts)
             {
@@ -27,7 +30,7 @@ namespace SoftwareMonkeys.csAnt
             return node;
         }
         
-        public FileNode GetCurrentNode ()
+        public virtual FileNode GetCurrentNode ()
         {
             Console.WriteLine ("");
             Console.WriteLine ("Getting current node...");
@@ -56,7 +59,7 @@ namespace SoftwareMonkeys.csAnt
             }
 
             FileNode node = fileNodes.Get (dir, false, true);
-            
+
             return node;
         }
     }

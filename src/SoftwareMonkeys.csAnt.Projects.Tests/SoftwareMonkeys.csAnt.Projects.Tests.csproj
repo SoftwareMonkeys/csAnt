@@ -88,6 +88,7 @@
     <Compile Include="ReleaseTestFixture.cs" />
     <Compile Include="Integration\NodesTestFixture.cs" />
     <Compile Include="Integration\BaseProjectsIntegrationTestFixture.cs" />
+    <Compile Include="BaseProjectsTestFixture.Construct.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

@@ -8,9 +8,18 @@ namespace SoftwareMonkeys.csAnt
     {
         public NodeRefresher Refresher { get;set; }
 
+        public INodeState State { get;set; }
+
         public NodesCreator (INodeState state)
         {
             Refresher = new NodeRefresher(state);
+            State = state;
+        }
+
+        public virtual void EnsureNodes()
+        {
+            if (State.CurrentNode == null)
+                CreateNode ();
         }
         
         public FileNode CreateNode()
