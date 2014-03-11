@@ -52,12 +52,12 @@ class Test_BuildFromGitScript : BaseProjectTestScript
 
 	public void EnsureReleases()
 	{
-                var testDir = CurrentDirectory;
+        var testDir = CurrentDirectory;
 
 		// Relocate back to the original directory to ensure that the releases have been created
 		Relocate(OriginalDirectory);
 
-                ExecuteScript("EnsureRelease", "standard-release");
+        ExecuteScript("EnsureRelease", "standard-release");
 
 		// Relocated back to the test directory
 		Relocate(testDir);
