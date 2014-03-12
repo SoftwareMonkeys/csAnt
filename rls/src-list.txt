@@ -40,11 +40,8 @@
 /lib/ILRepack.1.25.0/**.zip
 /lib/ILRepack.1.25.0/**.node
 /lib/Libraries.node
-/scripts/**.cs
+/scripts/**
 /scripts/Release/*
-/scripts/Initialize/*
-/scripts/RunUnitTests/*
-/scripts/RunTestScripts/*
 /rls/*.txt
 /*.sh
 /*.node

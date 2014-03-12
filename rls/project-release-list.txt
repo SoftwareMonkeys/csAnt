@@ -1,4 +1,3 @@
-/scripts/Initialize/*
 /scripts/HelloWorld.cs
 /scripts/CreateProjectNode.cs
 /scripts/BuildSolution.cs
@@ -19,8 +18,6 @@
 /scripts/List.cs
 /scripts/RunTests.cs
 /scripts/Release/*
-/scripts/RunUnitTests/*
-/scripts/RunTestScripts/*
 /scripts/Test_*.cs
 /scripts/ImportScript.cs
 /scripts/AddImport.cs

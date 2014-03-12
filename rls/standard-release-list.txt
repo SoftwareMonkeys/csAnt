@@ -1,4 +1,3 @@
-/scripts/Initialize/*
 /scripts/HelloWorld.cs
 /scripts/CreateProjectNode.cs
 /scripts/BuildSolution.cs
@@ -17,8 +16,6 @@
 /scripts/List.cs
 /scripts/Update.cs
 /scripts/Release/*
-/scripts/RunUnitTests/*
-/scripts/RunTestScripts/*
 /lib/NUnit/NUnit.node
 /lib/NUnitResults/NUnitResults.node
 /lib/SharpZipLib/SharpZipLib.node
