@@ -1,7 +1,7 @@
 {
   "Properties": {
     "Context": "Assembly",
-    "Version": "0.3.0.2100"
+    "Version": "0.3.0.4800"
   },
   "Name": "SoftwareMonkeys.csAnt.SetUpFromLocalConsole"
 }
