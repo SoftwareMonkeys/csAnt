@@ -14,11 +14,11 @@ using SoftwareMonkeys.csAnt.Projects.Tests;
 using SoftwareMonkeys.csAnt.Projects.Tests.Scripting;
 using NUnit.Framework;
 
-class Test_InitializeScript : BaseProjectTestScript
+class Test_CompileScriptsScript : BaseProjectTestScript
 {
 	public static void Main(string[] args)
 	{
-		new Test_InitializeScript().Start(args);
+		new Test_CompileScriptsScript().Start(args);
 	}
 	
 	public override bool Run(string[] args)
