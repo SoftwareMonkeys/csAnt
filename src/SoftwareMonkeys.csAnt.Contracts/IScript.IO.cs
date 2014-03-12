@@ -1,5 +1,6 @@
 using System;
 using SoftwareMonkeys.csAnt.IO;
+using System.Collections.Generic;
 
 namespace SoftwareMonkeys.csAnt
 {

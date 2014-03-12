@@ -66,11 +66,11 @@ namespace SoftwareMonkeys.csAnt.IO.Compression
 
                     Console.WriteLine ("  Short pattern: " + shortPattern);
 
-                    string[] foundFiles = FileFinder.FindFiles(workingDirectory, shortPattern);
-                    
-                    Console.WriteLine ("    Found " + foundFiles.Length.ToString() + " files.");
-                    
+                    var foundFiles = FileFinder.FindFiles(workingDirectory, shortPattern);
+
                     Console.WriteLine ("    Zipping...");
+
+                    int found = 0;
 
                     foreach (string foundFile in foundFiles)
                     {
@@ -103,7 +103,12 @@ namespace SoftwareMonkeys.csAnt.IO.Compression
 
                             } while (sourceBytes > 0);
                         }
+
+                        found++;
                     }
+
+                    Console.WriteLine ("    Found " + found.ToString() + " files.");
+                    
                 }
             }
 

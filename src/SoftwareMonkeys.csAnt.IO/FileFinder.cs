@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Linq.Dynamic;
+using System.Threading;
+using System.Text.RegularExpressions;
 
 namespace SoftwareMonkeys.csAnt.IO
 {
@@ -21,91 +23,76 @@ namespace SoftwareMonkeys.csAnt.IO
             IsVerbose = isVerbose;
         }
 
-        public string[] FindFiles (string workingDirectory, params string[] patterns)
+        public string[] FindFiles (string path, params string[] patterns)
         {
-            if (String.IsNullOrEmpty(workingDirectory))
-                throw new ArgumentException("workingDirectory", "The working directory must be specified.");
+            if (String.IsNullOrEmpty(path))
+                throw new ArgumentException("path", "The path must be specified.");
 
             if (patterns == null || patterns.Length == 0)
                 throw new ArgumentException("patterns", "At least one pattern must be specified.");
 
-            List<string> files = new List<string> ();
+            // Following code is based on an answer from:
+            // http://stackoverflow.com/questions/163162/can-you-call-directory-getfiles-with-multiple-filters
+            // ... but customized
 
-            var ignoredPatterns = GetIgnoredPatterns(patterns);
+            if (!Directory.Exists(path)) return new string[] { };
 
-            foreach (string pattern in patterns) {
-                if (!String.IsNullOrEmpty (pattern) // If it's not empty
-                    && !pattern.StartsWith("!")) { // And it's not an exclude pattern
-                    foreach (string file in FindFilesFromPattern(workingDirectory, pattern, ignoredPatterns))
-                        if (!files.Contains (file))
-                            files.Add (file);
-                }
-            }
-            return files.ToArray();
-        }
-
-        /// <summary>
-        /// Finds files in the specified directory based on the provided pattern.
-        /// If no wildcard is found in the pattern it treats it as a single file name.
-        /// If the pattern starts with a slash then the SearchOption.AllDirectories option is NOT used.
-        /// If the pattern does NOT start with a slash then the SearchOption.AllDirectories option IS used.
-        /// </summary>
-        public string[] FindFilesFromPattern (string workingDirectory, string pattern, string[] ignoredPatterns)
-        {
-            if (String.IsNullOrEmpty (workingDirectory))
-                throw new ArgumentException ("baseDirectory", "The base directory must be specified.");
-
-            if (String.IsNullOrEmpty (pattern))
-                throw new ArgumentException ("pattern", "The pattern must be specified.");
-
-            if (IsVerbose) {
-                Console.WriteLine ("");
-                Console.WriteLine ("Finding files...");
-                Console.WriteLine ("  Directory:");
-                Console.WriteLine ("  " + workingDirectory);
-                Console.WriteLine ("  Pattern:");
-                Console.WriteLine ("  " + pattern);
-            }
-
-            List<string> foundFiles = new List<string> ();
-
-            FixPathAndPattern(ref workingDirectory, ref pattern);
-
-            if (IsVerbose) 
+            var include = (from filter in patterns where !string.IsNullOrEmpty(filter.Trim()) select filter.Trim());
+            var exclude = (from filter in include where filter.Contains(@"!") select filter);
+        
+            include = include.Except(exclude);
+        
+            if (include.Count() == 0) include = new string[] { "*" };
+        
+            var rxfilters = from filter in exclude select string.Format("^{0}$", filter.Replace("!", "").Replace(".", @"\.").Replace("*", ".*").Replace("?", "."));
+            Regex regex = new Regex(string.Join("|", rxfilters.ToArray()));
+        
+            List<Thread> workers = new List<Thread>();
+            List<string> files = new List<string>();
+        
+            foreach (string filter in include)
             {
-                Console.WriteLine ("  Specified path: " + workingDirectory);
-                Console.WriteLine ("  Specified pattern: " + pattern);
-            }
+                var newPath = path;
+                var newFilter = filter;
 
-            var searchOption = SearchOption.TopDirectoryOnly;
+                FixPathAndPattern(ref newPath, ref newFilter);
 
-            if (pattern.IndexOf ("**") == 0) {
-                pattern = pattern.Replace ("**", "*");
-                searchOption = SearchOption.AllDirectories;
-            }
-
-            if (Directory.Exists (workingDirectory)) {
-                foreach (var file in Directory.GetFiles (workingDirectory, pattern, searchOption)) {
-                    if (
-                        !foundFiles.Contains (file)
-                        && !IsIgnored(file, ignoredPatterns)
-                        )
-                        foundFiles.Add (file);
+                var searchOption = SearchOption.TopDirectoryOnly;
+                if (filter.Contains("**"))
+                {
+                    searchOption = SearchOption.AllDirectories;
+                    newFilter = newFilter.Replace("**", "*");
                 }
-            } else {
-                if (IsVerbose) {
-                    Console.WriteLine ("Can't find directory:");
-                    Console.WriteLine (workingDirectory);
-                }
-            }
-            
-            if (IsVerbose) {
-                Console.WriteLine ("  # files found: " + foundFiles.Count);
-                Console.WriteLine("");
-            }
 
-            return foundFiles.ToArray();
-
+                Thread worker = new Thread(
+                    new ThreadStart(
+                        delegate
+                        {
+                            string[] allfiles = Directory.GetFiles(newPath, newFilter, searchOption);
+                            if (exclude.Count() > 0)
+                            {
+                                lock (files)
+                                    files.AddRange(allfiles.Where(p => !regex.Match(p).Success));
+                            }
+                            else
+                            {
+                                lock (files)
+                                    files.AddRange(allfiles);
+                            }
+                        }
+                    ));
+        
+                workers.Add(worker);
+        
+                worker.Start();
+            }
+        
+            foreach (Thread worker in workers)
+            {
+                worker.Join();
+            }
+        
+            return files.ToArray();
         }
 
         public void FixPathAndPattern(ref string path, ref string pattern)
@@ -177,24 +164,6 @@ namespace SoftwareMonkeys.csAnt.IO
 
             path = fixedPath;
             pattern = fixedPattern;
-        }
-
-        public bool IsIgnored(string file, params string[] ignoredPatterns)
-        {
-            var matchingPatterns = from p in ignoredPatterns
-                where file.Contains(p)
-                    select p;
-
-            return matchingPatterns.Count () > 0;
-        }
-
-        public string[] GetIgnoredPatterns(params string[] patterns)
-        {
-            var matchingPatterns = from p in patterns
-                where p.StartsWith("!")
-                    select p.Substring(1, p.Length-1).Trim('*').Trim('*');
-
-            return matchingPatterns.ToArray();
         }
     }
 }
