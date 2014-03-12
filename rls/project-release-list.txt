@@ -31,12 +31,7 @@
 /lib/csAnt/bin/Release/*.exe
 /lib/csAnt/bin/Release/*.config
 /lib/csAnt/bin/Release/*.snk
-/lib/NUnit/NUnit.node
-/lib/NUnitResults/NUnitResults.node
-/lib/SharpZipLib/SharpZipLib.node
-/lib/HtmlAgilityPack/HtmlAgilityPack.node
 /lib/GCUpload/GCUpload.node
-/lib/Newtonsoft.Json/Newtonsoft.Json.node
 /lib/Libraries.node
 /lib/csAnt/bin/Release/*
 /lib/csAnt/*.zip
@@ -44,14 +39,19 @@
 /lib/cs-script/*.exe
 /lib/cs-script/*.zip
 /lib/cs-script/Lib/Bin/NET 4.0/*.dll
+/lib/SharpZipLib/SharpZipLib.node
 /lib/SharpZipLib/net-20/*.dll
 /lib/SharpZipLib/*.zip
 /lib/FileNodes/bin/Release/*.dll
 /lib/FileNodes/*.zip
-/lib/HtmlAgilityPack/*.dll
+/lib/HtmlAgilityPack/HtmlAgilityPack.node
+/lib/HtmlAgilityPack/Net40/*.dll
 /lib/HtmlAgilityPack/*.zip
-/lib/GCUpload/*.dll
-/lib/GCUpload/*.zip
+/lib/GCUpload/**
+/lib/NUnit/**
+/lib/NUnitResults/**
+/lib/Newtonsoft.Json.6.0.1/*
+/lib/Newtonsoft.Json.6.0.1/lib/net40/**
 /lib/*.zip
 /*.sh
 /csAnt.sh
