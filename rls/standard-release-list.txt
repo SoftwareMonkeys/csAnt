@@ -22,7 +22,6 @@
 /lib/HtmlAgilityPack/HtmlAgilityPack.node
 /lib/GCUpload/GCUpload.node
 /lib/GCUpload/*.zip
-/lib/Newtonsoft.Json/Newtonsoft.Json.node
 /lib/Libraries.node
 /lib/csAnt/bin/Release/*.dll
 /lib/csAnt/bin/Release/*.exe
@@ -41,6 +40,8 @@
 /lib/HtmlAgilityPack/*.zip
 /lib/GCUpload/*.dll
 /lib/GCUpload/*.zip
+/lib/Newtonsoft.Json.6.0.1/*
+/lib/Newtonsoft.Json.6.0.1/lib/net40/**
 /lib/*.zip
 /*.sh
 /*.bat

@@ -9,6 +9,9 @@
 /lib/FileNodes/bin/Release/*.dll
 /lib/HtmlAgilityPack/*.dll
 /lib/GCUpload/*.dll
+/lib/Newtonsoft.Json.6.0.1/lib/net40/**
+/lib/NUnit/**
+/lib/NUnitResults/**
 /lib/*.zip
 /*.sh
 /*.bat
