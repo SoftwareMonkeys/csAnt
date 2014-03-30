@@ -86,7 +86,6 @@
     <Compile Include="BaseProjectScript.BuildAllSolutions.cs" />
     <Compile Include="BaseProjectScript.BuildSolution.cs" />
     <Compile Include="BaseProjectScript.cs" />
-    <Compile Include="BaseProjectScript.GoogleCodeUpload.cs" />
     <Compile Include="BaseProjectScript.GroupName.cs" />
     <Compile Include="BaseProjectScript.GroupNode.cs" />
     <Compile Include="BaseProjectScript.ImportLocalLib.cs" />
