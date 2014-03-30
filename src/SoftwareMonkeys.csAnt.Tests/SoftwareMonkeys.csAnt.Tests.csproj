@@ -87,7 +87,6 @@
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="AddLibTestFixture.cs" />
-    <Compile Include="ArgumentsTestFixture.cs" />
     <Compile Include="BaseTestFixture.cs" />
     <Compile Include="BaseTestFixture.IsLinux.cs" />
     <Compile Include="CurrentDirectoryFixer.cs" />
@@ -144,6 +143,9 @@
     <Compile Include="Integration\LibraryManagerTestFixture.cs" />
     <Compile Include="BaseTestFixture.Nodes.cs" />
     <Compile Include="BaseTestFixture.Construct.cs" />
+    <Compile Include="Unit\ArgumentsTestFixture.cs" />
+    <Compile Include="BaseTestFixture.OriginalDirectory.cs" />
+    <Compile Include="BaseTestFixture.GetOriginalDirectory.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
