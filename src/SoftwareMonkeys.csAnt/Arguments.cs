@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 using System.Text.RegularExpressions;
 using System.Text;
 using System.Collections.Specialized;
+using System.Collections;
 
 namespace SoftwareMonkeys.csAnt
 {
@@ -17,44 +18,49 @@ namespace SoftwareMonkeys.csAnt
 		// Variables
 		private StringDictionary Parameters;
 
+        public int Count
+        {
+            get { return Parameters.Count; }
+        }
+
 		// Constructor
-		public Arguments(string[] Args)
+		public Arguments(params string[] args)
 		{
 		    Parameters = new StringDictionary();
-		    Regex Spliter = new Regex(@"^-{1,2}|^/|=|:",
+		    Regex splitter = new Regex(@"^-{1,2}|^/|=|:",
 			RegexOptions.IgnoreCase|RegexOptions.Compiled);
 
-		    Regex Remover = new Regex(@"^['""]?(.*?)['""]?$",
+		    Regex remover = new Regex(@"^['""]?(.*?)['""]?$",
 			RegexOptions.IgnoreCase|RegexOptions.Compiled);
 
-		    string Parameter = null;
-		    string[] Parts;
+		    string parameter = null;
+		    string[] parts;
 
 		    // Valid parameters forms:
 		    // {-,/,--}param{ ,=,:}((",')value(",'))
 		    // Examples: 
 		    // -param1 value1 --param2 /param3:"Test-:-work" 
 		    //   /param4=happy -param5 '--=nice=--'
-		    foreach(string Txt in Args)
+		    foreach(string arg in args)
 		    {
 			// Look for new parameters (-,/ or --) and a
 			// possible enclosed value (=,:)
-			Parts = Spliter.Split(Txt,3);
+			parts = splitter.Split(arg,3);
 
-			switch(Parts.Length){
+			switch(parts.Length){
 			// Found a value (for the last parameter 
 			// found (space separator))
 			case 1:
-			    if(Parameter != null)
+			    if(parameter != null)
 			    {
-				if(!Parameters.ContainsKey(Parameter)) 
+				if(!Parameters.ContainsKey(parameter)) 
 				{
-				    Parts[0] = 
-				        Remover.Replace(Parts[0], "$1");
+				    parts[0] = 
+				        remover.Replace(parts[0], "$1");
 
-				    Parameters.Add(Parameter, Parts[0]);
+				    Parameters.Add(parameter, parts[0]);
 				}
-				Parameter=null;
+				parameter=null;
 			    }
 			    // else Error: no parameter waiting for a value (skipped)
 			    break;
@@ -63,42 +69,42 @@ namespace SoftwareMonkeys.csAnt
 			case 2:
 			    // The last parameter is still waiting. 
 			    // With no value, set it to true.
-			    if(Parameter!=null)
+			    if(parameter!=null)
 			    {
-				if(!Parameters.ContainsKey(Parameter)) 
-				    Parameters.Add(Parameter, "true");
+				if(!Parameters.ContainsKey(parameter)) 
+				    Parameters.Add(parameter, "true");
 			    }
-			    Parameter=Parts[1];
+			    parameter=parts[1];
 			    break;
 
 			// Parameter with enclosed value
 			case 3:
 			    // The last parameter is still waiting. 
 			    // With no value, set it to true.
-			    if(Parameter != null)
+			    if(parameter != null)
 			    {
-				if(!Parameters.ContainsKey(Parameter)) 
-				    Parameters.Add(Parameter, "true");
+				if(!Parameters.ContainsKey(parameter)) 
+				    Parameters.Add(parameter, "true");
 			    }
 
-			    Parameter = Parts[1];
+			    parameter = parts[1];
 
 			    // Remove possible enclosing characters (",')
-			    if(!Parameters.ContainsKey(Parameter))
+			    if(!Parameters.ContainsKey(parameter))
 			    {
-				Parts[2] = Remover.Replace(Parts[2], "$1");
-				Parameters.Add(Parameter, Parts[2]);
+				parts[2] = remover.Replace(parts[2], "$1");
+				Parameters.Add(parameter, parts[2]);
 			    }
 
-			    Parameter=null;
+			    parameter=null;
 			    break;
 			}
 		    }
 		    // In case a parameter is still waiting
-		    if(Parameter != null)
+		    if(parameter != null)
 		    {
-			if(!Parameters.ContainsKey(Parameter)) 
-			    Parameters.Add(Parameter, "true");
+			if(!Parameters.ContainsKey(parameter)) 
+			    Parameters.Add(parameter, "true");
 		    }
 		}
 
@@ -116,6 +122,22 @@ namespace SoftwareMonkeys.csAnt
 		{
 			return Parameters.ContainsKey(param);
 		}
+
+        public override string ToString ()
+        {
+            var builder = new StringBuilder();
+
+            int i = 0;
+            foreach (DictionaryEntry entry in Parameters)
+            {
+                builder.Append (entry.Value);
+                if (i < this.Count-1)
+                    builder.Append(" ");
+                i++;
+            }
+
+            return builder.ToString().Trim();
+        }
 	}
 }
 
