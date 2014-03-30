@@ -24,40 +24,42 @@ class CopyBinToLibScript : BaseProjectScript
 
 		int i = 0;
 
-                foreach (string dir in Directory.GetDirectories(binDirectory))
-                {
-                        var mode = Path.GetFileName(dir);
-                
-		        foreach (string file in Directory.GetFiles(dir))
+        foreach (string dir in Directory.GetDirectories(binDirectory))
+        {
+                var mode = Path.GetFileName(dir);
+        
+            foreach (string file in Directory.GetFiles(dir))
+            {
+	            i++;
+
+	            string toFile = GetLibDir()
+		            + Path.DirectorySeparatorChar
+		            + mode
+		            + Path.DirectorySeparatorChar
+		            + "net-40" // TODO: Make this customizable via an argument
+		            + Path.DirectorySeparatorChar
+		            + Path.GetFileName(file);
+
+	            if (!Directory.Exists(Path.GetDirectoryName(toFile)))
+		            Directory.CreateDirectory(Path.GetDirectoryName(toFile));
+
+	            Console.WriteLine("Copying: "
+		            + file.Replace(ProjectDirectory, "")
+	            );
+
+	            Console.WriteLine("To: "
+		            + toFile.Replace(ProjectDirectory, "")
+	            );
+
+		        try
 		        {
-			        i++;
-
-			        string toFile = GetLibDir()
-				        + Path.DirectorySeparatorChar
-				        + mode
-				        + Path.DirectorySeparatorChar
-				        + Path.GetFileName(file);
-		
-			        if (!Directory.Exists(Path.GetDirectoryName(toFile)))
-				        Directory.CreateDirectory(Path.GetDirectoryName(toFile));
-
-			        Console.WriteLine("Copying: "
-				        + file.Replace(ProjectDirectory, "")
-			        );
-
-			        Console.WriteLine("To: "
-				        + toFile.Replace(ProjectDirectory, "")
-			        );
-
-				try
-				{
-			        	File.Copy(file, toFile, true);
-				}
-				catch (Exception)
-				{
-					Console.WriteLine("Can't copy: " + file);
-				}
+	                	File.Copy(file, toFile, true);
 		        }
+		        catch (Exception)
+		        {
+			        Console.WriteLine("Can't copy: " + file);
+		        }
+	        }
 		}
 
 		Console.WriteLine(i + " files copied.");

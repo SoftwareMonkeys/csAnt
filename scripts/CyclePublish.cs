@@ -55,13 +55,14 @@ class CyclePublishScript : BaseProjectScript
 			tmpDir
 		).GrabOriginalFiles(
 			"bin/**",
-			"src/TimeStamps.txt",
 			"lib/csAnt/**",
 			"lib/cs-script/**",
 			"lib/HtmlAgilityPack/**",
 			"lib/ILRepack.1.25.0/**",
 			"lib/GCUpload/**",
 			"lib/FileNodes/**",
+			"lib/NUnit/**",
+			"lib/NUnitResults/**",
 			"lib/Newtonsoft.Json.6.0.1/lib/net40/**",
 			"lib/SharpZipLib/**"
 		);
