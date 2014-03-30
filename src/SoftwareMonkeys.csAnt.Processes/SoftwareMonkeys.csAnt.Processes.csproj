@@ -9,6 +9,8 @@
     <OutputType>Library</OutputType>
     <RootNamespace>SoftwareMonkeys.csAnt.Processes</RootNamespace>
     <AssemblyName>SoftwareMonkeys.csAnt.Processes</AssemblyName>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>SoftwareMonkeys.csAnt.Processes.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -32,8 +34,10 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MyClass.cs" />
     <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="ProcessStarter.cs" />
+    <Compile Include="DotNetProcessStarter.cs" />
+    <Compile Include="Platform.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

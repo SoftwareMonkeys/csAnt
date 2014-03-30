@@ -1,5 +1,5 @@
 using System;
-namespace SoftwareMonkeys.csAnt
+namespace SoftwareMonkeys.csAnt.Processes
 {
     static public class Platform
     {

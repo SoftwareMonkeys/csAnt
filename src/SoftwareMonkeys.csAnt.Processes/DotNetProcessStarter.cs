@@ -1,10 +1,8 @@
 using System;
 using System.Diagnostics;
 using System.Collections.Generic;
-using SoftwareMonkeys.csAnt.Processes;
 
-
-namespace SoftwareMonkeys.csAnt
+namespace SoftwareMonkeys.csAnt.Processes
 {
     public class DotNetProcessStarter
     {
