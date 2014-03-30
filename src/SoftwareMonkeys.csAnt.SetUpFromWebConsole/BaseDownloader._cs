@@ -1,0 +1,13 @@
+using System;
+namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole
+{
+    abstract public class BaseDownloader
+    {
+        public BaseDownloader ()
+        {
+        }
+
+        abstract public string Download(string url, bool overwrite); 
+    }
+}
+

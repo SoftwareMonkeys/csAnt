@@ -1,0 +1,20 @@
+using System;
+namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole
+{
+    public class BinTrayInstaller : BaseInstaller
+    {
+        public BinTrayInstaller ()
+        {
+            Downloader = new BinTrayDownloader();
+        }
+        
+        static public void DownloadReleaseZip(string releaseName, bool overwrite)
+        {
+            throw new NotImplementedException();
+            //new BinTrayDownloader().Download(releaseName, overwrite);
+
+     //       InstallFilesFromRelease(unzippedPath, overwrite);
+        }
+    }
+}
+

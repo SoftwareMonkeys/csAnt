@@ -1,0 +1,70 @@
+using System;
+using SoftwareMonkeys.csAnt.IO.Compression;
+using System.IO;
+
+
+namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole
+{
+    abstract public class BaseInstaller
+    {
+        public BaseDownloader Downloader { get;set; }
+
+        public FileZipper Zipper { get;set; }
+
+        public BaseInstaller ()
+        {
+            Zipper = new FileZipper();
+        }
+
+        public void Install(string releaseName, bool overwrite)
+        {
+            var zipFilePath = Downloader.Download(releaseName, overwrite);
+
+            var extractedPath = Extract(releaseName, zipFilePath);
+
+            InstallFilesFromRelease(extractedPath, overwrite);
+        }
+
+        public string Extract(string releaseName, string zipFilePath)
+        {
+            var unzippedPath = GetUnzippedPath(releaseName);
+
+            Zipper.Unzip(zipFilePath, unzippedPath, "/");
+
+            return unzippedPath;
+        }
+
+        public void InstallFilesFromRelease(string unzippedPath, bool overwrite)
+        {
+            Console.WriteLine ("");
+            Console.WriteLine ("Installing files:");
+
+            foreach (var file in Directory.GetFiles (unzippedPath, "*", SearchOption.AllDirectories))
+            {
+                var toFile = file.Replace(unzippedPath, Environment.CurrentDirectory);
+
+                if (!File.Exists (toFile) || overwrite)
+                {
+                    File.Copy(file, toFile);
+
+                    Console.WriteLine (toFile.Replace(Environment.CurrentDirectory, ""));
+                }
+                else
+                {
+                    Console.WriteLine ("Skipped: " + toFile.Replace(Environment.CurrentDirectory, ""));
+                }
+            }
+            Console.WriteLine ("");
+        }
+
+        public string GetUnzippedPath(string releaseName)
+        {
+            return Environment.CurrentDirectory
+                + Path.DirectorySeparatorChar
+                    + "_tmp"
+                    + Path.DirectorySeparatorChar
+                    + "csAnt-" + releaseName + "-release";
+        }
+    }
+}
+
