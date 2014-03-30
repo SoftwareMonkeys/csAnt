@@ -1,9 +1,12 @@
 using System;
 using System.IO;
+using SoftwareMonkeys.csAnt.Processes;
+using SoftwareMonkeys.csAnt.External.Nuget;
 
 
 namespace SoftwareMonkeys.csAnt
 {
+    // TODO: Decide whether this should be moved to External.Nuget assembly
     public class LibraryNugetGetter
     {
         public INodeState NodeState { get;set; }

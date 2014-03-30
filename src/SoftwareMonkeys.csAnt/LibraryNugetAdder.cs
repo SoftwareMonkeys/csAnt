@@ -5,6 +5,7 @@ using System.IO;
 
 namespace SoftwareMonkeys.csAnt
 {
+    // TODO: Decide whether this should be moved to External.Nuget assembly
     public class LibraryNugetAdder
     {
         public INodeState NodeState { get;set; }
