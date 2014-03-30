@@ -55,7 +55,7 @@ class Test_SetUpFromWebScript : BaseProjectTestScript
 
 		File.Copy(setUpExeFile, setUpExeToFile, true);
 
-		StartProcess(setUpExeToFile);
+		StartProcess(setUpExeToFile, "-i:false");
 
 		if (IsLinux)
 			StartProcess("sh csAnt.sh HelloWorld");
