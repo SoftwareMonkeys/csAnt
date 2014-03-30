@@ -2,7 +2,7 @@ using System;
 using System.IO;
 
 
-namespace SoftwareMonkeys.csAnt
+namespace SoftwareMonkeys.csAnt.External.Nuget
 {
     public class NugetChecker
     {

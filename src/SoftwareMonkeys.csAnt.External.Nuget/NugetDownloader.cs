@@ -3,7 +3,7 @@ using SoftwareMonkeys.csAnt.IO;
 using System.IO;
 
 
-namespace SoftwareMonkeys.csAnt
+namespace SoftwareMonkeys.csAnt.External.Nuget
 {
     public class NugetDownloader
     {

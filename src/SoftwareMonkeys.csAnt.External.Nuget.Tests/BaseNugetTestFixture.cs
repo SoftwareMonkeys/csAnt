@@ -1,9 +1,12 @@
 using System;
+using SoftwareMonkeys.csAnt.Tests;
+
+
 namespace SoftwareMonkeys.csAnt.External.Nuget.Tests
 {
-    public class MyClass
+    abstract public class BaseNugetTestFixture : BaseTestFixture
     {
-        public MyClass ()
+        public BaseNugetTestFixture ()
         {
         }
     }
