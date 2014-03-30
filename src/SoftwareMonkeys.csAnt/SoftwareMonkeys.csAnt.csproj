@@ -219,7 +219,6 @@
     <Compile Include="BaseScript.CreateNodes.cs" />
     <Compile Include="BaseScript.CreateNode.cs" />
     <Compile Include="BaseScript.ExportFile.cs" />
-    <Compile Include="PackageManagerNotInitializedException.cs" />
     <Compile Include="BaseScript.FileFinder.cs" />
     <Compile Include="BaseScript.InitializeFileFinder.cs" />
     <Compile Include="BaseScript.CurrentDirectoryChanged.cs" />
@@ -251,10 +250,6 @@
     <Compile Include="LibraryNugetGetter.cs" />
     <Compile Include="LibraryOnlineZipGetter.cs" />
     <Compile Include="LibraryUrlAdder.cs" />
-    <Compile Include="NugetChecker.cs" />
-    <Compile Include="NugetDownloader.cs" />
-    <Compile Include="ProcessStarter.cs" />
-    <Compile Include="DotNetProcessStarter.cs" />
     <Compile Include="Platform.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
@@ -270,6 +265,14 @@
     <ProjectReference Include="..\SoftwareMonkeys.csAnt.IO.Contracts\SoftwareMonkeys.csAnt.IO.Contracts.csproj">
       <Project>{53E3AFEA-3627-4846-B2E4-5A8091E96BC6}</Project>
       <Name>SoftwareMonkeys.csAnt.IO.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SoftwareMonkeys.csAnt.Processes\SoftwareMonkeys.csAnt.Processes.csproj">
+      <Project>{DA236BEB-4C3A-4076-AB72-1AEE6DB82BEA}</Project>
+      <Name>SoftwareMonkeys.csAnt.Processes</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SoftwareMonkeys.csAnt.External.Nuget\SoftwareMonkeys.csAnt.External.Nuget.csproj">
+      <Project>{D88EE98D-5F35-4B0E-AC92-4029A1742204}</Project>
+      <Name>SoftwareMonkeys.csAnt.External.Nuget</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>
