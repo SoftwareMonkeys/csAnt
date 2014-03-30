@@ -1,1 +1,1 @@
-mono lib/csAnt/bin/Release/csAnt.exe "$@"
+mono lib/csAnt/bin/Release/net-40/csAnt.exe "$@"
