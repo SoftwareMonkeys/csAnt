@@ -83,7 +83,9 @@ namespace SoftwareMonkeys.csAnt.IO
                 //"/src/**.cs",
                 //"/src/**.csproj",
                 //"/src/**.sln",
-                "scripts/**"
+                "scripts/**",
+                "!*.mlpd",
+                "!/obj/"
             );
         }
         
@@ -100,7 +102,13 @@ namespace SoftwareMonkeys.csAnt.IO
                 "src/**.snk",
                 "scripts/**",
                 "rls/*.txt",
-                "rls/*.zip"//,
+                "rls/*.zip",
+                "pkg/*.nuspec",
+                "!/tests/",
+                "!_bak",
+                "!.git",
+                "!*.mlpd",
+                "!/obj/"//,
                 //"../*.node" // TODO: Check if needed. Not currently supported
             );
         }
