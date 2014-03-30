@@ -1,13 +1,13 @@
-﻿using System.Reflection;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 
 [assembly: AssemblyTitle("SoftwareMonkeys.csAnt.Tests")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("SoftwareMonkeys.csAnt.Tests")]
-[assembly: AssemblyCopyright("Copyright 2012")]
+[assembly: AssemblyCompany("SoftwareMonkeys")]
+[assembly: AssemblyProduct("")]
+[assembly: AssemblyCopyright("")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
-[assembly: AssemblyVersion("1.0.*")]
+[assembly: AssemblyVersion("0.3.0.6300")]

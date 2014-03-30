@@ -4,10 +4,10 @@ using System.Runtime.CompilerServices;
 [assembly: AssemblyTitle("SoftwareMonkeys.csAnt.UI.csAntConsole")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("SoftwareMonkeys")]
 [assembly: AssemblyProduct("")]
 [assembly: AssemblyCopyright("")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
-[assembly: AssemblyVersion("1.0.*")]
+[assembly: AssemblyVersion("0.3.0.6300")]
