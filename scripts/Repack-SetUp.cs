@@ -54,8 +54,10 @@ class Repack_SetUpScript : BaseScript
                 "bin/Release/SoftwareMonkeys.csAnt.dll",
                 "bin/Release/SoftwareMonkeys.csAnt.Contracts.dll",
                 "bin/Release/SoftwareMonkeys.csAnt.IO.dll",
+                "bin/Release/SoftwareMonkeys.csAnt.IO.Contracts.dll",
                 "bin/Release/SoftwareMonkeys.csAnt.SetUp.Common.dll",
-                "bin/Release/SoftwareMonkeys.csAnt.IO.Contracts.dll"
+                "bin/Release/SoftwareMonkeys.csAnt.Processes.dll",
+                "bin/Release/SoftwareMonkeys.csAnt.External.Nuget.dll"
             };
 
             Console.WriteLine("Dependencies:");
