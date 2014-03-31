@@ -1,23 +1,19 @@
-//css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.dll;
 using System;
 using System.IO;
-using Microsoft.CSharp;
-using System.Diagnostics;
 using SoftwareMonkeys.csAnt;
+using SoftwareMonkeys.csAnt.External.Nuget;
 
-class NugetInstallScript : BaseScript
+class NugetScript : BaseScript
 {
 	public static void Main(string[] args)
 	{
-		new NugetInstallScript().Start(args);
+		new NugetScript().Start(args);
 	}
 	
 	public override bool Run(string[] args)
 	{
-		var name = args[0];
+		new NugetExecutor().Execute(args);
 
-		StartProcess("mono", "lib/nuget.exe install " + name);
-
-		return true;
+		return !IsError;
 	}
 }
