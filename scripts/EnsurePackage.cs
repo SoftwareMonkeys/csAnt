@@ -66,7 +66,7 @@ class EnsurePackageScript : BaseProjectScript
 			// Check whether the packages are up to date
 			foreach (var listFile in Directory.GetFiles(pkgDir, "*.nuspec"))
 			{
-				var name = Path.GetFileNameWithoutExtension(listFile).Replace("-list", "");
+				var name = Path.GetFileNameWithoutExtension(listFile);
 
 				var dir = pkgDir
 					+ Path.DirectorySeparatorChar
@@ -128,7 +128,7 @@ class EnsurePackageScript : BaseProjectScript
 
 		var variation = Path.GetFileName(packageSubDir);
 
-		var prefix = ProjectName + "-" + variation + "--";
+		var prefix = ProjectName + "-" + variation + ".";
 		
 		if (IsVerbose)
 			Console.WriteLine("Prefix: " + prefix);
@@ -139,9 +139,9 @@ class EnsurePackageScript : BaseProjectScript
 			Console.WriteLine("Without prefix: " + withoutPrefix);
 		
 
-		var versionStartPos = 0;
+		var versionStartPos = latestFileName.IndexOf(".")+1;
 
-		var versionEndPos = withoutPrefix.IndexOf("[")-1;
+		var versionEndPos = latestFileName.Length-versionStartPos-1;
 
 		var withoutTimestamp = withoutPrefix.Substring(versionStartPos, versionEndPos);
 
