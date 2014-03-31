@@ -37,7 +37,7 @@ class CyclePublishScript : BaseProjectScript
 		CreateNodes();
 
 		// Build the cloned source code
-		ExecuteScript("EnsureRelease");
+		ExecuteScript("EnsurePackage");
 
 		if (!IsError)
 		{
@@ -59,7 +59,6 @@ class CyclePublishScript : BaseProjectScript
 			"lib/cs-script/**",
 			"lib/HtmlAgilityPack/**",
 			"lib/ILRepack.1.25.0/**",
-			"lib/GCUpload/**",
 			"lib/FileNodes/**",
 			"lib/NUnit/**",
 			"lib/NUnitResults/**",

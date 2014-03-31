@@ -1,6 +1,3 @@
-//css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.dll;
-//css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.Projects.dll;
-
 using System;
 using System.IO;
 using Microsoft.CSharp;
@@ -21,8 +18,13 @@ class PublishScript : BaseProjectScript
 		Console.WriteLine("Publishing files...");
 		Console.WriteLine("");
 	
-		ExecuteScript("PublishSetupFiles");
-		ExecuteScript("PublishReleaseZips");
+        // Find all scripts starting with "Publish-"
+        var scripts = FindScripts("Publish-*");
+
+        // Loop through the scripts
+        foreach (var script in scripts)
+            // Execute the script
+            ExecuteScript(script);
 
 		return !IsError;
 	}
