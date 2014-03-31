@@ -5,7 +5,7 @@
 /src/*.node
 /lib/*.dll
 /lib/*.exe
-/lib/csAnt/bin/Release/*
+/lib/csAnt/bin/Release/**
 /lib/csAnt/*.zip
 /lib/cs-script/*.dll
 /lib/cs-script/*.exe
@@ -20,9 +20,6 @@
 /lib/HtmlAgilityPack/Net40/**.dll
 /lib/HtmlAgilityPack/Net40/**.zip
 /lib/HtmlAgilityPack/Net40/**.node
-/lib/GCUpload/*.dll
-/lib/GCUpload/*.zip
-/lib/GCUpload/*.node
 /lib/NUnit/bin/**.dll
 /lib/NUnit/bin/**.exe
 /lib/NUnit/bin/**.config

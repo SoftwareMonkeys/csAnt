@@ -2,6 +2,7 @@ using System;
 using SoftwareMonkeys.csAnt.Commands;
 using System.IO;
 using System.Collections.Generic;
+using System.Text;
 
 namespace SoftwareMonkeys.csAnt.Projects
 {
@@ -64,22 +65,30 @@ namespace SoftwareMonkeys.csAnt.Projects
                     ? Script.CurrentNode.Properties["Version"]
                     : "0.0.0.0";
                 
-                var zipFileName = Script.ProjectName
-                    + "-"
-                    + variation
-                    + "--"
-                    + version.Replace (".", "-")
-                    + "-"
-                    + dateStamp
-                    + ".zip";
+                var zipFileNameBuilder = new StringBuilder();
+                zipFileNameBuilder.Append(Script.ProjectName);
+                zipFileNameBuilder.Append("-");
+                zipFileNameBuilder.Append(variation);
+                zipFileNameBuilder.Append("--");
+                zipFileNameBuilder.Append(version.Replace (".", "-"));
+                zipFileNameBuilder.Append("-");
+                zipFileNameBuilder.Append(dateStamp);
+                zipFileNameBuilder.Append(".zip");
 
-                var zipFilePath = Script.ProjectDirectory
-                    + Path.DirectorySeparatorChar
-                    + "rls"
-                    + Path.DirectorySeparatorChar
-                    + variation
-                    + Path.DirectorySeparatorChar
-                    + zipFileName;
+                var zipFileName = zipFileNameBuilder.ToString();
+
+
+                var zipFilePathBuilder = new StringBuilder();
+
+                zipFilePathBuilder.Append(Script.ProjectDirectory);
+                zipFilePathBuilder.Append(Path.DirectorySeparatorChar);
+                zipFilePathBuilder.Append("rls");
+                    zipFilePathBuilder.Append(Path.DirectorySeparatorChar);
+                zipFilePathBuilder.Append(variation);
+                    zipFilePathBuilder.Append(Path.DirectorySeparatorChar);
+                zipFilePathBuilder.Append(zipFileName);
+
+                var zipFilePath = zipFilePathBuilder.ToString();
 
                 if (!Directory.Exists(Path.GetDirectoryName(zipFilePath)))
                     Directory.CreateDirectory(Path.GetDirectoryName(zipFilePath));

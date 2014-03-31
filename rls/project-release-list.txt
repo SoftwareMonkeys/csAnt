@@ -31,9 +31,8 @@
 /lib/csAnt/bin/Release/*.exe
 /lib/csAnt/bin/Release/*.config
 /lib/csAnt/bin/Release/*.snk
-/lib/GCUpload/GCUpload.node
 /lib/Libraries.node
-/lib/csAnt/bin/Release/*
+/lib/csAnt/bin/Release/**
 /lib/csAnt/*.zip
 /lib/cs-script/*.dll
 /lib/cs-script/*.exe
@@ -47,7 +46,6 @@
 /lib/HtmlAgilityPack/HtmlAgilityPack.node
 /lib/HtmlAgilityPack/Net40/*.dll
 /lib/HtmlAgilityPack/*.zip
-/lib/GCUpload/**
 /lib/NUnit/**
 /lib/NUnitResults/**
 /lib/Newtonsoft.Json.6.0.1/*

@@ -1,3 +1,9 @@
+<<<<<<< HEAD
+=======
+//css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.dll;
+//css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.Projects.dll;
+
+>>>>>>> 4feb481a8dbe026e96fb63402b3098b9e6001b42
 using System;
 using System.IO;
 using Microsoft.CSharp;
@@ -18,6 +24,7 @@ class PublishScript : BaseProjectScript
 		Console.WriteLine("Publishing files...");
 		Console.WriteLine("");
 	
+<<<<<<< HEAD
         // Find all scripts starting with "Publish-"
         var scripts = FindScripts("Publish-*");
 
@@ -25,6 +32,10 @@ class PublishScript : BaseProjectScript
         foreach (var script in scripts)
             // Execute the script
             ExecuteScript(script);
+=======
+		ExecuteScript("PublishSetupFiles");
+		ExecuteScript("PublishReleaseZips");
+>>>>>>> 4feb481a8dbe026e96fb63402b3098b9e6001b42
 
 		return !IsError;
 	}
