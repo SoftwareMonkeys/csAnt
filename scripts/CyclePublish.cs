@@ -55,6 +55,7 @@ class CyclePublishScript : BaseProjectScript
 			tmpDir
 		).GrabOriginalFiles(
 			"bin/**",
+			"lib/nuget.exe",
 			"lib/csAnt/**",
 			"lib/cs-script/**",
 			"lib/HtmlAgilityPack/**",
@@ -63,7 +64,8 @@ class CyclePublishScript : BaseProjectScript
 			"lib/NUnit/**",
 			"lib/NUnitResults/**",
 			"lib/Newtonsoft.Json.6.0.1/lib/net40/**",
-			"lib/SharpZipLib/**"
+			"lib/SharpZipLib/**",
+			"pkg/*"
 		);
 	}
 
@@ -97,9 +99,9 @@ class CyclePublishScript : BaseProjectScript
 			+ Path.DirectorySeparatorChar
 			+ "_security"
 			+ Path.DirectorySeparatorChar
-			+ "GoogleCode"
+			+ "MyGet"
 			+ Path.DirectorySeparatorChar
-			+ "GoogleCode.node";
+			+ "MyGet.node";
 
 		var tofile = file.Replace(fromDir, toDir);
 
