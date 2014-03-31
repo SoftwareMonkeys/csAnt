@@ -39,6 +39,12 @@ class CommitNodesScript : BaseProjectScript
             "*.node",
             "-m " + message
         );
+
+        Git(
+            "push",
+            "origin",
+            "master"
+        );
     
         return !IsError;
 	}
