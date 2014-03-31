@@ -141,7 +141,7 @@ class EnsurePackageScript : BaseProjectScript
 
 		var versionStartPos = latestFileName.IndexOf(".")+1;
 
-		var versionEndPos = latestFileName.Length-versionStartPos-1;
+		var versionEndPos = latestFileName.Length-versionStartPos;
 
 		var withoutTimestamp = withoutPrefix.Substring(versionStartPos, versionEndPos);
 
