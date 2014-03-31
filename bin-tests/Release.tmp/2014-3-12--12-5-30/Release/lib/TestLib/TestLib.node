@@ -1,0 +1,6 @@
+{
+  "Properties": {
+    "ImportScript": "RunTestImport"
+  },
+  "Name": "TestLib"
+}

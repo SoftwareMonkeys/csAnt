@@ -1,0 +1,8 @@
+{
+  "Name": "csAnt",
+  "Properties": {
+    "ImportScript": "GetCsAntLib",
+    "SubPath": "/"
+  }
+  
+}
