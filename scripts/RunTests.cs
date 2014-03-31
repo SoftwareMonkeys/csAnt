@@ -30,9 +30,13 @@ class RunTestsScript : BaseScript
 	
 	public void RunTests()
 	{
+        var binTestsDir = CurrentDirectory
+			+ Path.DirectorySeparatorChar
+			+ "bin-tests";
+
 		// Move all the files into a new location where the tests can run
 		// (without doing this, the scripts don't execute as tests because the general csAnt binaries aren't in the same folder)
-		var workingDir = PrepareTests();
+		var workingDir = PrepareTests(binTestsDir);
 
                 var runner = new NUnitTestRunner(
                     this,
@@ -41,14 +45,13 @@ class RunTestsScript : BaseScript
             
                 runner.RunTestsInDirectory(workingDir);
 
-		Directory.Delete(workingDir, true);
+
+		Directory.Delete(binTestsDir, true);
 	}
 
-	public string PrepareTests()
+	public string PrepareTests(string binTestsDir)
 	{
-		var workingDir = CurrentDirectory
-			+ Path.DirectorySeparatorChar
-			+ "bin-tests"
+		var workingDir = binTestsDir
 			+ Path.DirectorySeparatorChar
 			+ BuildMode;
 
