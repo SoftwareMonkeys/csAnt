@@ -114,7 +114,8 @@ class CyclePublishScript : BaseProjectScript
 
 		EnsureDirectoryExists(Path.GetDirectoryName(tofile));
 
-		File.Copy(file, tofile);
+        if (!File.Exists(tofile))
+			File.Copy(file, tofile);
 		
 		CurrentNode.Nodes["Security"].Nodes[ProjectName] = new FileNode(
 	                tofile,
@@ -139,7 +140,8 @@ class CyclePublishScript : BaseProjectScript
 
 		EnsureDirectoryExists(Path.GetDirectoryName(toNodeFile));
 
-		File.Copy(nodeFile, toNodeFile);
+        if (!File.Exists(toNodeFile))
+    		File.Copy(nodeFile, toNodeFile);
 		
 		CurrentNode.Nodes["Security"] = new FileNode(
 	                toNodeFile,
