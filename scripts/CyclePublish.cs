@@ -28,7 +28,6 @@ class CyclePublishScript : BaseProjectScript
 		// Git clone the project to another directory
 		var tmpDir = CloneToTmpDirectory();
 
-
 		GrabFiles(tmpDir);
 
 		// Move to the cloned directory
@@ -38,6 +37,9 @@ class CyclePublishScript : BaseProjectScript
 
 		// Build the cloned source code
 		ExecuteScript("EnsurePackage");
+
+        // Commit the file nodes containing the updated versions
+        ExecuteScript("CommitNodes");
 
 		if (!IsError)
 		{
