@@ -21,7 +21,7 @@ class CycleTestsScript : BaseProjectScript
 		ExecuteScript("EnsureBuild");
 
                 // Run a release cycle so the latest binaries and release zips are available
-		ExecuteScript("EnsureRelease");
+		ExecuteScript("EnsurePackage");
 
 		if (!IsError)
 		{
