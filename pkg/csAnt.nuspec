@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <metadata>
+    <id>csAnt</id>
+    <version>0.0.0.0</version>
+    <authors>SoftwareMonkeys</authors>
+    <owners>SoftwareMonkeys</owners>
+    <description>C# scripting and automation environment.</description>
+    <dependencies />
+  </metadata>
+  <files>
+    <file src="scripts/*.cs" target="scripts" />
+    <file src="csAnt-setup-local.sh" />
+    <file src="csAnt-setup.sh" />
+    <file src="csAnt-setup.vbs" />
+    <file src="csAnt.sh" />
+    <file src="csAnt.bat" />
+    <file src="lib/csAnt/bin/Release/net-40/*" target="lib/csAnt/bin/Release/net-40/" />
+  </files>
+</package>
