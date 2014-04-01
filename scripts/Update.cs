@@ -17,32 +17,11 @@ class UpdateScript : BaseProjectScript
 	
 	public override bool Run(string[] args)
 	{
-	        Console.WriteLine("");
-	        Console.WriteLine("Updating...");
-	        Console.WriteLine("");
+        Console.WriteLine("");
+        Console.WriteLine("Updating...");
+        Console.WriteLine("");
 
-	        ExecuteScript("AddCsAntImport");
-	        
-	        ImportFile("csAnt", "scripts/HelloWorld.cs");
-	        ImportFile("csAnt", "scripts/Update.cs");
-	        ImportFile("csAnt", "scripts/AddImport.cs");
-	        //ImportFile("csAnt", "scripts/GetCsAntLib.cs");
-	        ImportFile("csAnt", "scripts/AddCsAntImport.cs");
-	        ImportFile("csAnt", "scripts/ImportFile.cs");
-	        ImportFile("csAnt", "scripts/ImportScript.cs");
-	        ImportFile("csAnt", "scripts/ImportSync.cs");
-	        ImportFile("csAnt", "scripts/ExportFile.cs");
-	        ImportFile("csAnt", "scripts/GetLibs.cs");
-	        ImportFile("csAnt", "scripts/InitSoftwareMonkeys.cs");
-	        ImportFile("csAnt", "scripts/Initialize/*");
-	        
-	        ExecuteScript("GetCsAntLib", "-f");
-	        
-	        GetLib("csAnt", true);
-	        
-	        Console.WriteLine("");
-	        Console.WriteLine("Update complete!");
-	        Console.WriteLine("");
+        StartProcess("csAnt-SetUp.exe", "-update");
 
 		return !IsError;
 	}
