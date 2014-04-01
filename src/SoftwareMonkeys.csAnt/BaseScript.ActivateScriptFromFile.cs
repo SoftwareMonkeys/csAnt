@@ -43,7 +43,7 @@ namespace SoftwareMonkeys.csAnt
 
             // TODO: Check if settings are needed
             var scriptSettings = new Settings ();
-            scriptSettings.InMemoryAsssembly = true; // TODO: Check if needed
+            //scriptSettings.InMemoryAsssembly = true; // TODO: Check if needed
 
             var compilerOptions = "";
 
