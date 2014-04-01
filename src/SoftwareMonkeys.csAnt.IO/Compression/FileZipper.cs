@@ -215,7 +215,7 @@ namespace SoftwareMonkeys.csAnt.IO.Compression
             if (fullSubPath.Trim (Path.DirectorySeparatorChar) != destinationPath.Trim (Path.DirectorySeparatorChar))
             {
                 // Move the files in the sub path within the temporary folder into the final destination
-                Mover.Move(fullSubPath, destinationPath);
+                Mover.Move(fullSubPath, destinationPath, true); // TODO: Should the "overwrite" flag be provided via a parameter?
             }
 
             Console.WriteLine ("Extraction complete.");
