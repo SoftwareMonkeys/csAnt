@@ -38,6 +38,8 @@ class CyclePublishScript : BaseProjectScript
 		// Build the cloned source code
 		ExecuteScript("EnsurePackage");
 
+        ReturnPackages();
+
         // Commit the file nodes containing the updated versions
         ExecuteScript("CommitNodes");
 
@@ -49,6 +51,20 @@ class CyclePublishScript : BaseProjectScript
 
 		return !IsError;
 	}
+
+    public void ReturnPackages()
+    {
+        var pkgDir = Path.Combine(CurrentDirectory, "pkg");
+
+        foreach (var dir in Directory.GetDirectories(pkgDir))
+        {
+            var file = GetNewestFile(dir);
+            
+            var toFile = file.Replace(CurrentDirectory, OriginalDirectory);
+
+            File.Copy(file, toFile);
+        }
+    }
 
 	public void GrabFiles(string tmpDir)
 	{
