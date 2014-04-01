@@ -53,6 +53,8 @@ namespace SoftwareMonkeys.csAnt
                 new FileNodeSaver ()
             );
 
+            node.Name = name;
+
             if (!File.Exists (path)) {
                 node.Save ();
             }
