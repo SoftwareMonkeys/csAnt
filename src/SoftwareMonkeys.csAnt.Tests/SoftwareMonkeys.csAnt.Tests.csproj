@@ -146,6 +146,7 @@
     <Compile Include="Unit\ArgumentsTestFixture.cs" />
     <Compile Include="BaseTestFixture.OriginalDirectory.cs" />
     <Compile Include="BaseTestFixture.GetOriginalDirectory.cs" />
+    <Compile Include="Unit\BaseUnitTestFixture.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
