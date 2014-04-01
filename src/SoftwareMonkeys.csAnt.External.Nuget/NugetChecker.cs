@@ -13,7 +13,7 @@ namespace SoftwareMonkeys.csAnt.External.Nuget
             Downloader = new NugetDownloader();
         }
 
-        public void CheckNuget()
+        public virtual void CheckNuget()
         {
             // TODO: Make it possible to keep this path in a config file
             var filePath = Environment.CurrentDirectory

@@ -14,42 +14,59 @@ namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole
     {
         public static void Main (string[] args)
         {
-            Console.WriteLine ("");
-            Console.WriteLine ("Setting up csAnt...");
-            Console.WriteLine ("");
-
-            // TODO: Clean up and reorganise code
-            var destinationPath = Environment.CurrentDirectory;
-
             var arguments = new Arguments(args);
 
-            if (arguments.Contains ("d"))
-                destinationPath = Path.GetFullPath(arguments["d"]);
-
-            var overwrite = arguments.Contains("o");
-            
-            var showIntro = true;
-            if (arguments.Contains("i"))
-                showIntro = Convert.ToBoolean(arguments["i"]);
-
-            var releaseName = "standard";
-
-            if (arguments.Contains ("r"))
-                releaseName = arguments["r"];
-
-            if (releaseName.IndexOf("-release") > -1)
-                releaseName = releaseName.Replace("-release", "");
-
-            Install(overwrite);
-
-            if (showIntro)
-                ShowIntro();
-        }
-
-        // TODO: Move this code into a dedicated installer component
-        static public void Install(bool overwrite)
-        {
-            new Installer().Install(overwrite);
+            if (arguments.ContainsAny("h", "help", "man"))
+                Help();
+            else
+            {
+                Console.WriteLine ("");
+                Console.WriteLine ("Setting up csAnt...");
+                Console.WriteLine ("");
+    
+                // TODO: Clean up and reorganise code
+                var destinationPath = Environment.CurrentDirectory;
+    
+    
+                if (arguments.ContainsAny("d", "destination"))
+                    destinationPath = Path.GetFullPath(arguments["d", "destination"]);
+    
+                var overwrite = arguments.ContainsAny(
+                    "o",
+                    "overwrite"
+                );
+    
+                var update = arguments.ContainsAny(
+                    "u",
+                    "update"
+                );
+    
+                var version = new Version(0,0,0,0);
+    
+                if (arguments.ContainsAny("v", "version"))
+                    version = Version.Parse(arguments["v", "version"]);
+    
+                var showIntro = true;
+                if (arguments.ContainsAny("i", "intro"))
+                    showIntro = Convert.ToBoolean(arguments["i", "intro"]);
+    
+                var releaseName = "standard";
+    
+                if (arguments.Contains ("r"))
+                    releaseName = arguments["r"];
+    
+                if (releaseName.IndexOf("-release") > -1)
+                    releaseName = releaseName.Replace("-release", "");
+ 
+    
+                if (update)
+                    new Updater().Update();
+                else
+                    new Installer().Install(version, overwrite);
+    
+                if (showIntro)
+                    ShowIntro();
+            }
         }
 
         static public void ShowIntro()
@@ -88,6 +105,10 @@ namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole
             Console.WriteLine ("3) Launch your script:");
             Console.WriteLine ("  {0} [YourScriptName]", prefix);
             Console.WriteLine ("");
+        }
+
+        static public void Help()
+        {
         }
     }
 }

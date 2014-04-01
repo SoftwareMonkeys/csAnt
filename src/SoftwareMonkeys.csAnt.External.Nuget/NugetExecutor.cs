@@ -19,7 +19,7 @@ namespace SoftwareMonkeys.csAnt.External.Nuget
             Starter = new DotNetProcessStarter();
         }
 
-        public void Execute(params string[] arguments)
+        public virtual void Execute(params string[] arguments)
         {
             Starter.Start(
                 NugetPath,

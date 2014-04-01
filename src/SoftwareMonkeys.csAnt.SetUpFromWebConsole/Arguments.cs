@@ -104,18 +104,44 @@ namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole
 
 		// Retrieve a parameter value if it exists 
 		// (overriding C# indexer property)
-		public string this [string Param]
+		public string this [string parameters]
 		{
 		    get
 		    {
-			return(Parameters[Param]);
+		    	return(Parameters[parameters]);
 		    }
 		}
+
+        public string this [params string[] parameters]
+        {
+            get
+            {
+                foreach (var p in parameters)
+                    if (Contains(p))
+                        return this[p];
+
+                return String.Empty;
+            }
+        }
+
 
 		public bool Contains(string param)
 		{
 			return Parameters.ContainsKey(param);
 		}
+
+        public bool ContainsAny(params string[] queryParameters)
+        {
+            bool doesContain = false;
+
+            foreach (var p in queryParameters)
+            {
+                if (Contains(p))
+                    doesContain = true;
+            }
+
+            return doesContain;
+        }
 	}
 }
 

@@ -80,8 +80,7 @@ namespace SoftwareMonkeys.csAnt.SetUpFromLocalConsole
                 "lib/NUnitResults/**",
                 "lib/HtmlAgilityPack/Net40/**",
                 "lib/SharpZipLib/net-20/**",
-                "lib/ILRepack.1.25/**",
-                "lib/GCUpload/**",
+                "lib/ILRepack.1.25.0/**",
                 "scripts/**",
                 "csAnt.sh"
             };

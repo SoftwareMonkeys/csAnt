@@ -83,6 +83,7 @@
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="Arguments.cs" />
     <Compile Include="Installer.cs" />
+    <Compile Include="Updater.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

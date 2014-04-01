@@ -13,48 +13,67 @@ namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole
     {
         public IFileFinder FileFinder { get;set; }
 
+        public string NugetFeedPath { get;set; }
+
+        public NugetChecker NugetChecker { get;set; }
+
+        public NugetExecutor NugetExecutor { get;set; }
+
         public Installer ()
         {
             FileFinder = new FileFinder();
+            NugetFeedPath = "https://www.myget.org/F/csant/";
+            NugetChecker = new NugetChecker();
+            NugetExecutor = new NugetExecutor();
+        }
+        
+        public void Install()
+        {
+            Install(false);
         }
 
-        public void Install(bool overwrite)
+        public void Install(bool forceOverwrite)
+        {
+            Install(new Version(0,0,0,0), forceOverwrite);
+        }
+
+        public void Install(Version version, bool forceOverwrite)
         {
             InstallNuget();
 
             // TODO: Move this to a config file
-            var feedPath = "https://www.myget.org/F/csant/";
-
-            // TODO: Move this to a config file
             var outputDir = "lib";
 
+            var arguments = new List<string>();
+            arguments.Add("install");
+            arguments.Add("csAnt");
+            arguments.Add("-OutputDirectory " + outputDir);
+            arguments.Add("-Source " + NugetFeedPath);
+
+            if (version > new Version(0, 0, 0, 0))
+                arguments.Add("-Version " + version.ToString());
+
             // TODO: Move the executor to a property
-            var nugetExecutor = new NugetExecutor();
-            nugetExecutor.Execute(
-                "install",
-                "csAnt",
-                "-OutputDirectory " + outputDir,
-                "-Source " + feedPath
+            NugetExecutor.Execute(
+                arguments.ToArray()
             );
 
-            DeployFiles(overwrite);
+            DeployFiles(version, forceOverwrite);
         }
 
         public void InstallNuget()
         {
-            // TODO: Move the nuget checker to a property
-            var nugetChecker = new NugetChecker();
-            nugetChecker.CheckNuget();
+            NugetChecker.CheckNuget();
         }
 
-        public void DeployFiles(bool overwrite)
+        public void DeployFiles(Version version, bool forceOverwrite)
         {
-            DeployGeneralFiles(overwrite);
+            DeployGeneralFiles(version, forceOverwrite);
 
-            DeployLibFiles(overwrite);
+            DeployLibFiles(version, forceOverwrite);
         }
 
-        public void DeployGeneralFiles(bool overwrite)
+        public void DeployGeneralFiles(Version version, bool forceOverwrite)
         {
             var files = new string[]{
                 "csAnt.sh",
@@ -64,7 +83,7 @@ namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole
 
             var libDir = Path.Combine(Environment.CurrentDirectory, "lib");
 
-            var directory = GetVersionedLibDir(libDir);
+            var directory = GetcsAntPackageDir(libDir, version);
 
             foreach (var file in FileFinder.FindFiles(directory, files))
             {
@@ -73,16 +92,30 @@ namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole
                 if (!Directory.Exists(Path.GetDirectoryName(toFile)))
                     Directory.CreateDirectory(Path.GetDirectoryName(toFile));
 
-                if (overwrite || !File.Exists(toFile))
-                    File.Copy(file, toFile, overwrite);
+                //if (update && File.Exists(toFile))
+                //    BackupFile(toFile);
+
+                if (
+                    forceOverwrite
+                    || !File.Exists(toFile)
+                    || File.GetLastWriteTime(file) > File.GetLastWriteTime(toFile)
+                )
+                {
+                    File.Copy(file, toFile, forceOverwrite);
+                }
             }
         }
 
-        public void DeployLibFiles(bool overwrite)
+        public void BackupFile(string existingFile)
+        {
+
+        }
+
+        public void DeployLibFiles(Version version, bool forceOverwrite)
         {
             var libDir = Path.Combine(Environment.CurrentDirectory, "lib");
 
-            var versionedDir = GetVersionedLibDir(libDir);
+            var versionedDir = GetcsAntPackageDir(libDir, version);
 
             var versiondSubDir = versionedDir
                 + Path.DirectorySeparatorChar
@@ -95,15 +128,26 @@ namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole
                 "csAnt"
             );
 
+            // TODO: Moved component to property
             // Move from "lib/csAnt.1.2.3.4/lib/csAnt/" to just "/lib/csAnt/"
-            Directory.Move(versiondSubDir, generalDir);
+            new DirectoryMover().Move(versiondSubDir, generalDir, forceOverwrite);
         }
 
-        public string GetVersionedLibDir(string libDir)
+        public string GetcsAntPackageDir(string libDir, Version version)
         {
-            return new List<DirectoryInfo>(
-                new DirectoryInfo(libDir).GetDirectories().OrderByDescending(p => p.CreationTime)
-            )[0].FullName;
+            if (version > new Version(0,0,0,0))
+            {
+                return libDir
+                    + Path.DirectorySeparatorChar
+                    + "csAnt."
+                        + version.ToString();
+            }
+            else
+            {
+                return new List<DirectoryInfo>(
+                    new DirectoryInfo(libDir).GetDirectories("csAnt.*").OrderByDescending(p => p.CreationTime)
+                )[0].FullName;
+            }
         }
     }
 }
