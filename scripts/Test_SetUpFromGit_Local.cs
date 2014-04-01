@@ -1,9 +1,8 @@
-//css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.dll;
-//css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.Tests.dll;
-//css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.Tests.Scripting.dll;
-//css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.Projects.dll;
-//css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.Projects.Tests.dll;
-//css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.Projects.Tests.Scripting.dll;
+//css_ref ../lib/csAnt/bin/Release/net-40/SoftwareMonkeys.csAnt.Tests.dll;
+//css_ref ../lib/csAnt/bin/Release/net-40/SoftwareMonkeys.csAnt.Tests.Scripting.dll;
+//css_ref ../lib/csAnt/bin/Release/net-40/SoftwareMonkeys.csAnt.Projects.dll;
+//css_ref ../lib/csAnt/bin/Release/net-40/SoftwareMonkeys.csAnt.Projects.Tests.dll;
+//css_ref ../lib/csAnt/bin/Release/net-40/SoftwareMonkeys.csAnt.Projects.Tests.Scripting.dll;
 
 using System;
 using System.IO;
@@ -30,7 +29,8 @@ class Test_BuildFromGitScript : BaseProjectTestScript
 		Console.WriteLine("Test building solutions from git clone...");
 		Console.WriteLine("");
 
-		EnsureReleases();
+        // TODO: Check if this is needed. It take a long time to complete.
+		EnsurePackages();
 
 		new FilesGrabber(
                     OriginalDirectory,
@@ -50,14 +50,14 @@ class Test_BuildFromGitScript : BaseProjectTestScript
 		return !IsError;
 	}
 
-	public void EnsureReleases()
+	public void EnsurePackages()
 	{
         var testDir = CurrentDirectory;
 
-		// Relocate back to the original directory to ensure that the releases have been created
+		// Relocate back to the original directory to ensure that the packages have been created
 		Relocate(OriginalDirectory);
 
-        ExecuteScript("EnsureRelease", "standard-release");
+        ExecuteScript("EnsurePackage");
 
 		// Relocated back to the test directory
 		Relocate(testDir);
