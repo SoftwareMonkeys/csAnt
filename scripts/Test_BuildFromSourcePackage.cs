@@ -1,7 +1,8 @@
-//css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.Tests.dll;
-//css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.Tests.Scripting.dll;
-//css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.Projects.Tests.dll;
-//css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.Projects.Tests.Scripting.dll;
+//css_ref ../lib/csAnt/bin/Release/net-40/SoftwareMonkeys.csAnt.Tests.dll;
+//css_ref ../lib/csAnt/bin/Release/net-40/SoftwareMonkeys.csAnt.Tests.Scripting.dll;
+//css_ref ../lib/csAnt/bin/Release/net-40/SoftwareMonkeys.csAnt.Projects.dll;
+//css_ref ../lib/csAnt/bin/Release/net-40/SoftwareMonkeys.csAnt.Projects.Tests.dll;
+//css_ref ../lib/csAnt/bin/Release/net-40/SoftwareMonkeys.csAnt.Projects.Tests.Scripting.dll;
 
 using System;
 using System.IO;
@@ -13,26 +14,25 @@ using SoftwareMonkeys.csAnt.Projects;
 using SoftwareMonkeys.csAnt.Projects.Tests;
 using SoftwareMonkeys.csAnt.Projects.Tests.Scripting;
 
-class Test_BuildFromSourceReleaseScript : BaseProjectTestScript
+class Test_BuildFromSourcePackageScript : BaseProjectTestScript
 {
 	public static void Main(string[] args)
 	{
-		new Test_BuildFromSourceReleaseScript().Start(args);
+		new Test_BuildFromSourcePackageScript().Start(args);
 	}
 	
 	public override bool Run(string[] args)
 	{
 		Console.WriteLine("");
-		Console.WriteLine("Test building solutions from the release files...");
+		Console.WriteLine("Testing a build cycle from the source package...");
 		Console.WriteLine("");
 		
-		var testDir = CurrentDirectory;
+        new FilesGrabber(
+            OriginalDirectory,
+            CurrentDirectory
+        ).GrabOriginalFiles();
 
-		Relocate(OriginalDirectory);
-
-		ExecuteScript("EnsureRelease", "src");
-
-		Relocate(testDir);
+		ExecuteScript("EnsurePackage", "csAnt-src");
 
 		if (!IsError)
 		{
@@ -44,17 +44,17 @@ class Test_BuildFromSourceReleaseScript : BaseProjectTestScript
 
 	public void DeployAndBuild()
 	{
-                var tmpDir = GetTmpDir();
+        var tmpDir = GetTmpDir();
 
 		var releaseZipFile = GetNewestFile(
 			OriginalDirectory
 			+ Path.DirectorySeparatorChar
-			+ "rls"
+			+ "pkg"
 			+ Path.DirectorySeparatorChar
-			+ "src"
+			+ "csAnt-src"
 		);
 
-		Unzip(releaseZipFile, tmpDir, "*");			
+		Unzip(releaseZipFile, tmpDir);			
 
 		Console.WriteLine("");
 		Console.WriteLine("Tmp dir:");
