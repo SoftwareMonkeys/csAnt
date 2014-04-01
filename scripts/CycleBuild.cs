@@ -1,7 +1,7 @@
+//css_ref ../lib/csAnt/bin/Release/net-40/SoftwareMonkeys.csAnt.Projects.dll
+
 using System;
 using System.IO;
-using Microsoft.CSharp;
-using System.Diagnostics;
 using SoftwareMonkeys.csAnt;
 using SoftwareMonkeys.csAnt.Projects;
 
@@ -18,16 +18,16 @@ class CycleBuildScript : BaseProjectScript
 		Console.WriteLine("Starting a full build cycle.");
 		Console.WriteLine("");
 
-                var mode = "Release";
+        var mode = "Release";
+        
+        var arguments = new Arguments(args);
+        
+        if (arguments.Contains("mode"))
+                mode = arguments["mode"];
                 
-                var arguments = new Arguments(args);
-                
-                if (arguments.Contains("mode"))
-                        mode = arguments["mode"];
-                        
-                Console.WriteLine("");
-                Console.WriteLine("Build mode: " + mode);
-                Console.WriteLine("");
+        Console.WriteLine("");
+        Console.WriteLine("Build mode: " + mode);
+        Console.WriteLine("");
 
 		Console.WriteLine("Cleaning...");
 		Console.WriteLine("");
@@ -69,7 +69,7 @@ class CycleBuildScript : BaseProjectScript
 
 		if (!IsError)
 		{
-                    ExecuteScript("Repack");
+            ExecuteScript("Repack");
 		}
 
 		if (!IsError)
