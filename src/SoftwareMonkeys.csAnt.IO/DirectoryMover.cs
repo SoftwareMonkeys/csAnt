@@ -10,7 +10,7 @@ namespace SoftwareMonkeys.csAnt.IO
         {
         }
 
-        public void Move(string source, string destination)
+        public void Move(string source, string destination, bool overwrite)
         {
             Console.WriteLine ("");
             Console.WriteLine ("Moving directory: ");
@@ -28,8 +28,13 @@ namespace SoftwareMonkeys.csAnt.IO
                 Directory.CreateDirectory(folders.Target);
                 foreach (var file in Directory.GetFiles(folders.Source, "*.*"))
                 {
-                     string targetFile = Path.Combine(folders.Target, Path.GetFileName(file));
-                     if (File.Exists(targetFile)) File.Delete(targetFile);
+                    string targetFile = Path.Combine(folders.Target, Path.GetFileName(file));
+                    var isNewer = File.GetLastWriteTime(file) > File.GetLastWriteTime(targetFile);
+
+                     if (File.Exists(targetFile)
+                        && (isNewer || overwrite))
+                        File.Delete(targetFile);
+
                      File.Move(file, targetFile);
                 }
 
