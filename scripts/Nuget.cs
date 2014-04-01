@@ -1,3 +1,5 @@
+//css_ref ../lib/csAnt/bin/Release/net-40/SoftwareMonkeys.csAnt.External.Nuget.dll
+
 using System;
 using System.IO;
 using SoftwareMonkeys.csAnt;
