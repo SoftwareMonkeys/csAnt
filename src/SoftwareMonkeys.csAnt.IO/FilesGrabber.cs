@@ -72,17 +72,12 @@ namespace SoftwareMonkeys.csAnt.IO
                 "*.sh",
                 "*.bat",
                 "*.vbs",
-                //"bin/**",
                 "lib/csAnt/**",
                 "lib/FileNodes/**",
                 "lib/HtmlAgilityPack/**",
                 "lib/cs-script/**",
                 "lib/SharpZipLib/**",
-                //"lib/**",
-                //"/src/**.node", // TODO: Check if needed
-                //"/src/**.cs",
-                //"/src/**.csproj",
-                //"/src/**.sln",
+                "lib/ILRepack.1.25.0/**",
                 "scripts/**",
                 "!*.mlpd",
                 "!/obj/"
@@ -101,15 +96,13 @@ namespace SoftwareMonkeys.csAnt.IO
                 "src/**.sln",
                 "src/**.snk",
                 "scripts/**",
-                "rls/*.txt",
-                "rls/*.zip",
                 "pkg/*.nuspec",
                 "!/tests/",
                 "!_bak",
                 "!.git",
                 "!*.mlpd",
                 "!/obj/"//,
-                //"../*.node" // TODO: Check if needed. Not currently supported
+                //"../*.node" // TODO: Check if needed. Not currently supported. Shouldn't be needed because the group node can be created
             );
         }
 
