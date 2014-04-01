@@ -16,10 +16,11 @@
     <file src="csAnt.sh" />
     <file src="csAnt.bat" />
     <file src="lib/csAnt/bin/Release/net-40/*" target="lib/csAnt/bin/Release/net-40/" />
-    <file src="src\**.node" target="src" />
-    <file src="src\**.sln" target="src" />
-    <file src="src\**.csproj" target="src" />
-    <file src="src\**.cs" target="src" />
-    <file src="src\**.snk" target="src" />
+    <file src="src/*.node" target="src" />
+    <file src="src/**.sln" target="src" />
+    <file src="src/**/*.node" target="src" />
+    <file src="src/**/*.csproj" target="src" />
+    <file src="src/**/*.cs" target="src" />
+    <file src="src/**/*.snk" target="src" />
   </files>
 </package>

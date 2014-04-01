@@ -35,6 +35,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoftwareMonkeys.csAnt.Exter
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoftwareMonkeys.csAnt.Processes", "SoftwareMonkeys.csAnt.Processes\SoftwareMonkeys.csAnt.Processes.csproj", "{DA236BEB-4C3A-4076-AB72-1AEE6DB82BEA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoftwareMonkeys.csAnt.SetUpFromWebConsole.Tests", "SoftwareMonkeys.csAnt.SetUpFromWebConsole.Tests\SoftwareMonkeys.csAnt.SetUpFromWebConsole.Tests.csproj", "{2C92409D-8D85-4819-87FC-92A4E3594A01}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -67,6 +69,14 @@ Global
 		{2292E955-9611-4356-B952-CE580117952A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2292E955-9611-4356-B952-CE580117952A}.Release|x86.ActiveCfg = Release|x86
 		{2292E955-9611-4356-B952-CE580117952A}.Release|x86.Build.0 = Release|x86
+		{2C92409D-8D85-4819-87FC-92A4E3594A01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C92409D-8D85-4819-87FC-92A4E3594A01}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C92409D-8D85-4819-87FC-92A4E3594A01}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{2C92409D-8D85-4819-87FC-92A4E3594A01}.Debug|x86.Build.0 = Debug|Any CPU
+		{2C92409D-8D85-4819-87FC-92A4E3594A01}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C92409D-8D85-4819-87FC-92A4E3594A01}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C92409D-8D85-4819-87FC-92A4E3594A01}.Release|x86.ActiveCfg = Release|Any CPU
+		{2C92409D-8D85-4819-87FC-92A4E3594A01}.Release|x86.Build.0 = Release|Any CPU
 		{3BFB55C4-1247-49BD-AEC9-31BC3C0F1168}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3BFB55C4-1247-49BD-AEC9-31BC3C0F1168}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3BFB55C4-1247-49BD-AEC9-31BC3C0F1168}.Debug|x86.ActiveCfg = Debug|x86
