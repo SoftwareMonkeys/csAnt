@@ -42,6 +42,11 @@ class CycleBuildScript : BaseProjectScript
 			"IncrementVersion"
 		);
 
+		// Increment the version
+		ExecuteScript(
+			"GenerateAssemblyInfoFiles"
+		);
+
 		Console.WriteLine("Building...");
 		Console.WriteLine("");
 
