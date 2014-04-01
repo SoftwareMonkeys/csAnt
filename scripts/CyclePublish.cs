@@ -62,6 +62,10 @@ class CyclePublishScript : BaseProjectScript
             
             var toFile = file.Replace(CurrentDirectory, OriginalDirectory);
 
+            // TODO: Should the file be deleted and overwritten?
+            if (File.Exists(toFile))
+                File.Delete(toFile);
+
             File.Copy(file, toFile);
         }
     }
