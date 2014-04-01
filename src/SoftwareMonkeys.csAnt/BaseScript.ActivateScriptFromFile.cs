@@ -43,7 +43,8 @@ namespace SoftwareMonkeys.csAnt
 
             // TODO: Check if settings are needed
             var scriptSettings = new Settings ();
-            //scriptSettings.InMemoryAsssembly = true; // TODO: Check if needed
+            scriptSettings.InMemoryAsssembly = true; // TODO: Check if needed
+            scriptSettings.HideCompilerWarnings = true;
 
             var compilerOptions = "";
 
@@ -61,18 +62,26 @@ namespace SoftwareMonkeys.csAnt
                 File.SetLastWriteTime(assemblyFile, File.GetLastWriteTime(scriptPath));
             }
 
+            IScript script = null;
+            Assembly scriptAssembly = null;
+
             // Load the script assembly
-            Assembly a = CSScript.LoadWithConfig(scriptPath, assemblyFile, IsDebug, scriptSettings, compilerOptions);
+            try
+            {
+                scriptAssembly = CSScript.LoadWithConfig(scriptPath, assemblyFile, IsDebug, scriptSettings, compilerOptions);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("An error occurred when loading the '" + scriptName + "' script.", ex);
+            }
 
             // Get the script type
-            var type = a.GetTypes () [0];
+            var type = scriptAssembly.GetTypes () [0];
 
-            var s = Activator.CreateInstance(type).TryAlignToInterface<IScript>();
-
-            IScript script = s;
-
+            script = (IScript)Activator.CreateInstance(type);
+    
             script.Construct (scriptName, this);
-
+    
             // Set the indent of the new script to be one more than the current script
             script.Indent = Indent + 1;
 
