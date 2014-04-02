@@ -39,10 +39,21 @@ namespace SoftwareMonkeys.csAnt.SetUp.Common
 
         public void Install(string releaseName, Version version, bool forceOverwrite)
         {
+            Console.WriteLine("");
+            Console.WriteLine("Installing csAnt...");
+            Console.WriteLine("");
+            Console.WriteLine("Current directory:");
+            Console.WriteLine(Environment.CurrentDirectory);
+            Console.WriteLine("");
+
             InstallNuget();
 
             // TODO: Move this to a config file
             var outputDir = "lib";
+
+            var outputCsAntDir = outputDir
+                + Path.DirectorySeparatorChar
+                    + "csAnt";
 
             var arguments = new List<string>();
             arguments.Add("install");
@@ -52,6 +63,9 @@ namespace SoftwareMonkeys.csAnt.SetUp.Common
 
             if (version > new Version(0, 0, 0, 0))
                 arguments.Add("-Version " + version.ToString());
+
+            if (!Directory.Exists(outputCsAntDir))
+                Directory.CreateDirectory(outputCsAntDir);
 
             // TODO: Move the executor to a property
             NugetExecutor.Execute(
@@ -145,9 +159,11 @@ namespace SoftwareMonkeys.csAnt.SetUp.Common
 
         public string GetcsAntPackageDir(string libDir, Version version)
         {
+            var pkgDir = String.Empty;
+
             if (version > new Version(0,0,0,0))
             {
-                return libDir
+                pkgDir = libDir
                     + Path.DirectorySeparatorChar
                     + "csAnt."
                         + version.ToString();
@@ -158,6 +174,11 @@ namespace SoftwareMonkeys.csAnt.SetUp.Common
                     new DirectoryInfo(libDir).GetDirectories("csAnt.*").OrderByDescending(p => p.CreationTime)
                 )[0].FullName;
             }
+            
+            Console.WriteLine("csAnt package dir:");
+            Console.WriteLine(pkgDir);
+
+            return pkgDir;
         }
     }
 }
