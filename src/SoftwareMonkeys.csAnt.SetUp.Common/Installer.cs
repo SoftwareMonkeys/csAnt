@@ -6,7 +6,7 @@ using System.Linq;
 using SoftwareMonkeys.csAnt.IO;
 
 
-namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole
+namespace SoftwareMonkeys.csAnt.SetUp.Common
 {
     // TODO: Tidy up the code in this class
     public class Installer

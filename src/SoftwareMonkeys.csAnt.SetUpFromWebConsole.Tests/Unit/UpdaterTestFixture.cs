@@ -2,6 +2,7 @@ using System;
 using NUnit.Framework;
 using SoftwareMonkeys.csAnt.External.Nuget;
 using System.IO;
+using SoftwareMonkeys.csAnt.SetUp.Common;
 
 
 namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole.Tests.Unit
@@ -22,7 +23,7 @@ namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole.Tests.Unit
             updater.Installer.NugetChecker = CreateMockNugetChecker(false);
             updater.Installer.NugetExecutor = CreateMockNugetExecutor("2.0.0.0");
 
-            updater.Update(true);
+            updater.Update("csAnt", true);
 
             var script = GetDummyScript();
 
@@ -86,7 +87,7 @@ namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole.Tests.Unit
             installer.NugetChecker = CreateMockNugetChecker(false);
             installer.NugetExecutor = CreateMockNugetExecutor(version);
 
-            installer.Install();
+            installer.Install("csAnt");
         }
 
         public NugetChecker CreateMockNugetChecker(bool checkForNuget)

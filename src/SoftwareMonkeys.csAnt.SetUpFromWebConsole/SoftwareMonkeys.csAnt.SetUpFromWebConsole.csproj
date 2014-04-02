@@ -82,8 +82,6 @@
     <Compile Include="Main.cs" />
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="Arguments.cs" />
-    <Compile Include="Installer.cs" />
-    <Compile Include="Updater.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -98,6 +96,10 @@
     <ProjectReference Include="..\SoftwareMonkeys.csAnt.External.Nuget\SoftwareMonkeys.csAnt.External.Nuget.csproj">
       <Project>{D88EE98D-5F35-4B0E-AC92-4029A1742204}</Project>
       <Name>SoftwareMonkeys.csAnt.External.Nuget</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SoftwareMonkeys.csAnt.SetUp.Common\SoftwareMonkeys.csAnt.SetUp.Common.csproj">
+      <Project>{485BCC0F-7E4F-4430-9174-3A1ADA428E71}</Project>
+      <Name>SoftwareMonkeys.csAnt.SetUp.Common</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>

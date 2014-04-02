@@ -7,6 +7,7 @@ using SoftwareMonkeys.csAnt.IO.Compression;
 using SoftwareMonkeys.csAnt.IO;
 using System.Linq;
 using SoftwareMonkeys.csAnt.External.Nuget;
+using SoftwareMonkeys.csAnt.SetUp.Common;
 
 namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole
 {
@@ -60,9 +61,9 @@ namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole
  
     
                 if (update)
-                    new Updater().Update();
+                    new Updater().Update(releaseName);
                 else
-                    new Installer().Install(version, overwrite);
+                    new Installer().Install(releaseName, version, overwrite);
     
                 if (showIntro)
                     ShowIntro();

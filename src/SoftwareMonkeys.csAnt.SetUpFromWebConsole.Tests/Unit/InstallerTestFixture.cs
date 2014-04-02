@@ -1,6 +1,7 @@
 using System;
 using NUnit.Framework;
 using SoftwareMonkeys.csAnt.External.Nuget;
+using SoftwareMonkeys.csAnt.SetUp.Common;
 
 
 namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole.Tests.Unit
@@ -17,7 +18,7 @@ namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole.Tests.Unit
             installer.NugetChecker = CreateMockNugetChecker(false);
             installer.NugetExecutor = CreateMockNugetExecutor("0.0.0.1");
 
-            installer.Install();
+            installer.Install("csAnt");
 
             var script = GetDummyScript();
 
