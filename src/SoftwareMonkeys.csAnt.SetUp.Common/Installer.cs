@@ -100,17 +100,19 @@ namespace SoftwareMonkeys.csAnt.SetUp.Common
                 var isNewer = File.GetLastWriteTime(file) > File.GetLastWriteTime(toFile);
 
                 if (
-                    !File.Exists(toFile)
-                    || forceOverwrite
-                    || isNewer
-                )
+                    File.Exists(toFile)
+                    && (forceOverwrite
+                        || isNewer)
+                    )
                 {
-                    File.Copy(
-                        file,
-                        toFile,
-                        forceOverwrite || isNewer
-                        );
+                    // TODO: Back up this file before deleting
+                    File.Delete(toFile);
                 }
+
+                File.Copy(
+                    file,
+                    toFile
+                    );
             }
         }
 
