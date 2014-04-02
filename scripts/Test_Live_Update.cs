@@ -16,11 +16,11 @@ using SoftwareMonkeys.csAnt.Projects.Tests.Scripting;
 using SoftwareMonkeys.csAnt.SetUp.Common;
 using NUnit.Framework;
 
-class Test_SetUpFromWebScript : BaseProjectTestScript
+class Test_UpdateScript : BaseProjectTestScript
 {
 	public static void Main(string[] args)
 	{
-		new Test_SetUpFromWebScript().Start(args);
+		new Test_UpdateScript().Start(args);
 	}
 	
 	public override bool Run(string[] args)
@@ -91,7 +91,7 @@ class Test_SetUpFromWebScript : BaseProjectTestScript
     public void Install(string pkgName)
     {
         var installer = new Installer();
-        installer.Install(pkgName, new Version("0.3.0.8900"), true);
+        installer.Install(pkgName, new Version("0.4.0.100"), true);
     }
 
     /*public void Prepare(string version)
