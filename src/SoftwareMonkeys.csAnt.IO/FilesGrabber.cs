@@ -78,6 +78,7 @@ namespace SoftwareMonkeys.csAnt.IO
                 "lib/cs-script/**",
                 "lib/SharpZipLib/**",
                 "lib/ILRepack.1.25.0/**",
+                "lib/Newtonsoft.Json.6.0.1/lib/net40/**",
                 "scripts/**",
                 "!*.mlpd",
                 "!/obj/"
