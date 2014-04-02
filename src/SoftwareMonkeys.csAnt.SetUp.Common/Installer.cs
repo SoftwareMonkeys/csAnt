@@ -76,6 +76,7 @@ namespace SoftwareMonkeys.csAnt.SetUp.Common
         public void DeployGeneralFiles(Version version, bool forceOverwrite)
         {
             var files = new string[]{
+                "csAnt.node",
                 "csAnt.sh",
                 "csAnt.bat",
                 "scripts/*"
@@ -92,16 +93,23 @@ namespace SoftwareMonkeys.csAnt.SetUp.Common
                 if (!Directory.Exists(Path.GetDirectoryName(toFile)))
                     Directory.CreateDirectory(Path.GetDirectoryName(toFile));
 
+                // TODO: Clean up
                 //if (update && File.Exists(toFile))
                 //    BackupFile(toFile);
 
+                var isNewer = File.GetLastWriteTime(file) > File.GetLastWriteTime(toFile);
+
                 if (
-                    forceOverwrite
-                    || !File.Exists(toFile)
-                    || File.GetLastWriteTime(file) > File.GetLastWriteTime(toFile)
+                    !File.Exists(toFile)
+                    || forceOverwrite
+                    || isNewer
                 )
                 {
-                    File.Copy(file, toFile, forceOverwrite);
+                    File.Copy(
+                        file,
+                        toFile,
+                        forceOverwrite || isNewer
+                        );
                 }
             }
         }

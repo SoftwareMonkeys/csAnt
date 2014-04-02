@@ -4,7 +4,7 @@ using SoftwareMonkeys.csAnt.External.Nuget;
 using SoftwareMonkeys.csAnt.SetUp.Common;
 
 
-namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole.Tests.Unit
+namespace SoftwareMonkeys.csAnt.SetUp.Common.Tests.Unit
 {
     [TestFixture]
     public class InstallerTestFixture : BaseSetUpUnitTestFixture

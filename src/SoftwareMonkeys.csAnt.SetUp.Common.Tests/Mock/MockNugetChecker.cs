@@ -2,7 +2,7 @@ using System;
 using SoftwareMonkeys.csAnt.External.Nuget;
 
 
-namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole.Tests
+namespace SoftwareMonkeys.csAnt.SetUp.Common.Tests
 {
     public class MockNugetChecker : NugetChecker
     {

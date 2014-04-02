@@ -5,7 +5,7 @@ using System.IO;
 using SoftwareMonkeys.csAnt.Versions;
 
 
-namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole.Tests
+namespace SoftwareMonkeys.csAnt.SetUp.Common.Tests
 {
     public class MockNugetExecutor : NugetExecutor
     {
