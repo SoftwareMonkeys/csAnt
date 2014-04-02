@@ -39,23 +39,19 @@ class Test_SetUpFromWebScript : BaseProjectTestScript
 
 		Thread.Sleep(5000);*/
 
+        // TODO: Rename
 		var setUpExeFile = OriginalDirectory
 			+ Path.DirectorySeparatorChar
-			+ "bin"
-			+ Path.DirectorySeparatorChar
-			+ "Release"
-			+ Path.DirectorySeparatorChar
-			+ "packed"
-			+ Path.DirectorySeparatorChar
-			+ "csAnt-SetUp.exe";
+			+ "csAnt-setup.sh";
 
 		var setUpExeToFile = CurrentDirectory
 			+ Path.DirectorySeparatorChar
-			+ "csAnt-SetUp.exe";
+			+ "csAnt-setup.sh";
 
 		File.Copy(setUpExeFile, setUpExeToFile, true);
 
-		StartProcess(setUpExeToFile, "-i:false");
+        // TODO: Add windows support by running a vbs equivalent
+		StartProcess("bash", setUpExeToFile, "-i:false");
 
 		if (IsLinux)
 			StartProcess("sh csAnt.sh HelloWorld");
