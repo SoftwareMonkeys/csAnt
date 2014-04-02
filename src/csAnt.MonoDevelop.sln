@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoftwareMonkeys.csAnt", "SoftwareMonkeys.csAnt\SoftwareMonkeys.csAnt.csproj", "{16297BCB-0A8C-42E6-BE35-921085C3E238}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoftwareMonkeys.csAnt.UI.csAntConsole", "SoftwareMonkeys.csAnt.UI.csAntConsole\SoftwareMonkeys.csAnt.UI.csAntConsole.csproj", "{2292E955-9611-4356-B952-CE580117952A}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoftwareMonkeys.csAnt.Projects", "SoftwareMonkeys.csAnt.Projects\SoftwareMonkeys.csAnt.Projects.csproj", "{3BFB55C4-1247-49BD-AEC9-31BC3C0F1168}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoftwareMonkeys.csAnt.Contracts", "SoftwareMonkeys.csAnt.Contracts\SoftwareMonkeys.csAnt.Contracts.csproj", "{EA178299-9D1E-482E-B3CD-D3CEBF62CADF}"
@@ -24,6 +22,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoftwareMonkeys.csAnt.Processes", "SoftwareMonkeys.csAnt.Processes\SoftwareMonkeys.csAnt.Processes.csproj", "{DA236BEB-4C3A-4076-AB72-1AEE6DB82BEA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoftwareMonkeys.csAnt.External.Nuget", "SoftwareMonkeys.csAnt.External.Nuget\SoftwareMonkeys.csAnt.External.Nuget.csproj", "{D88EE98D-5F35-4B0E-AC92-4029A1742204}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoftwareMonkeys.csAnt.csAntConsole", "SoftwareMonkeys.csAnt.csAntConsole\SoftwareMonkeys.csAnt.csAntConsole.csproj", "{2292E955-9611-4356-B952-CE580117952A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
