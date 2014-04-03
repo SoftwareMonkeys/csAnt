@@ -7,6 +7,11 @@ namespace SoftwareMonkeys.csAnt.External.Nuget
     public class NugetChecker
     {
         public NugetDownloader Downloader { get;set; }
+        public string NugetPath
+        {
+            get { return Downloader.NugetPath; }
+            set { Downloader.NugetPath = value; }
+        }
 
         public NugetChecker ()
         {

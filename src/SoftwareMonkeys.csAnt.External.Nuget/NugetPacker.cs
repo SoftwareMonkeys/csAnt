@@ -8,8 +8,16 @@ namespace SoftwareMonkeys.csAnt.External.Nuget
 {
     public class NugetPacker
     {
+        public string WorkingDirectory { get;set; }
+
         public NugetPacker ()
         {
+            WorkingDirectory = Environment.CurrentDirectory;
+        }
+
+        public NugetPacker(string workingDirectory)
+        {
+            WorkingDirectory = workingDirectory;
         }
 
         public void PackAll(string projectDirectory)
@@ -58,9 +66,13 @@ namespace SoftwareMonkeys.csAnt.External.Nuget
             Console.WriteLine(filePath);
             Console.WriteLine("");
 
-            var cmd = "mono";
+            var cmd = WorkingDirectory
+                + Path.DirectorySeparatorChar
+                + "lib"
+                + Path.DirectorySeparatorChar
+                + "nuget.exe";
 
-            var outputDir = Environment.CurrentDirectory
+            var outputDir = WorkingDirectory
                 + Path.DirectorySeparatorChar
                 + "pkg"
                 + Path.DirectorySeparatorChar
@@ -69,18 +81,18 @@ namespace SoftwareMonkeys.csAnt.External.Nuget
             if (!Directory.Exists(outputDir))
                 Directory.CreateDirectory(outputDir);
 
+            // TODO: Move VersionManager to property
             var versionManager = new VersionManager();
-            var version = versionManager.GetVersion(Environment.CurrentDirectory);
+            var version = versionManager.GetVersion(WorkingDirectory);
 
-            var arguments = "lib/nuget.exe"
-                + " pack"
-                + " " + filePath.Replace(Environment.CurrentDirectory, "").Trim(Path.DirectorySeparatorChar)
-                + " -basepath " + Environment.CurrentDirectory
+            var arguments = " pack"
+                + " " + filePath.Replace(WorkingDirectory, "").Trim(Path.DirectorySeparatorChar)
+                + " -basepath " + WorkingDirectory
                 + " -outputdirectory " + outputDir
                 + " -version " + version
                 + " -verbosity detailed";
 
-            var starter = new ProcessStarter();
+            var starter = new DotNetProcessStarter();
             starter.Start(cmd, arguments);
         }
 
