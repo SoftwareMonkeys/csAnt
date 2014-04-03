@@ -21,7 +21,7 @@ class UpdateScript : BaseProjectScript
         Console.WriteLine("Updating...");
         Console.WriteLine("");
 
-        StartProcess("csAnt-SetUp.exe", "-update");
+        StartDotNetExe("csAnt-SetUp.exe", "-update");
 
 		return !IsError;
 	}
