@@ -1,7 +1,7 @@
+//css_ref ../lib/csAnt/bin/Release/net-40/SoftwareMonkeys.csAnt.Projects.dll
+
 using System;
 using System.IO;
-using Microsoft.CSharp;
-using System.Diagnostics;
 using SoftwareMonkeys.csAnt;
 
 class OnBuild_CopyBinToRootScript : BaseScript

@@ -1,11 +1,14 @@
+//css_ref ../lib/csAnt/bin/Release/net-40/SoftwareMonkeys.csAnt.Projects.dll
+
 using System;
 using System.IO;
-using System.Diagnostics;
 using SoftwareMonkeys.csAnt;
 using SoftwareMonkeys.csAnt.Projects;
 
 class CopyBinToLibScript : BaseProjectScript
 {
+    public string TemporaryDir = String.Empty;
+
 	public static void Main(string[] args)
 	{
 		new CopyBinToLibScript().Start(args);
@@ -24,9 +27,11 @@ class CopyBinToLibScript : BaseProjectScript
 
 		int i = 0;
 
+        TemporaryDir = GetTmpDir();
+
         foreach (string dir in Directory.GetDirectories(binDirectory))
         {
-                var mode = Path.GetFileName(dir);
+            var mode = Path.GetFileName(dir);
         
             foreach (string file in Directory.GetFiles(dir))
             {
@@ -53,6 +58,21 @@ class CopyBinToLibScript : BaseProjectScript
 
 		        try
 		        {
+
+                        // If the to file exists then move it to a temporary directory so it can keep running while the new assembly is copied into place
+                        // This should prevent errors with overwriting a running executable
+                        if (File.Exists(toFile))
+                        {                            
+                            var tmpFile = toFile.Replace(
+                                CurrentDirectory,
+                                TemporaryDir
+                            );
+
+                            EnsureDirectoryExists(Path.GetDirectoryName(tmpFile));
+
+                            File.Move(toFile, tmpFile);
+                        }
+                       
 	                	File.Copy(file, toFile, true);
 		        }
 		        catch (Exception)
@@ -79,4 +99,12 @@ class CopyBinToLibScript : BaseProjectScript
 			+ Path.DirectorySeparatorChar
 			+ "bin";
 	}
+
+    public override void Dispose()
+    {
+        base.Dispose();
+
+        Directory.Delete(TemporaryDir, true);
+
+    }
 }

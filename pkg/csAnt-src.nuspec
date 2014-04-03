@@ -16,6 +16,8 @@
     <file src="csAnt.sh" />
     <file src="csAnt.bat" />
     <file src="lib/csAnt/bin/Release/net-40/*" target="lib/csAnt/bin/Release/net-40/" />
+    <file src="lib/Newtonsoft.Json.6.0.1/lib/net40/*" target="lib/Newtonsoft.Json.6.0.1/lib/net40/" />
+    <file src="lib/NUnit/*" target="lib/NUnit/" />
     <file src="src/*.node" target="src" />
     <file src="src/**.sln" target="src" />
     <file src="src/**/*.node" target="src" />

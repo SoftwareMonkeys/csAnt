@@ -1,7 +1,5 @@
 using System;
 using System.IO;
-using Microsoft.CSharp;
-using System.Diagnostics;
 using SoftwareMonkeys.csAnt;
 
 class OnBuild_CopyBinToLibScript : BaseScript

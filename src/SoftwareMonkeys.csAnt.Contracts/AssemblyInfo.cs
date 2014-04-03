@@ -10,4 +10,4 @@ using System.Runtime.CompilerServices;
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
-[assembly: AssemblyVersion("0.3.0.6300")]
+[assembly: AssemblyVersion("0.4.0.1100")]
