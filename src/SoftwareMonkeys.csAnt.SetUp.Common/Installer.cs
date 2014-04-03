@@ -15,6 +15,12 @@ namespace SoftwareMonkeys.csAnt.SetUp.Common
 
         public string NugetFeedPath { get;set; }
 
+        public string NugetPath
+        {
+            get { return NugetChecker.NugetPath; }
+            set { NugetChecker.NugetPath = value; }
+        }
+
         public NugetChecker NugetChecker { get;set; }
 
         public NugetExecutor NugetExecutor { get;set; }
@@ -44,6 +50,12 @@ namespace SoftwareMonkeys.csAnt.SetUp.Common
             Console.WriteLine("");
             Console.WriteLine("Current directory:");
             Console.WriteLine(Environment.CurrentDirectory);
+            Console.WriteLine("");
+            Console.WriteLine("Nuget path:");
+            Console.WriteLine(NugetPath);
+            Console.WriteLine("");
+            Console.WriteLine("Nuget feed path:");
+            Console.WriteLine(NugetFeedPath);
             Console.WriteLine("");
 
             InstallNuget();
@@ -152,9 +164,26 @@ namespace SoftwareMonkeys.csAnt.SetUp.Common
                 "csAnt"
             );
 
-            // TODO: Moved component to property
             // Move from "lib/csAnt.1.2.3.4/lib/csAnt/" to just "/lib/csAnt/"
-            new DirectoryMover().Move(versiondSubDir, generalDir, forceOverwrite);
+
+            foreach (var file in Directory.GetFiles(versiondSubDir))
+            {
+                var toFile = file.Replace(versiondSubDir, generalDir);
+
+                var isNewer = File.GetLastWriteTime(file) > File.GetLastWriteTime(toFile);
+
+                if (
+                    File.Exists(toFile)
+                    && (isNewer
+                        || forceOverwrite)
+                    )
+                {
+                    // TODO: Backup file before deleting
+                    File.Delete(toFile);
+                }
+
+                File.Copy(file, toFile);
+            }
         }
 
         public string GetcsAntPackageDir(string libDir, Version version)

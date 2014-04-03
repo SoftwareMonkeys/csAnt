@@ -5,6 +5,18 @@ namespace SoftwareMonkeys.csAnt.SetUp.Common
     {
         public Installer Installer { get;set; }
 
+        public string NugetFeedPath
+        {
+            get { return Installer.NugetFeedPath; }
+            set { Installer.NugetFeedPath = value; }
+        }
+
+        public string NugetPath
+        {
+            get { return Installer.NugetPath; }
+            set { Installer.NugetPath = value; }
+        }
+
         public Updater ()
         {
             Installer = new Installer();

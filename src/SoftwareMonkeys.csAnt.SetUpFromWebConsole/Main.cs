@@ -13,11 +13,29 @@ namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole
 {
     class MainClass
     {
+        public static string DestinationPath { get;set; }
+
+        public static bool Overwrite { get;set; }
+
+        public static bool Update { get;set; }
+
+        public static Version Version = new Version(0,0,0,0);
+
+        public static string NugetFeedPath { get;set; }
+
+        public static string NugetPath = "http://nuget.org/nuget.exe";
+
+        public static string PackageName = "csAnt";
+
+        public static bool IsHelp { get;set; }
+
+        public static bool ShowIntro = true;
+
         public static void Main (string[] args)
         {
-            var arguments = new Arguments(args);
+            ParseArguments(args);
 
-            if (arguments.ContainsAny("h", "help", "man"))
+            if (IsHelp)
                 Help();
             else
             {
@@ -25,52 +43,81 @@ namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole
                 Console.WriteLine ("Setting up csAnt...");
                 Console.WriteLine ("");
     
-                // TODO: Clean up and reorganise code
-                var destinationPath = Environment.CurrentDirectory;
     
-    
-                if (arguments.ContainsAny("d", "destination"))
-                    destinationPath = Path.GetFullPath(arguments["d", "destination"]);
-    
-                var overwrite = arguments.ContainsAny(
-                    "o",
-                    "overwrite"
-                );
-    
-                var update = arguments.ContainsAny(
-                    "u",
-                    "update"
-                );
-    
-                var version = new Version(0,0,0,0);
-    
-                if (arguments.ContainsAny("v", "version"))
-                    version = Version.Parse(arguments["v", "version"]);
-    
-                var showIntro = true;
-                if (arguments.ContainsAny("i", "intro"))
-                    showIntro = Convert.ToBoolean(arguments["i", "intro"]);
-    
-                var releaseName = "standard";
-    
-                if (arguments.Contains ("r"))
-                    releaseName = arguments["r"];
-    
-                if (releaseName.IndexOf("-release") > -1)
-                    releaseName = releaseName.Replace("-release", "");
- 
-    
-                if (update)
-                    new Updater().Update(releaseName);
+                if (Update)
+                {
+                    var updater = new Updater();
+
+                    updater.NugetPath = NugetPath;
+
+                    if (!String.IsNullOrEmpty(NugetFeedPath))
+                        updater.NugetFeedPath = NugetFeedPath;
+
+                    updater.Update(PackageName);
+                }
                 else
-                    new Installer().Install(releaseName, version, overwrite);
-    
-                if (showIntro)
-                    ShowIntro();
+                {
+                    var installer = new Installer();
+
+                    installer.NugetPath = NugetPath;
+
+                    if (!String.IsNullOrEmpty(NugetFeedPath))
+                        installer.NugetFeedPath = NugetFeedPath;
+
+                    installer.Install(PackageName, Version, Overwrite);
+                }
+
+                if (ShowIntro)
+                    OutputIntro();
             }
         }
 
-        static public void ShowIntro()
+        static public void ParseArguments(string[] args)
+        {
+            var arguments = new Arguments(args);
+
+            // Is help
+            IsHelp = arguments.ContainsAny("h", "help", "man");
+
+            // Destination
+            DestinationPath = Environment.CurrentDirectory;
+            if (arguments.ContainsAny("d", "destination"))
+                DestinationPath = Path.GetFullPath(arguments["d", "destination"]);
+
+            // Version
+            if (arguments.ContainsAny("v", "version"))
+                Version = Version.Parse(arguments["v", "version"]);
+
+            // Package name
+            if (arguments.ContainsAny("p", "pkg", "package"))
+                PackageName = arguments["p", "pkg", "package"];
+
+            // Show intro
+            if (arguments.ContainsAny("i", "intro"))
+                ShowIntro = Convert.ToBoolean(arguments["i", "intro"]);
+            
+            // Version
+            if (arguments.ContainsAny("f", "feed", "feedpath"))
+                NugetFeedPath = arguments["f", "feed", "feedpath"];
+
+            // Version
+            if (arguments.ContainsAny("n", "nuget", "nugetpath"))
+                NugetPath = arguments["n", "nuget", "nugetpath"];
+
+            // Overwrite
+            Overwrite = arguments.ContainsAny(
+                "o",
+                "overwrite"
+            );
+
+            // Update
+            Update = arguments.ContainsAny(
+                "u",
+                "update"
+            );
+        }
+
+        static public void OutputIntro()
         {
             var prefix = "";
             if (Path.DirectorySeparatorChar == '/')
@@ -110,6 +157,41 @@ namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole
 
         static public void Help()
         {
+            Console.WriteLine("");
+            Console.WriteLine("csAnt SetUp Help");
+            Console.WriteLine("");
+            Console.WriteLine("Syntax:");
+            Console.WriteLine("");
+            Console.WriteLine("  mono csAnt-SetUp.exe [arguments]");
+            Console.WriteLine("");
+            Console.WriteLine("Arguments:");
+            Console.WriteLine("");
+            Console.WriteLine("  -p, -pkg, -package");
+            Console.WriteLine("      The name of the csAnt package to install. Default is 'csAnt'.");
+            Console.WriteLine("");
+            Console.WriteLine("  -v, -version");
+            Console.WriteLine("      The version to install. Default is the latest version.");
+            Console.WriteLine("");
+            Console.WriteLine("  -d, -destination");
+            Console.WriteLine("      The destination folder to install the files to (absolute or relative).");
+            Console.WriteLine("");
+            Console.WriteLine("  -f, -feed, -feedpath");
+            Console.WriteLine("      The location of the nuget feed.");
+            Console.WriteLine("");
+            Console.WriteLine("  -n, -nuget, -nugetpath");
+            Console.WriteLine("      The location of the nuget.exe file. This will be downloaded if it's a http path, or copied if it's a local/network path. Default is http://nuget.org/nuget.exe");
+            Console.WriteLine("");
+            Console.WriteLine("Options:");
+            Console.WriteLine("");
+            Console.WriteLine("  -o, -overwrite");
+            Console.WriteLine("      Tells the installer to force overwrite of files.");
+            Console.WriteLine("");
+            Console.WriteLine("  -u, -update");
+            Console.WriteLine("      Performs an update instead of a standard instead.");
+            Console.WriteLine("");
+            Console.WriteLine("  -i, -intro");
+            Console.WriteLine("      Whether or not to show the introduction text. Default is true.");
+            Console.WriteLine("");
         }
     }
 }
