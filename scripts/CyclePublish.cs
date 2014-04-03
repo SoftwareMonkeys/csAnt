@@ -78,6 +78,7 @@ class CyclePublishScript : BaseProjectScript
 			OriginalDirectory,
 			tmpDir
 		).GrabOriginalFiles(
+			"*.exe",
 			"bin/**",
 			"lib/nuget.exe",
 			"lib/csAnt/**",
