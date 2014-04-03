@@ -19,7 +19,7 @@ class CycleIncrementVersionScript : BaseProjectScript
 
         ExecuteScript("GenerateAssemblyInfoFiles");
 
-        ExecuteScript("CommitNodes");
+        ExecuteScript("CommitVersion");
          
 		return !IsError;
 	}
