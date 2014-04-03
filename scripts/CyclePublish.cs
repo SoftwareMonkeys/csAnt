@@ -35,13 +35,15 @@ class CyclePublishScript : BaseProjectScript
 
 		CreateNodes();
 
+        IncrementVersion(3);
+
 		// Build the cloned source code
 		ExecuteScript("EnsurePackage");
 
         ReturnPackages();
 
         // Commit the file nodes containing the updated versions
-        ExecuteScript("CommitNodes");
+        ExecuteScript("CommitVersion");
 
 		if (!IsError)
 		{
