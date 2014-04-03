@@ -86,8 +86,20 @@ class CopyBinToLibScript : BaseProjectScript
 
 		AddSummary("Moved " + i + " files from '/bin/' to '/lib/" + ProjectName + "'");
 
+        UpdateVersion();
+
 		return true;
 	}
+
+    public void UpdateVersion()
+    {
+        var csAntLibNode = CurrentNode.Nodes["Libraries"].Nodes["csAnt"];
+
+        var version = CurrentNode.Properties["Version"];
+
+        csAntLibNode.Properties["Version"] = version;
+        csAntLibNode.Save();
+    }
 
 	public string GetLibDir()
 	{
