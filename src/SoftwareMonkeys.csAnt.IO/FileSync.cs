@@ -35,7 +35,7 @@ namespace SoftwareMonkeys.csAnt.IO
             foreach (var file in Finder.FindFiles (fromDir, patterns)) {
                 var toFile = file.Replace(fromDir, toDir);
 
-                IOUtility.EnsureDirectoryExists(Path.GetDirectoryName(toFile));
+                DirectoryChecker.EnsureDirectoryExists(Path.GetDirectoryName(toFile));
 
                 if (!File.Exists(toFile))
                 {

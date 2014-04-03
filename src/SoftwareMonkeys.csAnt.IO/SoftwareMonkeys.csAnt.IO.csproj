@@ -81,7 +81,6 @@
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="FileFinder.cs" />
     <Compile Include="FileFinderNotInitializedException.cs" />
-    <Compile Include="IOUtility.cs" />
     <Compile Include="FileFinderOutput.cs" />
     <Compile Include="TemporaryDirectoryCreator.cs" />
     <Compile Include="Compression\FileZipper.cs" />
@@ -92,6 +91,7 @@
     <Compile Include="FileBackup.cs" />
     <Compile Include="FileSync.cs" />
     <Compile Include="DynamicLinq.cs" />
+    <Compile Include="FileNavigator.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
