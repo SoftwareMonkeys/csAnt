@@ -1,17 +1,12 @@
 using System;
+using SoftwareMonkeys.csAnt.Imports;
 
 namespace SoftwareMonkeys.csAnt
 {
     public partial interface IScript
     {
         #region Import/Export
-        string ImportStagingDirectory { get;set; }
-
-        string GetImportStagingDirectory();
-
-        void ImportFile(string projectName, string filePattern);
-
-        void ExportFile(string projectName, string filePattern);
+        Importer Importer { get;set; }
         #endregion
     }
 }

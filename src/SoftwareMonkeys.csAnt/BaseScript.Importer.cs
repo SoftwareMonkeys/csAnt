@@ -1,10 +1,19 @@
 using System;
+using SoftwareMonkeys.csAnt.Imports;
+
+
 namespace SoftwareMonkeys.csAnt
 {
-    public class BaseScript
+    public partial class BaseScript
     {
-        public BaseScript ()
+        private Importer importer;
+        public Importer Importer
         {
+            get {
+                if (importer == null)
+                    importer = new Importer();
+                return importer; }
+            set { importer = value; }
         }
     }
 }
