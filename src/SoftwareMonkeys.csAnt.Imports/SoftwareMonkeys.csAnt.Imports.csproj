@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.0</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B34DA062-E44B-4044-AC28-D006FC66CCA7}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>SoftwareMonkeys.csAnt.Imports</RootNamespace>
+    <AssemblyName>SoftwareMonkeys.csAnt.Imports</AssemblyName>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>SoftwareMonkeys.csAnt.Imports.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="Importer.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <ProjectReference Include="..\SoftwareMonkeys.csAnt.IO\SoftwareMonkeys.csAnt.IO.csproj">
+      <Project>{749ED083-15BD-4522-8FBE-847870434680}</Project>
+      <Name>SoftwareMonkeys.csAnt.IO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SoftwareMonkeys.csAnt.IO.Contracts\SoftwareMonkeys.csAnt.IO.Contracts.csproj">
+      <Project>{53E3AFEA-3627-4846-B2E4-5A8091E96BC6}</Project>
+      <Name>SoftwareMonkeys.csAnt.IO.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SoftwareMonkeys.csAnt.SourceControl.Git\SoftwareMonkeys.csAnt.SourceControl.Git.csproj">
+      <Project>{94578333-F8C9-40C0-9300-8D808ED1CD7A}</Project>
+      <Name>SoftwareMonkeys.csAnt.SourceControl.Git</Name>
+    </ProjectReference>
+  </ItemGroup>
+</Project>

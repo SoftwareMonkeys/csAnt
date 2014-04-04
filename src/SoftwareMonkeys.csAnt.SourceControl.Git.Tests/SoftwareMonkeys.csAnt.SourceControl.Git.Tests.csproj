@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.0</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{5D55A561-2497-45F5-8C49-6244671C04B5}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>SoftwareMonkeys.csAnt.SourceControl.Git.Tests</RootNamespace>
+    <AssemblyName>SoftwareMonkeys.csAnt.SourceControl.Git.Tests</AssemblyName>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>SoftwareMonkeys.csAnt.SourceControl.Git.Tests.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="nunit.framework">
+      <HintPath>..\..\lib\NUnit\bin\nunit.framework.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="Integration\BaseGitIntegrationTestFixture.cs" />
+    <Compile Include="Integration\GitterTestFixture.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Folder Include="Integration\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SoftwareMonkeys.csAnt.Tests\SoftwareMonkeys.csAnt.Tests.csproj">
+      <Project>{E79918A1-F275-4073-9968-77DAB04622A9}</Project>
+      <Name>SoftwareMonkeys.csAnt.Tests</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SoftwareMonkeys.csAnt.Contracts\SoftwareMonkeys.csAnt.Contracts.csproj">
+      <Project>{EA178299-9D1E-482E-B3CD-D3CEBF62CADF}</Project>
+      <Name>SoftwareMonkeys.csAnt.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SoftwareMonkeys.csAnt.SourceControl.Git\SoftwareMonkeys.csAnt.SourceControl.Git.csproj">
+      <Project>{94578333-F8C9-40C0-9300-8D808ED1CD7A}</Project>
+      <Name>SoftwareMonkeys.csAnt.SourceControl.Git</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SoftwareMonkeys.csAnt.Imports\SoftwareMonkeys.csAnt.Imports.csproj">
+      <Project>{B34DA062-E44B-4044-AC28-D006FC66CCA7}</Project>
+      <Name>SoftwareMonkeys.csAnt.Imports</Name>
+    </ProjectReference>
+  </ItemGroup>
+</Project>

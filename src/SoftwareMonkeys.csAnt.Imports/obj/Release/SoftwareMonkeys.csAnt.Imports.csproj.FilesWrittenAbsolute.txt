@@ -1,0 +1,3 @@
+/home/j/Projects/SoftwareMonkeys/csAnt/src/SoftwareMonkeys.csAnt.Imports/obj/Release/.NETFramework,Version=v4.0.AssemblyAttribute.cs
+/home/j/Projects/SoftwareMonkeys/csAnt/bin/Release/SoftwareMonkeys.csAnt.Imports.dll
+/home/j/Projects/SoftwareMonkeys/csAnt/src/SoftwareMonkeys.csAnt.Imports/obj/Release/SoftwareMonkeys.csAnt.Imports.dll
