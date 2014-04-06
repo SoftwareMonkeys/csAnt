@@ -7,10 +7,10 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{8D7A46B5-25AA-4E5C-9E3A-F27574B71EEC}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>SoftwareMonkeys.csAnt.SetUp.Common.Tests</RootNamespace>
+    <RootNamespace>SoftwareMonkeys.csAnt.SetUp.Tests</RootNamespace>
     <AssemblyName>SoftwareMonkeys.csAnt.SetUp.Common.Tests</AssemblyName>
     <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>SoftwareMonkeys.csAnt.SetUp.Common.Tests.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>SoftwareMonkeys.csAnt.SetUp.Tests.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -42,6 +42,7 @@
     <Compile Include="Unit\InstallerTestFixture.cs" />
     <Compile Include="Unit\UpdaterTestFixture.cs" />
     <Compile Include="Mock\MockInstallerRetriever.cs" />
+    <Compile Include="Unit\LocalInstallerTestFixture.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -69,7 +70,7 @@
       <Project>{EA178299-9D1E-482E-B3CD-D3CEBF62CADF}</Project>
       <Name>SoftwareMonkeys.csAnt.Contracts</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SoftwareMonkeys.csAnt.SetUp.Common\SoftwareMonkeys.csAnt.SetUp.csproj">
+    <ProjectReference Include="..\SoftwareMonkeys.csAnt.SetUp\SoftwareMonkeys.csAnt.SetUp.csproj">
       <Project>{485BCC0F-7E4F-4430-9174-3A1ADA428E71}</Project>
       <Name>SoftwareMonkeys.csAnt.SetUp</Name>
     </ProjectReference>
