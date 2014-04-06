@@ -118,7 +118,7 @@ class CyclePublishScript : BaseProjectScript
 
 	public void CopySecurityCode(string fromDir, string toDir)
 	{
-	        CopySecurityNode(fromDir, toDir);
+	    CopySecurityNode(fromDir, toDir);
 	
 		var file = fromDir
 			+ Path.DirectorySeparatorChar
@@ -156,10 +156,10 @@ class CyclePublishScript : BaseProjectScript
 
 		var toNodeFile = nodeFile.Replace(fromDir, toDir);
 
-                Console.WriteLine("Copying security node to:");
-                Console.WriteLine(toNodeFile);
-                Console.WriteLine("From:");
-                Console.WriteLine(nodeFile);
+        Console.WriteLine("Copying security node to:");
+        Console.WriteLine(toNodeFile);
+        Console.WriteLine("From:");
+        Console.WriteLine(nodeFile);
 
 		EnsureDirectoryExists(Path.GetDirectoryName(toNodeFile));
 
