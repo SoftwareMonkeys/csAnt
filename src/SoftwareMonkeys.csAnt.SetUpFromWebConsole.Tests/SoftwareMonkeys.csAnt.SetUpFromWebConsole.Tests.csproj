@@ -69,13 +69,13 @@
       <Project>{EA178299-9D1E-482E-B3CD-D3CEBF62CADF}</Project>
       <Name>SoftwareMonkeys.csAnt.Contracts</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SoftwareMonkeys.csAnt.SetUp.Common\SoftwareMonkeys.csAnt.SetUp.Common.csproj">
-      <Project>{485BCC0F-7E4F-4430-9174-3A1ADA428E71}</Project>
-      <Name>SoftwareMonkeys.csAnt.SetUp.Common</Name>
-    </ProjectReference>
     <ProjectReference Include="..\SoftwareMonkeys.csAnt.Processes\SoftwareMonkeys.csAnt.Processes.csproj">
       <Project>{DA236BEB-4C3A-4076-AB72-1AEE6DB82BEA}</Project>
       <Name>SoftwareMonkeys.csAnt.Processes</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SoftwareMonkeys.csAnt.SetUp\SoftwareMonkeys.csAnt.SetUp.csproj">
+      <Project>{485BCC0F-7E4F-4430-9174-3A1ADA428E71}</Project>
+      <Name>SoftwareMonkeys.csAnt.SetUp</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
