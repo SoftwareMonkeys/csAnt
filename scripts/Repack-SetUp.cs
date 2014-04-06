@@ -14,40 +14,8 @@ class Repack_SetUpScript : BaseScript
 	
 	public override bool Run(string[] args)
 	{
-            Console.WriteLine("");
-            Console.WriteLine("Repacking SetUp.exe file to include dependencies.");
-            Console.WriteLine("");
-	
-            var exeFile = "lib/ILRepack.1.25.0/tools/ILRepack.exe";
+            var assemblyFile = "bin/Release/csAnt-SetUp.exe";
 
-            var packedDir = "bin/Release/packed";
-
-            var outFile = packedDir + "/csAnt-SetUp.exe";
-            
-            var arguments = new List<string>();
-
-            arguments.Add("/out:" + outFile);
-            arguments.Add("/target:exe");
-            arguments.Add("/verbose");
-            arguments.Add("bin/Release/csAnt-SetUp.exe");
-
-            AddDependencies(arguments);
-            
-            Console.WriteLine("Output:");
-            Console.WriteLine(outFile);
-            Console.WriteLine("");
-
-            EnsureDirectoryExists(ToAbsolute(packedDir));
-            
-            StartDotNetExe(exeFile, arguments.ToArray());
-
-            Console.WriteLine("Done");
-
-            return !IsError;
-	}
-
-	public void AddDependencies(List<string> arguments)
-	{
             var dependencies = new string[]{
                 "lib/SharpZipLib/net-20/ICSharpCode.SharpZipLib.dll",
                 "lib/HtmlAgilityPack/Net40/HtmlAgilityPack.dll",
@@ -55,20 +23,16 @@ class Repack_SetUpScript : BaseScript
                 "bin/Release/SoftwareMonkeys.csAnt.Contracts.dll",
                 "bin/Release/SoftwareMonkeys.csAnt.IO.dll",
                 "bin/Release/SoftwareMonkeys.csAnt.IO.Contracts.dll",
-                "bin/Release/SoftwareMonkeys.csAnt.SetUp.Common.dll",
+                "bin/Release/SoftwareMonkeys.csAnt.Imports.dll",
                 "bin/Release/SoftwareMonkeys.csAnt.Processes.dll",
-                "bin/Release/SoftwareMonkeys.csAnt.External.Nuget.dll"
+                "bin/Release/SoftwareMonkeys.csAnt.External.Nuget.dll",
+                "bin/Release/SoftwareMonkeys.csAnt.SourceControl.Git.dll",
+                "bin/Release/SoftwareMonkeys.csAnt.SetUp.dll",
+                "bin/Release/SoftwareMonkeys.csAnt.Versions.dll"
             };
 
-            Console.WriteLine("Dependencies:");
+            new Repacker(assemblyFile, dependencies).Repack();
 
-            foreach (var dependency in dependencies)
-            {
-                arguments.Add(dependency);
-
-                Console.WriteLine("  " + dependency);
-            }
-
-            Console.WriteLine("");
+            return !IsError;
 	}
 }
