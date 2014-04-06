@@ -92,6 +92,8 @@
     <Compile Include="FileSync.cs" />
     <Compile Include="DynamicLinq.cs" />
     <Compile Include="FileNavigator.cs" />
+    <Compile Include="PathConverter.cs" />
+    <Compile Include="Platform.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
