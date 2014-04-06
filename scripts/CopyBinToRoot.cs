@@ -25,16 +25,15 @@ class CopyBinToRootScript : BaseProjectScript
 	        Console.WriteLine("");
 
 		int i = 0;
+        int s = 0;
 
 		var patterns = new string[]{
-			"bin/Release/packed/csAnt-SetUpFromLocal.exe",
-			"bin/Release/packed/csAnt-SetUp.exe"
+			"bin/Release/packed/csAnt-SetUpFromLocal.*",
+			"bin/Release/packed/csAnt-SetUp.*"
 		};
 
 	        foreach (string file in FindFiles(patterns))
 	        {
-		        i++;
-
 		        string toFile = CurrentDirectory
 			        + Path.DirectorySeparatorChar
 			        + Path.GetFileName(file);
@@ -50,10 +49,20 @@ class CopyBinToRootScript : BaseProjectScript
 			        + toFile.Replace(ProjectDirectory, "")
 		        );
 
-		        File.Copy(file, toFile, true);
+                var isNewer = File.GetLastWriteTime(file) > File.GetLastWriteTime(toFile);
+
+                if (!File.Exists(toFile) || isNewer)
+                {
+    		        File.Copy(file, toFile, true);
+
+    		        i++;
+                }
+                else
+                    s++;
 	        }
 
 		Console.WriteLine(i + " files copied.");
+		Console.WriteLine(s + " files skipped.");
 
 		AddSummary("Moved " + i + " files from '/bin/*' to '/'");
 

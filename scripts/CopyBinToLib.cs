@@ -26,6 +26,7 @@ class CopyBinToLibScript : BaseProjectScript
 	        Console.WriteLine("");
 
 		int i = 0;
+        int s = 0;
 
         TemporaryDir = GetTmpDir();
 
@@ -35,8 +36,6 @@ class CopyBinToLibScript : BaseProjectScript
         
             foreach (string file in Directory.GetFiles(dir))
             {
-	            i++;
-
 	            string toFile = GetLibDir()
 		            + Path.DirectorySeparatorChar
 		            + mode
@@ -59,21 +58,31 @@ class CopyBinToLibScript : BaseProjectScript
 		        try
 		        {
 
-                        // If the to file exists then move it to a temporary directory so it can keep running while the new assembly is copied into place
-                        // This should prevent errors with overwriting a running executable
-                        if (File.Exists(toFile))
-                        {                            
-                            var tmpFile = toFile.Replace(
-                                CurrentDirectory,
-                                TemporaryDir
-                            );
+// TODO: Remove if not needed
+                    // If the to file exists then move it to a temporary directory so it can keep running while the new assembly is copied into place
+                    // This should prevent errors with overwriting a running executable
+                    if (File.Exists(toFile))
+                    {                            
+                        var tmpFile = toFile.Replace(
+                            CurrentDirectory,
+                            TemporaryDir
+                        );
 
-                            EnsureDirectoryExists(Path.GetDirectoryName(tmpFile));
+                        EnsureDirectoryExists(Path.GetDirectoryName(tmpFile));
 
-                            File.Move(toFile, tmpFile);
-                        }
+                        File.Move(toFile, tmpFile);
+                    }
                        
-	                	File.Copy(file, toFile, true);
+                    var isNewer = File.GetLastWriteTime(file) > File.GetLastWriteTime(toFile);
+
+                    if (!File.Exists(toFile) || isNewer)
+                    {
+        		        File.Copy(file, toFile, true);
+                        File.SetLastWriteTime(toFile, File.GetLastWriteTime(file));
+        		        i++;
+                    }
+                    else
+                        s++; // TODO: Because the files are moved above they're never skipped. See if there's a way to resolve this
 		        }
 		        catch (Exception)
 		        {
@@ -83,6 +92,7 @@ class CopyBinToLibScript : BaseProjectScript
 		}
 
 		Console.WriteLine(i + " files copied.");
+		Console.WriteLine(s + " files skipped.");
 
 		AddSummary("Moved " + i + " files from '/bin/' to '/lib/" + ProjectName + "'");
 
