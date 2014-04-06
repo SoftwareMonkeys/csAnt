@@ -1,10 +1,14 @@
 using System;
 namespace SoftwareMonkeys.csAnt
 {
-    public class BaseScript
+    public partial class BaseScript
     {
-        public BaseScript ()
+        public void ExecuteScriptAt(string workingDirectory, string scriptName, params string[] arguments)
         {
+            var dir = CurrentDirectory;
+            Relocate(OriginalDirectory);
+            ExecuteScript(scriptName, arguments);
+            Relocate(dir);
         }
     }
 }
