@@ -1,13 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using HtmlAgilityPack;
-using System.Diagnostics;
-using SoftwareMonkeys.csAnt.IO.Compression;
-using SoftwareMonkeys.csAnt.IO;
-using System.Linq;
-using SoftwareMonkeys.csAnt.External.Nuget;
-using SoftwareMonkeys.csAnt.SetUp.Common;
+using SoftwareMonkeys.csAnt.SetUp;
 
 namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole
 {
@@ -19,9 +13,13 @@ namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole
 
         public static bool Update { get;set; }
 
+        public static bool Import { get;set; }
+
+        public static string ImportPath = "https://git01.codeplex.com/csant/";
+
         public static Version Version = new Version(0,0,0,0);
 
-        public static string NugetFeedPath { get;set; }
+        public static string NugetSourcePath { get;set; }
 
         public static string NugetPath = "http://nuget.org/nuget.exe";
 
@@ -43,28 +41,37 @@ namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole
                 Console.WriteLine ("Setting up csAnt...");
                 Console.WriteLine ("");
     
+                var nugetRetriever = new InstallerNugetRetriever(
+                    NugetPath
+                );
+
+                if (!String.IsNullOrEmpty(NugetSourcePath))
+                    nugetRetriever.NugetSourcePath = NugetSourcePath;
+
+                var fileManager = new InstallerFileManager();
     
                 if (Update)
                 {
-                    var updater = new Updater();
+                    var updater = new Updater(
+                        nugetRetriever,
+                        fileManager
+                        );
 
-                    updater.NugetPath = NugetPath;
-
-                    if (!String.IsNullOrEmpty(NugetFeedPath))
-                        updater.NugetFeedPath = NugetFeedPath;
-
-                    updater.Update(PackageName);
+                    updater.Import = Import;
+                    updater.ImportPath = ImportPath;
+                    updater.Update();
                 }
                 else
                 {
-                    var installer = new Installer();
+                    var installer = new Installer(
+                        nugetRetriever,
+                        fileManager
+                        );
 
-                    installer.NugetPath = NugetPath;
+                    installer.Import = Import;
+                    installer.ImportPath = ImportPath;
 
-                    if (!String.IsNullOrEmpty(NugetFeedPath))
-                        installer.NugetFeedPath = NugetFeedPath;
-
-                    installer.Install(PackageName, Version, Overwrite);
+                    installer.Install();
                 }
 
                 if (ShowIntro)
@@ -97,8 +104,8 @@ namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole
                 ShowIntro = Convert.ToBoolean(arguments["i", "intro"]);
             
             // Version
-            if (arguments.ContainsAny("f", "feed", "feedpath"))
-                NugetFeedPath = arguments["f", "feed", "feedpath"];
+            if (arguments.ContainsAny("s", "source"))
+                NugetSourcePath = arguments["s", "source"];
 
             // Version
             if (arguments.ContainsAny("n", "nuget", "nugetpath"))
@@ -115,6 +122,19 @@ namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole
                 "u",
                 "update"
             );
+
+            // Import
+            Import = arguments.ContainsAny(
+                "i",
+                "import"
+            );
+
+            if (Import)
+            {
+                var path = arguments["i", "import"];
+                if (!String.IsNullOrEmpty(path))
+                    ImportPath = path;
+            }
         }
 
         static public void OutputIntro()
@@ -189,7 +209,10 @@ namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole
             Console.WriteLine("  -u, -update");
             Console.WriteLine("      Performs an update instead of a standard instead.");
             Console.WriteLine("");
-            Console.WriteLine("  -i, -intro");
+            Console.WriteLine("  -i, -import");
+            Console.WriteLine("      Whether to import text files (eg. scripts) via git, which handles changes, merges, and commits back to the source project.");
+            Console.WriteLine("");
+            Console.WriteLine("  -intro");
             Console.WriteLine("      Whether or not to show the introduction text. Default is true.");
             Console.WriteLine("");
         }
