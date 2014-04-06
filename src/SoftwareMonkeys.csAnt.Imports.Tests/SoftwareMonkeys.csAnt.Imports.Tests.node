@@ -1,0 +1,7 @@
+{
+  "Properties": {
+    "Context": "Assembly",
+    "Version": "0.4.1.1000"
+  },
+  "Name": "SoftwareMonkeys.csAnt.Imports.Tests"
+}

@@ -47,6 +47,12 @@ namespace SoftwareMonkeys.csAnt.IO
             Finder = finder;
         }
 
+        public void GrabInstallation()
+        {
+            // TODO: Should installation files be more restricted?
+            GrabOriginalFiles();
+        }
+
         public void GrabOriginalScripts (
             params string[] scriptNames
         )
@@ -85,6 +91,20 @@ namespace SoftwareMonkeys.csAnt.IO
             );
         }
         
+        public void GrabOriginalLibFiles ()
+        {
+            GrabOriginalFiles(
+                //"../*.node" // TODO: Check if needed. Not currently supported
+                "*.exe",
+                "lib/csAnt/**",
+                "lib/FileNodes/**",
+                "lib/HtmlAgilityPack/**",
+                "lib/cs-script/**",
+                "lib/SharpZipLib/**",
+                "lib/ILRepack.1.25.0/**",
+                "lib/Newtonsoft.Json.6.0.1/lib/net40/**"
+            );
+        }
         public void GrabOriginalFiles ()
         {
             GrabOriginalFiles(
