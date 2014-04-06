@@ -98,7 +98,6 @@
     <Compile Include="FailingTestFixture.cs" />
     <Compile Include="GetLibTestFixture.cs" />
     <Compile Include="GetZipInternalPathTestFixture.cs" />
-    <Compile Include="GitCloneTestFixture.cs" />
     <Compile Include="DownloadAndUnzipTestFixture.cs" />
     <Compile Include="ClearTmpTestFixture.cs" />
     <Compile Include="Sanity\BaseSanityTestFixture.cs" />
@@ -132,9 +131,6 @@
     <Compile Include="HtmlResultFileNamer.cs" />
     <Compile Include="XmlResultFileNamer.cs" />
     <Compile Include="RaiseEventTestFixture.cs" />
-    <Compile Include="ImportFileTestFixture.cs" />
-    <Compile Include="ExportFileTestFixture.cs" />
-    <Compile Include="ImportSyncTestFixture.cs" />
     <Compile Include="BaseTestFixture.SetUp.cs" />
     <Compile Include="BaseTestFixture.TearDown.cs" />
     <Compile Include="BaseTestFixture.GetTimeStamp.cs" />
@@ -151,6 +147,7 @@
     <Compile Include="BaseTestFixture.OriginalDirectory.cs" />
     <Compile Include="BaseTestFixture.GetOriginalDirectory.cs" />
     <Compile Include="Unit\BaseUnitTestFixture.cs" />
+    <Compile Include="Helpers\HelloWorldScriptLauncher.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -177,8 +174,21 @@
       <Project>{9B72A2B8-0BC4-40BE-B242-AC79A080CEB6}</Project>
       <Name>SoftwareMonkeys.csAnt.Versions</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SoftwareMonkeys.csAnt.SourceControl.Git\SoftwareMonkeys.csAnt.SourceControl.Git.csproj">
+      <Project>{94578333-F8C9-40C0-9300-8D808ED1CD7A}</Project>
+      <Name>SoftwareMonkeys.csAnt.SourceControl.Git</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SoftwareMonkeys.csAnt.Imports\SoftwareMonkeys.csAnt.Imports.csproj">
+      <Project>{B34DA062-E44B-4044-AC28-D006FC66CCA7}</Project>
+      <Name>SoftwareMonkeys.csAnt.Imports</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SoftwareMonkeys.csAnt.Processes\SoftwareMonkeys.csAnt.Processes.csproj">
+      <Project>{DA236BEB-4C3A-4076-AB72-1AEE6DB82BEA}</Project>
+      <Name>SoftwareMonkeys.csAnt.Processes</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Unit\" />
+    <Folder Include="Helpers\" />
   </ItemGroup>
 </Project>
