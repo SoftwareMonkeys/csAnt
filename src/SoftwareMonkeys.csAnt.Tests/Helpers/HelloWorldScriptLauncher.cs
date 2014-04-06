@@ -4,11 +4,11 @@ using SoftwareMonkeys.csAnt.Processes;
 
 namespace SoftwareMonkeys.csAnt.Tests.Helpers
 {
-    public class HelloWorldLauncher
+    public class HelloWorldScriptLauncher
     {
         public ProcessStarter Starter { get;set; }
 
-        public HelloWorldLauncher ()
+        public HelloWorldScriptLauncher ()
         {
             Starter = new ProcessStarter();
         }
