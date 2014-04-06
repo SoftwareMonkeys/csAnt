@@ -1,7 +1,8 @@
 using System;
 using System.IO;
 using SoftwareMonkeys.csAnt.IO;
-using SoftwareMonkeys.csAnt.SetUp.Common;
+using SoftwareMonkeys.csAnt.SetUp;
+using SoftwareMonkeys.csAnt.Versions;
 
 namespace SoftwareMonkeys.csAnt.SetUpFromLocalConsole
 {
@@ -11,8 +12,7 @@ namespace SoftwareMonkeys.csAnt.SetUpFromLocalConsole
         {
             var arguments = new Arguments (args);
 
-            if (arguments.Contains ("h")
-                || arguments.Contains ("help")) {
+            if (arguments.ContainsAny ("h", "help", "man")) {
                 Help();
             } else {
                 Console.WriteLine ("");
@@ -21,26 +21,32 @@ namespace SoftwareMonkeys.csAnt.SetUpFromLocalConsole
 
                 var sourceDir = String.Empty;
 
-                var destinationDir = String.Empty;
+                var destinationDir = Environment.CurrentDirectory;
 
                 var overwrite = false;
 
-                var fileListFile = String.Empty;
+                var filePatternsFile = String.Empty;
+
+                var packageName = "csAnt";
 
                 if (args.Length > 0) {
+                    // Source directory
                     sourceDir = args [0];
 
-                    destinationDir = Path.GetFullPath (args [1]);
+                    // Destination directory
+                    if (args.Length > 1)
+                        destinationDir = Path.GetFullPath (args [1]);
 
                     overwrite = arguments.Contains ("o");
 
                     if (arguments.Contains ("l"))
-                        fileListFile = arguments ["l"];
+                        filePatternsFile = arguments ["l"];
+
+                    if (arguments.Contains ("p"))
+                        packageName = arguments ["p"];
 
                 } else {
                     sourceDir = DetectSourceDirectory ();
-
-                    destinationDir = Environment.CurrentDirectory;
                 }
 
                 Console.WriteLine ("");
@@ -52,38 +58,34 @@ namespace SoftwareMonkeys.csAnt.SetUpFromLocalConsole
                 Console.WriteLine (destinationDir);
                 Console.WriteLine ("");
 
-                Console.WriteLine ("List file:");
-                Console.WriteLine (fileListFile != String.Empty ? fileListFile : "[Not provided]");
+                Console.WriteLine ("File patterns file:");
+                Console.WriteLine (filePatternsFile != String.Empty ? filePatternsFile : "[Not provided]");
                 Console.WriteLine ("");
 
-                var fileList = GetDefaultFileList ();
-                if (!String.IsNullOrEmpty (fileListFile))
-                    fileList = File.ReadAllLines (fileListFile);
+                // TODO: Shorten code
+                if (!String.IsNullOrEmpty(filePatternsFile))
+                {
 
-                var installer = new LocalInstaller();
-                installer.Install(
-                    sourceDir,
-                    destinationDir,
-                    fileList,
-                    overwrite
+                    var installer = new LocalInstaller(
+                        sourceDir,
+                        destinationDir,
+                        packageName,
+                        filePatternsFile,
+                        overwrite
                     );
+                    installer.Install();
+                }
+                else
+                {
+                    var installer = new LocalInstaller(
+                        sourceDir,
+                        destinationDir,
+                        packageName,
+                        overwrite
+                    );
+                    installer.Install();
+                }
             }
-        }
-
-        static public string[] GetDefaultFileList()
-        {
-            return new string[]{
-                "lib/csAnt/**",
-                "lib/cs-script/**",
-                "lib/FileNodes/**",
-                "lib/NUnit/**",
-                "lib/NUnitResults/**",
-                "lib/HtmlAgilityPack/Net40/**",
-                "lib/SharpZipLib/net-20/**",
-                "lib/ILRepack.1.25.0/**",
-                "scripts/**",
-                "csAnt.sh"
-            };
         }
 
         static string DetectSourceDirectory ()
