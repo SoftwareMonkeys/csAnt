@@ -2,10 +2,10 @@ using System;
 using NUnit.Framework;
 using SoftwareMonkeys.csAnt.External.Nuget;
 using System.IO;
-using SoftwareMonkeys.csAnt.SetUp.Common;
+using SoftwareMonkeys.csAnt.SetUp;
 
 
-namespace SoftwareMonkeys.csAnt.SetUp.Common.Tests.Unit
+namespace SoftwareMonkeys.csAnt.SetUp.Tests.Unit
 {
     [TestFixture]
     public class UpdaterTestFixture : BaseSetUpUnitTestFixture
@@ -17,13 +17,15 @@ namespace SoftwareMonkeys.csAnt.SetUp.Common.Tests.Unit
 
             //ModifyFile();
 
-            var updater = new Updater();
+            var updater = new Updater(
+                CreateMockInstallerRetriever(
+                    OriginalDirectory,
+                    WorkingDirectory,
+                    new Version("2.0.0.0")
+                )
+            );
 
-            // Assign mock nuget components to avoid actually using nuget during the test (fas
-            updater.Installer.NugetChecker = CreateMockNugetChecker(false);
-            updater.Installer.NugetExecutor = CreateMockNugetExecutor("2.0.0.0");
-
-            updater.Update("csAnt", true);
+            updater.Update();
 
             var script = GetDummyScript();
 
@@ -81,26 +83,15 @@ namespace SoftwareMonkeys.csAnt.SetUp.Common.Tests.Unit
         {
             // TODO: Move the files directly without using the installer, because this is a unit test and should only be relying on one component
 
-            var installer = new Installer();
+            var installer = new Installer(
+                CreateMockInstallerRetriever(
+                    OriginalDirectory,
+                    WorkingDirectory,
+                    new Version("0.0.0.1")
+                )
+            );
 
-            // Assign mock nuget components to avoid actually using nuget during the test (fas
-            installer.NugetChecker = CreateMockNugetChecker(false);
-            installer.NugetExecutor = CreateMockNugetExecutor(version);
-
-            installer.Install("csAnt");
-        }
-
-        public NugetChecker CreateMockNugetChecker(bool checkForNuget)
-        {
-            return new MockNugetChecker()
-            {
-                CheckForNuget = checkForNuget
-            };
-        }
-
-        public NugetExecutor CreateMockNugetExecutor(string version)
-        {
-            return new MockNugetExecutor(OriginalDirectory, WorkingDirectory, version);
+            installer.Install();
         }
     }
 }

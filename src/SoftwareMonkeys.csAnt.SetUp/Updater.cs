@@ -1,35 +1,62 @@
 using System;
-namespace SoftwareMonkeys.csAnt.SetUp.Common
+namespace SoftwareMonkeys.csAnt.SetUp
 {
     public class Updater
     {
         public Installer Installer { get;set; }
 
-        public string NugetFeedPath
+        // TODO: Check if needed
+        /*public string NugetFeedPath
         {
-            get { return Installer.NugetFeedPath; }
-            set { Installer.NugetFeedPath = value; }
+            get { return Installer..NugetSourcePath; }
+            set { Installer.NugetSourcePath = value; }
         }
 
         public string NugetPath
         {
             get { return Installer.NugetPath; }
             set { Installer.NugetPath = value; }
+        }*/
+
+        public bool Import
+        {
+            get { return Installer.Import; }
+            set { Installer.Import = value; }
         }
 
-        public Updater ()
+        public string ImportPath
         {
-            Installer = new Installer();
+            get { return Installer.ImportPath; }
+            set { Installer.ImportPath = value; }
+        }
+        
+        public Updater(Installer installer)
+        {
+            Installer = installer;
+        }
+        
+        public Updater(BaseInstallerRetriever retriever)
+        {
+            Installer = new Installer(retriever);
         }
 
-        public void Update(string releaseName)
+        public Updater(BaseInstallerRetriever retriever, BaseInstallerFileManager fileManager)
         {
-			Update(releaseName, false);
+            Installer = new Installer(retriever, fileManager);
         }
 
-        public void Update(string releaseName, bool forceOverwrite)
+        public Updater (string sourceDir, string destinationDir)
         {
-            Installer.Install(releaseName, forceOverwrite);
+            Installer = new Installer(sourceDir, destinationDir);
+        }
+
+        public void Update()
+        {
+            Console.WriteLine("");
+            Console.WriteLine("Updating csAnt...");
+            Console.WriteLine("");
+
+            Installer.Install();
         }
     }
 }

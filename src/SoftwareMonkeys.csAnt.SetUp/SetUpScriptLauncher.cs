@@ -2,9 +2,9 @@ using System;
 using SoftwareMonkeys.csAnt.Processes;
 
 
-namespace SoftwareMonkeys.csAnt.Projects.Tests.Helpers
+namespace SoftwareMonkeys.csAnt.SetUp
 {
-    public class SetUpScriptLauncher : BaseTestInstallLauncher
+    public class SetUpScriptLauncher : BaseDeploymentSetUpLauncher
     {
         public ProcessStarter Starter { get;set; }
 
@@ -13,13 +13,13 @@ namespace SoftwareMonkeys.csAnt.Projects.Tests.Helpers
             Starter = new ProcessStarter();
         }
 
-        public override void Launch(string projectDirectory)
+        public override void Launch(string sourceDirectory, string projectDirectory)
         {
             // TODO: Should the project directory be set to Environment.CurrentDirectory?
             if (Platform.IsLinux)
-                Starter.Start("sh csAnt-setup.sh");
+                Starter.Start("sh", "csAnt-setup.sh", sourceDirectory);
             else
-                Starter.Start("cscript csAnt-setup.vbs");
+                Starter.Start("cscript", "csAnt-setup.vbs", sourceDirectory);
         }
     }
 }

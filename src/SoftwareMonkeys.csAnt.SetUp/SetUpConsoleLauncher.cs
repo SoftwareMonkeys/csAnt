@@ -3,9 +3,9 @@ using SoftwareMonkeys.csAnt.Processes;
 using System.IO;
 
 
-namespace SoftwareMonkeys.csAnt.Projects.Tests.Helpers
+namespace SoftwareMonkeys.csAnt.SetUp
 {
-    public class SetUpConsoleLauncher : BaseTestInstallLauncher
+    public class SetUpConsoleLauncher : BaseDeploymentSetUpLauncher
     {
         public DotNetProcessStarter Starter { get;set; }
 
@@ -14,7 +14,7 @@ namespace SoftwareMonkeys.csAnt.Projects.Tests.Helpers
             Starter = new DotNetProcessStarter();
         }
 
-        public override void Launch(string projectDirectory)
+        public override void Launch(string sourceDirectory, string projectDirectory)
         {
             var exeFile = projectDirectory
                 + Path.DirectorySeparatorChar

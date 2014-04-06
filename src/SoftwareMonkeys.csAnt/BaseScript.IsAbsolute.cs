@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using SoftwareMonkeys.csAnt.IO;
 
 namespace SoftwareMonkeys.csAnt
 {
@@ -7,12 +8,7 @@ namespace SoftwareMonkeys.csAnt
     {
         public bool IsAbsolute (string path)
         {
-            if (IsWindows) {
-                return path.Contains (":");
-            } else {
-                // TODO: Check if this is the best way of doing this
-                return path.StartsWith (Path.DirectorySeparatorChar.ToString());
-            }
+            return PathConverter.IsAbsolute(path);
         }
     }
 }

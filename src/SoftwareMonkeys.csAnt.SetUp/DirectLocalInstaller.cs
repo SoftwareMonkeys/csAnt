@@ -2,15 +2,15 @@ using System;
 using SoftwareMonkeys.csAnt.IO;
 
 
-namespace SoftwareMonkeys.csAnt.SetUp.Common
+namespace SoftwareMonkeys.csAnt.SetUp
 {
-    public class DirectInstaller : BaseInstaller
+    public class DirectLocalInstaller : BaseInstaller
     {
         public string SourcePath { get;set; }
 
         public string DestinationPath { get;set; }
 
-        public DirectInstaller (string sourcePath, string destinationPath)
+        public DirectLocalInstaller (string sourcePath, string destinationPath)
         {
             SourcePath = sourcePath;
             DestinationPath = destinationPath;
@@ -21,7 +21,7 @@ namespace SoftwareMonkeys.csAnt.SetUp.Common
             new FilesGrabber(
                 SourcePath,
                 DestinationPath
-                ).GrabInstallFiles();
+                ).GrabInstallation();
         }
     }
 }

@@ -1,25 +1,33 @@
 using System;
 using SoftwareMonkeys.csAnt.Processes;
+using SoftwareMonkeys.csAnt.IO;
 
 
 namespace SoftwareMonkeys.csAnt.SetUp
 {
-    public class SetUpScriptLauncher : BaseDeploymentSetUpLauncher
+    public class SetUpFromLocalScriptLauncher : BaseDeploymentSetUpLauncher
     {
         public ProcessStarter Starter { get;set; }
 
-        public SetUpScriptLauncher ()
+        public SetUpFromLocalScriptLauncher ()
         {
             Starter = new ProcessStarter();
         }
 
-        public override void Launch(string projectDirectory)
+        public override void Launch(string sourceDirectory, string projectDirectory)
         {
+            // TODO: Should sourceDirectory be set to Environment.CurrentDirectory?
+
+            Console.WriteLine("Launching setup from local script...");
+            Console.WriteLine("");
+            Console.WriteLine("Project directory:");
+            Console.WriteLine(projectDirectory);
+
             // TODO: Should the project directory be set to Environment.CurrentDirectory?
-            if (Platform.IsLinux)
-                Starter.Start("sh csAnt-setup.sh");
+            if (SoftwareMonkeys.csAnt.Processes.Platform.IsLinux)
+                Starter.Start("sh", "csAnt-setup-local.sh", sourceDirectory);
             else
-                Starter.Start("cscript csAnt-setup.vbs");
+                Starter.Start("cscript", "csAnt-setup-local.vbs", sourceDirectory);
         }
     }
 }

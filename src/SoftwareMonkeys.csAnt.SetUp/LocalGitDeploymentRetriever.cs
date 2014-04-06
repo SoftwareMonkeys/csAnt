@@ -2,13 +2,13 @@ using System;
 using SoftwareMonkeys.csAnt.SourceControl.Git;
 
 
-namespace SoftwareMonkeys.csAnt.SetUp.Common
+namespace SoftwareMonkeys.csAnt.SetUp
 {
-    public class LocalGitRetriever : BaseDeploymentFilesRetriever
+    public class LocalGitDeploymentRetriever : BaseDeploymentFilesRetriever
     {
         public Gitter Git { get;set; }
 
-        public LocalGitRetriever ()
+        public LocalGitDeploymentRetriever ()
         {
             Git = new Gitter();
         }

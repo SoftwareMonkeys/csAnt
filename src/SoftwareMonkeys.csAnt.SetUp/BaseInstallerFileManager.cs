@@ -1,13 +1,13 @@
 using System;
-namespace SoftwareMonkeys.csAnt.SetUp.Common
+namespace SoftwareMonkeys.csAnt.SetUp
 {
-    abstract public class BaseInstallerLauncher
+    abstract public class BaseInstallerFileManager
     {
-        public BaseInstallerLauncher ()
+        public BaseInstallerFileManager ()
         {
         }
 
-        public abstract void Launch(string projectDirectory);
+        public abstract void InstallFiles(string projectDirectory, string packageName, Version version, bool overwrite);
     }
 }
 

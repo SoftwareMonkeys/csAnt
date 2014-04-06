@@ -1,33 +1,63 @@
 using System;
-namespace SoftwareMonkeys.csAnt.SetUp.Common
+using System.IO;
+using SoftwareMonkeys.csAnt.Versions;
+using SoftwareMonkeys.csAnt.IO;
+
+
+namespace SoftwareMonkeys.csAnt.SetUp
 {
-    public class LocaInstallRetriever : BaseInstallerRetriever
+    public class LocalInstallRetriever : BaseInstallerRetriever
     {
         public string[] PatternList { get;set; }
 
         public bool Overwrite { get;set; }
 
-        public LocaInstallRetriever (
+        public IFileFinder FileFinder { get;set; }
+
+        public string SourcePath { get;set; }
+
+        public string DestinationPath { get;set; }
+
+        public string PackageName { get;set; }
+
+        public VersionManager Versions { get;set; }
+
+        public LocalInstallRetriever (
+            string sourcePath,
+            string destinationPath,
+            string packageName,
             string[] patternList,
             bool overwrite
             )
         {
+            SourcePath = sourcePath;
+            DestinationPath = destinationPath;
             PatternList = patternList;
             Overwrite = overwrite;
             PatternList = GetDefaultFilePatternList();
+            FileFinder = new FileFinder();
+            Versions = new VersionManager();
         }
 
-        public override void Retrieve(string sourceDir, string destinationDir)
+        public override void Retrieve()
         {
-            if (!Directory.Exists (destinationDir))
-                Directory.CreateDirectory (destinationDir);
+            if (!Directory.Exists (DestinationPath))
+                Directory.CreateDirectory (DestinationPath);
 
-            var files = Finder.FindFiles(sourceDir, patternList);
+            var files = FileFinder.FindFiles(SourcePath, PatternList);
 
             Console.WriteLine ("Total files: " + files.Length);
 
+            var destinationSubDir = DestinationPath
+                + Path.DirectorySeparatorChar
+                    + "lib"
+                    + Path.DirectorySeparatorChar
+                    + "csAnt" // TODO: Make this configurable
+                    + "."
+                    + Versions.GetVersion(SourcePath);
+
             foreach (var file in files) {
-                var toFile = file.Replace (sourceDir, destinationDir);
+                var toFile = file.Replace (SourcePath, destinationSubDir);
             
                 if (!Directory.Exists (Path.GetDirectoryName (toFile)))
                     Directory.CreateDirectory (Path.GetDirectoryName (toFile));
@@ -37,7 +67,7 @@ namespace SoftwareMonkeys.csAnt.SetUp.Common
                 Console.WriteLine ("  To:");
                 Console.WriteLine ("    " + toFile);
 
-                if (overwrite || !File.Exists (toFile))
+                if (Overwrite || !File.Exists (toFile))
                     File.Copy (file, toFile);
                 else
                     Console.WriteLine ("  Skipping copy.");

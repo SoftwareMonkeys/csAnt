@@ -1,9 +1,11 @@
 using System;
-namespace SoftwareMonkeys.csAnt.Projects.Tests.Helpers
+
+
+namespace SoftwareMonkeys.csAnt.SetUp
 {
-    abstract public class BaseTestInstallRetriever
+    abstract public class BaseDeploymentFilesRetriever
     {
-        public BaseTestInstallRetriever ()
+        public BaseDeploymentFilesRetriever ()
         {
         }
 

@@ -4,108 +4,137 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using SoftwareMonkeys.csAnt.IO;
+using SoftwareMonkeys.csAnt.Imports;
 
 
-namespace SoftwareMonkeys.csAnt.SetUp.Common
+namespace SoftwareMonkeys.csAnt.SetUp
 {
     // TODO: Tidy up the code in this class
-    public class Installer
+    public class Installer : BaseInstaller
     {
         public IFileFinder FileFinder { get;set; }
 
-        public string NugetFeedPath { get;set; }
+        public BaseInstallerRetriever Retriever { get;set; }
 
-        public string NugetPath
+        public BaseInstallerFileManager FileManager { get;set; }
+
+        public bool Import { get;set; }
+        public string ImportPath { get;set; }
+
+        public Importer Importer { get;set; }
+
+        public string PackageName { get;set; }
+
+        public bool Overwrite { get;set; }
+
+        public Version Version = new Version("0.0.0.0");
+        
+        public Installer (
+            BaseInstallerRetriever retriever,
+            BaseInstallerFileManager fileManager
+        )
         {
-            get { return NugetChecker.NugetPath; }
-            set { NugetChecker.NugetPath = value; }
+            Retriever = retriever;
+            FileManager = fileManager;
+            FileFinder = new FileFinder();
+            Importer = new Importer();
         }
 
-        public NugetChecker NugetChecker { get;set; }
-
-        public NugetExecutor NugetExecutor { get;set; }
-
-        public Installer ()
+        public Installer (
+            BaseInstallerRetriever retriever
+        )
         {
+            Retriever = retriever;
+            FileManager = new InstallerFileManager();
             FileFinder = new FileFinder();
-            NugetFeedPath = "https://www.myget.org/F/csant/";
-            NugetChecker = new NugetChecker();
-            NugetExecutor = new NugetExecutor();
+            Importer = new Importer();
+        }
+
+        public Installer (string packageName, string feedPath, string destination)
+        {
+            Retriever = new InstallerNugetRetriever(destination);
+            FileManager = new InstallerFileManager();
+            FileFinder = new FileFinder();
+            Importer = new Importer();
+        }
+
+        public Installer (string sourcePath, string destination)
+        {
+            Retriever = new InstallerNugetRetriever(destination);
+            FileManager = new InstallerFileManager();
+            FileFinder = new FileFinder();
+            Importer = new Importer();
         }
         
-        public void Install(string releaseName)
+        public Installer ()
         {
-            Install(releaseName, false);
+            Retriever = new InstallerNugetRetriever();
+            FileManager = new InstallerFileManager();
+            FileFinder = new FileFinder();
+            Importer = new Importer();
+        }
+        
+        /*public void Install(string packageName)
+        {
+            Install(packageName, Environment.CurrentDirectory, false);
         }
 
-        public void Install(string releaseName, bool forceOverwrite)
+        public void Install(string packageName, bool overwrite)
         {
-            Install(releaseName, new Version(0,0,0,0), forceOverwrite);
+            Install(packageName, Environment.CurrentDirectory, overwrite);
         }
 
-        public void Install(string releaseName, Version version, bool forceOverwrite)
+        public void Install(string packageName, string destination)
+        {
+            Install(packageName, destination, false);
+        }
+
+        public void Install(string packageName, string destination, bool forceOverwrite)
+        {
+            Install(packageName, destination, new Version(0,0,0,0), forceOverwrite);
+        }
+        
+        public void Install(string packageName, Version version, bool forceOverwrite)
+        {
+            Install(packageName, Environment.CurrentDirectory, version, forceOverwrite);
+        }
+
+        public void Install(string packageName, string destination, Version version, bool forceOverwrite)
+        {*/
+
+        public override void Install()
         {
             Console.WriteLine("");
             Console.WriteLine("Installing csAnt...");
             Console.WriteLine("");
             Console.WriteLine("Current directory:");
             Console.WriteLine(Environment.CurrentDirectory);
-            Console.WriteLine("");
-            Console.WriteLine("Nuget path:");
-            Console.WriteLine(NugetPath);
-            Console.WriteLine("");
-            Console.WriteLine("Nuget feed path:");
-            Console.WriteLine(NugetFeedPath);
-            Console.WriteLine("");
 
-            InstallNuget();
+            Retriever.Retrieve();
 
-            // TODO: Move this to a config file
-            var outputDir = "lib";
-
-            var outputCsAntDir = outputDir
-                + Path.DirectorySeparatorChar
-                    + "csAnt";
-
-            var arguments = new List<string>();
-            arguments.Add("install");
-            arguments.Add("csAnt");
-            arguments.Add("-OutputDirectory " + outputDir);
-            arguments.Add("-Source " + NugetFeedPath);
-
-            if (version > new Version(0, 0, 0, 0))
-                arguments.Add("-Version " + version.ToString());
-
-            if (!Directory.Exists(outputCsAntDir))
-                Directory.CreateDirectory(outputCsAntDir);
-
-            // TODO: Move the executor to a property
-            NugetExecutor.Execute(
-                arguments.ToArray()
+            FileManager.InstallFiles(
+                Environment.CurrentDirectory, // TODO: Make this configurable
+                PackageName,
+                Version,
+                Overwrite
             );
 
-            DeployFiles(version, forceOverwrite);
-        }
-
-        public void InstallNuget()
-        {
-            NugetChecker.CheckNuget();
+            if (Import)
+                ImportFiles();
         }
 
         public void DeployFiles(Version version, bool forceOverwrite)
         {
-            DeployGeneralFiles(version, forceOverwrite);
+            Console.WriteLine("");
+            Console.WriteLine("Installing files...");
+            Console.WriteLine("");
 
-            DeployLibFiles(version, forceOverwrite);
-        }
-
-        public void DeployGeneralFiles(Version version, bool forceOverwrite)
-        {
             var files = new string[]{
                 "csAnt.node",
                 "csAnt.sh",
                 "csAnt.bat",
-                "scripts/*"
+                "scripts/**",
+                "lib/**"
             };
 
             var libDir = Path.Combine(Environment.CurrentDirectory, "lib");
@@ -135,6 +164,8 @@ namespace SoftwareMonkeys.csAnt.SetUp.Common
                     File.Delete(toFile);
                 }
 
+                Console.WriteLine(toFile.Replace(Environment.CurrentDirectory, ""));
+
                 File.Copy(
                     file,
                     toFile
@@ -144,46 +175,7 @@ namespace SoftwareMonkeys.csAnt.SetUp.Common
 
         public void BackupFile(string existingFile)
         {
-
-        }
-
-        public void DeployLibFiles(Version version, bool forceOverwrite)
-        {
-            var libDir = Path.Combine(Environment.CurrentDirectory, "lib");
-
-            var versionedDir = GetcsAntPackageDir(libDir, version);
-
-            var versiondSubDir = versionedDir
-                + Path.DirectorySeparatorChar
-                + "lib"
-                + Path.DirectorySeparatorChar
-                + "csAnt";
-
-            var generalDir = Path.Combine(
-                libDir,
-                "csAnt"
-            );
-
-            // Move from "lib/csAnt.1.2.3.4/lib/csAnt/" to just "/lib/csAnt/"
-
-            foreach (var file in Directory.GetFiles(versiondSubDir))
-            {
-                var toFile = file.Replace(versiondSubDir, generalDir);
-
-                var isNewer = File.GetLastWriteTime(file) > File.GetLastWriteTime(toFile);
-
-                if (
-                    File.Exists(toFile)
-                    && (isNewer
-                        || forceOverwrite)
-                    )
-                {
-                    // TODO: Backup file before deleting
-                    File.Delete(toFile);
-                }
-
-                File.Copy(file, toFile);
-            }
+            throw new NotImplementedException();
         }
 
         public string GetcsAntPackageDir(string libDir, Version version)
@@ -203,11 +195,39 @@ namespace SoftwareMonkeys.csAnt.SetUp.Common
                     new DirectoryInfo(libDir).GetDirectories("csAnt.*").OrderByDescending(p => p.CreationTime)
                 )[0].FullName;
             }
-            
-            Console.WriteLine("csAnt package dir:");
-            Console.WriteLine(pkgDir);
 
             return pkgDir;
+        }
+
+        public void ImportFiles()
+        {
+            AddCsAntImport();
+
+            var files = new string[]{
+                "*.bat",
+                "*.sh",
+                "*.vbs",
+                "scripts/HelloWorld.cs"
+            };
+
+            foreach (var file in files)
+                Importer.ImportFile("csAnt", file);
+
+        }
+
+        public void AddCsAntImport()
+        {
+            Console.WriteLine("");
+            Console.WriteLine("Adding csAnt import...");
+            Console.WriteLine("");
+    
+            if (!Importer.ImportExists("csAnt"))
+            {
+                    Importer.AddImport(
+                            "csAnt",
+                            ImportPath
+                    );
+            }
         }
     }
 }

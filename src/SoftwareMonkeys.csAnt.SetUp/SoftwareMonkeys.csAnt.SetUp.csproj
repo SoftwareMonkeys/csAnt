@@ -7,8 +7,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{485BCC0F-7E4F-4430-9174-3A1ADA428E71}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>SoftwareMonkeys.csAnt.SetUp.Common</RootNamespace>
-    <AssemblyName>SoftwareMonkeys.csAnt.SetUp.Common</AssemblyName>
+    <RootNamespace>SoftwareMonkeys.csAnt.SetUp</RootNamespace>
     <NoWin32Manifest>False</NoWin32Manifest>
     <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
     <NoStdLib>False</NoStdLib>
@@ -25,7 +24,8 @@
     <ConsolePause>false</ConsolePause>
     <BaseIntermediateOutputPath>obj\</BaseIntermediateOutputPath>
     <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>SoftwareMonkeys.csAnt.SetUp.Common.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>SoftwareMonkeys.csAnt.SetUp.snk</AssemblyOriginatorKeyFile>
+    <AssemblyName>SoftwareMonkeys.csAnt.SetUp.Common</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>full</DebugType>
@@ -36,7 +36,8 @@
     <ConsolePause>false</ConsolePause>
     <DebugSymbols>true</DebugSymbols>
     <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>SoftwareMonkeys.csAnt.SetUp.Common.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>SoftwareMonkeys.csAnt.SetUp.snk</AssemblyOriginatorKeyFile>
+    <AssemblyName>SoftwareMonkeys.csAnt.SetUp</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <DebugType>none</DebugType>
@@ -49,6 +50,7 @@
     <RegisterForComInterop>False</RegisterForComInterop>
     <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
     <FileAlignment>4096</FileAlignment>
+    <AssemblyName>SoftwareMonkeys.csAnt.SetUp.Common</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <DebugType>none</DebugType>
@@ -60,6 +62,7 @@
     <RegisterForComInterop>False</RegisterForComInterop>
     <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
     <FileAlignment>4096</FileAlignment>
+    <AssemblyName>SoftwareMonkeys.csAnt.SetUp.Common</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
@@ -95,6 +98,10 @@
     <Compile Include="BaseInstaller.cs" />
     <Compile Include="DirectLocalInstaller.cs" />
     <Compile Include="DefaultFiles.cs" />
+    <Compile Include="SetUpFromLocalScriptLauncher.cs" />
+    <Compile Include="SetUpFromLocalScriptRetriever.cs" />
+    <Compile Include="SetUpFromLocalConsoleRetriever.cs" />
+    <Compile Include="SetUpFromLocalConsoleLauncher.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

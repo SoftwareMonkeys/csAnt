@@ -1,6 +1,6 @@
 using System;
 
-namespace SoftwareMonkeys.csAnt.SetUp.Common
+namespace SoftwareMonkeys.csAnt.SetUp
 {
     public class PatternListFileNotFoundException : Exception
     {

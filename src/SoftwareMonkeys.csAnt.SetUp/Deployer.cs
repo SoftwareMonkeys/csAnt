@@ -2,25 +2,25 @@ using System;
 using SoftwareMonkeys.csAnt.Processes;
 
 
-namespace SoftwareMonkeys.csAnt.Projects.Tests.Helpers
+namespace SoftwareMonkeys.csAnt.SetUp
 {
     public class Deployer
     {
-        public BaseTestInstallRetriever Retriever { get;set; }
+        public BaseDeploymentFilesRetriever Retriever { get;set; }
 
-        public BaseTestInstallLauncher SetupLauncher { get;set; }
+        public BaseDeploymentSetUpLauncher SetupLauncher { get;set; }
 
         public Deployer()
         {
             Construct(
-                new LocalGitRetriever(), // TODO: Change default retriever to one which directly copies files (to avoid the need to use git)
+                new LocalGitDeploymentRetriever(), // TODO: Change default retriever to one which directly copies files (to avoid the need to use git)
                 new SetUpConsoleLauncher() // TODO: Change default launcher to one which directly uses the Installer component (to avoid the need to build and repack the setup console exe)
                 );
         }
 
         public Deployer (
-            BaseTestInstallRetriever retriever,
-            BaseTestInstallLauncher launcher
+            BaseDeploymentFilesRetriever retriever,
+            BaseDeploymentSetUpLauncher launcher
         )
         {
             Construct(
@@ -30,8 +30,8 @@ namespace SoftwareMonkeys.csAnt.Projects.Tests.Helpers
         }
 
         public void Construct (
-            BaseTestInstallRetriever retriever,
-            BaseTestInstallLauncher launcher
+            BaseDeploymentFilesRetriever retriever,
+            BaseDeploymentSetUpLauncher launcher
         )
         {
             Retriever = retriever;
@@ -42,7 +42,7 @@ namespace SoftwareMonkeys.csAnt.Projects.Tests.Helpers
         {
             Retriever.Retrieve(source, destination);
 
-            SetupLauncher.Launch(destination);
+            SetupLauncher.Launch(source, destination);
         }
     }
 }

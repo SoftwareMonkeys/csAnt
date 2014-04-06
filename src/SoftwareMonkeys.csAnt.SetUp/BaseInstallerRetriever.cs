@@ -1,5 +1,5 @@
 using System;
-namespace SoftwareMonkeys.csAnt.SetUp.Common
+namespace SoftwareMonkeys.csAnt.SetUp
 {
     abstract public class BaseInstallerRetriever
     {
@@ -7,7 +7,7 @@ namespace SoftwareMonkeys.csAnt.SetUp.Common
         {
         }
 
-        public abstract void Retrieve(string source, string destination);
+        public abstract void Retrieve();
     }
 }
 

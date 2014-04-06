@@ -4,9 +4,9 @@ using SoftwareMonkeys.csAnt.IO;
 
 namespace SoftwareMonkeys.csAnt.SetUp
 {
-    public class SetUpFromLocalScriptRetriever
+    public class SetUpFromLocalConsoleRetriever
     {
-        public SetUpFromLocalScriptRetriever ()
+        public SetUpFromLocalConsoleRetriever ()
         {
         }
 
@@ -16,8 +16,7 @@ namespace SoftwareMonkeys.csAnt.SetUp
                 source,
                 destination
                 ).GrabOriginalFiles(
-                    "csAnt-setup-local.sh",
-                    "csAnt-setup-local.vbs"
+                    "csAnt-SetUpFromLocal.exe"
                 );
         }
     }

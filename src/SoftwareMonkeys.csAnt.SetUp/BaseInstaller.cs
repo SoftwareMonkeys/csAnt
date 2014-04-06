@@ -1,11 +1,13 @@
 using System;
-namespace SoftwareMonkeys.csAnt.SetUp.Common
+namespace SoftwareMonkeys.csAnt.SetUp
 {
-    public class BaseInstaller
+    abstract public class BaseInstaller
     {
         public BaseInstaller ()
         {
         }
+
+        abstract public void Install();
     }
 }
 

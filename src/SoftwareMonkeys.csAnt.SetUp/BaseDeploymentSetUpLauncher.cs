@@ -1,13 +1,15 @@
 using System;
-namespace SoftwareMonkeys.csAnt.Projects.Tests.Helpers
+
+
+namespace SoftwareMonkeys.csAnt.SetUp
 {
-    abstract public class BaseTestInstallLauncher
+    abstract public class BaseDeploymentSetUpLauncher
     {
-        public BaseTestInstallLauncher ()
+        public BaseDeploymentSetUpLauncher ()
         {
         }
 
-        public abstract void Launch(string projectDirectory);
+        public abstract void Launch(string sourceDirectory, string projectDirectory);
     }
 }
 

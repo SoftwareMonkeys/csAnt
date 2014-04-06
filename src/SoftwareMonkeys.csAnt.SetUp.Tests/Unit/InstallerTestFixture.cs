@@ -1,24 +1,22 @@
 using System;
 using NUnit.Framework;
 using SoftwareMonkeys.csAnt.External.Nuget;
-using SoftwareMonkeys.csAnt.SetUp.Common;
+using SoftwareMonkeys.csAnt.SetUp;
 
 
-namespace SoftwareMonkeys.csAnt.SetUp.Common.Tests.Unit
+namespace SoftwareMonkeys.csAnt.SetUp.Tests.Unit
 {
     [TestFixture]
     public class InstallerTestFixture : BaseSetUpUnitTestFixture
     {
         [Test]
-        public void Install()
+        public void Test_Install()
         {
-            var installer = new Installer();
+            var installer = new Installer(
+                CreateMockRetriever(OriginalDirectory, WorkingDirectory)
+            );
 
-            // Assign mock nuget components to avoid actually using nuget during the test (fas
-            installer.NugetChecker = CreateMockNugetChecker(false);
-            installer.NugetExecutor = CreateMockNugetExecutor("0.0.0.1");
-
-            installer.Install("csAnt");
+            installer.Install();
 
             var script = GetDummyScript();
 
@@ -29,7 +27,33 @@ namespace SoftwareMonkeys.csAnt.SetUp.Common.Tests.Unit
             Assert.IsFalse(script.IsError, "An error occurred.");
         }
 
-        public NugetChecker CreateMockNugetChecker(bool checkForNuget)
+        [Test]
+        public void Test_Install_Import()
+        {
+            var installer = new Installer(
+                CreateMockInstallerRetriever(
+                    OriginalDirectory,
+                    WorkingDirectory,
+                    new Version("0.0.0.1")
+                )
+            );
+
+            installer.ImportPath = OriginalDirectory;
+            installer.Import = true;
+
+            installer.Install();
+
+            var script = GetDummyScript();
+
+            // TODO: Is launching a hello world script the best way to check that the installation worked considering this is a unit test and not an integration test?
+
+            script.ExecuteScript("HelloWorld");
+
+            Assert.IsFalse(script.IsError, "An error occurred.");
+        }
+
+        // TODO: Remove if not needed
+        /*public NugetChecker CreateMockNugetChecker(bool checkForNuget)
         {
             return new MockNugetChecker()
             {
@@ -37,9 +61,21 @@ namespace SoftwareMonkeys.csAnt.SetUp.Common.Tests.Unit
             };
         }
 
-        public NugetExecutor CreateMockNugetExecutor(string version)
+        public NugetExecutor CreateMockNugetExecutor(Version version)
         {
             return new MockNugetExecutor(OriginalDirectory, WorkingDirectory, version);
+        }*/
+        
+        public MockInstallerRetriever CreateMockRetriever(string source, string destination)
+        {
+            return CreateMockRetriever(source, destination, new Version("0.0.0.0"));
+        }
+
+        public MockInstallerRetriever CreateMockRetriever(string source, string destination, Version version)
+        {
+            var retriever = new MockInstallerRetriever(source, destination, version);
+
+            return retriever;
         }
     }
 }
