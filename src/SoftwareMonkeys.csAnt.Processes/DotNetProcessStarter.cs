@@ -8,6 +8,12 @@ namespace SoftwareMonkeys.csAnt.Processes
     {
         public ProcessStarter Starter { get;set; }
 
+        public bool IsError
+        {
+            get { return Starter.IsError; }
+            set { Starter.IsError = value; }
+        }
+
         public DotNetProcessStarter ()
         {
             Starter = new ProcessStarter();

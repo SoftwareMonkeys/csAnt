@@ -8,15 +8,35 @@ namespace SoftwareMonkeys.csAnt.Processes
 {
     public class ProcessStarter
     {
+        public bool IsError { get;set; }
+
         public ProcessStarter ()
         {
+        }
+
+        public Process Start(string command)
+        {
+            if (command.Contains(" "))
+            {
+                var cmd = String.Empty;
+                var arguments = new string[]{};
+                var list = new List<string>(command.Split(' '));
+                cmd = list[0];
+                list.RemoveAt(0);
+                arguments = list.ToArray();
+                return Start(cmd, arguments);
+            }
+            else
+            {
+                return Start(command, new string[]{});
+            }
         }
         /// <summary>
         /// Starts/executes a process in the current thread.
         /// </summary>
         /// <param name='command'></param>
         /// <param name='arguments'></param>
-        public Process Start(string command, string[] arguments)
+        public Process Start(string command, params string[] arguments)
         {
             arguments = FixArguments(arguments);
 
@@ -74,6 +94,8 @@ namespace SoftwareMonkeys.csAnt.Processes
             (
                 delegate(object sender, DataReceivedEventArgs e)
                 {
+                    IsError = true;
+
                     Console.SetOut (c);
                     c.WriteLine(e.Data);
                 }
@@ -115,6 +137,7 @@ namespace SoftwareMonkeys.csAnt.Processes
             }
             catch (Exception ex)
             {
+                IsError = true;
                 Console.WriteLine ("Error starting process.", ex);
             }
 
