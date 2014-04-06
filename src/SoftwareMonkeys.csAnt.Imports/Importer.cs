@@ -9,8 +9,33 @@ namespace SoftwareMonkeys.csAnt.Imports
 {
     public class Importer
     {
-        public string WorkingDirectory { get;set; }
-        public string StagingDirectory { get;set; }
+        private string workingDirectory;
+        public string WorkingDirectory
+        {
+            get
+            {
+                if (!String.IsNullOrEmpty(workingDirectory))
+                    return workingDirectory;
+                else
+                    return Environment.CurrentDirectory;
+            }
+            set { workingDirectory = value; }
+        }
+
+        private string stagingDirectory;
+        public string StagingDirectory
+        {
+            get
+            {
+                if (String.IsNullOrEmpty(stagingDirectory))
+                    stagingDirectory = GetStagingDirectory();
+                return stagingDirectory;
+            }
+            set
+            {
+                stagingDirectory = value;
+            }
+        }
         public bool IsVerbose { get;set; }
         public Gitter Git { get;set; }
         public IFileFinder Finder { get;set; }
@@ -18,7 +43,6 @@ namespace SoftwareMonkeys.csAnt.Imports
 
         public Importer ()
         {
-            WorkingDirectory = Environment.CurrentDirectory;
             StagingDirectory = GetStagingDirectory();
             Git = new Gitter();
             Finder = new FileFinder();
@@ -34,6 +58,9 @@ namespace SoftwareMonkeys.csAnt.Imports
             Console.WriteLine("Path:");
             Console.WriteLine(importProjectPath);
             Console.WriteLine("");
+
+            if (String.IsNullOrEmpty(StagingDirectory))
+                throw new Exception("StagingDirectory is not set."); // TODO: Create custom error class
 
             var importProjectName = importProject;
 
@@ -280,6 +307,9 @@ namespace SoftwareMonkeys.csAnt.Imports
 
         public void ExportFile(string projectName, string relativePath, string destination, bool flattenHeirarchy)
         {
+            if (PathConverter.IsAbsolute(relativePath))
+                relativePath = PathConverter.ToRelative(relativePath);
+
             destination = PathConverter.ToAbsolute(destination);
 
             AddImportPattern(projectName, relativePath);
@@ -344,8 +374,10 @@ namespace SoftwareMonkeys.csAnt.Imports
 
                     Git.AddTo(importedProjectDirectory, toFile);
 
-                    throw new NotImplementedException();
-                    //Git.CommitTo (importedProjectDirectory, "Exported from '" + CurrentNode.Name + "' project.");
+                    // TODO: Find a better way to get the project name
+                    var name = Path.GetFileName(WorkingDirectory);
+
+                    Git.CommitTo (importedProjectDirectory, "Exported from '" + name + "' project.");
 
                     // Get the remote name
                     var remoteName = Path.GetFileName(importedProjectDirectory);

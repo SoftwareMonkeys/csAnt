@@ -3,14 +3,16 @@ using NUnit.Framework;
 using System.IO;
 using SoftwareMonkeys.csAnt.IO;
 
-namespace SoftwareMonkeys.csAnt.Tests
+namespace SoftwareMonkeys.csAnt.Imports.Tests
 {
 	[TestFixture]
-	public class ExportFileTestFixture : BaseTestFixture
+	public class ExportFileTestFixture : BaseImportsIntegrationTestFixture
 	{
 		[Test]
 		public void Test_ExportFile()
 		{
+            // TODO: Overhaul test to use Importer instead of using a dummy script
+
 			var script = (BaseScript)GetDummyScript();
 
             new FilesGrabber(
@@ -26,32 +28,32 @@ namespace SoftwareMonkeys.csAnt.Tests
 				+ Path.DirectorySeparatorChar
 					+ "Projects";
 
-			var project1Dir = projectsDir
+			var sourceProjectDir = projectsDir
 				+ Path.DirectorySeparatorChar
-					+ "ProjectOne";
+					+ "SourceProject";
 
-			var project2Dir = projectsDir
+			var destinationProjectDir = projectsDir
 				+ Path.DirectorySeparatorChar
-					+ "ProjectTwo";
+					+ "DestinationProject";
 			
 			Console.WriteLine ("");
-			Console.WriteLine ("Project One:");
-			Console.WriteLine (project1Dir);
-			Console.WriteLine ("Project Two:");
-			Console.WriteLine (project2Dir);
+			Console.WriteLine ("Source project:");
+			Console.WriteLine (sourceProjectDir);
+			Console.WriteLine ("Destination project:");
+			Console.WriteLine (destinationProjectDir);
 			Console.WriteLine ("");
 
 			Console.WriteLine ("Creating test project directories...");
 			Console.WriteLine ("");
 
-			script.EnsureDirectoryExists(project1Dir);
-			script.EnsureDirectoryExists(project2Dir);
+			script.EnsureDirectoryExists(sourceProjectDir);
+			script.EnsureDirectoryExists(destinationProjectDir);
 			
 			Console.WriteLine ("Relocating to project 2...");
 			Console.WriteLine ("");
 
 			// Move to second project
-			script.Relocate(project2Dir);
+			script.Relocate(destinationProjectDir);
 			
 			Console.WriteLine ("Initializing git repository...");
 			Console.WriteLine ("");
@@ -59,29 +61,29 @@ namespace SoftwareMonkeys.csAnt.Tests
 			// Initialize git
 			script.Git.Init();
 
-			var scriptsDir = project2Dir
+			var destinationScriptsDir = destinationProjectDir
 				+ Path.DirectorySeparatorChar
 					+ "scripts";
 
-			var scriptFile = scriptsDir
+			var destinationScriptFile = destinationScriptsDir
 				+ Path.DirectorySeparatorChar
 					+ "TestScript.cs";
 
-			script.EnsureDirectoryExists(scriptsDir);
+			script.EnsureDirectoryExists(destinationScriptsDir);
 
-			var scriptContent = "test";
+			var destinationScriptContent = "test";
 			
 			Console.WriteLine ("Creating a dummy script file...");
 			Console.WriteLine ("");
 
 			// Create the script file
-			File.WriteAllText(scriptFile, scriptContent);
+			File.WriteAllText(destinationScriptFile, destinationScriptContent);
 
 			Console.WriteLine ("Adding the dummy script file to git...");
 			Console.WriteLine ("");
 
 			// Add the script file to git
-			script.Git.Add (scriptFile);
+			script.Git.Add (destinationScriptFile);
 			
 			Console.WriteLine ("Committing file to git...");
 			Console.WriteLine ("");
@@ -93,7 +95,7 @@ namespace SoftwareMonkeys.csAnt.Tests
 			Console.WriteLine ("");
 
 			// Switch back to project one
-			script.Relocate(project1Dir);
+			script.Relocate(sourceProjectDir);
 
             // Create the required file nodes
             script.CreateNodes();
@@ -102,14 +104,14 @@ namespace SoftwareMonkeys.csAnt.Tests
 			Console.WriteLine ("");
 
 			// Add project 2 as import
-			script.Importer.AddImport("ProjectTwo", project2Dir);
+			script.Importer.AddImport("DestinationProject", destinationProjectDir);
 
 			Console.WriteLine ("Importing test script to project from project two...");
 			Console.WriteLine ("");
 
-			script.Importer.ImportFile("ProjectTwo", "scripts/TestScript.cs", "scripts", false);
+			script.Importer.ImportFile("DestinationProject", "scripts/TestScript.cs", "scripts", false);
 
-			var expectedFile = project1Dir
+			var expectedFile = sourceProjectDir
 				+ Path.DirectorySeparatorChar
 				+ "scripts"
 				+ Path.DirectorySeparatorChar
@@ -123,7 +125,7 @@ namespace SoftwareMonkeys.csAnt.Tests
 
 
 			// Add another file
-			var script2File = project1Dir
+			var script2File = sourceProjectDir
 				+ Path.DirectorySeparatorChar
 				+ "scripts"
 					+ Path.DirectorySeparatorChar
@@ -139,11 +141,11 @@ namespace SoftwareMonkeys.csAnt.Tests
 			Console.WriteLine ("Exporting the second test script to project two...");
 			Console.WriteLine ("");
 
-			script.Importer.ExportFile("ProjectTwo", script2File);
+			script.Importer.ExportFile("DestinationProject", script2File);
 			
 			var expectedFile2 = script.Importer.StagingDirectory
 				+ Path.DirectorySeparatorChar
-				+ "ProjectTwo"
+				+ "DestinationProject"
 				+ Path.DirectorySeparatorChar
 				+ "scripts"
 				+ Path.DirectorySeparatorChar
@@ -161,7 +163,7 @@ namespace SoftwareMonkeys.csAnt.Tests
 			Console.WriteLine ("Pulling git changes...");
 			Console.WriteLine ("");
 */
-			var expectedFile3Path = project2Dir
+			var expectedFile3Path = destinationProjectDir
 				+ Path.DirectorySeparatorChar
 					+ "scripts"
 					+ Path.DirectorySeparatorChar

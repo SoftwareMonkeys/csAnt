@@ -3,14 +3,16 @@ using System.IO;
 using NUnit.Framework;
 using SoftwareMonkeys.csAnt.IO;
 
-namespace SoftwareMonkeys.csAnt.Tests
+namespace SoftwareMonkeys.csAnt.Imports.Tests
 {
 	[TestFixture]
-	public class ImportSyncTestFixture : BaseTestFixture
+	public class ImportSyncTestFixture : BaseImportsIntegrationTestFixture
 	{
 		[Test]
 		public void Test_ImportSync()
 		{
+            // TODO: Overhaul test to use Importer instead of using a dummy script
+
 			var script = (BaseScript)GetDummyScript();
 
             new FilesGrabber(
