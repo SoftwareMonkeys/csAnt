@@ -7,6 +7,7 @@ using SoftwareMonkeys.csAnt.External.Nuget;
 using SoftwareMonkeys.csAnt.Projects;
 using SoftwareMonkeys.csAnt.SetUp;
 using SoftwareMonkeys.csAnt.SourceControl.Git;
+using SoftwareMonkeys.csAnt.External.Nuget.Tests.Mock;
 
 
 namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole.Tests.Unit
@@ -153,36 +154,11 @@ namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole.Tests.Unit
 
         public string CreateMockFeed()
         {
-            var feedPath = Path.GetDirectoryName(WorkingDirectory)
+            var feedPath = Path.GetDirectoryName(CurrentDirectory)
                 + Path.DirectorySeparatorChar
                     + "TestFeed";
 
-            var nuget = new NugetPacker(WorkingDirectory);
-
-            var pkgDir = WorkingDirectory
-                + Path.DirectorySeparatorChar
-                    + "pkg";
-
-            var specFile = pkgDir
-                    + Path.DirectorySeparatorChar
-                    + "csAnt.nuspec";
-
-            // TODO: Perform packaging in temporary directory instead of main project
-            nuget.PackageFile(specFile);
-
-            var pkgFile = FileNavigator.GetNewestFile(
-                pkgDir
-                + Path.DirectorySeparatorChar
-                + "csAnt"
-            );
-
-            var pkgToFile = feedPath
-                + Path.DirectorySeparatorChar
-                    + Path.GetFileName(pkgFile);
-
-            DirectoryChecker.EnsureDirectoryExists(Path.GetDirectoryName(pkgToFile));
-
-            File.Copy(pkgFile, pkgToFile);
+            new MockNugetFeedCreator(CurrentDirectory, feedPath).Create();
 
             MockFeedPath = feedPath;
 

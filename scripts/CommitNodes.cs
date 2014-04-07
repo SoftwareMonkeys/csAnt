@@ -22,25 +22,25 @@ class CommitNodesScript : BaseProjectScript
             "src/**.node"       
         };
 
-        Git(
+        Git.Git(
             "reset"
         );
 
         foreach (var file in FindFiles(patterns))
         {
-            Git(
+            Git.Git(
                 "add",
                 ToRelative(file)
             );
         }
 
-        Git(
+        Git.Git(
             "commit",
             "*.node",
             "-m " + message
         );
 
-        Git(
+        Git.Git(
             "push",
             "origin",
             "master"

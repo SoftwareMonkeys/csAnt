@@ -19,7 +19,7 @@ namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole
 
         public static Version Version = new Version(0,0,0,0);
 
-        public static string NugetSourcePath { get;set; }
+        public static string NugetSourcePath = "https://www.myget.org/F/csant/";
 
         public static string NugetPath = "http://nuget.org/nuget.exe";
 

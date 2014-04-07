@@ -45,6 +45,8 @@ class CyclePublishScript : BaseProjectScript
         // Commit the file nodes containing the updated versions
         ExecuteScript("CommitVersion");
 
+        Git.Push("origin", "master");
+
 		if (!IsError)
 		{
 			// Publish files
