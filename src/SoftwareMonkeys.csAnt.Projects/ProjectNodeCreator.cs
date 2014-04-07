@@ -5,13 +5,17 @@ namespace SoftwareMonkeys.csAnt.Projects
 {
     public class ProjectNodeCreator : NodesCreator
     {
-        public ProjectNodeState State
+        public new ProjectNodeState State
         {
             get { return (ProjectNodeState)base.State; }
             set { base.State = value; }
         }
 
         public ProjectNodeCreator (INodeState nodeState) : base(nodeState)
+        {
+        }
+
+        public ProjectNodeCreator () : base(new ProjectNodeState())
         {
         }
 
