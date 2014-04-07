@@ -32,6 +32,8 @@ class Test_BuildFromSourcePackageScript : BaseProjectTestScript
             CurrentDirectory
         ).GrabOriginalFiles();
 
+        CreateNodes();
+
 		ExecuteScript("EnsurePackage", "csAnt-src");
 
 		if (!IsError)

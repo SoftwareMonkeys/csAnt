@@ -7,7 +7,7 @@ using SoftwareMonkeys.csAnt.IO;
 namespace SoftwareMonkeys.csAnt.Tests.Scripting
 {
     [TestFixture]
-    public class GetTestScriptTestFixture : BaseScriptingTestFixture
+    public class GetTestScriptTestFixture : BaseScriptingUnitTestFixture
     {
         [Test]
         public void Test_GetTestScript_HasCorrectDefaultPropertyValues()
@@ -15,7 +15,7 @@ namespace SoftwareMonkeys.csAnt.Tests.Scripting
             Console.WriteLine ("");
             Console.WriteLine ("Testing the GetTestScript function.");
 
-            var script = GetTestScript("MyTestScript");
+            var script = new TestScriptCreator().Create("MyTestScript");
             
             Console.WriteLine ("");
             Console.WriteLine ("Working directory:");
@@ -52,7 +52,7 @@ namespace SoftwareMonkeys.csAnt.Tests.Scripting
             Console.WriteLine ("Testing the GetTestScript function.");
 
             var script = GetTestScript("MyTestScript");
-            
+
             Console.WriteLine ("");
             Console.WriteLine ("Working directory:");
             Console.WriteLine (WorkingDirectory);

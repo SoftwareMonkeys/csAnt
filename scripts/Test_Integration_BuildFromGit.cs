@@ -26,18 +26,39 @@ class Test_BuildFromGitScript : BaseProjectTestScript
 		Console.WriteLine("Test building solutions from git clone...");
 		Console.WriteLine("");
 
-		var dummyProjectDir = PrepareTest();
+        // Clone to test dir
+        Console.WriteLine("Cloning to test directory...");
+
+        Git.Clone(OriginalDirectory, CurrentDirectory);
+
+        CreateNodes();
+
+        // Grab the required library files
+        Console.WriteLine("Grabbing required library files...");
+
+        new FilesGrabber(
+            OriginalDirectory,
+            CurrentDirectory
+        ).GrabOriginalLibFiles();
+
+        // Launch the build cycle
+        Console.WriteLine("Launching build cycle...");
+
+        ExecuteScript("CycleBuild");
+        
+
+		/*var dummyProjectDir = PrepareTest();
 
 		if (!IsError)
 		{
 			// Build and test the cloned copy of the project
 			BuildClonedCopy(dummyProjectDir);
-		}
+		}*/
 
 		return !IsError;
 	}
 
-	public string PrepareTest()
+	/*public string PrepareTest()
 	{
         var testDir = CurrentDirectory;
 		
@@ -64,10 +85,9 @@ class Test_BuildFromGitScript : BaseProjectTestScript
 		);
 
 		return dummyProjectDir;
-	}
+	}*/
 
-	public string CloneToTmpDirectory()
-	{
+	/*{
 		Console.WriteLine("Cloning to tmp directory...");
 
 		var projectDirectory = Path.GetDirectoryName(CurrentDirectory)
@@ -82,14 +102,14 @@ class Test_BuildFromGitScript : BaseProjectTestScript
 		GitClone(OriginalDirectory, projectDirectory);
 
 		return projectDirectory;
-	}
+	}*/
 
-	public void BuildClonedCopy(string dummyProjectDir)
+	/*public void BuildClonedCopy(string dummyProjectDir)
 	{
 		CurrentDirectory = dummyProjectDir;
 
 		// Build and test
 		ExecuteScript("CycleBuild");
-	}
+	}*/
 
 }

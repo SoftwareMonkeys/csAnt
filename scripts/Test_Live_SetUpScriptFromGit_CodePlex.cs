@@ -3,6 +3,7 @@
 //css_ref ../lib/csAnt/bin/Release/net-40/SoftwareMonkeys.csAnt.Projects.dll;
 //css_ref ../lib/csAnt/bin/Release/net-40/SoftwareMonkeys.csAnt.Projects.Tests.dll;
 //css_ref ../lib/csAnt/bin/Release/net-40/SoftwareMonkeys.csAnt.Projects.Tests.Scripting.dll;
+//css_ref ../lib/csAnt/bin/Release/net-40/SoftwareMonkeys.csAnt.SourceControl.Git.dll;
 
 using System;
 using System.IO;
@@ -13,6 +14,8 @@ using SoftwareMonkeys.csAnt.IO;
 using SoftwareMonkeys.csAnt.Projects;
 using SoftwareMonkeys.csAnt.Projects.Tests;
 using SoftwareMonkeys.csAnt.Projects.Tests.Scripting;
+using SoftwareMonkeys.csAnt.Projects.Tests.Helpers;
+using SoftwareMonkeys.csAnt.SourceControl.Git;
 
 class Test_SetUpFromGitScript : BaseProjectTestScript
 {
@@ -26,73 +29,21 @@ class Test_SetUpFromGitScript : BaseProjectTestScript
 		// TODO: Better organize this script
 
 		Console.WriteLine("");
-		Console.WriteLine("Test building solutions from git clone...");
+		Console.WriteLine("Test building solutions from CodePlex git clone...");
 		Console.WriteLine("");
 
-		new FilesGrabber(
-                    OriginalDirectory,
-                    CurrentDirectory
-                ).GrabOriginalFiles();
+        var gitPath = "https://git01.codeplex.com/csant";
 
-		// Clone the project to another directory
-		var dummyProjectDir = CloneToTmpDirectory();
+        // Clone from CodePlex
+        new Gitter().Clone(gitPath, CurrentDirectory);
+   
+        // Run the setup script
+        new SetUpScriptLauncher().Launch(CurrentDirectory);
 
-		SetUpClonedCopy(dummyProjectDir);
-
-        StartHelloWorld();
+        // Test the hello world script to ensure setup worked
+        new HelloWorldLauncher().Launch();
 
 		return !IsError;
-	}
-
-    public void StartHelloWorld()
-    {
-		if (IsLinux)
-			StartProcess("sh csAnt.sh HelloWorld");
-		else
-			StartProcess("csAnt.bat HelloWorld");
-    }
-
-	public void EnsurePackages()
-	{
-        var testDir = CurrentDirectory;
-
-		// Relocate back to the original directory to ensure that the packages have been created
-		Relocate(OriginalDirectory);
-
-        ExecuteScript("EnsurePackage");
-
-		// Relocated back to the test directory
-		Relocate(testDir);
-	}
-
-	public string CloneToTmpDirectory()
-	{
-		Console.WriteLine("Cloning to tmp directory...");
-
-		var projectDirectory = Path.GetDirectoryName(CurrentDirectory)
-                    + Path.DirectorySeparatorChar
-                    + "TestProject";
-
-		Console.WriteLine("Tmp directory:");
-		Console.WriteLine(projectDirectory);
-
-		Directory.CreateDirectory(projectDirectory);
-
-		GitClone("https://git01.codeplex.com/csant", projectDirectory);
-
-		Relocate(projectDirectory);
-
-		CreateNodes();
-
-		return projectDirectory;
-	}
-
-	public void SetUpClonedCopy(string dummyProjectDir)
-	{
-		if (IsLinux)
-			StartProcess("sh csAnt-setup.sh");
-		else
-			throw new NotImplementedException("Windows support hasn't yet been implemented");
 	}
 
 }

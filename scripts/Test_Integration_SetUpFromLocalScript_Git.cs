@@ -3,6 +3,7 @@
 //css_ref ../lib/csAnt/bin/Release/net-40/SoftwareMonkeys.csAnt.Projects.dll;
 //css_ref ../lib/csAnt/bin/Release/net-40/SoftwareMonkeys.csAnt.Projects.Tests.dll;
 //css_ref ../lib/csAnt/bin/Release/net-40/SoftwareMonkeys.csAnt.Projects.Tests.Scripting.dll;
+//css_ref ../lib/csAnt/bin/Release/net-40/SoftwareMonkeys.csAnt.SourceControl.Git.dll;
 
 using System;
 using System.IO;
@@ -13,12 +14,15 @@ using SoftwareMonkeys.csAnt.IO;
 using SoftwareMonkeys.csAnt.Projects;
 using SoftwareMonkeys.csAnt.Projects.Tests;
 using SoftwareMonkeys.csAnt.Projects.Tests.Scripting;
+using SoftwareMonkeys.csAnt.Tests.Helpers;
+using SoftwareMonkeys.csAnt.SourceControl.Git;
+using SoftwareMonkeys.csAnt.SetUp;
 
-class Test_BuildFromGitScript : BaseProjectTestScript
+class Test_SetUpFromLocalScript_Git : BaseProjectTestScript
 {
 	public static void Main(string[] args)
 	{
-		new Test_BuildFromGitScript().Start(args);
+		new Test_SetUpFromLocalScript_Git().Start(args);
 	}
 	
 	public override bool Run(string[] args)
@@ -29,28 +33,20 @@ class Test_BuildFromGitScript : BaseProjectTestScript
 		Console.WriteLine("Test building solutions from git clone...");
 		Console.WriteLine("");
 
-        // TODO: Check if this is needed. It take a long time to complete.
-		EnsurePackages();
+        // Clone from original directory
+        new Gitter().Clone(OriginalDirectory, CurrentDirectory);
 
-		new FilesGrabber(
-                    OriginalDirectory,
-                    CurrentDirectory
-                ).GrabOriginalFiles();
+        // Run the setup from local script
+        new SetUpFromLocalScriptLauncher().Launch(OriginalDirectory, CurrentDirectory);
 
-		// Clone the project to another directory
-		var dummyProjectDir = CloneToTmpDirectory();
-
-		SetUpClonedCopy(dummyProjectDir);
-
-		if (IsLinux)
-			StartProcess("sh csAnt.sh HelloWorld");
-		else
-			StartProcess("csAnt.bat HelloWorld");
+        // Test the hello world script to ensure setup worked
+        new HelloWorldScriptLauncher().Launch();
 
 		return !IsError;
 	}
 
-	public void EnsurePackages()
+// TODO: Remove if not needed
+	/*public void EnsurePackages()
 	{
         var testDir = CurrentDirectory;
 
@@ -91,6 +87,6 @@ class Test_BuildFromGitScript : BaseProjectTestScript
 			StartProcess("sh csAnt-setup-local.sh");
 		else
 			throw new NotImplementedException("Windows support hasn't yet been implemented");
-	}
+	}*/
 
 }

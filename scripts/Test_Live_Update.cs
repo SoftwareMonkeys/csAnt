@@ -2,7 +2,7 @@
 //css_ref ../lib/csAnt/bin/Release/net-40/SoftwareMonkeys.csAnt.Tests.Scripting.dll;
 //css_ref ../lib/csAnt/bin/Release/net-40/SoftwareMonkeys.csAnt.Projects.Tests.dll;
 //css_ref ../lib/csAnt/bin/Release/net-40/SoftwareMonkeys.csAnt.Projects.Tests.Scripting.dll;
-//css_ref ../lib/csAnt/bin/Release/net-40/SoftwareMonkeys.csAnt.SetUp.Common.dll;
+//css_ref ../lib/csAnt/bin/Release/net-40/SoftwareMonkeys.csAnt.SetUp.dll;
 //css_ref ../lib/NUnit/bin/nunit.framework.dll;
 
 using System;
@@ -13,7 +13,7 @@ using SoftwareMonkeys.csAnt.IO;
 using SoftwareMonkeys.csAnt.Projects;
 using SoftwareMonkeys.csAnt.Projects.Tests;
 using SoftwareMonkeys.csAnt.Projects.Tests.Scripting;
-using SoftwareMonkeys.csAnt.SetUp.Common;
+using SoftwareMonkeys.csAnt.SetUp;
 using NUnit.Framework;
 
 class Test_UpdateScript : BaseProjectTestScript
@@ -47,38 +47,10 @@ class Test_UpdateScript : BaseProjectTestScript
         ModifyFile();
 
         var updater = new Updater();
-        updater.Update(pkgName, true);
+        updater.PackageName = pkgName;
+        updater.Update();
 
         CheckModifiedFile();
-
-
-
-
-		// TODO: Launch a http server and test against it, to remove the dependency of having a live server
-
-		/*StartHttp(
-			CurrentDirectory,
-			"localhost",
-			8089
-		);
-
-		StartNewProcess("http://localhost:8089/readme.txt");
-
-		Thread.Sleep(5000);*/
-
-        // TODO: Rename
-		/*var setUpExeFile = OriginalDirectory
-			+ Path.DirectorySeparatorChar
-			+ "csAnt-setup.sh";
-
-		var setUpExeToFile = CurrentDirectory
-			+ Path.DirectorySeparatorChar
-			+ "csAnt-setup.sh";
-
-		File.Copy(setUpExeFile, setUpExeToFile, true);
-
-        // TODO: Add windows support by running a vbs equivalent
-		StartProcess("bash", setUpExeToFile, "-i:false");*/
 
 		if (IsLinux)
 			StartProcess("sh csAnt.sh HelloWorld");
@@ -91,7 +63,10 @@ class Test_UpdateScript : BaseProjectTestScript
     public void Install(string pkgName)
     {
         var installer = new Installer();
-        installer.Install(pkgName, new Version("0.4.0.100"), true);
+        installer.PackageName = pkgName;
+        installer.Version = new Version("0.4.0.100");
+        installer.Overwrite = true;
+        installer.Install();
     }
 
     /*public void Prepare(string version)
