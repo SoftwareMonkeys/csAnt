@@ -15,7 +15,6 @@
     <file src="csAnt-setup.vbs" />
     <file src="csAnt.sh" />
     <file src="csAnt.bat" />
-    <file src="csAnt.vbs" />
     <file src="csAnt.node" />
     <file src="lib/csAnt/bin/Release/net-40/*" target="lib/csAnt/bin/Release/net-40/" />
   </files>
