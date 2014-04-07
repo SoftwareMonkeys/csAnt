@@ -14,7 +14,7 @@ class Publish_PushToCodePlexScript : BaseProjectScript
 	
 	public override bool Run(string[] args)
 	{
-        GitPush("CodePlex");
+        Git.Push("CodePlex");
 
 		return !IsError;
 	}
