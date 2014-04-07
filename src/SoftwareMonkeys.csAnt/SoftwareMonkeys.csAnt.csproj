@@ -156,8 +156,6 @@
     <Compile Include="BaseScript.Start.cs" />
     <Compile Include="BaseScript.FixScriptName.cs" />
     <Compile Include="BaseScript.TimeStamp.cs" />
-    <Compile Include="BaseScript.GetIndentSpace.cs" />
-    <Compile Include="BaseScript.ActivateScript.cs" />
     <Compile Include="Script.cs" />
     <Compile Include="BaseScript.ToRelative.cs" />
     <Compile Include="BaseScript.ToAbsolute.cs" />
@@ -192,7 +190,6 @@
     <Compile Include="ScriptStackDetector.cs" />
     <Compile Include="ScriptNotFoundException.cs" />
     <Compile Include="BaseScript.RefreshCurrentNode.cs" />
-    <Compile Include="BaseScript.ActivateScriptAt.cs" />
     <Compile Include="BaseScript.GetScriptAt.cs" />
     <Compile Include="BaseScript.ToString.cs" />
     <Compile Include="BaseScript.CompileScripts.cs" />
@@ -220,7 +217,6 @@
     <Compile Include="NodeGetter.cs" />
     <Compile Include="BaseScript.Nodes.cs" />
     <Compile Include="BaseScript.InitializeNodeManager.cs" />
-    <Compile Include="BaseScript.ActivateScriptFromFile.cs" />
     <Compile Include="BaseScript.ScriptAssembliesDirectory.cs" />
     <Compile Include="BaseScript.GetScriptAssemblyPath.cs" />
     <Compile Include="BaseScript.VersionAndTimeStamp.cs" />
@@ -238,6 +234,16 @@
     <Compile Include="BaseScript.Git.cs" />
     <Compile Include="Repacker.cs" />
     <Compile Include="BaseScript.ExecuteScriptAt.cs" />
+    <Compile Include="BuildMode.cs" />
+    <Compile Include="ScriptExecutor.cs" />
+    <Compile Include="ScriptActivator.cs" />
+    <Compile Include="BaseScript.ScriptExecutor.cs" />
+    <Compile Include="ScriptStackWriter.cs" />
+    <Compile Include="ScriptFileNamer.cs" />
+    <Compile Include="ScriptCompiler.cs" />
+    <Compile Include="BaseScript.ScriptCompiler.cs" />
+    <Compile Include="Indenter.cs" />
+    <Compile Include="BaseScript.Indenter.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
