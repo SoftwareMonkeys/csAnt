@@ -7,10 +7,7 @@ namespace SoftwareMonkeys.csAnt.External.Nuget
     public class NugetExecutor
     {
         // TODO: Make it possible to put this in a config file
-        public string NugetPath = "lib/nuget.exe";
-
-        // TODO: Make it possible to put this in a config file
-        public string NugetUrl = "http://nuget.org/nuget.exe";
+        public string NugetFilePath = "lib/nuget.exe";
 
         public DotNetProcessStarter Starter { get;set; }
 
@@ -22,7 +19,7 @@ namespace SoftwareMonkeys.csAnt.External.Nuget
         public virtual void Execute(params string[] arguments)
         {
             Starter.Start(
-                NugetPath,
+                NugetFilePath,
                 arguments
             );
         }

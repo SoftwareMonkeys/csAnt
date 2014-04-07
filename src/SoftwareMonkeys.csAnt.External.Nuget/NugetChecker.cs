@@ -28,7 +28,19 @@ namespace SoftwareMonkeys.csAnt.External.Nuget
                     + "nuget.exe";
 
             if (!File.Exists (filePath))
+            {
+                Console.WriteLine("nuget.exe file not found at:");
+                Console.WriteLine(filePath.Replace(Environment.CurrentDirectory, ""));
+                Console.WriteLine("Downloading...");
+
                 Downloader.Download();
+            }
+            else
+            {
+                Console.WriteLine("nuget.exe file found at:");
+                Console.WriteLine(filePath.Replace(Environment.CurrentDirectory, ""));
+                Console.WriteLine("Skipping download.");
+            }
         }
     }
 }

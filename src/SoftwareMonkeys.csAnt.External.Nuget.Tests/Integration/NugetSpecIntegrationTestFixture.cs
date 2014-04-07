@@ -36,7 +36,7 @@ namespace SoftwareMonkeys.csAnt.External.Nuget.Tests
                 + projectName + "-" + releaseName + ".nuspec";
 
             var packer = new NugetPacker();
-            packer.PackFile(filePath);
+            packer.PackageFile(filePath);
 
             var pkgFilePath = Path.GetDirectoryName(filePath)
                 + Path.DirectorySeparatorChar

@@ -33,7 +33,7 @@ namespace SoftwareMonkeys.csAnt.External.Nuget
 
             foreach (var specFile in Directory.GetFiles(pkgsDir, "*.nuspec"))
             {
-                PackFile(specFile);
+                PackageFile(specFile);
             }
         }
         
@@ -55,10 +55,10 @@ namespace SoftwareMonkeys.csAnt.External.Nuget
             if (!File.Exists(packageFile))
                 throw new ArgumentException("Cannot find '" + packageName + "' package in '" + projectDirectory + "' project directory, at '" + packageFile + "'.");
         
-            PackFile(packageFile);
+            PackageFile(packageFile);
         }
 
-        public void PackFile(string filePath)
+        public void PackageFile(string filePath)
         {
             Console.WriteLine("");
             Console.WriteLine("Packing nuget package: " + Path.GetFileNameWithoutExtension(filePath));
