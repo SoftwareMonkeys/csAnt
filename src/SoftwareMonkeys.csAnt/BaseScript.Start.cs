@@ -8,7 +8,7 @@ namespace SoftwareMonkeys.csAnt
         {
             Arguments = new Arguments(args);
 
-            WriteHeader();
+            WriteHeader(args);
 
             SetUp();
 
