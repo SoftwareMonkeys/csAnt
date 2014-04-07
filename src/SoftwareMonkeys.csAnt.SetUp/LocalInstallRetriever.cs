@@ -67,7 +67,14 @@ namespace SoftwareMonkeys.csAnt.SetUp
                 Console.WriteLine ("  To:");
                 Console.WriteLine ("    " + toFile);
 
-                if (Overwrite || !File.Exists (toFile))
+                if (File.Exists(toFile)
+                    && Overwrite)
+                {
+                    // TODO: Backup file
+                    File.Delete(toFile);
+                }
+
+                if (!File.Exists (toFile))
                     File.Copy (file, toFile);
                 else
                     Console.WriteLine ("  Skipping copy.");

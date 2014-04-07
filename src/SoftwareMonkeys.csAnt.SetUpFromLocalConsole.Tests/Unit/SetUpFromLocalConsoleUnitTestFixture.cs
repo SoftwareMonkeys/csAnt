@@ -4,7 +4,7 @@ using SoftwareMonkeys.csAnt.SetUp;
 using SoftwareMonkeys.csAnt.Tests.Helpers;
 
 
-namespace SoftwareMonkeys.csAnt.SetUpFromLocalConsole.Tests
+namespace SoftwareMonkeys.csAnt.SetUpFromLocalConsole.Tests.Unit
 {
     [TestFixture]
     public class SetUpFromLocalConsoleUnitTestFixture : BaseSetUpFromLocalConsoleUnitTestFixture
@@ -31,9 +31,8 @@ namespace SoftwareMonkeys.csAnt.SetUpFromLocalConsole.Tests
             script.Relocate(OriginalDirectory);
 
             // TODO: See if there's a faster way to prepare
-            script.ExecuteScript("Repack");
-            script.ExecuteScript("CopyBinToRoot");
-            script.ExecuteScript("CopyBinToLib");
+            script.ExecuteScript("Repack", "-mode:" + BuildMode.Value);
+            script.ExecuteScript("CopyBinToRoot", "-mode:" + BuildMode.Value);
 
             script.Relocate(dir);
         }

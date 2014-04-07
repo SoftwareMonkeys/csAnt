@@ -22,9 +22,25 @@ namespace SoftwareMonkeys.csAnt.SetUp
 
         public string DestinationPath { get;set; }
 
-        public Version Version { get;set; }
+        public Version Version = new Version(0,0,0,0);
 
         public string PackageName = "csAnt";
+        
+        public InstallerNugetRetriever (string nugetSourcePath, string destinationPath, Version version)
+        {
+            if (!String.IsNullOrEmpty(destinationPath))
+                DestinationPath = destinationPath;
+            else
+                DestinationPath = Environment.CurrentDirectory;
+
+            NugetChecker = new NugetChecker();
+            NugetExecutor = new NugetExecutor();
+
+            if (!String.IsNullOrEmpty(nugetSourcePath))
+                NugetSourcePath = nugetSourcePath;
+
+            Version = version;
+        }
 
         public InstallerNugetRetriever (string nugetSourcePath, string destinationPath, Version version, NugetChecker checker, NugetExecutor executor)
         {
@@ -48,29 +64,29 @@ namespace SoftwareMonkeys.csAnt.SetUp
             else
                 DestinationPath = Environment.CurrentDirectory;
 
-            if (!String.IsNullOrEmpty(nugetSourcePath))
-                NugetSourcePath = nugetSourcePath;
-
             NugetChecker = new NugetChecker();
             NugetExecutor = new NugetExecutor();
+
+            if (!String.IsNullOrEmpty(nugetSourcePath))
+                NugetSourcePath = nugetSourcePath;
         }
 
-        public InstallerNugetRetriever (string nugetSourcePath, string nugetPath, string destinationPath)
+        /*public InstallerNugetRetriever (string nugetSourcePath, string nugetPath, string destinationPath)
         {
             if (!String.IsNullOrEmpty(destinationPath))
                 DestinationPath = destinationPath;
             else
                 DestinationPath = Environment.CurrentDirectory;
 
+            NugetChecker = new NugetChecker();
+            NugetExecutor = new NugetExecutor();
+
             if (!String.IsNullOrEmpty(nugetSourcePath))
                 NugetSourcePath = nugetSourcePath;
 
             if (!String.IsNullOrEmpty(nugetPath))
                 NugetPath = nugetPath;
-
-            NugetChecker = new NugetChecker();
-            NugetExecutor = new NugetExecutor();
-        }
+        }*/
 
         public InstallerNugetRetriever (string destinationPath)
         {
@@ -79,9 +95,9 @@ namespace SoftwareMonkeys.csAnt.SetUp
             else
                 DestinationPath = Environment.CurrentDirectory;
 
-            NugetSourcePath = "https://www.myget.org/F/csant/";
             NugetChecker = new NugetChecker();
             NugetExecutor = new NugetExecutor();
+            NugetSourcePath = "https://www.myget.org/F/csant/";
         }
 
         public InstallerNugetRetriever ()

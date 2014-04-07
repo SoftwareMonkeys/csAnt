@@ -40,13 +40,30 @@ namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole
                 Console.WriteLine ("");
                 Console.WriteLine ("Setting up csAnt...");
                 Console.WriteLine ("");
+
+                
+                Console.WriteLine("PackageName:" + PackageName);
+                Console.WriteLine("");
+                Console.WriteLine("Version:" + (Version == new Version(0,0,0,0) ? "[Latest]" : Version.ToString()));
+                Console.WriteLine("");
+                Console.WriteLine("Destination path:");
+                Console.WriteLine(DestinationPath);
+                Console.WriteLine("");
+                Console.WriteLine("nuget source feed path:");
+                Console.WriteLine(NugetSourcePath);
+                Console.WriteLine("");
+                Console.WriteLine("nuget exe path:");
+                Console.WriteLine(NugetPath);
+                Console.WriteLine("");
     
                 var nugetRetriever = new InstallerNugetRetriever(
-                    NugetPath
+                    NugetSourcePath,
+                    DestinationPath,
+                    Version
                 );
 
-                if (!String.IsNullOrEmpty(NugetSourcePath))
-                    nugetRetriever.NugetSourcePath = NugetSourcePath;
+                if (!String.IsNullOrEmpty(NugetPath))
+                    nugetRetriever.NugetPath = NugetPath;
 
                 var fileManager = new InstallerFileManager();
     
@@ -95,21 +112,25 @@ namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole
             if (arguments.ContainsAny("v", "version"))
                 Version = Version.Parse(arguments["v", "version"]);
 
+
             // Package name
             if (arguments.ContainsAny("p", "pkg", "package"))
                 PackageName = arguments["p", "pkg", "package"];
 
+
             // Show intro
-            if (arguments.ContainsAny("i", "intro"))
-                ShowIntro = Convert.ToBoolean(arguments["i", "intro"]);
-            
+            if (arguments.ContainsAny("intro"))
+                ShowIntro = Convert.ToBoolean(arguments["intro"]);
+
             // Version
             if (arguments.ContainsAny("s", "source"))
                 NugetSourcePath = arguments["s", "source"];
 
+
             // Version
             if (arguments.ContainsAny("n", "nuget", "nugetpath"))
                 NugetPath = arguments["n", "nuget", "nugetpath"];
+
 
             // Overwrite
             Overwrite = arguments.ContainsAny(

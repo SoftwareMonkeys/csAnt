@@ -5,18 +5,17 @@ namespace SoftwareMonkeys.csAnt.SetUp
     {
         public Installer Installer { get;set; }
 
-        // TODO: Check if needed
-        /*public string NugetFeedPath
+        public string PackageName
         {
-            get { return Installer..NugetSourcePath; }
-            set { Installer.NugetSourcePath = value; }
+            get { return Installer.PackageName; }
+            set { Installer.PackageName = value; }
         }
 
-        public string NugetPath
+        public Version Version
         {
-            get { return Installer.NugetPath; }
-            set { Installer.NugetPath = value; }
-        }*/
+            get { return Installer.Version; }
+            set { Installer.Version = value; }
+        }
 
         public bool Import
         {
@@ -30,6 +29,11 @@ namespace SoftwareMonkeys.csAnt.SetUp
             set { Installer.ImportPath = value; }
         }
         
+        public Updater()
+        {
+            Installer = new Installer();
+        }
+
         public Updater(Installer installer)
         {
             Installer = installer;

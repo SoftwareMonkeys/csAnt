@@ -13,6 +13,8 @@
     <NoStdLib>False</NoStdLib>
     <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
     <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
+    <AssemblyName>SoftwareMonkeys.csAnt.SetUp</AssemblyName>
+    <AssemblyOriginatorKeyFile>SoftwareMonkeys.csAnt.SetUp.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -24,8 +26,6 @@
     <ConsolePause>false</ConsolePause>
     <BaseIntermediateOutputPath>obj\</BaseIntermediateOutputPath>
     <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>SoftwareMonkeys.csAnt.SetUp.snk</AssemblyOriginatorKeyFile>
-    <AssemblyName>SoftwareMonkeys.csAnt.SetUp.Common</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>full</DebugType>
@@ -36,8 +36,6 @@
     <ConsolePause>false</ConsolePause>
     <DebugSymbols>true</DebugSymbols>
     <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>SoftwareMonkeys.csAnt.SetUp.snk</AssemblyOriginatorKeyFile>
-    <AssemblyName>SoftwareMonkeys.csAnt.SetUp</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <DebugType>none</DebugType>
@@ -50,7 +48,6 @@
     <RegisterForComInterop>False</RegisterForComInterop>
     <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
     <FileAlignment>4096</FileAlignment>
-    <AssemblyName>SoftwareMonkeys.csAnt.SetUp.Common</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <DebugType>none</DebugType>
@@ -62,7 +59,6 @@
     <RegisterForComInterop>False</RegisterForComInterop>
     <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
     <FileAlignment>4096</FileAlignment>
-    <AssemblyName>SoftwareMonkeys.csAnt.SetUp.Common</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
@@ -102,6 +98,7 @@
     <Compile Include="SetUpFromLocalScriptRetriever.cs" />
     <Compile Include="SetUpFromLocalConsoleRetriever.cs" />
     <Compile Include="SetUpFromLocalConsoleLauncher.cs" />
+    <Compile Include="SetUpRepacker.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -132,6 +129,10 @@
     <ProjectReference Include="..\SoftwareMonkeys.csAnt.Versions\SoftwareMonkeys.csAnt.Versions.csproj">
       <Project>{9B72A2B8-0BC4-40BE-B242-AC79A080CEB6}</Project>
       <Name>SoftwareMonkeys.csAnt.Versions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SoftwareMonkeys.csAnt\SoftwareMonkeys.csAnt.csproj">
+      <Project>{16297BCB-0A8C-42E6-BE35-921085C3E238}</Project>
+      <Name>SoftwareMonkeys.csAnt</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>

@@ -38,6 +38,18 @@ namespace SoftwareMonkeys.csAnt.SetUp
             Console.WriteLine("");
             Console.WriteLine("Installing files...");
             Console.WriteLine("");
+            Console.WriteLine("Project directory:");
+            Console.WriteLine(projectDirectory);
+            Console.WriteLine("");
+            Console.WriteLine("Package name:");
+            Console.WriteLine(packageName);
+            Console.WriteLine("");
+            Console.WriteLine("Version:");
+            Console.WriteLine(version.ToString());
+            Console.WriteLine("");
+            Console.WriteLine("Force overwrite:");
+            Console.WriteLine(forceOverwrite);
+            Console.WriteLine("");
 
             var files = new string[]{
                 "csAnt.node",
@@ -50,6 +62,10 @@ namespace SoftwareMonkeys.csAnt.SetUp
             var libDir = Path.Combine(projectDirectory, "lib");
 
             var directory = GetcsAntPackageDir(libDir, version);
+
+            var installedFiles = 0;
+            var skippedFiles = 0;
+            var overwrittenFiles = 0;
 
             foreach (var file in FileFinder.FindFiles(directory, files))
             {
@@ -72,6 +88,7 @@ namespace SoftwareMonkeys.csAnt.SetUp
                 {
                     // TODO: Back up this file before deleting
                     File.Delete(toFile);
+                    overwrittenFiles++;
                 }
 
                 Console.WriteLine(toFile.Replace(projectDirectory, ""));
@@ -82,8 +99,19 @@ namespace SoftwareMonkeys.csAnt.SetUp
                         file,
                         toFile
                         );
+
+
+                    installedFiles++;
                 }
+                else
+                    skippedFiles++;
             }
+            
+            Console.WriteLine();
+            Console.WriteLine("Files installed: " + installedFiles);
+            Console.WriteLine("Files skipped: " + skippedFiles);
+            Console.WriteLine("Files overwritten: " + skippedFiles);
+            Console.WriteLine();
         }
         
         public string GetcsAntPackageDir(string libDir, Version version)

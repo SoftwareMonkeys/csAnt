@@ -23,7 +23,7 @@ namespace SoftwareMonkeys.csAnt.SetUp
 
         public Importer Importer { get;set; }
 
-        public string PackageName { get;set; }
+        public string PackageName = "csAnt";
 
         public bool Overwrite { get;set; }
 
