@@ -19,11 +19,11 @@ namespace SoftwareMonkeys.csAnt
 			IsError = true;
 			
 			Console.WriteLine ("");
-			Console.WriteLine (GetIndentSpace() + "// -------------------- !!! Error !!! --------------------");
-			Console.WriteLine (GetIndentSpace() + "// Script: " + ScriptName);
-            WriteScriptStack(GetScriptStack());
-			Console.WriteLine (GetIndentSpace() + message);
-			Console.WriteLine (GetIndentSpace() + "// -------------------------------------------------------");
+			Console.WriteLine (Indenter.GetIndentSpace() + "// -------------------- !!! Error !!! --------------------");
+			Console.WriteLine (Indenter.GetIndentSpace() + "// Script: " + ScriptName);
+            new ScriptStackWriter().Write(GetScriptStack());
+			Console.WriteLine (Indenter.GetIndentSpace() + message);
+			Console.WriteLine (Indenter.GetIndentSpace() + "// -------------------------------------------------------");
 			Console.WriteLine ("");
 
             AddSummary("Error in script '" + ScriptName + "': " + message);

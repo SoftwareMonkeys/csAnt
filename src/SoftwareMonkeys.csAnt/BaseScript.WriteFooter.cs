@@ -7,12 +7,13 @@ namespace SoftwareMonkeys.csAnt
         public virtual void WriteFooter ()
         {
             Console.WriteLine ("");
-            Console.WriteLine (GetIndentSpace (Indent) + "// Finished script: " + ScriptName);
+            Console.WriteLine (Indenter.GetIndentSpace (Indent) + "// Finished script: " + ScriptName);
             if (IsVerbose)
             {
-                WriteScriptStack (GetScriptStack ());
+                // TODO: Move to a property
+                new ScriptStackWriter().Write (GetScriptStack ());
             }
-            Console.WriteLine (GetIndentSpace (Indent) + "// --------------------------------------------------");
+            Console.WriteLine (Indenter.GetIndentSpace (Indent) + "// --------------------------------------------------");
 
         }
     }
