@@ -39,7 +39,7 @@ class GenerateAssemblyInfoFilesScript : BaseProjectScript
         );
 
         var assemblyTitle = Path.GetFileName(assemblyDir);
-        var assemblyCompany = GroupNode.Name;
+        var assemblyCompany = GroupName;
 
         var version = new VersionManager().GetVersion(assemblyDir);
 
