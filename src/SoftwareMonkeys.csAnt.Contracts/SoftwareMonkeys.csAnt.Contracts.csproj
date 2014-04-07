@@ -117,6 +117,7 @@
     <Compile Include="IScriptCompiler.cs" />
     <Compile Include="IScriptExecutor.cs" />
     <Compile Include="IScriptActivator.cs" />
+    <Compile Include="IIndenter.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
