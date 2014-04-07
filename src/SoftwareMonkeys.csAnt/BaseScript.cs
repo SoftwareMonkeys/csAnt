@@ -15,8 +15,6 @@ namespace SoftwareMonkeys.csAnt
 
         public int Indent { get;set; }
 
-        public Indenter Indenter { get;set; }
-
 		protected BaseScript ()
         {
             // The parameterless constructor shouldn't call the Construct function. It needs to be called explicitly if using this constructor.

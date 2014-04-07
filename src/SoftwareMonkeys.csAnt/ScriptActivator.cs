@@ -120,10 +120,6 @@ namespace SoftwareMonkeys.csAnt
     
             script.Construct (scriptName, ParentScript);
     
-            // Set the indent of the new script to be one more than the current script
-            if (ParentScript != null)
-                script.Indent = ParentScript.Indent + 1;
-
             return script;
         }
         

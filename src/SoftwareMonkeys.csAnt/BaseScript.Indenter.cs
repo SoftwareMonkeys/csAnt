@@ -3,8 +3,8 @@ namespace SoftwareMonkeys.csAnt
 {
     public partial class BaseScript
     {
-        private Indenter indenter;
-        public Indenter Indenter
+        private IIndenter indenter;
+        public IIndenter Indenter
         {
             get
             {

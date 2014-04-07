@@ -4,9 +4,14 @@ using System.Text;
 
 namespace SoftwareMonkeys.csAnt
 {
-    public class Indenter
+    public class Indenter : IIndenter
     {
         public int Indent { get;set; }
+        
+        public Indenter (int indent)
+        {
+            Indent = indent;
+        }
 
         public Indenter ()
         {
