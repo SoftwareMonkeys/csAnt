@@ -89,6 +89,10 @@
       <Project>{94578333-F8C9-40C0-9300-8D808ED1CD7A}</Project>
       <Name>SoftwareMonkeys.csAnt.SourceControl.Git</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SoftwareMonkeys.csAnt.External.Nuget.Tests\SoftwareMonkeys.csAnt.External.Nuget.Tests.csproj">
+      <Project>{A5DD8740-CCDB-4F86-974E-6480A2919620}</Project>
+      <Name>SoftwareMonkeys.csAnt.External.Nuget.Tests</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Unit\" />

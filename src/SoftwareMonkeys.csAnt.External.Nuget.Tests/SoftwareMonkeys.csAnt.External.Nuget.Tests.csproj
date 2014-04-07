@@ -39,6 +39,7 @@
     <Compile Include="BaseNugetTestFixture.cs" />
     <Compile Include="Integration\BaseNugetIntegrationTestFixture.cs" />
     <Compile Include="Integration\NugetSpecIntegrationTestFixture.cs" />
+    <Compile Include="Mock\MockNugetFeedCreator.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -69,5 +70,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Integration\" />
+    <Folder Include="Mock\" />
   </ItemGroup>
 </Project>

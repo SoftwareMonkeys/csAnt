@@ -8,6 +8,8 @@ namespace SoftwareMonkeys.csAnt.SetUp
         public BaseDeploymentSetUpLauncher ()
         {
         }
+        
+        public abstract void Launch(string projectDirectory);
 
         public abstract void Launch(string sourceDirectory, string projectDirectory);
     }

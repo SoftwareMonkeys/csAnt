@@ -38,6 +38,9 @@ namespace SoftwareMonkeys.csAnt.Versions
             if (!currentNode.Nodes.ContainsKey("Source"))
                 throw new Exception("Can't find 'Source' node.");
 
+            currentNode.Nodes["Source"].Properties["Version"] = version.ToString();
+            currentNode.Nodes["Source"].Save();
+
             foreach (var node in currentNode.Nodes["Source"].Nodes.Values) {
                 node.Properties["Version"] = version.ToString();
                 node.Save();

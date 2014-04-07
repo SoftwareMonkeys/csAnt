@@ -16,8 +16,12 @@ class PublishScript : BaseProjectScript
 		Console.WriteLine("Publishing files...");
 		Console.WriteLine("");
 	
+        var packageName = ""; // Empty means all
+        if (args.Length > 0)
+            packageName = args[0];
+
         // Find all scripts starting with "Publish-"
-        var scripts = FindScripts("Publish-*");
+        var scripts = FindScripts("Publish-*", packageName);
 
         // Loop through the scripts
         foreach (var script in scripts)

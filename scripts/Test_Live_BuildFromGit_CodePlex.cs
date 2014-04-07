@@ -79,7 +79,7 @@ class Test_BuildFromGitScript : BaseProjectTestScript
 
 		Directory.CreateDirectory(projectDirectory);
 
-		GitClone("https://git01.codeplex.com/csant", projectDirectory);
+		Git.Clone("https://git01.codeplex.com/csant", projectDirectory);
 
 		return projectDirectory;
 	}
