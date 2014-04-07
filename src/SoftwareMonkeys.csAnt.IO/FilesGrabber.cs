@@ -9,10 +9,93 @@ namespace SoftwareMonkeys.csAnt.IO
         public string OriginalDirectory { get; set; }
 
         public string CurrentDirectory { get;set; }
-
-        public IFileFinder Finder { get; set; }
+                
+        public FileCopier Copier { get;set; }
 
         public bool IsVerbose { get;set; }
+        
+        public string[] LibFilePatterns
+        {
+            get
+            {
+                return new string[] {
+                    "csAnt-SetUp.exe",
+                    "csAnt-SetUpFromLocal.exe",
+                    "lib/nuget.exe",
+                    "lib/csAnt/**",
+                    "lib/FileNodes/**",
+                    "lib/HtmlAgilityPack/**",
+                    "lib/cs-script/**",
+                    "lib/SharpZipLib/**",
+                    "lib/ILRepack.1.25.0/**",
+                    "lib/Newtonsoft.Json.6.0.1/lib/net40/**"
+                };
+            }
+        }
+        public string[] SrcFilePatterns
+        {
+            get
+            {
+                return new string[] {
+                    "src/**.node",
+                    "src/**.cs",
+                    "src/**.csproj",
+                    "src/**.sln",
+                    "src/**.snk"
+                };
+            }
+        }
+        public string[] BinFilePatterns
+        {
+            get
+            {
+                return new string[] {
+                    "bin/**"
+                };
+            }
+        }
+
+        public string[] PackageSpecFilePatterns
+        {
+            get
+            {
+                return new string[] {
+                    "pkg/*.nuspec"
+                };
+            }
+        }
+
+        public string[] ScriptFilePatterns
+        {
+            get
+            {
+                return new string[] {
+                    "scripts/**"
+                };
+            }
+        }
+
+        public string[] LauncherFilePatterns
+        {
+            get
+            {
+                return new string[] {
+                    "*.sh",
+                    "*.bat",
+                    "*.vbs"
+                };
+            }
+        }
+
+        public string[] NodeFilePatterns
+        {
+            get
+            {
+                return new string[] {
+                    "*.node"
+                };
+            }
+        }
 
         public FilesGrabber (
             string originalDirectory,
@@ -21,7 +104,7 @@ namespace SoftwareMonkeys.csAnt.IO
         {
             OriginalDirectory = originalDirectory;
             CurrentDirectory = currentDirectory;
-            Finder = new FileFinder();
+            Copier = new FileCopier(originalDirectory, currentDirectory);
         }
         
         public FilesGrabber (
@@ -32,19 +115,8 @@ namespace SoftwareMonkeys.csAnt.IO
         {
             OriginalDirectory = originalDirectory;
             CurrentDirectory = currentDirectory;
-            Finder = new FileFinder(isVerbose);
+            Copier = new FileCopier(originalDirectory, currentDirectory);
             IsVerbose = isVerbose;
-        }
-        
-        public FilesGrabber (
-            string originalDirectory,
-            string currentDirectory,
-            IFileFinder finder
-        )
-        {
-            OriginalDirectory = originalDirectory;
-            CurrentDirectory = currentDirectory;
-            Finder = finder;
         }
 
         public void GrabInstallation()
@@ -71,114 +143,54 @@ namespace SoftwareMonkeys.csAnt.IO
 
         public void GrabOriginalScriptingFiles ()
         {
-            GrabOriginalFiles(
-                //"../*.node" // TODO: Check if needed. Not currently supported
-                "*.exe",
-                "*.node",
-                "*.sh",
-                "*.bat",
-                "*.vbs",
-                "lib/csAnt/**",
-                "lib/FileNodes/**",
-                "lib/HtmlAgilityPack/**",
-                "lib/cs-script/**",
-                "lib/SharpZipLib/**",
-                "lib/ILRepack.1.25.0/**",
-                "lib/Newtonsoft.Json.6.0.1/lib/net40/**",
-                "scripts/**",
-                "!*.mlpd",
-                "!/obj/"
-            );
+            Grab(LauncherFilePatterns);
+            Grab(ScriptFilePatterns);
+            Grab(LibFilePatterns);
         }
         
         public void GrabOriginalLibFiles ()
         {
-            GrabOriginalFiles(
-                //"../*.node" // TODO: Check if needed. Not currently supported
-                "*.exe",
-                "lib/csAnt/**",
-                "lib/FileNodes/**",
-                "lib/HtmlAgilityPack/**",
-                "lib/cs-script/**",
-                "lib/SharpZipLib/**",
-                "lib/ILRepack.1.25.0/**",
-                "lib/Newtonsoft.Json.6.0.1/lib/net40/**"
+            Grab(
+                LibFilePatterns
             );
         }
         public void GrabOriginalFiles ()
         {
-            GrabOriginalFiles(
-                "*",
-                "lib/**",
-                "bin/**",
-                "src/**.node",
-                "src/**.cs",
-                "src/**.csproj",
-                "src/**.sln",
-                "src/**.snk",
-                "scripts/**",
-                "pkg/*.nuspec",
-                "!/tests/",
-                "!_bak",
-                "!.git",
-                "!*.mlpd",
-                "!/obj/"//,
-                //"../*.node" // TODO: Check if needed. Not currently supported. Shouldn't be needed because the group node can be created
-            );
+            Grab(LauncherFilePatterns);
+
+            Grab(NodeFilePatterns);
+
+            Grab(LibFilePatterns);
+
+            Grab(SrcFilePatterns);
+
+            Grab(BinFilePatterns);
+
+            Grab(ScriptFilePatterns);
+
+            Grab(PackageSpecFilePatterns);
         }
 
         public void GrabOriginalFiles (params string[] patterns)
         {
-            Console.WriteLine ("");
-            Console.WriteLine ("Grabbing original project files...");
-
-            if (IsVerbose) {
-                Console.WriteLine ("From:");
-                Console.WriteLine ("  " + OriginalDirectory);
-                Console.WriteLine ("To:");
-                Console.WriteLine ("  " + CurrentDirectory);
-                Console.WriteLine ("");
-
-                Console.WriteLine ("Patterns:");
-                foreach (var pattern in patterns)
-                {
-                    Console.WriteLine (pattern);
-                }
-                
-                Console.WriteLine ("");
-            }
-
-            int i = 0;
-
-            if (CurrentDirectory != OriginalDirectory) {
-                foreach (var file in Finder.FindFiles (OriginalDirectory, patterns)) {
-                    if (file.IndexOf(OriginalDirectory) == -1)
-                        throw new NotSupportedException("Paths outside the project aren't yet supported.");
-
-                    i++;
-                    var toFile = file.Replace (OriginalDirectory, CurrentDirectory);
-
-                    if (!Directory.Exists (Path.GetDirectoryName (toFile)))
-                        Directory.CreateDirectory (Path.GetDirectoryName (toFile));
-
-                    if (IsVerbose)
-                    {
-                        Console.WriteLine ("From:");
-                        Console.WriteLine ("  " + file);
-                        Console.WriteLine ("To:");
-                        Console.WriteLine ("  " + toFile);
-                    }
-
-                    File.Copy (file, toFile, true);
-                }
-            }
-            else
-                Console.WriteLine ("OriginalDirectory is the same as CurrentDirectory. No need to grab files.");
-
-            Console.WriteLine("Total files: " + i);
-
-            Console.WriteLine ("");
+            Grab(patterns);
         }
+
+        public void Grab(params string[] patterns)
+        {
+            Copier.Copy(patterns);
+        }
+        
+        public void GrabLibFiles()
+        {
+            GrabOriginalFiles(LibFilePatterns);
+        }
+        
+        public void GrabSrcFiles()
+        {
+            GrabOriginalFiles(SrcFilePatterns);
+        }
+
     }
 }
 

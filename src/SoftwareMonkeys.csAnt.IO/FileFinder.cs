@@ -64,27 +64,30 @@ namespace SoftwareMonkeys.csAnt.IO
                     newFilter = newFilter.Replace("**", "*");
                 }
 
-                Thread worker = new Thread(
-                    new ThreadStart(
-                        delegate
-                        {
-                            string[] allfiles = Directory.GetFiles(newPath, newFilter, searchOption);
-                            if (exclude.Count() > 0)
+                if (Directory.Exists(newPath))
+                {
+                    Thread worker = new Thread(
+                        new ThreadStart(
+                            delegate
                             {
-                                lock (files)
-                                    files.AddRange(allfiles.Where(p => !regex.Match(p).Success));
+                                string[] allfiles = Directory.GetFiles(newPath, newFilter, searchOption);
+                                if (exclude.Count() > 0)
+                                {
+                                    lock (files)
+                                        files.AddRange(allfiles.Where(p => !regex.Match(p).Success));
+                                }
+                                else
+                                {
+                                    lock (files)
+                                        files.AddRange(allfiles);
+                                }
                             }
-                            else
-                            {
-                                lock (files)
-                                    files.AddRange(allfiles);
-                            }
-                        }
-                    ));
-        
-                workers.Add(worker);
-        
-                worker.Start();
+                        ));
+            
+                    workers.Add(worker);
+            
+                    worker.Start();
+                }
             }
         
             foreach (Thread worker in workers)
