@@ -1,7 +1,5 @@
 using System;
 using System.IO;
-using Microsoft.CSharp;
-using System.Diagnostics;
 using SoftwareMonkeys.csAnt;
 using System.Collections.Generic;
 
@@ -14,22 +12,28 @@ class Repack_SetUpFromLocalScript : BaseScript
 	
 	public override bool Run(string[] args)
 	{
-            var assemblyFile = "bin/Release/csAnt-SetUpFromLocal.exe";
+            var assemblyFile = "bin/{BuildMode}/csAnt-SetUpFromLocal.exe";
+
+            var arguments = new Arguments(args);
+    
+            var buildMode = "Release";
+            if (arguments.Contains("mode"))
+                buildMode = arguments["mode"];
 
             var dependencies = new string[]{
-                "bin/Release/SoftwareMonkeys.csAnt.External.Nuget.dll",
-                "bin/Release/SoftwareMonkeys.csAnt.IO.dll",
-                "bin/Release/SoftwareMonkeys.csAnt.IO.Contracts.dll",
-                "bin/Release/SoftwareMonkeys.csAnt.Imports.dll",
-                "bin/Release/SoftwareMonkeys.csAnt.Processes.dll",
-                "bin/Release/SoftwareMonkeys.csAnt.SetUp.dll",
-                "bin/Release/SoftwareMonkeys.csAnt.SourceControl.Git.dll",
-                "bin/Release/SoftwareMonkeys.csAnt.Versions.dll",
-                "bin/Release/SoftwareMonkeys.FileNodes.dll",
-                "bin/Release/Newtonsoft.Json.dll"
+                "bin/{BuildMode}/SoftwareMonkeys.csAnt.External.Nuget.dll",
+                "bin/{BuildMode}/SoftwareMonkeys.csAnt.IO.dll",
+                "bin/{BuildMode}/SoftwareMonkeys.csAnt.IO.Contracts.dll",
+                "bin/{BuildMode}/SoftwareMonkeys.csAnt.Imports.dll",
+                "bin/{BuildMode}/SoftwareMonkeys.csAnt.Processes.dll",
+                "bin/{BuildMode}/SoftwareMonkeys.csAnt.SetUp.dll",
+                "bin/{BuildMode}/SoftwareMonkeys.csAnt.SourceControl.Git.dll",
+                "bin/{BuildMode}/SoftwareMonkeys.csAnt.Versions.dll",
+                "bin/{BuildMode}/SoftwareMonkeys.FileNodes.dll",
+                "bin/{BuildMode}/Newtonsoft.Json.dll"
             };
 
-            new Repacker(assemblyFile, dependencies).Repack();
+            new Repacker(assemblyFile, dependencies, buildMode).Repack();
 
             return !IsError;
 	}

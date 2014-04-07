@@ -15,11 +15,13 @@ namespace SoftwareMonkeys.csAnt
 
         public string[] Dependencies { get;set; }
 
-        public string PackedBinDirectory = "bin/Release/packed";
+        public string PackedBinDirectory = "bin/{BuildMode}/packed";
 
         public string Target = "exe";
 
         public bool IsVerbose = false;
+
+        public string BuildMode = "Release";
 
         public DotNetProcessStarter Starter = new DotNetProcessStarter();
 
@@ -29,14 +31,32 @@ namespace SoftwareMonkeys.csAnt
             Dependencies = dependencies;
         }
 
+        public Repacker (string assemblyPath, string[] dependencies, string buildMode)
+        {
+            AssemblyPath = assemblyPath;
+            Dependencies = dependencies;
+            BuildMode = buildMode;
+        }
+
         public void Repack()
         {
             Console.WriteLine("");
             Console.WriteLine("Repacking " + Path.GetFileName(AssemblyPath) + " file to include " + Dependencies.Length + " dependencies.");
             Console.WriteLine("");
 
+            AssemblyPath = FixPath(AssemblyPath, BuildMode);
+            Dependencies = FixPaths(Dependencies, BuildMode);
+
+            Console.WriteLine("Current directory:");
+            Console.WriteLine("  " + Environment.CurrentDirectory);
+            Console.WriteLine("");
+
             Console.WriteLine("Assembly path:");
             Console.WriteLine("  " + AssemblyPath);
+            Console.WriteLine("");
+
+            Console.WriteLine("Build mode:");
+            Console.WriteLine("  " + BuildMode);
             Console.WriteLine("");
 
             Console.WriteLine("Dependencies:");
@@ -47,6 +67,8 @@ namespace SoftwareMonkeys.csAnt
             var outFile = PackedBinDirectory
                 + Path.DirectorySeparatorChar
                     + Path.GetFileName(AssemblyPath);
+
+            outFile = FixPath(outFile, BuildMode);
             
             var arguments = new List<string>();
 
@@ -73,11 +95,13 @@ namespace SoftwareMonkeys.csAnt
                 Console.WriteLine("  " + outFile);
                 Console.WriteLine("");
     
-                DirectoryChecker.EnsureDirectoryExists(PathConverter.ToAbsolute(PackedBinDirectory));
+                DirectoryChecker.EnsureDirectoryExists(Path.GetDirectoryName(PathConverter.ToAbsolute(outFile)));
                 
                 Starter.Start(ILRepackAssemblyPath, arguments.ToArray());
     
-                File.SetLastWriteTime(PathConverter.ToAbsolute(outFile), File.GetLastWriteTime(PathConverter.ToAbsolute(AssemblyPath)));
+                var lastWriteTime = File.GetLastWriteTime(PathConverter.ToAbsolute(AssemblyPath));
+
+                File.SetLastWriteTime(PathConverter.ToAbsolute(outFile), lastWriteTime);
     
                 Console.WriteLine("");
                 Console.WriteLine("Repacking complete.");
@@ -89,6 +113,23 @@ namespace SoftwareMonkeys.csAnt
                 Console.WriteLine("Repacked files are up to date. Skipping repack.");
                 Console.WriteLine("");
             }
+        }
+
+        public string FixPath(string path, string buildMode)
+        {
+            return path.Replace("{BuildMode}", buildMode);
+        }
+
+        public string[] FixPaths(string[] paths, string buildMode)
+        {
+            var list = new List<string>(paths);
+
+            for (int i = 0; i < list.Count; i++)
+            {
+                list[i] = FixPath(list[i], buildMode);
+            }
+
+            return list.ToArray();
         }
     }
 }
