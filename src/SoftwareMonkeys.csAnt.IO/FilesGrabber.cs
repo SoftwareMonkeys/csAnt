@@ -28,7 +28,8 @@ namespace SoftwareMonkeys.csAnt.IO
                     "lib/cs-script/**",
                     "lib/SharpZipLib/**",
                     "lib/ILRepack.1.25.0/**",
-                    "lib/Newtonsoft.Json.6.0.1/lib/net40/**"
+                    "lib/Newtonsoft.Json.6.0.1/lib/net40/**",
+                    "lib/NUnit/bin/nunit.framework.dll"
                 };
             }
         }
@@ -92,7 +93,10 @@ namespace SoftwareMonkeys.csAnt.IO
             get
             {
                 return new string[] {
-                    "*.node"
+                    "*.node",
+                    "src/*.node",
+                    "lib/*.node",
+                    "!_security/"
                 };
             }
         }
