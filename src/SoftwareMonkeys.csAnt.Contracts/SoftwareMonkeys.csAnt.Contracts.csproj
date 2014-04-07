@@ -114,6 +114,9 @@
     <Compile Include="INodeState.cs" />
     <Compile Include="INodeGetter.cs" />
     <Compile Include="IScript.Importer.cs" />
+    <Compile Include="IScriptCompiler.cs" />
+    <Compile Include="IScriptExecutor.cs" />
+    <Compile Include="IScriptActivator.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
