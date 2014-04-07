@@ -6,7 +6,7 @@ using SoftwareMonkeys.csAnt.IO;
 
 namespace SoftwareMonkeys.csAnt.Tests.Scripting
 {
-	public class BaseScriptingUnitTestFixture
+	public class BaseScriptingUnitTestFixture : BaseUnitTestFixture
 	{
 	}
 
