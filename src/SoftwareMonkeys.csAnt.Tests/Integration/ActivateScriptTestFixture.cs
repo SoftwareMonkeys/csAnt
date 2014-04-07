@@ -61,13 +61,13 @@ namespace SoftwareMonkeys.csAnt.Tests
             
             Assert.AreEqual(
                 0,
-                script.Indent,
+                script.Indenter.Indent,
                 "The indent property on parent script is incorrect."
             );
 
             Assert.AreEqual(
                 1,
-                script2.Indent,
+                script2.Indenter.Indent,
                 "The indent property on activated script is incorrect."
             );
         }
