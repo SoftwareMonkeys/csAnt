@@ -37,7 +37,6 @@ class CommitAssemblyInfoFilesScript : BaseProjectScript
 
         Git.Git(
             "commit",
-            "*",
             "-m " + message
         );
 
