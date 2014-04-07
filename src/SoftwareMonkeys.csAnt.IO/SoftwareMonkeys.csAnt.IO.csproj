@@ -94,6 +94,7 @@
     <Compile Include="FileNavigator.cs" />
     <Compile Include="PathConverter.cs" />
     <Compile Include="Platform.cs" />
+    <Compile Include="FileCopier.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
