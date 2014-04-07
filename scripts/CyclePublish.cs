@@ -54,7 +54,7 @@ class CyclePublishScript : BaseProjectScript
 		if (!IsError)
 		{
 			// Publish files
-			ExecuteScript("Publish");
+			ExecuteScript("Publish", packageName);
 		}
 
 		return !IsError;
