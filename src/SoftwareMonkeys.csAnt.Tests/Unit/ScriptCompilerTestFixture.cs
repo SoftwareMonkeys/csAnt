@@ -5,7 +5,7 @@ using NUnit.Framework;
 namespace SoftwareMonkeys.csAnt.Tests
 {
     [TestFixture]
-    public class ScriptCompilerTestFixture : BaseTestFixture
+    public class ScriptCompilerTestFixture : BaseUnitTestFixture
     {
         [Test]
         public void Test_CompileScripts()
@@ -14,9 +14,10 @@ namespace SoftwareMonkeys.csAnt.Tests
 
             var scriptPath = CreateScriptFile();
 
-            script.CompileScripts();
+            var scriptCompiler = new ScriptCompiler();
+            scriptCompiler.CompileAll();
 
-            var assemblyFile = script.GetScriptAssemblyPath("HelloWorld");
+            var assemblyFile = scriptCompiler.FileNamer.GetScriptAssemblyPath("HelloWorld");
 
             Assert.IsTrue(File.Exists(assemblyFile), "Assembly file not found.");
         }

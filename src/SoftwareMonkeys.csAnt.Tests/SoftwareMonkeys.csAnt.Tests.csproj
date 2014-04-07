@@ -117,14 +117,12 @@
     <Compile Include="GetDummyScriptTestFixture.cs" />
     <Compile Include="TemporaryDirectoryCreatorTestFixture.cs" />
     <Compile Include="FixCurrentDirectoryTestFixture.cs" />
-    <Compile Include="ActivateScriptTestFixture.cs" />
     <Compile Include="TestSummarizer.cs" />
     <Compile Include="BaseTestFixture.GetDummyScript.cs" />
     <Compile Include="NUnitTestRunner.cs" />
     <Compile Include="NUnitTestRunnerTestFixture.cs" />
     <Compile Include="NUnitTestResultReturner.cs" />
     <Compile Include="HelloWorldTestFixture.cs" />
-    <Compile Include="CompileScriptsTestFixture.cs" />
     <Compile Include="BaseTestFixture.ParseTimeStamp.cs" />
     <Compile Include="ExtractTimeStampTestFixture.cs" />
     <Compile Include="BaseTestFixture.GetWorkingDirectory.cs" />
@@ -148,6 +146,9 @@
     <Compile Include="BaseTestFixture.GetOriginalDirectory.cs" />
     <Compile Include="Unit\BaseUnitTestFixture.cs" />
     <Compile Include="Helpers\HelloWorldScriptLauncher.cs" />
+    <Compile Include="Unit\ScriptCompilerTestFixture.cs" />
+    <Compile Include="Integration\ActivateScriptTestFixture.cs" />
+    <Compile Include="BaseTestFixture.CurrentDirectory.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

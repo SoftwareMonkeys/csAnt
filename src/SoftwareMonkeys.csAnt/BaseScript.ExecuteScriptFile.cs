@@ -4,11 +4,11 @@ namespace SoftwareMonkeys.csAnt
 {
     public partial class BaseScript
     {
-        public void ExecuteScriptFile (string scriptFilePath)
+        public void ExecuteScriptFile (string scriptFilePath, params string[] arguments)
         {
-            var script = ActivateScriptFromFile(scriptFilePath);
+            var script = ScriptExecutor.Activator.ActivateScriptFromFile(scriptFilePath);
 
-            ExecuteScript(script);
+            ExecuteScript(script, arguments);
         }
     }
 }

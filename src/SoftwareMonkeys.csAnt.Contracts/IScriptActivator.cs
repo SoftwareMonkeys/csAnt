@@ -1,11 +1,11 @@
 using System;
 namespace SoftwareMonkeys.csAnt
 {
-    public class IScriptActivator
+    public interface IScriptActivator
     {
-        public IScriptActivator ()
-        {
-        }
+        IScript ActivateScript(string scriptName);
+        IScript ActivateScriptAt(string workingDirectory, string scriptName);
+        IScript ActivateScriptFromFile(string scriptFilePath);
     }
 }
 

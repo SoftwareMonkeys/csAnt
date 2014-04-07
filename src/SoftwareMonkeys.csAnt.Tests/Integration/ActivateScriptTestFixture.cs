@@ -17,7 +17,7 @@ namespace SoftwareMonkeys.csAnt.Tests
                 script.CurrentDirectory
                 ).GrabOriginalScriptingFiles();
 
-            var script2 = script.ActivateScript("HelloWorld");
+            var script2 = script.ScriptExecutor.Activator.ActivateScript("HelloWorld");
 
             Assert.IsNotNull(script2.ParentScript, "The ParentScript property isn't set.");
         }
@@ -32,7 +32,7 @@ namespace SoftwareMonkeys.csAnt.Tests
                 script.CurrentDirectory
                 ).GrabOriginalScriptingFiles();
 
-            var script2 = script.ActivateScript("HelloWorld");
+            var script2 = script.ScriptExecutor.Activator.ActivateScript("HelloWorld");
             
             Assert.AreEqual(
                 script.Time.ToString (),
@@ -57,7 +57,7 @@ namespace SoftwareMonkeys.csAnt.Tests
                 script.CurrentDirectory
                 ).GrabOriginalScriptingFiles();
 
-            var script2 = script.ActivateScript("HelloWorld");
+            var script2 = script.ScriptExecutor.Activator.ActivateScript("HelloWorld");
             
             Assert.AreEqual(
                 0,
@@ -84,13 +84,13 @@ namespace SoftwareMonkeys.csAnt.Tests
                 script.CurrentDirectory
                 ).GrabOriginalScriptingFiles();
 
-            var script2 = script.ActivateScript("HelloWorld");
+            var script2 = script.ScriptExecutor.Activator.ActivateScript("HelloWorld");
 
             Assert.AreEqual(script.IsVerbose, script2.IsVerbose);
 
             script.IsVerbose = true;
 
-            var script3 = script.ActivateScript("HelloWorld");
+            var script3 = script.ScriptExecutor.Activator.ActivateScript("HelloWorld");
             
             Assert.AreEqual(script.IsVerbose, script3.IsVerbose);
 
