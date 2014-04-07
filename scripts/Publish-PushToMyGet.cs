@@ -14,7 +14,11 @@ class Publish_PushToMyGetScript : BaseProjectScript
 	
 	public override bool Run(string[] args)
 	{
-		ExecuteScript("PushToMyGet");
+        var packageName = "";
+        if (args.Length > 0)
+            packageName = args[0];
+
+		ExecuteScript("PushToMyGet", packageName);
 
 		return !IsError;
 	}

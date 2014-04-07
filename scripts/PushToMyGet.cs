@@ -13,6 +13,10 @@ class PushToMyGetScript : BaseProjectScript
 	
 	public override bool Run(string[] args)
 	{
+        var packageName = "";
+        if (args.Length > 0)
+            packageName = args[0];
+
         var pkgsDir = CurrentDirectory
             + Path.DirectorySeparatorChar
             + "pkg";
@@ -21,9 +25,20 @@ class PushToMyGetScript : BaseProjectScript
         Console.WriteLine(" " + pkgsDir);
         Console.WriteLine();
 
-        foreach (var dir in Directory.GetDirectories(pkgsDir))
+        if (!String.IsNullOrEmpty(packageName))
         {
+            var dir = pkgsDir
+                + Path.DirectorySeparatorChar
+                + packageName;
+
             PushPackagesInDirectory(dir);
+        }
+        else
+        {
+            foreach (var dir in Directory.GetDirectories(pkgsDir))
+            {
+                PushPackagesInDirectory(dir);
+            }
         }
 
 		return true;

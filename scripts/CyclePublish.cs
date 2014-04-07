@@ -25,6 +25,10 @@ class CyclePublishScript : BaseProjectScript
 		Console.WriteLine("Starting a full release cycle.");
 		Console.WriteLine("");
 
+        var packageName = ""; // Empty means all
+        if (args.Length > 0)
+            packageName = args[0];
+
 		// Git clone the project to another directory
 		var tmpDir = CloneToTmpDirectory();
 
@@ -38,7 +42,7 @@ class CyclePublishScript : BaseProjectScript
         IncrementVersion(3);
 
 		// Build the cloned source code
-		ExecuteScript("EnsurePackage");
+		ExecuteScript("EnsurePackage", packageName);
 
         ReturnPackages();
 
@@ -69,6 +73,9 @@ class CyclePublishScript : BaseProjectScript
             // TODO: Should the file be deleted and overwritten?
             if (File.Exists(toFile))
                 File.Delete(toFile);
+
+            if (!Directory.Exists(Path.GetDirectoryName(toFile)))
+                Directory.CreateDirectory(Path.GetDirectoryName(toFile));
 
             File.Copy(file, toFile);
         }
@@ -132,10 +139,10 @@ class CyclePublishScript : BaseProjectScript
 
 		var tofile = file.Replace(fromDir, toDir);
 
-                Console.WriteLine("Copying security node to:");
-                Console.WriteLine(tofile);
-                Console.WriteLine("From:");
-                Console.WriteLine(file);
+        Console.WriteLine("Copying security node to:");
+        Console.WriteLine(tofile);
+        Console.WriteLine("From:");
+        Console.WriteLine(file);
 
 		EnsureDirectoryExists(Path.GetDirectoryName(tofile));
 
@@ -143,8 +150,8 @@ class CyclePublishScript : BaseProjectScript
 			File.Copy(file, tofile);
 		
 		CurrentNode.Nodes["Security"].Nodes[ProjectName] = new FileNode(
-	                tofile,
-	                new FileNodeSaver()
+            tofile,
+            new FileNodeSaver()
 		);
 	}
 	
@@ -169,8 +176,8 @@ class CyclePublishScript : BaseProjectScript
     		File.Copy(nodeFile, toNodeFile);
 		
 		CurrentNode.Nodes["Security"] = new FileNode(
-	                toNodeFile,
-	                new FileNodeSaver()
+            toNodeFile,
+            new FileNodeSaver()
 		);
 	}
 }
