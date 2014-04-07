@@ -217,8 +217,6 @@
     <Compile Include="NodeGetter.cs" />
     <Compile Include="BaseScript.Nodes.cs" />
     <Compile Include="BaseScript.InitializeNodeManager.cs" />
-    <Compile Include="BaseScript.ScriptAssembliesDirectory.cs" />
-    <Compile Include="BaseScript.GetScriptAssemblyPath.cs" />
     <Compile Include="BaseScript.VersionAndTimeStamp.cs" />
     <Compile Include="BaseScript.AddLibNuget.cs" />
     <Compile Include="BaseScript.AddLibUrl.cs" />

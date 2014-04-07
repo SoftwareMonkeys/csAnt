@@ -76,10 +76,10 @@
     <Compile Include="BaseTestScriptConstructor.cs" />
     <Compile Include="LifecycleTestFixture.cs" />
     <Compile Include="HelloWorldScriptTestFixture.cs" />
-    <Compile Include="Sanity\BaseScriptingUnitTestFixture.cs" />
     <Compile Include="TestScriptCreator.cs" />
     <Compile Include="Sanity\TestScriptCreatorTestFixture.cs" />
     <Compile Include="Sanity\TestScriptStackDetectorTestFixture.cs" />
+    <Compile Include="Sanity\BaseScriptingSanityTestFixture.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
