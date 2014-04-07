@@ -124,13 +124,13 @@ namespace SoftwareMonkeys.csAnt.UI.csAntConsole
 					script.OutputSummaries();
 
 					Console.WriteLine("");
-					Console.WriteLine(script.GetIndentSpace() + "// Duration: " + totalTime.ToString());
+					Console.WriteLine(script.Indenter.GetIndentSpace() + "// Duration: " + totalTime.ToString());
 				}
 
 				if (script.IsError)
-					Console.WriteLine(script.GetIndentSpace() + "// !!!!!!!!!!!!!!!!!!!!  Failed  !!!!!!!!!!!!!!!!!!!!");
+					Console.WriteLine(script.Indenter.GetIndentSpace() + "// !!!!!!!!!!!!!!!!!!!!  Failed  !!!!!!!!!!!!!!!!!!!!");
 				else
-					Console.WriteLine(script.GetIndentSpace() + "// ==================== Success! ====================");
+					Console.WriteLine(script.Indenter.GetIndentSpace() + "// ==================== Success! ====================");
 
 
 				Console.WriteLine("");
