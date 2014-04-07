@@ -7,7 +7,7 @@ using SoftwareMonkeys.csAnt.IO;
 namespace SoftwareMonkeys.csAnt.Tests.Scripting.Sanity
 {
     [TestFixture]
-    public class TestScriptCreatorTestFixture : BaseScriptingUnitTestFixture
+    public class TestScriptCreatorTestFixture : BaseScriptingSanityTestFixture
     {
         [Test]
         public void Test_Create_HasCorrectDefaultPropertyValues()

@@ -9,9 +9,11 @@ namespace SoftwareMonkeys.csAnt.Tests.Scripting.Sanity
         [Test]
         public void Test_Detect_3()
         {
-            var script1 = GetTestScript("Test1");
-            var script2 = GetTestScript("Test2", script1);
-            var script3 = GetTestScript("Test3", script2);
+            var testScriptCreator = new TestScriptCreator(CurrentDirectory);
+
+            var script1 = testScriptCreator.Create("Test1");
+            var script2 = testScriptCreator.Create("Test2", script1);
+            var script3 = testScriptCreator.Create("Test3", script2);
 
             var stack = new TestScriptStackDetector(script3).Detect();
 
@@ -34,9 +36,11 @@ namespace SoftwareMonkeys.csAnt.Tests.Scripting.Sanity
         [Test]
         public void Test_Detect_3_OneNormalScript()
         {
-            var script1 = GetTestScript("Test1");
+            var testScriptCreator = new TestScriptCreator(CurrentDirectory);
+
+            var script1 = testScriptCreator.Create("Test1");
             var script2 = GetDummyScript("Test2", script1); // A dummy script isn't the same as a test script and won't be treated the same
-            var script3 = GetTestScript("Test3", script2);
+            var script3 = testScriptCreator.Create("Test3", script2);
 
             var stack = new TestScriptStackDetector(script3).Detect();
 
