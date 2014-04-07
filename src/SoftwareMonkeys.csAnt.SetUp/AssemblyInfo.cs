@@ -1,7 +1,7 @@
 using System.Reflection;
 using System.Runtime.CompilerServices;
 
-[assembly: AssemblyTitle("SoftwareMonkeys.csAnt.SetUp.Common")]
+[assembly: AssemblyTitle("SoftwareMonkeys.csAnt.SetUp")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("SoftwareMonkeys")]
@@ -10,4 +10,4 @@ using System.Runtime.CompilerServices;
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
-[assembly: AssemblyVersion("0.4.0.1100")]
+[assembly: AssemblyVersion("0.4.1.2500")]

@@ -8,8 +8,6 @@ namespace SoftwareMonkeys.csAnt
         {
             get
             {
-                if (indenter == null)
-                    indenter = new Indenter();
                 return indenter;
             }
             set { indenter = value; }

@@ -107,7 +107,7 @@ class CyclePublishScript : BaseProjectScript
 
 		Directory.CreateDirectory(tmpDirectory);
 
-		GitClone(ProjectDirectory, tmpDirectory);
+		Git.Clone(ProjectDirectory, tmpDirectory);
 
 		AddSummary("Cloned project to: " + tmpDirectory);
 
