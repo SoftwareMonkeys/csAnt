@@ -176,12 +176,17 @@ namespace SoftwareMonkeys.csAnt.SourceControl.Git
 
         public void PullTo(string directory, string remote)
         {
-            GitIn (directory, "pull", remote, "master");
+            GitIn (directory, "pull", remote, "master"); // Should branch be left out?
         }
 
         public void Push(string remote)
         {
             Git ("push", remote);
+        }
+
+        public void Push(string remote, string branch)
+        {
+            Git ("push", remote, branch);
         }
         
         public void PushFrom(string directory, string remote)
