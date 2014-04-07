@@ -94,8 +94,6 @@ namespace SoftwareMonkeys.csAnt.Processes
             (
                 delegate(object sender, DataReceivedEventArgs e)
                 {
-                    IsError = true;
-
                     Console.SetOut (c);
                     c.WriteLine(e.Data);
                 }
@@ -134,17 +132,22 @@ namespace SoftwareMonkeys.csAnt.Processes
                 process.BeginErrorReadLine();
 
                 process.WaitForExit();
+
+                // If the exit code is NOT zero then an error must have occurred
+                IsError = (process.ExitCode != 0);
             }
             catch (Exception ex)
             {
                 IsError = true;
-                Console.WriteLine ("Error starting process.", ex);
+                throw new Exception ("Error starting process.", ex);
             }
 
 
             Console.WriteLine("");
             Console.WriteLine("--------------------");
             Console.WriteLine("");
+
+            Console.Out.Flush();
 
             return process;
         }

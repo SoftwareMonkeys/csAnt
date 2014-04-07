@@ -1,13 +1,51 @@
 using System;
 using System.IO;
+using SoftwareMonkeys.csAnt.IO;
 using CSScriptLibrary;
-using System.Reflection;
 using csscript;
+using System.Reflection;
+
 
 namespace SoftwareMonkeys.csAnt
 {
-    public partial class BaseScript
+    public class ScriptActivator : IScriptActivator
     {
+        public ScriptFileNamer FileNamer { get;set; }
+
+        public bool IsVerbose { get;set; }
+
+        public bool IsDebug { get;set; }
+
+        public IScript ParentScript { get;set; }
+
+        public ScriptActivator ()
+        {
+            FileNamer = new ScriptFileNamer();
+        }
+
+        public ScriptActivator (IScript parentScript)
+        {
+            ParentScript = parentScript;
+            FileNamer = new ScriptFileNamer();
+        }
+
+        public T ActivateScript<T> (string scriptName)
+            where T : IScript
+        {
+            var path = FileNamer.GetScriptPath(scriptName);
+
+            return (T)ActivateScriptFromFile(path);
+        }
+
+        public IScript ActivateScript (string scriptName)
+        {
+            var path = FileNamer.GetScriptPath(scriptName);
+
+            if (String.IsNullOrEmpty(path))
+                throw new ScriptNotFoundException(scriptName);
+
+            return ActivateScriptFromFile(path);
+        }
         public IScript ActivateScriptFromFile (string scriptPath)
         {
             if (String.IsNullOrEmpty (scriptPath))
@@ -30,9 +68,9 @@ namespace SoftwareMonkeys.csAnt
             CSScript.GlobalSettings.DefaultArguments = "/nl"; // TODO: Check if this is working
             //CSScript.GlobalSettings.ReportDetailedErrorInfo = IsDebug; // TODO: Check if needed
 
-            var assemblyFile = GetScriptAssemblyPath (scriptName);
+            var assemblyFile = FileNamer.GetScriptAssemblyPath (scriptName);
 
-            EnsureDirectoryExists (Path.GetDirectoryName (assemblyFile));
+            DirectoryChecker.EnsureDirectoryExists (Path.GetDirectoryName (assemblyFile));
          
             if (IsVerbose) {
                 Console.WriteLine ("");
@@ -80,10 +118,22 @@ namespace SoftwareMonkeys.csAnt
 
             script = (IScript)Activator.CreateInstance(type);
     
-            script.Construct (scriptName, this);
+            script.Construct (scriptName, ParentScript);
     
             // Set the indent of the new script to be one more than the current script
-            script.Indent = Indent + 1;
+            if (ParentScript != null)
+                script.Indent = ParentScript.Indent + 1;
+
+            return script;
+        }
+        
+        public IScript ActivateScriptAt(string scriptName, string workingDirectory)
+        {
+            var scriptPath = FileNamer.GetScriptPath(scriptName, workingDirectory);
+
+            var script = ActivateScriptFromFile(scriptPath);
+
+            script.Relocate(workingDirectory);
 
             return script;
         }
