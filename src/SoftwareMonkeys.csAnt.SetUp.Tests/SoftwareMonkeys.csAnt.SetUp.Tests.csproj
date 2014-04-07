@@ -8,7 +8,7 @@
     <ProjectGuid>{8D7A46B5-25AA-4E5C-9E3A-F27574B71EEC}</ProjectGuid>
     <OutputType>Library</OutputType>
     <RootNamespace>SoftwareMonkeys.csAnt.SetUp.Tests</RootNamespace>
-    <AssemblyName>SoftwareMonkeys.csAnt.SetUp.Common.Tests</AssemblyName>
+    <AssemblyName>SoftwareMonkeys.csAnt.SetUp.Tests</AssemblyName>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>SoftwareMonkeys.csAnt.SetUp.Tests.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
