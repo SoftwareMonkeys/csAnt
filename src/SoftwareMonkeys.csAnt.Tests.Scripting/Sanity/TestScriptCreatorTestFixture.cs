@@ -4,18 +4,18 @@ using System.Reflection;
 using System.IO;
 using SoftwareMonkeys.csAnt.IO;
 
-namespace SoftwareMonkeys.csAnt.Tests.Scripting
+namespace SoftwareMonkeys.csAnt.Tests.Scripting.Sanity
 {
     [TestFixture]
-    public class GetTestScriptTestFixture : BaseScriptingUnitTestFixture
+    public class TestScriptCreatorTestFixture : BaseScriptingUnitTestFixture
     {
         [Test]
-        public void Test_GetTestScript_HasCorrectDefaultPropertyValues()
+        public void Test_Create_HasCorrectDefaultPropertyValues()
         {
             Console.WriteLine ("");
-            Console.WriteLine ("Testing the GetTestScript function.");
+            Console.WriteLine ("Testing the Create function.");
 
-            var script = new TestScriptCreator().Create("MyTestScript");
+            var script = new TestScriptCreator(WorkingDirectory).Create("MyTestScript");
             
             Console.WriteLine ("");
             Console.WriteLine ("Working directory:");
@@ -45,13 +45,13 @@ namespace SoftwareMonkeys.csAnt.Tests.Scripting
         }
         
         [Test]
-        public void Test_GetTestScript_HasCorrectCurrentDirectory()
+        public void Test_Create_HasCorrectCurrentDirectory()
         {
 
             Console.WriteLine ("");
-            Console.WriteLine ("Testing the GetTestScript function.");
+            Console.WriteLine ("Testing the Create function.");
 
-            var script = GetTestScript("MyTestScript");
+            var script = new TestScriptCreator(WorkingDirectory).Create("MyTestScript");
 
             Console.WriteLine ("");
             Console.WriteLine ("Working directory:");
@@ -76,13 +76,14 @@ namespace SoftwareMonkeys.csAnt.Tests.Scripting
         }
         
         [Test]
-        public void Test_GetTestScript_SubScript_HasCorrectCurrentDirectory()
+        public void Test_Create_SubScript_HasCorrectCurrentDirectory()
         {
+            // TODO: Move to a different test fixture because it's really testing the Activator.ActivatScript function
 
             Console.WriteLine ("");
-            Console.WriteLine ("Testing the GetTestScript function.");
+            Console.WriteLine ("Testing the Create function.");
 
-            var script = GetTestScript("MyTestScript");
+            var script = new TestScriptCreator(WorkingDirectory).Create("MyTestScript");
 
             new FilesGrabber(
                 script.OriginalDirectory,
@@ -116,20 +117,21 @@ namespace SoftwareMonkeys.csAnt.Tests.Scripting
         }
         
         [Test]
-        public void Test_GetTestScript_SubScript_HasCorrectOriginalDirectory()
+        public void Test_Create_SubScript_HasCorrectOriginalDirectory()
         {
+            // TODO: Move to a different test fixture because it's really testing the Activator.ActivatScript function
 
             Console.WriteLine ("");
-            Console.WriteLine ("Testing the GetTestScript function.");
+            Console.WriteLine ("Testing the Create function.");
 
-            var script = GetTestScript("MyTestScript");
+            var script = new TestScriptCreator(WorkingDirectory).Create("MyTestScript");
 
             new FilesGrabber(
                 script.OriginalDirectory,
                 script.CurrentDirectory
                 ).GrabOriginalScriptingFiles();
 
-            var script2 = script.ActivateScript("Test_HelloWorld");
+            var script2 = script.ScriptExecutor.Activator.ActivateScript("Test_HelloWorld");
             
             Console.WriteLine ("");
             Console.WriteLine ("Working directory:");
@@ -148,16 +150,18 @@ namespace SoftwareMonkeys.csAnt.Tests.Scripting
         }
         
         [Test]
-        public void Test_GetTestScript_SubScript_HasCorrectTimeAndTimeStamp()
+        public void Test_Create_SubScript_HasCorrectTimeAndTimeStamp()
         {
-            var script = GetTestScript("MyTestScript");
+            // TODO: Move to a different test fixture because it's really testing the Activator.ActivatScript function
+
+            var script = new TestScriptCreator(WorkingDirectory).Create("MyTestScript");
 
             new FilesGrabber(
                 script.OriginalDirectory,
                 script.CurrentDirectory
                 ).GrabOriginalScriptingFiles();
 
-            var script2 = script.ActivateScript("HelloWorld");
+            var script2 = script.ScriptExecutor.Activator.ActivateScript("HelloWorld");
 
             Console.WriteLine ("");
             Console.WriteLine ("Expected time:");

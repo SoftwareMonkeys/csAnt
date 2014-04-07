@@ -60,7 +60,6 @@
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="TestScriptStackDetector.cs" />
-    <Compile Include="TestScriptStackDetectorTestFixture.cs" />
     <Compile Include="BaseScriptingDummyScript.cs" />
     <Compile Include="BaseScriptingTestFixture.cs" />
     <Compile Include="ScriptingDummyScriptTearDowner.cs" />
@@ -71,13 +70,16 @@
     <Compile Include="ScriptingTestScriptSetUpper.cs" />
     <Compile Include="ScriptingTestScriptTearDowner.cs" />
     <Compile Include="ScriptingTestScriptRelocator.cs" />
-    <Compile Include="GetTestScriptTestFixture.cs" />
     <Compile Include="BaseTestScript.cs" />
     <Compile Include="BaseTestScriptTearDowner.cs" />
     <Compile Include="BaseTestScriptSetUpper.cs" />
     <Compile Include="BaseTestScriptConstructor.cs" />
     <Compile Include="LifecycleTestFixture.cs" />
     <Compile Include="HelloWorldScriptTestFixture.cs" />
+    <Compile Include="Sanity\BaseScriptingUnitTestFixture.cs" />
+    <Compile Include="TestScriptCreator.cs" />
+    <Compile Include="Sanity\TestScriptCreatorTestFixture.cs" />
+    <Compile Include="Sanity\TestScriptStackDetectorTestFixture.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -101,5 +103,9 @@
       <Project>{53E3AFEA-3627-4846-B2E4-5A8091E96BC6}</Project>
       <Name>SoftwareMonkeys.csAnt.IO.Contracts</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Sanity\" />
+    <Folder Include="Unit\" />
   </ItemGroup>
 </Project>

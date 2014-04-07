@@ -1,10 +1,10 @@
 using System;
 using NUnit.Framework;
 
-namespace SoftwareMonkeys.csAnt.Tests.Scripting.Unit
+namespace SoftwareMonkeys.csAnt.Tests.Scripting.Sanity
 {
     [TestFixture]
-    public class TestScriptStackDetectorTestFixture : BaseScriptingUnitTestFixture
+    public class TestScriptStackDetectorTestFixture : BaseScriptingSanityTestFixture
     {
         [Test]
         public void Test_Detect_3()
