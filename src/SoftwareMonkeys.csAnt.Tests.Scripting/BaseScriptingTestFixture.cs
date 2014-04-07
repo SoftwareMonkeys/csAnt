@@ -30,29 +30,7 @@ namespace SoftwareMonkeys.csAnt.Tests.Scripting
 
         public virtual ITestScript GetTestScript(string scriptName, IScript parentScript, bool isVerbose)
         {
-            Console.WriteLine ("");
-            Console.WriteLine ("Getting test script: " + scriptName);
-
-            if (parentScript != null)
-                Console.WriteLine ("Parent script: " + parentScript.ScriptName);
-
-            Console.WriteLine ("");
-
-            var testScript = new ScriptingTestScript(
-                scriptName,
-                parentScript
-            );
-
-            Scripts.Add (testScript);
-
-            testScript.ParentScript = parentScript;
-
-            testScript.CurrentDirectory = WorkingDirectory;
-
-			// TODO: Check if needed. Shouldn't be needed while SetUp is called during Construct
-            //testScript.SetUp ();
-
-            return testScript;
+            return new TestScriptCreator(WorkingDirectory, isVerbose).Create(scriptName, parentScript);
         }
     }
 }
