@@ -21,30 +21,54 @@ namespace SoftwareMonkeys.csAnt.Tests
             var targets = new string[]{"x86"};
 
             foreach (var mode in modes) {
-            	var key = Path.DirectorySeparatorChar
-            		+ "bin"
-            		+ Path.DirectorySeparatorChar
-            		+ mode;
+                var key = Path.DirectorySeparatorChar
+                    + "bin"
+                    + Path.DirectorySeparatorChar
+                    + mode;
+
+                var key2 = Path.DirectorySeparatorChar
+                    + "bin-tests"
+                    + Path.DirectorySeparatorChar
+                    + mode;
             	
                 if (currentDirectory.EndsWith (key))
                 {
                     currentDirectory = currentDirectory.Replace (key, "");
                     break;
                 }
+
+                if (currentDirectory.EndsWith (key2))
+                {
+                    currentDirectory = currentDirectory.Replace (key2, "");
+                    break;
+                }
                 
                 foreach (var target in targets)
                 {
-            		var subKey = Path.DirectorySeparatorChar
-	            		+ "bin"
-	            		+ Path.DirectorySeparatorChar
-	            		+ target
-	            		+ Path.DirectorySeparatorChar
-	            		+ mode;
+                    var subKey = Path.DirectorySeparatorChar
+                        + "bin"
+                        + Path.DirectorySeparatorChar
+                        + target
+                        + Path.DirectorySeparatorChar
+                        + mode;
+
+                    var subKey2 = Path.DirectorySeparatorChar
+                        + "bin-tests"
+                        + Path.DirectorySeparatorChar
+                        + target
+                        + Path.DirectorySeparatorChar
+                        + mode;
             	
-	                if (currentDirectory.EndsWith (subKey))
-	                {
-	                    currentDirectory = currentDirectory.Replace (subKey, "");
-	                    break;
+                    if (currentDirectory.EndsWith (subKey))
+                    {
+                        currentDirectory = currentDirectory.Replace (subKey, "");
+                        break;
+                    }
+
+                    if (currentDirectory.EndsWith (subKey2))
+                    {
+                        currentDirectory = currentDirectory.Replace (subKey2, "");
+                        break;
 	                }
                 }
             }
