@@ -50,17 +50,17 @@ class CycleBuildScript : BaseProjectScript
 		Console.WriteLine("Building...");
 		Console.WriteLine("");
 
-                // If the mode is "all" then build both Debug and Release modes
-                if (mode == "all")
-                {
+        // If the mode is "all" then build both Debug and Release modes
+        if (mode == "all")
+        {
 		        ExecuteScript(
 			        "BuildAllSolutions",
-			        "-mode:Release"
+			        "-mode=Release"
 		        );
 		        
 		        ExecuteScript(
 			        "BuildAllSolutions",
-			        "-mode:Debug"
+			        "-mode=Debug"
 		        );
 		}
 		else
@@ -68,13 +68,13 @@ class CycleBuildScript : BaseProjectScript
 		        // Build the solutions
 		        ExecuteScript(
 			        "BuildAllSolutions",
-			        "-mode:" + mode
+			        "-mode=" + mode
 		        );
 		}
 
 		if (!IsError)
 		{
-            ExecuteScript("Repack");
+            ExecuteScript("Repack", "-mode=" + mode);
 		}
 
 		if (!IsError)

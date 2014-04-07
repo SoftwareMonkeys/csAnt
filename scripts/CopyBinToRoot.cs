@@ -19,17 +19,25 @@ class CopyBinToRootScript : BaseProjectScript
 			+ Path.DirectorySeparatorChar
 			+ "bin";
 	
-	        Console.WriteLine("");
-	        Console.WriteLine("Bin directory:");
-	        Console.WriteLine(binDirectory);
-	        Console.WriteLine("");
+        Console.WriteLine("");
+        Console.WriteLine("Bin directory:");
+        Console.WriteLine(binDirectory);
+        Console.WriteLine("");
 
 		int i = 0;
         int s = 0;
 
+        var arguments = new Arguments(args);
+
+        var buildMode = "Release";
+        if (arguments.Contains("mode"))
+            buildMode = arguments["mode"];
+
+        Console.WriteLine("Build mode: " + buildMode);
+
 		var patterns = new string[]{
-			"bin/Release/packed/csAnt-SetUpFromLocal.*",
-			"bin/Release/packed/csAnt-SetUp.*"
+			"bin/" + buildMode + "/packed/csAnt-SetUpFromLocal.*",
+			"bin/" + buildMode + "/packed/csAnt-SetUp.*"
 		};
 
 	        foreach (string file in FindFiles(patterns))

@@ -15,6 +15,10 @@ class EnsureBuildScript : BaseScript
 	
 	public override bool Run(string[] args)
 	{
+        var buildMode = "Release";
+        if (Arguments.Contains("mode"))
+            buildMode = Arguments["mode"];
+
 		var timeStampsData = GetTimeStampsData();
 
 		var latestTimeStamps = GetLatestTimeStamps();
@@ -56,7 +60,7 @@ class EnsureBuildScript : BaseScript
 
 		if (needsBuild)
 		{
-			ExecuteScript("CycleBuild");
+			ExecuteScript("CycleBuild", "-mode=" + buildMode);
 
 			WriteTimeStampsData(latestTimeStamps);
 		}
