@@ -14,13 +14,22 @@ namespace SoftwareMonkeys.csAnt.SetUp
             Starter = new DotNetProcessStarter();
         }
 
-        public override void Launch(string sourceDirectory, string projectDirectory)
+        public override void Launch(string projectDirectory)
         {
             var exeFile = projectDirectory
                 + Path.DirectorySeparatorChar
                     + "csAnt-SetUp.exe";
 
             Starter.Start(exeFile);
+        }
+
+        public override void Launch(string sourceDirectory, string projectDirectory)
+        {
+            var exeFile = projectDirectory
+                + Path.DirectorySeparatorChar
+                    + "csAnt-SetUp.exe";
+
+            Starter.Start(exeFile, sourceDirectory);
         }
     }
 }
