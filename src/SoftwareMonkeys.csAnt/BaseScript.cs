@@ -13,7 +13,9 @@ namespace SoftwareMonkeys.csAnt
 
 		public string ScriptName { get; set; }
 
-		public int Indent { get;set; }
+        public int Indent { get;set; }
+
+        public Indenter Indenter { get;set; }
 
 		protected BaseScript ()
         {

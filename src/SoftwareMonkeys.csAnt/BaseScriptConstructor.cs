@@ -58,6 +58,8 @@ namespace SoftwareMonkeys.csAnt
                 Script.InitializeNodeManager(Script.ParentScript.Nodes);
                 //Script.Relocator = Script.ParentScript.Relocator; // TODO: Remove if not needed. At the moment each script must have its own relocator. Could possibly change relocator so it doesn't need one per script
                 Script.InitializeFileFinder(Script.ParentScript.FileFinder);
+                Script.Indenter = Script.ParentScript.Indenter;
+                Script.Indent = Script.ParentScript.Indent+1;
             } else {
                 Script.Time = DateTime.Now;
                 Script.TimeStamp = Script.GetTimeStamp ();
