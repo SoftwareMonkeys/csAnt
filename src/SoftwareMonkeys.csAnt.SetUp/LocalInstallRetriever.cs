@@ -84,6 +84,7 @@ namespace SoftwareMonkeys.csAnt.SetUp
         public string[] GetDefaultFilePatternList()
         {
             return new string[]{
+                "lib/nuget.exe",
                 "lib/csAnt/**",
                 "lib/cs-script/**",
                 "lib/FileNodes/**",
