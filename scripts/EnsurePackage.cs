@@ -122,33 +122,38 @@ class EnsurePackageScript : BaseProjectScript
 	{
 		var latestFilePath = GetNewestFile(packageSubDir);
 
-		var latestFileName = Path.GetFileNameWithoutExtension(latestFilePath);
+        var version = "0.0.0.0";
 
-		Console.WriteLine("Package file: " + latestFileName);
+        if (File.Exists(latestFilePath))
+        {
+		    var latestFileName = Path.GetFileNameWithoutExtension(latestFilePath);
 
-		var variation = Path.GetFileName(packageSubDir);
+		    Console.WriteLine("Package file: " + latestFileName);
 
-		var prefix = ProjectName + "-" + variation + ".";
+		    var variation = Path.GetFileName(packageSubDir);
+
+		    var prefix = ProjectName + "-" + variation + ".";
 		
-		if (IsVerbose)
-			Console.WriteLine("Prefix: " + prefix);
+		    if (IsVerbose)
+			    Console.WriteLine("Prefix: " + prefix);
 
-		var withoutPrefix = latestFileName.Replace(prefix, "");
+		    var withoutPrefix = latestFileName.Replace(prefix, "");
 		
-		if (IsVerbose)
-			Console.WriteLine("Without prefix: " + withoutPrefix);
+		    if (IsVerbose)
+			    Console.WriteLine("Without prefix: " + withoutPrefix);
 		
 
-		var versionStartPos = latestFileName.IndexOf(".")+1;
+		    var versionStartPos = latestFileName.IndexOf(".")+1;
 
-		var versionEndPos = latestFileName.Length-versionStartPos;
+		    var versionEndPos = latestFileName.Length-versionStartPos;
 
-		var withoutTimestamp = withoutPrefix.Substring(versionStartPos, versionEndPos);
+		    var withoutTimestamp = withoutPrefix.Substring(versionStartPos, versionEndPos);
 
-		if (IsVerbose)
-			Console.WriteLine("Without time stamp: " + withoutTimestamp);
+		    if (IsVerbose)
+			    Console.WriteLine("Without time stamp: " + withoutTimestamp);
 
-		var version = withoutTimestamp.Replace("-", ".");
+		    version = withoutTimestamp.Replace("-", ".");
+        }
 
 		return version;
 	}

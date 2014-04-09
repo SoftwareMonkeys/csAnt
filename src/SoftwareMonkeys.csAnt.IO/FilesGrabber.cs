@@ -101,6 +101,16 @@ namespace SoftwareMonkeys.csAnt.IO
             }
         }
 
+        public string[] MiscFilePatterns
+        {
+            get
+            {
+                return new string[] {
+                    "readme.txt"
+                };
+            }
+        }
+
         public FilesGrabber (
             string originalDirectory,
             string currentDirectory
@@ -171,8 +181,10 @@ namespace SoftwareMonkeys.csAnt.IO
             Grab(BinFilePatterns);
 
             Grab(ScriptFilePatterns);
-
+            
             Grab(PackageSpecFilePatterns);
+
+            Grab(MiscFilePatterns);
         }
 
         public void GrabOriginalFiles (params string[] patterns)

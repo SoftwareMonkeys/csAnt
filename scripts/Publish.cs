@@ -21,12 +21,12 @@ class PublishScript : BaseProjectScript
             packageName = args[0];
 
         // Find all scripts starting with "Publish-"
-        var scripts = FindScripts("Publish-*", packageName);
+        var scripts = FindScripts("Publish-*");
 
         // Loop through the scripts
         foreach (var script in scripts)
             // Execute the script
-            ExecuteScript(script);
+            ExecuteScript(script, packageName);
 
 		return !IsError;
 	}

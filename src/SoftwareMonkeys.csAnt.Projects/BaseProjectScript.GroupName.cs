@@ -10,7 +10,14 @@ namespace SoftwareMonkeys.csAnt.Projects
 		/// </summary>
 		public string GroupName
 		{
-			get { return GroupNode.Name; }
+			get {
+                if (CurrentNode.Properties.ContainsKey("Group"))
+                    return CurrentNode.Properties["Group"];
+                else if (GroupNode != null)
+                    return GroupNode.Name;
+                else
+                    return String.Empty;
+            }
 		}
 	}
 }

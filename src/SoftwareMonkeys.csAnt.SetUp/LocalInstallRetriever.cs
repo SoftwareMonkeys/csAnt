@@ -84,6 +84,7 @@ namespace SoftwareMonkeys.csAnt.SetUp
         public string[] GetDefaultFilePatternList()
         {
             return new string[]{
+                "lib/nuget.exe",
                 "lib/csAnt/**",
                 "lib/cs-script/**",
                 "lib/FileNodes/**",
@@ -93,7 +94,8 @@ namespace SoftwareMonkeys.csAnt.SetUp
                 "lib/SharpZipLib/net-20/**",
                 "lib/ILRepack.1.25.0/**",
                 "scripts/**",
-                "csAnt.sh"
+                "csAnt.sh",
+                "csAnt.bat"
             };
         }
     }

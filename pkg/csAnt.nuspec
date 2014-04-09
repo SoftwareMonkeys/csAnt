@@ -6,16 +6,28 @@
     <authors>SoftwareMonkeys</authors>
     <owners>SoftwareMonkeys</owners>
     <description>C# scripting and automation environment.</description>
-    <dependencies />
+    <dependencies>
+        <dependency id="Newtonsoft.Json" version="6.0.1"/>
+        <dependency id="HtmlAgilityPack"/>
+        <dependency id="SharpZipLib"/>
+        <dependency id="ILRepack" version="1.25.0"/>
+        <dependency id="NUnit"/>
+        <dependency id="NUnitResults"/>
+        <dependency id="cs-script"/>
+    </dependencies>
   </metadata>
   <files>
-    <file src="scripts/*.cs" target="scripts" />
+    <file src="scripts/**.cs" target="scripts" />
     <file src="csAnt-setup-local.sh" />
     <file src="csAnt-setup.sh" />
     <file src="csAnt-setup.vbs" />
     <file src="csAnt.sh" />
     <file src="csAnt.bat" />
     <file src="csAnt.node" />
+    <file src="lib/csAnt/csAnt.node" target="lib/csAnt/" />
     <file src="lib/csAnt/bin/Release/net-40/*" target="lib/csAnt/bin/Release/net-40/" />
+    <file src="lib/FileNodes/bin/Release/*" target="lib/FileNodes/bin/Release/" />
+    <file src="lib/Libraries.node" target="lib/" />
+    <file src="readme.txt" />
   </files>
 </package>
