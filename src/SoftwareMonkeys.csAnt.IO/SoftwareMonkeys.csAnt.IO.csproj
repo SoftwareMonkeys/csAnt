@@ -95,6 +95,8 @@
     <Compile Include="PathConverter.cs" />
     <Compile Include="Platform.cs" />
     <Compile Include="FileCopier.cs" />
+    <Compile Include="TextReplacer.cs" />
+    <Compile Include="FileFormat.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -104,6 +106,10 @@
     <ProjectReference Include="..\SoftwareMonkeys.csAnt.IO.Contracts\SoftwareMonkeys.csAnt.IO.Contracts.csproj">
       <Project>{53E3AFEA-3627-4846-B2E4-5A8091E96BC6}</Project>
       <Name>SoftwareMonkeys.csAnt.IO.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SoftwareMonkeys.csAnt.SourceControl.Git\SoftwareMonkeys.csAnt.SourceControl.Git.csproj">
+      <Project>{94578333-F8C9-40C0-9300-8D808ED1CD7A}</Project>
+      <Name>SoftwareMonkeys.csAnt.SourceControl.Git</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>

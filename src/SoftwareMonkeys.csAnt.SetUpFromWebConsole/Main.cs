@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using SoftwareMonkeys.csAnt;
 using SoftwareMonkeys.csAnt.SetUp;
 
 namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole
