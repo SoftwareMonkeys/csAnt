@@ -21,7 +21,7 @@ namespace SoftwareMonkeys.csAnt.Tests
 
             grabber.GrabOriginalFiles(
                 "bin/**",
-                "lib/NUnit/bin/**",
+                "lib/NUnit.2.6.3/bin/**",
                 "lib/NUnitResults/**"
             );
 
