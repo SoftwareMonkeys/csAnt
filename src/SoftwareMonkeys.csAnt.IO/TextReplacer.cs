@@ -14,9 +14,9 @@ namespace SoftwareMonkeys.csAnt.IO
 
         public string[] ExcludePatterns = new string[]{
             "!.git",
-            "!/logs",
-            "!/tests/results",
-            "!/profiling"
+            "!logs/",
+            "!tests/results/",
+            "!profiling/"
         };
 
         public TextReplacer ()
@@ -26,8 +26,13 @@ namespace SoftwareMonkeys.csAnt.IO
 
         public void ReplaceIn(string workingDir, string filePattern, string textToFind, string replacementText, bool commit)
         {
+            ReplaceIn(workingDir, new string[]{filePattern}, textToFind, replacementText, commit);
+        }
+
+        public void ReplaceIn(string workingDir, string[] filePatterns, string textToFind, string replacementText, bool commit)
+        {
             var patterns = new List<string>();
-            patterns.Add(filePattern);
+            patterns.AddRange(filePatterns);
             patterns.AddRange(ExcludePatterns);
 
             string[] files = Finder.FindFiles(workingDir, patterns.ToArray());
@@ -41,10 +46,20 @@ namespace SoftwareMonkeys.csAnt.IO
             {
                 if (IsText(file))
                 {
-                    string content = OpenFile(file);
+                    string content = String.Empty;
+
+                    try
+                    {
+                        content = OpenFile(file);
+                    }
+                    catch
+                    {
+                        Console.WriteLine("Can't load: " + file);
+                    }
 
                     // Check file text
-                    if (content.Contains(textToFind))
+                    if (!String.IsNullOrEmpty(content)
+                        && content.Contains(textToFind))
                     {
                         Console.WriteLine("Text found in file: " + PathConverter.ToRelative(file));
                         if (commit)
@@ -57,32 +72,32 @@ namespace SoftwareMonkeys.csAnt.IO
                         else
                             totalSkipped++;
                     }
-
-                    // Check file name
-                    if (file.Contains(textToFind))
+                }
+                
+                // Check file name
+                if (file.Contains(textToFind))
+                {
+                    Console.WriteLine("Text found in file name: " + PathConverter.ToRelative(file));
+                    if (commit)
                     {
-                        Console.WriteLine("Text found in file name: " + PathConverter.ToRelative(file));
-                        if (commit)
+                        var newFileName = file.Replace(textToFind, replacementText);
+
+                        DirectoryChecker.EnsureDirectoryExists(Path.GetDirectoryName(newFileName));
+
+                        try
                         {
-                            var newFileName = file.Replace(textToFind, replacementText);
-
-                            DirectoryChecker.EnsureDirectoryExists(Path.GetDirectoryName(newFileName));
-
-                            try
-                            {
-                                Git.Move(file, newFileName);
-                                Console.WriteLine("Renamed (git move)");
-                            }
-                            catch
-                            {
-                                File.Move(file, newFileName);
-                                Console.WriteLine("Renamed (direct file move/rename)");
-                            }
-                            totalChanges++;
+                            Git.Move(file, newFileName);
+                            Console.WriteLine("Renamed (git move)");
                         }
-                        else
-                            totalSkipped++;
+                        catch
+                        {
+                            File.Move(file, newFileName);
+                            Console.WriteLine("Renamed (direct file move/rename)");
+                        }
+                        totalChanges++;
                     }
+                    else
+                        totalSkipped++;
                 }
             }
             
