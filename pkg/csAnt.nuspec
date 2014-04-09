@@ -13,6 +13,7 @@
         <dependency id="SharpZipLib"/>
         <dependency id="ILRepack" version="1.25.0"/>
         <dependency id="NUnit"/>
+        <dependency id="NUnit.Runners"/>
         <dependency id="NUnitResults"/>
     </dependencies>
   </metadata>

@@ -6,7 +6,16 @@
     <authors>SoftwareMonkeys</authors>
     <owners>SoftwareMonkeys</owners>
     <description>C# scripting and automation environment (source code).</description>
-    <dependencies />
+    <dependencies>
+        <dependency id="cs-script"/>
+        <dependency id="Newtonsoft.Json" version="6.0.1"/>
+        <dependency id="HtmlAgilityPack"/>
+        <dependency id="SharpZipLib"/>
+        <dependency id="ILRepack" version="1.25.0"/>
+        <dependency id="NUnit"/>
+        <dependency id="NUnit.Runners"/>
+        <dependency id="NUnitResults"/>
+    </dependencies>
   </metadata>
   <files>
     <file src="scripts/*.cs" target="scripts" />
@@ -18,16 +27,7 @@
     <file src="csAnt.node" />
     <file src="lib/csAnt/csAnt.node" target="lib/csAnt/" />
     <file src="lib/csAnt/bin/Release/net-40/*" target="lib/csAnt/bin/Release/net-40/" />
-    <file src="lib/cs-script/**" target="lib/cs-script/" />
-    <file src="lib/Newtonsoft.Json.6.0.1/lib/net40/*" target="lib/Newtonsoft.Json.6.0.1/lib/net40/" />
-    <file src="lib/NUnit/*" target="lib/NUnit/" />
-    <file src="lib/NUnit/bin/nunit.framework.dll" target="lib/NUnit/bin/" />
-    <file src="lib/NUnitResults/*" target="lib/NUnitResults/" />
-    <file src="lib/FileNodes/bin/Release/*" target="lib/FileNodes/bin/Release/" />
-    <file src="lib/ILRepack.1.25.0/tools/*" target="lib/ILRepack.1.25.0/tools/" />
-    <file src="lib/SharpZipLib/net-20/*" target="lib/SharpZipLib/net-20/" />
-    <file src="lib/HtmlAgilityPack/Net40/*" target="lib/HtmlAgilityPack/Net40/" />
-    <file src="lib/Libraries.node" target="lib" />
+    <file src="lib/**.node" target="lib" />
     <file src="src/*.node" target="src" />
     <file src="src/**.sln" target="src" />
     <file src="src/**/*.node" target="src" />
