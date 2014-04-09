@@ -92,13 +92,13 @@ class CyclePublishScript : BaseProjectScript
 			"lib/nuget.exe",
 			"lib/csAnt/**",
 			"lib/cs-script/**",
-			"lib/HtmlAgilityPack/**",
+			"lib/HtmlAgilityPack.1.4.6/**",
 			"lib/ILRepack.1.25.0/**",
 			"lib/FileNodes/**",
-			"lib/NUnit/**",
+			"lib/NUnit.2.6.3/**",
 			"lib/NUnitResults/**",
-			"lib/Newtonsoft.Json.6.0.1/lib/net40/**",
-			"lib/SharpZipLib/**",
+			"lib/Newtonsoft.Json.6.0.2/lib/net40/**",
+			"lib/SharpZipLib.0.86.0/**",
 			"pkg/*"
 		);
 	}

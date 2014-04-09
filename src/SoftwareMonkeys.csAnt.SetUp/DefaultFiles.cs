@@ -11,10 +11,10 @@ namespace SoftwareMonkeys.csAnt.Tests
                     "lib/csAnt/**",
                     "lib/cs-script/**",
                     "lib/FileNodes/**",
-                    "lib/NUnit/**",
+                    "lib/NUnit.2.6.3/**",
                     "lib/NUnitResults/**",
-                    "lib/HtmlAgilityPack/Net40/**",
-                    "lib/SharpZipLib/net-20/**",
+                    "lib/HtmlAgilityPack.1.4.6/lib/Net40/**",
+                    "lib/SharpZipLib.0.86.0/lib/20/**",
                     "lib/ILRepack.1.25.0/**",
                     "scripts/**",
                     "csAnt.sh"

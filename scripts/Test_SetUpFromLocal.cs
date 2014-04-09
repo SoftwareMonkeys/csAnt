@@ -3,7 +3,7 @@
 //css_ref ../lib/csAnt/bin/Release/net-40/SoftwareMonkeys.csAnt.IO.Contracts.dll;
 //css_ref ../lib/csAnt/bin/Release/net-40/SoftwareMonkeys.csAnt.Tests.dll;
 //css_ref ../lib/csAnt/bin/Release/net-40/SoftwareMonkeys.csAnt.Tests.Scripting.dll;
-//css_ref ../lib/SharpZipLib/net-20/ICSharpCode.SharpZipLib.dll;
+//css_ref ../lib/SharpZipLib.0.86.0/net-20/ICSharpCode.SharpZipLib.0.86.0.dll;
 using System;
 using System.IO;
 using Microsoft.CSharp;

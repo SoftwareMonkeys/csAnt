@@ -38,7 +38,7 @@ namespace SoftwareMonkeys.csAnt.IO.Compression
 
             var zipFileName = Path.GetFileNameWithoutExtension(zipFilePath);
 
-            // Zip up the files - From SharpZipLib Demo Code
+            // Zip up the files
             ZipOutputStream s = new ZipOutputStream(
                 File.Create(zipFilePath)
             );

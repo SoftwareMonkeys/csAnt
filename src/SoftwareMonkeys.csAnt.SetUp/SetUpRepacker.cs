@@ -19,8 +19,8 @@ namespace SoftwareMonkeys.csAnt.SetUp
             var assemblyFile = "bin/{BuildMode}/csAnt-SetUp.exe";
 
             var dependencies = new string[]{
-                "lib/SharpZipLib/net-20/ICSharpCode.SharpZipLib.dll",
-                "lib/HtmlAgilityPack/Net40/HtmlAgilityPack.dll",
+                "lib/SharpZipLib.0.86.0/lib/20/ICSharpCode.SharpZipLib.dll",
+                "lib/HtmlAgilityPack.1.4.6/lib/Net40/HtmlAgilityPack.dll",
                 "bin/{BuildMode}/SoftwareMonkeys.csAnt.dll",
                 "bin/{BuildMode}/SoftwareMonkeys.csAnt.Contracts.dll",
                 "bin/{BuildMode}/SoftwareMonkeys.csAnt.IO.dll",

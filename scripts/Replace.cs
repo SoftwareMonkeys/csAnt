@@ -22,26 +22,17 @@ class ReplaceScript : BaseScript
 
         var commit = Arguments.ContainsAny("c", "commit");
 
-        if (args.Length == 2)
-        {
-            var text = args[0];
+        var text = args[0];
 
-            var replacementText = args[1];
+        var replacementText = args[1];
 
-            replacer.ReplaceIn(CurrentDirectory, "**", text, replacementText, commit); 
-        }
-        if (args.Length == 3)
-        {
-            var pattern = args[0];
+        var patterns = new string[]{ "*" }; // TODO: Should this be "**" to search sub directories?
 
-            var text = args[1];
+        if (Arguments.ContainsAny("f", "files"))
+            patterns = Arguments["f", "files"].Split(';');
 
-            var replacementText = args[2];
-
-            replacer.ReplaceIn(CurrentDirectory, pattern, text, replacementText, commit); 
-        }
+        replacer.ReplaceIn(CurrentDirectory, patterns, text, replacementText, commit); 
         
-
 		return !IsError;
 	}
 	

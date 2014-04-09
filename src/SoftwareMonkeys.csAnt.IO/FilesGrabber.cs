@@ -24,12 +24,12 @@ namespace SoftwareMonkeys.csAnt.IO
                     "lib/nuget.exe",
                     "lib/csAnt/**",
                     "lib/FileNodes/**",
-                    "lib/HtmlAgilityPack/**",
+                    "lib/HtmlAgilityPack.1.4.6/lib/Net40/**",
                     "lib/cs-script/**",
-                    "lib/SharpZipLib/**",
+                    "lib/SharpZipLib.0.86.0/lib/20/**",
                     "lib/ILRepack.1.25.0/**",
-                    "lib/Newtonsoft.Json.6.0.1/lib/net40/**",
-                    "lib/NUnit/bin/nunit.framework.dll"
+                    "lib/Newtonsoft.Json.6.0.2/lib/net40/**",
+                    "lib/NUnit.2.6.3/bin/nunit.framework.dll"
                 };
             }
         }

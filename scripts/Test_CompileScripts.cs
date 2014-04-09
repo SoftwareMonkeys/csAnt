@@ -1,4 +1,4 @@
-//css_ref ../lib/NUnit/bin/nunit.framework.dll;
+//css_ref ../lib/NUnit.2.6.3/lib/nunit.framework.dll;
 //css_ref ../lib/csAnt/bin/Release/net-40/SoftwareMonkeys.csAnt.Tests.Scripting.dll;
 //css_ref ../lib/csAnt/bin/Release/net-40/SoftwareMonkeys.csAnt.Projects.dll;
 //css_ref ../lib/csAnt/bin/Release/net-40/SoftwareMonkeys.csAnt.Projects.Tests.dll;
