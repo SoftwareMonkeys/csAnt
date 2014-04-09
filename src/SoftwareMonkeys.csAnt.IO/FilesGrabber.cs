@@ -25,7 +25,7 @@ namespace SoftwareMonkeys.csAnt.IO
                     "lib/csAnt/**",
                     "lib/FileNodes/**",
                     "lib/HtmlAgilityPack.1.4.6/lib/Net40/**",
-                    "lib/cs-script/**",
+                    "lib/CS-Script.3.7.2.0/lib/net40/**",
                     "lib/SharpZipLib.0.86.0/lib/20/**",
                     "lib/ILRepack.1.25.0/**",
                     "lib/Newtonsoft.Json.6.0.2/lib/net40/**",
@@ -56,11 +56,12 @@ namespace SoftwareMonkeys.csAnt.IO
             }
         }
 
-        public string[] PackageSpecFilePatterns
+        public string[] PackageFilePatterns
         {
             get
             {
                 return new string[] {
+                    "pkg/**.nupkg",
                     "pkg/*.nuspec"
                 };
             }
@@ -182,7 +183,7 @@ namespace SoftwareMonkeys.csAnt.IO
 
             Grab(ScriptFilePatterns);
             
-            Grab(PackageSpecFilePatterns);
+            Grab(PackageFilePatterns);
 
             Grab(MiscFilePatterns);
         }

@@ -9,7 +9,7 @@ namespace SoftwareMonkeys.csAnt.Tests
             {
                 return new string[]{
                     "lib/csAnt/**",
-                    "lib/cs-script/**",
+                    "lib/CS-Script.3.7.2.0/lib/net40/**",
                     "lib/FileNodes/**",
                     "lib/NUnit.2.6.3/**",
                     "lib/NUnitResults/**",

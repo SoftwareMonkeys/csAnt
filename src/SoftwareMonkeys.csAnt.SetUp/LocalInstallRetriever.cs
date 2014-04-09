@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using SoftwareMonkeys.csAnt.Versions;
 using SoftwareMonkeys.csAnt.IO;
+using SoftwareMonkeys.csAnt.Tests;
 
 
 namespace SoftwareMonkeys.csAnt.SetUp
@@ -83,10 +84,13 @@ namespace SoftwareMonkeys.csAnt.SetUp
 
         public string[] GetDefaultFilePatternList()
         {
-            return new string[]{
+            return DefaultFiles.DefaultFilePatterns;
+
+            // TODO: Remove if not needed
+            /*return new string[]{
                 "lib/nuget.exe",
                 "lib/csAnt/**",
-                "lib/cs-script/**",
+                "lib/CS-Script.3.7.2.0/lib/net40/**",
                 "lib/FileNodes/**",
                 "lib/NUnit.2.6.3/**",
                 "lib/NUnitResults/**",
@@ -96,7 +100,7 @@ namespace SoftwareMonkeys.csAnt.SetUp
                 "scripts/**",
                 "csAnt.sh",
                 "csAnt.bat"
-            };
+            };*/
         }
     }
 }

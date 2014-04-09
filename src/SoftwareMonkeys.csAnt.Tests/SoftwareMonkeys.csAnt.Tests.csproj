@@ -75,17 +75,17 @@
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Web" />
-    <Reference Include="HtmlAgilityPack">
-      <HintPath>..\..\lib\HtmlAgilityPack\lib\Net40\HtmlAgilityPack.dll</HintPath>
-    </Reference>
     <Reference Include="nunit.framework">
       <HintPath>..\..\lib\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
     </Reference>
-    <Reference Include="CSScriptLibrary">
-      <HintPath>..\..\lib\cs-script\Lib\Bin\NET 4.0\CSScriptLibrary.dll</HintPath>
-    </Reference>
     <Reference Include="SoftwareMonkeys.FileNodes">
       <HintPath>..\..\lib\FileNodes\bin\Release\SoftwareMonkeys.FileNodes.dll</HintPath>
+    </Reference>
+    <Reference Include="HtmlAgilityPack">
+      <HintPath>..\..\lib\HtmlAgilityPack.1.4.6\lib\Net40\HtmlAgilityPack.dll</HintPath>
+    </Reference>
+    <Reference Include="CSScriptLibrary">
+      <HintPath>..\..\lib\CS-Script.3.7.2.0\lib\net40\CSScriptLibrary.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

@@ -67,6 +67,9 @@ namespace SoftwareMonkeys.csAnt.SetUp
             var skippedFiles = 0;
             var overwrittenFiles = 0;
 
+            Console.WriteLine("Looking for files in:");
+            Console.WriteLine(directory);
+
             foreach (var file in FileFinder.FindFiles(directory, files))
             {
                 var toFile = file.Replace(directory, projectDirectory);
