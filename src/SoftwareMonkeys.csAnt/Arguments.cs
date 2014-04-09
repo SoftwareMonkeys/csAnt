@@ -110,13 +110,25 @@ namespace SoftwareMonkeys.csAnt
 
 		// Retrieve a parameter value if it exists 
 		// (overriding C# indexer property)
-		public string this [string Param]
+		public string this [string param]
 		{
 		    get
 		    {
-			return(Parameters[Param]);
+			return(Parameters[param]);
 		    }
 		}
+
+        public string this [params string[] parameters]
+        {
+            get
+            {
+                foreach (var p in parameters)
+                    if (Contains(p))
+                        return this[p];
+
+                return String.Empty;
+            }
+        }
 
 		public bool Contains(string param)
 		{
@@ -137,6 +149,19 @@ namespace SoftwareMonkeys.csAnt
             }
 
             return builder.ToString().Trim();
+        }
+
+        public bool ContainsAny(params string[] queryParameters)
+        {
+            bool doesContain = false;
+
+            foreach (var p in queryParameters)
+            {
+                if (Contains(p))
+                    doesContain = true;
+            }
+
+            return doesContain;
         }
 	}
 }
