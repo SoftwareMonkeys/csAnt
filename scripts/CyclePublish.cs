@@ -44,10 +44,11 @@ class CyclePublishScript : BaseProjectScript
 		// Build the cloned source code
 		ExecuteScript("EnsurePackage", packageName);
 
-        ReturnPackages();
-
         // Commit the file nodes containing the updated versions
         ExecuteScript("CommitVersion");
+
+        ReturnPackages();
+
 
         Git.Push("origin", "master");
 
@@ -68,16 +69,19 @@ class CyclePublishScript : BaseProjectScript
         {
             var file = GetNewestFile(dir);
             
-            var toFile = file.Replace(CurrentDirectory, OriginalDirectory);
+            if (!String.IsNullOrEmpty(file))
+            {
+                var toFile = file.Replace(CurrentDirectory, OriginalDirectory);
 
-            // TODO: Should the file be deleted and overwritten?
-            if (File.Exists(toFile))
-                File.Delete(toFile);
+                // TODO: Should the file be deleted and overwritten?
+                if (File.Exists(toFile))
+                    File.Delete(toFile);
 
-            if (!Directory.Exists(Path.GetDirectoryName(toFile)))
-                Directory.CreateDirectory(Path.GetDirectoryName(toFile));
+                if (!Directory.Exists(Path.GetDirectoryName(toFile)))
+                    Directory.CreateDirectory(Path.GetDirectoryName(toFile));
 
-            File.Copy(file, toFile);
+                File.Copy(file, toFile);
+            }
         }
     }
 
@@ -96,7 +100,7 @@ class CyclePublishScript : BaseProjectScript
 			"lib/ILRepack.1.25.0/**",
 			"lib/FileNodes/**",
 			"lib/NUnit.2.6.3/**",
-			"lib/NUnitResults/**",
+			"lib/NUnitResults.1.1/**",
 			"lib/Newtonsoft.Json.6.0.2/lib/net40/**",
 			"lib/SharpZipLib.0.86.0/**",
 			"pkg/*"
