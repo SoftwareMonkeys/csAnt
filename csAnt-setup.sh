@@ -24,4 +24,4 @@ cp csAnt-SetUp.exe ../../
 cd ../../
 
 # Run the setup file
-mono csAnt-SetUp.exe
+mono csAnt-SetUp.exe "$@"
