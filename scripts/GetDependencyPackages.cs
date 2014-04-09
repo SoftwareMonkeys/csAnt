@@ -55,8 +55,8 @@ class GetDependencyPackages : BaseProjectScript
                 Path.Combine(tmpDir, "lib"),
                 Path.Combine(CurrentDirectory, "pkg")
             ).Copy(
-                "pkg/**.nupkg",
-                "!pkg/csAnt" // Don't copy the csAnt packages back because they're already there
+                "**.nupkg",
+                "!csAnt" // Don't copy the csAnt packages back because they're already there
             );
 
             return !IsError;

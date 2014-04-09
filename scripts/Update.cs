@@ -3,8 +3,7 @@
 
 using System;
 using System.IO;
-using Microsoft.CSharp;
-using System.Diagnostics;
+using System.Collections.Generic;
 using SoftwareMonkeys.csAnt;
 using SoftwareMonkeys.csAnt.Projects;
 
@@ -21,7 +20,16 @@ class UpdateScript : BaseProjectScript
         Console.WriteLine("Updating...");
         Console.WriteLine("");
 
-        StartDotNetExe("csAnt-SetUp.exe", "-update");
+        var list = new List<string>();
+        list.Add("-update");
+        list.Add("-info=false");
+        list.AddRange(args);
+
+        StartDotNetExe("csAnt-SetUp.exe", list.ToArray());
+
+        Console.WriteLine("");
+        Console.WriteLine("Update complete!");
+        Console.WriteLine("");
 
 		return !IsError;
 	}
