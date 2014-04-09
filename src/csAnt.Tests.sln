@@ -49,6 +49,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoftwareMonkeys.csAnt.SetUp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoftwareMonkeys.csAnt.SetUpFromLocalConsole.Tests", "SoftwareMonkeys.csAnt.SetUpFromLocalConsole.Tests\SoftwareMonkeys.csAnt.SetUpFromLocalConsole.Tests.csproj", "{5213577F-3F0E-4283-8AD6-589BEC5F0C4D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoftwareMonkeys.csAnt.IO.Tests", "SoftwareMonkeys.csAnt.IO.Tests\SoftwareMonkeys.csAnt.IO.Tests.csproj", "{6E471C34-550C-425D-B7E2-42D3E230AF17}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -137,6 +139,14 @@ Global
 		{5D55A561-2497-45F5-8C49-6244671C04B5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5D55A561-2497-45F5-8C49-6244671C04B5}.Release|x86.ActiveCfg = Release|Any CPU
 		{5D55A561-2497-45F5-8C49-6244671C04B5}.Release|x86.Build.0 = Release|Any CPU
+		{6E471C34-550C-425D-B7E2-42D3E230AF17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E471C34-550C-425D-B7E2-42D3E230AF17}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E471C34-550C-425D-B7E2-42D3E230AF17}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{6E471C34-550C-425D-B7E2-42D3E230AF17}.Debug|x86.Build.0 = Debug|Any CPU
+		{6E471C34-550C-425D-B7E2-42D3E230AF17}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E471C34-550C-425D-B7E2-42D3E230AF17}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E471C34-550C-425D-B7E2-42D3E230AF17}.Release|x86.ActiveCfg = Release|Any CPU
+		{6E471C34-550C-425D-B7E2-42D3E230AF17}.Release|x86.Build.0 = Release|Any CPU
 		{749ED083-15BD-4522-8FBE-847870434680}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{749ED083-15BD-4522-8FBE-847870434680}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{749ED083-15BD-4522-8FBE-847870434680}.Debug|x86.ActiveCfg = Debug|x86
