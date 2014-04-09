@@ -1,7 +1,7 @@
 {
-  "Name": "csAnt",
   "Properties": {
     "Group": "SoftwareMonkeys",
-    "Version": "0.4.9.0"
-  }
+    "Version": "0.4.9.200"
+  },
+  "Name": "csAnt"
 }
