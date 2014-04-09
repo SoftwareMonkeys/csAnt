@@ -7,14 +7,14 @@
     <owners>SoftwareMonkeys</owners>
     <description>C# scripting and automation environment.</description>
     <dependencies>
-        <dependency id="cs-script"/>
-        <dependency id="Newtonsoft.Json" version="6.0.1"/>
-        <dependency id="HtmlAgilityPack"/>
-        <dependency id="SharpZipLib"/>
+        <dependency id="CS-Script" version="3.7.2.0" />
+        <dependency id="Newtonsoft.Json" version="6.0.2"/>
+        <dependency id="HtmlAgilityPack" version="1.4.6"/>
+        <dependency id="SharpZipLib" version="0.86.0"/>
         <dependency id="ILRepack" version="1.25.0"/>
-        <dependency id="NUnit"/>
-        <dependency id="NUnit.Runners"/>
-        <dependency id="NUnitResults"/>
+        <dependency id="NUnit" version="2.6.3"/>
+        <dependency id="NUnit.Runners" version="2.6.3"/>
+        <dependency id="NUnitResults" version="1.1"/>
     </dependencies>
   </metadata>
   <files>
