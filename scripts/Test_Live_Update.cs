@@ -16,11 +16,11 @@ using SoftwareMonkeys.csAnt.Projects.Tests.Scripting;
 using SoftwareMonkeys.csAnt.SetUp;
 using NUnit.Framework;
 
-class Test_UpdateScript : BaseProjectTestScript
+class Test_Live_Update : BaseProjectTestScript
 {
 	public static void Main(string[] args)
 	{
-		new Test_UpdateScript().Start(args);
+		new Test_Live_Update().Start(args);
 	}
 	
 	public override bool Run(string[] args)
@@ -95,6 +95,9 @@ class Test_UpdateScript : BaseProjectTestScript
         var file = GetHelloWorldFile();
 
         var content = File.ReadAllText(file);
+
+        Console.WriteLine("Modifying file:");
+        Console.WriteLine(file);
 
         content.Replace("Hello world", "ModifiedText");
 
