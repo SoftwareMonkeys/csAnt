@@ -1,5 +1,4 @@
 using System;
-using SoftwareMonkeys.csAnt.IO;
 using SoftwareMonkeys.csAnt.Processes;
 using System.IO;
 
@@ -8,13 +7,10 @@ namespace SoftwareMonkeys.csAnt.SourceControl.Git
 {
     public class Gitter
     {
-        public DirectoryMover Mover { get;set; }
-
         public ProcessStarter Starter { get;set; }
 
         public Gitter ()
         {
-            Mover = new DirectoryMover();
             Starter = new ProcessStarter();
         }
 
@@ -110,11 +106,9 @@ namespace SoftwareMonkeys.csAnt.SourceControl.Git
             Git (
                 "clone",
                 sourceDir,
-                tmpDir,
+                destinationDir,
                 "--verbose"
             );
-
-            Mover.Move(tmpDir, destinationDir, true);
 
             Console.WriteLine("");
             Console.WriteLine("Complete");
@@ -210,6 +204,11 @@ namespace SoftwareMonkeys.csAnt.SourceControl.Git
             Console.WriteLine ("");
 
             GitIn (directory, "push", destination);
+        }
+
+        public void Move(string fromPath, string toPath)
+        {
+            Git("mv", fromPath, toPath);
         }
 
     }
