@@ -1,9 +1,18 @@
+libDir="lib"
+nugetFile="$libDir/nuget.exe"
+
+# Create lib directory
+if [ ! -d "$libDir" ]; then
+    mkdir $libDir
+fi
+
 # Get nuget
-mkdir lib
-wget "http://nuget.org/nuget.exe" -O lib/nuget.exe
+if [ ! -f "$nugetFile" ]; then
+    wget "http://nuget.org/nuget.exe" -O $nugetFile
+fi
 
 # Get csAnt setup package
-mono lib/nuget.exe install csAnt-setup -Source https://www.myget.org/F/csant/ -OutputDirectory lib
+mono $nugetFile install csAnt-setup -Source https://www.myget.org/F/csant/ -OutputDirectory lib -NoCache
 
 # Enter csAnt package dir
 cd lib/csAnt-setup.*
