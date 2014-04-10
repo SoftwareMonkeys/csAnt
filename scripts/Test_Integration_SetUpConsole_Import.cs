@@ -2,6 +2,7 @@
 //css_ref ../lib/csAnt/bin/Release/net-40/SoftwareMonkeys.csAnt.Tests.Scripting.dll;
 //css_ref ../lib/csAnt/bin/Release/net-40/SoftwareMonkeys.csAnt.Projects.Tests.dll;
 //css_ref ../lib/csAnt/bin/Release/net-40/SoftwareMonkeys.csAnt.Projects.Tests.Scripting.dll;
+//css_ref ../lib/csAnt/bin/Release/net-40/SoftwareMonkeys.csAnt.External.Nuget.Tests.dll;
 
 using System;
 using System.IO;
@@ -11,6 +12,7 @@ using SoftwareMonkeys.csAnt.IO;
 using SoftwareMonkeys.csAnt.Projects;
 using SoftwareMonkeys.csAnt.Projects.Tests;
 using SoftwareMonkeys.csAnt.Projects.Tests.Scripting;
+using SoftwareMonkeys.csAnt.External.Nuget.Tests.Mock;
 
 class Test_Integration_SetUpConsole_Import : BaseProjectTestScript
 {
@@ -30,6 +32,8 @@ class Test_Integration_SetUpConsole_Import : BaseProjectTestScript
         var feedPath = Path.GetDirectoryName(CurrentDirectory)
             + Path.DirectorySeparatorChar
             + "TestFeed";
+
+        CreateNodes();
 
         new MockNugetFeedCreator(CurrentDirectory, feedPath).Create();
 

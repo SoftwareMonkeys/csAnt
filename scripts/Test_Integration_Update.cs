@@ -13,14 +13,14 @@ using SoftwareMonkeys.csAnt.Tests;
 using SoftwareMonkeys.csAnt.Tests.Scripting;
 using NUnit.Framework;
 
-class Test_StartProcessScript : BaseTestScript
+class Test_Integration_Update : BaseTestScript
 {
     public string TestSourceDirectory = String.Empty;
     public string TestProjectDirectory = String.Empty;
 
 	public static void Main(string[] args)
 	{
-            new Test_StartProcessScript().Start(args);
+            new Test_Integration_Update().Start(args);
 	}
 	
 	public override bool Run(string[] args)
@@ -60,13 +60,12 @@ class Test_StartProcessScript : BaseTestScript
 
         var newContent = File.ReadAllText(newHelloWorldFile);
 
+   		Assert.IsFalse(IsError, "An error occurred.");
+
         Assert.IsTrue(newContent.Contains("Hello universe"), "The new content wasn't found.");
 
-//        ExecuteScript("Update");
-
-   /*     Assert.IsTrue(!IsError, "An error occurred.");
-
-        Assert.IsTrue(ConsoleWriter != null, "Console is null");
+		// TODO: Check if needed
+        /*Assert.IsTrue(ConsoleWriter != null, "Console is null");
         
         Assert.IsTrue(ConsoleWriter.Output != null, "Console.Output is null");
         
