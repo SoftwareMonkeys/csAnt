@@ -39,7 +39,7 @@ class ClearDllsScript : BaseProjectScript
 			{
 				Console.WriteLine(dir);
 
-                                DeleteDllDir(dir);
+                DeleteDllDir(dir, true);
                                         
 			}
 		}
@@ -60,7 +60,7 @@ class ClearDllsScript : BaseProjectScript
 			Console.WriteLine(binDir);
 
 			if (Directory.Exists(binDir))
-				DeleteDllDir(binDir);
+				DeleteDllDir(binDir, true);
 
 			var objDir = dir
 				+ Path.DirectorySeparatorChar
@@ -69,13 +69,18 @@ class ClearDllsScript : BaseProjectScript
 			Console.WriteLine(objDir);
 	
 			if (Directory.Exists(objDir))
-				DeleteDllDir(objDir);
+				DeleteDllDir(objDir, true);
 		}
 	}
         
-        public void DeleteDllDir(string dir)
+        public void DeleteDllDir(string dir, bool recursive)
         {
-                foreach (var file in Directory.GetFiles(dir))
+                var searchOption = SearchOption.TopDirectoryOnly;
+
+                if (recursive)
+                    searchOption = SearchOption.AllDirectories;
+
+                foreach (var file in Directory.GetFiles(dir, "*", searchOption))
                 {
                         DeleteDll(file);
                 }
