@@ -29,7 +29,9 @@ namespace SoftwareMonkeys.csAnt.IO
                     "lib/SharpZipLib.0.86.0/lib/20/**",
                     "lib/ILRepack.1.25.0/**",
                     "lib/Newtonsoft.Json.6.0.2/lib/net40/**",
-                    "lib/NUnit.2.6.3/bin/nunit.framework.dll"
+                    "lib/NUnit.2.6.3/lib/nunit.framework.dll",
+                    "lib/NUnit.Runners.2.6.3/tools/nunit-console.exe",
+                    "lib/NUnitResults.1.1/*"
                 };
             }
         }
