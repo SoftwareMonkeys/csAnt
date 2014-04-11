@@ -44,18 +44,18 @@
     <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="SoftwareMonkeys.FileNodes">
-      <HintPath>..\..\lib\FileNodes\bin\Release\SoftwareMonkeys.FileNodes.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
+    <Reference Include="System.Web" />
     <Reference Include="HtmlAgilityPack">
-      <HintPath>..\..\lib\HtmlAgilityPack\Net40\HtmlAgilityPack.dll</HintPath>
+      <HintPath>..\..\lib\HtmlAgilityPack.1.4.6\lib\Net40\HtmlAgilityPack.dll</HintPath>
+    </Reference>
+    <Reference Include="SoftwareMonkeys.FileNodes">
+      <HintPath>..\..\lib\FileNodes.0.5.0.0\bin\Release\SoftwareMonkeys.FileNodes.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework">
-      <HintPath>..\..\lib\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
+      <HintPath>..\..\lib\NUnit.2.6.0.12051\lib\nunit.framework.dll</HintPath>
     </Reference>
-    <Reference Include="System.Web" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
@@ -75,11 +75,11 @@
     <Compile Include="BaseTestScriptSetUpper.cs" />
     <Compile Include="BaseTestScriptConstructor.cs" />
     <Compile Include="LifecycleTestFixture.cs" />
-    <Compile Include="HelloWorldScriptTestFixture.cs" />
     <Compile Include="TestScriptCreator.cs" />
     <Compile Include="Sanity\TestScriptCreatorTestFixture.cs" />
     <Compile Include="Sanity\TestScriptStackDetectorTestFixture.cs" />
     <Compile Include="Sanity\BaseScriptingSanityTestFixture.cs" />
+    <Compile Include="Sanity\HelloWorldScriptTestFixture.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

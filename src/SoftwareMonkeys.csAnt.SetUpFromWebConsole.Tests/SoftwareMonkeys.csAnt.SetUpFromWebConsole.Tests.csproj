@@ -31,13 +31,13 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="nunit.framework">
-      <HintPath>..\..\lib\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
+      <HintPath>..\..\lib\NUnit.2.6.0.12051\lib\nunit.framework.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
-    <Compile Include="Unit\SetUpConsoleTestFixture.cs" />
-    <Compile Include="Unit\BaseSetUpConsoleUnitTestFixture.cs" />
+    <Compile Include="Integration\BaseSetUpConsoleIntegrationTestFixture.cs" />
+    <Compile Include="Integration\SetUpConsoleIntegrationTestFixture.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -95,6 +95,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Unit\" />
+    <Folder Include="Integration\" />
   </ItemGroup>
 </Project>

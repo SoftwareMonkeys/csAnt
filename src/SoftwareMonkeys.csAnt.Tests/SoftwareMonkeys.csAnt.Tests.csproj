@@ -76,16 +76,16 @@
     <Reference Include="System.Xml" />
     <Reference Include="System.Web" />
     <Reference Include="nunit.framework">
-      <HintPath>..\..\lib\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
-    </Reference>
-    <Reference Include="SoftwareMonkeys.FileNodes">
-      <HintPath>..\..\lib\FileNodes\bin\Release\SoftwareMonkeys.FileNodes.dll</HintPath>
+      <HintPath>..\..\lib\NUnit.2.6.0.12051\lib\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="HtmlAgilityPack">
       <HintPath>..\..\lib\HtmlAgilityPack.1.4.6\lib\Net40\HtmlAgilityPack.dll</HintPath>
     </Reference>
     <Reference Include="CSScriptLibrary">
       <HintPath>..\..\lib\CS-Script.3.7.2.0\lib\net40\CSScriptLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="SoftwareMonkeys.FileNodes">
+      <HintPath>..\..\lib\FileNodes.0.5.0.0\bin\Release\SoftwareMonkeys.FileNodes.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -122,7 +122,6 @@
     <Compile Include="NUnitTestRunner.cs" />
     <Compile Include="NUnitTestRunnerTestFixture.cs" />
     <Compile Include="NUnitTestResultReturner.cs" />
-    <Compile Include="HelloWorldTestFixture.cs" />
     <Compile Include="BaseTestFixture.ParseTimeStamp.cs" />
     <Compile Include="ExtractTimeStampTestFixture.cs" />
     <Compile Include="BaseTestFixture.GetWorkingDirectory.cs" />
@@ -149,6 +148,7 @@
     <Compile Include="Unit\ScriptCompilerTestFixture.cs" />
     <Compile Include="Integration\ActivateScriptTestFixture.cs" />
     <Compile Include="BaseTestFixture.CurrentDirectory.cs" />
+    <Compile Include="Sanity\HelloWorldTestFixture.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
