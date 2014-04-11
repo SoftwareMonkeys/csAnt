@@ -49,7 +49,6 @@ class CyclePublishScript : BaseProjectScript
 
         ReturnPackages();
 
-
         Git.Push("origin", "master");
 
 		if (!IsError)
@@ -99,7 +98,7 @@ class CyclePublishScript : BaseProjectScript
 			"lib/HtmlAgilityPack.1.4.6/**",
 			"lib/ILRepack.1.25.0/**",
 			"lib/FileNodes/**",
-			"lib/NUnit.2.6.3/**",
+			"lib/NUnit.2.6.0.12051/**",
 			"lib/NUnitResults.1.1/**",
 			"lib/Newtonsoft.Json.6.0.2/lib/net40/**",
 			"lib/SharpZipLib.0.86.0/**",
