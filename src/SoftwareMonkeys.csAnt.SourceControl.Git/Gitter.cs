@@ -66,7 +66,12 @@ namespace SoftwareMonkeys.csAnt.SourceControl.Git
             Console.WriteLine("Path:" + path);
             Console.WriteLine("");
 
-            Git ("remote add " + name + " \"" + path + "\"");
+            Git(
+                "remote",
+                "add",
+                name,
+                path
+                );
         }
         
         public void AddRemoteTo(string directory, string name, string path)
@@ -78,7 +83,13 @@ namespace SoftwareMonkeys.csAnt.SourceControl.Git
             Console.WriteLine("Path:" + path);
             Console.WriteLine("");
 
-            GitIn (directory, "remote add " + name + " \"" + path + "\"");
+            GitIn (
+                directory,
+                "remote",
+                "add",
+                name,
+                path
+                );
         }
 
         public void Clone(
