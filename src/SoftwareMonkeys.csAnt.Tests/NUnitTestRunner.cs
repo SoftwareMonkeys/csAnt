@@ -186,7 +186,7 @@ namespace SoftwareMonkeys.csAnt.Tests
             arguments.Add("--runtime=v4.0");
 
             // TODO: Make configurable
-            arguments.Add("lib/NUnit.Runners.2.6.3/tools/nunit-console.exe");
+            arguments.Add("lib/NUnit.Runners.2.6.0.12051/tools/nunit-console.exe");
 
             arguments.Add("\"" + assemblyFile + "\"");
 
@@ -211,7 +211,7 @@ namespace SoftwareMonkeys.csAnt.Tests
                         
             List<string> arguments = new List<string> ();
 
-            arguments.Add ("lib/NUnitResults/nunit-results.exe");
+            arguments.Add ("lib/NUnitResults.1.1/nunit-results.exe");
 
             arguments.Add ("\"" + xmlResultDir + "\"");
 

@@ -21,8 +21,8 @@ namespace SoftwareMonkeys.csAnt.Tests
 
             grabber.GrabOriginalFiles(
                 "bin/**",
-                "lib/NUnit.2.6.3/bin/**",
-                "lib/NUnitResults/**"
+                "lib/NUnit.2.6.0.12051/lib/nunit.framework.dll",
+                "lib/NUnitResults/tools/nunit-console.exe"
             );
 
             CreateDummyTest();
