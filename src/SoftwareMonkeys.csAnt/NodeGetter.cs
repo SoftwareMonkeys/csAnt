@@ -8,6 +8,8 @@ namespace SoftwareMonkeys.csAnt
     {
         public INodeState State { get;set; }
 
+        public bool IsVerbose = false;
+
         public NodeGetter (INodeState state)
         {
             State = state;
@@ -32,20 +34,26 @@ namespace SoftwareMonkeys.csAnt
         
         public virtual FileNode GetCurrentNode ()
         {
-            Console.WriteLine ("");
-            Console.WriteLine ("Getting current node...");
-            Console.WriteLine ("");
+            if (IsVerbose)
+            {
+                Console.WriteLine ("");
+                Console.WriteLine ("Getting current node...");
+                Console.WriteLine ("");
+            }
 
             // TODO: See if this should be injected via constructor
             var fileNodes = new FileNodeManager ();
 
             string dir = Environment.CurrentDirectory;
 
-            Console.WriteLine ("");
-            Console.WriteLine ("Current node directory");
-            Console.WriteLine (dir);
-            Console.WriteLine ("");
-            
+            if (IsVerbose)
+            {
+                Console.WriteLine ("");
+                Console.WriteLine ("Current node directory");
+                Console.WriteLine (dir);
+                Console.WriteLine ("");
+            }
+
             bool foundPropertiesFile = Directory.GetFiles (dir, "*.node").Length > 0;
             
             // Step up the directories looking for .node file
