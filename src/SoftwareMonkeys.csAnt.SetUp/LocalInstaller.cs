@@ -19,7 +19,7 @@ namespace SoftwareMonkeys.csAnt.SetUp
 
         public bool Overwrite { get;set; }
 
-        public string[] FilePatterns { get;set; }
+        public static Version Version = new Version(0,0,0,0);
 
         public VersionManager Versions { get;set; }
         
@@ -29,41 +29,17 @@ namespace SoftwareMonkeys.csAnt.SetUp
             DestinationPath = destinationPath;
             PackageName = packageName;
             Overwrite = overwrite;
-            FilePatterns = DefaultFiles.DefaultFilePatterns;
             Finder = new FileFinder();
             Versions = new VersionManager();
-            Retriever = new LocalInstallRetriever(SourcePath, DestinationPath, PackageName, FilePatterns, Overwrite);
-        }
-
-        public LocalInstaller (string sourcePath, string destinationPath, string packageName, string[] filePatterns, bool overwrite)
-        {
-            SourcePath = sourcePath;
-            DestinationPath = destinationPath;
-            PackageName = packageName;
-            Overwrite = overwrite;
-            FilePatterns = filePatterns;
-            Finder = new FileFinder();
-            Versions = new VersionManager();
-            Retriever = new LocalInstallRetriever(SourcePath, DestinationPath, PackageName, FilePatterns, Overwrite);
-        }
-
-        public LocalInstaller (string sourcePath, string destinationPath, string packageName, string filePatternsFile, bool overwrite)
-        {
-            SourcePath = sourcePath;
-            DestinationPath = destinationPath;
-            PackageName = packageName;
-            Overwrite = overwrite;
-            FilePatterns = GetFilePatterns(filePatternsFile);
-            Finder = new FileFinder();
-            Versions = new VersionManager();
-            Retriever = new LocalInstallRetriever(SourcePath, DestinationPath, PackageName, FilePatterns, Overwrite);
+            Retriever = new LocalInstallRetriever(SourcePath, DestinationPath, PackageName, Overwrite);
         }
         
         public override void Install ()
         {
-            // TODO: Use base functionality with the local retriever
+            // Use base functionality with the local retriever
             base.Install();
 
+            // TODO: Clean up
             /*if (!Directory.Exists (destinationDir))
                 Directory.CreateDirectory (destinationDir);
 

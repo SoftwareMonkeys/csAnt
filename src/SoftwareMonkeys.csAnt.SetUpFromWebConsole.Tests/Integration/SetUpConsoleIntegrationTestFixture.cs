@@ -13,7 +13,7 @@ using SoftwareMonkeys.csAnt.External.Nuget.Tests.Mock;
 namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole.Tests.Integration
 {
     [TestFixture]
-    public class SetUpConsoleTestFixture : BaseSetUpConsoleIntegrationTestFixture
+    public class SetUpConsoleIntegrationTestFixture : BaseSetUpConsoleIntegrationTestFixture
     {
         public string MockFeedPath { get;set; }
         public string LocalNugetFilePath { get;set; }

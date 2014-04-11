@@ -3,14 +3,14 @@ using System.IO;
 using SoftwareMonkeys.csAnt.Versions;
 using SoftwareMonkeys.csAnt.IO;
 using SoftwareMonkeys.csAnt.Tests;
+using System.Xml;
+using System.Collections.Generic;
 
 
 namespace SoftwareMonkeys.csAnt.SetUp
 {
     public class LocalInstallRetriever : BaseInstallerRetriever
     {
-        public string[] PatternList { get;set; }
-
         public bool Overwrite { get;set; }
 
         public IFileFinder FileFinder { get;set; }
@@ -19,7 +19,7 @@ namespace SoftwareMonkeys.csAnt.SetUp
 
         public string DestinationPath { get;set; }
 
-        public string PackageName { get;set; }
+        public string PackageName = "csAnt";
 
         public VersionManager Versions { get;set; }
 
@@ -27,15 +27,12 @@ namespace SoftwareMonkeys.csAnt.SetUp
             string sourcePath,
             string destinationPath,
             string packageName,
-            string[] patternList,
             bool overwrite
             )
         {
             SourcePath = sourcePath;
             DestinationPath = destinationPath;
-            PatternList = patternList;
             Overwrite = overwrite;
-            PatternList = GetDefaultFilePatternList();
             FileFinder = new FileFinder();
             Versions = new VersionManager();
         }
@@ -45,7 +42,9 @@ namespace SoftwareMonkeys.csAnt.SetUp
             if (!Directory.Exists (DestinationPath))
                 Directory.CreateDirectory (DestinationPath);
 
-            var files = FileFinder.FindFiles(SourcePath, PatternList);
+            var patterns = GetPatternsFromPackage();
+
+            var files = FileFinder.FindFiles(SourcePath, patterns);
 
             Console.WriteLine ("Total files: " + files.Length);
 
@@ -85,22 +84,26 @@ namespace SoftwareMonkeys.csAnt.SetUp
         public string[] GetDefaultFilePatternList()
         {
             return DefaultFiles.DefaultFilePatterns;
+        }
 
-            // TODO: Remove if not needed
-            /*return new string[]{
-                "lib/nuget.exe",
-                "lib/csAnt/**",
-                "lib/CS-Script.3.7.2.0/lib/net40/**",
-                "lib/FileNodes/**",
-                "lib/NUnit.2.6.3/**",
-                "lib/NUnitResults/**",
-                "lib/HtmlAgilityPack.1.4.6/lib/Net40/**",
-                "lib/SharpZipLib.0.86.0/lib/20/**",
-                "lib/ILRepack.1.25.0/**",
-                "scripts/**",
-                "csAnt.sh",
-                "csAnt.bat"
-            };*/
+        public string[] GetPatternsFromPackage()
+        {
+            var packageSpecFile = Path.Combine(SourcePath, "pkg/" + PackageName + ".nuspec");
+
+            var doc = new XmlDocument();
+
+            doc.Load(packageSpecFile);
+
+            var nodes = doc.SelectNodes("//files/file");
+
+            var list = new List<string>();
+
+            foreach (XmlNode node in nodes)
+            {
+                list.Add(node.Attributes["src"].Value);
+            }
+
+            return list.ToArray();
         }
     }
 }

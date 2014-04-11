@@ -113,7 +113,7 @@ namespace SoftwareMonkeys.csAnt.SetUp
             Console.WriteLine();
             Console.WriteLine("Files installed: " + installedFiles);
             Console.WriteLine("Files skipped: " + skippedFiles);
-            Console.WriteLine("Files overwritten: " + skippedFiles);
+            Console.WriteLine("Files overwritten: " + overwrittenFiles);
             Console.WriteLine();
         }
         

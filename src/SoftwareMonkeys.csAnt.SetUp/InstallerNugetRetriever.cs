@@ -97,7 +97,7 @@ namespace SoftwareMonkeys.csAnt.SetUp
 
             NugetChecker = new NugetChecker();
             NugetExecutor = new NugetExecutor();
-            NugetSourcePath = "https://www.myget.org/F/csant/";
+            NugetSourcePath = "https://www.myget.org/F/softwaremonkeys/";
         }
 
         public InstallerNugetRetriever ()
@@ -116,7 +116,7 @@ namespace SoftwareMonkeys.csAnt.SetUp
             else
                 DestinationPath = Environment.CurrentDirectory;
 
-            NugetSourcePath = "https://www.myget.org/F/csant/";
+            NugetSourcePath = "https://www.myget.org/F/softwaremonkeys/";
             NugetChecker = checker;
             NugetExecutor = executor;
         }
