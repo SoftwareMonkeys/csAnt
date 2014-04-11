@@ -37,7 +37,7 @@ namespace SoftwareMonkeys.csAnt
         public ScriptExecutor (IScript parentScript)
         {
             ParentScript = parentScript;
-            Activator = new ScriptActivator();
+            Activator = new ScriptActivator(parentScript);
         }
 
         public IScript Execute(string scriptName)
