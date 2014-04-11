@@ -2,7 +2,7 @@
 //css_ref ../lib/csAnt/bin/Release/net-40/SoftwareMonkeys.csAnt.Tests.Scripting.dll;
 //css_ref ../lib/csAnt/bin/Release/net-40/SoftwareMonkeys.csAnt.Projects.Tests.dll;
 //css_ref ../lib/csAnt/bin/Release/net-40/SoftwareMonkeys.csAnt.Projects.Tests.Scripting.dll;
-//css_ref ../lib/NUnit.2.6.3/lib/nunit.framework.dll;
+//css_ref ../lib/NUnit.2.6.0.12051/lib/nunit.framework.dll;
 
 using System;
 using System.IO;
