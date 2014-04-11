@@ -21,7 +21,9 @@ class Repack_SetUpFromLocalScript : BaseScript
                 buildMode = arguments["mode"];
 
             var dependencies = new string[]{
+                "bin/{BuildMode}/SoftwareMonkeys.FileNodes.dll",
                 "bin/{BuildMode}/SoftwareMonkeys.csAnt.dll",
+                "bin/{BuildMode}/SoftwareMonkeys.csAnt.Contracts.dll",
                 "bin/{BuildMode}/SoftwareMonkeys.csAnt.External.Nuget.dll",
                 "bin/{BuildMode}/SoftwareMonkeys.csAnt.IO.dll",
                 "bin/{BuildMode}/SoftwareMonkeys.csAnt.IO.Contracts.dll",
