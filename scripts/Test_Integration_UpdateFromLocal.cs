@@ -13,6 +13,7 @@ using SoftwareMonkeys.csAnt.Tests;
 using SoftwareMonkeys.csAnt.Tests.Scripting;
 using NUnit.Framework;
 
+[TestFixture]
 class Test_Integration_UpdateFromLocal : BaseTestScript
 {
     public string TestSourceDirectory = String.Empty;
@@ -25,10 +26,10 @@ class Test_Integration_UpdateFromLocal : BaseTestScript
 	
 	public override bool Run(string[] args)
 	{
-new FilesGrabber(
-    OriginalDirectory,
-    CurrentDirectory
-).GrabOriginalFiles();
+        new FilesGrabber(
+            OriginalDirectory,
+            CurrentDirectory
+        ).GrabOriginalFiles();
 
         ExecuteScript("UpdateFromLocal");
         /*TestSourceDirectory = CurrentDirectory;

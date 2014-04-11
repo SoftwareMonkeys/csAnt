@@ -13,6 +13,7 @@ using SoftwareMonkeys.csAnt.Tests;
 using SoftwareMonkeys.csAnt.Tests.Scripting;
 using NUnit.Framework;
 
+[TestFixture]
 class Test_Integration_Update : BaseTestScript
 {
     public string TestSourceDirectory = String.Empty;
