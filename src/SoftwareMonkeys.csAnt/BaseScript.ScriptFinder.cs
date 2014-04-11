@@ -1,10 +1,21 @@
 using System;
+using SoftwareMonkeys.csAnt;
+
+
 namespace SoftwareMonkeys.csAnt
 {
-    public class BaseScript
+    public partial class BaseScript
     {
-        public BaseScript ()
+        private ScriptFinder scriptFinder;
+        public ScriptFinder ScriptFinder
         {
+            get
+            {
+                if (scriptFinder == null)
+                    scriptFinder = new ScriptFinder();
+                return scriptFinder;
+            }
+            set { scriptFinder = value; }
         }
     }
 }
