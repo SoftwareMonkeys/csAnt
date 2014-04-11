@@ -10,6 +10,27 @@ namespace SoftwareMonkeys.csAnt.External.Nuget
     {
         public string WorkingDirectory { get;set; }
 
+        public VersionManager VersionManager { get;set; }
+
+        public bool AutoLoadVersion = true;
+
+        private Version version = new Version(0,0,0,0);
+        public Version Version
+        {
+            get
+            {
+                if (version == null && AutoLoadVersion)
+                    version = new Version(
+                        VersionManager.GetVersion(WorkingDirectory)
+                    );
+                return version;
+            }
+            set
+            {
+                version = value;
+            }
+        }
+
         public NugetPacker ()
         {
             WorkingDirectory = Environment.CurrentDirectory;
@@ -81,15 +102,11 @@ namespace SoftwareMonkeys.csAnt.External.Nuget
             if (!Directory.Exists(outputDir))
                 Directory.CreateDirectory(outputDir);
 
-            // TODO: Move VersionManager to property
-            var versionManager = new VersionManager();
-            var version = versionManager.GetVersion(WorkingDirectory);
-
             var arguments = " pack"
                 + " " + filePath.Replace(WorkingDirectory, "").Trim(Path.DirectorySeparatorChar)
                 + " -basepath " + WorkingDirectory
                 + " -outputdirectory " + outputDir
-                + " -version " + version
+                + " -version " + Version
                 + " -verbosity detailed";
 
             var starter = new DotNetProcessStarter();
