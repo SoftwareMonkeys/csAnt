@@ -28,32 +28,32 @@ namespace SoftwareMonkeys.csAnt.Imports.Tests
 				+ Path.DirectorySeparatorChar
 					+ "Projects";
 
-			var project1Dir = projectsDir
+			var sourceDir = projectsDir
 				+ Path.DirectorySeparatorChar
-					+ "ProjectOne";
+					+ "SourceProject";
 
-			var project2Dir = projectsDir
+			var destinationDir = projectsDir
 				+ Path.DirectorySeparatorChar
-					+ "ProjectTwo";
+					+ "DestinationProject";
 			
 			Console.WriteLine ("");
-			Console.WriteLine ("Project One:");
-			Console.WriteLine (project1Dir);
-			Console.WriteLine ("Project Two:");
-			Console.WriteLine (project2Dir);
+			Console.WriteLine ("Source Project:");
+			Console.WriteLine (sourceDir);
+			Console.WriteLine ("Destination Project:");
+			Console.WriteLine (destinationDir);
 			Console.WriteLine ("");
 
 			Console.WriteLine ("Creating test project directories...");
 			Console.WriteLine ("");
 
-			script.EnsureDirectoryExists(project1Dir);
-			script.EnsureDirectoryExists(project2Dir);
+			script.EnsureDirectoryExists(sourceDir);
+			script.EnsureDirectoryExists(destinationDir);
 			
-			Console.WriteLine ("Relocating to project 2...");
+			Console.WriteLine ("Relocating to destination project...");
 			Console.WriteLine ("");
 
 			// Move to second project
-			script.Relocate(project2Dir);
+			script.Relocate(destinationDir);
             
             // Create the required file nodes
             script.CreateNodes();
@@ -64,7 +64,7 @@ namespace SoftwareMonkeys.csAnt.Imports.Tests
 			// Initialize git
 			script.Git.Init();
 
-			var scriptsDir = project2Dir
+			var scriptsDir = destinationDir
 				+ Path.DirectorySeparatorChar
 					+ "scripts";
 
@@ -94,27 +94,27 @@ namespace SoftwareMonkeys.csAnt.Imports.Tests
 			// Git commit
 			script.Git.Commit();
 			
-			Console.WriteLine ("Relocating to project 1...");
+			Console.WriteLine ("Relocating to source project...");
 			Console.WriteLine ("");
 
 			// Switch back to project one
-			script.Relocate(project1Dir);
+			script.Relocate(sourceDir);
 
             // Create the required file nodes
             script.CreateNodes();
 			
-			Console.WriteLine ("Adding project 2 as an import project...");
+			Console.WriteLine ("Adding destination project as an import project...");
 			Console.WriteLine ("");
 
-			// Add project 2 as import
-			script.Importer.AddImport("ProjectTwo", project2Dir);
+			// Add destination project as import
+			script.Importer.AddImport("DestinationProject", destinationDir);
 
 			Console.WriteLine ("Importing test script to project from project two...");
 			Console.WriteLine ("");
 
-			script.Importer.ImportFile("ProjectTwo", "scripts/TestScript.cs", "scripts", false);
+			script.Importer.ImportFile("DestinationProject", "scripts/TestScript.cs", "scripts", false);
 
-			var expectedFile = project1Dir
+			var expectedFile = sourceDir
 				+ Path.DirectorySeparatorChar
 				+ "scripts"
 				+ Path.DirectorySeparatorChar
@@ -128,7 +128,7 @@ namespace SoftwareMonkeys.csAnt.Imports.Tests
 
 
 			// Add another file
-			var script2File = project1Dir
+			var script2File = sourceDir
 				+ Path.DirectorySeparatorChar
 				+ "scripts"
 					+ Path.DirectorySeparatorChar
@@ -145,16 +145,16 @@ namespace SoftwareMonkeys.csAnt.Imports.Tests
 			Console.WriteLine ("");
 
 			// 
-			script.Importer.AddImportPattern("ProjectTwo", script.ToRelative(script2File));
+			script.Importer.AddImportPattern("DestinationProject", script.ToRelative(script2File));
 
 			Console.WriteLine ("Syncing the imports...");
 			Console.WriteLine ("");
 
-			script.Importer.Sync("ProjectTwo", script2File);
+			script.Importer.Sync("DestinationProject", script2File);
 			
 			var expectedFile2 = script.Importer.StagingDirectory
 				+ Path.DirectorySeparatorChar
-				+ "ProjectTwo"
+				+ "DestinationProject"
 				+ Path.DirectorySeparatorChar
 				+ "scripts"
 				+ Path.DirectorySeparatorChar
@@ -166,13 +166,13 @@ namespace SoftwareMonkeys.csAnt.Imports.Tests
 			/*Console.WriteLine ("Relocating to project two...");
 			Console.WriteLine ("");
 
-			// Move into project 2
+			// Move into destination project
 			script.Relocate(project2Dir);
 			
 			Console.WriteLine ("Pulling git changes...");
 			Console.WriteLine ("");
 */
-			var expectedFile3Path = project2Dir
+			var expectedFile3Path = destinationDir
 				+ Path.DirectorySeparatorChar
 					+ "scripts"
 					+ Path.DirectorySeparatorChar

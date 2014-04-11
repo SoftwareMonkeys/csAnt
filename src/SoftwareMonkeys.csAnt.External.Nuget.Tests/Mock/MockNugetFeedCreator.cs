@@ -20,6 +20,7 @@ namespace SoftwareMonkeys.csAnt.External.Nuget.Tests.Mock
         public void Create()
         {
             var nuget = new NugetPacker(WorkingDirectory);
+            nuget.Version = new Version(0,1,0,0);
 
             var pkgDir = WorkingDirectory
                 + Path.DirectorySeparatorChar
@@ -44,7 +45,7 @@ namespace SoftwareMonkeys.csAnt.External.Nuget.Tests.Mock
 
             DirectoryChecker.EnsureDirectoryExists(Path.GetDirectoryName(pkgToFile));
 
-            File.Copy(pkgFile, pkgToFile);
+            File.Copy(pkgFile, pkgToFile, true);
         }
     }
 }

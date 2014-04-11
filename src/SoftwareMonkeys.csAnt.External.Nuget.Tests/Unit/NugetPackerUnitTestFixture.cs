@@ -6,11 +6,11 @@ using SoftwareMonkeys.csAnt.IO;
 using SoftwareMonkeys.csAnt.Versions;
 
 
-namespace SoftwareMonkeys.csAnt.External.Nuget.Tests
+namespace SoftwareMonkeys.csAnt.External.Nuget.Tests.Unit
 {
     [TestFixture]
     [Category("Unit")]
-    public class NugetPackerIntegrationTestFixture : BaseNugetIntegrationTestFixture
+    public class NugetPackerUnitTestFixture : BaseNugetUnitTestFixture
     {
         [Test]
         public void Test_Pack()
@@ -24,8 +24,7 @@ namespace SoftwareMonkeys.csAnt.External.Nuget.Tests
 
             var packageName = "csAnt";
 
-            // TODO: Remove dependency on version stored in .node file. Mock the version and updage NugetPacker to allow it
-            var version = new VersionManager().GetVersion(WorkingDirectory);
+            var version = "0.0.0.1";
 
             // TODO: Remove dependency on existing .nuspec file by creating a mock one
             var filePath = WorkingDirectory
@@ -35,6 +34,7 @@ namespace SoftwareMonkeys.csAnt.External.Nuget.Tests
                 + packageName + ".nuspec";
 
             var packer = new NugetPacker();
+            packer.Version = new Version(version);
             packer.PackageFile(filePath);
 
             var pkgFilePath = Path.GetDirectoryName(filePath)
