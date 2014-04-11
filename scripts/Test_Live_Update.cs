@@ -3,7 +3,7 @@
 //css_ref ../lib/csAnt/bin/Release/net-40/SoftwareMonkeys.csAnt.Projects.Tests.dll;
 //css_ref ../lib/csAnt/bin/Release/net-40/SoftwareMonkeys.csAnt.Projects.Tests.Scripting.dll;
 //css_ref ../lib/csAnt/bin/Release/net-40/SoftwareMonkeys.csAnt.SetUp.dll;
-//css_ref ../lib/NUnit.2.6.3/lib/nunit.framework.dll;
+//css_ref ../lib/NUnit.2.6.0.12051/lib/nunit.framework.dll;
 
 using System;
 using System.IO;
@@ -69,14 +69,6 @@ class Test_Live_Update : BaseProjectTestScript
         installer.Install();
     }
 
-    /*public void Prepare(string version)
-    {
-        MockInstall(version);
-
-        var script = GetDummyScript();
-        script.CreateNodes();
-    }*/
-
     public void CheckModifiedFile()
     {
         var file = GetHelloWorldFile();
@@ -112,17 +104,4 @@ class Test_Live_Update : BaseProjectTestScript
                 + Path.DirectorySeparatorChar
                 + "HelloWorld.cs";
     }
-/*
-    public void MockInstall(string version)
-    {
-        // TODO: Move the files directly without using the installer, because this is a unit test and should only be relying on one component
-
-        var installer = new Installer();
-
-        // Assign mock nuget components to avoid actually using nuget during the test (fas
-        installer.NugetChecker = CreateMockNugetChecker(false);
-        installer.NugetExecutor = CreateMockNugetExecutor(version);
-
-        installer.Install();
-    }*/
 }
