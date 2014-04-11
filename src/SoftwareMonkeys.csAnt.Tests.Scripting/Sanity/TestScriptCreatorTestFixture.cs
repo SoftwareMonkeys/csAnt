@@ -15,7 +15,7 @@ namespace SoftwareMonkeys.csAnt.Tests.Scripting.Sanity
             Console.WriteLine ("");
             Console.WriteLine ("Testing the Create function.");
 
-            var script = new TestScriptCreator(WorkingDirectory).Create("MyTestScript");
+            var script = new TestScriptCreator(OriginalDirectory, WorkingDirectory).Create("MyTestScript");
             
             Console.WriteLine ("");
             Console.WriteLine ("Working directory:");
@@ -51,13 +51,13 @@ namespace SoftwareMonkeys.csAnt.Tests.Scripting.Sanity
             Console.WriteLine ("");
             Console.WriteLine ("Testing the Create function.");
 
-            var script = new TestScriptCreator(WorkingDirectory).Create("MyTestScript");
+            var script = new TestScriptCreator(OriginalDirectory, WorkingDirectory).Create("MyTestScript");
 
             Console.WriteLine ("");
             Console.WriteLine ("Working directory:");
             Console.WriteLine (WorkingDirectory);
 
-            var expected = script.OriginalDirectory + ".tmp"
+            var expected = OriginalDirectory + ".tmp"
                 + Path.DirectorySeparatorChar
                 + TimeStamp
                 + Path.DirectorySeparatorChar
@@ -78,16 +78,16 @@ namespace SoftwareMonkeys.csAnt.Tests.Scripting.Sanity
         [Test]
         public void Test_Create_SubScript_HasCorrectCurrentDirectory()
         {
-            // TODO: Move to a different test fixture because it's really testing the Activator.ActivatScript function
+            // TODO: Move to a different test fixture because it's really testing the Activator.ActivatScript function?
 
             Console.WriteLine ("");
             Console.WriteLine ("Testing the Create function.");
 
-            var script = new TestScriptCreator(WorkingDirectory).Create("MyTestScript");
+            var script = new TestScriptCreator(OriginalDirectory, WorkingDirectory).Create("MyTestScript");
 
             new FilesGrabber(
-                script.OriginalDirectory,
-                script.CurrentDirectory
+                OriginalDirectory,
+                CurrentDirectory
                 ).GrabOriginalScriptingFiles();
 
             var script2 = script.ScriptExecutor.Activator.ActivateScript("HelloWorld");
@@ -119,12 +119,12 @@ namespace SoftwareMonkeys.csAnt.Tests.Scripting.Sanity
         [Test]
         public void Test_Create_SubScript_HasCorrectOriginalDirectory()
         {
-            // TODO: Move to a different test fixture because it's really testing the Activator.ActivatScript function
+            // TODO: Move to a different test fixture because it's really testing the Activator.ActivatScript function?
 
             Console.WriteLine ("");
             Console.WriteLine ("Testing the Create function.");
 
-            var script = new TestScriptCreator(WorkingDirectory).Create("MyTestScript");
+            var script = new TestScriptCreator(OriginalDirectory, WorkingDirectory).Create("MyTestScript");
 
             new FilesGrabber(
                 script.OriginalDirectory,
@@ -152,9 +152,9 @@ namespace SoftwareMonkeys.csAnt.Tests.Scripting.Sanity
         [Test]
         public void Test_Create_SubScript_HasCorrectTimeAndTimeStamp()
         {
-            // TODO: Move to a different test fixture because it's really testing the Activator.ActivatScript function
+            // TODO: Move to a different test fixture because it's really testing the Activator.ActivatScript function?
 
-            var script = new TestScriptCreator(WorkingDirectory).Create("MyTestScript");
+            var script = new TestScriptCreator(OriginalDirectory, WorkingDirectory).Create("MyTestScript");
 
             new FilesGrabber(
                 script.OriginalDirectory,
@@ -165,20 +165,20 @@ namespace SoftwareMonkeys.csAnt.Tests.Scripting.Sanity
 
             Console.WriteLine ("");
             Console.WriteLine ("Expected time:");
-            Console.WriteLine (Time.ToString());
+            Console.WriteLine (script.Time.ToString());
             Console.WriteLine ("Actual time:");
             Console.WriteLine (script2.Time.ToString());
             Console.WriteLine ("");
             
             Console.WriteLine ("");
             Console.WriteLine ("Expected time stamp:");
-            Console.WriteLine (TimeStamp);
+            Console.WriteLine (script.TimeStamp);
             Console.WriteLine ("Actual time stamp:");
             Console.WriteLine (script2.TimeStamp);
             Console.WriteLine ("");
 
-            Assert.AreEqual(Time.ToString(), script2.Time.ToString(), "Time property is incorrect.");
-            Assert.AreEqual(TimeStamp, script2.TimeStamp, "TimeStamp property is incorrect.");
+            Assert.AreEqual(script.Time.ToString(), script2.Time.ToString(), "Time property is incorrect.");
+            Assert.AreEqual(script.TimeStamp, script2.TimeStamp, "TimeStamp property is incorrect.");
         }
     }
 }

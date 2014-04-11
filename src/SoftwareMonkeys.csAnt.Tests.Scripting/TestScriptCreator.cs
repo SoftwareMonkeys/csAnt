@@ -5,15 +5,19 @@ namespace SoftwareMonkeys.csAnt.Tests.Scripting
     {
         public bool IsVerbose { get;set; }
 
+        public string OriginalDirectory { get;set; }
+
         public string WorkingDirectory { get;set; }
         
-        public TestScriptCreator (string workingDirectory)
+        public TestScriptCreator (string originalDirectory, string workingDirectory)
         {
+            OriginalDirectory = originalDirectory;
             WorkingDirectory = workingDirectory;
         }
 
-        public TestScriptCreator (string workingDirectory, bool isVerbose)
+        public TestScriptCreator (string originalDirectory, string workingDirectory, bool isVerbose)
         {
+            OriginalDirectory = originalDirectory;
             WorkingDirectory = workingDirectory;
             IsVerbose = isVerbose;
         }
@@ -43,10 +47,11 @@ namespace SoftwareMonkeys.csAnt.Tests.Scripting
                 parentScript
             );
 
-            testScript.ParentScript = parentScript;
-
-            // TODO: Should this be passed as a constructor parameter?
-            testScript.CurrentDirectory = WorkingDirectory;
+            if (parentScript == null)
+            {
+                testScript.OriginalDirectory = OriginalDirectory;
+                testScript.CurrentDirectory = WorkingDirectory;
+            }
 
             return testScript;
         }

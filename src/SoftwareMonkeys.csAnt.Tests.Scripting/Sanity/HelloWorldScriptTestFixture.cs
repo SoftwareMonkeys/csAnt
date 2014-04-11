@@ -2,7 +2,7 @@ using System;
 using NUnit.Framework;
 using SoftwareMonkeys.csAnt.IO;
 
-namespace SoftwareMonkeys.csAnt.Tests.Scripting
+namespace SoftwareMonkeys.csAnt.Tests.Scripting.Sanity
 {
 	[TestFixture]
 	public class HelloWorldScriptTestFixture : BaseTestFixture

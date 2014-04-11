@@ -30,7 +30,7 @@ namespace SoftwareMonkeys.csAnt.Tests.Scripting
 
         public virtual ITestScript GetTestScript(string scriptName, IScript parentScript, bool isVerbose)
         {
-            return new TestScriptCreator(WorkingDirectory, isVerbose).Create(scriptName, parentScript);
+            return new TestScriptCreator(OriginalDirectory, WorkingDirectory, isVerbose).Create(scriptName, parentScript);
         }
     }
 }

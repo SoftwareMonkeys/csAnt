@@ -26,10 +26,7 @@ namespace SoftwareMonkeys.csAnt.Tests
                     + Path.DirectorySeparatorChar
                     + mode;
 
-                var key2 = Path.DirectorySeparatorChar
-                    + "bin-tests"
-                    + Path.DirectorySeparatorChar
-                    + mode;
+                var postFix1 = "-tests";
             	
                 if (currentDirectory.EndsWith (key))
                 {
@@ -37,9 +34,9 @@ namespace SoftwareMonkeys.csAnt.Tests
                     break;
                 }
 
-                if (currentDirectory.EndsWith (key2))
+                if (currentDirectory.EndsWith (key + postFix1))
                 {
-                    currentDirectory = currentDirectory.Replace (key2, "");
+                    currentDirectory = currentDirectory.Replace (key + postFix1, "");
                     break;
                 }
                 
@@ -51,13 +48,6 @@ namespace SoftwareMonkeys.csAnt.Tests
                         + target
                         + Path.DirectorySeparatorChar
                         + mode;
-
-                    var subKey2 = Path.DirectorySeparatorChar
-                        + "bin-tests"
-                        + Path.DirectorySeparatorChar
-                        + target
-                        + Path.DirectorySeparatorChar
-                        + mode;
             	
                     if (currentDirectory.EndsWith (subKey))
                     {
@@ -65,9 +55,9 @@ namespace SoftwareMonkeys.csAnt.Tests
                         break;
                     }
 
-                    if (currentDirectory.EndsWith (subKey2))
+                    if (currentDirectory.EndsWith (subKey + postFix1))
                     {
-                        currentDirectory = currentDirectory.Replace (subKey2, "");
+                        currentDirectory = currentDirectory.Replace (subKey + postFix1, "");
                         break;
 	                }
                 }

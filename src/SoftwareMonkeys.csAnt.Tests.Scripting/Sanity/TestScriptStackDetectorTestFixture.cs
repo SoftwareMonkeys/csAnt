@@ -9,7 +9,7 @@ namespace SoftwareMonkeys.csAnt.Tests.Scripting.Sanity
         [Test]
         public void Test_Detect_3()
         {
-            var testScriptCreator = new TestScriptCreator(CurrentDirectory);
+            var testScriptCreator = new TestScriptCreator(OriginalDirectory, CurrentDirectory);
 
             var script1 = testScriptCreator.Create("Test1");
             var script2 = testScriptCreator.Create("Test2", script1);
@@ -36,7 +36,7 @@ namespace SoftwareMonkeys.csAnt.Tests.Scripting.Sanity
         [Test]
         public void Test_Detect_3_OneNormalScript()
         {
-            var testScriptCreator = new TestScriptCreator(CurrentDirectory);
+            var testScriptCreator = new TestScriptCreator(OriginalDirectory, CurrentDirectory);
 
             var script1 = testScriptCreator.Create("Test1");
             var script2 = GetDummyScript("Test2", script1); // A dummy script isn't the same as a test script and won't be treated the same
