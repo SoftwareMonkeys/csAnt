@@ -280,9 +280,8 @@ namespace SoftwareMonkeys.csAnt.Imports
                 
                 var sourcePath = File.ReadAllText (importedProjectPath + Path.DirectorySeparatorChar + "source.txt");
                     
-                throw new NotImplementedException();
                 // Commit import project
-                //Git.CommitTo (importedProjectPath, "Sync from '" + CurrentNode.Name + "'.");
+                Git.CommitTo (importedProjectPath, "Sync.");
 
                 // Get the remote name
                 var remoteName = Path.GetFileName (importedProjectPath);
