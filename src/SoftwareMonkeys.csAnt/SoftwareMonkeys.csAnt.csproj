@@ -242,6 +242,10 @@
     <Compile Include="BaseScript.ScriptCompiler.cs" />
     <Compile Include="Indenter.cs" />
     <Compile Include="BaseScript.Indenter.cs" />
+    <Compile Include="ScriptEventRaiser.cs" />
+    <Compile Include="BaseScript.EventRaiser.cs" />
+    <Compile Include="ScriptFinder.cs" />
+    <Compile Include="BaseScript.ScriptFinder.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
