@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using SoftwareMonkeys.csAnt.IO;
 using SoftwareMonkeys.csAnt.Imports;
+using SoftwareMonkeys.csAnt.Processes;
 
 
 namespace SoftwareMonkeys.csAnt.SetUp
@@ -28,6 +29,8 @@ namespace SoftwareMonkeys.csAnt.SetUp
         public bool Overwrite { get;set; }
 
         public Version Version = new Version("0.0.0.0");
+
+        public ProcessStarter Starter = new ProcessStarter();
         
         public Installer (
             BaseInstallerRetriever retriever,
@@ -99,7 +102,14 @@ namespace SoftwareMonkeys.csAnt.SetUp
 
         public void RaiseInstallEvent()
         {
-            new ScriptEventRaiser().Raise("Install");
+            // Launch the install event via a process and the launcher script. Doing it directly from the installer using the ScriptEventRaiser doesn't seem to work.
+            Starter.Start(
+                "sh",
+                "csAnt.sh",
+                "RaiseEvent",
+                "Install"
+            );
+			// TODO: Add support for windows by calling the csAnt.bat file
         }
 
         public void BackupFile(string existingFile)
