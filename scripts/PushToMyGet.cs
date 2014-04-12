@@ -3,6 +3,7 @@ using System.IO;
 using System.Diagnostics;
 using SoftwareMonkeys.csAnt;
 using SoftwareMonkeys.csAnt.Projects;
+using System.Linq;
 
 class PushToMyGetScript : BaseProjectScript
 {
@@ -54,7 +55,7 @@ class PushToMyGetScript : BaseProjectScript
     {
         var destination = GetMyGetDestination();
 
-        var pkgFile = GetNewestFile(dir);
+        var pkgFile = GetLatestPackage(dir);
 
         pkgFile = ToRelative(pkgFile);
 
@@ -74,5 +75,20 @@ class PushToMyGetScript : BaseProjectScript
     public string GetMyGetDestination()
     {
         return "https://www.myget.org/F/csant/api/v2/package";
+    }
+
+    static public string GetLatestPackage(string directory)
+    {
+        string file = String.Empty;
+
+        var files = new DirectoryInfo(directory).GetFiles().OrderByDescending(p => p.Name);
+
+        foreach (var f in files)
+        {
+            file = f.FullName;
+            break;
+        }
+
+        return file;
     }
 }
