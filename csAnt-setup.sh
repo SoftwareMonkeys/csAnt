@@ -1,5 +1,6 @@
 libDir="lib"
 nugetFile="$libDir/nuget.exe"
+sourcePath="https://www.myget.org/F/softwaremonkeys/"
 
 # Create lib directory
 if [ ! -d "$libDir" ]; then
@@ -12,7 +13,8 @@ if [ ! -f "$nugetFile" ]; then
 fi
 
 # Get csAnt setup package
-mono $nugetFile install csAnt-setup -Source https://www.myget.org/F/csant/ -OutputDirectory lib -NoCache
+
+mono $nugetFile install csAnt-setup -Source $sourcePath -OutputDirectory lib -NoCache
 
 # Enter csAnt package dir
 cd lib/csAnt-setup.*
