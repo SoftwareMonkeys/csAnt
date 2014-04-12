@@ -1,6 +1,7 @@
 using System;
 using SoftwareMonkeys.csAnt.Processes;
 using System.IO;
+using System.Collections.Generic;
 
 
 namespace SoftwareMonkeys.csAnt.SourceControl.Git
@@ -192,6 +193,16 @@ namespace SoftwareMonkeys.csAnt.SourceControl.Git
         public void Push(string remote, string branch)
         {
             Git ("push", remote, branch);
+        }
+
+        public void Push(string remote, string branch, params string[] arguments)
+        {
+            var list = new List<string>();
+            list.Add("push");
+            list.Add(remote);
+            list.Add(branch);
+            list.AddRange(arguments);
+            Git (list.ToArray());
         }
         
         public void PushFrom(string directory, string remote)
