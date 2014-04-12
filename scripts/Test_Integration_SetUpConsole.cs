@@ -14,7 +14,7 @@ using SoftwareMonkeys.csAnt.Projects.Tests;
 using SoftwareMonkeys.csAnt.Projects.Tests.Scripting;
 using SoftwareMonkeys.csAnt.External.Nuget.Tests.Mock;
 
-class Test_Integration_SetUpConsole_Import : BaseProjectTestScript
+class Test_Integration_SetUpConsole : BaseProjectTestScript
 {
     public static string FeedPath { get;set; }
 
@@ -24,7 +24,7 @@ class Test_Integration_SetUpConsole_Import : BaseProjectTestScript
 
 	public static void Main(string[] args)
 	{
-		new Test_Integration_SetUpConsole_Import().Start(args);
+		new Test_Integration_SetUpConsole().Start(args);
 	}
 	
 	public override bool Run(string[] args)
@@ -45,8 +45,7 @@ class Test_Integration_SetUpConsole_Import : BaseProjectTestScript
             "csAnt-SetUp.exe",
             "-intro=false",
             "-source=" + FeedPath,
-            "-nuget=" + nugetPath,
-            "-import=" + OriginalDirectory
+            "-nuget=" + nugetPath
         );
 
 		if (IsLinux)
