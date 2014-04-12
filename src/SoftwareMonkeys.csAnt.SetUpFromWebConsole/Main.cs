@@ -154,7 +154,8 @@ namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole
             if (Import)
             {
                 var path = arguments["i", "import"];
-                if (!String.IsNullOrEmpty(path))
+                if (!String.IsNullOrEmpty(path)
+                    || path != "true")
                     ImportPath = path;
             }
         }
