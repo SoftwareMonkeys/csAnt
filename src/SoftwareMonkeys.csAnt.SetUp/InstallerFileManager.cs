@@ -11,23 +11,6 @@ namespace SoftwareMonkeys.csAnt.SetUp
     {
         public IFileFinder FileFinder { get;set; }
 
-        /*public string ProjectDirectory { get;set; }
-
-        public string PackageName { get;set; }
-
-        public Version Version { get;set; }
-
-        public bool ForceOverwrite { get;set; }
-
-        public InstallerFileManager (string projectDirectory, string packageName, Version version, bool forceOverwrite)
-        {
-            ProjectDirectory = projectDirectory;
-            PackageName = packageNAme;
-            Version = version;
-            ForceOverwrite = forceOverwrite;
-
-            FileFinder = new FileFinder();
-        }*/
         public InstallerFileManager ()
         {
             FileFinder = new FileFinder();
@@ -109,7 +92,7 @@ namespace SoftwareMonkeys.csAnt.SetUp
                 else
                     skippedFiles++;
             }
-            
+
             Console.WriteLine();
             Console.WriteLine("Files installed: " + installedFiles);
             Console.WriteLine("Files skipped: " + skippedFiles);

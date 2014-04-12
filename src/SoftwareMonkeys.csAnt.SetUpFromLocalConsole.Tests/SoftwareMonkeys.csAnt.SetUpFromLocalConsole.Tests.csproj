@@ -35,6 +35,9 @@
     <Reference Include="nunit.framework">
       <HintPath>..\..\lib\NUnit.2.6.0.12051\lib\nunit.framework.dll</HintPath>
     </Reference>
+    <Reference Include="CSScriptLibrary">
+      <HintPath>..\..\lib\CS-Script.3.7.2.0\lib\net40\CSScriptLibrary.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />

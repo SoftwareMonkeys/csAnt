@@ -44,12 +44,6 @@ namespace SoftwareMonkeys.csAnt.SetUpFromLocalConsole
                 Console.WriteLine ("Setting up csAnt from local files...");
                 Console.WriteLine ("");
 
-                DestinationPath = Environment.CurrentDirectory;
-
-                Overwrite = false;
-
-                PackageName = "csAnt";
-
                 Console.WriteLine ("");
                 Console.WriteLine ("Source dir:");
                 Console.WriteLine (SourcePath);
@@ -133,6 +127,7 @@ namespace SoftwareMonkeys.csAnt.SetUpFromLocalConsole
                     DestinationPath = Path.GetFullPath (args [1]);
             } else {
                 SourcePath = DetectSourceDirectory ();
+                DestinationPath = Environment.CurrentDirectory;
             }
     
             var arguments = new Arguments(args);

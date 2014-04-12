@@ -73,34 +73,6 @@ namespace SoftwareMonkeys.csAnt.SetUp
             FileFinder = new FileFinder();
             Importer = new Importer();
         }
-        
-        /*public void Install(string packageName)
-        {
-            Install(packageName, Environment.CurrentDirectory, false);
-        }
-
-        public void Install(string packageName, bool overwrite)
-        {
-            Install(packageName, Environment.CurrentDirectory, overwrite);
-        }
-
-        public void Install(string packageName, string destination)
-        {
-            Install(packageName, destination, false);
-        }
-
-        public void Install(string packageName, string destination, bool forceOverwrite)
-        {
-            Install(packageName, destination, new Version(0,0,0,0), forceOverwrite);
-        }
-        
-        public void Install(string packageName, Version version, bool forceOverwrite)
-        {
-            Install(packageName, Environment.CurrentDirectory, version, forceOverwrite);
-        }
-
-        public void Install(string packageName, string destination, Version version, bool forceOverwrite)
-        {*/
 
         public override void Install()
         {
@@ -121,56 +93,13 @@ namespace SoftwareMonkeys.csAnt.SetUp
 
             if (Import)
                 ImportFiles();
+
+            RaiseInstallEvent();
         }
 
-        public void DeployFiles(Version version, bool forceOverwrite)
+        public void RaiseInstallEvent()
         {
-            Console.WriteLine("");
-            Console.WriteLine("Installing files...");
-            Console.WriteLine("");
-
-            var files = new string[]{
-                "csAnt.node",
-                "csAnt.sh",
-                "csAnt.bat",
-                "scripts/**",
-                "lib/**"
-            };
-
-            var libDir = Path.Combine(Environment.CurrentDirectory, "lib");
-
-            var directory = GetcsAntPackageDir(libDir, version);
-
-            foreach (var file in FileFinder.FindFiles(directory, files))
-            {
-                var toFile = file.Replace(directory, Environment.CurrentDirectory);
-
-                if (!Directory.Exists(Path.GetDirectoryName(toFile)))
-                    Directory.CreateDirectory(Path.GetDirectoryName(toFile));
-
-                // TODO: Clean up
-                //if (update && File.Exists(toFile))
-                //    BackupFile(toFile);
-
-                var isNewer = File.GetLastWriteTime(file) > File.GetLastWriteTime(toFile);
-
-                if (
-                    File.Exists(toFile)
-                    && (forceOverwrite
-                        || isNewer)
-                    )
-                {
-                    // TODO: Back up this file before deleting
-                    File.Delete(toFile);
-                }
-
-                Console.WriteLine(toFile.Replace(Environment.CurrentDirectory, ""));
-
-                File.Copy(
-                    file,
-                    toFile
-                    );
-            }
+            new ScriptEventRaiser().Raise("Install");
         }
 
         public void BackupFile(string existingFile)
@@ -192,7 +121,7 @@ namespace SoftwareMonkeys.csAnt.SetUp
             else
             {
                 return new List<DirectoryInfo>(
-                    new DirectoryInfo(libDir).GetDirectories("csAnt.*").OrderByDescending(p => p.CreationTime)
+                    new DirectoryInfo(libDir).GetDirectories("csAnt.*").OrderByDescending(p => p.Name)
                 )[0].FullName;
             }
 
@@ -208,7 +137,7 @@ namespace SoftwareMonkeys.csAnt.SetUp
                 "*.sh",
                 "*.vbs",
                 "scripts/HelloWorld.cs"
-            };
+            }; // TODO: Add more
 
             foreach (var file in files)
                 Importer.ImportFile("csAnt", file);
