@@ -29,6 +29,9 @@ namespace SoftwareMonkeys.csAnt.Tests
         
         public IFileFinder FileFinder { get;set; }
         
+        public string[] IncludeCategories { get;set; }
+        public string[] ExcludeCategories { get;set; }
+        
         public NUnitTestRunner (
             IScript script,
             string mode
@@ -183,17 +186,24 @@ namespace SoftwareMonkeys.csAnt.Tests
 
             List<string> arguments = new List<string>();
 
+            // TODO: Remove if not needed
             arguments.Add("--runtime=v4.0");
 
             // TODO: Make configurable
             arguments.Add("lib/NUnit.Runners.2.6.0.12051/tools/nunit-console.exe");
 
-            arguments.Add("\"" + assemblyFile + "\"");
+            arguments.Add("\"" + PathConverter.ToRelative(assemblyFile) + "\"");
 
-            arguments.Add("-xml=\"" + xmlResult + "\"");
-
+            arguments.Add("-xml=" + PathConverter.ToRelative(xmlResult));
+            
             if (!String.IsNullOrEmpty(testName))
                 arguments.Add ("-run=" + testName);
+            
+            if (IncludeCategories != null && IncludeCategories.Length > 0)
+                arguments.Add ("-include=" + String.Join(",", IncludeCategories));
+
+            if (ExcludeCategories != null && ExcludeCategories.Length > 0)
+                arguments.Add ("-exclude=" + String.Join(",", ExcludeCategories));
 
             Script.StartProcess(
                     command,
@@ -235,6 +245,28 @@ namespace SoftwareMonkeys.csAnt.Tests
             if (!Directory.Exists (htmlResultDir))
                 Directory.CreateDirectory (htmlResultDir);
 
+        }
+
+        public void AddIncludeCategory(string category)
+        {
+            var list = new List<string>();
+            if (IncludeCategories != null)
+                list.AddRange(IncludeCategories);
+
+            list.Add(category);
+
+            IncludeCategories = list.ToArray();
+        }
+
+        public void AddExcludeCategory(string category)
+        {
+            var list = new List<string>();
+            if (ExcludeCategories != null)
+                list.AddRange(ExcludeCategories);
+
+            list.Add(category);
+
+            ExcludeCategories = list.ToArray();
         }
     }
 }

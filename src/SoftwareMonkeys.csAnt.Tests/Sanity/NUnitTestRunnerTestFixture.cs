@@ -19,11 +19,7 @@ namespace SoftwareMonkeys.csAnt.Tests.Sanity
                 script.CurrentDirectory
                 );
 
-            grabber.GrabOriginalFiles(
-                "bin/**",
-                "lib/NUnit.2.6.0.12051/lib/nunit.framework.dll",
-                "lib/NUnitResults/tools/nunit-console.exe"
-            );
+            grabber.GrabOriginalFiles();
 
             CreateDummyTest();
 
@@ -100,12 +96,19 @@ namespace SoftwareMonkeys.csAnt.Tests.Sanity
             if (!Directory.Exists (Path.GetDirectoryName(assemblyFile)))
                 Directory.CreateDirectory(Path.GetDirectoryName(assemblyFile));
                             
-            CSScript.CompileCode(testCode, assemblyFile, true, new string[]{});
+            var refAssemblies = new string[]{
+                "/lib/NUnit.2.6.0.12051/lib/nunit.framework.dll"
+            };
+
+            CSScript.CompileCode(testCode, assemblyFile, true, refAssemblies);
         }
 
         public string GetTestCode()
         {
-            return @"using System;
+            return @"
+//css_ref ../lib/NUnit.2.6.0.12051/lib/nunit.framework.dll
+
+using System;
 using NUnit.Framework;
 
 namespace SoftwareMonkeys.csAnt.Tests
