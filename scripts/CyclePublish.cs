@@ -86,24 +86,14 @@ class CyclePublishScript : BaseProjectScript
 
 	public void GrabFiles(string tmpDir)
 	{
-		new FilesGrabber(
+		var grabber = new FilesGrabber(
 			OriginalDirectory,
 			tmpDir
-		).GrabOriginalFiles(
-			"*.exe",
-			"bin/**",
-			"lib/nuget.exe",
-			"lib/csAnt/**",
-			"lib/cs-script/**",
-			"lib/HtmlAgilityPack.1.4.6/**",
-			"lib/ILRepack.1.25.0/**",
-			"lib/FileNodes/**",
-			"lib/NUnit.2.6.0.12051/**",
-			"lib/NUnitResults.1.1/**",
-			"lib/Newtonsoft.Json.6.0.2/lib/net40/**",
-			"lib/SharpZipLib.0.86.0/**",
-			"pkg/*"
 		);
+
+        grabber.Grab(grabber.BinFilePatterns);
+        grabber.Grab(grabber.LibFilePatterns);
+        grabber.Grab(grabber.PackageSpecFilePatterns);
 	}
 
 	public string CloneToTmpDirectory()
