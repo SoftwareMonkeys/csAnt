@@ -49,7 +49,7 @@ class CyclePublishScript : BaseProjectScript
 
         ReturnPackages();
 
-        Git.Push("origin", "master");
+        Git.Push("origin", "master", "-f");
 
 		if (!IsError)
 		{
