@@ -74,7 +74,7 @@ class PushToMyGetScript : BaseProjectScript
 
     public string GetMyGetDestination()
     {
-        return "https://www.myget.org/F/csant/api/v2/package";
+        return "https://www.myget.org/F/softwaremonkeys/api/v2/package";
     }
 
     static public string GetLatestPackage(string directory)
