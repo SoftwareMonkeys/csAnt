@@ -1,10 +1,10 @@
 using System;
 using NUnit.Framework;
 
-namespace SoftwareMonkeys.csAnt.Tests
+namespace SoftwareMonkeys.csAnt.Tests.Sanity
 {
 	[TestFixture]
-	public class FailingTestFixture
+	public class FailingTestFixture : BaseSanityTestFixture
 	{
 		[Test]
 		public void Test_Fail()
