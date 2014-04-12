@@ -37,12 +37,18 @@ class PushToMyGetScript : BaseProjectScript
         {
             foreach (var dir in Directory.GetDirectories(pkgsDir))
             {
-                PushPackagesInDirectory(dir);
+                if (IsProjectPackage(Path.GetFileName(dir))
+                    PushPackagesInDirectory(dir);
             }
         }
 
 		return true;
 	}
+
+    public bool IsProjectPackage(string packageName)
+    {
+        return packageName.StartsWith(ProjectName);
+    }
 
     public void PushPackagesInDirectory(string dir)
     {
