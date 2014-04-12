@@ -43,7 +43,7 @@ class GetDependencyPackages : BaseProjectScript
                 "install",
                 "csAnt",
                 "-Source " + pkgDir,
-                "-Source " + "https://www.myget.org/F/csant/",
+                "-Source " + "https://www.myget.org/F/softwaremonkeys/",
                 "-Source " + "https://go.microsoft.com/fwlink/?LinkID=206669",
                 "-OutputDirectory lib",
                 "-NoCache"
