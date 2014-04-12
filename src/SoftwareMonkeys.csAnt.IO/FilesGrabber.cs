@@ -122,7 +122,7 @@ namespace SoftwareMonkeys.csAnt.IO
             {
                 return new string[] {
                     "readme.txt",
-                    "src/Timestamps.txt"
+                    "src/TimeStamps.txt"
                 };
             }
         }
