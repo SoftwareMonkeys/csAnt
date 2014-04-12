@@ -76,7 +76,6 @@ namespace SoftwareMonkeys.csAnt.IO
             get
             {
                 return new string[] {
-                    "pkg/**.nupkg",
                     "pkg/*.nuspec"
                 };
             }
@@ -122,7 +121,8 @@ namespace SoftwareMonkeys.csAnt.IO
             get
             {
                 return new string[] {
-                    "readme.txt"
+                    "readme.txt",
+                    "src/Timestamps.txt"
                 };
             }
         }
