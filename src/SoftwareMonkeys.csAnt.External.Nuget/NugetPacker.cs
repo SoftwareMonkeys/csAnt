@@ -10,7 +10,7 @@ namespace SoftwareMonkeys.csAnt.External.Nuget
     {
         public string WorkingDirectory { get;set; }
 
-        public VersionManager VersionManager { get;set; }
+        public VersionManager VersionManager = new VersionManager();
 
         public bool AutoLoadVersion = true;
 
@@ -19,10 +19,17 @@ namespace SoftwareMonkeys.csAnt.External.Nuget
         {
             get
             {
-                if (version == null && AutoLoadVersion)
+                if (
+                    (version == null
+                        || version == new Version(0,0,0,0))
+                    && AutoLoadVersion
+                    && VersionManager != null
+                    )
+                {
                     version = new Version(
                         VersionManager.GetVersion(WorkingDirectory)
                     );
+                }
                 return version;
             }
             set
