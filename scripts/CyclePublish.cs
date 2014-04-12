@@ -49,7 +49,7 @@ class CyclePublishScript : BaseProjectScript
 
         ReturnPackages();
 
-        Git.Push("origin", "master", "-f");
+        Git.Push("origin", "master");
 
         // TODO: Move this to its own function or script and make the path easily configurable
         var codePlexGitPath = "https://git01.codeplex.com/csAnt";
