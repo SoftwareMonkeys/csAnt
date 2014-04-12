@@ -64,6 +64,17 @@ namespace SoftwareMonkeys.csAnt.IO
         {
             get
             {
+                var list = new List<string>();
+                list.Add("pkg/**.nupkg");
+                list.AddRange(PackageSpecFilePatterns);
+                return list.ToArray();
+            }
+        }
+
+        public string[] PackageSpecFilePatterns
+        {
+            get
+            {
                 return new string[] {
                     "pkg/**.nupkg",
                     "pkg/*.nuspec"
