@@ -2,7 +2,7 @@ using System;
 using NUnit.Framework;
 using System.IO;
 
-namespace SoftwareMonkeys.csAnt.Tests
+namespace SoftwareMonkeys.csAnt.Tests.Unit
 {
 	[TestFixture]
 	public class ClearTmpTestFixture : BaseUnitTestFixture
