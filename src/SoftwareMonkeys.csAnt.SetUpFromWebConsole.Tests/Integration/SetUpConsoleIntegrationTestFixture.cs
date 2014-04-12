@@ -157,7 +157,7 @@ namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole.Tests.Integration
                 + Path.DirectorySeparatorChar
                     + "TestFeed";
 
-            new MockNugetFeedCreator(CurrentDirectory, feedPath).Create();
+            new MockNugetFeedCreator(OriginalDirectory, CurrentDirectory, feedPath).Create();
 
             MockFeedPath = feedPath;
 
