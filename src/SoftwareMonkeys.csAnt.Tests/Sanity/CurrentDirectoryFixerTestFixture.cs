@@ -13,28 +13,50 @@ namespace SoftwareMonkeys.csAnt.Tests.Sanity
 		public CurrentDirectoryFixerTestFixture()
 		{
 		}
-		
-		[Test]
-		public void Test_Fix_AnyCPU()
-		{			
-			var startingDir = "";
-			if (IsLinux)
-				startingDir = "/home/user/projects/group/project/bin/Release";
-			else
-				startingDir = @"c:\projects\group\project\bin\Release";
-			
-			var fixedDir = new CurrentDirectoryFixer().Fix(startingDir);
-			
-			var expectedDir = startingDir.Replace(
-					Path.DirectorySeparatorChar
-					+ "bin"
-					+ Path.DirectorySeparatorChar
-					+ "Release",
-					""
-				);
-			
-			Assert.AreEqual(expectedDir, fixedDir, "Invalid path.");
-		}
+        
+        [Test]
+        public void Test_Fix_AnyCPU()
+        {           
+            var startingDir = "";
+            if (IsLinux)
+                startingDir = "/home/user/projects/group/project/bin/Release";
+            else
+                startingDir = @"c:\projects\group\project\bin\Release";
+            
+            var fixedDir = new CurrentDirectoryFixer().Fix(startingDir);
+            
+            var expectedDir = startingDir.Replace(
+                    Path.DirectorySeparatorChar
+                    + "bin"
+                    + Path.DirectorySeparatorChar
+                    + "Release",
+                    ""
+                );
+            
+            Assert.AreEqual(expectedDir, fixedDir, "Invalid path.");
+        }
+        
+        [Test]
+        public void Test_Fix_AnyCPU_BinTests()
+        {           
+            var startingDir = "";
+            if (IsLinux)
+                startingDir = "/home/user/projects/group/project/bin-tests/Release";
+            else
+                startingDir = @"c:\projects\group\project\bin-tests\Release";
+            
+            var fixedDir = new CurrentDirectoryFixer().Fix(startingDir);
+            
+            var expectedDir = startingDir.Replace(
+                    Path.DirectorySeparatorChar
+                    + "bin-tests"
+                    + Path.DirectorySeparatorChar
+                    + "Release",
+                    ""
+                );
+            
+            Assert.AreEqual(expectedDir, fixedDir, "Invalid path.");
+        }
 		
 		[Test]
 		public void Test_Fix_x86()
