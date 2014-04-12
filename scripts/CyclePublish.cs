@@ -41,11 +41,11 @@ class CyclePublishScript : BaseProjectScript
 
         IncrementVersion(3);
 
-		// Build the cloned source code
-		ExecuteScript("EnsurePackage", packageName);
-
         // Commit the file nodes containing the updated versions
         ExecuteScript("CommitVersion");
+
+		// Build the cloned source code
+		ExecuteScript("Package", packageName);
 
         ReturnPackages();
 
