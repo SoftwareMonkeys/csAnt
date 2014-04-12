@@ -16,6 +16,12 @@ using SoftwareMonkeys.csAnt.External.Nuget.Tests.Mock;
 
 class Test_Integration_SetUpConsole_Import : BaseProjectTestScript
 {
+    public static string FeedPath { get;set; }
+
+    public static string TestSourceDirectory { get;set; }
+
+    public static string TestProjectDirectory { get;set; }
+
 	public static void Main(string[] args)
 	{
 		new Test_Integration_SetUpConsole_Import().Start(args);
@@ -29,30 +35,18 @@ class Test_Integration_SetUpConsole_Import : BaseProjectTestScript
 		Console.WriteLine("Testing setup from web...");
 		Console.WriteLine("");
 
-        var feedPath = Path.GetDirectoryName(CurrentDirectory)
-            + Path.DirectorySeparatorChar
-            + "TestFeed";
+        Prepare();
 
-        CreateNodes();
+        Relocate(TestProjectDirectory);
 
-        new MockNugetFeedCreator(CurrentDirectory, feedPath).Create();
-
-		var setUpExeFile = OriginalDirectory
-			+ Path.DirectorySeparatorChar
-			+ "csAnt-SetUp.exe";
-
-		var setUpExeToFile = CurrentDirectory
-			+ Path.DirectorySeparatorChar
-			+ "csAnt-SetUp.exe";
-
-		File.Copy(setUpExeFile, setUpExeToFile, true);
+        var nugetPath = Path.Combine(TestSourceDirectory, "lib/nuget.exe");
 
 		StartDotNetExe(
-            setUpExeToFile,
+            "csAnt-SetUp.exe",
             "-intro=false",
-            "-source=" + feedPath,
-            "-nuget=" + feedPath,
-            "-import"
+            "-source=" + FeedPath,
+            "-nuget=" + nugetPath,
+            "-import=" + OriginalDirectory
         );
 
 		if (IsLinux)
@@ -62,4 +56,41 @@ class Test_Integration_SetUpConsole_Import : BaseProjectTestScript
 
 		return !IsError;
 	}
+
+    public void Prepare()
+    {
+        TestSourceDirectory = CurrentDirectory;
+
+        TestProjectDirectory = Path.GetDirectoryName(CurrentDirectory)
+            + Path.DirectorySeparatorChar
+            + "TestProject";
+
+        EnsureDirectoryExists(TestProjectDirectory);
+
+        FeedPath = Path.GetDirectoryName(CurrentDirectory)
+            + Path.DirectorySeparatorChar
+            + "pkgs";
+
+        CreateNodes();
+
+        new FilesGrabber(
+            OriginalDirectory,
+            CurrentDirectory
+        ).GrabOriginalFiles();
+
+        // TODO: Should a feed be created normally instead of a mock feed?
+        new MockNugetFeedCreator(OriginalDirectory, CurrentDirectory, FeedPath).Create();
+
+        ExecuteScript("EnsureBuild", "csAnt");
+
+		var setUpExeFile = TestSourceDirectory
+			+ Path.DirectorySeparatorChar
+			+ "csAnt-SetUp.exe";
+
+		var setUpExeToFile = TestProjectDirectory
+			+ Path.DirectorySeparatorChar
+			+ "csAnt-SetUp.exe";
+
+		File.Copy(setUpExeFile, setUpExeToFile, true);
+    }
 }
