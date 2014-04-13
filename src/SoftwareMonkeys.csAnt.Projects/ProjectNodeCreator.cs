@@ -11,6 +11,8 @@ namespace SoftwareMonkeys.csAnt.Projects
             set { base.State = value; }
         }
 
+        public bool IsVerbose { get;set; }
+
         public ProjectNodeCreator (INodeState nodeState) : base(nodeState)
         {
         }
@@ -53,17 +55,23 @@ namespace SoftwareMonkeys.csAnt.Projects
 
         public void CreateProjectNode (string currentDirectory, string projectName)
         {
-            Console.WriteLine ("");
-            Console.WriteLine ("Creating project node...");
-            Console.WriteLine ("  Current directory:");
-            Console.WriteLine ("  " + currentDirectory);
+            if (IsVerbose)
+            {
+                Console.WriteLine ("");
+                Console.WriteLine ("Creating project node...");
+                Console.WriteLine ("  Current directory:");
+                Console.WriteLine ("  " + currentDirectory);
+            }
 
             var node = CreateNode(currentDirectory, projectName);
 
             node.Properties["Version"] = new Version(0, 0, 0, 1).ToString();
-
-            Console.WriteLine ("  Version: " + node.Properties["Version"]);
-            Console.WriteLine ("");
+            
+            if (IsVerbose)
+            {
+                Console.WriteLine ("  Version: " + node.Properties["Version"]);
+                Console.WriteLine ("");
+            }
 
             if (!File.Exists(node.FilePath))
                 node.Save();
@@ -76,10 +84,13 @@ namespace SoftwareMonkeys.csAnt.Projects
 
         public void CreateSourceNode (string currentDirectory)
         {
-            Console.WriteLine ("");
-            Console.WriteLine ("Creating source node...");
-            Console.WriteLine ("  Current directory:");
-            Console.WriteLine ("  " + currentDirectory);
+            if (IsVerbose)
+            {
+                Console.WriteLine ("");
+                Console.WriteLine ("Creating source node...");
+                Console.WriteLine ("  Current directory:");
+                Console.WriteLine ("  " + currentDirectory);
+            }
 
             var srcDirectory = currentDirectory
                 + Path.DirectorySeparatorChar
@@ -89,9 +100,12 @@ namespace SoftwareMonkeys.csAnt.Projects
                 srcDirectory,
                 "Source"
                 );
-
-            Console.WriteLine ("  Source (src) directory:");
-            Console.WriteLine ("  " + srcDirectory);
+            
+            if (IsVerbose)
+            {
+                Console.WriteLine ("  Source (src) directory:");
+                Console.WriteLine ("  " + srcDirectory);
+            }
             
             if (!File.Exists(node.FilePath))
                 node.Save();
@@ -111,12 +125,15 @@ namespace SoftwareMonkeys.csAnt.Projects
 
         public void CreateGroupNode (string groupDirectory, string groupName)
         {
-            Console.WriteLine ("");
-            Console.WriteLine ("Creating group node...");
-            Console.WriteLine ("  Group name: " + groupName);
-            Console.WriteLine ("  Group directory:");
-            Console.WriteLine ("  " + groupDirectory);
-
+            if (IsVerbose)
+            {
+                Console.WriteLine ("");
+                Console.WriteLine ("Creating group node...");
+                Console.WriteLine ("  Group name: " + groupName);
+                Console.WriteLine ("  Group directory:");
+                Console.WriteLine ("  " + groupDirectory);
+            }
+    
             CreateNode(groupDirectory, groupName);
         }
     }
