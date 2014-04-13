@@ -70,9 +70,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="HtmlAgilityPack">
-      <HintPath>..\..\lib\HtmlAgilityPack\Net40\HtmlAgilityPack.dll</HintPath>
-    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="ICSharpCode.SharpZipLib">
       <HintPath>..\..\lib\SharpZipLib.0.86.0\net-20\ICSharpCode.SharpZipLib.dll</HintPath>
