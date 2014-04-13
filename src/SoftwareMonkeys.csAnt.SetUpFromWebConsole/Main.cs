@@ -146,16 +146,16 @@ namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole
             );
 
             // Import
-            Import = arguments.ContainsAny(
-                "i",
-                "import"
-            );
+            Import = arguments.ContainsAny("i", "import")
+                && (arguments["i", "import"].ToLower() != false.ToString().ToLower()
+                || arguments["i", "import"].ToLower() == true.ToString().ToLower());
 
             if (Import)
             {
                 var path = arguments["i", "import"];
                 if (!String.IsNullOrEmpty(path)
-                    || path != "true")
+                    && path.ToLower() != true.ToString().ToLower()
+                    && path.ToLower() != false.ToString().ToLower())
                     ImportPath = path;
             }
         }
