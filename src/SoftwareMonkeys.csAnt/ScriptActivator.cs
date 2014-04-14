@@ -87,8 +87,6 @@ namespace SoftwareMonkeys.csAnt
             scriptSettings.InMemoryAsssembly = true;
             scriptSettings.HideCompilerWarnings = true;
 
-            var compilerOptions = "";
-
             // If the script file is newer then recompile
             if (
                 File.Exists (assemblyFile)
@@ -110,7 +108,8 @@ namespace SoftwareMonkeys.csAnt
             // Load the script assembly
             try
             {
-                scriptAssembly = CSScript.LoadWithConfig(scriptPath, assemblyFile, IsDebug, scriptSettings, compilerOptions);
+                CSScript.CacheEnabled = false;
+                scriptAssembly = CSScript.Load(scriptPath, assemblyFile, IsDebug, new string[]{});
             }
             catch (Exception ex)
             {
