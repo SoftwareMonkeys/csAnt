@@ -55,7 +55,9 @@ class Test_SetUpFromLocalScript_Git : BaseProjectTestScript
             CurrentDirectory
         ).GrabOriginalFiles();
 
-        ExecuteScript("CycleBuild");
+        ExecuteScript("EnsureBuild");
+
+        EnsureDirectoryExists(testProjectDir);
 
         Relocate(testProjectDir);
 

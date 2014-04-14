@@ -1,13 +1,10 @@
-arg=$1
+sourcePath=$1
 
 echo "Setting up csAnt..."
 
-echo "arg:"
-echo $arg
-
-if [ ! -z $arg ]
+if [ ! -z $sourcePath ]
 then :
-    csAntDir=$(readlink -f $arg)
+    csAntDir=$(readlink -f $sourcePath)
 else :
     csAntDir=$(readlink -f "../../SoftwareMonkeys/csAnt")
 fi
@@ -22,5 +19,5 @@ if [ -d "$csAntDir" ]; then
         
     cp $csAntDir/bin/Release/packed/csAnt-SetUpFromLocal.exe csAnt-SetUpFromLocal.exe
 
-    mono csAnt-SetUpFromLocal.exe $csAntDir
+    mono csAnt-SetUpFromLocal.exe $csAntDir "$@"
 fi
