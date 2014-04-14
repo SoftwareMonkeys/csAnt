@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -87,6 +87,10 @@
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
+    <ProjectReference Include="..\SoftwareMonkeys.csAnt.Imports\SoftwareMonkeys.csAnt.Imports.csproj">
+      <Project>{B34DA062-E44B-4044-AC28-D006FC66CCA7}</Project>
+      <Name>SoftwareMonkeys.csAnt.Imports</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SoftwareMonkeys.csAnt.IO.Contracts\SoftwareMonkeys.csAnt.IO.Contracts.csproj">
       <Project>{53E3AFEA-3627-4846-B2E4-5A8091E96BC6}</Project>
       <Name>SoftwareMonkeys.csAnt.IO.Contracts</Name>
@@ -94,6 +98,10 @@
     <ProjectReference Include="..\SoftwareMonkeys.csAnt.IO\SoftwareMonkeys.csAnt.IO.csproj">
       <Project>{749ED083-15BD-4522-8FBE-847870434680}</Project>
       <Name>SoftwareMonkeys.csAnt.IO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SoftwareMonkeys.csAnt.SourceControl.Git\SoftwareMonkeys.csAnt.SourceControl.Git.csproj">
+      <Project>{94578333-F8C9-40C0-9300-8D808ED1CD7A}</Project>
+      <Name>SoftwareMonkeys.csAnt.SourceControl.Git</Name>
     </ProjectReference>
     <ProjectReference Include="..\SoftwareMonkeys.csAnt\SoftwareMonkeys.csAnt.csproj">
       <Project>{16297BCB-0A8C-42E6-BE35-921085C3E238}</Project>
