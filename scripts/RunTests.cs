@@ -20,12 +20,12 @@ class RunTestsScript : BaseScript
 	public override bool Run(string[] args)
 	{
 	    // Compile the scripts so they can run as unit tests
-            CompileScripts();
-            
-            // Run all tests including scripts and standard unit tests
-            RunTests();
+        CompileScripts();
+        
+        // Run all tests including scripts and standard unit tests
+        RunTests();
 
-            return !IsError;
+        return !IsError;
 	}
 	
 	public void RunTests()
@@ -38,12 +38,16 @@ class RunTestsScript : BaseScript
 		// (without doing this, the scripts don't execute as tests because the general csAnt binaries aren't in the same folder)
 		var workingDir = PrepareTests(binTestsDir);
 
-                var runner = new NUnitTestRunner(
-                    this,
-                    BuildMode
-                );
-            
-                runner.RunTestsInDirectory(workingDir);
+        var runner = new NUnitTestRunner(
+            this,
+            BuildMode
+        );
+
+        // Exclude live tests during standard testing because most of the time they're not required and too slow during development.
+        // They should be performed on their own when required
+        runner.AddExcludeCategory("Live"); 
+    
+        runner.RunTestsInDirectory(workingDir);
 
 
 		Directory.Delete(binTestsDir, true);
