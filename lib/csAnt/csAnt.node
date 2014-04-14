@@ -2,7 +2,7 @@
   "Properties": {
     "ImportScript": "GetCsAntLib",
     "SubPath": "/",
-    "Version": "0.4.3.300"
+    "Version": "0.4.35.500"
   },
   "Name": "csAnt"
 }
