@@ -17,7 +17,7 @@ fi
 # Get nuget
 if [ ! -f "$nugetFile" ]; then
     echo "Getting the nuget.exe file"
-    wget nugetUrl -O $nugetFile
+    wget $nugetUrl -O $nugetFile
     echo "Done"
     echo ""
 fi

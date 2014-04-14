@@ -76,12 +76,18 @@ namespace SoftwareMonkeys.csAnt.Versions
             switch (position) {
             case 1:
                 major += 1;
+                minor = 0;
+                build = 0;
+                revision = 0;
                 break;
             case 2:
                 minor += 1;
+                build = 0;
+                revision = 0;
                 break;
             case 3:
                 build += 1;
+                revision = 0;
                 break;
             case 4:
                 revision += 100;
