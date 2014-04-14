@@ -80,6 +80,7 @@
     <Compile Include="Sanity\TestScriptStackDetectorTestFixture.cs" />
     <Compile Include="Sanity\BaseScriptingSanityTestFixture.cs" />
     <Compile Include="Sanity\HelloWorldScriptTestFixture.cs" />
+    <Compile Include="Live\BaseLiveTestScript.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -114,5 +115,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Sanity\" />
+    <Folder Include="Live\" />
   </ItemGroup>
 </Project>

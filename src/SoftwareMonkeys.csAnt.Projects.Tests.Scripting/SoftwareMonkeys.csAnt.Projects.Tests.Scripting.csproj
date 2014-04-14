@@ -84,6 +84,7 @@
     <Compile Include="ProjectTestScriptTearDowner.cs" />
     <Compile Include="ProjectTestScriptSetUpper.cs" />
     <Compile Include="ProjectTestScriptConstructor.cs" />
+    <Compile Include="Live\BaseLiveProjectTestScript.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -131,5 +132,8 @@
       <Project>{9B72A2B8-0BC4-40BE-B242-AC79A080CEB6}</Project>
       <Name>SoftwareMonkeys.csAnt.Versions</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Live\" />
   </ItemGroup>
 </Project>

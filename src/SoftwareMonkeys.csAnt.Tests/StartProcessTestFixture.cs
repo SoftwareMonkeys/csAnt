@@ -7,6 +7,7 @@ namespace SoftwareMonkeys.csAnt.Tests
 	[TestFixture]
 	public class StartProcessTestFixture : BaseTestFixture
 	{
+        // TODO: Move this to Process.Tests library and rename to ProcessStarterTestFixture. Test the ProcessStarter component instead of the StartProcess function so it's a true unit test
 		[Test]
 		public void Test_StartProcess()
 		{
