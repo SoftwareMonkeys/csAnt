@@ -28,6 +28,7 @@ namespace SoftwareMonkeys.csAnt
 
         public void CompileScripts (bool force, params string[] scriptNames)
         {
+            ScriptCompiler.Compile(force, scriptNames);
         }
     }
 }

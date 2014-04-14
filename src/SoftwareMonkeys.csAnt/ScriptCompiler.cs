@@ -14,8 +14,6 @@ namespace SoftwareMonkeys.csAnt
 
         public ScriptFileNamer FileNamer { get;set; }
 
-        public bool Force { get;set; }
-
         public ScriptCompiler ()
         {
             FileNamer = new ScriptFileNamer();
@@ -26,7 +24,12 @@ namespace SoftwareMonkeys.csAnt
             Compile(new string[]{});
         }
 
-        public void Compile(string[] scriptNames)
+        public void Compile(params string[] scriptNames)
+        {
+            Compile(scriptNames);
+        }
+
+        public void Compile(bool force, params string[] scriptNames)
         {
             // TODO: Remove binDir variable if not needed. Use ScriptAssembliesDirectory property instead
             var binDir = Environment.CurrentDirectory
@@ -79,7 +82,7 @@ namespace SoftwareMonkeys.csAnt
                     }
 
                     try {
-                        if (!File.Exists(assemblyFile) || Force)
+                        if (!File.Exists(assemblyFile) || force)
                         {
                             Console.WriteLine ("    Compiling...");
                             CSScript.Compile (scriptPath, assemblyFile, BuildMode == "Debug", new string[]{});
@@ -93,7 +96,8 @@ namespace SoftwareMonkeys.csAnt
                             totalSkipped++;
                         }
                     } catch (Exception ex) {
-                        throw new Exception ("Cannot compile '" + scriptName + "' script.", ex);
+                        Console.WriteLine("Script '" + scriptName + "' compile error:");
+                        Console.WriteLine(ex.ToString());
                         totalFailed++;
                     }
                 }
