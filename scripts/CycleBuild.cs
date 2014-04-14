@@ -50,26 +50,56 @@ class CycleBuildScript : BaseProjectScript
 		Console.WriteLine("Building...");
 		Console.WriteLine("");
 
+        var solutions = new string[]{};
+
+        if (CurrentNode.Properties.ContainsKey("CycleBuildSolutions"))
+        {
+            solutions = CurrentNode.Properties["CycleBuildSolutions"].Split(',');
+        }
+
+        // TODO: Better organize the following code so it's shorter
         // If the mode is "all" then build both Debug and Release modes
         if (mode == "all")
         {
-		        ExecuteScript(
-			        "BuildAllSolutions",
-			        "-mode=Release"
-		        );
-		        
-		        ExecuteScript(
-			        "BuildAllSolutions",
-			        "-mode=Debug"
-		        );
+                if (solutions.Length > 0)
+                {
+                    foreach (var solution in solutions)
+                    {
+                        ExecuteScript("BuildSolution", solution, "-mode=Debug");
+                        ExecuteScript("BuildSolution", solution, "-mode=Release");
+                    }
+                    
+                }
+                else
+                {
+		            ExecuteScript(
+			            "BuildAllSolutions",
+			            "-mode=Debug"
+		            );
+
+		            ExecuteScript(
+			            "BuildAllSolutions",
+			            "-mode=Release"
+		            );
+                }
 		}
 		else
 		{
-		        // Build the solutions
-		        ExecuteScript(
-			        "BuildAllSolutions",
-			        "-mode=" + mode
-		        );
+                if (solutions.Length > 0)
+                {
+                    foreach (var solution in solutions)
+                    {
+                        ExecuteScript("BuildSolution", solution, "-mode=" + mode);
+                    }
+                }
+                else
+                {
+	                // Build the solutions
+	                ExecuteScript(
+		                "BuildAllSolutions",
+		                "-mode=" + mode
+	                );
+                }
 		}
 
 		if (!IsError)
