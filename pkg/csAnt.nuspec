@@ -21,6 +21,7 @@
   <files>
     <file src="scripts/HelloWorld.cs" target="scripts" />
     <file src="scripts/RaiseEvent.cs" target="scripts" />
+    <file src="scripts/FixNUnitRunners.cs" target="scripts" />
     <file src="scripts/OnInstall_FixNUnitRunners.cs" target="scripts" />
     <file src="scripts/Update.cs" target="scripts" />
     <file src="csAnt-setup-local.sh" />
