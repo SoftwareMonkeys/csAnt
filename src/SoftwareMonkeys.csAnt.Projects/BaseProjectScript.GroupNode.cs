@@ -7,7 +7,7 @@ namespace SoftwareMonkeys.csAnt.Projects
 	public partial class BaseProjectScript
 	{
         // TODO: Move to ProjectNodeState component
-		private FileNode groupNode;
+		//private FileNode groupNode;
 		/// <summary>
 		/// Gets information node of the group/company/organization that the project belongs to.
 		/// The information comes from the [GroupName].node file in the directory one step above the project directory.
@@ -16,13 +16,11 @@ namespace SoftwareMonkeys.csAnt.Projects
 		{
 			get
 			{
-				if (groupNode == null)
-					groupNode = GetGroupNode();
-				return groupNode;
+                return Nodes.State.GroupNode;
 			}
 		}
 		
-		public FileNode GetGroupNode()
+		/*public FileNode GetGroupNode()
 		{
 			if (IsVerbose)
 			{
@@ -42,12 +40,15 @@ namespace SoftwareMonkeys.csAnt.Projects
 			);
 
 			// Scan for the group node
-			FileNode node = fileNodes.Get(dir, false, true);
+			FileNode node = fileNodes.Get(dir, false, false);
 			
 			if (node == null)
 				throw new GroupNodeNotFoundException();
+
+            if (CurrentNode != null)
+                node.Nodes.Add (CurrentNode);
 			
 			return node;
-		}
+		}*/
 	}
 }

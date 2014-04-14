@@ -3,8 +3,7 @@
 
 using System;
 using System.IO;
-using Microsoft.CSharp;
-using System.Diagnostics;
+using System.Collections.Generic;
 using SoftwareMonkeys.csAnt;
 using SoftwareMonkeys.csAnt.Projects;
 
@@ -17,32 +16,20 @@ class UpdateScript : BaseProjectScript
 	
 	public override bool Run(string[] args)
 	{
-	        Console.WriteLine("");
-	        Console.WriteLine("Updating...");
-	        Console.WriteLine("");
+        Console.WriteLine("");
+        Console.WriteLine("Updating...");
+        Console.WriteLine("");
 
-	        ExecuteScript("AddCsAntImport");
-	        
-	        ImportFile("csAnt", "scripts/HelloWorld.cs");
-	        ImportFile("csAnt", "scripts/Update.cs");
-	        ImportFile("csAnt", "scripts/AddImport.cs");
-	        //ImportFile("csAnt", "scripts/GetCsAntLib.cs");
-	        ImportFile("csAnt", "scripts/AddCsAntImport.cs");
-	        ImportFile("csAnt", "scripts/ImportFile.cs");
-	        ImportFile("csAnt", "scripts/ImportScript.cs");
-	        ImportFile("csAnt", "scripts/ImportSync.cs");
-	        ImportFile("csAnt", "scripts/ExportFile.cs");
-	        ImportFile("csAnt", "scripts/GetLibs.cs");
-	        ImportFile("csAnt", "scripts/InitSoftwareMonkeys.cs");
-	        ImportFile("csAnt", "scripts/Initialize/*");
-	        
-	        ExecuteScript("GetCsAntLib", "-f");
-	        
-	        GetLib("csAnt", true);
-	        
-	        Console.WriteLine("");
-	        Console.WriteLine("Update complete!");
-	        Console.WriteLine("");
+        var list = new List<string>();
+        list.Add("-update");
+        list.Add("-info=false");
+        list.AddRange(args);
+
+        StartDotNetExe("csAnt-SetUp.exe", list.ToArray());
+
+        Console.WriteLine("");
+        Console.WriteLine("Update complete!");
+        Console.WriteLine("");
 
 		return !IsError;
 	}

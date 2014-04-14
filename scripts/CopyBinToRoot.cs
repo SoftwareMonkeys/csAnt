@@ -1,3 +1,5 @@
+//css_ref ../lib/csAnt/bin/Release/net-40/SoftwareMonkeys.csAnt.Projects.dll
+
 using System;
 using System.IO;
 using System.Diagnostics;
@@ -17,22 +19,29 @@ class CopyBinToRootScript : BaseProjectScript
 			+ Path.DirectorySeparatorChar
 			+ "bin";
 	
-	        Console.WriteLine("");
-	        Console.WriteLine("Bin directory:");
-	        Console.WriteLine(binDirectory);
-	        Console.WriteLine("");
+        Console.WriteLine("");
+        Console.WriteLine("Bin directory:");
+        Console.WriteLine(binDirectory);
+        Console.WriteLine("");
 
 		int i = 0;
+        int s = 0;
+
+        var arguments = new Arguments(args);
+
+        var buildMode = "Release";
+        if (arguments.Contains("mode"))
+            buildMode = arguments["mode"];
+
+        Console.WriteLine("Build mode: " + buildMode);
 
 		var patterns = new string[]{
-			"bin/Release/packed/csAnt-SetUpFromLocal.exe",
-			"bin/Release/packed/csAnt-SetUp.exe"
+			"bin/" + buildMode + "/packed/csAnt-SetUpFromLocal.*",
+			"bin/" + buildMode + "/packed/csAnt-SetUp.*"
 		};
 
 	        foreach (string file in FindFiles(patterns))
 	        {
-		        i++;
-
 		        string toFile = CurrentDirectory
 			        + Path.DirectorySeparatorChar
 			        + Path.GetFileName(file);
@@ -48,10 +57,20 @@ class CopyBinToRootScript : BaseProjectScript
 			        + toFile.Replace(ProjectDirectory, "")
 		        );
 
-		        File.Copy(file, toFile, true);
+                var isNewer = File.GetLastWriteTime(file) > File.GetLastWriteTime(toFile);
+
+                if (!File.Exists(toFile) || isNewer)
+                {
+    		        File.Copy(file, toFile, true);
+
+    		        i++;
+                }
+                else
+                    s++;
 	        }
 
 		Console.WriteLine(i + " files copied.");
+		Console.WriteLine(s + " files skipped.");
 
 		AddSummary("Moved " + i + " files from '/bin/*' to '/'");
 

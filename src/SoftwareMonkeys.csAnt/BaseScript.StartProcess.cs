@@ -1,6 +1,7 @@
 using System;
 using System.Diagnostics;
 using System.Collections.Generic;
+using SoftwareMonkeys.csAnt.Processes;
 
 namespace SoftwareMonkeys.csAnt
 {
@@ -16,7 +17,8 @@ namespace SoftwareMonkeys.csAnt
 		/// <param name='arguments'></param>
 		public Process StartProcess(string command, params string[] arguments)
 		{
-			return StartProcess(command + " " + String.Join(" ", arguments));
+            // TODO: Move ProcessStarter to a property
+			return new ProcessStarter().Start(command, String.Join(" ", arguments));
 		}
 		
 		/// <summary>
@@ -29,15 +31,24 @@ namespace SoftwareMonkeys.csAnt
 		/// <param name='arguments'></param>
 		public Process StartProcess(string command)
 		{
-			var cmd = new StartProcessCommand(
-				this,
-				command
-			);
+            var parts = command.Split(' ');
 
-			ExecuteCommand(cmd);
+            var cmd = "";
+            var arguments = new string[]{};
 
-			return cmd.CommandProcess;
+            if (parts.Length > 0)
+                cmd = parts[0];
+
+            if (parts.Length > 1)
+            {
+                var list = new List<string>(parts);
+                list.RemoveAt(0);
+
+                arguments = list.ToArray();
+            }
+
+            // TODO: Move ProcessStarter to a property
+            return new ProcessStarter().Start(cmd, String.Join(" ", arguments));
 		}
 	}
 }
-

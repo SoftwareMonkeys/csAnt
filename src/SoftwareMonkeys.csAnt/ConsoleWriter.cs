@@ -6,11 +6,12 @@ namespace SoftwareMonkeys.csAnt
 {
 	public class ConsoleWriter : TextWriter, IConsoleWriter
 	{
+        // TODO: Remove if not needed
         public StringBuilder OutputBuilder { get;set; }
         
 		public string Output
         {
-            get { return OutputBuilder.ToString(); }
+            get { return LogFileWriter.ToString(); }
         }
 
 		public string LogFile { get;set; }
@@ -96,7 +97,9 @@ namespace SoftwareMonkeys.csAnt
 			if (text == null)
 				text = String.Empty;
 
-			OutputBuilder.Append(text);
+            // TODO: Check if needed. Is currently using up too much memory so should be removed if possible.
+            // Currently used by some tests to access and analyse output
+			//OutputBuilder.Append(text);
 		}
 		
 		public void AppendOutputFile(string text)

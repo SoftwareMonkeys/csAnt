@@ -15,7 +15,20 @@ To launch the csAnt scripts...
 
 1) Open the terminal at the location of the project.
 2) Use the following command:
-        a) Linux: "sh csAnt.sh [ScriptName]"
-                Example "sh csAnt.sh HelloWorld"
-        b) Windows: "csAnt.bat [ScriptName]"
-                Example "csAnt.bat HelloWorld"
+        a) Linux
+                Syntax: "sh csAnt.sh [ScriptName]"
+                Example: "sh csAnt.sh HelloWorld"
+        b) Windows
+                Syntax: "csAnt.bat [ScriptName]"
+                Example: "csAnt.bat HelloWorld"
+
+==== Updates ====
+To update the csAnt application...
+
+1) Open the terminal at the location of the project.
+2) Use the following command:
+        a) Linux:
+                "sh csAnt.sh Update"
+        b) Windows:
+                "csAnt.bat Update"
+

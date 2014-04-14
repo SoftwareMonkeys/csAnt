@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -44,23 +44,22 @@
     <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="SoftwareMonkeys.FileNodes">
-      <HintPath>..\..\lib\FileNodes\bin\Release\SoftwareMonkeys.FileNodes.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
+    <Reference Include="System.Web" />
     <Reference Include="HtmlAgilityPack">
-      <HintPath>..\..\lib\HtmlAgilityPack\Net40\HtmlAgilityPack.dll</HintPath>
+      <HintPath>..\..\lib\HtmlAgilityPack.1.4.6\lib\Net40\HtmlAgilityPack.dll</HintPath>
+    </Reference>
+    <Reference Include="SoftwareMonkeys.FileNodes">
+      <HintPath>..\..\lib\FileNodes.0.5.3.200\bin\Release\SoftwareMonkeys.FileNodes.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework">
-      <HintPath>..\..\lib\NUnit\bin\nunit.framework.dll</HintPath>
+      <HintPath>..\..\lib\NUnit.2.6.0.12051\lib\nunit.framework.dll</HintPath>
     </Reference>
-    <Reference Include="System.Web" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="TestScriptStackDetector.cs" />
-    <Compile Include="TestScriptStackDetectorTestFixture.cs" />
     <Compile Include="BaseScriptingDummyScript.cs" />
     <Compile Include="BaseScriptingTestFixture.cs" />
     <Compile Include="ScriptingDummyScriptTearDowner.cs" />
@@ -71,13 +70,16 @@
     <Compile Include="ScriptingTestScriptSetUpper.cs" />
     <Compile Include="ScriptingTestScriptTearDowner.cs" />
     <Compile Include="ScriptingTestScriptRelocator.cs" />
-    <Compile Include="GetTestScriptTestFixture.cs" />
     <Compile Include="BaseTestScript.cs" />
     <Compile Include="BaseTestScriptTearDowner.cs" />
     <Compile Include="BaseTestScriptSetUpper.cs" />
     <Compile Include="BaseTestScriptConstructor.cs" />
     <Compile Include="LifecycleTestFixture.cs" />
-    <Compile Include="HelloWorldScriptTestFixture.cs" />
+    <Compile Include="TestScriptCreator.cs" />
+    <Compile Include="Sanity\TestScriptCreatorTestFixture.cs" />
+    <Compile Include="Sanity\TestScriptStackDetectorTestFixture.cs" />
+    <Compile Include="Sanity\BaseScriptingSanityTestFixture.cs" />
+    <Compile Include="Sanity\HelloWorldScriptTestFixture.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -101,5 +103,9 @@
       <Project>{53E3AFEA-3627-4846-B2E4-5A8091E96BC6}</Project>
       <Name>SoftwareMonkeys.csAnt.IO.Contracts</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Sanity\" />
+    <Folder Include="Unit\" />
   </ItemGroup>
 </Project>

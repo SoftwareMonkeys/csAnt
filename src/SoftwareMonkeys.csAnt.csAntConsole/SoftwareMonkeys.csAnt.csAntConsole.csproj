@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.0</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{2292E955-9611-4356-B952-CE580117952A}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>SoftwareMonkeys.csAnt.csAntConsole</RootNamespace>
+    <NoWin32Manifest>False</NoWin32Manifest>
+    <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
+    <NoStdLib>False</NoStdLib>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
+    <AssemblyName>csAnt</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\bin\Debug</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Commandlineparameters>"HelloWorld" "-b:../../"</Commandlineparameters>
+    <ConsolePause>false</ConsolePause>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>SoftwareMonkeys.csAnt.csAntConsole.snk</AssemblyOriginatorKeyFile>
+    <BaseIntermediateOutputPath>obj\</BaseIntermediateOutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <Commandlineparameters>"HelloWorld" "-b:../../"</Commandlineparameters>
+    <DebugSymbols>true</DebugSymbols>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>SoftwareMonkeys.csAnt.csAntConsole.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugType>none</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\bin\x86\Debug</OutputPath>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+    <BaseIntermediateOutputPath>obj\</BaseIntermediateOutputPath>
+    <BaseAddress>4194304</BaseAddress>
+    <RegisterForComInterop>False</RegisterForComInterop>
+    <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
+    <FileAlignment>4096</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <DebugType>none</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\bin\x86\Release</OutputPath>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+    <BaseAddress>4194304</BaseAddress>
+    <RegisterForComInterop>False</RegisterForComInterop>
+    <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
+    <FileAlignment>4096</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
+    <BaseIntermediateOutputPath>obj\</BaseIntermediateOutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Platform)' == 'x86' ">
+    <BaseAddress>4194304</BaseAddress>
+    <RegisterForComInterop>False</RegisterForComInterop>
+    <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
+    <FileAlignment>4096</FileAlignment>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="SoftwareMonkeys.FileNodes">
+      <HintPath>..\..\lib\FileNodes.0.5.3.200\bin\Release\SoftwareMonkeys.FileNodes.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="Program.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <ProjectReference Include="..\SoftwareMonkeys.csAnt\SoftwareMonkeys.csAnt.csproj">
+      <Project>{16297BCB-0A8C-42E6-BE35-921085C3E238}</Project>
+      <Name>SoftwareMonkeys.csAnt</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SoftwareMonkeys.csAnt.Contracts\SoftwareMonkeys.csAnt.Contracts.csproj">
+      <Project>{EA178299-9D1E-482E-B3CD-D3CEBF62CADF}</Project>
+      <Name>SoftwareMonkeys.csAnt.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SoftwareMonkeys.csAnt.IO\SoftwareMonkeys.csAnt.IO.csproj">
+      <Project>{749ED083-15BD-4522-8FBE-847870434680}</Project>
+      <Name>SoftwareMonkeys.csAnt.IO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SoftwareMonkeys.csAnt.Versions\SoftwareMonkeys.csAnt.Versions.csproj">
+      <Project>{9B72A2B8-0BC4-40BE-B242-AC79A080CEB6}</Project>
+      <Name>SoftwareMonkeys.csAnt.Versions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SoftwareMonkeys.csAnt.IO.Contracts\SoftwareMonkeys.csAnt.IO.Contracts.csproj">
+      <Project>{53E3AFEA-3627-4846-B2E4-5A8091E96BC6}</Project>
+      <Name>SoftwareMonkeys.csAnt.IO.Contracts</Name>
+    </ProjectReference>
+  </ItemGroup>
+</Project>

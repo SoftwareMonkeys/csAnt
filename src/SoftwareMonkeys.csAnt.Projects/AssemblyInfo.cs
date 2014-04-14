@@ -4,14 +4,10 @@ using System.Runtime.CompilerServices;
 [assembly: AssemblyTitle("SoftwareMonkeys.csAnt.Projects")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("SoftwareMonkeys")]
 [assembly: AssemblyProduct("")]
 [assembly: AssemblyCopyright("")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
-[assembly: AssemblyVersion("1.0.*")]
-
-//[assembly: AssemblyDelaySign(false)]
-//[assembly: AssemblyKeyFile("")]
-
+[assembly: AssemblyVersion("0.4.31.100")]

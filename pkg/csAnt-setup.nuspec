@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <metadata>
+    <id>csAnt-setup</id>
+    <version>0.0.0.0</version>
+    <authors>SoftwareMonkeys</authors>
+    <owners>SoftwareMonkeys</owners>
+    <description>C# scripting and automation environment (setup wizard).</description>
+    <dependencies />
+  </metadata>
+  <files>
+    <file src="csAnt-SetUp.exe" />
+  </files>
+</package>

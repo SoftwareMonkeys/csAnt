@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -39,8 +39,8 @@
     <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
-    <DebugType>Full</DebugType>
-    <Optimize>False</Optimize>
+    <DebugType>none</DebugType>
+    <Optimize>false</Optimize>
     <OutputPath>..\..\bin\x86\Debug</OutputPath>
     <WarningLevel>4</WarningLevel>
     <PlatformTarget>x86</PlatformTarget>
@@ -74,7 +74,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="SoftwareMonkeys.FileNodes">
-      <HintPath>..\..\lib\FileNodes\bin\Release\SoftwareMonkeys.FileNodes.dll</HintPath>
+      <HintPath>..\..\lib\FileNodes.0.5.3.200\bin\Release\SoftwareMonkeys.FileNodes.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -99,7 +99,6 @@
     <Compile Include="IScript.Events.cs" />
     <Compile Include="IScript.Git.cs" />
     <Compile Include="IScript.Http.cs" />
-    <Compile Include="IScript.Import.cs" />
     <Compile Include="IScript.IO.cs" />
     <Compile Include="IScript.Libs.cs" />
     <Compile Include="IScript.Nodes.cs" />
@@ -113,12 +112,26 @@
     <Compile Include="IScript.ConsoleWriter.cs" />
     <Compile Include="INodeManager.cs" />
     <Compile Include="INodeState.cs" />
+    <Compile Include="INodeGetter.cs" />
+    <Compile Include="IScript.Importer.cs" />
+    <Compile Include="IScriptCompiler.cs" />
+    <Compile Include="IScriptExecutor.cs" />
+    <Compile Include="IScriptActivator.cs" />
+    <Compile Include="IIndenter.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <ProjectReference Include="..\SoftwareMonkeys.csAnt.IO.Contracts\SoftwareMonkeys.csAnt.IO.Contracts.csproj">
       <Project>{53E3AFEA-3627-4846-B2E4-5A8091E96BC6}</Project>
       <Name>SoftwareMonkeys.csAnt.IO.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SoftwareMonkeys.csAnt.SourceControl.Git\SoftwareMonkeys.csAnt.SourceControl.Git.csproj">
+      <Project>{94578333-F8C9-40C0-9300-8D808ED1CD7A}</Project>
+      <Name>SoftwareMonkeys.csAnt.SourceControl.Git</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SoftwareMonkeys.csAnt.Imports\SoftwareMonkeys.csAnt.Imports.csproj">
+      <Project>{B34DA062-E44B-4044-AC28-D006FC66CCA7}</Project>
+      <Name>SoftwareMonkeys.csAnt.Imports</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>

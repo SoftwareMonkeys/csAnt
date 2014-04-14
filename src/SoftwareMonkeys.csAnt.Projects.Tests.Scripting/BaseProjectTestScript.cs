@@ -7,6 +7,7 @@ using NUnit.Framework;
 namespace SoftwareMonkeys.csAnt.Projects.Tests.Scripting
 {
     [TestFixture]
+    [Category("TestScript")]
     public abstract partial class BaseProjectTestScript : BaseProjectScript, ITestScript
     {
         public TestSummarizer TestSummarizer { get;set; }

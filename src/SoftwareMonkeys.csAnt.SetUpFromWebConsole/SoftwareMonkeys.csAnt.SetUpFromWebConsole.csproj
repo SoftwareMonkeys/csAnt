@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -13,6 +13,7 @@
     <NoStdLib>False</NoStdLib>
     <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
     <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
+    <AssemblyName>csAnt-SetUp</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -22,7 +23,6 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Externalconsole>true</Externalconsole>
-    <AssemblyName>SoftwareMonkeys.csAnt.SetUpFromWebConsole.cs</AssemblyName>
     <BaseIntermediateOutputPath>obj\</BaseIntermediateOutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -32,16 +32,14 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Externalconsole>true</Externalconsole>
-    <AssemblyName>csAnt-SetUp</AssemblyName>
     <DebugSymbols>true</DebugSymbols>
     <Commandlineparameters>d:../../</Commandlineparameters>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
-    <DebugType>Full</DebugType>
-    <Optimize>False</Optimize>
+    <DebugType>none</DebugType>
+    <Optimize>false</Optimize>
     <OutputPath>bin\x86\Debug</OutputPath>
     <WarningLevel>4</WarningLevel>
-    <AssemblyName>SoftwareMonkeys.csAnt.SetUpFromWebConsole</AssemblyName>
     <PlatformTarget>x86</PlatformTarget>
     <BaseIntermediateOutputPath>obj\</BaseIntermediateOutputPath>
     <BaseAddress>4194304</BaseAddress>
@@ -54,7 +52,6 @@
     <Optimize>false</Optimize>
     <OutputPath>..\..\bin\x86\Release</OutputPath>
     <WarningLevel>4</WarningLevel>
-    <AssemblyName>SoftwareMonkeys.csAnt.SetUpFromWebConsole</AssemblyName>
     <PlatformTarget>x86</PlatformTarget>
     <BaseAddress>4194304</BaseAddress>
     <RegisterForComInterop>False</RegisterForComInterop>
@@ -73,31 +70,20 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="HtmlAgilityPack">
-      <HintPath>..\..\lib\HtmlAgilityPack\Net40\HtmlAgilityPack.dll</HintPath>
-    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="ICSharpCode.SharpZipLib">
-      <HintPath>..\..\lib\SharpZipLib\net-20\ICSharpCode.SharpZipLib.dll</HintPath>
+      <HintPath>..\..\lib\SharpZipLib.0.86.0\net-20\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="CSScriptLibrary">
+      <HintPath>..\..\lib\CS-Script.3.7.2.0\lib\net40\CSScriptLibrary.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Main.cs" />
     <Compile Include="AssemblyInfo.cs" />
-    <Compile Include="DownloadUtility.cs" />
-    <Compile Include="IOUtility.cs" />
-    <Compile Include="Arguments.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
-    <ProjectReference Include="..\SoftwareMonkeys.csAnt.Packages\SoftwareMonkeys.csAnt.Packages.csproj">
-      <Project>{089D0473-0CB0-458B-AFDF-428D83B5CC6A}</Project>
-      <Name>SoftwareMonkeys.csAnt.Packages</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SoftwareMonkeys.csAnt.Packages.Contracts\SoftwareMonkeys.csAnt.Packages.Contracts.csproj">
-      <Project>{C3C8D4B3-1659-4307-A7B1-DAE98C15250D}</Project>
-      <Name>SoftwareMonkeys.csAnt.Packages.Contracts</Name>
-    </ProjectReference>
     <ProjectReference Include="..\SoftwareMonkeys.csAnt.IO\SoftwareMonkeys.csAnt.IO.csproj">
       <Project>{749ED083-15BD-4522-8FBE-847870434680}</Project>
       <Name>SoftwareMonkeys.csAnt.IO</Name>
@@ -105,6 +91,22 @@
     <ProjectReference Include="..\SoftwareMonkeys.csAnt.IO.Contracts\SoftwareMonkeys.csAnt.IO.Contracts.csproj">
       <Project>{53E3AFEA-3627-4846-B2E4-5A8091E96BC6}</Project>
       <Name>SoftwareMonkeys.csAnt.IO.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SoftwareMonkeys.csAnt.External.Nuget\SoftwareMonkeys.csAnt.External.Nuget.csproj">
+      <Project>{D88EE98D-5F35-4B0E-AC92-4029A1742204}</Project>
+      <Name>SoftwareMonkeys.csAnt.External.Nuget</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SoftwareMonkeys.csAnt.SetUp\SoftwareMonkeys.csAnt.SetUp.csproj">
+      <Project>{485BCC0F-7E4F-4430-9174-3A1ADA428E71}</Project>
+      <Name>SoftwareMonkeys.csAnt.SetUp</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SoftwareMonkeys.csAnt\SoftwareMonkeys.csAnt.csproj">
+      <Project>{16297BCB-0A8C-42E6-BE35-921085C3E238}</Project>
+      <Name>SoftwareMonkeys.csAnt</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SoftwareMonkeys.csAnt.Contracts\SoftwareMonkeys.csAnt.Contracts.csproj">
+      <Project>{EA178299-9D1E-482E-B3CD-D3CEBF62CADF}</Project>
+      <Name>SoftwareMonkeys.csAnt.Contracts</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>

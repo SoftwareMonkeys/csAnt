@@ -1,7 +1,7 @@
 using System;
 using System.IO;
 using System.IO.Compression;
-using ICSharpCode.SharpZipLib.Zip;
+using SoftwareMonkeys.csAnt.IO.Compression;
 
 namespace SoftwareMonkeys.csAnt
 {
@@ -18,16 +18,8 @@ namespace SoftwareMonkeys.csAnt
 
 	    public int Unzip (string zipFilePath, string destinationPath, string subPath)
 		{
-            var cmd = new UnzipCommand(
-                this,
-                zipFilePath,
-                destinationPath,
-                subPath
-            );
-
-            Execute (cmd);
-
-            return cmd.TotalFiles;
+            // TODO: Keep zipper on a property
+            return new FileZipper().Unzip(zipFilePath, destinationPath, subPath);
 	    }
 
 	}

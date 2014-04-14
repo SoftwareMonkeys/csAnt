@@ -1,3 +1,7 @@
+//css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.dll;
+//css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.Tests.dll;
+//css_ref ../lib/NUnit.2.6.0.12051/lib/nunit.framework.dll;
+
 using System;
 using System.IO;
 using Microsoft.CSharp;
@@ -26,23 +30,28 @@ class RunTestsScript : BaseScript
 	
 	public void RunTests()
 	{
+        var binTestsDir = CurrentDirectory
+			+ Path.DirectorySeparatorChar
+			+ "bin-tests";
+
 		// Move all the files into a new location where the tests can run
 		// (without doing this, the scripts don't execute as tests because the general csAnt binaries aren't in the same folder)
-		var workingDir = PrepareTests();
+		var workingDir = PrepareTests(binTestsDir);
 
-            var runner = new NUnitTestRunner(
-                this,
-                BuildMode
-            );
+                var runner = new NUnitTestRunner(
+                    this,
+                    BuildMode
+                );
             
-            runner.RunTestsInDirectory(workingDir);
+                runner.RunTestsInDirectory(workingDir);
+
+
+		Directory.Delete(binTestsDir, true);
 	}
 
-	public string PrepareTests()
+	public string PrepareTests(string binTestsDir)
 	{
-		var workingDir = CurrentDirectory
-			+ Path.DirectorySeparatorChar
-			+ "bin-tests"
+		var workingDir = binTestsDir
 			+ Path.DirectorySeparatorChar
 			+ BuildMode;
 

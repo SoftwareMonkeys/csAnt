@@ -25,9 +25,12 @@ class CyclePublishScript : BaseProjectScript
 		Console.WriteLine("Starting a full release cycle.");
 		Console.WriteLine("");
 
+        var packageName = ""; // Empty means all
+        if (args.Length > 0)
+            packageName = args[0];
+
 		// Git clone the project to another directory
 		var tmpDir = CloneToTmpDirectory();
-
 
 		GrabFiles(tmpDir);
 
@@ -36,33 +39,61 @@ class CyclePublishScript : BaseProjectScript
 
 		CreateNodes();
 
+        IncrementVersion(3);
+
+        // Commit the file nodes containing the updated versions
+        ExecuteScript("CommitVersion");
+
 		// Build the cloned source code
-		ExecuteScript("EnsureRelease");
+		ExecuteScript("Package", packageName);
+
+        ReturnPackages();
+
+        Git.Push("origin", "master", "-f");
 
 		if (!IsError)
 		{
 			// Publish files
-			ExecuteScript("Publish");
+			ExecuteScript("Publish", packageName);
 		}
 
 		return !IsError;
 	}
 
+    public void ReturnPackages()
+    {
+        var pkgDir = Path.Combine(CurrentDirectory, "pkg");
+
+        foreach (var dir in Directory.GetDirectories(pkgDir))
+        {
+            var file = GetNewestFile(dir);
+            
+            if (!String.IsNullOrEmpty(file))
+            {
+                var toFile = file.Replace(CurrentDirectory, OriginalDirectory);
+
+                // TODO: Should the file be deleted and overwritten?
+                if (File.Exists(toFile))
+                    File.Delete(toFile);
+
+                if (!Directory.Exists(Path.GetDirectoryName(toFile)))
+                    Directory.CreateDirectory(Path.GetDirectoryName(toFile));
+
+                File.Copy(file, toFile);
+            }
+        }
+    }
+
 	public void GrabFiles(string tmpDir)
 	{
-		new FilesGrabber(
+		var grabber = new FilesGrabber(
 			OriginalDirectory,
 			tmpDir
-		).GrabOriginalFiles(
-			"bin/**",
-			"src/TimeStamps.txt",
-			"lib/csAnt/**",
-			"lib/cs-script/**",
-			"lib/HtmlAgilityPack/**",
-			"lib/ILRepack.1.25.0/**",
-			"lib/GCUpload/**",
-			"lib/FileNodes/**"
 		);
+
+        grabber.Grab(grabber.BinFilePatterns);
+        grabber.Grab(grabber.LibFilePatterns);
+        grabber.Grab(grabber.PackageSpecFilePatterns);
 	}
 
 	public string CloneToTmpDirectory()
@@ -78,7 +109,7 @@ class CyclePublishScript : BaseProjectScript
 
 		Directory.CreateDirectory(tmpDirectory);
 
-		GitClone(ProjectDirectory, tmpDirectory);
+		Git.Clone(ProjectDirectory, tmpDirectory);
 
 		AddSummary("Cloned project to: " + tmpDirectory);
 
@@ -89,30 +120,31 @@ class CyclePublishScript : BaseProjectScript
 
 	public void CopySecurityCode(string fromDir, string toDir)
 	{
-	        CopySecurityNode(fromDir, toDir);
+	    CopySecurityNode(fromDir, toDir);
 	
 		var file = fromDir
 			+ Path.DirectorySeparatorChar
 			+ "_security"
 			+ Path.DirectorySeparatorChar
-			+ "GoogleCode"
+			+ "MyGet"
 			+ Path.DirectorySeparatorChar
-			+ "GoogleCode.node";
+			+ "MyGet.node";
 
 		var tofile = file.Replace(fromDir, toDir);
 
-                Console.WriteLine("Copying security node to:");
-                Console.WriteLine(tofile);
-                Console.WriteLine("From:");
-                Console.WriteLine(file);
+        Console.WriteLine("Copying security node to:");
+        Console.WriteLine(tofile);
+        Console.WriteLine("From:");
+        Console.WriteLine(file);
 
 		EnsureDirectoryExists(Path.GetDirectoryName(tofile));
 
-		File.Copy(file, tofile);
+        if (!File.Exists(tofile))
+			File.Copy(file, tofile);
 		
 		CurrentNode.Nodes["Security"].Nodes[ProjectName] = new FileNode(
-	                tofile,
-	                new FileNodeSaver()
+            tofile,
+            new FileNodeSaver()
 		);
 	}
 	
@@ -126,18 +158,19 @@ class CyclePublishScript : BaseProjectScript
 
 		var toNodeFile = nodeFile.Replace(fromDir, toDir);
 
-                Console.WriteLine("Copying security node to:");
-                Console.WriteLine(toNodeFile);
-                Console.WriteLine("From:");
-                Console.WriteLine(nodeFile);
+        Console.WriteLine("Copying security node to:");
+        Console.WriteLine(toNodeFile);
+        Console.WriteLine("From:");
+        Console.WriteLine(nodeFile);
 
 		EnsureDirectoryExists(Path.GetDirectoryName(toNodeFile));
 
-		File.Copy(nodeFile, toNodeFile);
+        if (!File.Exists(toNodeFile))
+    		File.Copy(nodeFile, toNodeFile);
 		
 		CurrentNode.Nodes["Security"] = new FileNode(
-	                toNodeFile,
-	                new FileNodeSaver()
+            toNodeFile,
+            new FileNodeSaver()
 		);
 	}
 }

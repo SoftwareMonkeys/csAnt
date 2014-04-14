@@ -19,7 +19,7 @@ namespace SoftwareMonkeys.csAnt.Tests.Scripting
                 ).GrabOriginalScriptingFiles();
 
             // Create a sub script
-            var subScript = script.ActivateScript("HelloWorld");
+            var subScript = script.ScriptExecutor.Activator.ActivateScript("HelloWorld");
 
             // Start the sub script (to ensure it's set up)
             subScript.Start();
@@ -40,7 +40,7 @@ namespace SoftwareMonkeys.csAnt.Tests.Scripting
                 ).GrabOriginalScriptingFiles();
 
             // Create a sub script
-            using (var subScript = script.ActivateScript("HelloWorld")) {
+            using (var subScript = script.ScriptExecutor.Activator.ActivateScript("HelloWorld")) {
                 // Start the sub script
                 subScript.Start();
             }// Let the sub script dispose, and be torn down

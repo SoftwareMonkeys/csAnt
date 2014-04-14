@@ -5,15 +5,12 @@ namespace SoftwareMonkeys.csAnt
     public partial interface IScript
     {
         #region Script functions
-        T ActivateScript<T>(string scriptName)
-            where T : IScript;
+        IScriptCompiler ScriptCompiler { get;set; }
+        IScriptExecutor ScriptExecutor { get;set; }
 
-        IScript ActivateScript(string scriptName);
-
-        IScript ActivateScriptFromFile(string scriptFilePath);
-
-        void ExecuteScript(string scriptName);
-        void ExecuteScriptFile(string scriptFileName);
+        void ExecuteScript(string scriptName, params string[] arguments);
+        void ExecuteScriptFile(string scriptFileName, params string[] arguments);
+        void ExecuteScriptAt(string workingDirectory, string scriptName, params string[] arguments);
         #endregion
 
     }

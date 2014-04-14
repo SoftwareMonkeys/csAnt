@@ -13,7 +13,7 @@ namespace SoftwareMonkeys.csAnt
 
 		bool IsVerbose { get;set; }
 
-		int Indent { get; set; }
+		IIndenter Indenter { get; set; }
 		#endregion
     }
 }

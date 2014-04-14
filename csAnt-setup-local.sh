@@ -1,5 +1,18 @@
-csAntDir=$(readlink -f "../../SoftwareMonkeys/csAnt")
+arg=$1
 
+echo "Setting up csAnt..."
+
+echo "arg:"
+echo $arg
+
+if [ ! -z $arg ]
+then :
+    csAntDir=$(readlink -f $arg)
+else :
+    csAntDir=$(readlink -f "../../SoftwareMonkeys/csAnt")
+fi
+
+echo "csAnt path:"
 echo $csAntDir
 
 if [ -d "$csAntDir" ]; then
@@ -9,5 +22,5 @@ if [ -d "$csAntDir" ]; then
         
     cp $csAntDir/bin/Release/packed/csAnt-SetUpFromLocal.exe csAnt-SetUpFromLocal.exe
 
-    mono csAnt-SetUpFromLocal.exe
+    mono csAnt-SetUpFromLocal.exe $csAntDir
 fi

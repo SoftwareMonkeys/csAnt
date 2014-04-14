@@ -1,4 +1,6 @@
 {
-  "Properties": {},
-  "Name": null
+  "Properties": {
+    "Version": "0.4.32.0"
+  },
+  "Name": "Source"
 }

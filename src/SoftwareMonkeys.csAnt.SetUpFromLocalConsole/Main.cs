@@ -1,84 +1,66 @@
 using System;
 using System.IO;
+using SoftwareMonkeys.csAnt;
 using SoftwareMonkeys.csAnt.IO;
-using SoftwareMonkeys.csAnt.SetUp.Common;
+using SoftwareMonkeys.csAnt.SetUp;
+using SoftwareMonkeys.csAnt.Versions;
 
 namespace SoftwareMonkeys.csAnt.SetUpFromLocalConsole
 {
     class MainClass
     {
+        public static string SourcePath { get;set; }
+
+        public static string DestinationPath { get;set; }
+        
+        public static bool Overwrite { get;set; }
+
+        public static bool Update { get;set; }
+
+        public static bool Import { get;set; }
+
+        public static string ImportPath = "https://git01.codeplex.com/csant/";
+
+        // TODO: Remove if not needed
+        public static string NugetSourcePath = "https://www.myget.org/F/softwaremonkeys/";
+        
+        // TODO: Remove if not needed
+        public static string NugetPath = "http://nuget.org/nuget.exe";
+        
+        public static string PackageName = "csAnt";
+
+        public static bool IsHelp { get;set; }
+
+        public static Version Version { get;set; }
+
         public static void Main (string[] args)
         {
-            var arguments = new Arguments (args);
+            ParseArguments(args);
 
-            if (arguments.Contains ("h")
-                || arguments.Contains ("help")) {
+            if (IsHelp) {
                 Help();
             } else {
                 Console.WriteLine ("");
-                Console.WriteLine ("Setting up csAnt and the package manager from local files...");
+                Console.WriteLine ("Setting up csAnt from local files...");
                 Console.WriteLine ("");
-
-                var sourceDir = String.Empty;
-
-                var destinationDir = String.Empty;
-
-                var overwrite = false;
-
-                var fileListFile = String.Empty;
-
-                if (args.Length > 0) {
-                    sourceDir = args [0];
-
-                    destinationDir = Path.GetFullPath (args [1]);
-
-                    overwrite = arguments.Contains ("o");
-
-                    if (arguments.Contains ("l"))
-                        fileListFile = arguments ["l"];
-
-                } else {
-                    sourceDir = DetectSourceDirectory ();
-
-                    destinationDir = Environment.CurrentDirectory;
-                }
 
                 Console.WriteLine ("");
                 Console.WriteLine ("Source dir:");
-                Console.WriteLine (sourceDir);
+                Console.WriteLine (SourcePath);
                 Console.WriteLine ("");
 
                 Console.WriteLine ("Destination dir:");
-                Console.WriteLine (destinationDir);
+                Console.WriteLine (DestinationPath);
                 Console.WriteLine ("");
 
-                Console.WriteLine ("List file:");
-                Console.WriteLine (fileListFile != String.Empty ? fileListFile : "[Not provided]");
-                Console.WriteLine ("");
-
-                var fileList = GetDefaultFileList ();
-                if (!String.IsNullOrEmpty (fileListFile))
-                    fileList = File.ReadAllLines (fileListFile);
-
-                var installer = new LocalInstaller();
-                installer.Install(
-                    sourceDir,
-                    destinationDir,
-                    fileList,
-                    overwrite
-                    );
+                var installer = new LocalInstaller(
+                    SourcePath,
+                    DestinationPath,
+                    PackageName,
+                    Overwrite
+                );
+                installer.Install();
             }
-        }
-
-        static public string[] GetDefaultFileList()
-        {
-            return new string[]{
-                "lib/csAnt/**",
-                "lib/cs-script/**",
-                "lib/FileNodes/**",
-                "scripts/*.cs",
-                "csAnt.sh"
-            };
         }
 
         static string DetectSourceDirectory ()
@@ -132,5 +114,82 @@ namespace SoftwareMonkeys.csAnt.SetUpFromLocalConsole
             Console.WriteLine (" -o");
             Console.WriteLine ("     A flag indicating whether to overwrite files if they already exist.");
         }
+        
+        static public void ParseArguments(string[] args)
+        {
+
+            if (args.Length > 0) {
+                // Source directory
+                SourcePath = args [0];
+    
+                // Destination directory
+                if (args.Length > 1)
+                    DestinationPath = Path.GetFullPath (args [1]);
+            } else {
+                SourcePath = DetectSourceDirectory ();
+                DestinationPath = Environment.CurrentDirectory;
+            }
+    
+            var arguments = new Arguments(args);
+
+            // Is help
+            IsHelp = arguments.ContainsAny("h", "help", "man");
+
+            // Destination
+            DestinationPath = Environment.CurrentDirectory;
+            if (arguments.ContainsAny("d", "destination"))
+                DestinationPath = Path.GetFullPath(arguments["d", "destination"]);
+
+            // Version
+            if (arguments.ContainsAny("v", "version"))
+                Version = Version.Parse(arguments["v", "version"]);
+
+
+            // Package name
+            if (arguments.ContainsAny("p", "pkg", "package"))
+                PackageName = arguments["p", "pkg", "package"];
+
+
+            // TODO: Remove if not needed
+            // Show intro
+            //if (arguments.ContainsAny("intro"))
+            //    ShowIntro = Convert.ToBoolean(arguments["intro"]);
+
+            // Version
+            if (arguments.ContainsAny("s", "source"))
+                NugetSourcePath = arguments["s", "source"];
+
+
+            // Version
+            if (arguments.ContainsAny("n", "nuget", "nugetpath"))
+                NugetPath = arguments["n", "nuget", "nugetpath"];
+
+
+            // Overwrite
+            Overwrite = arguments.ContainsAny(
+                "o",
+                "overwrite"
+            );
+
+            // Update
+            Update = arguments.ContainsAny(
+                "u",
+                "update"
+            );
+
+            // Import
+            Import = arguments.ContainsAny(
+                "i",
+                "import"
+            );
+
+            if (Import)
+            {
+                var path = arguments["i", "import"];
+                if (!String.IsNullOrEmpty(path))
+                    ImportPath = path;
+            }
+        }
+
     }
 }

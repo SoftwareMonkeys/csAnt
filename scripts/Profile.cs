@@ -27,7 +27,11 @@ class ProfileScript : BaseScript
 
 			var profilingSummaryFile = profilingDir
 				+ Path.DirectorySeparatorChar
-				+ "summary.txt";
+				+ "summary"
+				+ Path.DirectorySeparatorChar
+				+ scriptName
+				+ Path.DirectorySeparatorChar
+				+ TimeStamp + ".txt";
 
 			Console.WriteLine("");
 			Console.WriteLine("Profiling '" + scriptName + "' script...");
@@ -39,7 +43,7 @@ class ProfileScript : BaseScript
 			Console.WriteLine(profilingSummaryFile);
 			Console.WriteLine("");
 
-			EnsureDirectoryExists(profilingDir);
+			EnsureDirectoryExists(Path.GetDirectoryName(profilingSummaryFile));
 
 			var otherArgs = new List<string>(args);
 

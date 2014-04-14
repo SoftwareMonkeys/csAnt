@@ -40,6 +40,8 @@ namespace SoftwareMonkeys.csAnt.Tests
                 parentScript
             );
 
+            script.Nodes = Nodes;
+
             script.IsVerbose = isVerbose;
 
             script.TimeStamp = TimeStamp;

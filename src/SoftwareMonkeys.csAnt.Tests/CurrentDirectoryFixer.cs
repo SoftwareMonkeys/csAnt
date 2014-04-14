@@ -16,36 +16,42 @@ namespace SoftwareMonkeys.csAnt.Tests
 		{
 			currentDirectory = currentDirectory.TrimEnd(Path.DirectorySeparatorChar);
 			
+            var binFolders = new string[]{"bin", "bin-tests"};
+
             var modes = new string[]{"Debug", "Release"};
             
             var targets = new string[]{"x86"};
-
-            foreach (var mode in modes) {
-            	var key = Path.DirectorySeparatorChar
-            		+ "bin"
-            		+ Path.DirectorySeparatorChar
-            		+ mode;
-            	
-                if (currentDirectory.EndsWith (key))
+            
+            foreach (var binFolder in binFolders)
+            {
+                foreach (var mode in modes)
                 {
-                    currentDirectory = currentDirectory.Replace (key, "");
-                    break;
-                }
-                
-                foreach (var target in targets)
-                {
-            		var subKey = Path.DirectorySeparatorChar
-	            		+ "bin"
-	            		+ Path.DirectorySeparatorChar
-	            		+ target
-	            		+ Path.DirectorySeparatorChar
-	            		+ mode;
-            	
-	                if (currentDirectory.EndsWith (subKey))
-	                {
-	                    currentDirectory = currentDirectory.Replace (subKey, "");
-	                    break;
-	                }
+                    var key = Path.DirectorySeparatorChar
+                        + binFolder
+                        + Path.DirectorySeparatorChar
+                        + mode;
+                	
+                    if (currentDirectory.EndsWith (key))
+                    {
+                        currentDirectory = currentDirectory.Replace (key, "");
+                        break;
+                    }
+                    
+                    foreach (var target in targets)
+                    {
+                        var subKey = Path.DirectorySeparatorChar
+                            + binFolder
+                            + Path.DirectorySeparatorChar
+                            + target
+                            + Path.DirectorySeparatorChar
+                            + mode;
+                	
+                        if (currentDirectory.EndsWith (subKey))
+                        {
+                            currentDirectory = currentDirectory.Replace (subKey, "");
+                            break;
+                        }
+                    }
                 }
             }
             
