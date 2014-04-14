@@ -27,25 +27,40 @@ class Test_SetUpFromLocalScript_Git : BaseProjectTestScript
 	
 	public override bool Run(string[] args)
 	{
-		// TODO: Better organize this script
-
 		Console.WriteLine("");
 		Console.WriteLine("Testing the setup from local script...");
 		Console.WriteLine("");
 
-        ExecuteScriptAt(OriginalDirectory, "Repack");
-        ExecuteScriptAt(OriginalDirectory, "CopyBinToLib");
-        ExecuteScriptAt(OriginalDirectory, "CopyBinToRoot");
+        var testProjectDir = Path.GetDirectoryName(CurrentDirectory)
+            + Path.DirectorySeparatorChar
+            + "TestProject";
 
-        new SetUpFromLocalScriptRetriever().Retrieve(OriginalDirectory, CurrentDirectory);
+        var sourceDir = CurrentDirectory;
+
+        Prepare(sourceDir, testProjectDir);
 
         // Run the setup from local script
-        new SetUpFromLocalScriptLauncher().Launch(OriginalDirectory, CurrentDirectory);
+        new SetUpFromLocalScriptLauncher().Launch(sourceDir, testProjectDir);
 
         // Test the hello world script to ensure setup worked
         new HelloWorldScriptLauncher().Launch();
 
 		return !IsError;
 	}
+
+    public void Prepare(string sourceDir, string testProjectDir)
+    {
+        new FilesGrabber(
+            OriginalDirectory,
+            CurrentDirectory
+        ).GrabOriginalFiles();
+
+        ExecuteScript("CycleBuild");
+
+        Relocate(testProjectDir);
+
+        new SetUpFromLocalScriptRetriever().Retrieve(sourceDir, testProjectDir);
+
+    }
 
 }
