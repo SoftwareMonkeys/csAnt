@@ -81,7 +81,10 @@ namespace SoftwareMonkeys.csAnt
 
             // TODO: Check if settings are needed
             var scriptSettings = new Settings ();
-            scriptSettings.InMemoryAsssembly = true; // TODO: Check if needed. Could be causing errors with tmp dir access exception. Keeping it seems to fix errors with activation during install tests (intermittent failure)
+            // TODO: Check if needed.
+            // Could be causing errors with tmp dir access exception when using jenkins.
+            // Keeping this line seems to fix errors with activation during install tests (intermittent failure)
+            scriptSettings.InMemoryAsssembly = true;
             scriptSettings.HideCompilerWarnings = true;
 
             var compilerOptions = "";
@@ -91,6 +94,7 @@ namespace SoftwareMonkeys.csAnt
                 File.Exists (assemblyFile)
                 && File.GetLastWriteTime (scriptPath) > File.GetLastWriteTime (assemblyFile)
             ) {
+                CSScript.CacheEnabled = false; // TODO: Check if this is needed. Being true was causing errors when running under jenkins.
                 CSScript.GlobalSettings = scriptSettings;
                 
                 // Compile the script
