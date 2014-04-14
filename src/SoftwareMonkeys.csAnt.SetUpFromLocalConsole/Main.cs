@@ -33,6 +33,8 @@ namespace SoftwareMonkeys.csAnt.SetUpFromLocalConsole
 
         public static Version Version { get;set; }
 
+        public static bool Direct { get;set; }
+
         public static void Main (string[] args)
         {
             ParseArguments(args);
@@ -53,13 +55,27 @@ namespace SoftwareMonkeys.csAnt.SetUpFromLocalConsole
                 Console.WriteLine (DestinationPath);
                 Console.WriteLine ("");
 
-                var installer = new LocalInstaller(
-                    SourcePath,
-                    DestinationPath,
-                    PackageName,
-                    Overwrite
-                );
-                installer.Install();
+                // If it's a direct install then use the direct local installer
+                if (Direct)
+                {
+                    var installer = new DirectLocalInstaller(
+                        SourcePath,
+                        DestinationPath,
+                        Overwrite
+                    );
+
+                    installer.Install();
+                }
+                else
+                {
+                    var installer = new LocalInstaller(
+                        SourcePath,
+                        DestinationPath,
+                        PackageName,
+                        Overwrite
+                    );
+                    installer.Install();
+                }
             }
         }
 
@@ -182,6 +198,8 @@ namespace SoftwareMonkeys.csAnt.SetUpFromLocalConsole
                 "i",
                 "import"
             );
+
+            Direct = arguments.Contains("direct");
 
             if (Import)
             {

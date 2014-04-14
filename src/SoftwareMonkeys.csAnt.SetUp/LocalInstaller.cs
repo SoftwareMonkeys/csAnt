@@ -7,6 +7,10 @@ using SoftwareMonkeys.csAnt.Versions;
 
 namespace SoftwareMonkeys.csAnt.SetUp
 {
+    /// <summary>
+    /// The local installer uses the standard install system and copies files into the destination mimicking a package
+    /// and then that package is installed as usual. 
+    /// </summary>
     public class LocalInstaller : Installer
     {
         public FileFinder Finder { get; set; }
@@ -15,10 +19,13 @@ namespace SoftwareMonkeys.csAnt.SetUp
 
         public string DestinationPath { get;set; }
 
+        // TODO: Remove if not needed
         public string PackageName { get;set; }
-
+        
+        // TODO: Remove if not needed
         public bool Overwrite { get;set; }
-
+        
+        // TODO: Remove if not needed
         public static Version Version = new Version(0,0,0,0);
 
         public VersionManager Versions { get;set; }

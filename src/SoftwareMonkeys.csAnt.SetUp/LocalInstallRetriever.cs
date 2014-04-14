@@ -9,6 +9,9 @@ using System.Collections.Generic;
 
 namespace SoftwareMonkeys.csAnt.SetUp
 {
+    /// <summary>
+    /// Retrieves installation files from a local csAnt project using the [PackageName].nuspec file to determine which files to retrieve.
+    /// </summary>
     public class LocalInstallRetriever : BaseInstallerRetriever
     {
         public bool Overwrite { get;set; }
@@ -42,7 +45,12 @@ namespace SoftwareMonkeys.csAnt.SetUp
             if (!Directory.Exists (DestinationPath))
                 Directory.CreateDirectory (DestinationPath);
 
-            var patterns = GetPatternsFromPackage();
+            var patterns = GetFilePatterns();
+
+            Console.WriteLine("File patterns:");
+            foreach (var pattern in patterns)
+                Console.WriteLine("  " + pattern);
+            Console.WriteLine("");
 
             var files = FileFinder.FindFiles(SourcePath, patterns);
 
@@ -81,12 +89,13 @@ namespace SoftwareMonkeys.csAnt.SetUp
             }
         }
 
-        public string[] GetDefaultFilePatternList()
+        // TODO: Remove if not needed
+        /*public string[] GetDefaultFilePatternList()
         {
             return DefaultFiles.DefaultFilePatterns;
-        }
+        }*/
 
-        public string[] GetPatternsFromPackage()
+        public string[] GetFilePatterns()
         {
             var packageSpecFile = Path.Combine(SourcePath, "pkg/" + PackageName + ".nuspec");
 
@@ -94,6 +103,16 @@ namespace SoftwareMonkeys.csAnt.SetUp
 
             doc.Load(packageSpecFile);
 
+            var list = new List<string>();
+            
+            list.AddRange(GetFilePatternsFromNugetSpecFiles(doc));
+            list.AddRange(GetFilePatternsFromNugetSpecDependencies(doc));
+
+            return list.ToArray();
+        }
+
+        public string[] GetFilePatternsFromNugetSpecFiles(XmlDocument doc)
+        {
             var nodes = doc.SelectNodes("//files/file");
 
             var list = new List<string>();
@@ -101,6 +120,32 @@ namespace SoftwareMonkeys.csAnt.SetUp
             foreach (XmlNode node in nodes)
             {
                 list.Add(node.Attributes["src"].Value);
+            }
+
+            return list.ToArray();
+        }
+
+        public string[] GetFilePatternsFromNugetSpecDependencies(XmlDocument doc)
+        {
+            var nodes = doc.SelectNodes("//dependency");
+
+            var list = new List<string>();
+
+            foreach (XmlNode node in nodes)
+            {
+                var packageId = node.Attributes["id"].Value;
+
+                var version = node.Attributes["version"].Value;
+
+                // Remove any of the nuget special characters used with versions
+                version = version.Replace("[", "");
+                version = version.Replace("]", "");
+                version = version.Replace("(", "");
+                version = version.Replace(")", "");
+
+                var fullPattern = "lib/" + packageId + "." + version + "/**";
+
+                list.Add(fullPattern);
             }
 
             return list.ToArray();

@@ -23,11 +23,13 @@ namespace SoftwareMonkeys.csAnt.SetUp
             Console.WriteLine("Project directory:");
             Console.WriteLine(projectDirectory);
 
+            var name = "csAnt-setupfromlocal";
+
             // TODO: Should the project directory be set to Environment.CurrentDirectory?
             if (SoftwareMonkeys.csAnt.Processes.Platform.IsLinux)
-                Starter.Start("sh", "csAnt-setup-local.sh");
+                Starter.Start("sh", name + ".sh");
             else
-                Starter.Start("cscript", "csAnt-setup-local.vbs");
+                Starter.Start("cscript", name + ".vbs");
         }
 
         public override void Launch(string sourceDirectory, string projectDirectory)
@@ -39,11 +41,13 @@ namespace SoftwareMonkeys.csAnt.SetUp
             Console.WriteLine("Project directory:");
             Console.WriteLine(projectDirectory);
 
+            var name = "csAnt-setupfromlocal";
+
             // TODO: Should the project directory be set to Environment.CurrentDirectory?
             if (SoftwareMonkeys.csAnt.Processes.Platform.IsLinux)
-                Starter.Start("sh", "csAnt-setup-local.sh", sourceDirectory);
+                Starter.Start("sh", name + ".sh");
             else
-                Starter.Start("cscript", "csAnt-setup-local.vbs", sourceDirectory);
+                Starter.Start("cscript", name + ".vbs");
         }
     }
 }

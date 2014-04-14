@@ -12,12 +12,14 @@ namespace SoftwareMonkeys.csAnt.SetUp
 
         public void Retrieve(string source, string destination)
         {
+            var name = "csAnt-setupfromlocal";
+
             new FilesGrabber(
                 source,
                 destination
                 ).GrabOriginalFiles(
-                    "csAnt-setup-local.sh",
-                    "csAnt-setup-local.vbs"
+                    name + ".sh",
+                    name + ".vbs"
                 );
         }
     }
