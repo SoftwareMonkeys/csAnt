@@ -1,6 +1,7 @@
 libDir="lib"
 nugetFile="$libDir/nuget.exe"
 sourcePath="https://www.myget.org/F/softwaremonkeys/"
+nugetUrl="http://nuget.org/nuget.exe"
 
 echo ""
 echo "Setting up csAnt..."
@@ -16,7 +17,7 @@ fi
 # Get nuget
 if [ ! -f "$nugetFile" ]; then
     echo "Getting the nuget.exe file"
-    wget "http://nuget.org/nuget.exe" -O $nugetFile
+    wget nugetUrl -O $nugetFile
     echo "Done"
     echo ""
 fi
