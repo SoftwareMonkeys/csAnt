@@ -114,6 +114,5 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Sanity\" />
-    <Folder Include="Unit\" />
   </ItemGroup>
 </Project>
