@@ -8,233 +8,240 @@ using SoftwareMonkeys.csAnt.IO;
 
 namespace SoftwareMonkeys.csAnt.Tests
 {
-    public class NUnitTestRunner
-    {
-        public IScript Script { get;set; }
+	public class NUnitTestRunner
+	{
+		public IScript Script { get;set; }
 
-        public NUnitTestResultReturner Returner { get; set; }
+		public NUnitTestResultReturner Returner { get; set; }
 
-        public XmlResultFileNamer XmlFileNamer { get;set; }
+		public XmlResultFileNamer XmlFileNamer { get;set; }
 
-        public HtmlResultFileNamer HtmlFileNamer { get;set; }
+		public HtmlResultFileNamer HtmlFileNamer { get;set; }
 
-        public string Mode { get;set; }
+		public string Mode { get;set; }
 
-        /// <summary>
-        /// A value indicating whether to automatically finish up by generating results and returning them to the original project.
-        /// </summary>
-        public bool AutoFinish = true;
+		/// <summary>
+		/// A value indicating whether to automatically finish up by generating results and returning them to the original project.
+		/// </summary>
+		public bool AutoFinish = true;
 
-        public IConsoleWriter Console { get; set; }
-        
-        public IFileFinder FileFinder { get;set; }
-        
-        public NUnitTestRunner (
-            IScript script,
-            string mode
-        )
-            : this(
-                script,
-                new NUnitTestResultReturner(
-                    script
-                ),
-                mode
-            )
-        {
+		public IConsoleWriter Console { get; set; }
+		
+		public IFileFinder FileFinder { get;set; }
+		
+		public NUnitTestRunner (
+			IScript script,
+			string mode
+		)
+			: this(
+				script,
+				new NUnitTestResultReturner(
+					script
+				),
+				mode
+			)
+		{
 
-        }
-        public NUnitTestRunner (
-            IScript script,
-            NUnitTestResultReturner returner,
-            string mode
-        )
-            : this(
-                script,
-                returner,
-                new XmlResultFileNamer(),
-                new HtmlResultFileNamer(),
-                mode
-            )
-        {
-        }
+		}
+		public NUnitTestRunner (
+			IScript script,
+			NUnitTestResultReturner returner,
+			string mode
+		)
+			: this(
+				script,
+				returner,
+				new XmlResultFileNamer(),
+				new HtmlResultFileNamer(),
+				mode
+			)
+		{
+		}
 
-        public NUnitTestRunner (
-            IScript script,
-            NUnitTestResultReturner returner,
-            XmlResultFileNamer xmlFileNamer,
-            HtmlResultFileNamer htmlFileNamer,
-            string mode
-        )
-        {
-            Script = script;
-            Returner = returner;
-            Mode = mode;
-            Console = Script.ConsoleWriter;
-            XmlFileNamer = xmlFileNamer;
-            HtmlFileNamer = htmlFileNamer;
-            FileFinder = new FileFinder();
-        }
-        
-        public void RunTests ()
-        {
-            var dir = Script.CurrentDirectory
-                    + Path.DirectorySeparatorChar
-                    + "bin"
-                    + Path.DirectorySeparatorChar
-                    + "Release";
+		public NUnitTestRunner (
+			IScript script,
+			NUnitTestResultReturner returner,
+			XmlResultFileNamer xmlFileNamer,
+			HtmlResultFileNamer htmlFileNamer,
+			string mode
+		)
+		{
+			Script = script;
+			Returner = returner;
+			Mode = mode;
+			Console = Script.ConsoleWriter;
+			XmlFileNamer = xmlFileNamer;
+			HtmlFileNamer = htmlFileNamer;
+			FileFinder = new FileFinder();
+		}
+		
+		public void RunTests ()
+		{
+			var dir = Script.CurrentDirectory
+				+ Path.DirectorySeparatorChar
+				+ "bin"
+				+ Path.DirectorySeparatorChar
+				+ "Release";
 
-            RunTestsInDirectory(dir);
-        }
+			RunTestsInDirectory(dir);
+		}
 
-        public void RunTestsInDirectory (string directory)
-        {
-            RunTestsInDirectory(directory, new string[]{});
-        }
+		public void RunTestsInDirectory (string directory)
+		{
+			RunTestsInDirectory(directory, new string[]{});
+		}
 
-        public void RunTestsInDirectory (string directory, params string[] testNames)
-        {
-            EnsureDirectories ();
-    
-            Console.WriteLine ("Test assemblies:");
+		public void RunTestsInDirectory (string directory, params string[] testNames)
+		{
+			EnsureDirectories ();
+			
+			Console.WriteLine ("Test assemblies:");
 
-            List<string> executedAssemblies = new List<string> ();
-            
-            var extensions = new string[]{
-                "*.dll",
-                "*.exe"
-            };
+			List<string> executedAssemblies = new List<string> ();
+			
+			var extensions = new string[]{
+				"*.dll",
+				"*.exe"
+			};
 
-            foreach (string assemblyFile in FileFinder.FindFiles(directory, extensions)) {
-                if (AssemblyContainsTestFixtures (assemblyFile, testNames)) {
-                    var assemblyFileName = Path.GetFileName (assemblyFile);
+			foreach (string assemblyFile in FileFinder.FindFiles(directory, extensions)) {
+				if (AssemblyContainsTestFixtures (assemblyFile, testNames)) {
+					var assemblyFileName = Path.GetFileName (assemblyFile);
 
-                    if (!executedAssemblies.Contains (assemblyFileName)) {
-                        executedAssemblies.Add (
-                                        assemblyFileName
-                        );
-                                
-                        Console.WriteLine (assemblyFile);
+					if (!executedAssemblies.Contains (assemblyFileName)) {
+						executedAssemblies.Add (
+							assemblyFileName
+						);
+						
+						Console.WriteLine (assemblyFile);
 
-                        if (testNames != null && testNames.Length > 0) {
-                            foreach (var name in testNames)
-                                RunAssemblyTests (assemblyFile, name);
-                        } else
-                            RunAssemblyTests (assemblyFile, String.Empty);
-                    }
-                }
-            }
+						if (testNames != null && testNames.Length > 0) {
+							foreach (var name in testNames)
+								RunAssemblyTests (assemblyFile, name);
+						} else
+							RunAssemblyTests (assemblyFile, String.Empty);
+					}
+				}
+			}
 
-            if (AutoFinish) {
-                Finish();
-            }
-        }
+			if (AutoFinish) {
+				Finish();
+			}
+		}
 
-        public void Finish()
-        {
-            GenerateResults ();
+		public void Finish()
+		{
+			GenerateResults ();
 
-            ReturnResults ();
-        }
+			ReturnResults ();
+		}
 
-        public void ReturnResults()
-        {
-            Returner.ReturnResults();
-        }
+		public void ReturnResults()
+		{
+			Returner.ReturnResults();
+		}
 
-        public bool AssemblyContainsTestFixtures (string assemblyFile, string[] testNames)
-        {
-            var a = Assembly.LoadFrom (assemblyFile);
+		public bool AssemblyContainsTestFixtures (string assemblyFile, string[] testNames)
+		{
+			try
+			{
+				var a = Assembly.LoadFrom (assemblyFile);
 
-            bool does = false;
+				bool does = false;
 
-            foreach (var t in a.GetTypes()) {
-                if (t.GetCustomAttributes(typeof(TestFixtureAttribute), true).Length > 0)
-                {
-                    if (testNames == null
-                        || testNames.Length == 0)
-                        does = true;
-                    else
-                    {
-                        foreach (var name in testNames)
-                        {
-                            if (t.FullName == name)
-                                does = true;
-                        }
-                    }
-                }
-            }
+				foreach (var t in a.GetTypes()) {
+					if (t.GetCustomAttributes(typeof(TestFixtureAttribute), true).Length > 0)
+					{
+						if (testNames == null
+						    || testNames.Length == 0)
+							does = true;
+						else
+						{
+							foreach (var name in testNames)
+							{
+								if (t.FullName == name)
+									does = true;
+							}
+						}
+					}
+				}
 
-            return does;
-        }
+				return does;
+			}
+			catch(Exception)
+			{
+				return false;
+			}
+		}
 
-        public void RunAssemblyTests(string assemblyFile, string testName)
-        {
-            string assemblyFileName = Path.GetFileName(assemblyFile);
+		public void RunAssemblyTests(string assemblyFile, string testName)
+		{
+			string assemblyFileName = Path.GetFileName(assemblyFile);
 
-            string xmlResult = XmlFileNamer.GetResultsDirectory(Script)
-                    + Path.DirectorySeparatorChar
-                    + Path.GetFileNameWithoutExtension(assemblyFileName).Replace(".", "-")
-                    + ".xml";
-                    
-            if (!Directory.Exists(Path.GetDirectoryName(xmlResult)))
-                Directory.CreateDirectory(Path.GetDirectoryName(xmlResult));
+			string xmlResult = XmlFileNamer.GetResultsDirectory(Script)
+				+ Path.DirectorySeparatorChar
+				+ Path.GetFileNameWithoutExtension(assemblyFileName).Replace(".", "-")
+				+ ".xml";
+			
+			if (!Directory.Exists(Path.GetDirectoryName(xmlResult)))
+				Directory.CreateDirectory(Path.GetDirectoryName(xmlResult));
 
-            string command = "mono";
+			string command = "mono";
 
-            List<string> arguments = new List<string>();
+			List<string> arguments = new List<string>();
 
-            arguments.Add("--runtime=v4.0");
+			arguments.Add("--runtime=v4.0");
 
-            arguments.Add("lib/NUnit/bin/nunit-console.exe");
+			arguments.Add("lib/NUnit/bin/nunit-console.exe");
 
-            arguments.Add("\"" + assemblyFile + "\"");
+			arguments.Add("\"" + assemblyFile + "\"");
 
-            arguments.Add("-xml=\"" + xmlResult + "\"");
+			arguments.Add("-xml=\"" + xmlResult + "\"");
 
-            if (!String.IsNullOrEmpty(testName))
-                arguments.Add ("-run=" + testName);
+			if (!String.IsNullOrEmpty(testName))
+				arguments.Add ("-run=" + testName);
 
-            Script.StartProcess(
-                    command,
-                    arguments.ToArray()
-            );
+			Script.StartProcess(
+				command,
+				arguments.ToArray()
+			);
 
-        }
+		}
 
-        public void GenerateResults ()
-        {
-            var xmlResultDir = XmlFileNamer.GetResultsDirectory (Script)
-                + Path.DirectorySeparatorChar;
+		public void GenerateResults ()
+		{
+			var xmlResultDir = XmlFileNamer.GetResultsDirectory (Script)
+				+ Path.DirectorySeparatorChar;
 
-            string htmlResultDir = HtmlFileNamer.GetResultsDirectory (Script);
-                        
-            List<string> arguments = new List<string> ();
+			string htmlResultDir = HtmlFileNamer.GetResultsDirectory (Script);
+			
+			List<string> arguments = new List<string> ();
 
-            arguments.Add ("lib/NUnitResults/nunit-results.exe");
+			arguments.Add ("lib/NUnitResults/nunit-results.exe");
 
-            arguments.Add ("\"" + xmlResultDir + "\"");
+			arguments.Add ("\"" + xmlResultDir + "\"");
 
-            arguments.Add ("\"" + htmlResultDir + "\"");
+			arguments.Add ("\"" + htmlResultDir + "\"");
 
-            Script.StartProcess (
-                        "mono",
-                        arguments.ToArray ()
-            );
-        }
+			Script.StartProcess (
+				"mono",
+				arguments.ToArray ()
+			);
+		}
 
-        public void EnsureDirectories ()
-        {
-            var xmlResultDir = XmlFileNamer.GetResultsDirectory (Script);
+		public void EnsureDirectories ()
+		{
+			var xmlResultDir = XmlFileNamer.GetResultsDirectory (Script);
 
-            if (!Directory.Exists (xmlResultDir))
-                Directory.CreateDirectory (xmlResultDir);
+			if (!Directory.Exists (xmlResultDir))
+				Directory.CreateDirectory (xmlResultDir);
 
-            var htmlResultDir = HtmlFileNamer.GetResultsDirectory (Script);
+			var htmlResultDir = HtmlFileNamer.GetResultsDirectory (Script);
 
-            if (!Directory.Exists (htmlResultDir))
-                Directory.CreateDirectory (htmlResultDir);
+			if (!Directory.Exists (htmlResultDir))
+				Directory.CreateDirectory (htmlResultDir);
 
-        }
-    }
+		}
+	}
 }
 
