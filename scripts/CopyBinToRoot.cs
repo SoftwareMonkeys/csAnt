@@ -57,7 +57,8 @@ class CopyBinToRootScript : BaseProjectScript
 			        + toFile.Replace(ProjectDirectory, "")
 		        );
 
-                var isNewer = File.GetLastWriteTime(file) > File.GetLastWriteTime(toFile);
+                var isNewer = !File.Exists(toFile)
+                    || File.GetLastWriteTime(file) > File.GetLastWriteTime(toFile);
 
                 if (!File.Exists(toFile) || isNewer)
                 {

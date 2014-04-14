@@ -58,6 +58,8 @@ class CopyBinToLibScript : BaseProjectScript
 		        try
 		        {
 
+                    var timeStamp = File.GetLastWriteTime(file);
+
 // TODO: Remove if not needed
                     // If the to file exists then move it to a temporary directory so it can keep running while the new assembly is copied into place
                     // This should prevent errors with overwriting a running executable
@@ -73,12 +75,13 @@ class CopyBinToLibScript : BaseProjectScript
                         File.Move(toFile, tmpFile);
                     }
                        
-                    var isNewer = File.GetLastWriteTime(file) > File.GetLastWriteTime(toFile);
+                    var isNewer = !File.Exists(toFile)
+                        || File.GetLastWriteTime(file) > File.GetLastWriteTime(toFile);
 
                     if (!File.Exists(toFile) || isNewer)
                     {
         		        File.Copy(file, toFile, true);
-                        File.SetLastWriteTime(toFile, File.GetLastWriteTime(file));
+                        File.SetLastWriteTime(toFile, timeStamp);
         		        i++;
                     }
                     else
