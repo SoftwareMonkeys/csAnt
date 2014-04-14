@@ -11,8 +11,9 @@ using SoftwareMonkeys.csAnt.IO;
 using SoftwareMonkeys.csAnt.Projects;
 using SoftwareMonkeys.csAnt.Projects.Tests;
 using SoftwareMonkeys.csAnt.Projects.Tests.Scripting;
+using SoftwareMonkeys.csAnt.Projects.Tests.Scripting.Live;
 
-class Test_SetUpScript : BaseProjectTestScript
+class Test_SetUpScript : BaseLiveProjectTestScript
 {
 	public static void Main(string[] args)
 	{
@@ -24,20 +25,8 @@ class Test_SetUpScript : BaseProjectTestScript
 		// TODO: Better organize this script
 
 		Console.WriteLine("");
-		Console.WriteLine("Testing setup from web...");
+		Console.WriteLine("Testing setup (live)...");
 		Console.WriteLine("");
-
-		// TODO: Launch a http server and test against it, to remove the dependency of having a live server
-
-		/*StartHttp(
-			CurrentDirectory,
-			"localhost",
-			8089
-		);
-
-		StartNewProcess("http://localhost:8089/readme.txt");
-
-		Thread.Sleep(5000);*/
 
 		var setUpExeFile = OriginalDirectory
 			+ Path.DirectorySeparatorChar

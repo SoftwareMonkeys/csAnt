@@ -12,9 +12,10 @@ using SoftwareMonkeys.csAnt.IO;
 using SoftwareMonkeys.csAnt.Projects;
 using SoftwareMonkeys.csAnt.Projects.Tests;
 using SoftwareMonkeys.csAnt.Projects.Tests.Scripting;
+using SoftwareMonkeys.csAnt.Projects.Tests.Scripting.Live;
 using NUnit.Framework;
 
-class Test_SetUpScript : BaseProjectTestScript
+class Test_SetUpScript : BaseLiveProjectTestScript
 {
 	public static void Main(string[] args)
 	{

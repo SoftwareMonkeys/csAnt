@@ -13,10 +13,11 @@ using SoftwareMonkeys.csAnt.IO;
 using SoftwareMonkeys.csAnt.Projects;
 using SoftwareMonkeys.csAnt.Projects.Tests;
 using SoftwareMonkeys.csAnt.Projects.Tests.Scripting;
+using SoftwareMonkeys.csAnt.Projects.Tests.Scripting.Live;
 using SoftwareMonkeys.csAnt.SetUp;
 using NUnit.Framework;
 
-class Test_Live_Update : BaseProjectTestScript
+class Test_Live_Update : BaseLiveProjectTestScript
 {
 	public static void Main(string[] args)
 	{

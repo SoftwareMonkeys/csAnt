@@ -15,11 +15,12 @@ using SoftwareMonkeys.csAnt.IO;
 using SoftwareMonkeys.csAnt.Projects;
 using SoftwareMonkeys.csAnt.Projects.Tests;
 using SoftwareMonkeys.csAnt.Projects.Tests.Scripting;
+using SoftwareMonkeys.csAnt.Projects.Tests.Scripting.Live;
 using SoftwareMonkeys.csAnt.Projects.Tests.Helpers;
 using SoftwareMonkeys.csAnt.SourceControl.Git;
 using SoftwareMonkeys.csAnt.SetUp;
 
-class Test_SetUpFromGitScript : BaseProjectTestScript
+class Test_SetUpFromGitScript : BaseLiveProjectTestScript
 {
 	public static void Main(string[] args)
 	{
