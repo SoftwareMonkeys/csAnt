@@ -30,9 +30,16 @@ class RunTestsScript : BaseScript
 	
 	public void RunTests()
 	{
+        Console.WriteLine("");
+        Console.WriteLine("Running tests...");
+        Console.WriteLine("");
+
         var binTestsDir = CurrentDirectory
 			+ Path.DirectorySeparatorChar
 			+ "bin-tests";
+
+        Console.WriteLine("Bin tests dir:");
+        Console.WriteLine(binTestsDir);
 
 		// Move all the files into a new location where the tests can run
 		// (without doing this, the scripts don't execute as tests because the general csAnt binaries aren't in the same folder)
@@ -71,11 +78,15 @@ class RunTestsScript : BaseScript
 
 		EnsureDirectoryExists(workingDir);
 
+        Console.WriteLine("Copying bin files to test bin directory:");
+
 		foreach (var f1 in Directory.GetFiles(binDir))
 		{
 			var t1 = workingDir
 				+ Path.DirectorySeparatorChar
 				+ Path.GetFileName(f1);
+
+            Console.WriteLine(ToRelative(t1));
 
 			File.Copy(f1, t1, true);
 		}
@@ -86,6 +97,7 @@ class RunTestsScript : BaseScript
 				+ Path.DirectorySeparatorChar
 				+ Path.GetFileName(f2);
 
+            Console.WriteLine(ToRelative(t2));
 			File.Copy(f2, t2, true);
 		}
 
