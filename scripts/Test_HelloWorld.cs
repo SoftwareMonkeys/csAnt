@@ -1,13 +1,3 @@
-<<<<<<< HEAD
-=======
-//css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.dll;
-//css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.Tests.dll;
-//css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.Tests.Scripting.dll;
-//css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.IO.dll;
-//css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.IO.Contracts.dll;
-//css_ref ../lib/NUnit.2.6.0.12051/lib/nunit.framework.dll;
-
->>>>>>> master
 using System;
 using System.IO;
 using Microsoft.CSharp;
@@ -28,11 +18,11 @@ public class Test_HelloWorldScript : BaseTestScript
 	
 	public override bool Run(string[] args)
 	{
-	        new FilesGrabber(
-                    OriginalDirectory,
-                    CurrentDirectory,
-		    		IsVerbose
-                ).GrabOriginalScriptingFiles();
+        new FilesGrabber(
+            OriginalDirectory,
+            CurrentDirectory,
+    		IsVerbose
+        ).GrabOriginalScriptingFiles();
 	
 		ExecuteScript("HelloWorld");
 
