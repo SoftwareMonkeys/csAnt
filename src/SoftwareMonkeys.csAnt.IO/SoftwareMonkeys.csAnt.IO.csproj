@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -25,6 +25,7 @@
     <ConsolePause>false</ConsolePause>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>SoftwareMonkeys.csAnt.IO.snk</AssemblyOriginatorKeyFile>
+    <BaseIntermediateOutputPath>obj\</BaseIntermediateOutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>full</DebugType>
@@ -38,11 +39,16 @@
     <AssemblyOriginatorKeyFile>SoftwareMonkeys.csAnt.IO.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
-    <DebugType>Full</DebugType>
-    <Optimize>False</Optimize>
+    <DebugType>none</DebugType>
+    <Optimize>false</Optimize>
     <OutputPath>..\..\bin\x86\Debug</OutputPath>
     <WarningLevel>4</WarningLevel>
     <PlatformTarget>x86</PlatformTarget>
+    <BaseIntermediateOutputPath>obj\</BaseIntermediateOutputPath>
+    <BaseAddress>4194304</BaseAddress>
+    <RegisterForComInterop>False</RegisterForComInterop>
+    <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
+    <FileAlignment>4096</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <DebugType>none</DebugType>
@@ -50,6 +56,10 @@
     <OutputPath>..\..\bin\x86\Release</OutputPath>
     <WarningLevel>4</WarningLevel>
     <PlatformTarget>x86</PlatformTarget>
+    <BaseAddress>4194304</BaseAddress>
+    <RegisterForComInterop>False</RegisterForComInterop>
+    <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
+    <FileAlignment>4096</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
@@ -64,25 +74,39 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="ICSharpCode.SharpZipLib">
-      <HintPath>..\..\lib\SharpZipLib\net-20\ICSharpCode.SharpZipLib.dll</HintPath>
+      <HintPath>..\..\lib\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="FileFinder.cs" />
     <Compile Include="FileFinderNotInitializedException.cs" />
-    <Compile Include="IOUtility.cs" />
     <Compile Include="FileFinderOutput.cs" />
     <Compile Include="TemporaryDirectoryCreator.cs" />
     <Compile Include="Compression\FileZipper.cs" />
     <Compile Include="FilesGrabber.cs" />
     <Compile Include="DirectoryMover.cs" />
+    <Compile Include="FileDownloader.cs" />
+    <Compile Include="DirectoryChecker.cs" />
+    <Compile Include="FileBackup.cs" />
+    <Compile Include="FileSync.cs" />
+    <Compile Include="DynamicLinq.cs" />
+    <Compile Include="FileNavigator.cs" />
+    <Compile Include="PathConverter.cs" />
+    <Compile Include="Platform.cs" />
+    <Compile Include="FileCopier.cs" />
+    <Compile Include="TextReplacer.cs" />
+    <Compile Include="FileFormat.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <Folder Include="Compression\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SoftwareMonkeys.csAnt.SourceControl.Git\SoftwareMonkeys.csAnt.SourceControl.Git.csproj">
+      <Project>{94578333-F8C9-40C0-9300-8D808ED1CD7A}</Project>
+      <Name>SoftwareMonkeys.csAnt.SourceControl.Git</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SoftwareMonkeys.csAnt.IO.Contracts\SoftwareMonkeys.csAnt.IO.Contracts.csproj">
       <Project>{53E3AFEA-3627-4846-B2E4-5A8091E96BC6}</Project>
       <Name>SoftwareMonkeys.csAnt.IO.Contracts</Name>

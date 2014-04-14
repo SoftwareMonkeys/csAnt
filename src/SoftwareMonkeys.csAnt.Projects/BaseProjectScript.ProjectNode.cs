@@ -54,7 +54,7 @@ namespace SoftwareMonkeys.csAnt.Projects
 			
 			// Step up the directories looking for .node file
 			while (!foundPropertiesFile
-			       || dir.IndexOf('/') == dir.LastIndexOf('/'))
+			       || dir.IndexOf(Path.DirectorySeparatorChar) == dir.LastIndexOf(Path.DirectorySeparatorChar))
 			{
 				dir = Path.GetDirectoryName(dir);
 				

@@ -2,6 +2,7 @@ using System;
 using SoftwareMonkeys.csAnt.Commands;
 using System.IO;
 using System.Collections.Generic;
+using System.Text;
 
 namespace SoftwareMonkeys.csAnt.Projects
 {
@@ -63,11 +64,11 @@ namespace SoftwareMonkeys.csAnt.Projects
                 var version = Script.CurrentNode.Properties.ContainsKey("Version")
                     ? Script.CurrentNode.Properties["Version"]
                     : "0.0.0.0";
-                
+
                 var zipFileName = Script.ProjectName
                     + "-"
                     + variation
-                    + "-"
+                    + "--"
                     + version.Replace (".", "-")
                     + "-"
                     + dateStamp

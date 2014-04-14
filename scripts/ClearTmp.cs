@@ -18,7 +18,7 @@ class ClearTmpScript : BaseProjectScript
 		Console.WriteLine("Clearing tmp files...");
 		Console.WriteLine("");
 
-                ClearTmp();
+        ClearTmp();
 
 		return !IsError;
 	}

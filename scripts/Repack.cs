@@ -1,7 +1,5 @@
 using System;
 using System.IO;
-using Microsoft.CSharp;
-using System.Diagnostics;
 using SoftwareMonkeys.csAnt;
 
 class RepackScript : BaseScript
@@ -13,14 +11,26 @@ class RepackScript : BaseScript
 	
 	public override bool Run(string[] args)
 	{
-		//ExecuteScript("EnsureBuild");
+        Console.WriteLine("");
+        Console.WriteLine("Repacking assemblies...");
+        Console.WriteLine("");
 
-                foreach (var script in FindScripts("Repack-*.cs"))
-                {
-                    Console.WriteLine(script);
+        var arguments = new Arguments(args);
 
-                    ExecuteScript(script);
-                }
+        var buildMode = "Release";
+        if (arguments.Contains("mode"))
+            buildMode = arguments["mode"];
+
+        Console.WriteLine("Build mode:");
+        Console.WriteLine(buildMode);
+        Console.WriteLine("");
+
+        foreach (var script in FindScripts("Repack-*.cs"))
+        {
+            Console.WriteLine(script);
+
+            ExecuteScript(script, "-mode=" + buildMode);
+        }
 
 		return !IsError;
 	}

@@ -19,7 +19,9 @@ class SetVersionScript : BaseProjectScript
 	
 	public override bool Run(string[] args)
 	{
-    		var versionString = args[0];
+  		var versionString = args[0];
+
+        var commit = Arguments.ContainsAny("c", "commit");
 
 		Version version = null;
 
@@ -33,6 +35,9 @@ class SetVersionScript : BaseProjectScript
 		}
 
 		SetVersion(version);
+
+        if (commit)
+            ExecuteScript("CommitVersion");
 
 		return !IsError;
 	}

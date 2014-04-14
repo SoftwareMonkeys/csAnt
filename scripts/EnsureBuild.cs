@@ -1,4 +1,3 @@
-//css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.dll;
 using System;
 using System.IO;
 using Microsoft.CSharp;
@@ -16,6 +15,10 @@ class EnsureBuildScript : BaseScript
 	
 	public override bool Run(string[] args)
 	{
+        var buildMode = "Release";
+        if (Arguments.Contains("mode"))
+            buildMode = Arguments["mode"];
+
 		var timeStampsData = GetTimeStampsData();
 
 		var latestTimeStamps = GetLatestTimeStamps();
@@ -37,18 +40,6 @@ class EnsureBuildScript : BaseScript
 			{
 				var key = entry.Key;
 
-				/*var key2 = latestTimeStamps.Keys.ElementAt(i);
-
-				if (key1 != key2)
-				{
-					Console.WriteLine("Files don't match (likely one was added or removed:");
-					Console.WriteLine("File 1: " + key1);
-					Console.WriteLine("File 2: " + key2);
-
-					needsBuild = true;
-					break;
-				}*/
-
 				var timeStamp1 = timeStampsData[key];
 
 				var timeStamp2 = latestTimeStamps[key];
@@ -69,7 +60,7 @@ class EnsureBuildScript : BaseScript
 
 		if (needsBuild)
 		{
-			ExecuteScript("CycleBuild");
+			ExecuteScript("CycleBuild", "-mode=" + buildMode);
 
 			WriteTimeStampsData(latestTimeStamps);
 		}
@@ -120,10 +111,17 @@ class EnsureBuildScript : BaseScript
 
 		foreach (var file in files)
 		{
-			timeStamps.Add(
-				file.Replace(CurrentDirectory, ""),
-				File.GetLastWriteTime(file).ToString()
-			);
+			var objKey = Path.DirectorySeparatorChar
+				+ "obj"
+				+ Path.DirectorySeparatorChar;
+
+			if (file.IndexOf(objKey) == -1)
+			{
+				timeStamps.Add(
+					file.Replace(CurrentDirectory, ""),
+					File.GetLastWriteTime(file).ToString()
+				);
+			}
 		}
 
 		return timeStamps;

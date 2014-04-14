@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -26,6 +26,7 @@
     <ConsolePause>false</ConsolePause>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>SoftwareMonkeys.csAnt.snk</AssemblyOriginatorKeyFile>
+    <BaseIntermediateOutputPath>obj\</BaseIntermediateOutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>full</DebugType>
@@ -39,11 +40,16 @@
     <AssemblyOriginatorKeyFile>SoftwareMonkeys.csAnt.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
-    <DebugType>Full</DebugType>
-    <Optimize>False</Optimize>
+    <DebugType>none</DebugType>
+    <Optimize>false</Optimize>
     <OutputPath>..\..\bin\x86\Debug</OutputPath>
     <WarningLevel>4</WarningLevel>
     <PlatformTarget>x86</PlatformTarget>
+    <BaseIntermediateOutputPath>obj\</BaseIntermediateOutputPath>
+    <BaseAddress>4194304</BaseAddress>
+    <RegisterForComInterop>False</RegisterForComInterop>
+    <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
+    <FileAlignment>4096</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <DebugType>none</DebugType>
@@ -51,6 +57,10 @@
     <OutputPath>..\..\bin\x86\Release</OutputPath>
     <WarningLevel>4</WarningLevel>
     <PlatformTarget>x86</PlatformTarget>
+    <BaseAddress>4194304</BaseAddress>
+    <RegisterForComInterop>False</RegisterForComInterop>
+    <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
+    <FileAlignment>4096</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
@@ -64,23 +74,22 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="ICSharpCode.SharpZipLib">
-      <HintPath>..\..\lib\SharpZipLib\net-20\ICSharpCode.SharpZipLib.dll</HintPath>
-    </Reference>
     <Reference Include="CSScriptLibrary">
-      <HintPath>..\..\lib\cs-script\Lib\Bin\NET 4.0\CSScriptLibrary.dll</HintPath>
-    </Reference>
-    <Reference Include="HtmlAgilityPack">
-      <HintPath>..\..\lib\HtmlAgilityPack\Net40\HtmlAgilityPack.dll</HintPath>
+      <HintPath>..\..\lib\CS-Script.3.7.2.0\lib\net40\CSScriptLibrary.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml" />
+    <Reference Include="ICSharpCode.SharpZipLib">
+      <HintPath>..\..\lib\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="HtmlAgilityPack">
+      <HintPath>..\..\lib\HtmlAgilityPack.1.4.6\lib\Net40\HtmlAgilityPack.dll</HintPath>
+    </Reference>
     <Reference Include="SoftwareMonkeys.FileNodes">
-      <HintPath>..\..\lib\FileNodes\bin\Release\SoftwareMonkeys.FileNodes.dll</HintPath>
+      <HintPath>..\..\lib\FileNodes.0.5.3.200\bin\Release\SoftwareMonkeys.FileNodes.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
-    <Compile Include="BaseScript.AddLib.cs" />
     <Compile Include="BaseScript.Arguments.cs" />
     <Compile Include="BaseScript.BackupFile.cs" />
     <Compile Include="BaseScript.BaseNode.cs" />
@@ -109,11 +118,6 @@
     <Compile Include="BaseScript.GetTimeStamp.cs" />
     <Compile Include="BaseScript.GetTmpDir.cs" />
     <Compile Include="BaseScript.GetTmpFile.cs" />
-    <Compile Include="BaseScript.Git.cs" />
-    <Compile Include="BaseScript.GitAdd.cs" />
-    <Compile Include="BaseScript.GitClone.cs" />
-    <Compile Include="BaseScript.GitCommit.cs" />
-    <Compile Include="BaseScript.GitInit.cs" />
     <Compile Include="BaseScript.IsError.cs" />
     <Compile Include="BaseScript.IsHelp.cs" />
     <Compile Include="BaseScript.IsLinux.cs" />
@@ -137,34 +141,24 @@
     <Compile Include="BaseScript.Zip.cs" />
     <Compile Include="ConsoleWriter.cs" />
     <Compile Include="Arguments.cs" />
-    <Compile Include="Commands\AddLibCommand.cs" />
     <Compile Include="Commands\BackupFileCommand.cs" />
     <Compile Include="Commands\BaseScriptCommand.cs" />
     <Compile Include="Commands\DownloadAndUnzipCommand.cs" />
-    <Compile Include="Commands\DownloadCommand.cs" />
-    <Compile Include="Commands\GetLibCommand.cs" />
     <Compile Include="Commands\HelloWorldCommand.cs" />
-    <Compile Include="Commands\StartProcessCommand.cs" />
-    <Compile Include="DynamicLinq.cs" />
     <Compile Include="BaseScript.SubProcesses.cs" />
     <Compile Include="BaseScript.GetTmpRoot.cs" />
     <Compile Include="BaseScript.GetScript.cs" />
     <Compile Include="ExpectedArgumentAttribute.cs" />
     <Compile Include="Commands\StartNewProcessCommand.cs" />
     <Compile Include="BaseScript.Sync.cs" />
-    <Compile Include="BaseScript.GitPush.cs" />
     <Compile Include="BaseScript.SetUp.cs" />
     <Compile Include="BaseScript.TearDown.cs" />
     <Compile Include="BaseScript.Start.cs" />
     <Compile Include="BaseScript.FixScriptName.cs" />
     <Compile Include="BaseScript.TimeStamp.cs" />
-    <Compile Include="BaseScript.GetIndentSpace.cs" />
-    <Compile Include="BaseScript.ActivateScript.cs" />
     <Compile Include="Script.cs" />
-    <Compile Include="BaseScript.GitPull.cs" />
     <Compile Include="BaseScript.ToRelative.cs" />
     <Compile Include="BaseScript.ToAbsolute.cs" />
-    <Compile Include="BaseScript.GitAddRemote.cs" />
     <Compile Include="BaseScript.LibExists.cs" />
     <Compile Include="BaseScript.IsDebug.cs" />
     <Compile Include="BaseScript.Relocate.cs" />
@@ -196,28 +190,15 @@
     <Compile Include="ScriptStackDetector.cs" />
     <Compile Include="ScriptNotFoundException.cs" />
     <Compile Include="BaseScript.RefreshCurrentNode.cs" />
-    <Compile Include="BaseScript.ActivateScriptAt.cs" />
     <Compile Include="BaseScript.GetScriptAt.cs" />
     <Compile Include="BaseScript.ToString.cs" />
     <Compile Include="BaseScript.CompileScripts.cs" />
     <Compile Include="BaseScript.GetBuildMode.cs" />
-    <Compile Include="BaseScript.ImportStagingDirectory.cs" />
-    <Compile Include="BaseScript.GetImportStagingDirectory.cs" />
     <Compile Include="BaseScript.RaiseEvent.cs" />
     <Compile Include="BaseScript.FindScripts.cs" />
     <Compile Include="BaseScript.GetEventScripts.cs" />
-    <Compile Include="BaseScript.AddImport.cs" />
-    <Compile Include="BaseScript.AddImportPattern.cs" />
-    <Compile Include="BaseScript.ImportExists.cs" />
-    <Compile Include="BaseScript.ImportFile.cs" />
-    <Compile Include="BaseScript.ImportRefresh.cs" />
-    <Compile Include="BaseScript.ImportSync.cs" />
     <Compile Include="BaseScript.CreateNodes.cs" />
     <Compile Include="BaseScript.CreateNode.cs" />
-    <Compile Include="BaseScript.ExportFile.cs" />
-    <Compile Include="Commands\UnzipCommand.cs" />
-    <Compile Include="Commands\ZipCommand.cs" />
-    <Compile Include="PackageManagerNotInitializedException.cs" />
     <Compile Include="BaseScript.FileFinder.cs" />
     <Compile Include="BaseScript.InitializeFileFinder.cs" />
     <Compile Include="BaseScript.CurrentDirectoryChanged.cs" />
@@ -236,10 +217,35 @@
     <Compile Include="NodeGetter.cs" />
     <Compile Include="BaseScript.Nodes.cs" />
     <Compile Include="BaseScript.InitializeNodeManager.cs" />
-    <Compile Include="BaseScript.ActivateScriptFromFile.cs" />
-    <Compile Include="BaseScript.ScriptAssembliesDirectory.cs" />
-    <Compile Include="BaseScript.GetScriptAssemblyPath.cs" />
     <Compile Include="BaseScript.VersionAndTimeStamp.cs" />
+    <Compile Include="BaseScript.AddLibNuget.cs" />
+    <Compile Include="BaseScript.AddLibUrl.cs" />
+    <Compile Include="LibraryGetter.cs" />
+    <Compile Include="LibraryLocalZipGetter.cs" />
+    <Compile Include="LibraryManager.cs" />
+    <Compile Include="LibraryNugetAdder.cs" />
+    <Compile Include="LibraryNugetGetter.cs" />
+    <Compile Include="LibraryOnlineZipGetter.cs" />
+    <Compile Include="LibraryUrlAdder.cs" />
+    <Compile Include="Platform.cs" />
+    <Compile Include="BaseScript.Importer.cs" />
+    <Compile Include="BaseScript.Git.cs" />
+    <Compile Include="Repacker.cs" />
+    <Compile Include="BaseScript.ExecuteScriptAt.cs" />
+    <Compile Include="BuildMode.cs" />
+    <Compile Include="ScriptExecutor.cs" />
+    <Compile Include="ScriptActivator.cs" />
+    <Compile Include="BaseScript.ScriptExecutor.cs" />
+    <Compile Include="ScriptStackWriter.cs" />
+    <Compile Include="ScriptFileNamer.cs" />
+    <Compile Include="ScriptCompiler.cs" />
+    <Compile Include="BaseScript.ScriptCompiler.cs" />
+    <Compile Include="Indenter.cs" />
+    <Compile Include="BaseScript.Indenter.cs" />
+    <Compile Include="ScriptEventRaiser.cs" />
+    <Compile Include="BaseScript.EventRaiser.cs" />
+    <Compile Include="ScriptFinder.cs" />
+    <Compile Include="BaseScript.ScriptFinder.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -255,8 +261,21 @@
       <Project>{53E3AFEA-3627-4846-B2E4-5A8091E96BC6}</Project>
       <Name>SoftwareMonkeys.csAnt.IO.Contracts</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Components\" />
+    <ProjectReference Include="..\SoftwareMonkeys.csAnt.Processes\SoftwareMonkeys.csAnt.Processes.csproj">
+      <Project>{DA236BEB-4C3A-4076-AB72-1AEE6DB82BEA}</Project>
+      <Name>SoftwareMonkeys.csAnt.Processes</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SoftwareMonkeys.csAnt.External.Nuget\SoftwareMonkeys.csAnt.External.Nuget.csproj">
+      <Project>{D88EE98D-5F35-4B0E-AC92-4029A1742204}</Project>
+      <Name>SoftwareMonkeys.csAnt.External.Nuget</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SoftwareMonkeys.csAnt.Imports\SoftwareMonkeys.csAnt.Imports.csproj">
+      <Project>{B34DA062-E44B-4044-AC28-D006FC66CCA7}</Project>
+      <Name>SoftwareMonkeys.csAnt.Imports</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SoftwareMonkeys.csAnt.SourceControl.Git\SoftwareMonkeys.csAnt.SourceControl.Git.csproj">
+      <Project>{94578333-F8C9-40C0-9300-8D808ED1CD7A}</Project>
+      <Name>SoftwareMonkeys.csAnt.SourceControl.Git</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>

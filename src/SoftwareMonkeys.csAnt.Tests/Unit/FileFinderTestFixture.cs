@@ -2,6 +2,7 @@ using System;
 using NUnit.Framework;
 using System.IO;
 using SoftwareMonkeys.csAnt.IO;
+using System.Collections.Generic;
 
 namespace SoftwareMonkeys.csAnt.Tests.Unit
 {
@@ -27,7 +28,7 @@ namespace SoftwareMonkeys.csAnt.Tests.Unit
 
 			var files = testScript.FindFiles(tmpDir, patterns);
 
-			Assert.AreEqual(1, files.Length, "Wrong number of files.");
+			Assert.AreEqual(1, new List<string>(files).Count, "Wrong number of files.");
 		}
 		
 		[Test]
@@ -39,25 +40,26 @@ namespace SoftwareMonkeys.csAnt.Tests.Unit
 				"**"
 			};
 
-			var dir = testScript.CurrentDirectory;
+			var dir = testScript.GetTmpDir();
 
-			var tmpFile = dir
-				+ Path.DirectorySeparatorChar
-				+ "test"
-				+ Path.DirectorySeparatorChar
-				+ "TestFile.txt";
+            var tmpFile = dir
+                + Path.DirectorySeparatorChar
+                + "test"
+                + Path.DirectorySeparatorChar
+                + "subdir"
+                + Path.DirectorySeparatorChar
+                + "TestFile.txt";
 
 			Console.WriteLine ("Tmp file: " + tmpFile);
 			
-			testScript.EnsureDirectoryExists(Path.GetDirectoryName(Path.GetDirectoryName(tmpFile)));
 			testScript.EnsureDirectoryExists(Path.GetDirectoryName(tmpFile));
 
-			File.WriteAllText(tmpFile, "Test content");
+            File.WriteAllText(tmpFile, "Test content");
 
 			// Should get the file even though it's in a sub directory
 			var files = testScript.FindFiles(dir, patterns);
 
-			Assert.AreEqual(1, files.Length, "Wrong number of files.");
+			Assert.AreEqual(1, new List<string>(files).Count, "Wrong number of files.");
 		}
 		
 		[Test]
@@ -69,7 +71,7 @@ namespace SoftwareMonkeys.csAnt.Tests.Unit
 				"**.txt"
 			};
 
-			var dir = testScript.CurrentDirectory;
+			var dir = testScript.GetTmpDir();
 
 			var tmpFile = dir
 				+ Path.DirectorySeparatorChar
@@ -85,7 +87,6 @@ namespace SoftwareMonkeys.csAnt.Tests.Unit
 
 			Console.WriteLine ("Tmp file: " + tmpFile);
 			
-			testScript.EnsureDirectoryExists(Path.GetDirectoryName(Path.GetDirectoryName(tmpFile)));
 			testScript.EnsureDirectoryExists(Path.GetDirectoryName(tmpFile));
 
 			File.WriteAllText(tmpFile, "Test content");
@@ -94,8 +95,36 @@ namespace SoftwareMonkeys.csAnt.Tests.Unit
 			// Should get the file even though it's in a sub directory
 			var files = testScript.FindFiles(dir, patterns);
 
-			Assert.AreEqual(1, files.Length, "Wrong number of files.");
+			Assert.AreEqual(1, new List<string>(files).Count, "Wrong number of files.");
 		}
+        
+        [Test]
+        public void Test_FindFiles_SubDirAndStarPattern()
+        {
+            var testScript = GetDummyScript();
+
+            var patterns = new string[]{
+                "test/*.txt"
+            };
+
+            var dir = testScript.GetTmpDir();
+
+            var tmpFile = dir
+                + Path.DirectorySeparatorChar
+                + "test"
+                + Path.DirectorySeparatorChar
+                + "TestFile.txt";
+
+            Console.WriteLine ("Tmp file: " + tmpFile);
+
+            testScript.EnsureDirectoryExists(Path.GetDirectoryName(tmpFile));
+
+            File.WriteAllText(tmpFile, "Test content");
+
+            var files = testScript.FindFiles(dir, patterns);
+
+            Assert.AreEqual(1, new List<string>(files).Count, "Wrong number of files.");
+        }
 		
 		[Test]
 		public void Test_FindFiles_StepUpOneLevel()
@@ -120,7 +149,7 @@ namespace SoftwareMonkeys.csAnt.Tests.Unit
 
 			var files = testScript.FindFiles(tmpSubDir, patterns);
 
-			Assert.AreEqual(1, files.Length, "Wrong number of files.");
+			Assert.AreEqual(1, new List<string>(files).Count, "Wrong number of files.");
 		}
 
         [Test]
@@ -142,7 +171,31 @@ namespace SoftwareMonkeys.csAnt.Tests.Unit
 
             Assert.AreEqual(pattern, fixedPattern, "Invalid pattern.");
         }
-        
+
+        [Test]
+        public void Test_FixPathAndPattern_PatternStartsWithSlash()
+        {
+            var path = WorkingDirectory;
+
+            var pattern = "/*.txt";
+
+            var fixedPath = path;
+
+            var fixedPattern = pattern;
+
+            var finder = new FileFinder();
+
+
+            finder.FixPathAndPattern(ref fixedPath, ref fixedPattern);
+
+            var expectedPath = path;
+
+            var expectedPattern = "*.txt";
+
+            Assert.AreEqual (expectedPath, fixedPath, "Invalid path.");
+
+            Assert.AreEqual(expectedPattern, fixedPattern, "Invalid pattern.");
+        }
 
         [Test]
         public void Test_FixPathAndPattern_StepUp()
@@ -166,6 +219,55 @@ namespace SoftwareMonkeys.csAnt.Tests.Unit
             Assert.AreEqual (expectedPath, fixedPath, "Invalid path.");
 
             Assert.AreEqual(expectedPattern, fixedPattern, "Invalid pattern.");
+        }		
+        
+        
+        [Test]
+        public void Test_Excluded()
+        {
+            var testScript = GetDummyScript();
+
+            var patterns = new string[]{
+                "!*.txt"
+            };
+
+            var tmpDir = testScript.GetTmpDir();
+
+            var tmpFile = tmpDir
+                + Path.DirectorySeparatorChar
+                    + "TestFile.txt";
+
+            File.WriteAllText(tmpFile, "Test content");
+
+            var fileFinder = new FileFinder();
+            var files = fileFinder.FindFiles(tmpDir, patterns);
+
+            Assert.AreEqual(0, new List<string>(files).Count, "Wrong number of files.");
+        }
+        
+        [Test]
+        public void Test_Excluded_Not()
+        {
+            var testScript = GetDummyScript();
+
+            var patterns = new string[]{
+                "*.txt",
+                "!*.cs"
+            };
+
+            var tmpDir = testScript.GetTmpDir();
+
+            var tmpFile = tmpDir
+                + Path.DirectorySeparatorChar
+                    + "TestFile.txt";
+
+            File.WriteAllText(tmpFile, "Test content");
+
+
+            var fileFinder = new FileFinder();
+            var files = fileFinder.FindFiles(tmpDir, patterns);
+
+            Assert.AreEqual(1, new List<string>(files).Count, "Wrong number of files.");
         }
 	}
 }

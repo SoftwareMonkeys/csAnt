@@ -24,6 +24,8 @@ namespace SoftwareMonkeys.csAnt.Tests
 
         public List<IScript> Scripts = new List<IScript>();
 
+        public BuildMode BuildMode = new BuildMode();
+
         /// <summary>
         /// A flag indicating whether to auto initialize the test.
         /// Initialization moves the test to a temporary directory, etc.
@@ -41,6 +43,8 @@ namespace SoftwareMonkeys.csAnt.Tests
 #else
             IsVerbose = false;
 #endif
+
+            Construct();
 		}
 
         public BaseTestFixture (bool autoSetUp)
@@ -50,6 +54,8 @@ namespace SoftwareMonkeys.csAnt.Tests
 #else
             IsVerbose = false;
 #endif
+            Construct();
+
             if (autoSetUp)
                 SetUp ();
         }

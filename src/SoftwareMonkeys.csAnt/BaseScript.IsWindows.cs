@@ -8,9 +8,8 @@ namespace SoftwareMonkeys.csAnt
 		{
 			get
 			{
-				return (Environment.OSVersion.Platform == PlatformID.Win32NT);
+				return Platform.IsWindows;
 			}
 		}
 	}
 }
-

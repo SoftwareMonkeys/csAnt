@@ -1,6 +1,7 @@
 using System;
 using ICSharpCode.SharpZipLib.Zip;
 using System.IO;
+using SoftwareMonkeys.csAnt.IO.Compression;
 
 namespace SoftwareMonkeys.csAnt
 {
@@ -22,13 +23,8 @@ namespace SoftwareMonkeys.csAnt
 		/// </param>
 		public void Zip(string zipFilePath, params string[] filePatterns)
 		{
-            var cmd = new ZipCommand(
-                this,
-                zipFilePath,
-                filePatterns
-                );
-
-            Execute(cmd);
+            // TODO: Keep zipper on a property
+            new FileZipper().Zip(CurrentDirectory, zipFilePath, filePatterns);
 		}
 	}
 }

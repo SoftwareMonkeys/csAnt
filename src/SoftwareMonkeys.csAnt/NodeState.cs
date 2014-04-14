@@ -16,11 +16,16 @@ namespace SoftwareMonkeys.csAnt
             set { currentNode = value; }
         }
 
-        public NodeGetter Getter { get; set; }
+        public bool CurrentNodeFound
+        {
+            get { return currentNode != null; }
+        }
+
+        public INodeGetter Getter { get; set; }
 
         public NodeState ()
         {
-            Getter = new NodeGetter();
+            Getter = new NodeGetter(this);
         }
 
         public void Refresh()

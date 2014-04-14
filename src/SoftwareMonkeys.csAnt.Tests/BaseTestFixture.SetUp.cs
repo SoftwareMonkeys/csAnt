@@ -29,6 +29,9 @@ namespace SoftwareMonkeys.csAnt.Tests
                 FixCurrentDirectory ();
 
                 WorkingDirectory = GetWorkingDirectory();
+                OriginalDirectory = GetOriginalDirectory();
+
+                Nodes.EnsureNodes();
             }
              
             if (IsVerbose) {

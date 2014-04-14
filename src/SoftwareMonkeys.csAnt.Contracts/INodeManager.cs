@@ -9,8 +9,7 @@ namespace SoftwareMonkeys.csAnt
 
         void CreateNodes();
 
-        // TODO: Remove if not needed
-        //FileNode CreateNode();
+        void EnsureNodes();
 
         FileNode CreateNode(string location);
         FileNode CreateNode(string location, string name);

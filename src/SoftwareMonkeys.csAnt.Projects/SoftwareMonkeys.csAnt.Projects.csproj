@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -24,7 +24,8 @@
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
     <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>..\SoftwareMonkeys.csAnt.Packages.Contracts\SoftwareMonkeys.csAnt.Packages.Contracts.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>SoftwareMonkeys.csAnt.Projects.snk</AssemblyOriginatorKeyFile>
+    <BaseIntermediateOutputPath>obj\</BaseIntermediateOutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>full</DebugType>
@@ -35,14 +36,19 @@
     <ConsolePause>false</ConsolePause>
     <DebugSymbols>true</DebugSymbols>
     <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>..\SoftwareMonkeys.csAnt.Packages.Contracts\SoftwareMonkeys.csAnt.Packages.Contracts.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>SoftwareMonkeys.csAnt.Projects.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
-    <DebugType>Full</DebugType>
-    <Optimize>False</Optimize>
+    <DebugType>none</DebugType>
+    <Optimize>false</Optimize>
     <OutputPath>..\..\bin\x86\Debug</OutputPath>
     <WarningLevel>4</WarningLevel>
     <PlatformTarget>x86</PlatformTarget>
+    <BaseIntermediateOutputPath>obj\</BaseIntermediateOutputPath>
+    <BaseAddress>4194304</BaseAddress>
+    <RegisterForComInterop>False</RegisterForComInterop>
+    <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
+    <FileAlignment>4096</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <DebugType>none</DebugType>
@@ -50,6 +56,10 @@
     <OutputPath>..\..\bin\x86\Release</OutputPath>
     <WarningLevel>4</WarningLevel>
     <PlatformTarget>x86</PlatformTarget>
+    <BaseAddress>4194304</BaseAddress>
+    <RegisterForComInterop>False</RegisterForComInterop>
+    <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
+    <FileAlignment>4096</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
@@ -62,11 +72,13 @@
     <FileAlignment>4096</FileAlignment>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Build" />
     <Reference Include="System" />
     <Reference Include="Microsoft.Build.Engine" />
     <Reference Include="Microsoft.Build.Framework" />
+    <Reference Include="System.Xml" />
     <Reference Include="SoftwareMonkeys.FileNodes">
-      <HintPath>..\..\lib\FileNodes\bin\Release\SoftwareMonkeys.FileNodes.dll</HintPath>
+      <HintPath>..\..\lib\FileNodes.0.5.3.200\bin\Release\SoftwareMonkeys.FileNodes.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -74,7 +86,6 @@
     <Compile Include="BaseProjectScript.BuildAllSolutions.cs" />
     <Compile Include="BaseProjectScript.BuildSolution.cs" />
     <Compile Include="BaseProjectScript.cs" />
-    <Compile Include="BaseProjectScript.GoogleCodeUpload.cs" />
     <Compile Include="BaseProjectScript.GroupName.cs" />
     <Compile Include="BaseProjectScript.GroupNode.cs" />
     <Compile Include="BaseProjectScript.ImportLocalLib.cs" />
@@ -94,9 +105,12 @@
     <Compile Include="BaseProjectScript.IncrementVersion.cs" />
     <Compile Include="BaseProjectScript.SetVersion.cs" />
     <Compile Include="ProjectCreator.cs" />
-    <Compile Include="ProjectNodesCreator.cs" />
     <Compile Include="BaseProjectScript.Nodes.cs" />
     <Compile Include="ProjectNodeManager.cs" />
+    <Compile Include="ProjectNodeState.cs" />
+    <Compile Include="ProjectNodeGetter.cs" />
+    <Compile Include="ProjectNodeCreator.cs" />
+    <Compile Include="SolutionBuilder.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -114,6 +128,10 @@
     <ProjectReference Include="..\SoftwareMonkeys.csAnt.Versions\SoftwareMonkeys.csAnt.Versions.csproj">
       <Project>{9B72A2B8-0BC4-40BE-B242-AC79A080CEB6}</Project>
       <Name>SoftwareMonkeys.csAnt.Versions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SoftwareMonkeys.csAnt.Processes\SoftwareMonkeys.csAnt.Processes.csproj">
+      <Project>{DA236BEB-4C3A-4076-AB72-1AEE6DB82BEA}</Project>
+      <Name>SoftwareMonkeys.csAnt.Processes</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>

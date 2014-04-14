@@ -13,8 +13,8 @@ namespace SoftwareMonkeys.csAnt
 
         public NodeManager ()
         {
-            Getter = new NodeGetter();
             State = new NodeState();
+            Getter = new NodeGetter(State);
             Creator = new NodesCreator(State);
         }
 
@@ -36,6 +36,11 @@ namespace SoftwareMonkeys.csAnt
         public void Refresh()
         {
             State.Refresh();
+        }
+
+        public void EnsureNodes()
+        {
+            Creator.EnsureNodes();
         }
     }
 }

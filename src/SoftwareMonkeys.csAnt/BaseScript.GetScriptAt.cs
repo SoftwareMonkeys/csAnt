@@ -6,7 +6,7 @@ namespace SoftwareMonkeys.csAnt
     {
         public IScript GetScriptAt(string scriptName, string workingDirectory)
         {
-            var script = ActivateScriptAt(scriptName, workingDirectory);
+            var script = ScriptExecutor.Activator.ActivateScriptAt(scriptName, workingDirectory);
 
             return script;
         }

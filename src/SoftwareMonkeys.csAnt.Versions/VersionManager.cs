@@ -16,12 +16,12 @@ namespace SoftwareMonkeys.csAnt.Versions
             var node = scanner.ScanDirectory(workingDirectory, false, false);
 
             if (node == null)
-                throw new Exception("File node not found in working directory.");
+                throw new Exception("File node not found in working directory: " + workingDirectory);
 
             if (node.Properties.ContainsKey("Version"))
                 return node.Properties["Version"];
             else
-                throw new VersionNotFoundException();
+                throw new VersionNotFoundException(workingDirectory);
         }
 
         public void SetVersion(FileNode currentNode, Version version)
@@ -37,6 +37,9 @@ namespace SoftwareMonkeys.csAnt.Versions
 
             if (!currentNode.Nodes.ContainsKey("Source"))
                 throw new Exception("Can't find 'Source' node.");
+
+            currentNode.Nodes["Source"].Properties["Version"] = version.ToString();
+            currentNode.Nodes["Source"].Save();
 
             foreach (var node in currentNode.Nodes["Source"].Nodes.Values) {
                 node.Properties["Version"] = version.ToString();

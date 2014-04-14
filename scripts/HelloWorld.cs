@@ -1,7 +1,4 @@
 using System;
-using System.IO;
-using Microsoft.CSharp;
-using System.Diagnostics;
 using SoftwareMonkeys.csAnt;
 
 public class HelloWorldScript : BaseScript

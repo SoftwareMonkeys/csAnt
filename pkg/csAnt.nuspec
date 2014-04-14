@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <metadata>
+    <id>csAnt</id>
+    <version>0.0.0.0</version>
+    <authors>SoftwareMonkeys</authors>
+    <owners>SoftwareMonkeys</owners>
+    <description>C# scripting and automation environment.</description>
+    <dependencies>
+        <dependency id="CS-Script" version="[3.7.2.0]" />
+        <dependency id="FileNodes" version="[0.5.3.200]" />
+        <dependency id="Newtonsoft.Json" version="[6.0.2]"/>
+        <dependency id="HtmlAgilityPack" version="[1.4.6]"/>
+        <dependency id="SharpZipLib" version="[0.86.0]"/>
+        <dependency id="ILRepack" version="[1.25.0]"/>
+        <dependency id="NUnit" version="[2.6.0.12051]"/>
+        <dependency id="NUnit.Runners" version="[2.6.0.12051]"/>
+        <dependency id="NUnitResults" version="[1.1]"/>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="scripts/HelloWorld.cs" target="scripts" />
+    <file src="scripts/RaiseEvent.cs" target="scripts" />
+    <file src="scripts/FixNUnitRunners.cs" target="scripts" />
+    <file src="scripts/OnInstall_FixNUnitRunners.cs" target="scripts" />
+    <file src="scripts/Update.cs" target="scripts" />
+    <file src="csAnt-setup-local.sh" />
+    <file src="csAnt-setup.sh" />
+    <file src="csAnt-setup.vbs" />
+    <file src="csAnt.sh" />
+    <file src="csAnt.bat" />
+    <file src="csAnt.node" />
+    <file src="lib/csAnt/csAnt.node" target="lib/csAnt/" />
+    <file src="lib/csAnt/bin/Release/net-40/*" target="lib/csAnt/bin/Release/net-40/" />
+    <file src="lib/**.node" target="lib" />
+    <file src="readme.txt" />
+  </files>
+</package>

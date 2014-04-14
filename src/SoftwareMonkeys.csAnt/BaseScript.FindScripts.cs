@@ -17,22 +17,7 @@ namespace SoftwareMonkeys.csAnt
         /// </param>
         public string[] FindScripts (string pattern)
         {
-            var scriptsDir = CurrentDirectory
-                + Path.DirectorySeparatorChar
-                + "scripts";
-
-            if (!pattern.EndsWith(".cs"))
-                pattern += ".cs";
-
-            var scripts = FindFiles (scriptsDir, pattern);
-
-            var scriptNames = new List<string>();
-
-            foreach (var script in scripts) {
-                scriptNames.Add (Path.GetFileNameWithoutExtension(script));
-            }
-
-            return scriptNames.ToArray();
+            return ScriptFinder.Find(pattern);
         }
     }
 }

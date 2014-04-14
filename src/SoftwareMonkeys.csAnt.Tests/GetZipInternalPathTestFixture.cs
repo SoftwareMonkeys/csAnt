@@ -1,6 +1,7 @@
 using System;
 using NUnit.Framework;
 using System.IO;
+using SoftwareMonkeys.csAnt.IO.Compression;
 
 namespace SoftwareMonkeys.csAnt.Tests
 {
@@ -18,15 +19,13 @@ namespace SoftwareMonkeys.csAnt.Tests
 
 			string zipFileName = "MyZipFile";
 
-			var script = new DummyScript("TestScript");
+            // TODO: Remove if not ne
+			//var script = new DummyScript("TestScript");
 
-            var cmd = new ZipCommand(
-                script,
-                zipFileName,
-                pattern
-            );
+            var zipper = new FileZipper();
 
-			string internalPath = cmd.GetZipInternalPath(
+			string internalPath = zipper.GetZipInternalPath(
+                WorkingDirectory,
 				zipFileName,
 				fileName,
 				pattern

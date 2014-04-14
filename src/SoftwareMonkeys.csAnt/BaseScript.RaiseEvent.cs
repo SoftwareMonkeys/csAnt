@@ -6,15 +6,7 @@ namespace SoftwareMonkeys.csAnt
     {
         public void RaiseEvent (string eventName)
         {
-            Console.WriteLine ("");
-            Console.WriteLine ("Raising '" + eventName + "' event");
-            Console.WriteLine ("");
-
-            var eventScripts = GetEventScripts(eventName);
-
-            foreach (var script in eventScripts) {
-                ExecuteScript(script);
-            }
+            EventRaiser.Raise(eventName);
         }
     }
 }

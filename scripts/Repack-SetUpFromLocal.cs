@@ -1,7 +1,5 @@
 using System;
 using System.IO;
-using Microsoft.CSharp;
-using System.Diagnostics;
 using SoftwareMonkeys.csAnt;
 using System.Collections.Generic;
 
@@ -14,55 +12,34 @@ class Repack_SetUpFromLocalScript : BaseScript
 	
 	public override bool Run(string[] args)
 	{
-            Console.WriteLine("");
-            Console.WriteLine("Repacking SetUpFromLocal.exe file to include dependencies.");
-            Console.WriteLine("");
-	
-            var exeFile = "lib/ILRepack.1.25.0/tools/ILRepack.exe";
+            var assemblyFile = "bin/{BuildMode}/csAnt-SetUpFromLocal.exe";
 
-            var packedDir = "bin/Release/packed";
+            var arguments = new Arguments(args);
+    
+            var buildMode = "Release";
+            if (arguments.Contains("mode"))
+                buildMode = arguments["mode"];
 
-            var outFile = packedDir + "/csAnt-SetUpFromLocal.exe";
-            
-            var arguments = new List<string>();
-
-            arguments.Add("/out:" + outFile);
-            arguments.Add("/target:exe");
-            arguments.Add("/verbose");
-            arguments.Add("bin/Release/csAnt-SetUpFromLocal.exe");
-
-            AddDependencies(arguments);
-            
-            Console.WriteLine("Output:");
-            Console.WriteLine(outFile);
-            Console.WriteLine("");
-
-            EnsureDirectoryExists(ToAbsolute(packedDir));
-            
-            StartDotNetExe(exeFile, arguments.ToArray());
-
-            Console.WriteLine("Done");
-
-            return !IsError;
-	}
-
-	public void AddDependencies(List<string> arguments)
-	{
             var dependencies = new string[]{
-                "bin/Release/SoftwareMonkeys.csAnt.IO.dll",
-                "bin/Release/SoftwareMonkeys.csAnt.SetUp.Common.dll",
-                "bin/Release/SoftwareMonkeys.csAnt.IO.Contracts.dll"
+                "lib/CS-Script.3.7.2.0/lib/net40/CSScriptLibrary.dll",
+                "lib/CS-Script.3.7.2.0/lib/net40/Mono.CSharp.dll",
+                "bin/{BuildMode}/SoftwareMonkeys.FileNodes.dll",
+                "bin/{BuildMode}/SoftwareMonkeys.csAnt.dll",
+                "bin/{BuildMode}/SoftwareMonkeys.csAnt.Contracts.dll",
+                "bin/{BuildMode}/SoftwareMonkeys.csAnt.External.Nuget.dll",
+                "bin/{BuildMode}/SoftwareMonkeys.csAnt.IO.dll",
+                "bin/{BuildMode}/SoftwareMonkeys.csAnt.IO.Contracts.dll",
+                "bin/{BuildMode}/SoftwareMonkeys.csAnt.Imports.dll",
+                "bin/{BuildMode}/SoftwareMonkeys.csAnt.Processes.dll",
+                "bin/{BuildMode}/SoftwareMonkeys.csAnt.SetUp.dll",
+                "bin/{BuildMode}/SoftwareMonkeys.csAnt.SourceControl.Git.dll",
+                "bin/{BuildMode}/SoftwareMonkeys.csAnt.Versions.dll",
+                "bin/{BuildMode}/SoftwareMonkeys.FileNodes.dll",
+                "bin/{BuildMode}/Newtonsoft.Json.dll"
             };
 
-            Console.WriteLine("Dependencies:");
+            new Repacker(assemblyFile, dependencies, buildMode).Repack();
 
-            foreach (var dependency in dependencies)
-            {
-                arguments.Add(dependency);
-
-                Console.WriteLine("  " + dependency);
-            }
-
-            Console.WriteLine("");
+            return !IsError;
 	}
 }

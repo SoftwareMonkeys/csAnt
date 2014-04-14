@@ -5,7 +5,7 @@
 //css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.IO.Contracts.dll;
 //css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.Projects.dll;
 //css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.Projects.Tests.Scripting.dll;
-//css_ref ../lib/NUnit/bin/nunit.framework.dll;
+//css_ref ../lib/NUnit.2.6.0.12051/lib/nunit.framework.dll;
 
 using System;
 using System.IO;
@@ -34,7 +34,9 @@ public class Test_IncrementVersionScript : BaseProjectTestScript
 			CurrentDirectory
 		).GrabOriginalFiles();
 
-	        IncrementVersion();
+        Nodes.Refresh();
+
+	    IncrementVersion();
 
 		Assert.IsTrue(!IsError);
 

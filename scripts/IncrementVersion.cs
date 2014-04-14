@@ -15,7 +15,7 @@ class IncrementVersionScript : BaseProjectScript
 	
 	public override bool Run(string[] args)
 	{
-    		IncrementVersion();
+    	IncrementVersion();
          
 		return !IsError;
 	}

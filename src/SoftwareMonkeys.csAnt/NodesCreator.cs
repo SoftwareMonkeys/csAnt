@@ -8,9 +8,20 @@ namespace SoftwareMonkeys.csAnt
     {
         public NodeRefresher Refresher { get;set; }
 
+        public INodeState State { get;set; }
+
+        public bool IsVerbose { get;set; }
+
         public NodesCreator (INodeState state)
         {
             Refresher = new NodeRefresher(state);
+            State = state;
+        }
+
+        public virtual void EnsureNodes()
+        {
+            if (State.CurrentNode == null)
+                CreateNode ();
         }
         
         public FileNode CreateNode()
@@ -28,11 +39,14 @@ namespace SoftwareMonkeys.csAnt
 
         public FileNode CreateNode(string location, string name)
         {
-            Console.WriteLine ("");
-            Console.WriteLine ("Creating node...");
-            Console.WriteLine ("Location:");
-            Console.WriteLine (location);
-            Console.WriteLine ("Name: " + name);
+            if (IsVerbose)
+            {
+                Console.WriteLine ("");
+                Console.WriteLine ("Creating node...");
+                Console.WriteLine ("Location:");
+                Console.WriteLine (location);
+                Console.WriteLine ("Name: " + name);
+            }
 
             var path = location
                 + Path.DirectorySeparatorChar
@@ -44,13 +58,18 @@ namespace SoftwareMonkeys.csAnt
                 new FileNodeSaver ()
             );
 
+            node.Name = name;
+
             if (!File.Exists (path)) {
                 node.Save ();
             }
-
-            Console.WriteLine ("Node file:");
-            Console.WriteLine (path);
-            Console.WriteLine ("");
+            
+            if (IsVerbose)
+            {
+                Console.WriteLine ("Node file:");
+                Console.WriteLine (path);
+                Console.WriteLine ("");
+            }
 
             return node;
         }

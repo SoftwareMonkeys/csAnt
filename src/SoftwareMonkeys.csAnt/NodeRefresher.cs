@@ -12,7 +12,7 @@ namespace SoftwareMonkeys.csAnt
             INodeState state
         )
         {
-            Getter = new NodeGetter();
+            Getter = new NodeGetter(state);
             State = state;
         }
 

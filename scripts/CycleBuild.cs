@@ -1,7 +1,7 @@
+//css_ref ../lib/csAnt/bin/Release/net-40/SoftwareMonkeys.csAnt.Projects.dll
+
 using System;
 using System.IO;
-using Microsoft.CSharp;
-using System.Diagnostics;
 using SoftwareMonkeys.csAnt;
 using SoftwareMonkeys.csAnt.Projects;
 
@@ -18,16 +18,16 @@ class CycleBuildScript : BaseProjectScript
 		Console.WriteLine("Starting a full build cycle.");
 		Console.WriteLine("");
 
-                var mode = "Release";
+        var mode = "Release";
+        
+        var arguments = new Arguments(args);
+        
+        if (arguments.Contains("mode"))
+                mode = arguments["mode"];
                 
-                var arguments = new Arguments(args);
-                
-                if (arguments.Contains("mode"))
-                        mode = arguments["mode"];
-                        
-                Console.WriteLine("");
-                Console.WriteLine("Build mode: " + mode);
-                Console.WriteLine("");
+        Console.WriteLine("");
+        Console.WriteLine("Build mode: " + mode);
+        Console.WriteLine("");
 
 		Console.WriteLine("Cleaning...");
 		Console.WriteLine("");
@@ -42,20 +42,25 @@ class CycleBuildScript : BaseProjectScript
 			"IncrementVersion"
 		);
 
+		// Increment the version
+		ExecuteScript(
+			"GenerateAssemblyInfoFiles"
+		);
+
 		Console.WriteLine("Building...");
 		Console.WriteLine("");
 
-                // If the mode is "all" then build both Debug and Release modes
-                if (mode == "all")
-                {
+        // If the mode is "all" then build both Debug and Release modes
+        if (mode == "all")
+        {
 		        ExecuteScript(
 			        "BuildAllSolutions",
-			        "-mode:Release"
+			        "-mode=Release"
 		        );
 		        
 		        ExecuteScript(
 			        "BuildAllSolutions",
-			        "-mode:Debug"
+			        "-mode=Debug"
 		        );
 		}
 		else
@@ -63,13 +68,13 @@ class CycleBuildScript : BaseProjectScript
 		        // Build the solutions
 		        ExecuteScript(
 			        "BuildAllSolutions",
-			        "-mode:" + mode
+			        "-mode=" + mode
 		        );
 		}
 
 		if (!IsError)
 		{
-                    ExecuteScript("Repack");
+            ExecuteScript("Repack", "-mode=" + mode);
 		}
 
 		if (!IsError)

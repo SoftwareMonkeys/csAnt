@@ -38,7 +38,7 @@ namespace SoftwareMonkeys.csAnt.IO.Compression
 
             var zipFileName = Path.GetFileNameWithoutExtension(zipFilePath);
 
-            // Zip up the files - From SharpZipLib Demo Code
+            // Zip up the files
             ZipOutputStream s = new ZipOutputStream(
                 File.Create(zipFilePath)
             );
@@ -66,11 +66,11 @@ namespace SoftwareMonkeys.csAnt.IO.Compression
 
                     Console.WriteLine ("  Short pattern: " + shortPattern);
 
-                    string[] foundFiles = FileFinder.FindFiles(workingDirectory, shortPattern);
-                    
-                    Console.WriteLine ("    Found " + foundFiles.Length.ToString() + " files.");
-                    
+                    var foundFiles = FileFinder.FindFiles(workingDirectory, shortPattern);
+
                     Console.WriteLine ("    Zipping...");
+
+                    int found = 0;
 
                     foreach (string foundFile in foundFiles)
                     {
@@ -103,7 +103,12 @@ namespace SoftwareMonkeys.csAnt.IO.Compression
 
                             } while (sourceBytes > 0);
                         }
+
+                        found++;
                     }
+
+                    Console.WriteLine ("    Found " + found.ToString() + " files.");
+                    
                 }
             }
 
@@ -210,7 +215,7 @@ namespace SoftwareMonkeys.csAnt.IO.Compression
             if (fullSubPath.Trim (Path.DirectorySeparatorChar) != destinationPath.Trim (Path.DirectorySeparatorChar))
             {
                 // Move the files in the sub path within the temporary folder into the final destination
-                Mover.Move(fullSubPath, destinationPath);
+                Mover.Move(fullSubPath, destinationPath, true); // TODO: Should the "overwrite" flag be provided via a parameter?
             }
 
             Console.WriteLine ("Extraction complete.");

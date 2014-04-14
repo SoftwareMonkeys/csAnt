@@ -1,13 +1,12 @@
 using System;
+using SoftwareMonkeys.csAnt.SourceControl.Git;
 
 namespace SoftwareMonkeys.csAnt
 {
     public partial interface IScript
     {
         #region Git
-        void GitInit();
-        void GitAdd(string filePath);
-        void GitCommit();
+        Gitter Git { get;set; }
         #endregion
     }
 }

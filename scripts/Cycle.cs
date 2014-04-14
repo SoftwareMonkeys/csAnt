@@ -1,6 +1,3 @@
-//css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.dll;
-//css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.Projects.dll;
-
 using System;
 using System.IO;
 using Microsoft.CSharp;
@@ -29,7 +26,8 @@ class CycleScript : BaseProjectScript
 			"EnsureBuild"
 		);
 
-		if (!IsError)
+        // TODO: Remove if not needed. Tests take a long time and should be done separately.
+		/*if (!IsError)
 		{
 			Console.WriteLine("Testing and creating reports...");
 			Console.WriteLine("");
@@ -38,16 +36,16 @@ class CycleScript : BaseProjectScript
 			ExecuteScript(
 				"RunTests"
 			);
-		}
+		}*/
 
 		if (!IsError)
 		{
-			Console.WriteLine("Creating release zip files locally...");
+			Console.WriteLine("Creating package files locally...");
 			Console.WriteLine("");
 
 			// Run release scripts
 			ExecuteScript(
-				"CycleRelease"
+				"CyclePackage"
 			);
 		}
 		

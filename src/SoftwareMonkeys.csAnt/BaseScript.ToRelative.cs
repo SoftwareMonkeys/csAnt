@@ -1,4 +1,5 @@
 using System;
+using SoftwareMonkeys.csAnt.IO;
 
 namespace SoftwareMonkeys.csAnt
 {
@@ -6,7 +7,7 @@ namespace SoftwareMonkeys.csAnt
 	{
 		public string ToRelative(string absolutePath)
 		{
-			return absolutePath.Replace(CurrentDirectory, "").TrimStart('/').TrimStart('\\');
+            return PathConverter.ToRelative(absolutePath);
 		}
 	}
 }

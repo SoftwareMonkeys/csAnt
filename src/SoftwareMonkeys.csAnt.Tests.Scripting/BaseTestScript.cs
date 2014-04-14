@@ -5,6 +5,7 @@ using System.IO;
 namespace SoftwareMonkeys.csAnt.Tests.Scripting
 {
     [TestFixture]
+    [Category("TestScript")]
     public abstract class BaseTestScript : BaseScript, ITestScript
     {
         public TestSummarizer TestSummarizer { get;set; }

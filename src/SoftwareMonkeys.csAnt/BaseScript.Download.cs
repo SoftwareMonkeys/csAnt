@@ -1,25 +1,19 @@
 using System;
 using System.Net;
 using System.IO;
+using SoftwareMonkeys.csAnt.IO;
 
 namespace SoftwareMonkeys.csAnt
 {
 	public partial class BaseScript
 	{
-		public string Download(
+		public void Download(
 			string url,
-			string localDestination
+			string toFile
 		)
 		{
-			var cmd = new DownloadCommand(
-				this,
-				url,
-				localDestination
-			);
-
-			ExecuteCommand(cmd);
-
-			return (string)cmd.ReturnValue;
+            // TODO: Check if this should be injected or an instance kept on a property
+            new FileDownloader().Download(url, toFile);
 		}
 	}
 }

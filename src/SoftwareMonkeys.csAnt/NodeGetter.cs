@@ -4,19 +4,24 @@ using System.IO;
 
 namespace SoftwareMonkeys.csAnt
 {
-    public class NodeGetter
+    public class NodeGetter : INodeGetter
     {
-        public NodeGetter ()
+        public INodeState State { get;set; }
+
+        public bool IsVerbose = false;
+
+        public NodeGetter (INodeState state)
         {
+            State = state;
         }
 
-        public FileNode GetNode(NodeState state, string relativePath)
+        public virtual FileNode GetNode(string relativePath)
         {
             var parts = relativePath.Replace("\"", "/").Trim('/').Split('/');
 
             FileNode node = null;
 
-            node = state.CurrentNode;
+            node = State.CurrentNode;
 
             foreach (string part in parts)
             {
@@ -27,34 +32,42 @@ namespace SoftwareMonkeys.csAnt
             return node;
         }
         
-        public FileNode GetCurrentNode ()
+        public virtual FileNode GetCurrentNode ()
         {
-            Console.WriteLine ("");
-            Console.WriteLine ("Getting current node...");
-            Console.WriteLine ("");
+            if (IsVerbose)
+            {
+                Console.WriteLine ("");
+                Console.WriteLine ("Getting current node...");
+                Console.WriteLine ("");
+            }
 
             // TODO: See if this should be injected via constructor
             var fileNodes = new FileNodeManager ();
 
             string dir = Environment.CurrentDirectory;
 
-            Console.WriteLine ("");
-            Console.WriteLine ("Current node directory");
-            Console.WriteLine (dir);
-            Console.WriteLine ("");
-            
+            if (IsVerbose)
+            {
+                Console.WriteLine ("");
+                Console.WriteLine ("Current node directory");
+                Console.WriteLine (dir);
+                Console.WriteLine ("");
+            }
+
             bool foundPropertiesFile = Directory.GetFiles (dir, "*.node").Length > 0;
             
             // Step up the directories looking for .node file
             while (!foundPropertiesFile
-                   || dir.IndexOf('/') == dir.LastIndexOf('/')) {
+                   || dir.IndexOf(Path.DirectorySeparatorChar) == dir.LastIndexOf(Path.DirectorySeparatorChar)) {
                 dir = Path.GetDirectoryName (dir);
                 
-                foundPropertiesFile = Directory.GetFiles (dir, "*.node").Length > 0;
+                var nodeCount = Directory.GetFiles (dir, "*.node").Length;
+                
+                foundPropertiesFile = nodeCount > 0;
             }
 
             FileNode node = fileNodes.Get (dir, false, true);
-            
+
             return node;
         }
     }

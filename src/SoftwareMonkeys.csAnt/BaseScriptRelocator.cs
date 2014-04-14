@@ -36,7 +36,7 @@ namespace SoftwareMonkeys.csAnt
             //CurrentNode = GetCurrentNode ();
 
             // Clear the import staging directory and it will refresh when it's needed
-            Script.ImportStagingDirectory = "";
+            Script.Importer.StagingDirectory = "";
 
             Script.Nodes.Refresh();
         }

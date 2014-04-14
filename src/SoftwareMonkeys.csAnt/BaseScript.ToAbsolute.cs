@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using SoftwareMonkeys.csAnt.IO;
 
 namespace SoftwareMonkeys.csAnt
 {
@@ -7,24 +8,12 @@ namespace SoftwareMonkeys.csAnt
 	{
 		public string ToAbsolute (string relativePath)
         {
-            if (!IsAbsolute (relativePath)) {
-                return Path.GetFullPath (relativePath);
-            } else {
-                var absolutePath = relativePath;
-                return absolutePath;
-            }
+            return PathConverter.ToAbsolute(relativePath);
 		}
         
         public string ToAbsolute (string basePath, string relativePath)
         {
-            if (!IsAbsolute (relativePath)) {
-                return basePath.TrimEnd(Path.DirectorySeparatorChar)
-                    + Path.DirectorySeparatorChar
-                        + relativePath.TrimStart(Path.DirectorySeparatorChar);
-            } else {
-                var absolutePath = relativePath;
-                return absolutePath;
-            }
+            return PathConverter.ToAbsolute(relativePath);
         }
 	}
 }
