@@ -87,7 +87,8 @@ namespace SoftwareMonkeys.csAnt
             scriptSettings.InMemoryAsssembly = true;
             scriptSettings.HideCompilerWarnings = true;
 
-            // If the script file is newer then recompile
+            // TODO: Remove if not needed. Should be compiled during CSScript.Load
+            /*// If the script file is newer then recompile
             if (
                 File.Exists (assemblyFile)
                 && File.GetLastWriteTime (scriptPath) > File.GetLastWriteTime (assemblyFile)
@@ -98,9 +99,7 @@ namespace SoftwareMonkeys.csAnt
                 // Compile the script
                 CSScript.Compile(scriptPath, assemblyFile, IsDebug);
 
-                // Set the assembly file last write time to the same as the script file, so it's easy to know they're matching
-                File.SetLastWriteTime(assemblyFile, File.GetLastWriteTime(scriptPath));
-            }
+            }*/
 
             IScript script = null;
             Assembly scriptAssembly = null;
@@ -109,7 +108,11 @@ namespace SoftwareMonkeys.csAnt
             try
             {
                 CSScript.CacheEnabled = false;
+                CSScript.GlobalSettings = scriptSettings;
                 scriptAssembly = CSScript.Load(scriptPath, assemblyFile, IsDebug, new string[]{});
+                
+                // Set the assembly file last write time to the same as the script file, so it's easy to know they're matching
+                File.SetLastWriteTime(assemblyFile, File.GetLastWriteTime(scriptPath));
             }
             catch (Exception ex)
             {
