@@ -2,19 +2,64 @@
 Dim fso
 Set fso = CreateObject("Scripting.FileSystemObject")
 
-Dim url : url = "https://csant.googlecode.com/files/csAnt-SetUp--0-3-0-400-%5B2014-3-8--12-1-22%5D.exe"
+Dim shell
+Set shell = CreateObject("Wscript.Shell")
 
 Dim path : path = "csAnt-setup.exe"
+Dim libDir : libDir="lib"
+Dim nugetFile : nugetFile=libDir+"\nuget.exe"
+Dim sourcePath : sourcePath="https://www.myget.org/F/softwaremonkeys/"
+Dim nugetUrl : nugetUrl="http://nuget.org/nuget.exe"
+Dim installDir : installDir = shell.CurrentDirectory
 
-Download url, path, true
+WriteLine ""
+WriteLine "Setting up csAnt..."
+WriteLine ""
+WriteLine "(Please wait. This might take a while, as files need to be downloaded and installed.)"
+WriteLine ""
 
-Start(path)
+If (NOT fso.FolderExists(MapPath(libDir))) Then
+        fso.CreateFolder(MapPath(libDir))
+End If
+
+If (NOT fso.FileExists(nugetFile)) Then
+        ' Download nuget  
+
+        WScript.Echo "Getting the nuget.exe file"
+        Download nugetUrl, nugetFile, true
+End If
+
+' Get csAnt setup package
+WriteLine "Getting the installer"
+Start(nugetFile + " install csAnt-setup -Source " + sourcePath + " -OutputDirectory lib -NoCache")
+WriteLine "Done"
+WriteLine ""
+
+' Enter csAnt package dir
+Dim setupLibDir : setupLibDir = GetSetupLibDir()
+WriteLine "Setup lib dir:"
+WriteLine setupLibDir
+
+' Move the setup file back to the root
+WriteLine "Moving the installer to the correct location"
+WriteLine ""
+Dim setupFilePath : setupFilePath = MapPath(setupLibDir + "\csAnt-SetUp.exe")
+Dim toSetupFilePath : toSetupFilePath = MapPath(installDir + "\csAnt-SetUp.exe")
+WriteLine(toSetupFilePath)
+fso.CopyFile setupFilePath, toSetupFilePath
+
+' Run the setup file
+WriteLine "Launching the installer..."
+WriteLine ""
+Start "csAnt-SetUp.exe " + GetArgumentsString()
 
 Function Start(ByVal path)
         Dim objShell
         Set objShell = WScript.CreateObject ("WScript.shell")
         Dim cmd : cmd = path
-        objShell.run cmd
+        Dim objCmdExec
+        Set objCmdExec = objShell.exec(cmd)
+        WriteLine objCmdExec.StdOut.ReadAll
         Set objShell = Nothing
 End Function
 
@@ -64,7 +109,6 @@ Function Download ( ByVal strUrl, ByVal strDestPath, ByVal overwrite )
 	End If
  
 	Set objXMLHTTP = Nothing
-	Set fso = Nothing
  
 	'WScript.Echo "Status code: " & intStatusCode & VBNewLine
  
@@ -89,6 +133,25 @@ Function WriteLine( v )
 
 	Wscript.stdout.WriteLine(v)
 	
+End Function
+
+Function GetSetupLibDir ()
+        ' TODO: Make this choose the latest folder in cases where multiple are found
+        prefix = UCase("csAnt-setup.") 'Must be in upper case!
+        Set oFSO = CreateObject("Scripting.FileSystemObject")
+        Set oFolder = oFSO.GetFolder(MapPath("lib"))
+        For Each oSubFolder In oFolder.SubFolders
+                If UCase(Left(oSubFolder.Name, len(prefix))) = prefix _
+                    Then GetSetupLibDir = oFolder & "\" & oSubFolder.Name
+        Next 
+End Function
+
+Function GetArgumentsString()
+        Dim argsString : argsString = ""
+        For i = 0 to WScript.Arguments.Count - 1
+           argsString = argsString + WScript.Arguments(i)
+        Next
+        GetArgumentsString = Trim(argsString)
 End Function
 
 Set fso = nothing
