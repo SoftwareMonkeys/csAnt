@@ -127,6 +127,20 @@ namespace SoftwareMonkeys.csAnt.IO
             }
         }
 
+        private bool overwrite;
+        public bool Overwrite
+        {
+            get
+            {
+                return overwrite; 
+            }
+            set
+            {
+                overwrite = value;
+                Copier.Overwrite = value;
+            }
+        }
+        
         public FilesGrabber (
             string originalDirectory,
             string currentDirectory
@@ -136,17 +150,17 @@ namespace SoftwareMonkeys.csAnt.IO
             CurrentDirectory = currentDirectory;
             Copier = new FileCopier(originalDirectory, currentDirectory);
         }
-        
+
         public FilesGrabber (
             string originalDirectory,
             string currentDirectory,
-            bool isVerbose
+            bool overwrite
         )
         {
             OriginalDirectory = originalDirectory;
             CurrentDirectory = currentDirectory;
-            Copier = new FileCopier(originalDirectory, currentDirectory);
-            IsVerbose = isVerbose;
+            Overwrite = overwrite;
+            Copier = new FileCopier(originalDirectory, currentDirectory, Overwrite);
         }
 
         public void GrabInstallation()

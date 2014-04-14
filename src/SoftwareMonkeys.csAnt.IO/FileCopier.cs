@@ -13,6 +13,8 @@ namespace SoftwareMonkeys.csAnt.IO
 
         public bool IsVerbose { get;set; }
 
+        public bool Overwrite { get;set; }
+
         public FileCopier (
             string sourceDirectory,
             string destinationDirectory
@@ -21,6 +23,18 @@ namespace SoftwareMonkeys.csAnt.IO
             SourceDirectory = sourceDirectory;
             DestinationDirectory = destinationDirectory;
             Finder = new FileFinder();
+        }
+
+        public FileCopier (
+            string sourceDirectory,
+            string destinationDirectory,
+            bool overwrite
+        )
+        {
+            SourceDirectory = sourceDirectory;
+            DestinationDirectory = destinationDirectory;
+            Finder = new FileFinder();
+            Overwrite = overwrite;
         }
 
         public void Copy(params string[] patterns)
@@ -65,7 +79,8 @@ namespace SoftwareMonkeys.csAnt.IO
                         Console.WriteLine ("  " + toFile);
                     }
 
-                    File.Copy (file, toFile, true);
+                    if (!File.Exists(toFile) || Overwrite)
+                        File.Copy (file, toFile, true);
                 }
             }
             else
