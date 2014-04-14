@@ -87,7 +87,7 @@ class Test_SetUpFromLocalScript_Git : BaseProjectTestScript
 	public void SetUpClonedCopy(string dummyProjectDir)
 	{
 		if (IsLinux)
-			StartProcess("sh csAnt-setup-local.sh");
+			StartProcess("sh csAnt-setupfromlocal.sh");
 		else
 			throw new NotImplementedException("Windows support hasn't yet been implemented");
 	}*/
