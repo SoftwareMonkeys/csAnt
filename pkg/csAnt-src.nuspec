@@ -20,7 +20,7 @@
   </metadata>
   <files>
     <file src="scripts/*.cs" target="scripts" />
-    <file src="csAnt-setup-local.sh" />
+    <file src="csAnt-setupfromlocal.sh" />
     <file src="csAnt-setup.sh" />
     <file src="csAnt-setup.vbs" />
     <file src="csAnt.sh" />
