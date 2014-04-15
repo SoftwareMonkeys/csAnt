@@ -65,7 +65,7 @@ namespace SoftwareMonkeys.csAnt.SetUp
                     + Versions.GetVersion(SourcePath);
 
             foreach (var file in files) {
-                var toFile = file.Replace (SourcePath, destinationSubDir);
+                var toFile = file.Replace (SourcePath.TrimEnd(Path.DirectorySeparatorChar), destinationSubDir.TrimEnd(Path.DirectorySeparatorChar));
             
                 if (!Directory.Exists (Path.GetDirectoryName (toFile)))
                     Directory.CreateDirectory (Path.GetDirectoryName (toFile));
@@ -88,12 +88,6 @@ namespace SoftwareMonkeys.csAnt.SetUp
                     Console.WriteLine ("  Skipping copy.");
             }
         }
-
-        // TODO: Remove if not needed
-        /*public string[] GetDefaultFilePatternList()
-        {
-            return DefaultFiles.DefaultFilePatterns;
-        }*/
 
         public string[] GetFilePatterns()
         {
