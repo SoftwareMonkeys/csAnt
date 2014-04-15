@@ -22,7 +22,7 @@ namespace SoftwareMonkeys.csAnt
 			}
 
 			if (IsError && StopOnFail)
-				Environment.Exit(1);
+				Environment.Exit(1); // TODO: Check if needed
 		}
 	}
 }

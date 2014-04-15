@@ -81,51 +81,38 @@ namespace SoftwareMonkeys.csAnt
 
             // TODO: Check if settings are needed
             var scriptSettings = new Settings ();
+
             // TODO: Check if needed.
             // Could be causing errors with tmp dir access exception when using jenkins.
             // Keeping this line seems to fix errors with activation during install tests (intermittent failure)
             scriptSettings.InMemoryAsssembly = true;
+
             scriptSettings.HideCompilerWarnings = true;
 
-            // TODO: Remove if not needed. Should be compiled during CSScript.Load
-            /*// If the script file is newer then recompile
-            if (
-                File.Exists (assemblyFile)
-                && File.GetLastWriteTime (scriptPath) > File.GetLastWriteTime (assemblyFile)
-            ) {
-                CSScript.CacheEnabled = false; // TODO: Check if this is needed. Being true was causing errors when running under jenkins.
-                CSScript.GlobalSettings = scriptSettings;
-                
-                // Compile the script
-                CSScript.Compile(scriptPath, assemblyFile, IsDebug);
-
-            }*/
-
             IScript script = null;
-            Assembly scriptAssembly = null;
 
             // Load the script assembly
             try
             {
                 CSScript.CacheEnabled = false;
                 CSScript.GlobalSettings = scriptSettings;
-                scriptAssembly = CSScript.Load(scriptPath, assemblyFile, IsDebug, new string[]{});
-                
+                using (var helper = new AsmHelper(CSScript.Load(scriptPath)))
+                {
+                    helper.CachingEnabled = false;
+                    script = (IScript)helper.CreateObject("*");
+                }
+
+                // TODO: Remove if not needed
                 // Set the assembly file last write time to the same as the script file, so it's easy to know they're matching
-                File.SetLastWriteTime(assemblyFile, File.GetLastWriteTime(scriptPath));
+                //File.SetLastWriteTime(assemblyFile, File.GetLastWriteTime(scriptPath));
             }
             catch (Exception ex)
             {
                 throw new Exception("An error occurred when loading the '" + scriptName + "' script.", ex);
             }
-
-            // Get the script type
-            var type = scriptAssembly.GetTypes () [0];
-
-            script = (IScript)Activator.CreateInstance(type);
-    
+            
             script.Construct (scriptName, ParentScript);
-    
+
             return script;
         }
         
