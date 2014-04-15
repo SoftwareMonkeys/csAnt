@@ -4,8 +4,6 @@
 
 using System;
 using System.IO;
-using Microsoft.CSharp;
-using System.Diagnostics;
 using SoftwareMonkeys.csAnt;
 using SoftwareMonkeys.csAnt.Tests;
 using SoftwareMonkeys.csAnt.IO;
