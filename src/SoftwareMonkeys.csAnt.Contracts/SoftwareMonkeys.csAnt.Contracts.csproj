@@ -76,6 +76,9 @@
     <Reference Include="SoftwareMonkeys.FileNodes">
       <HintPath>..\..\lib\FileNodes.0.5.3.200\bin\Release\SoftwareMonkeys.FileNodes.dll</HintPath>
     </Reference>
+    <Reference Include="CSScriptLibrary">
+      <HintPath>..\..\lib\CS-Script.3.7.2.0\lib\net40\CSScriptLibrary.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
