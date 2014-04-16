@@ -20,6 +20,7 @@ using SoftwareMonkeys.csAnt.Projects.Tests.Scripting;
 using NUnit.Framework;
 
 [TestFixture]
+[Category("SubTests")]
 class Test_BuildAndTestFromGitScript : BaseProjectTestScript
 {
 	public static void Main(string[] args)
@@ -53,7 +54,7 @@ class Test_BuildAndTestFromGitScript : BaseProjectTestScript
 
 	public void Clone()
 	{
-		Console.WriteLine("Cloning to tmp directory...");
+		Console.WriteLine("Cloning...");
 
 		Git.Clone(OriginalDirectory, CurrentDirectory);
 	}

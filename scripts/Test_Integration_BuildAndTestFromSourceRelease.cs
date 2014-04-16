@@ -4,6 +4,7 @@
 //css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.Projects.dll;
 //css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.Projects.Tests.dll;
 //css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.Projects.Tests.Scripting.dll;
+//css_ref ../lib/NUnit.1.6.0.12051/lib/nunit.framework.dll;
 
 using System;
 using System.IO;
@@ -15,7 +16,9 @@ using SoftwareMonkeys.csAnt.Tests.Scripting;
 using SoftwareMonkeys.csAnt.Projects;
 using SoftwareMonkeys.csAnt.Projects.Tests;
 using SoftwareMonkeys.csAnt.Projects.Tests.Scripting;
+using NUnit.Framework.dll;
 
+[Category("SubTests")]
 class Test_BuildAndTestFromSourceReleaseScript : BaseProjectTestScript
 {
 	public static void Main(string[] args)
