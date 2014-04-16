@@ -1,6 +1,8 @@
-//css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.dll;
-//css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.Tests.dll;
-//css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.Tests.Scripting.dll;
+//css_ref ../lib/csAnt/bin/Release/net-40/SoftwareMonkeys.csAnt.dll;
+//css_ref ../lib/csAnt/bin/Release/net-40/SoftwareMonkeys.csAnt.IO.dll;
+//css_ref ../lib/csAnt/bin/Release/net-40/SoftwareMonkeys.csAnt.Tests.dll;
+//css_ref ../lib/csAnt/bin/Release/net-40/SoftwareMonkeys.csAnt.Tests.Scripting.dll;
+
 using System;
 using System.IO;
 using Microsoft.CSharp;
@@ -8,6 +10,7 @@ using System.Diagnostics;
 using SoftwareMonkeys.csAnt;
 using SoftwareMonkeys.csAnt.Tests;
 using SoftwareMonkeys.csAnt.Tests.Scripting;
+using SoftwareMonkeys.csAnt.IO;
 
 class Test_Release_SpecifyList_Script : BaseTestScript
 {
@@ -18,15 +21,18 @@ class Test_Release_SpecifyList_Script : BaseTestScript
 	
 	public override bool Run(string[] args)
 	{
-	        FilesGrabber.GrabOriginalFiles();
-	        
-	        ExecuteScript("CycleBuild", "-mode:all");
-	        
-	        if (!IsError)
-                    ExecuteScript("Release", "bin");
+        new FilesGrabber(
+            OriginalDirectory,
+            CurrentDirectory
+        ).GrabOriginalFiles();
+        
+        ExecuteScript("CycleBuild");
+        
+        if (!IsError)
+		    ExecuteScript("Package", "csAnt");
 
 		if (Summaries.Count > 1)
-			Error("Multiple releases were generated when only one should have been.");
+			Error("Multiple packages were generated when only one should have been.");
 
 		return !IsError;
 	}

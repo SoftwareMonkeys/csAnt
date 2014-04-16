@@ -4,6 +4,7 @@
 //css_ref ../lib/csAnt/bin/Release/net-40/SoftwareMonkeys.csAnt.Projects.Tests.dll;
 //css_ref ../lib/csAnt/bin/Release/net-40/SoftwareMonkeys.csAnt.Projects.Tests.Scripting.dll;
 //css_ref ../lib/csAnt/bin/Release/net-40/SoftwareMonkeys.csAnt.SourceControl.Git.dll;
+//css_ref ../lib/csAnt/bin/Release/net-40/SoftwareMonkeys.csAnt.SetUp.dll;
 
 using System;
 using System.IO;
@@ -15,8 +16,9 @@ using SoftwareMonkeys.csAnt.Projects;
 using SoftwareMonkeys.csAnt.Projects.Tests;
 using SoftwareMonkeys.csAnt.Projects.Tests.Scripting;
 using SoftwareMonkeys.csAnt.Projects.Tests.Scripting.Live;
-using SoftwareMonkeys.csAnt.Projects.Tests.Helpers;
+using SoftwareMonkeys.csAnt.Tests.Helpers;
 using SoftwareMonkeys.csAnt.SourceControl.Git;
+using SoftwareMonkeys.csAnt.SetUp;
 
 class Test_SetUpFromGitScript : BaseLiveProjectTestScript
 {
@@ -42,7 +44,7 @@ class Test_SetUpFromGitScript : BaseLiveProjectTestScript
         new SetUpConsoleLauncher().Launch(CurrentDirectory);
 
         // Test the hello world script to ensure setup worked
-        new HelloWorldLauncher().Launch();
+        new HelloWorldScriptLauncher().Launch();
 
 		return !IsError;
 	}

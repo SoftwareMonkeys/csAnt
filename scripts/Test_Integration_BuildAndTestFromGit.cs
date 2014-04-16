@@ -55,7 +55,7 @@ class Test_BuildAndTestFromGitScript : BaseProjectTestScript
 	{
 		Console.WriteLine("Cloning to tmp directory...");
 
-		GitClone(OriginalDirectory, CurrentDirectory);
+		Git.Clone(OriginalDirectory, CurrentDirectory);
 	}
 
 	public void BuildAndTestClonedCopy()

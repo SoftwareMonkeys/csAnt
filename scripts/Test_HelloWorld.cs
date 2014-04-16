@@ -1,3 +1,5 @@
+//css_ref ../lib/NUnit.2.6.0.12051/lib/nunit.framework.dll
+
 using System;
 using System.IO;
 using Microsoft.CSharp;
