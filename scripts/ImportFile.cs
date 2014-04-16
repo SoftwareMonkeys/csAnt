@@ -17,11 +17,11 @@ class ImportFileScript : BaseProjectScript
 	
 	public override bool Run(string[] args)
 	{
-                var projectName = args[0];
+        var projectName = args[0];
 
-                var pattern = args[1];
-                
-                ImportFile(projectName, pattern);
+        var pattern = args[1];
+        
+        Importer.ImportFile(projectName, pattern);
                 
 		return !IsError;
 	}

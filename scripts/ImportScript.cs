@@ -21,53 +21,52 @@ class ImportScriptScript : BaseProjectScript
 		Console.WriteLine("Importing scripts...");
 		Console.WriteLine("");
 
-                var pattern = args[0];
+        var pattern = args[0];
 
 		Console.WriteLine("");
-                Console.WriteLine("Pattern:");
-                Console.WriteLine(pattern);
+        Console.WriteLine("Pattern:");
+        Console.WriteLine(pattern);
 		Console.WriteLine("");
 
-                var csAntImportPath = ImportStagingDirectory
-                        + Path.DirectorySeparatorChar
-                        + "csAnt";
+        var csAntImportPath = Importer.StagingDirectory
+                + Path.DirectorySeparatorChar
+                + "csAnt";
 
-                var csAntScriptsPath = csAntImportPath
-                        + Path.DirectorySeparatorChar
-                        + "scripts";
+        var csAntScriptsPath = csAntImportPath
+                + Path.DirectorySeparatorChar
+                + "scripts";
 
 		Console.WriteLine("");
-                Console.WriteLine("csAnt scripts path:");
-                Console.WriteLine(csAntScriptsPath);
+        Console.WriteLine("csAnt scripts path:");
+        Console.WriteLine(csAntScriptsPath);
 		Console.WriteLine("");
 
-                var i = 0;
+        var i = 0;
+        
+        Importer.AddImport(
+                "csAnt",
+                "https://code.google.com/p/csant/"
+        );
+        
+        if (!pattern.Contains(".cs"))
+                pattern = pattern + ".cs";
+        
+        var files = FindFiles(csAntScriptsPath, pattern);
+
+        foreach (var f in files)
+        {
+                i++;
                 
-                AddImport(
-                        "csAnt",
-                        "https://code.google.com/p/csant/"
-                );
+                var toFile = f.Replace(csAntImportPath, CurrentDirectory);
                 
-                if (!pattern.Contains(".cs"))
-                        pattern = pattern + ".cs";
+                Console.WriteLine("To file: " + toFile);
                 
-                var files = FindFiles(csAntScriptsPath, pattern);
-
-                foreach (var f in files)
-                {
-                        i++;
+                if (File.Exists(toFile))
+                        BackupFile(toFile);
                         
-                        var toFile = f.Replace(csAntImportPath, CurrentDirectory);
-                        
-                        Console.WriteLine("To file: " + toFile);
-                        
-                        if (File.Exists(toFile))
-                                BackupFile(toFile);
-                                
-                        File.Copy(f, toFile, true);
-                }
+                File.Copy(f, toFile, true);
+        }
                 
-
 		Console.WriteLine("Imported " + i + " files.");
                 
 		AddSummary("Imported " + i + " files.");

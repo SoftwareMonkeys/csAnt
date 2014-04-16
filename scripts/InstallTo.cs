@@ -1,5 +1,6 @@
-//css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.dll;
-//css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.Projects.dll;
+//css_ref ../lib/csAnt/bin/Release/net-40/SoftwareMonkeys.csAnt.dll;
+//css_ref ../lib/csAnt/bin/Release/net-40/SoftwareMonkeys.csAnt.Projects.dll;
+//css_ref ../lib/csAnt/bin/Release/net-40/SoftwareMonkeys.csAnt.SetUp.dll;
 
 using System;
 using System.IO;
@@ -7,6 +8,7 @@ using Microsoft.CSharp;
 using System.Diagnostics;
 using SoftwareMonkeys.csAnt;
 using SoftwareMonkeys.csAnt.Projects;
+using SoftwareMonkeys.csAnt.SetUp;
 
 class InstallToScript : BaseProjectScript
 {
@@ -17,16 +19,34 @@ class InstallToScript : BaseProjectScript
 	
 	public override bool Run(string[] args)
 	{
-	    var name = args[0];
+	    var packageName = "csAnt";
+	    var destination = "";
 
-	    var destination = Path.GetFullPath(args[1]);
-	    
-	    InstallTo(name, destination);
+        if (args.Length >= 2)
+        {
+            packageName = args[0];
+            destination = args[1];
+        }
+        else if (args.Length >= 1)
+        {
+    	    destination = Path.GetFullPath(args[1]);
+	    }
+
+        if (destination == "")
+            throw new Exception("A destination must be specified as an argument.");
+
+        var installer = new LocalInstaller(
+            CurrentDirectory,
+            destination,
+            packageName,
+            true
+        );
+        installer.Install();
 	    
 	    var arguments = new Arguments(args);
 	    
 	    if (arguments.Contains("r"))
-	      Relocate(destination);
+	        Relocate(destination);
 	    
 	    return !IsError;
 	}

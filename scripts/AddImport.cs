@@ -2,8 +2,6 @@
 //css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.Projects.dll;
 using System;
 using System.IO;
-using Microsoft.CSharp;
-using System.Diagnostics;
 using SoftwareMonkeys.csAnt;
 using SoftwareMonkeys.csAnt.Projects;
 
@@ -26,7 +24,7 @@ class AddImportScript : BaseProjectScript
 
 			string path = args[1];
 
-			AddImport(name, path);
+			Importer.AddImport(name, path);
 		}
 
 		return !IsError;

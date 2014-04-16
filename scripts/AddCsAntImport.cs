@@ -23,9 +23,9 @@ class AddCsAntImportScript : BaseProjectScript
 
 		AddSummary("Added csAnt import info");
 
-        if (!ImportExists("csAnt"))
+        if (!Importer.ImportExists("csAnt"))
         {
-                AddImport(
+                Importer.AddImport(
                         "csAnt",
                         "https://code.google.com/p/csant/"
                 );

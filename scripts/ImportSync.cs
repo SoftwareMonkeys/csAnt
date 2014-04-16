@@ -2,9 +2,6 @@
 //css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.Projects.dll;
 
 using System;
-using System.IO;
-using Microsoft.CSharp;
-using System.Diagnostics;
 using SoftwareMonkeys.csAnt;
 using SoftwareMonkeys.csAnt.Projects;
 
@@ -17,9 +14,9 @@ class ImportSyncScript : BaseProjectScript
 	
 	public override bool Run(string[] args)
 	{
-                var projectName = args[0];
+        var projectName = args[0];
 
-                ImportSync(projectName);
+        Importer.Sync(projectName);
                 
 		return !IsError;
 	}

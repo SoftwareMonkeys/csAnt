@@ -21,26 +21,22 @@ class CommitAssemblyInfoFilesScript : BaseProjectScript
             "src/**/AssemblyInfo.cs"       
         };
 
-        Git(
-            "reset"
-        );
+        Git.Reset();
 
         foreach (var file in FindFiles(patterns))
         {
-            Git(
-                "add",
+            Git.Add(
                 ToRelative(file)
             );
         }
 
-        Git(
+        Git.Git(
             "commit",
             "*.node",
             "-m " + message
         );
 
-        Git(
-            "push",
+        Git.Push(
             "origin",
             "master"
         );

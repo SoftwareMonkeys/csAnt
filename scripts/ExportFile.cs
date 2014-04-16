@@ -17,11 +17,11 @@ class ExportFileScript : BaseProjectScript
 	
 	public override bool Run(string[] args)
 	{
-                var projectName = args[0];
+        var projectName = args[0];
 
-                var pattern = args[1];
-                
-                ExportFile(projectName, pattern);
+        var pattern = args[1];
+        
+        Importer.ExportFile(projectName, pattern);
                 
 		return !IsError;
 	}
