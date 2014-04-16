@@ -14,6 +14,15 @@ namespace SoftwareMonkeys.csAnt.SourceControl.Git
         {
             Starter = new ProcessStarter();
         }
+        
+        public void Git(string command, params string[] arguments)
+        {
+            var list = new List<string>();
+            list.Add(command);
+            list.AddRange(arguments);
+
+            Git(list.ToArray());
+        }
 
         public void Git(params string[] arguments)
         {
@@ -232,7 +241,11 @@ namespace SoftwareMonkeys.csAnt.SourceControl.Git
         {
             Git("mv", fromPath, toPath);
         }
-
+        
+        public void Reset(params string[] arguments)
+        {
+            Git("reset", arguments);
+        }
     }
 }
 
