@@ -122,8 +122,6 @@ namespace SoftwareMonkeys.csAnt.SourceControl.Git
             Console.WriteLine ("Source: " + sourceDir);
             Console.WriteLine ("Destination: " + destinationDir);
 
-            var tmpDir = destinationDir + Path.DirectorySeparatorChar + "_clone";
-
             Git (
                 "clone",
                 sourceDir,
