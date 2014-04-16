@@ -50,7 +50,11 @@ class RunTestsScript : BaseScript
 
         // Exclude live tests during standard testing because most of the time they're not required and too slow during development.
         // They should be performed on their own when required
-        runner.AddExcludeCategory("Live"); 
+        runner.AddExcludeCategory("Live");
+
+        // Exclude sub tests otherwise it causes an infinite loop with a test being executed which executes all other tests, causing it to be re-executed each time
+        // Sub tests can be executed separately
+        runner.AddExcludeCategory("SubTests");
     
         runner.RunTestsInDirectory(workingDir);
 
