@@ -33,7 +33,8 @@ class DetermineVersionFromMyGet : BaseProjectScript
             "install",
             "csAnt",
             "-Source " + feedPath,
-            "-OutputDirectory " + tmpDir
+            "-OutputDirectory " + tmpDir,
+            "-NoCache"
         );
 
         var dir = Directory.GetDirectories(tmpDir, "csAnt.*")[0];
