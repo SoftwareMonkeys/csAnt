@@ -43,6 +43,9 @@ class CyclePublishScript : BaseProjectScript
 
         // Look at the MyGet feed to find out what the latest version is and set it as the current version
         ExecuteScript("DetermineVersionFromMyGet");
+
+        // Refresh the current node to ensure it picks up the determined version
+        Nodes.Refresh();
       
         // Increment the 3rd position of the version for each publishing cycle
         IncrementVersion(3);
