@@ -16,8 +16,8 @@ class PackageScript : BaseScript
 	{
         var packageName = "";
 
-        if (args.Length > 0)
-            packageName = args[0];
+        if (Arguments.KeylessArguments.Length > 0)
+            packageName = Arguments.KeylessArguments[0];
         
         var packer = new NugetPacker();
 
