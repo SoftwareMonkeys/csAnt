@@ -2,7 +2,7 @@ using System;
 using SoftwareMonkeys.csAnt.IO;
 
 
-namespace SoftwareMonkeys.csAnt.SetUp
+namespace SoftwareMonkeys.csAnt.SetUp.Install
 {
     /// <summary>
     /// The direct local installer bypasses the standard install system and copies files directly

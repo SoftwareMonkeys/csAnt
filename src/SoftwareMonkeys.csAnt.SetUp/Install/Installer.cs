@@ -7,9 +7,11 @@ using SoftwareMonkeys.csAnt.IO;
 using SoftwareMonkeys.csAnt.Imports;
 using SoftwareMonkeys.csAnt.Processes;
 using SoftwareMonkeys.csAnt.SourceControl.Git;
+using SoftwareMonkeys.csAnt.SetUp.Install.Retrieve;
+using SoftwareMonkeys.csAnt.SetUp.Install.Unpack;
 
 
-namespace SoftwareMonkeys.csAnt.SetUp
+namespace SoftwareMonkeys.csAnt.SetUp.Install
 {
     // TODO: Tidy up the code in this class
     public class Installer : BaseInstaller
@@ -18,7 +20,7 @@ namespace SoftwareMonkeys.csAnt.SetUp
 
         public BaseInstallerRetriever Retriever { get;set; }
 
-        public BaseInstallerFileManager FileManager { get;set; }
+        public BaseInstallUnpacker Unpacker { get;set; }
 
         public bool Import { get;set; }
         public string ImportPath { get;set; }
@@ -41,11 +43,11 @@ namespace SoftwareMonkeys.csAnt.SetUp
         
         public Installer (
             BaseInstallerRetriever retriever,
-            BaseInstallerFileManager fileManager
+            BaseInstallUnpacker unpacker
         )
         {
             Retriever = retriever;
-            FileManager = fileManager;
+            Unpacker = unpacker;
             FileFinder = new FileFinder();
             Importer = new Importer();
         }
@@ -55,31 +57,31 @@ namespace SoftwareMonkeys.csAnt.SetUp
         )
         {
             Retriever = retriever;
-            FileManager = new InstallerFileManager();
+            Unpacker = new InstallUnpacker();
             FileFinder = new FileFinder();
             Importer = new Importer();
         }
 
         public Installer (string packageName, string feedPath, string destination)
         {
-            Retriever = new InstallerNugetRetriever(destination);
-            FileManager = new InstallerFileManager();
+            Retriever = new InstallerNugetPackageRetriever(destination);
+            Unpacker = new InstallUnpacker();
             FileFinder = new FileFinder();
             Importer = new Importer();
         }
 
         public Installer (string sourcePath, string destination)
         {
-            Retriever = new InstallerNugetRetriever(destination);
-            FileManager = new InstallerFileManager();
+            Retriever = new InstallerNugetPackageRetriever(destination);
+            Unpacker = new InstallUnpacker();
             FileFinder = new FileFinder();
             Importer = new Importer();
         }
         
         public Installer ()
         {
-            Retriever = new InstallerNugetRetriever();
-            FileManager = new InstallerFileManager();
+            Retriever = new InstallerNugetPackageRetriever();
+            Unpacker = new InstallUnpacker();
             FileFinder = new FileFinder();
             Importer = new Importer();
         }
@@ -91,10 +93,16 @@ namespace SoftwareMonkeys.csAnt.SetUp
             Console.WriteLine("");
             Console.WriteLine("Current directory:");
             Console.WriteLine(Environment.CurrentDirectory);
+            Console.WriteLine("");
+            Console.WriteLine("Clone:" + Clone.ToString());
+            Console.WriteLine("Clone source:" + CloneSource);
+            Console.WriteLine("");
+            Console.WriteLine("Import:" + Import.ToString());
+            Console.WriteLine("Import path:" + ImportPath);
 
             Retriever.Retrieve();
 
-            FileManager.InstallFiles(
+            Unpacker.Unpack(
                 DestinationPath, // TODO: Make this configurable
                 PackageName,
                 Version,
@@ -186,7 +194,14 @@ namespace SoftwareMonkeys.csAnt.SetUp
 
         public void CloneFiles()
         {
-            Git.Clone(CloneSource, DestinationPath);
+            if (!String.IsNullOrEmpty(CloneSource))
+                Git.Clone(CloneSource, DestinationPath);
+            else
+            {
+                Console.WriteLine("");
+                Console.WriteLine("Error: Failed to clone. No path was specified on the CloneSource property.");
+                Console.WriteLine("");
+            }
         }
     }
 }

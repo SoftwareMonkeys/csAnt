@@ -63,7 +63,7 @@ namespace SoftwareMonkeys.csAnt.SetUp.Update
 
         public Updater(BaseInstallerRetriever retriever, BaseInstallUnpacker unpacker)
         {
-            Installer = new Installer(retriever, fileManager);
+            Installer = new Installer(retriever, unpacker);
         }
 
         public Updater (string sourceDir, string destinationDir)

@@ -1,5 +1,5 @@
 using System;
-namespace SoftwareMonkeys.csAnt.SetUp
+namespace SoftwareMonkeys.csAnt.SetUp.Repack
 {
     public class SetUpRepacker
     {

@@ -1,8 +1,10 @@
 using System;
 using SoftwareMonkeys.csAnt.Processes;
+using SoftwareMonkeys.csAnt.SetUp.Install.Retrieve;
+using SoftwareMonkeys.csAnt.SetUp.Deploy.Launch;
 
 
-namespace SoftwareMonkeys.csAnt.SetUp
+namespace SoftwareMonkeys.csAnt.SetUp.Deploy
 {
     public class Deployer
     {
@@ -38,7 +40,7 @@ namespace SoftwareMonkeys.csAnt.SetUp
             SetupLauncher = launcher;
         }
 
-        public void Install(string source, string destination)
+        public void Deploy(string source, string destination)
         {
             Retriever.Retrieve(source, destination);
 
