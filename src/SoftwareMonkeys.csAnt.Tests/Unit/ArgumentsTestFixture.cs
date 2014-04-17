@@ -48,6 +48,25 @@ namespace SoftwareMonkeys.csAnt.Tests.Unit
             Assert.AreEqual(expected, arguments.ToString(), "Incorrect return value.");
 
         }
+        
+        [Test]
+        public void Test_KeylessArguments()
+        {
+            var firstVar = "FirstVar";
+
+            var secondVar = "-SecondVar=sdf";
+
+            var thirdVar = "-ThirdVar=xyz";
+
+            var arguments = new Arguments(
+                firstVar,
+                secondVar,
+                thirdVar
+            );
+
+            Assert.AreEqual(1, arguments.KeylessArguments.Length, "Wrong number of keyless arguments found.");
+
+        }
 	}
 }
 
