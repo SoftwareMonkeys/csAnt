@@ -101,7 +101,9 @@ namespace SoftwareMonkeys.csAnt.SetUp.Install.Retrieve
             doc.Load(packageSpecFile);
 
             var list = new List<string>();
-            
+
+            // Add nuget to the list because it won't be listed in the nuspec file itself
+            list.Add("lib/nuget.exe");
             list.AddRange(GetFilePatternsFromNugetSpecFiles(doc));
             list.AddRange(GetFilePatternsFromNugetSpecDependencies(doc));
 
