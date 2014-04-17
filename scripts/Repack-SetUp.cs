@@ -1,16 +1,18 @@
+//css_ref ../lib/csAnt/bin/Release/net-40/SoftwareMonkeys.csAnt.SetUp.dll
+
 using System;
 using System.IO;
 using Microsoft.CSharp;
 using System.Diagnostics;
 using SoftwareMonkeys.csAnt;
-using SoftwareMonkeys.csAnt.SetUp;
+using SoftwareMonkeys.csAnt.SetUp.Repack;
 using System.Collections.Generic;
 
-class Repack_SetUpScript : BaseScript
+class Repack_SetUp : BaseScript
 {
 	public static void Main(string[] args)
 	{
-		new Repack_SetUpScript().Start(args);
+		new Repack_SetUp().Start(args);
 	}
 	
 	public override bool Run(string[] args)
