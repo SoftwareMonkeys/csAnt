@@ -29,7 +29,7 @@ class CyclePackageScript : BaseProjectScript
 			Console.WriteLine("Package name: " + packageName);
 		}
 
-        bool skipIncrement = Arguments.ContainsKey("skipincrement");
+        bool skipIncrement = Arguments.Contains("skipincrement");
 
 		ExecuteScript(
             "EnsureBuild",

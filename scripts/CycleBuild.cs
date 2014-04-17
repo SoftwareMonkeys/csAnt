@@ -25,7 +25,7 @@ class CycleBuildScript : BaseProjectScript
         if (arguments.Contains("mode"))
                 mode = arguments["mode"];
 
-        bool skipIncrement = Arguments.ContainsKey("skipincrement");
+        bool skipIncrement = Arguments.Contains("skipincrement");
                 
         Console.WriteLine("");
         Console.WriteLine("Build mode: " + mode);
