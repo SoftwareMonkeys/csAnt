@@ -18,7 +18,7 @@ class CycleTestsScript : BaseProjectScript
 		Console.WriteLine("Starting a full test cycle.");
 		Console.WriteLine("");
 
-        bool skipIncrement = Arguments.ContainsKey("skipincrement");
+        bool skipIncrement = Arguments.Contains("skipincrement");
 
         // Run a release cycle so the latest binaries and release zips are available
 		ExecuteScript(

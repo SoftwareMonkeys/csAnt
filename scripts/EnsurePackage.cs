@@ -57,9 +57,19 @@ class EnsurePackageScript : BaseProjectScript
 
 			// TODO: Perform package cycle only on missing packages instead of all of them
 			if (!String.IsNullOrEmpty(packageName))
-				ExecuteScript("CyclePackage", packageName);
+            {
+				ExecuteScript(
+                    "CyclePackage",
+                    packageName,
+                    skipIncrement ? "-skipincrement" : ""
+                );
+            }
 			else
-				ExecuteScript("CyclePackage");
+            {
+				ExecuteScript(
+                    "CyclePackage",
+                    skipIncrement ? "-skipincrement" : ""
+                );
 		}
 		else
 		{
