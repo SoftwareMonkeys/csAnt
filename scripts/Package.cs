@@ -30,8 +30,4 @@ class PackageScript : BaseScript
 
 		return true;
 	}
-
-	public void FixName(string name, string scriptFile)
-	{
-	}
 }
