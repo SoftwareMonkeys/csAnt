@@ -43,6 +43,8 @@ class DetermineVersionFromMyGet : BaseProjectScript
         Console.WriteLine("Version: " + version);
         Console.WriteLine("");
 
+        CurrentNode.Properties["Version"] = version;
+
         ExecuteScript("SetVersion", version);
 
         return !IsError;
