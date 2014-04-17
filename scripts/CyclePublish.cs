@@ -64,7 +64,7 @@ class CyclePublishScript : BaseProjectScript
         ExecuteScript("CommitVersion");
 
 		// Build and package the cloned source code (the package script will trigger build cycle if necessary)
-		ExecuteScript("Package", packageName);
+		ExecuteScript("CyclePackage", packageName, "-skipincrement");
 
         // Return the created packages back to the original project /pkg/ directory
         ReturnPackages();

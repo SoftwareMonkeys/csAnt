@@ -24,6 +24,8 @@ class CycleBuildScript : BaseProjectScript
         
         if (arguments.Contains("mode"))
                 mode = arguments["mode"];
+
+        bool skipIncrement = Arguments.ContainsKey("skipincrement");
                 
         Console.WriteLine("");
         Console.WriteLine("Build mode: " + mode);
@@ -37,10 +39,13 @@ class CycleBuildScript : BaseProjectScript
 			"ClearDlls"
 		);
 
-		// Increment the version
-		ExecuteScript(
-			"IncrementVersion"
-		);
+        if (!skipIncrement)
+        {
+		    // Increment the version
+		    ExecuteScript(
+			    "IncrementVersion"
+		    );
+        }
 
 		// Increment the version
 		ExecuteScript(

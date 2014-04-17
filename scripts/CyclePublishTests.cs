@@ -44,7 +44,7 @@ class CyclePublishTestsScript : BaseProjectScript
 
         Nodes.Refresh();
 
-        ExecuteScript("CycleTests");
+        ExecuteScript("CycleTests", "-skipincrement");
 
 		// Build the cloned source code
 		ExecuteScript("Package", packageName);

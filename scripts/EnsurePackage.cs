@@ -109,10 +109,23 @@ class EnsurePackageScript : BaseProjectScript
 
 				if (needsPackage)
 				{
+                    bool skipIncrement = Arguments.ContainsKey("skipincrement");
+
 					if (!String.IsNullOrEmpty(packageName))
-						ExecuteScript("CyclePackage", packageName);
-					else
-						ExecuteScript("CyclePackage");
+                    {
+						ExecuteScript(
+                            "CyclePackage",
+                            packageName,
+                            skipIncrement ? "-skipincrement" : ""
+                        );
+					}
+                    else
+                    {
+						ExecuteScript(
+                            "CyclePackage",
+                            skipIncrement ? "-skipincrement" : ""
+                        );
+                    }
 				}
 			}
 		}
