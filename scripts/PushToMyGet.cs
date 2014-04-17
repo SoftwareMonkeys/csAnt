@@ -57,19 +57,24 @@ class PushToMyGetScript : BaseProjectScript
 
         var pkgFile = GetLatestPackage(dir);
 
-        pkgFile = ToRelative(pkgFile);
+        if (!String.IsNullOrEmpty(pkgFile))
+        {
+            pkgFile = ToRelative(pkgFile);
 
-        Console.WriteLine("Package file:");
-        Console.WriteLine(" " + pkgFile);
+            Console.WriteLine("Package file:");
+            Console.WriteLine(" " + pkgFile);
 
-        var apiKey = CurrentNode.Nodes["Security"].Nodes["MyGet"].Properties["ApiKey"];
+            var apiKey = CurrentNode.Nodes["Security"].Nodes["MyGet"].Properties["ApiKey"];
 
-        var arguments = "push"
-            + " " + pkgFile
-            + " " + apiKey
-            + " -Source " + destination;
+            var arguments = "push"
+                + " " + pkgFile
+                + " " + apiKey
+                + " -Source " + destination;
 
-        ExecuteScript("nuget", arguments);
+            ExecuteScript("nuget", arguments);
+        }
+        else
+            Console.WriteLine("No package file. Skipping " + Path.GetFileName(dir));
     }
 
     public string GetMyGetDestination()
