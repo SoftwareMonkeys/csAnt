@@ -43,9 +43,9 @@ class DetermineVersionFromMyGet : BaseProjectScript
         Console.WriteLine("Version: " + version);
         Console.WriteLine("");
 
-        RefreshCurrentNode();
-
         ExecuteScript("SetVersion", version);
+
+        RefreshCurrentNode();
 
         return !IsError;
 	}

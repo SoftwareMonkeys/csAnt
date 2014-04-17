@@ -26,8 +26,12 @@ class CyclePublishScript : BaseProjectScript
 		Console.WriteLine("");
 
         var packageName = ""; // Empty means all
-        if (args.Length > 0)
-            packageName = args[0];
+        if (Arguments.KeylessArguments.Length > 0)
+            packageName = Arguments.KeylessArguments[0];
+
+        var version = "";
+        if (Arguments.ContainsAny("version"))
+            version = Arguments["version"];        
 
 		// Clone (using git) from the project to another tmp directory
 		var tmpDir = CloneToTmpDirectory();
@@ -41,12 +45,18 @@ class CyclePublishScript : BaseProjectScript
         // Create any missing file nodes (*.node files)
 		CreateNodes();
 
-        // Look at the MyGet feed to find out what the latest version is and set it as the current version
-        ExecuteScript("DetermineVersionFromMyGet");
+        if (!String.IsNullOrEmpty(version))
+        {
+            ExecuteScript("SetVersion", version);
+        }
+        else
+        {
+            // Look at the MyGet feed to find out what the latest version is and set it as the current version
+            ExecuteScript("DetermineVersionFromMyGet"); 
+        }
 
-        // Refresh the current node to ensure it picks up the determined version
         Nodes.Refresh();
-      
+     
         // Increment the 3rd position of the version for each publishing cycle
         IncrementVersion(3);
 
