@@ -29,24 +29,31 @@ class CyclePublishScript : BaseProjectScript
         if (args.Length > 0)
             packageName = args[0];
 
-		// Git clone the project to another directory
+		// Clone (using git) from the project to another tmp directory
 		var tmpDir = CloneToTmpDirectory();
 
+        // Grab any files required to continue
 		GrabFiles(tmpDir);
 
-		// Move to the cloned directory
+		// Move to the tmp directory
 		Relocate(tmpDir);
 
+        // Create any missing file nodes (*.node files)
 		CreateNodes();
 
+        // Look at the MyGet feed to find out what the latest version is and set it as the current version
+        ExecuteScript("DetermineVersionFromMyGet");
+      
+        // Increment the 3rd position of the version for each publishing cycle
         IncrementVersion(3);
 
-        // Commit the file nodes containing the updated versions
+        // Commit the file version information to source control
         ExecuteScript("CommitVersion");
 
-		// Build the cloned source code
+		// Build and package the cloned source code (the package script will trigger build cycle if necessary)
 		ExecuteScript("Package", packageName);
 
+        // Return the created packages back to the original project /pkg/ directory
         ReturnPackages();
 
         Git.Push("origin", "master", "-f");
