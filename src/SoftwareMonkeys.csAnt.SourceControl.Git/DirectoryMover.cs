@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 
-namespace SoftwareMonkeys.csAnt.IO
+namespace SoftwareMonkeys.csAnt.SourceControl.Git
 {
     public class DirectoryMover
     {

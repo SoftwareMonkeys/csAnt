@@ -122,12 +122,19 @@ namespace SoftwareMonkeys.csAnt.SourceControl.Git
             Console.WriteLine ("Source: " + sourceDir);
             Console.WriteLine ("Destination: " + destinationDir);
 
+            // Create a temporary directory path to clone to
+            // (the temporary folder works around the issue of cloning into existing directory)
+            var tmpDir = Path.Combine(destinationDir, "_tmpclone");
+
             Git (
                 "clone",
                 sourceDir,
-                destinationDir,
+                tmpDir,
                 "--verbose"
             );
+
+            // TODO: Move DirectoryMover to a property
+            new DirectoryMover().Move(tmpDir, destinationDir, true);
 
             Console.WriteLine("");
             Console.WriteLine("Complete");
