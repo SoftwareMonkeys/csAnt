@@ -4,7 +4,7 @@
 //css_ref ../lib/csAnt/bin/Release/net-40/SoftwareMonkeys.csAnt.Projects.Tests.dll;
 //css_ref ../lib/csAnt/bin/Release/net-40/SoftwareMonkeys.csAnt.Projects.Tests.Scripting.dll;
 //css_ref ../lib/csAnt/bin/Release/net-40/SoftwareMonkeys.csAnt.SourceControl.Git.dll;
-//css_ref ../lib/csAnt/bin/Release/net-40/SoftwareMonkeys.csAnt.SetUp.dll;
+//css_ref ../lib/csAnt/bin/Release/net-40/SoftwareMonkeys.csAnt.SetUp.dll
 
 using System;
 using System.IO;
@@ -17,14 +17,14 @@ using SoftwareMonkeys.csAnt.Projects.Tests;
 using SoftwareMonkeys.csAnt.Projects.Tests.Scripting;
 using SoftwareMonkeys.csAnt.Tests.Helpers;
 using SoftwareMonkeys.csAnt.SourceControl.Git;
-using SoftwareMonkeys.csAnt.SetUp.Deploy.Launch;
 using SoftwareMonkeys.csAnt.SetUp.Deploy.Retrieve;
+using SoftwareMonkeys.csAnt.SetUp.Deploy.Launch;
 
-class Test_SetUpFromLocalScript : BaseProjectTestScript
+class Test_Integration_SetUpFromLocalScript_Clone : BaseProjectTestScript
 {
 	public static void Main(string[] args)
 	{
-		new Test_SetUpFromLocalScript().Start(args);
+		new Test_Integration_SetUpFromLocalScript_Clone().Start(args);
 	}
 	
 	public override bool Run(string[] args)
@@ -41,8 +41,18 @@ class Test_SetUpFromLocalScript : BaseProjectTestScript
 
         Prepare(sourceDir, testProjectDir);
 
+		Console.WriteLine("");
+		Console.WriteLine("Running the test...");
+		Console.WriteLine("");
+
         // Run the setup from local script
-        new SetUpFromLocalScriptLauncher().Launch(sourceDir, testProjectDir);
+        new SetUpFromLocalScriptLauncher{
+            Clone=true
+        }.Launch(sourceDir, testProjectDir);
+
+		Console.WriteLine("");
+		Console.WriteLine("Ensuring the test worked...");
+		Console.WriteLine("");
 
         // Test the hello world script to ensure setup worked
         new HelloWorldScriptLauncher().Launch();
@@ -52,9 +62,16 @@ class Test_SetUpFromLocalScript : BaseProjectTestScript
 
     public void Prepare(string sourceDir, string testProjectDir)
     {
+		Console.WriteLine("");
+		Console.WriteLine("Preparing the test...");
+		Console.WriteLine("");
+
+        Git.Clone(OriginalDirectory, CurrentDirectory);
+
         new FilesGrabber(
             OriginalDirectory,
-            CurrentDirectory
+            CurrentDirectory,
+            true
         ).GrabOriginalFiles();
 
         ExecuteScript("EnsureBuild");
