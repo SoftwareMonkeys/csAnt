@@ -55,21 +55,24 @@ class EnsurePackageScript : BaseProjectScript
 
 			Console.WriteLine("");
 
+            bool skipIncrement = Arguments.Contains("skipincrement");
+
 			// TODO: Perform package cycle only on missing packages instead of all of them
 			if (!String.IsNullOrEmpty(packageName))
             {
 				ExecuteScript(
                     "CyclePackage",
                     packageName,
-                    skipIncrement ? "-skipincrement" : ""
+                    (skipIncrement ? "-skipincrement" : "")
                 );
             }
 			else
             {
 				ExecuteScript(
                     "CyclePackage",
-                    skipIncrement ? "-skipincrement" : ""
+                    (skipIncrement ? "-skipincrement" : "")
                 );
+            }
 		}
 		else
 		{
@@ -119,21 +122,21 @@ class EnsurePackageScript : BaseProjectScript
 
 				if (needsPackage)
 				{
-                    bool skipIncrement = Arguments.ContainsKey("skipincrement");
+                    bool skipIncrement = Arguments.Contains("skipincrement");
 
 					if (!String.IsNullOrEmpty(packageName))
                     {
 						ExecuteScript(
                             "CyclePackage",
                             packageName,
-                            skipIncrement ? "-skipincrement" : ""
+                            (skipIncrement ? "-skipincrement" : "")
                         );
 					}
                     else
                     {
 						ExecuteScript(
                             "CyclePackage",
-                            skipIncrement ? "-skipincrement" : ""
+                            (skipIncrement ? "-skipincrement" : "")
                         );
                     }
 				}
