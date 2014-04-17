@@ -14,6 +14,35 @@ namespace SoftwareMonkeys.csAnt.Processes
         {
         }
 
+        public Process Start(params string[] commandParts)
+        {
+            return Start(String.Join(" ", commandParts));
+        }
+
+        public Process Start(string command, string argument1, params string[] otherArguments)
+        {
+            return Start(
+                command
+                + " "
+                + argument1
+                + " "
+                + String.Join(" ", otherArguments)
+                );
+        }
+
+        public Process Start(string command, string argument1, string argument2, params string[] otherArguments)
+        {
+            return Start(
+                command
+                + " "
+                + argument1
+                + " "
+                + argument2
+                + " "
+                + String.Join(" ", otherArguments)
+                );
+        }
+
         public Process Start(string command)
         {
             if (command.Contains(" "))
