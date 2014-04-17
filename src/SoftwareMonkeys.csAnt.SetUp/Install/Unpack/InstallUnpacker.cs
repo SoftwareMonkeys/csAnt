@@ -7,11 +7,11 @@ using System.Linq;
 
 namespace SoftwareMonkeys.csAnt.SetUp.Install.Unpack
 {
-    public class InstallerUnpacker : BaseInstallUnpacker
+    public class InstallUnpacker : BaseInstallUnpacker
     {
         public IFileFinder FileFinder { get;set; }
 
-        public InstallerUnpacker ()
+        public InstallUnpacker ()
         {
             FileFinder = new FileFinder();
         }

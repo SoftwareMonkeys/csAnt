@@ -4,6 +4,8 @@ using SoftwareMonkeys.csAnt.SetUp;
 using SoftwareMonkeys.csAnt.Tests.Helpers;
 using SoftwareMonkeys.csAnt.IO;
 using System.IO;
+using SoftwareMonkeys.csAnt.SetUp.Deploy.Retrieve;
+using SoftwareMonkeys.csAnt.SetUp.Deploy.Launch;
 
 namespace SoftwareMonkeys.csAnt.SetUpFromLocalConsole.Tests.Integration
 {

@@ -2,7 +2,7 @@ using System;
 using SoftwareMonkeys.csAnt.IO;
 
 
-namespace SoftwareMonkeys.csAnt.SetUp
+namespace SoftwareMonkeys.csAnt.SetUp.Deploy.Retrieve
 {
     public class SetUpFromLocalScriptRetriever
     {

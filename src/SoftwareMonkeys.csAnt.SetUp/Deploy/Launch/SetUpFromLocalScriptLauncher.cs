@@ -4,7 +4,7 @@ using SoftwareMonkeys.csAnt.IO;
 using System.Collections.Generic;
 
 
-namespace SoftwareMonkeys.csAnt.SetUp.Launchers
+namespace SoftwareMonkeys.csAnt.SetUp.Deploy.Launch
 {
     public class SetUpFromLocalScriptLauncher : BaseSetUpLauncher
     {
@@ -23,18 +23,18 @@ namespace SoftwareMonkeys.csAnt.SetUp.Launchers
             Starter = new ProcessStarter();
         }
         
-        public override void Launch(string projectDirectory)
+        public override void Launch(string destinationPath)
         {
-            // TODO: Should sourceDirectory be set to Environment.CurrentDirectory?
+            // TODO: Should sourcePath be set to Environment.CurrentDirectory?
 
             Console.WriteLine("Launching setup from local script...");
             Console.WriteLine("");
             Console.WriteLine("Project directory:");
-            Console.WriteLine(projectDirectory);
+            Console.WriteLine(destinationPath);
 
             var name = "csAnt-setupfromlocal";
 
-            var arguments = GetArguments();
+            var arguments = GetArguments(String.Empty, destinationPath);
 
             // TODO: Should the project directory be set to Environment.CurrentDirectory?
             if (SoftwareMonkeys.csAnt.Processes.Platform.IsLinux)
@@ -43,18 +43,18 @@ namespace SoftwareMonkeys.csAnt.SetUp.Launchers
                 Starter.Start("cscript", name + ".vbs", arguments);
         }
 
-        public override void Launch(string sourceDirectory, string projectDirectory)
+        public override void Launch(string sourcePath, string destinationPath)
         {
-            // TODO: Should sourceDirectory be set to Environment.CurrentDirectory?
+            // TODO: Should sourcePath be set to Environment.CurrentDirectory?
 
             Console.WriteLine("Launching setup from local script...");
             Console.WriteLine("");
             Console.WriteLine("Project directory:");
-            Console.WriteLine(projectDirectory);
+            Console.WriteLine(destinationPath);
 
             var name = "csAnt-setupfromlocal";
 
-            var arguments = GetArguments();
+            var arguments = GetArguments(sourcePath, destinationPath);
 
             // TODO: Should the project directory be set to Environment.CurrentDirectory?
             if (SoftwareMonkeys.csAnt.Processes.Platform.IsLinux)
@@ -63,9 +63,15 @@ namespace SoftwareMonkeys.csAnt.SetUp.Launchers
                 Starter.Start("cscript", name + ".vbs", arguments);
         }
 
-        public string[] GetArguments()
+        public string[] GetArguments(string sourcePath, string destinationPath)
         {
             var list = new List<string>();
+
+            if (!String.IsNullOrEmpty(sourcePath))
+                list.Add(sourcePath);
+
+            if (!String.IsNullOrEmpty(destinationPath))
+                list.Add("-destination=" + destinationPath);
             
             if (Clone)
             {

@@ -1,13 +1,13 @@
 using System;
 namespace SoftwareMonkeys.csAnt.SetUp.Install.Unpack
 {
-    abstract public class BaseInstallerUnpacker
+    abstract public class BaseInstallUnpacker
     {
-        public BaseInstallerUnpacker ()
+        public BaseInstallUnpacker ()
         {
         }
 
-        public abstract void InstallFiles(string projectDirectory, string packageName, Version version, bool overwrite);
+        public abstract void Unpack(string projectDirectory, string packageName, Version version, bool overwrite);
     }
 }
 

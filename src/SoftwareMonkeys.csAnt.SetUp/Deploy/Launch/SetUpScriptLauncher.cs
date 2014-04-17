@@ -2,7 +2,7 @@ using System;
 using SoftwareMonkeys.csAnt.Processes;
 
 
-namespace SoftwareMonkeys.csAnt.SetUp
+namespace SoftwareMonkeys.csAnt.SetUp.Deploy.Launch
 {
     public class SetUpScriptLauncher : BaseSetUpLauncher
     {

@@ -79,29 +79,28 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
-    <Compile Include="Installer.cs" />
-    <Compile Include="Updater.cs" />
-    <Compile Include="LocalInstaller.cs" />
-    <Compile Include="PatternListFileNotFoundException.cs" />
-    <Compile Include="InstallerNugetRetriever.cs" />
-    <Compile Include="SetUpConsoleLauncher.cs" />
-    <Compile Include="SetUpScriptLauncher.cs" />
-    <Compile Include="Deployer.cs" />
-    <Compile Include="BaseDeploymentSetUpLauncher.cs" />
-    <Compile Include="BaseDeploymentFilesRetriever.cs" />
-    <Compile Include="BaseInstallerRetriever.cs" />
-    <Compile Include="BaseInstallerFileManager.cs" />
-    <Compile Include="InstallerFileManager.cs" />
-    <Compile Include="LocalGitDeploymentRetriever.cs" />
-    <Compile Include="LocalInstallRetriever.cs" />
-    <Compile Include="BaseInstaller.cs" />
-    <Compile Include="DirectLocalInstaller.cs" />
     <Compile Include="DefaultFiles.cs" />
-    <Compile Include="SetUpFromLocalScriptLauncher.cs" />
-    <Compile Include="SetUpFromLocalScriptRetriever.cs" />
-    <Compile Include="SetUpFromLocalConsoleRetriever.cs" />
-    <Compile Include="SetUpFromLocalConsoleLauncher.cs" />
-    <Compile Include="SetUpRepacker.cs" />
+    <Compile Include="Repack\SetUpRepacker.cs" />
+    <Compile Include="Install\DirectLocalInstaller.cs" />
+    <Compile Include="Install\Installer.cs" />
+    <Compile Include="Deploy\Deployer.cs" />
+    <Compile Include="Install\Retrieve\BaseInstallerRetriever.cs" />
+    <Compile Include="Install\Retrieve\LocalInstallRetriever.cs" />
+    <Compile Include="Install\Retrieve\InstallerNugetPackageRetriever.cs" />
+    <Compile Include="Deploy\Launch\BaseSetUpLauncher.cs" />
+    <Compile Include="Deploy\Launch\SetUpFromLocalConsoleLauncher.cs" />
+    <Compile Include="Deploy\Launch\SetUpFromLocalScriptLauncher.cs" />
+    <Compile Include="Deploy\Launch\SetUpConsoleLauncher.cs" />
+    <Compile Include="Deploy\Launch\SetUpScriptLauncher.cs" />
+    <Compile Include="Deploy\Retrieve\BaseDeploymentFilesRetriever.cs" />
+    <Compile Include="Deploy\Retrieve\LocalGitDeploymentRetriever.cs" />
+    <Compile Include="Deploy\Retrieve\SetUpFromLocalConsoleRetriever.cs" />
+    <Compile Include="Deploy\Retrieve\SetUpFromLocalScriptRetriever.cs" />
+    <Compile Include="Install\Unpack\BaseInstallUnpacker.cs" />
+    <Compile Include="Update\Updater.cs" />
+    <Compile Include="Install\Unpack\InstallUnpacker.cs" />
+    <Compile Include="Install\BaseInstaller.cs" />
+    <Compile Include="Install\LocalInstaller.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -137,5 +136,12 @@
       <Project>{16297BCB-0A8C-42E6-BE35-921085C3E238}</Project>
       <Name>SoftwareMonkeys.csAnt</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Repack\" />
+    <Folder Include="Install\" />
+    <Folder Include="Deploy\" />
+    <Folder Include="Deploy\Retrieve\" />
+    <Folder Include="Update\" />
   </ItemGroup>
 </Project>

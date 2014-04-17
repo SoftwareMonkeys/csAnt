@@ -3,6 +3,8 @@ using NUnit.Framework;
 using SoftwareMonkeys.csAnt.External.Nuget;
 using System.IO;
 using SoftwareMonkeys.csAnt.SetUp;
+using SoftwareMonkeys.csAnt.SetUp.Update;
+using SoftwareMonkeys.csAnt.SetUp.Install;
 
 
 namespace SoftwareMonkeys.csAnt.SetUp.Tests.Unit

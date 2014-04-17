@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using System.IO;
 using SoftwareMonkeys.csAnt;
 using SoftwareMonkeys.csAnt.SetUp;
+using SoftwareMonkeys.csAnt.SetUp.Install.Retrieve;
+using SoftwareMonkeys.csAnt.SetUp.Install.Unpack;
+using SoftwareMonkeys.csAnt.SetUp.Update;
+using SoftwareMonkeys.csAnt.SetUp.Install;
 
 namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole
 {
@@ -23,6 +27,10 @@ namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole
         public static string NugetSourcePath = "https://www.myget.org/F/softwaremonkeys/";
 
         public static string NugetPath = "http://nuget.org/nuget.exe";
+
+        public static string CloneSource = "https://git01.codeplex.com/csant/";
+
+        public static bool Clone { get;set; }
 
         public static string PackageName = "csAnt";
 
@@ -57,7 +65,7 @@ namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole
                 Console.WriteLine(NugetPath);
                 Console.WriteLine("");
     
-                var nugetRetriever = new InstallerNugetRetriever(
+                var nugetRetriever = new InstallerNugetPackageRetriever(
                     NugetSourcePath,
                     DestinationPath,
                     Version
@@ -66,28 +74,33 @@ namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole
                 if (!String.IsNullOrEmpty(NugetPath))
                     nugetRetriever.NugetPath = NugetPath;
 
-                var fileManager = new InstallerFileManager();
+                var unpacker = new InstallUnpacker();
     
                 if (Update)
                 {
                     var updater = new Updater(
                         nugetRetriever,
-                        fileManager
+                        unpacker
                         );
 
                     updater.Import = Import;
                     updater.ImportPath = ImportPath;
+                    updater.Clone = Clone;
+                    updater.CloneSource = CloneSource;
+
                     updater.Update();
                 }
                 else
                 {
                     var installer = new Installer(
                         nugetRetriever,
-                        fileManager
+                        unpacker
                         );
 
                     installer.Import = Import;
                     installer.ImportPath = ImportPath;
+                    installer.Clone = Clone;
+                    installer.CloneSource = CloneSource;
 
                     installer.Install();
                 }
@@ -157,6 +170,20 @@ namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole
                     && path.ToLower() != true.ToString().ToLower()
                     && path.ToLower() != false.ToString().ToLower())
                     ImportPath = path;
+            }
+
+            // Clone
+            Clone = arguments.ContainsAny("c", "clone")
+                && (arguments["c", "clone"].ToLower() != false.ToString().ToLower()
+                || arguments["c", "clone"].ToLower() == true.ToString().ToLower());
+
+            if (Clone)
+            {
+                var path = arguments["c", "clone"];
+                if (!String.IsNullOrEmpty(path)
+                    && path.ToLower() != true.ToString().ToLower()
+                    && path.ToLower() != false.ToString().ToLower())
+                    CloneSource = path;
             }
         }
 
@@ -233,6 +260,9 @@ namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole
             Console.WriteLine("      Performs an update instead of a standard instead.");
             Console.WriteLine("");
             Console.WriteLine("  -i, -import");
+            Console.WriteLine("      Whether to import text files (eg. scripts) via git, which handles changes, merges, and commits back to the source project.");
+            Console.WriteLine("");
+            Console.WriteLine("  -c, -clone");
             Console.WriteLine("      Whether to import text files (eg. scripts) via git, which handles changes, merges, and commits back to the source project.");
             Console.WriteLine("");
             Console.WriteLine("  -intro");

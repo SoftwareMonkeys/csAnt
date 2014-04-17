@@ -7,7 +7,7 @@ using System.Xml;
 using System.Collections.Generic;
 
 
-namespace SoftwareMonkeys.csAnt.SetUp
+namespace SoftwareMonkeys.csAnt.SetUp.Install.Retrieve
 {
     /// <summary>
     /// Retrieves installation files from a local csAnt project using the [PackageName].nuspec file to determine which files to retrieve.
@@ -42,6 +42,9 @@ namespace SoftwareMonkeys.csAnt.SetUp
 
         public override void Retrieve()
         {
+            Console.WriteLine("Retrieving files from:");
+            Console.WriteLine(SourcePath);
+
             if (!Directory.Exists (DestinationPath))
                 Directory.CreateDirectory (DestinationPath);
 

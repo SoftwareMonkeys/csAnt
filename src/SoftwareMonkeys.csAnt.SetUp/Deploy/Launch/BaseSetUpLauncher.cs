@@ -1,7 +1,7 @@
 using System;
 
 
-namespace SoftwareMonkeys.csAnt.SetUp.Launchers
+namespace SoftwareMonkeys.csAnt.SetUp.Deploy.Launch
 {
     abstract public class BaseSetUpLauncher
     {

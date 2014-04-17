@@ -3,7 +3,7 @@ using SoftwareMonkeys.csAnt.Processes;
 using System.IO;
 
 
-namespace SoftwareMonkeys.csAnt.SetUp
+namespace SoftwareMonkeys.csAnt.SetUp.Deploy.Launch
 {
     public class SetUpConsoleLauncher : BaseSetUpLauncher
     {

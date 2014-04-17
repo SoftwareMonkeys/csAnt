@@ -4,6 +4,7 @@ using SoftwareMonkeys.csAnt;
 using SoftwareMonkeys.csAnt.IO;
 using SoftwareMonkeys.csAnt.SetUp;
 using SoftwareMonkeys.csAnt.Versions;
+using SoftwareMonkeys.csAnt.SetUp.Install;
 
 namespace SoftwareMonkeys.csAnt.SetUpFromLocalConsole
 {
@@ -26,6 +27,10 @@ namespace SoftwareMonkeys.csAnt.SetUpFromLocalConsole
         
         // TODO: Remove if not needed
         public static string NugetPath = "http://nuget.org/nuget.exe";
+
+        public static string CloneSource { get;set; }
+
+        public static bool Clone { get;set; }
         
         public static string PackageName = "csAnt";
 
@@ -55,27 +60,34 @@ namespace SoftwareMonkeys.csAnt.SetUpFromLocalConsole
                 Console.WriteLine (DestinationPath);
                 Console.WriteLine ("");
 
+                Installer installer = null;
+
                 // If it's a direct install then use the direct local installer
                 if (Direct)
                 {
-                    var installer = new DirectLocalInstaller(
+                    installer = new DirectLocalInstaller(
                         SourcePath,
                         DestinationPath,
                         Overwrite
                     );
-
-                    installer.Install();
                 }
                 else
                 {
-                    var installer = new LocalInstaller(
+                    installer = new LocalInstaller(
                         SourcePath,
                         DestinationPath,
                         PackageName,
                         Overwrite
                     );
-                    installer.Install();
                 }
+                
+                installer.Import = Import;
+                installer.ImportPath = ImportPath;
+                
+                installer.Clone = Clone;
+                installer.CloneSource = CloneSource;
+
+                installer.Install();
             }
         }
 
@@ -111,12 +123,13 @@ namespace SoftwareMonkeys.csAnt.SetUpFromLocalConsole
 
         static public void Help()
         {
+            // TODO: Finish help
             Console.WriteLine ("");
             Console.WriteLine ("Help");
             Console.WriteLine ("");
             Console.WriteLine ("Syntax:");
             Console.WriteLine ("");
-            Console.WriteLine ("  SetUpFromLocal.exe (sourceProjectPath) [(destinationProjectPath)] -l:../Projects/SourceProject/InstallList.txt [-o]");
+            Console.WriteLine ("  SetUpFromLocal.exe -Source=(sourceProjectPath)"); 
             Console.WriteLine ("");
             Console.WriteLine ("Arguments:");
             Console.WriteLine ("");
@@ -129,24 +142,25 @@ namespace SoftwareMonkeys.csAnt.SetUpFromLocalConsole
             Console.WriteLine ("");
             Console.WriteLine (" -o");
             Console.WriteLine ("     A flag indicating whether to overwrite files if they already exist.");
+            Console.WriteLine ("");
+            Console.WriteLine ("  -c, -clone");
+            Console.WriteLine ("      Whether to import text files (eg. scripts) via git, which handles changes, merges, and commits back to the source project.");
+            Console.WriteLine ("");
         }
         
         static public void ParseArguments(string[] args)
         {
-
-            if (args.Length > 0) {
-                // Source directory
-                SourcePath = args [0];
-    
-                // Destination directory
-                if (args.Length > 1)
-                    DestinationPath = Path.GetFullPath (args [1]);
-            } else {
-                SourcePath = DetectSourceDirectory ();
-                DestinationPath = Environment.CurrentDirectory;
-            }
-    
             var arguments = new Arguments(args);
+
+            if (arguments.KeylessArguments.Length > 0)
+                SourcePath = arguments.KeylessArguments[0];
+            else
+                SourcePath = DetectSourceDirectory ();
+
+            if (arguments.ContainsAny("d", "dest", "destination"))
+                DestinationPath = arguments["d", "dest", "destination"];
+            else
+                DestinationPath = Environment.CurrentDirectory;
 
             // Is help
             IsHelp = arguments.ContainsAny("h", "help", "man");
@@ -200,12 +214,33 @@ namespace SoftwareMonkeys.csAnt.SetUpFromLocalConsole
             );
 
             Direct = arguments.Contains("direct");
+            
+            // Import
+            Import = arguments.ContainsAny("i", "import")
+                && (arguments["i", "import"].ToLower() != false.ToString().ToLower()
+                || arguments["i", "import"].ToLower() == true.ToString().ToLower());
 
             if (Import)
             {
                 var path = arguments["i", "import"];
-                if (!String.IsNullOrEmpty(path))
+                if (!String.IsNullOrEmpty(path)
+                    && path.ToLower() != true.ToString().ToLower()
+                    && path.ToLower() != false.ToString().ToLower())
                     ImportPath = path;
+            }
+
+            // Clone
+            Clone = arguments.ContainsAny("c", "clone")
+                && (arguments["c", "clone"].ToLower() != false.ToString().ToLower()
+                || arguments["c", "clone"].ToLower() == true.ToString().ToLower());
+
+            if (Clone)
+            {
+                var path = arguments["c", "clone"];
+                if (!String.IsNullOrEmpty(path)
+                    && path.ToLower() != true.ToString().ToLower()
+                    && path.ToLower() != false.ToString().ToLower())
+                    CloneSource = path;
             }
         }
 

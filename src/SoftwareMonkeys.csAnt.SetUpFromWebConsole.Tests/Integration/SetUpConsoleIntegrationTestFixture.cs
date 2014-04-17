@@ -8,6 +8,7 @@ using SoftwareMonkeys.csAnt.Projects;
 using SoftwareMonkeys.csAnt.SetUp;
 using SoftwareMonkeys.csAnt.SourceControl.Git;
 using SoftwareMonkeys.csAnt.External.Nuget.Tests.Mock;
+using SoftwareMonkeys.csAnt.SetUp.Repack;
 
 
 namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole.Tests.Integration

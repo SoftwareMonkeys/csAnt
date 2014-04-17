@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace SoftwareMonkeys.csAnt.SetUp.Install.Retrieve
 {
-    public class InstallerNugetRetriever : BaseInstallerRetriever
+    public class InstallerNugetPackageRetriever : BaseInstallerRetriever
     {
         public string NugetSourcePath { get;set; }
 
@@ -26,7 +26,7 @@ namespace SoftwareMonkeys.csAnt.SetUp.Install.Retrieve
 
         public string PackageName = "csAnt";
         
-        public InstallerNugetRetriever (string nugetSourcePath, string destinationPath, Version version)
+        public InstallerNugetPackageRetriever (string nugetSourcePath, string destinationPath, Version version)
         {
             if (!String.IsNullOrEmpty(destinationPath))
                 DestinationPath = destinationPath;
@@ -42,7 +42,7 @@ namespace SoftwareMonkeys.csAnt.SetUp.Install.Retrieve
             Version = version;
         }
 
-        public InstallerNugetRetriever (string nugetSourcePath, string destinationPath, Version version, NugetChecker checker, NugetExecutor executor)
+        public InstallerNugetPackageRetriever (string nugetSourcePath, string destinationPath, Version version, NugetChecker checker, NugetExecutor executor)
         {
             if (!String.IsNullOrEmpty(destinationPath))
                 DestinationPath = destinationPath;
@@ -57,7 +57,7 @@ namespace SoftwareMonkeys.csAnt.SetUp.Install.Retrieve
             Version = version;
         }
 
-        public InstallerNugetRetriever (string nugetSourcePath, string destinationPath)
+        public InstallerNugetPackageRetriever (string nugetSourcePath, string destinationPath)
         {
             if (!String.IsNullOrEmpty(destinationPath))
                 DestinationPath = destinationPath;
@@ -88,7 +88,7 @@ namespace SoftwareMonkeys.csAnt.SetUp.Install.Retrieve
                 NugetPath = nugetPath;
         }*/
 
-        public InstallerNugetRetriever (string destinationPath)
+        public InstallerNugetPackageRetriever (string destinationPath)
         {
             if (!String.IsNullOrEmpty(destinationPath))
                 DestinationPath = destinationPath;
@@ -100,12 +100,12 @@ namespace SoftwareMonkeys.csAnt.SetUp.Install.Retrieve
             NugetSourcePath = "https://www.myget.org/F/softwaremonkeys/";
         }
 
-        public InstallerNugetRetriever ()
+        public InstallerNugetPackageRetriever ()
             : this("")
         {
         }
 
-        public InstallerNugetRetriever (
+        public InstallerNugetPackageRetriever (
             string destinationPath,
             NugetChecker checker,
             NugetExecutor executor

@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using SoftwareMonkeys.csAnt.IO;
+using SoftwareMonkeys.csAnt.SetUp.Install.Retrieve;
 
 
 namespace SoftwareMonkeys.csAnt.SetUp.Tests
