@@ -18,11 +18,11 @@ using SoftwareMonkeys.csAnt.Tests.Helpers;
 using SoftwareMonkeys.csAnt.SourceControl.Git;
 using SoftwareMonkeys.csAnt.SetUp;
 
-class Test_SetUpFromLocalScript_Git : BaseProjectTestScript
+class Test_SetUpFromLocalScript : BaseProjectTestScript
 {
 	public static void Main(string[] args)
 	{
-		new Test_SetUpFromLocalScript_Git().Start(args);
+		new Test_SetUpFromLocalScript().Start(args);
 	}
 	
 	public override bool Run(string[] args)
