@@ -159,8 +159,8 @@ namespace SoftwareMonkeys.csAnt.IO
         {
             OriginalDirectory = originalDirectory;
             CurrentDirectory = currentDirectory;
-            Overwrite = overwrite;
             Copier = new FileCopier(originalDirectory, currentDirectory, Overwrite);
+            Overwrite = overwrite;
         }
 
         public void GrabInstallation()
