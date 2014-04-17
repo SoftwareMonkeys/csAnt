@@ -6,6 +6,7 @@ using Microsoft.CSharp;
 using System.Diagnostics;
 using SoftwareMonkeys.csAnt;
 using SoftwareMonkeys.csAnt.SetUp;
+using SoftwareMonkeys.csAnt.SetUp.Deploy.Launch;
 using SoftwareMonkeys.csAnt.Projects;
 
 class CloneToScript : BaseProjectScript

@@ -8,7 +8,7 @@ using Microsoft.CSharp;
 using System.Diagnostics;
 using SoftwareMonkeys.csAnt;
 using SoftwareMonkeys.csAnt.Projects;
-using SoftwareMonkeys.csAnt.SetUp;
+using SoftwareMonkeys.csAnt.SetUp.Install;
 
 class InstallToScript : BaseProjectScript
 {

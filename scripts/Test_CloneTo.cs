@@ -6,6 +6,7 @@
 //css_ref ../lib/csAnt/bin/Release/net-40/SoftwareMonkeys.csAnt.Projects.dll;
 //css_ref ../lib/csAnt/bin/Release/net-40/SoftwareMonkeys.csAnt.Projects.Tests.Scripting.dll;
 //css_ref ../lib/csAnt/bin/Release/net-40/SoftwareMonkeys.csAnt.SourceControl.Git.dll;
+//css_ref ../lib/csAnt/bin/Release/net-40/SoftwareMonkeys.csAnt.SetUp.dll;
 //css_ref ../lib/NUnit.2.6.0.12051/lib/nunit.framework.dll;
 
 using System;
@@ -19,6 +20,7 @@ using SoftwareMonkeys.csAnt.IO;
 using SoftwareMonkeys.csAnt.Projects;
 using SoftwareMonkeys.csAnt.Projects.Tests.Scripting;
 using SoftwareMonkeys.csAnt.SourceControl.Git;
+using SoftwareMonkeys.csAnt.SetUp.Deploy.Launch;
 using NUnit.Framework;
 
 [TestFixture]

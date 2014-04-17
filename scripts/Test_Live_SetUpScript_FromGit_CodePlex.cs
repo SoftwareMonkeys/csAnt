@@ -18,6 +18,7 @@ using SoftwareMonkeys.csAnt.Projects.Tests.Scripting.Live;
 using SoftwareMonkeys.csAnt.SourceControl.Git;
 using SoftwareMonkeys.csAnt.Tests.Helpers;
 using SoftwareMonkeys.csAnt.SetUp;
+using SoftwareMonkeys.csAnt.SetUp.Deploy.Launch;
 
 class Test_SetUpFromGitScript : BaseLiveProjectTestScript
 {

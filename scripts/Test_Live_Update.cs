@@ -14,7 +14,8 @@ using SoftwareMonkeys.csAnt.Projects;
 using SoftwareMonkeys.csAnt.Projects.Tests;
 using SoftwareMonkeys.csAnt.Projects.Tests.Scripting;
 using SoftwareMonkeys.csAnt.Projects.Tests.Scripting.Live;
-using SoftwareMonkeys.csAnt.SetUp;
+using SoftwareMonkeys.csAnt.SetUp.Install;
+using SoftwareMonkeys.csAnt.SetUp.Update;
 using NUnit.Framework;
 
 class Test_Live_Update : BaseLiveProjectTestScript
