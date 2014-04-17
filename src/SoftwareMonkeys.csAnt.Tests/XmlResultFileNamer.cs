@@ -45,9 +45,7 @@ namespace SoftwareMonkeys.csAnt.Tests
                 + Path.DirectorySeparatorChar
                 + "results"
                 + Path.DirectorySeparatorChar
-                + Version.ToString().Replace(".", "-")
-                + "--"
-                + script.TimeStamp
+                + Version.ToString()
                 + Path.DirectorySeparatorChar
                 + "xml";
         }
@@ -60,9 +58,7 @@ namespace SoftwareMonkeys.csAnt.Tests
                 + Path.DirectorySeparatorChar
                 + "results"
                 + Path.DirectorySeparatorChar
-                + Version.ToString().Replace(".", "-")
-                + "--"
-                + script.TimeStamp
+                + Version.ToString()
                 + Path.DirectorySeparatorChar
                 + "xml";
         }
