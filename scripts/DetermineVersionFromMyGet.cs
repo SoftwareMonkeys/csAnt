@@ -32,19 +32,42 @@ class DetermineVersionFromMyGet : BaseProjectScript
             "Nuget",
             "install",
             "csAnt",
-            "-Source " + feedPath,
-            "-OutputDirectory " + tmpDir,
-            "-NoCache"
+            "-Source \"" + feedPath + "\"",
+            "-OutputDirectory \"" + tmpDir + "\"",
+            "-NoCache",
+            "-Pre"
         );
 
         var dir = Directory.GetDirectories(tmpDir, "csAnt.*")[0];
 
-        var version = Path.GetFileName(dir).Replace("csAnt.", "");
+        var publishedVersionString = Path.GetFileName(dir).Replace("csAnt.", "");
+        if (publishedVersionString.Contains("-"))
+            publishedVersionString = publishedVersionString.Substring(0, publishedVersionString.IndexOf("-"));
+        var publishedVersion = new Version(publishedVersionString);
 
-        Console.WriteLine("Version: " + version);
+        var currentVersionString = CurrentNode.Properties["Version"];
+        if (currentVersionString.Contains("-"))
+            currentVersionString = currentVersionString.Substring(0, currentVersionString.IndexOf("-"));d
+        var currentVersion = new Version(CurrentNode.Properties["Version"]);
+
+        Console.WriteLine("Current version: " + currentVersion);
+        Console.WriteLine("Published version: " + publishedVersion);
         Console.WriteLine("");
 
-        ExecuteScript("SetVersion", version);
+        if (publishedVersion > currentVersion)
+        {
+            Console.WriteLine("Published version is newer.");
+            Console.WriteLine("Using published version.");
+
+            ExecuteScript("SetVersion", publishedVersion.ToString());
+        }
+        else
+        {
+            Console.WriteLine("Current version is newer.");
+            Console.WriteLine("Staying with current version.");
+        }
+
+        Console.WriteLine("");
 
         RefreshCurrentNode();
 
