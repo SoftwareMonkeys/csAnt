@@ -4,6 +4,7 @@ using Microsoft.CSharp;
 using System.Diagnostics;
 using System.Collections.Generic;
 using SoftwareMonkeys.csAnt;
+using SoftwareMonkeys.csAnt.Projects;
 using System.Linq;
 
 class EnsureBuildScript : BaseScript
@@ -19,7 +20,7 @@ class EnsureBuildScript : BaseScript
         if (Arguments.Contains("mode"))
             buildMode = Arguments["mode"];
 
-        new SolutionBuildEnsurer().EnsureBuilt(CurrentDirectory, buildMode);
+        new SolutionBuildChecker().EnsureBuilt(CurrentDirectory, buildMode);
 
 		return !IsError;
 	}
