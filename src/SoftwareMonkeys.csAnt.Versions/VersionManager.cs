@@ -21,7 +21,7 @@ namespace SoftwareMonkeys.csAnt.Versions
             if (node.Properties.ContainsKey("Version"))
                 return node.Properties["Version"];
             else
-                throw new VersionNotFoundException(workingDirectory);
+                return "0.0.0.0";
         }
 
         public void SetVersion(FileNode currentNode, Version version)
