@@ -47,7 +47,7 @@ class DetermineVersionFromMyGet : BaseProjectScript
 
         var currentVersionString = CurrentNode.Properties["Version"];
         if (currentVersionString.Contains("-"))
-            currentVersionString = currentVersionString.Substring(0, currentVersionString.IndexOf("-"));d
+            currentVersionString = currentVersionString.Substring(0, currentVersionString.IndexOf("-"));
         var currentVersion = new Version(CurrentNode.Properties["Version"]);
 
         Console.WriteLine("Current version: " + currentVersion);
