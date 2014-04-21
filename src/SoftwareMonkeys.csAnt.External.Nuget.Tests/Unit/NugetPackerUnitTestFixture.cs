@@ -24,7 +24,7 @@ namespace SoftwareMonkeys.csAnt.External.Nuget.Tests.Unit
 
             var packageName = "csAnt";
 
-            var version = "0.0.0.1";
+            var version = "0.0.1";
 
             // TODO: Remove dependency on existing .nuspec file by creating a mock one
             var filePath = WorkingDirectory
@@ -35,13 +35,14 @@ namespace SoftwareMonkeys.csAnt.External.Nuget.Tests.Unit
 
             var packer = new NugetPacker();
             packer.Version = new Version(version);
+            packer.Status = "beta";
             packer.PackageFile(filePath);
 
             var pkgFilePath = Path.GetDirectoryName(filePath)
                 + Path.DirectorySeparatorChar
                     + packageName
                     + Path.DirectorySeparatorChar
-                    + packageName + "." + version
+                    + packageName + "." + version + "-" + packer.Status
                     + ".nupkg";
 
             Console.WriteLine("Expected package file:");
