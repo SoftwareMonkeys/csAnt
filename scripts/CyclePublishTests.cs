@@ -39,9 +39,6 @@ class CyclePublishTestsScript : BaseProjectScript
 
 		CreateNodes();
 
-        // Look at the MyGet feed to find out what the latest version is and set it as the current version
-        ExecuteScript("DetermineVersionFromMyGet"); 
-
         Nodes.Refresh();
 
         ExecuteScript("CycleTests", "-skipincrement");
