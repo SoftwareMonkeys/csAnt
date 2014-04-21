@@ -74,9 +74,7 @@
     <Compile Include="BaseTestScriptTearDowner.cs" />
     <Compile Include="BaseTestScriptSetUpper.cs" />
     <Compile Include="BaseTestScriptConstructor.cs" />
-    <Compile Include="LifecycleTestFixture.cs" />
     <Compile Include="TestScriptCreator.cs" />
-    <Compile Include="Sanity\TestScriptCreatorTestFixture.cs" />
     <Compile Include="Sanity\TestScriptStackDetectorTestFixture.cs" />
     <Compile Include="Sanity\BaseScriptingSanityTestFixture.cs" />
     <Compile Include="Sanity\HelloWorldScriptTestFixture.cs" />
