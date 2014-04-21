@@ -34,12 +34,16 @@ class DetermineVersionFromMyGet : BaseProjectScript
             "csAnt",
             "-Source " + feedPath,
             "-OutputDirectory " + tmpDir,
+            "-Pre", // TODO: Make this configurable
             "-NoCache"
         );
 
         var dir = Directory.GetDirectories(tmpDir, "csAnt.*")[0];
 
         var version = Path.GetFileName(dir).Replace("csAnt.", "");
+
+        if (version.Contains("-"))
+            version = version.Substring(0, version.IndexOf("-"));
 
         Console.WriteLine("Version: " + version);
         Console.WriteLine("");
