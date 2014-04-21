@@ -31,7 +31,7 @@ End If
 
 ' Get csAnt setup package
 WriteLine "Getting the installer"
-Start(nugetFile + " install csAnt-setup -Source " + sourcePath + " -OutputDirectory lib -NoCache")
+Start(nugetFile + " install csAnt-setup -Source " + sourcePath + " -OutputDirectory lib -NoCache -Pre")
 WriteLine "Done"
 WriteLine ""
 

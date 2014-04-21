@@ -25,7 +25,9 @@ class CyclePublishTestsScript : BaseProjectScript
 		Console.WriteLine("Starting a full release cycle.");
 		Console.WriteLine("");
 
-        var packageName = "csAnt-testresults";
+        var packageName = ""; // Empty means all
+        if (args.Length > 0)
+            packageName = args[0];
 
 		// Git clone the project to another directory
 		var tmpDir = CloneToTmpDirectory();
@@ -36,9 +38,6 @@ class CyclePublishTestsScript : BaseProjectScript
 		Relocate(tmpDir);
 
 		CreateNodes();
-
-        // Look at the MyGet feed to find out what the latest version is and set it as the current version
-        ExecuteScript("DetermineVersionFromMyGet"); 
 
         Nodes.Refresh();
 
