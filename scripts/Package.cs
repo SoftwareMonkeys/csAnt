@@ -21,6 +21,9 @@ class PackageScript : BaseScript
         
         var packer = new NugetPacker();
 
+        if (CurrentNode.Properties.ContainsKey("Status"))
+            packer.Status = CurrentNode.Properties["Status"];
+
         if (String.IsNullOrEmpty(packageName))
             packer.PackAll(CurrentDirectory);
         else
