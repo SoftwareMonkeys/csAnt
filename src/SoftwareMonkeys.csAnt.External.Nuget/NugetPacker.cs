@@ -38,6 +38,19 @@ namespace SoftwareMonkeys.csAnt.External.Nuget
             }
         }
 
+        private string status;
+        public string Status
+        {
+            get
+            {
+                return status;
+            }
+            set
+            {
+                status = value;
+            }
+        }
+
         public NugetPacker ()
         {
             WorkingDirectory = Environment.CurrentDirectory;
@@ -109,17 +122,25 @@ namespace SoftwareMonkeys.csAnt.External.Nuget
             if (!Directory.Exists(outputDir))
                 Directory.CreateDirectory(outputDir);
 
+            var versionString = Version.Major
+                + "."
+                + Version.Minor
+                + "."
+                + Version.Build;
+
+            if (!String.IsNullOrEmpty(Status))
+                versionString = versionString
+                    + "-" + Status;
+
             var arguments = " pack"
                 + " " + filePath.Replace(WorkingDirectory, "").Trim(Path.DirectorySeparatorChar)
                 + " -basepath " + WorkingDirectory
                 + " -outputdirectory " + outputDir
-                + " -version " + Version
+                + " -version " + versionString
                 + " -verbosity detailed";
 
             var starter = new DotNetProcessStarter();
             starter.Start(cmd, arguments);
         }
-
     }
 }
-
