@@ -26,7 +26,7 @@ namespace SoftwareMonkeys.csAnt
 
         public void Compile(params string[] scriptNames)
         {
-            Compile(scriptNames);
+            Compile(false, scriptNames);
         }
 
         public void Compile(bool force, params string[] scriptNames)
@@ -113,4 +113,3 @@ namespace SoftwareMonkeys.csAnt
         }
     }
 }
-

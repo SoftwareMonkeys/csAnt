@@ -221,7 +221,7 @@ namespace SoftwareMonkeys.csAnt.Tests
                         
             List<string> arguments = new List<string> ();
 
-            arguments.Add ("lib/NUnitResults.1.1/nunit-results.exe");
+            arguments.Add ("lib/NUnitResults.1.1/bin/nunit-results.exe");
 
             arguments.Add ("\"" + xmlResultDir + "\"");
 
@@ -270,4 +270,3 @@ namespace SoftwareMonkeys.csAnt.Tests
         }
     }
 }
-

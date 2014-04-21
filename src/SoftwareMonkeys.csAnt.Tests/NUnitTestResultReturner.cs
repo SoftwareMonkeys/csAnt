@@ -122,28 +122,28 @@ namespace SoftwareMonkeys.csAnt.Tests
 
             if (Directory.Exists (fromTestsDir)) {
 
-                foreach (var dateDir in Directory.GetDirectories(fromTestsDir)) {
+                foreach (var versionDir in Directory.GetDirectories(fromTestsDir)) {
                         
                     if (Script.IsVerbose) {
-                        Console.WriteLine ("Date dir:");
-                        Console.WriteLine (dateDir);
+                        Console.WriteLine ("Version dir:");
+                        Console.WriteLine (versionDir);
                         Console.WriteLine ("");
                     }
 
-                    foreach (var formatDir in Directory.GetDirectories(dateDir)) {
+                    foreach (var formatDir in Directory.GetDirectories(versionDir)) {
                         if (Script.IsVerbose) {
                             Console.WriteLine ("Format dir:");
                             Console.WriteLine (formatDir);
                             Console.WriteLine ("");
                         }
 
-                        var date = Path.GetFileNameWithoutExtension (dateDir);
+                        var version = Path.GetFileName (versionDir);
 
-                        var format = Path.GetFileNameWithoutExtension (formatDir);
+                        var format = Path.GetFileName (formatDir);
 
                         var toDir = destinationTestsDir
                             + Path.DirectorySeparatorChar
-                            + date
+                            + version
                             + Path.DirectorySeparatorChar
                             + format;
                         
@@ -154,7 +154,7 @@ namespace SoftwareMonkeys.csAnt.Tests
                             Console.WriteLine ("To dir:");
                             Console.WriteLine ("  " + toDir);
                             Console.WriteLine ("");
-                            Console.WriteLine ("Date: " + date);
+                            Console.WriteLine ("Version: " + version);
                             Console.WriteLine ("Format: " + format);
                             Console.WriteLine ("");
                         }
@@ -182,4 +182,3 @@ namespace SoftwareMonkeys.csAnt.Tests
         }
     }
 }
-

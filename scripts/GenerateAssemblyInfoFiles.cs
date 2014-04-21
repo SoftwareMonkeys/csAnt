@@ -23,7 +23,8 @@ class GenerateAssemblyInfoFilesScript : BaseProjectScript
 
         foreach (var assemblyDir in Directory.GetDirectories(srcDir))
         {
-            GenerateIn(assemblyDir);
+            if (Path.GetFileNameWithoutExtension(assemblyDir) != "test-results")
+                GenerateIn(assemblyDir);
         }
 
 		return !IsError;
