@@ -25,9 +25,7 @@ class CyclePublishTestsScript : BaseProjectScript
 		Console.WriteLine("Starting a full release cycle.");
 		Console.WriteLine("");
 
-        var packageName = ""; // Empty means all
-        if (args.Length > 0)
-            packageName = args[0];
+        var packageName = "csAnt-testresults";
 
 		// Git clone the project to another directory
 		var tmpDir = CloneToTmpDirectory();
