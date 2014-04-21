@@ -6,7 +6,7 @@ using SoftwareMonkeys.csAnt.IO;
 
 namespace SoftwareMonkeys.csAnt.Projects
 {
-    public class SolutionBuildEnsurer
+    public class SolutionBuildChecker
     {
         public ScriptExecutor Executor { get;set; }
 
@@ -14,7 +14,7 @@ namespace SoftwareMonkeys.csAnt.Projects
 
         public FileTimeStampManager TimeStamps { get;set; }
 
-        public SolutionBuildEnsurer ()
+        public SolutionBuildChecker ()
         {
             Executor = new ScriptExecutor();
             TimeStamps = new FileTimeStampManager();

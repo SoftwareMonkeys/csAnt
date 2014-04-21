@@ -107,6 +107,9 @@ class CycleBuildScript : BaseProjectScript
                 }
 		}
 
+        // Update the time stamps data
+        new FileTimeStampManager().Update(CurrentDirectory);
+
 		if (!IsError)
 		{
             ExecuteScript("Repack", "-mode=" + mode);
