@@ -148,6 +148,7 @@ namespace SoftwareMonkeys.csAnt.SetUp.Install.Retrieve
             arguments.Add("-OutputDirectory " + outputDir);
             arguments.Add("-Source " + NugetSourcePath);
             arguments.Add("-NoCache"); // TODO: Is this required? It slows down setup and tests, but ensures the latest version of packages are accessible
+            arguments.Add("-Pre");
 
             if (Version > new Version(0, 0, 0, 0))
                 arguments.Add("-Version " + Version.ToString());
