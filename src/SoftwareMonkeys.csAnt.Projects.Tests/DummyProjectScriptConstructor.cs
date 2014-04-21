@@ -1,9 +1,12 @@
 using System;
+using SoftwareMonkeys.csAnt.Tests;
+
+
 namespace SoftwareMonkeys.csAnt.Projects.Tests
 {
-    public class DummyProjectScriptConstructor
+    public class DummyProjectScriptConstructor : ProjectScriptConstructor
     {
-        public DummyProjectScriptConstructor ()
+        public DummyProjectScriptConstructor (IScript script) : base(script)
         {
         }
     }
