@@ -171,14 +171,14 @@ class EnsurePackageScript : BaseProjectScript
 
 		    var versionStartPos = latestFileName.IndexOf(".")+1;
 
-		    var versionEndPos = latestFileName.Length-versionStartPos;
+		    var versionEndPos = latestFileName.IndexOf("-");
 
-		    var withoutTimestamp = withoutPrefix.Substring(versionStartPos, versionEndPos);
+		    var withoutStatus = withoutPrefix.Substring(versionStartPos, versionEndPos);
 
 		    if (IsVerbose)
-			    Console.WriteLine("Without time stamp: " + withoutTimestamp);
+			    Console.WriteLine("Without status: " + withoutStatus);
 
-		    version = withoutTimestamp.Replace("-", ".");
+		    version = withoutStatus.Replace("-", ".");
         }
 
 		return version;
