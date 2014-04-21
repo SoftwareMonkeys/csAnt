@@ -80,13 +80,10 @@
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="BaseProjectsTestFixture.cs" />
-    <Compile Include="BuildAllSolutionsTestFixture.cs" />
     <Compile Include="DummyProjectScript.cs" />
     <Compile Include="BaseProjectDummyScript.cs" />
     <Compile Include="BaseProjectsTestFixture.GetDummyScript.cs" />
     <Compile Include="BaseProjectsTestFixture.GetWorkingDirectory.cs" />
-    <Compile Include="ReleaseTestFixture.cs" />
-    <Compile Include="Integration\NodesTestFixture.cs" />
     <Compile Include="Integration\BaseProjectsIntegrationTestFixture.cs" />
     <Compile Include="BaseProjectsTestFixture.Construct.cs" />
   </ItemGroup>
