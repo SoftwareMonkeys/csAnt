@@ -32,7 +32,7 @@ namespace SoftwareMonkeys.csAnt.IO
                     "lib/Newtonsoft.Json.6.0.2/lib/net40/**",
                     "lib/NUnit.2.6.0.12051/lib/**",
                     "lib/NUnit.Runners.2.6.0.12051/tools/**",
-                    "lib/NUnitResults.1.1/*"
+                    "lib/NUnitResults.1.1/bin/*"
                 };
             }
         }
