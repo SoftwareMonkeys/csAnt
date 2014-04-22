@@ -48,7 +48,8 @@ namespace SoftwareMonkeys.csAnt
 		    foreach(string arg in args)
 		    {
                 if (!arg.Contains(":")
-                    && !arg.Contains("="))
+                    && !arg.Contains("=")
+                    && !arg.StartsWith("-"))
                     keyless.Add(arg);
 
 			// Look for new parameters (-,/ or --) and a
