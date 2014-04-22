@@ -9,6 +9,7 @@ using SoftwareMonkeys.csAnt.Processes;
 using SoftwareMonkeys.csAnt.SourceControl.Git;
 using SoftwareMonkeys.csAnt.SetUp.Install.Retrieve;
 using SoftwareMonkeys.csAnt.SetUp.Install.Unpack;
+using SoftwareMonkeys.csAnt.Tests;
 
 
 namespace SoftwareMonkeys.csAnt.SetUp.Install
@@ -35,6 +36,8 @@ namespace SoftwareMonkeys.csAnt.SetUp.Install
         public string PackageName = "csAnt";
 
         public bool Overwrite { get;set; }
+
+        public bool Clear { get;set; }
 
         public Version Version = new Version("0.0.0.0");
 
@@ -91,14 +94,22 @@ namespace SoftwareMonkeys.csAnt.SetUp.Install
             Console.WriteLine("");
             Console.WriteLine("Installing csAnt...");
             Console.WriteLine("");
-            Console.WriteLine("Current directory:");
-            Console.WriteLine(Environment.CurrentDirectory);
+            Console.WriteLine("Destination:");
+            Console.WriteLine("  " + DestinationPath);
             Console.WriteLine("");
-            Console.WriteLine("Clone:" + Clone.ToString());
-            Console.WriteLine("Clone source:" + CloneSource);
+            Console.WriteLine("Clear: " + Clear.ToString());
+            Console.WriteLine("Overwrite: " + Overwrite.ToString());
             Console.WriteLine("");
-            Console.WriteLine("Import:" + Import.ToString());
-            Console.WriteLine("Import path:" + ImportPath);
+            Console.WriteLine("Clone: " + Clone.ToString());
+            Console.WriteLine("Clone source:");
+            Console.WriteLine("  " + CloneSource);
+            Console.WriteLine("");
+            Console.WriteLine("Import: " + Import.ToString());
+            Console.WriteLine("Import path: ");
+            Console.WriteLine("  " + ImportPath);
+
+            if (Clear)
+                ClearFiles();
 
             Retriever.Retrieve();
 
@@ -116,6 +127,23 @@ namespace SoftwareMonkeys.csAnt.SetUp.Install
                 CloneFiles();
 
             RaiseInstallEvent();
+        }
+
+        public void ClearFiles()
+        {
+            Console.WriteLine("");
+            Console.WriteLine("Clearing existing files before install...");
+            Console.WriteLine("");
+            
+            // TODO: Check whether this is using the right patterns
+            var patterns = DefaultFiles.DefaultFilePatterns;
+
+            foreach (var file in FileFinder.FindFiles(DestinationPath, patterns))
+            {
+                File.Delete(file);
+                Console.WriteLine("  " + file.Replace(DestinationPath, ""));
+            }
+            Console.WriteLine("");
         }
 
         public void RaiseInstallEvent()

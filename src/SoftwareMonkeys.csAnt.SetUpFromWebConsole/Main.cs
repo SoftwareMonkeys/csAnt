@@ -16,6 +16,8 @@ namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole
 
         public static bool Overwrite { get;set; }
 
+        public static bool Clear { get;set; }
+
         public static bool Update { get;set; }
 
         public static bool Import { get;set; }
@@ -82,7 +84,8 @@ namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole
                         nugetRetriever,
                         unpacker
                         );
-
+                    
+                    updater.Clear = Clear;
                     updater.Import = Import;
                     updater.ImportPath = ImportPath;
                     updater.Clone = Clone;
@@ -96,7 +99,8 @@ namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole
                         nugetRetriever,
                         unpacker
                         );
-
+                    
+                    installer.Clear = Clear;
                     installer.Import = Import;
                     installer.ImportPath = ImportPath;
                     installer.Clone = Clone;
@@ -144,12 +148,17 @@ namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole
             // Version
             if (arguments.ContainsAny("n", "nuget", "nugetpath"))
                 NugetPath = arguments["n", "nuget", "nugetpath"];
-
+            
 
             // Overwrite
             Overwrite = arguments.ContainsAny(
                 "o",
                 "overwrite"
+            );
+
+            // Clear
+            Clear = arguments.ContainsAny(
+                "clear"
             );
 
             // Update
