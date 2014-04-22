@@ -1,7 +1,7 @@
 {
   "Properties": {
     "Context": "Assembly",
-    "Version": "0.5.8.0"
+    "Version": "0.5.5.0"
   },
   "Name": "SoftwareMonkeys.csAnt.SourceControl.Git"
 }
