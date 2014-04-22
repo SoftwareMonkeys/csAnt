@@ -62,7 +62,10 @@ class CyclePublishScript : BaseProjectScript
         ExecuteScript("CommitVersion");
 
 		// Build and package the cloned source code (the package script will trigger build cycle if necessary)
-		ExecuteScript("CyclePackage", packageName, "-skipincrement");
+        if (!String.IsNullOrEmpty(packageName))
+    		ExecuteScript("CyclePackage", packageName, "-skipincrement");
+        else
+            ExecuteScript("CyclePackage", "-skipincrement");
 
         // Return the created packages back to the original project /pkg/ directory
         ReturnPackages();
