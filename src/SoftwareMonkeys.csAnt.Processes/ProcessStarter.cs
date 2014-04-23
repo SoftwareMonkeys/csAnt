@@ -60,7 +60,7 @@ namespace SoftwareMonkeys.csAnt.Processes
         /// </summary>
         /// <param name='command'></param>
         /// <param name='arguments'></param>
-        public Process Start(string command, params string[] arguments)
+        public virtual Process Start(string command, params string[] arguments)
         {
             return Start(command, String.Join(" ", arguments));
         }
@@ -70,7 +70,7 @@ namespace SoftwareMonkeys.csAnt.Processes
         /// </summary>
         /// <param name='command'></param>
         /// <param name='arguments'></param>
-        public Process Start (string command, string arguments)
+        public virtual Process Start (string command, string arguments)
         {
             Console.WriteLine ("");
             Console.WriteLine ("--------------------");
