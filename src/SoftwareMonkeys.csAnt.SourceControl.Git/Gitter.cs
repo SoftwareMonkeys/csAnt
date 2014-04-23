@@ -53,7 +53,7 @@ namespace SoftwareMonkeys.csAnt.SourceControl.Git
             Console.WriteLine (file);
             Console.WriteLine ("");
 
-            Git ("add", file);
+            Git ("add", Starter.FixArgument(file));
         }
         
         public void AddTo(string path, string file)
@@ -64,7 +64,7 @@ namespace SoftwareMonkeys.csAnt.SourceControl.Git
             Console.WriteLine (file);
             Console.WriteLine ("");
 
-            GitIn (path, "add", file);
+            GitIn (path, "add", Starter.FixArgument(file));
         }
 
         public void AddRemote(string name, string path)
@@ -80,7 +80,7 @@ namespace SoftwareMonkeys.csAnt.SourceControl.Git
                 "remote",
                 "add",
                 name,
-                path
+                Starter.FixArgument(path)
                 );
         }
         
@@ -98,7 +98,7 @@ namespace SoftwareMonkeys.csAnt.SourceControl.Git
                 "remote",
                 "add",
                 name,
-                path
+                Starter.FixArgument(path)
                 );
         }
 
@@ -108,7 +108,7 @@ namespace SoftwareMonkeys.csAnt.SourceControl.Git
         {
             Clone(
                 sourceDir,
-                Environment.CurrentDirectory
+                Starter.FixArgument(Environment.CurrentDirectory)
             );
         }
 
@@ -128,8 +128,8 @@ namespace SoftwareMonkeys.csAnt.SourceControl.Git
 
             Git (
                 "clone",
-                sourceDir,
-                tmpDir,
+                Starter.FixArgument(sourceDir),
+                Starter.FixArgument(tmpDir),
                 "--verbose"
             );
 
@@ -239,12 +239,12 @@ namespace SoftwareMonkeys.csAnt.SourceControl.Git
             Console.WriteLine (destination);
             Console.WriteLine ("");
 
-            GitIn (directory, "push", destination);
+            GitIn (directory, "push", Starter.FixArgument(destination));
         }
 
         public void Move(string fromPath, string toPath)
         {
-            Git("mv", fromPath, toPath);
+            Git("mv", Starter.FixArgument(fromPath), Starter.FixArgument(toPath));
         }
         
         public void Reset(params string[] arguments)
