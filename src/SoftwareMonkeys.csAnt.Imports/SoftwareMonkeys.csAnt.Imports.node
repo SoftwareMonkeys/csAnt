@@ -1,7 +1,7 @@
 {
   "Properties": {
     "Context": "Assembly",
-    "Version": "0.5.11.0"
+    "Version": "0.5.11.100"
   },
   "Name": "SoftwareMonkeys.csAnt.Imports"
 }
