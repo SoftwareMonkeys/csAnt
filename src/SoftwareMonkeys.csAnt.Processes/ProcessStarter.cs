@@ -21,26 +21,21 @@ namespace SoftwareMonkeys.csAnt.Processes
 
         public Process Start(string command, string argument1, params string[] otherArguments)
         {
-            return Start(
-                command
-                + " "
-                + argument1
-                + " "
-                + String.Join(" ", otherArguments)
-                );
+            var arguments = new List<string>();
+            arguments.Add(argument1);
+            arguments.AddRange(otherArguments);
+
+            return Start(command, arguments.ToArray());
         }
 
         public Process Start(string command, string argument1, string argument2, params string[] otherArguments)
         {
-            return Start(
-                command
-                + " "
-                + argument1
-                + " "
-                + argument2
-                + " "
-                + String.Join(" ", otherArguments)
-                );
+            var arguments = new List<string>();
+            arguments.Add(argument1);
+            arguments.Add(argument2);
+            arguments.AddRange(otherArguments);
+
+            return Start(command, arguments.ToArray());
         }
 
         public Process Start(string command)
@@ -65,10 +60,8 @@ namespace SoftwareMonkeys.csAnt.Processes
         /// </summary>
         /// <param name='command'></param>
         /// <param name='arguments'></param>
-        public Process Start(string command, params string[] arguments)
+        public virtual Process Start(string command, params string[] arguments)
         {
-            arguments = FixArguments(arguments);
-
             return Start(command, String.Join(" ", arguments));
         }
         
@@ -77,7 +70,7 @@ namespace SoftwareMonkeys.csAnt.Processes
         /// </summary>
         /// <param name='command'></param>
         /// <param name='arguments'></param>
-        public Process Start (string command, string arguments)
+        public virtual Process Start (string command, string arguments)
         {
             Console.WriteLine ("");
             Console.WriteLine ("--------------------");
@@ -190,21 +183,23 @@ namespace SoftwareMonkeys.csAnt.Processes
 
             for (int i = 0; i < argsList.Count; i++)
             {
-                if (!String.IsNullOrEmpty (argsList[0]))
+                if (!String.IsNullOrEmpty (argsList[i]))
                 {
-                    if (
-                        argsList[0].IndexOf(" ") > -1
-                        && argsList[0].IndexOf("\"") != 0
-                    )
-                    {
-                        argsList[0] = @"""" + argsList[0] + @"""";
-                    }
+                    argsList[i] = FixArgument(argsList[i]);
                 }
             }
 
             return argsList.ToArray();
         }
 
+        public string FixArgument(string argument)
+        {
+            if (argument.Contains(" ")
+                && argument.IndexOf("\"") != 0)
+                return @"""" + argument + @"""";
+            else
+                return argument;
+        }
 
     }
 }
