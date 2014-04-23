@@ -45,7 +45,9 @@ class DetermineVersionFromMyGet : BaseProjectScript
             publishedVersionString = publishedVersionString.Substring(0, publishedVersionString.IndexOf("-"));
         var publishedVersion = new Version(publishedVersionString);
 
-        var currentVersionString = CurrentNode.Properties["Version"];
+        var currentVersionString = "0.0.0.0";
+        if (CurrentNode.Properties.ContainsKey("Version"))
+            currentVersionString = CurrentNode.Properties["Version"];
         if (currentVersionString.Contains("-"))
             currentVersionString = currentVersionString.Substring(0, currentVersionString.IndexOf("-"));
         var currentVersion = new Version(currentVersionString);
