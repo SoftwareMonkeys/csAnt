@@ -16,20 +16,16 @@ namespace SoftwareMonkeys.csAnt.Processes
 
         public Process Start(params string[] commandParts)
         {
-            commandParts = FixArguments(commandParts);
-
             return Start(String.Join(" ", commandParts));
         }
 
         public Process Start(string command, string argument1, params string[] otherArguments)
         {
-            return Start(
-                command
-                + " "
-                + argument1
-                + " "
-                + String.Join(" ", otherArguments)
-                );
+            var arguments = new List<string>();
+            arguments.Add(argument1);
+            arguments.AddRange(otherArguments);
+
+            return Start(command, arguments.ToArray());
         }
 
         public Process Start(string command, string argument1, string argument2, params string[] otherArguments)
@@ -66,8 +62,6 @@ namespace SoftwareMonkeys.csAnt.Processes
         /// <param name='arguments'></param>
         public Process Start(string command, params string[] arguments)
         {
-            arguments = FixArguments(arguments);
-
             return Start(command, String.Join(" ", arguments));
         }
         
@@ -191,19 +185,21 @@ namespace SoftwareMonkeys.csAnt.Processes
             {
                 if (!String.IsNullOrEmpty (argsList[i]))
                 {
-                    if (
-                        argsList[i].IndexOf(" ") > -1
-                        && argsList[i].IndexOf("\"") != 0
-                    )
-                    {
-                        argsList[i] = @"""" + argsList[i] + @"""";
-                    }
+                    argsList[i] = FixArgument(argsList[i]);
                 }
             }
 
             return argsList.ToArray();
         }
 
+        public string FixArgument(string argument)
+        {
+            if (argument.Contains(" ")
+                && argument.IndexOf("\"") != 0)
+                return @"""" + argument + @"""";
+            else
+                return argument;
+        }
 
     }
 }
