@@ -32,23 +32,44 @@ class DetermineVersionFromMyGet : BaseProjectScript
             "Nuget",
             "install",
             "csAnt",
-            "-Source " + feedPath,
-            "-OutputDirectory " + tmpDir,
-            "-Pre", // TODO: Make this configurable
-            "-NoCache"
+            "-Source \"" + feedPath + "\"",
+            "-OutputDirectory \"" + tmpDir + "\"",
+            "-NoCache",
+            "-Pre"
         );
 
         var dir = Directory.GetDirectories(tmpDir, "csAnt.*")[0];
 
-        var version = Path.GetFileName(dir).Replace("csAnt.", "");
+        var publishedVersionString = Path.GetFileName(dir).Replace("csAnt.", "");
+        if (publishedVersionString.Contains("-"))
+            publishedVersionString = publishedVersionString.Substring(0, publishedVersionString.IndexOf("-"));
+        var publishedVersion = new Version(publishedVersionString);
 
-        if (version.Contains("-"))
-            version = version.Substring(0, version.IndexOf("-"));
+        var currentVersionString = "0.0.0.0";
+        if (CurrentNode.Properties.ContainsKey("Version"))
+            currentVersionString = CurrentNode.Properties["Version"];
+        if (currentVersionString.Contains("-"))
+            currentVersionString = currentVersionString.Substring(0, currentVersionString.IndexOf("-"));
+        var currentVersion = new Version(currentVersionString);
 
-        Console.WriteLine("Version: " + version);
+        Console.WriteLine("Current version: " + currentVersion);
+        Console.WriteLine("Published version: " + publishedVersion);
         Console.WriteLine("");
 
-        ExecuteScript("SetVersion", version);
+        if (publishedVersion > currentVersion)
+        {
+            Console.WriteLine("Published version is newer.");
+            Console.WriteLine("Using published version.");
+
+            ExecuteScript("SetVersion", publishedVersion.ToString());
+        }
+        else
+        {
+            Console.WriteLine("Current version is newer.");
+            Console.WriteLine("Staying with current version.");
+        }
+
+        Console.WriteLine("");
 
         RefreshCurrentNode();
 

@@ -56,7 +56,7 @@ namespace SoftwareMonkeys.csAnt.SetUp.Install
             if (Clone
                 && String.IsNullOrEmpty(CloneSource))
             {
-                Console.WriteLine("Using source path as clone source.");;
+                Console.WriteLine("Using source path as clone source.");
                 CloneSource = SourcePath;
             }
 
@@ -65,7 +65,7 @@ namespace SoftwareMonkeys.csAnt.SetUp.Install
             if (Import
                 && String.IsNullOrEmpty(ImportPath))
             {
-                Console.WriteLine("Using source path as import path.");;
+                Console.WriteLine("Using source path as import path.");
                 ImportPath = SourcePath;
             }
 

@@ -199,7 +199,7 @@ namespace SoftwareMonkeys.csAnt.Projects
 
             if (failed > 0)
                 Console.WriteLine(failed + " solution(s) failed to build.");
-        
+
             return success;
         }
     }

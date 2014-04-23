@@ -34,6 +34,12 @@ namespace SoftwareMonkeys.csAnt.SetUp.Update
             set { Installer.ImportPath = value; }
         }
 
+        public bool Clear
+        {
+            get { return Installer.Clear; }
+            set { Installer.Clear = value; }
+        }
+
         public bool Clone
         {
             get { return Installer.Clone; }

@@ -5,7 +5,7 @@ namespace SoftwareMonkeys.csAnt.Projects.Tests
     {
         public override void Construct()
         {
-            Nodes = new NodeManager();
+            Nodes = new ProjectNodeManager();
         }
     }
 }

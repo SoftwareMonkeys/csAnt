@@ -45,6 +45,9 @@ class CyclePublishScript : BaseProjectScript
         // Create any missing file nodes (*.node files)
 		CreateNodes();
 
+        // Determine the version from the release in case the current version isn't up to date
+        ExecuteScript("DetermineVersionFromMyGet");
+
         if (!String.IsNullOrEmpty(version))
         {
             ExecuteScript("SetVersion", version);
@@ -59,7 +62,10 @@ class CyclePublishScript : BaseProjectScript
         ExecuteScript("CommitVersion");
 
 		// Build and package the cloned source code (the package script will trigger build cycle if necessary)
-		ExecuteScript("CyclePackage", packageName, "-skipincrement");
+        if (!String.IsNullOrEmpty(packageName))
+    		ExecuteScript("CyclePackage", packageName, "-skipincrement");
+        else
+            ExecuteScript("CyclePackage", "-skipincrement");
 
         // Return the created packages back to the original project /pkg/ directory
         ReturnPackages();

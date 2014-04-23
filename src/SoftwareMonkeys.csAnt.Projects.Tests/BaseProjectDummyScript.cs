@@ -11,7 +11,7 @@ namespace SoftwareMonkeys.csAnt.Projects.Tests.Scripting
 
 		public BaseProjectDummyScript (string scriptName) : base(scriptName)
 		{
-            Constructor = new DummyScriptConstructor(this);
+            Constructor = new DummyProjectScriptConstructor(this);
 
             Construct(scriptName);
 		}

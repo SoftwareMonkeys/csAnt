@@ -80,12 +80,16 @@
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="BaseProjectsTestFixture.cs" />
+    <Compile Include="BuildAllSolutionsTestFixture.cs" />
     <Compile Include="DummyProjectScript.cs" />
     <Compile Include="BaseProjectDummyScript.cs" />
     <Compile Include="BaseProjectsTestFixture.GetDummyScript.cs" />
     <Compile Include="BaseProjectsTestFixture.GetWorkingDirectory.cs" />
+    <Compile Include="Integration\NodesTestFixture.cs" />
     <Compile Include="Integration\BaseProjectsIntegrationTestFixture.cs" />
     <Compile Include="BaseProjectsTestFixture.Construct.cs" />
+    <Compile Include="DummyProjectScriptConstructor.cs" />
+    <Compile Include="Integration\SolutionBuildCheckerTestFixture.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

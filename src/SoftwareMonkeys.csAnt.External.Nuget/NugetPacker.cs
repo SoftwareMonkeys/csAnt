@@ -132,14 +132,16 @@ namespace SoftwareMonkeys.csAnt.External.Nuget
                 versionString = versionString
                     + "-" + Status;
 
+            // TODO: Move to a property
+            var starter = new DotNetProcessStarter();
+
             var arguments = " pack"
-                + " " + filePath.Replace(WorkingDirectory, "").Trim(Path.DirectorySeparatorChar)
-                + " -basepath " + WorkingDirectory
-                + " -outputdirectory " + outputDir
+                + " " + starter.FixArgument(filePath.Replace(WorkingDirectory, "").Trim(Path.DirectorySeparatorChar))
+                + " -basepath " + starter.FixArgument(WorkingDirectory)
+                + " -outputdirectory " + starter.FixArgument(outputDir)
                 + " -version " + versionString
                 + " -verbosity detailed";
 
-            var starter = new DotNetProcessStarter();
             starter.Start(cmd, arguments);
         }
     }

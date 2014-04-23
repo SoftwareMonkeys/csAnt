@@ -15,6 +15,8 @@ namespace SoftwareMonkeys.csAnt.SetUpFromLocalConsole
         public static string DestinationPath { get;set; }
         
         public static bool Overwrite { get;set; }
+        
+        public static bool Clear { get;set; }
 
         public static bool Update { get;set; }
 
@@ -80,7 +82,9 @@ namespace SoftwareMonkeys.csAnt.SetUpFromLocalConsole
                         Overwrite
                     );
                 }
-                
+
+                installer.Clear = Clear;
+
                 installer.Import = Import;
                 installer.ImportPath = ImportPath;
                 
@@ -199,6 +203,11 @@ namespace SoftwareMonkeys.csAnt.SetUpFromLocalConsole
             Overwrite = arguments.ContainsAny(
                 "o",
                 "overwrite"
+            );
+
+            // Clear
+            Clear = arguments.ContainsAny(
+                "clear"
             );
 
             // Update

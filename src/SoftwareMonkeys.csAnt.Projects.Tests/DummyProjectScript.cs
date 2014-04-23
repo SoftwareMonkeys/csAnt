@@ -15,10 +15,12 @@ namespace SoftwareMonkeys.csAnt.Projects.Tests
         
         public DummyProjectScript (string scriptName) : base(scriptName)
         {
+            Constructor = new ProjectScriptConstructor(this);
         }
 
         public DummyProjectScript(string scriptName, IScript parentScript) : base(scriptName, parentScript)
         {
+            Constructor = new ProjectScriptConstructor(this);
         }
 
         public override bool Run (string[] args)

@@ -4,22 +4,13 @@ using System.Collections.Generic;
 
 namespace SoftwareMonkeys.csAnt.Processes
 {
-    public class DotNetProcessStarter
+    public class DotNetProcessStarter : ProcessStarter
     {
-        public ProcessStarter Starter { get;set; }
-
-        public bool IsError
-        {
-            get { return Starter.IsError; }
-            set { Starter.IsError = value; }
-        }
-
         public DotNetProcessStarter ()
         {
-            Starter = new ProcessStarter();
         }
 
-        public Process Start(string exeFile, params string[] arguments)
+        public override Process Start(string exeFile, params string[] arguments)
         {
             string cmd = exeFile;
             
@@ -38,7 +29,7 @@ namespace SoftwareMonkeys.csAnt.Processes
 
             argsList.AddRange(arguments);
 
-            return Starter.Start(
+            return base.Start(
                 cmd,
                 argsList.ToArray()
             );
