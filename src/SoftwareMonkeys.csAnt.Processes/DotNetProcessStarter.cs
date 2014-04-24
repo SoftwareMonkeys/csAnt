@@ -9,8 +9,16 @@ namespace SoftwareMonkeys.csAnt.Processes
         public DotNetProcessStarter ()
         {
         }
+        
+        public new Process Start(string exeFile, string arguments)
+        {
+            if (Platform.IsMono)
+                return base.Start("mono", exeFile, arguments);
+            else
+                return base.Start(exeFile, arguments);
+        }
 
-        public override Process Start(string exeFile, params string[] arguments)
+        public new Process Start(string exeFile, params string[] arguments)
         {
             string cmd = exeFile;
             

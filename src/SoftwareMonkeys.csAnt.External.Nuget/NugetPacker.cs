@@ -107,9 +107,7 @@ namespace SoftwareMonkeys.csAnt.External.Nuget
             Console.WriteLine(filePath);
             Console.WriteLine("");
 
-            var cmd = WorkingDirectory
-                + Path.DirectorySeparatorChar
-                + "lib"
+            var cmd = "lib"
                 + Path.DirectorySeparatorChar
                 + "nuget.exe";
 
@@ -135,12 +133,14 @@ namespace SoftwareMonkeys.csAnt.External.Nuget
             // TODO: Move to a property
             var starter = new DotNetProcessStarter();
 
-            var arguments = " pack"
-                + " " + starter.FixArgument(filePath.Replace(WorkingDirectory, "").Trim(Path.DirectorySeparatorChar))
-                + " -basepath " + starter.FixArgument(WorkingDirectory)
-                + " -outputdirectory " + starter.FixArgument(outputDir)
-                + " -version " + versionString
-                + " -verbosity detailed";
+            var arguments = new string[]{
+                "pack",
+                starter.FixArgument(filePath.Replace(WorkingDirectory, "").Trim(Path.DirectorySeparatorChar)),
+                "-basepath " + starter.FixArgument(WorkingDirectory),
+                "-outputdirectory " + starter.FixArgument(outputDir),
+                "-version " + versionString,
+                "-verbosity detailed"
+            };
 
             starter.Start(cmd, arguments);
         }
