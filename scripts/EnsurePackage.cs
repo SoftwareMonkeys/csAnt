@@ -156,9 +156,9 @@ class EnsurePackageScript : BaseProjectScript
 
 		    Console.WriteLine("Package file: " + latestFileName);
 
-		    var variation = Path.GetFileName(packageSubDir);
+		    var releaseName = Path.GetFileName(packageSubDir);
 
-		    var prefix = ProjectName + "-" + variation + ".";
+		    var prefix = releaseName + ".";
 		
 		    if (IsVerbose)
 			    Console.WriteLine("Prefix: " + prefix);
@@ -169,18 +169,13 @@ class EnsurePackageScript : BaseProjectScript
 			    Console.WriteLine("Without prefix: " + withoutPrefix);
 		
 
-		    var versionStartPos = latestFileName.IndexOf(".")+1;
+		    var versionStartPos = 0;
 
-		    var versionEndPos = latestFileName.IndexOf("-");
+		    var versionEndPos = withoutPrefix.IndexOf("-");
 
-		    var withoutStatus = withoutPrefix;
-            if (withoutStatus.Contains("-"))
-                withoutStatus = withoutStatus.Substring(versionStartPos, versionEndPos);
+		    version = withoutPrefix.Substring(versionStartPos, versionEndPos);
 
-		    if (IsVerbose)
-			    Console.WriteLine("Without status: " + withoutStatus);
-
-		    version = withoutStatus.Replace("-", ".");
+		    version = version.Replace("-", ".");
         }
 
 		return version;
