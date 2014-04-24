@@ -34,7 +34,7 @@ cd lib/csAnt-setup.*
 # Move the setup file back to the root
 echo "Moving the installer to the correct location"
 echo ""
-cp csAnt-SetUp.exe ../../
+cp csAnt-SetUp.exe ../../ -f
 
 # Return to the root dir
 cd ../../
