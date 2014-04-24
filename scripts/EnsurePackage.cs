@@ -173,7 +173,9 @@ class EnsurePackageScript : BaseProjectScript
 
 		    var versionEndPos = latestFileName.IndexOf("-");
 
-		    var withoutStatus = withoutPrefix.Substring(versionStartPos, versionEndPos);
+		    var withoutStatus = withoutPrefix;
+            if (withoutStatus.Contains("-"))
+                withoutStatus = withoutStatus.Substring(versionStartPos, versionEndPos);
 
 		    if (IsVerbose)
 			    Console.WriteLine("Without status: " + withoutStatus);
