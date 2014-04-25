@@ -2,7 +2,9 @@ using System;
 using SoftwareMonkeys.csAnt.External.Nuget;
 using System.IO;
 using System.Collections.Generic;
-
+using NuGet.Runtime;
+using NuGet;
+using System.Linq;
 
 namespace SoftwareMonkeys.csAnt.SetUp.Install.Retrieve
 {
@@ -21,11 +23,6 @@ namespace SoftwareMonkeys.csAnt.SetUp.Install.Retrieve
         public NugetExecutor NugetExecutor { get;set; }
 
         public string DestinationPath { get;set; }
-
-        // TODO: Remove if not needed
-        ///public Version Version = new Version(0,0,0,0);
-
-        //public string PackageName = "csAnt";
         
         public InstallerNugetPackageRetriever (string nugetSourcePath, string destinationPath)
         {
@@ -83,10 +80,10 @@ namespace SoftwareMonkeys.csAnt.SetUp.Install.Retrieve
         {
             Console.WriteLine("");
             Console.WriteLine("Nuget path:");
-            Console.WriteLine(NugetPath);
+            Console.WriteLine("  " + NugetPath);
             Console.WriteLine("");
             Console.WriteLine("Nuget feed path:");
-            Console.WriteLine(NugetSourcePath);
+            Console.WriteLine("  " + NugetSourcePath);
             Console.WriteLine("");
 
             InstallNuget();
@@ -100,6 +97,9 @@ namespace SoftwareMonkeys.csAnt.SetUp.Install.Retrieve
                 + Path.DirectorySeparatorChar
                     + "csAnt";
 
+            if (version == new Version(0,0,0,0))
+                version = GetVersion(packageName, version, status);
+
             var arguments = new List<string>();
             arguments.Add("install");
             arguments.Add(packageName);
@@ -108,8 +108,7 @@ namespace SoftwareMonkeys.csAnt.SetUp.Install.Retrieve
             arguments.Add("-NoCache"); // TODO: Is this required? It slows down setup and tests, but ensures the latest version of packages are accessible
             arguments.Add("-Pre");
 
-            if (version > new Version(0, 0, 0, 0))
-                arguments.Add("-Version " + version.ToString());
+            AddVersionArgument(packageName, version, status, arguments);
 
             if (!Directory.Exists(outputCsAntDir))
                 Directory.CreateDirectory(outputCsAntDir);
@@ -120,11 +119,98 @@ namespace SoftwareMonkeys.csAnt.SetUp.Install.Retrieve
             );
         }
 
+        public void AddVersionArgument(string packageName, Version version, string status, List<string> arguments)
+        {
+            if (version > new Version(0, 0, 0, 0)
+                || !String.IsNullOrEmpty(status))
+            {
+                var versionString = GetVersion(packageName, version, status)
+                    + "-" + status;
+
+                arguments.Add("-Version " + versionString.ToString());
+            }
+        }
+
         public void InstallNuget()
         {
             NugetChecker.CheckNuget();
         }
 
+        public Version GetVersion(string packageName, Version version, string status)
+        {
+            var versions = GetMatchingVersions(packageName, version, status);
+
+            var list = new List<string>(versions);
+            list.Sort();
+
+            var latestVersion = list[list.Count-1];
+
+            var versionPart = latestVersion.Substring(0, latestVersion.IndexOf("-"));
+
+            return new Version(versionPart);
+        }
+
+        public string[] GetMatchingVersions(string packageName, Version versionQuery, string status)
+        {
+            var versions = GetVersions(packageName);
+
+            var matchingVersions = new List<string>();
+
+            foreach (var version in versions)
+            {
+                if (VersionMatches(version, versionQuery, status))
+                {
+                    matchingVersions.Add(version);
+                }
+            }
+
+            return matchingVersions.ToArray();
+        }
+
+        public bool VersionMatches(string versionStringWithStatus, Version versionQuery, string status)
+        {
+            var versionStringParts = versionStringWithStatus.Split('-');
+            var versionPart = versionStringParts[0];
+            var statusPart = versionStringParts[1];
+
+            var versionSections = versionPart.Split('.');
+
+            var statusMatches = status.Equals(statusPart);
+
+            var versionMatches = VersionMatches(versionPart, versionQuery);
+
+            return versionMatches && statusMatches;
+        }
+        
+        public bool VersionMatches(string versionString, Version versionQuery)
+        {
+            var versionMatches = true;
+
+            for (int i = 0; i < versionQuery.ToString().Split('.').Length; i++)
+            {
+                var sectionQuery = versionQuery.ToString().Split('.')[i];
+                var otherSection = versionString.Split('.')[i];
+
+                if (!sectionQuery.Equals(otherSection))
+                    versionMatches = false;
+            }
+
+            return versionMatches;
+        }
+
+        public string[] GetVersions(string packageName)
+        {
+            //Connect to the official package repository
+            IPackageRepository repo = PackageRepositoryFactory.Default.CreateRepository(NugetSourcePath);
+
+            //Get the list of all NuGet packages with ID 'EntityFramework'       
+            List<IPackage> packages = repo.FindPackagesById(packageName).ToList();
+
+            var versions = from p in packages
+                select p.Version.ToString();
+
+            return versions.ToArray();
+        }
     }
 }
 

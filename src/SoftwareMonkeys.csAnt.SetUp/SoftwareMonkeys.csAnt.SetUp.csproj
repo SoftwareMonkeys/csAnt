@@ -76,6 +76,9 @@
     <Reference Include="CSScriptLibrary">
       <HintPath>..\..\lib\CS-Script.3.7.2.0\lib\net40\CSScriptLibrary.dll</HintPath>
     </Reference>
+    <Reference Include="NuGet.Core">
+      <HintPath>..\..\lib\Nuget.Core.2.8.1\lib\net40-Client\NuGet.Core.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />

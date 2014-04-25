@@ -44,6 +44,7 @@
     <Compile Include="Mock\MockInstallerRetriever.cs" />
     <Compile Include="Unit\LocalInstallerTestFixture.cs" />
     <Compile Include="Unit\InstallUnpackerTestFixture.cs" />
+    <Compile Include="Unit\InstallerNugetPackageRetrieverTestFixture.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -79,5 +80,13 @@
       <Project>{16297BCB-0A8C-42E6-BE35-921085C3E238}</Project>
       <Name>SoftwareMonkeys.csAnt</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SoftwareMonkeys.csAnt.External.Nuget.Tests\SoftwareMonkeys.csAnt.External.Nuget.Tests.csproj">
+      <Project>{A5DD8740-CCDB-4F86-974E-6480A2919620}</Project>
+      <Name>SoftwareMonkeys.csAnt.External.Nuget.Tests</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Unit\Install\" />
+    <Folder Include="Unit\Install\Retrieve\" />
   </ItemGroup>
 </Project>
