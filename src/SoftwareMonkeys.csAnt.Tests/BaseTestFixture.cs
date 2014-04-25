@@ -17,9 +17,14 @@ namespace SoftwareMonkeys.csAnt.Tests
         public string WorkingDirectory {
             get {
                 if (String.IsNullOrEmpty(workingDirectory))
-                    return GetWorkingDirectory();
+                {
+                    workingDirectory = GetWorkingDirectory();
+                    Environment.CurrentDirectory = workingDirectory;
+                }
                 return workingDirectory; }
-            set { workingDirectory = value; }
+            set { workingDirectory = value;
+                Environment.CurrentDirectory = value;
+            }
         }
 
         public List<IScript> Scripts = new List<IScript>();
