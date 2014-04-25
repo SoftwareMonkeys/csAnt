@@ -24,8 +24,8 @@ class CyclePackageScript : BaseProjectScript
 
 		var packageName = String.Empty;
 
-		if (args.Length > 0){
-			packageName = args[0];
+		if (Arguments.KeylessArguments.Length > 0){
+			packageName = Arguments.KeylessArguments[0];
 			Console.WriteLine("Package name: " + packageName);
 		}
 
