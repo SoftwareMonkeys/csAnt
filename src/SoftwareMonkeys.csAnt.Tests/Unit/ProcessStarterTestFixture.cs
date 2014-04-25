@@ -44,14 +44,20 @@ namespace SoftwareMonkeys.csAnt.Tests.Unit
         }
         
         [Test]
-        public void Test_StartProcess_Error()
+        public void Test_Start_Error()
         {
             // TODO: Overhaul test
             var script = GetDummyScript();
+            
+            var starter = new ProcessStarter()
+            {
+                ThrowExceptionOnError = false
+            };
 
-            script.StartProcess ("missingcommand", "Hello world!");
+            starter.Start ("missingcommand", "Hello world!");
 
-            Assert.IsTrue(script.ConsoleWriter.Output.Contains ("Win32Exception: ApplicationName='missingcommand'"), "The output is incorrect.");
+            var output = script.ConsoleWriter.Output;
+            Assert.IsTrue(output.Contains ("Win32Exception: ApplicationName='missingcommand'"), "The output is incorrect.");
         }
 	}
 }
