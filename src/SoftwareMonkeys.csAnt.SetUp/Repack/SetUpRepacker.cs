@@ -1,9 +1,12 @@
 using System;
+using System.IO;
+
+
 namespace SoftwareMonkeys.csAnt.SetUp.Repack
 {
     public class SetUpRepacker
     {
-        public string BuildMode = "Release";
+        public string BuildMode = new BuildMode().Value;
         
         public SetUpRepacker ()
         {
@@ -16,7 +19,7 @@ namespace SoftwareMonkeys.csAnt.SetUp.Repack
 
         public void Repack()
         {
-            var assemblyFile = "bin/{BuildMode}/csAnt-SetUp.exe";
+            var assemblyFile = Path.Combine(Environment.CurrentDirectory, "bin/{BuildMode}/csAnt-SetUp.exe");
 
             var dependencies = new string[]{
                 "lib/SharpZipLib.0.86.0/lib/20/ICSharpCode.SharpZipLib.dll",

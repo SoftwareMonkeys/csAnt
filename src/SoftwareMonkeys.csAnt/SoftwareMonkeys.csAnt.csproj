@@ -246,6 +246,7 @@
     <Compile Include="BaseScript.EventRaiser.cs" />
     <Compile Include="ScriptFinder.cs" />
     <Compile Include="BaseScript.ScriptFinder.cs" />
+    <Compile Include="ScriptLauncher.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

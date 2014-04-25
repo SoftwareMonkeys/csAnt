@@ -12,6 +12,11 @@ namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole
 {
     class MainClass
     {
+
+        public static string PackageName = "csAnt";
+        public static Version Version = new Version(0,0,0,0);
+        public static string Status = String.Empty;
+
         public static string DestinationPath { get;set; }
 
         public static bool Overwrite { get;set; }
@@ -24,8 +29,6 @@ namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole
 
         public static string ImportPath = "https://git01.codeplex.com/csant/";
 
-        public static Version Version = new Version(0,0,0,0);
-
         public static string NugetSourcePath = "https://www.myget.org/F/softwaremonkeys/";
 
         public static string NugetPath = "http://nuget.org/nuget.exe";
@@ -33,8 +36,6 @@ namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole
         public static string CloneSource = "https://git01.codeplex.com/csant/";
 
         public static bool Clone { get;set; }
-
-        public static string PackageName = "csAnt";
 
         public static bool IsHelp { get;set; }
 
@@ -69,8 +70,7 @@ namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole
     
                 var nugetRetriever = new InstallerNugetPackageRetriever(
                     NugetSourcePath,
-                    DestinationPath,
-                    Version
+                    DestinationPath
                 );
 
                 if (!String.IsNullOrEmpty(NugetPath))
@@ -85,6 +85,9 @@ namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole
                         unpacker
                         );
                     
+                    updater.PackageName = PackageName;
+                    updater.Version = Version;
+                    updater.Status = Status;
                     updater.Clear = Clear;
                     updater.Import = Import;
                     updater.ImportPath = ImportPath;
@@ -99,7 +102,10 @@ namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole
                         nugetRetriever,
                         unpacker
                         );
-                    
+
+                    installer.PackageName = PackageName;
+                    installer.Version = Version;
+                    installer.Status = Status;
                     installer.Clear = Clear;
                     installer.Import = Import;
                     installer.ImportPath = ImportPath;
@@ -125,30 +131,30 @@ namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole
             DestinationPath = Environment.CurrentDirectory;
             if (arguments.ContainsAny("d", "destination"))
                 DestinationPath = Path.GetFullPath(arguments["d", "destination"]);
-
-            // Version
-            if (arguments.ContainsAny("v", "version"))
-                Version = Version.Parse(arguments["v", "version"]);
-
-
+            
             // Package name
             if (arguments.ContainsAny("p", "pkg", "package"))
                 PackageName = arguments["p", "pkg", "package"];
 
+            // Version
+            if (arguments.ContainsAny("v", "version"))
+                Version = Version.Parse(arguments["v", "version"]);
+            
+            // Status
+            if (arguments.ContainsAny("status"))
+                Status = arguments["status"];
 
             // Show intro
             if (arguments.ContainsAny("intro"))
                 ShowIntro = Convert.ToBoolean(arguments["intro"]);
 
-            // Version
+            // Source
             if (arguments.ContainsAny("s", "source"))
                 NugetSourcePath = arguments["s", "source"];
 
-
-            // Version
+            // Nuget path
             if (arguments.ContainsAny("n", "nuget", "nugetpath"))
                 NugetPath = arguments["n", "nuget", "nugetpath"];
-            
 
             // Overwrite
             Overwrite = arguments.ContainsAny(
@@ -251,11 +257,14 @@ namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole
             Console.WriteLine("  -v, -version");
             Console.WriteLine("      The version to install. Default is the latest version.");
             Console.WriteLine("");
+            Console.WriteLine("  -status");
+            Console.WriteLine("      The version to install. Default is the latest version.");
+            Console.WriteLine("");
             Console.WriteLine("  -d, -destination");
             Console.WriteLine("      The destination folder to install the files to (absolute or relative).");
             Console.WriteLine("");
-            Console.WriteLine("  -f, -feed, -feedpath");
-            Console.WriteLine("      The location of the nuget feed.");
+            Console.WriteLine("  -s, -source");
+            Console.WriteLine("      The location of the source nuget feed.");
             Console.WriteLine("");
             Console.WriteLine("  -n, -nuget, -nugetpath");
             Console.WriteLine("      The location of the nuget.exe file. This will be downloaded if it's a http path, or copied if it's a local/network path. Default is http://nuget.org/nuget.exe");

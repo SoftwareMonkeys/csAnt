@@ -3,6 +3,7 @@ using Microsoft.Build.BuildEngine;
 using SoftwareMonkeys.csAnt.Processes;
 using System.Collections.Generic;
 using System.IO;
+using SoftwareMonkeys.csAnt;
 
 
 namespace SoftwareMonkeys.csAnt.Projects
@@ -11,7 +12,7 @@ namespace SoftwareMonkeys.csAnt.Projects
     {
         public ProcessStarter Starter { get;set; }
 
-        public string BuildMode = "Release";
+        public string BuildMode = new BuildMode().Value;
         
         public SolutionBuilder ()
         {

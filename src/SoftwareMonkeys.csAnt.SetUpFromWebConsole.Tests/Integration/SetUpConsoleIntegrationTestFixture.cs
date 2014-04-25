@@ -99,7 +99,7 @@ namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole.Tests.Integration
             new ProjectNodeCreator().CreateGroupNode();
             
             // Build the solution
-            new SolutionBuilder().BuildSolution("csAnt");
+            new SolutionBuilder(buildMode).BuildSolution("csAnt.Tests");
 
             // Repack the csAnt-SetUp.exe file to include dependencies
             new SetUpRepacker(buildMode).Repack();

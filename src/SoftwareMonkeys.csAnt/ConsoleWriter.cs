@@ -8,10 +8,17 @@ namespace SoftwareMonkeys.csAnt
 	{
         // TODO: Remove if not needed
         public StringBuilder OutputBuilder { get;set; }
-        
+
 		public string Output
         {
-            get { return LogFileWriter.ToString(); }
+            get
+            {
+                // TODO: Check whether this code is too slow. Find a faster way to get the output.
+                CloseLogFileWriter();
+                var output = File.ReadAllText(LogFile);
+                OpenLogFileWriter();
+                return output;
+            }
         }
 
 		public string LogFile { get;set; }
@@ -39,15 +46,9 @@ namespace SoftwareMonkeys.csAnt
 			string scriptName
 		)
 		{
-			var logFile = Path.GetFullPath(outputDirectory)
-				+ Path.DirectorySeparatorChar
-				+ GetTimeStamp()
-				+ "-" + scriptName
-				+ ".txt";
+			LogFile = GetLogFilePath(outputDirectory, scriptName);
 
             StandardWriter = standardWriter;
-
-			LogFile = logFile;
 
 			ScriptName = scriptName;
             
@@ -58,20 +59,10 @@ namespace SoftwareMonkeys.csAnt
 		{
 			if (text == null)
 				text = String.Empty;
-
-			// TODO: Increase the indent depending on the indent of the script
-
-            // TODO: Check if needed
-			//System.Console.WriteLine(text);
-
+        
             StandardWriter.WriteLine (text);
 
-			AppendOutput(text + "\n");
-			
 			AppendOutputFile(text + "\n");
-			
-			// TODO: Remove if not needed
-			//base.WriteLine (text);
 		}
 
 		public override void Write(string text)
@@ -79,27 +70,9 @@ namespace SoftwareMonkeys.csAnt
 			if (text == null)
 				text = String.Empty;
 
-            // TODO: Check if needed
-			//System.Console.Write(text);
-			
             StandardWriter.Write (text);
 
-			AppendOutput(text);
-
 			AppendOutputFile(text);
-
-			// TODO: Remove if not needed
-			//base.Write (text);
-		}
-
-		public void AppendOutput (string text)
-		{
-			if (text == null)
-				text = String.Empty;
-
-            // TODO: Check if needed. Is currently using up too much memory so should be removed if possible.
-            // Currently used by some tests to access and analyse output
-			//OutputBuilder.Append(text);
 		}
 		
 		public void AppendOutputFile(string text)
@@ -115,14 +88,30 @@ namespace SoftwareMonkeys.csAnt
 			}
 
 			if (LogFileWriter == null) {
-
-				LogFileWriter = File.CreateText (LogFile);
-
-				LogFileWriter.AutoFlush = true;
+                OpenLogFileWriter();
 			}
 
 			LogFileWriter.Write(text);
 		}
+
+        public void OpenLogFileWriter()
+        {
+            if (File.Exists(LogFile))
+                LogFileWriter = new StreamWriter(File.OpenWrite(LogFile));
+            else
+                LogFileWriter = File.CreateText (LogFile);
+
+            LogFileWriter.AutoFlush = true;
+        }
+
+        public void CloseLogFileWriter()
+        {
+            if (LogFileWriter != null)
+            {
+                LogFileWriter.Close();
+                LogFileWriter = null;
+            }
+        }
 
 		public string GetTimeStamp()
 		{
@@ -143,10 +132,21 @@ namespace SoftwareMonkeys.csAnt
 				+ dateTime.Ticks;
 		}
 
+        public string GetLogFilePath(string outputDirectory, string scriptName)
+        {
+            return Path.GetFullPath(outputDirectory)
+                        + Path.DirectorySeparatorChar
+                        + GetTimeStamp()
+                        + "-" + scriptName
+                    + ".txt";
+        }
+
 		protected override void Dispose (bool disposing)
 		{
-			if (disposing && LogFileWriter != null)
-				LogFileWriter.Close();
+			if (disposing)
+            {
+                CloseLogFileWriter();
+            }
 
 			base.Dispose (disposing);
 		}

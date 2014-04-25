@@ -94,10 +94,13 @@
     <Compile Include="BaseTestFixture.cs" />
     <Compile Include="BaseTestFixture.IsLinux.cs" />
     <Compile Include="CurrentDirectoryFixer.cs" />
+    <Compile Include="DownloadTestFixture.cs" />
     <Compile Include="GetLibTestFixture.cs" />
     <Compile Include="GetZipInternalPathTestFixture.cs" />
+    <Compile Include="DownloadAndUnzipTestFixture.cs" />
     <Compile Include="Sanity\BaseSanityTestFixture.cs" />
     <Compile Include="Sanity\CurrentDirectoryFixerTestFixture.cs" />
+    <Compile Include="Sanity\WorkingDirectoryTestFixture.cs" />
     <Compile Include="SyncTestFixture.cs" />
     <Compile Include="BasicTestFixture.cs" />
     <Compile Include="SuccessfulTestFixture.cs" />
@@ -108,6 +111,7 @@
     <Compile Include="DummyScriptTearDowner.cs" />
     <Compile Include="IDummyScript.cs" />
     <Compile Include="GetDummyScriptTestFixture.cs" />
+    <Compile Include="TemporaryDirectoryCreatorTestFixture.cs" />
     <Compile Include="FixCurrentDirectoryTestFixture.cs" />
     <Compile Include="TestSummarizer.cs" />
     <Compile Include="BaseTestFixture.GetDummyScript.cs" />
@@ -118,6 +122,7 @@
     <Compile Include="BaseTestFixture.GetWorkingDirectory.cs" />
     <Compile Include="HtmlResultFileNamer.cs" />
     <Compile Include="XmlResultFileNamer.cs" />
+    <Compile Include="RaiseEventTestFixture.cs" />
     <Compile Include="BaseTestFixture.SetUp.cs" />
     <Compile Include="BaseTestFixture.TearDown.cs" />
     <Compile Include="BaseTestFixture.GetTimeStamp.cs" />
@@ -125,6 +130,7 @@
     <Compile Include="BaseTestFixture.WriteDirectoryStructure.cs" />
     <Compile Include="BaseTestFixture.EnsureSetUp.cs" />
     <Compile Include="BaseTestFixture.EnsureTornDown.cs" />
+    <Compile Include="Unit\FileFinderTestFixture.cs" />
     <Compile Include="Integration\BaseIntegrationTestFixture.cs" />
     <Compile Include="Integration\LibraryManagerTestFixture.cs" />
     <Compile Include="BaseTestFixture.Nodes.cs" />
@@ -141,6 +147,7 @@
     <Compile Include="Sanity\NUnitTestRunnerTestFixture.cs" />
     <Compile Include="Unit\ClearTmpTestFixture.cs" />
     <Compile Include="Sanity\FailingTestFixture.cs" />
+    <Compile Include="Unit\GetOriginalDirectoryTestFixture.cs" />
     <Compile Include="Unit\ProcessStarterTestFixture.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

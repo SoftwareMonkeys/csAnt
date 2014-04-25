@@ -12,23 +12,25 @@ namespace SoftwareMonkeys.csAnt.SetUp.Tests
 
         public string DestinationPath { get;set; }
 
-        public Version Version { get;set; }
-
-        public MockInstallerRetriever(string source, string destination, Version version)
+        public MockInstallerRetriever(string source, string destination)
         {
             SourcePath = source;
             DestinationPath = destination;
-            Version = version;
         }
 
-        public override void Retrieve ()
+        public override void Retrieve (string packageName)
+        {
+            throw new NotImplementedException ();
+        }
+
+        public override void Retrieve (string packageName, Version version, string status)
         {
             var toDir = DestinationPath
                 + Path.DirectorySeparatorChar
                     + "lib"
                     + Path.DirectorySeparatorChar
                     + "csAnt."
-                    + Version;
+                    + version;
 
             new FilesGrabber(
                 SourcePath,

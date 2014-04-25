@@ -5,6 +5,7 @@ using System.IO;
 using SoftwareMonkeys.csAnt.SetUp;
 using SoftwareMonkeys.csAnt.SetUp.Update;
 using SoftwareMonkeys.csAnt.SetUp.Install;
+using SoftwareMonkeys.csAnt.Tests.Helpers;
 
 
 namespace SoftwareMonkeys.csAnt.SetUp.Tests.Unit
@@ -22,22 +23,16 @@ namespace SoftwareMonkeys.csAnt.SetUp.Tests.Unit
             var updater = new Updater(
                 CreateMockInstallerRetriever(
                     OriginalDirectory,
-                    WorkingDirectory,
-                    new Version("2.0.0.0")
+                    WorkingDirectory
                 )
             );
 
+            updater.Version = new Version("2.0.0.0");
+
             updater.Update();
-
-            var script = GetDummyScript();
-
-            // TODO: Is launching a hello world script the best way to check that the installation worked considering this is a unit test and not an integration test?
-
-            script.ExecuteScript("HelloWorld");
-
-            Assert.IsFalse(script.IsError, "An error occurred.");
-
-            //CheckModifiedFile();
+            
+            // Check that csAnt still runs
+            new HelloWorldScriptLauncher().Launch();
         }
 
         public void Prepare(string version)
@@ -88,8 +83,7 @@ namespace SoftwareMonkeys.csAnt.SetUp.Tests.Unit
             var installer = new Installer(
                 CreateMockInstallerRetriever(
                     OriginalDirectory,
-                    WorkingDirectory,
-                    new Version("0.0.0.1")
+                    WorkingDirectory
                 )
             );
 

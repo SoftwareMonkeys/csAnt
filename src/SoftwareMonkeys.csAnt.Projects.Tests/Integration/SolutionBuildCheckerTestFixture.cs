@@ -1,7 +1,6 @@
 using System;
 using SoftwareMonkeys.csAnt.IO;
 using NUnit.Framework;
-using System.IO;
 
 
 namespace SoftwareMonkeys.csAnt.Projects.Tests.Integration
@@ -33,11 +32,6 @@ namespace SoftwareMonkeys.csAnt.Projects.Tests.Integration
                 ).GrabOriginalFiles();
 
             var checker = new SolutionBuildChecker();
-
-            var timeStampsFile = PathConverter.ToAbsolute("src/TimeStamps.txt");
-
-            if (File.Exists(timeStampsFile))
-                File.Delete(timeStampsFile);
 
             Assert.IsTrue(checker.RequiresBuild(CurrentDirectory));
         }

@@ -22,7 +22,8 @@ namespace SoftwareMonkeys.csAnt.SetUp.Install.Retrieve
 
         public string DestinationPath { get;set; }
 
-        public string PackageName = "csAnt";
+        // TODO: Remove if not needed
+        //public string PackageName = "csAnt";
 
         public VersionManager Versions { get;set; }
 
@@ -39,8 +40,13 @@ namespace SoftwareMonkeys.csAnt.SetUp.Install.Retrieve
             FileFinder = new FileFinder();
             Versions = new VersionManager();
         }
+        
+        public override void Retrieve(string packageName)
+        {
+            Retrieve(packageName, new Version(0,0,0,0), String.Empty);
+        }
 
-        public override void Retrieve()
+        public override void Retrieve(string packageName, Version version, string status)
         {
             Console.WriteLine("Retrieving files from:");
             Console.WriteLine(SourcePath);
@@ -48,7 +54,7 @@ namespace SoftwareMonkeys.csAnt.SetUp.Install.Retrieve
             if (!Directory.Exists (DestinationPath))
                 Directory.CreateDirectory (DestinationPath);
 
-            var patterns = GetFilePatterns();
+            var patterns = GetFilePatterns(packageName, version, status);
 
             Console.WriteLine("File patterns:");
             foreach (var pattern in patterns)
@@ -92,9 +98,10 @@ namespace SoftwareMonkeys.csAnt.SetUp.Install.Retrieve
             }
         }
 
-        public string[] GetFilePatterns()
+        public string[] GetFilePatterns(string packageName, Version version, string status)
         {
-            var packageSpecFile = Path.Combine(SourcePath, "pkg/" + PackageName + ".nuspec");
+            // TODO: Check existing packages for the one specified by the version and status parameter. Use it instead of the latest nuspec file
+            var packageSpecFile = Path.Combine(SourcePath, "pkg/" + packageName + ".nuspec");
 
             var doc = new XmlDocument();
 
