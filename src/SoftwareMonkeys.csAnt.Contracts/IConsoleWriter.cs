@@ -12,8 +12,6 @@ namespace SoftwareMonkeys.csAnt
 
         void WriteLine(string message);
         void WriteLine();
-
-        void AppendOutput(string message);
     }
 }
 
