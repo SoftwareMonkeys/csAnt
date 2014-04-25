@@ -16,6 +16,7 @@ namespace SoftwareMonkeys.csAnt.SetUp.Install.Unpack
         public InstallUnpacker ()
         {
             FileFinder = new FileFinder();
+            Backup = new FileBackup();
         }
 
         public override void Unpack (string projectDirectory, string packageName, Version version, bool forceOverwrite)
