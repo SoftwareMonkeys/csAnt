@@ -85,9 +85,11 @@ namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole
                         unpacker
                         );
                     
+
                     updater.PackageName = PackageName;
                     updater.Version = Version;
                     updater.Status = Status;
+
                     updater.Clear = Clear;
                     updater.Import = Import;
                     updater.ImportPath = ImportPath;
@@ -106,6 +108,7 @@ namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole
                     installer.PackageName = PackageName;
                     installer.Version = Version;
                     installer.Status = Status;
+
                     installer.Clear = Clear;
                     installer.Import = Import;
                     installer.ImportPath = ImportPath;
