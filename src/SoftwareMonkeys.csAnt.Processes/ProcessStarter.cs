@@ -10,6 +10,8 @@ namespace SoftwareMonkeys.csAnt.Processes
     {
         public bool IsError { get;set; }
 
+        public bool ThrowExceptionOnError = true;
+
         public ProcessStarter ()
         {
         }
@@ -161,7 +163,18 @@ namespace SoftwareMonkeys.csAnt.Processes
             catch (Exception ex)
             {
                 IsError = true;
-                throw new Exception ("Error starting process.", ex);
+
+                var title = "\"Error starting process.\"";
+
+                if (ThrowExceptionOnError)
+                    throw new Exception (title, ex);
+                else
+                {
+                    Console.WriteLine("");
+                    Console.WriteLine(title);
+                    Console.WriteLine(ex.ToString());
+                    Console.WriteLine("");
+                }
             }
 
 
