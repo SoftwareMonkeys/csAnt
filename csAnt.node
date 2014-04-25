@@ -1,7 +1,7 @@
 {
   "Properties": {
     "Group": "SoftwareMonkeys",
-    "Version": "0.5.14.0",
+    "Version": "0.5.15.0",
     "Status": "alpha",
     "Branch": "master",
     "CycleBuildSolutions": "csAnt.Tests"
