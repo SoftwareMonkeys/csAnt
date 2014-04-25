@@ -11,6 +11,8 @@ namespace SoftwareMonkeys.csAnt.SetUp.Install.Unpack
     {
         public IFileFinder FileFinder { get;set; }
 
+        public FileBackup Backup { get;set; }
+
         public InstallUnpacker ()
         {
             FileFinder = new FileFinder();
@@ -73,8 +75,10 @@ namespace SoftwareMonkeys.csAnt.SetUp.Install.Unpack
                         || isNewer)
                     )
                 {
-                    // TODO: Back up this file before deleting
+                    BackupFile(toFile);
+
                     File.Delete(toFile);
+
                     overwrittenFiles++;
                 }
 
@@ -86,7 +90,6 @@ namespace SoftwareMonkeys.csAnt.SetUp.Install.Unpack
                         file,
                         toFile
                         );
-
 
                     installedFiles++;
                 }
@@ -122,6 +125,11 @@ namespace SoftwareMonkeys.csAnt.SetUp.Install.Unpack
             }
 
             return pkgDir;
+        }
+
+        public void BackupFile(string filePath)
+        {
+            Backup.Backup(filePath);
         }
     }
 }
