@@ -6,19 +6,16 @@ namespace SoftwareMonkeys.csAnt.Tests.Helpers
 {
     public class HelloWorldScriptLauncher
     {
-        public ProcessStarter Starter { get;set; }
+        public ScriptLauncher Launcher { get;set; }
 
         public HelloWorldScriptLauncher ()
         {
-            Starter = new ProcessStarter();
+            Launcher = new ScriptLauncher();
         }
 
         public void Launch()
         {
-            if (Platform.IsLinux)
-                Starter.Start("sh csAnt.sh HelloWorld");
-            else
-                Starter.Start("csAnt.bat HelloWorld");
+            Launcher.Launch("HelloWorld");
         }
     }
 }
