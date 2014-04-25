@@ -50,8 +50,9 @@ namespace SoftwareMonkeys.csAnt.SetUp.Install.Unpack
             var skippedFiles = 0;
             var overwrittenFiles = 0;
 
-            Console.WriteLine("Looking for files in:");
+            Console.WriteLine("Looking for files in package directory:");
             Console.WriteLine(directory);
+            Console.WriteLine("");
 
             foreach (var file in FileFinder.FindFiles(directory, files))
             {
@@ -114,7 +115,9 @@ namespace SoftwareMonkeys.csAnt.SetUp.Install.Unpack
             else
             {
                 return new List<DirectoryInfo>(
-                    new DirectoryInfo(libDir).GetDirectories("csAnt.*").OrderByDescending(p => p.CreationTime)
+                    new DirectoryInfo(libDir).GetDirectories("csAnt.*")
+                        .Where(d => d.Name.StartsWith("csAnt."))
+                            .OrderByDescending(p => p.Name)
                 )[0].FullName;
             }
 

@@ -43,6 +43,7 @@
     <Compile Include="Unit\UpdaterTestFixture.cs" />
     <Compile Include="Mock\MockInstallerRetriever.cs" />
     <Compile Include="Unit\LocalInstallerTestFixture.cs" />
+    <Compile Include="Unit\InstallUnpackerTestFixture.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
