@@ -15,7 +15,10 @@ class IncrementVersionScript : BaseProjectScript
 	
 	public override bool Run(string[] args)
 	{
-    	IncrementVersion();
+        if (args.Length > 0)
+            IncrementVersion(Convert.ToInt32(args[0]));
+        else
+    	    IncrementVersion();
          
 		return !IsError;
 	}
