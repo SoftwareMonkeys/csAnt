@@ -74,5 +74,9 @@
       <Project>{485BCC0F-7E4F-4430-9174-3A1ADA428E71}</Project>
       <Name>SoftwareMonkeys.csAnt.SetUp</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SoftwareMonkeys.csAnt\SoftwareMonkeys.csAnt.csproj">
+      <Project>{16297BCB-0A8C-42E6-BE35-921085C3E238}</Project>
+      <Name>SoftwareMonkeys.csAnt</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>
