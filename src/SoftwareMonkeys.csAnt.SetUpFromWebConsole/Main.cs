@@ -59,13 +59,7 @@ namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole
                 Console.WriteLine("Version:" + (Version == new Version(0,0,0,0) ? "[Latest]" : Version.ToString()));
                 Console.WriteLine("");
                 Console.WriteLine("Destination path:");
-                Console.WriteLine(DestinationPath);
-                Console.WriteLine("");
-                Console.WriteLine("nuget source feed path:");
-                Console.WriteLine(NugetSourcePath);
-                Console.WriteLine("");
-                Console.WriteLine("nuget exe path:");
-                Console.WriteLine(NugetPath);
+                Console.WriteLine("  " + DestinationPath);
                 Console.WriteLine("");
     
                 var nugetRetriever = new InstallerNugetPackageRetriever(
