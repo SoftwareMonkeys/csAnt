@@ -10,9 +10,9 @@ namespace SoftwareMonkeys.csAnt.SetUp.Tests
         {
         }
 
-        public MockInstallerRetriever CreateMockInstallerRetriever(string source, string destination, Version version)
+        public MockInstallerRetriever CreateMockInstallerRetriever(string source, string destination)
         {
-            return new MockInstallerRetriever(source, destination, version);
+            return new MockInstallerRetriever(source, destination);
         }
     }
 }

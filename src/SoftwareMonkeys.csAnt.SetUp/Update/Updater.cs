@@ -22,6 +22,12 @@ namespace SoftwareMonkeys.csAnt.SetUp.Update
             set { Installer.Version = value; }
         }
 
+        public string Status
+        {
+            get { return Installer.Status; }
+            set { Installer.Status = value; }
+        }
+
         public bool Import
         {
             get { return Installer.Import; }

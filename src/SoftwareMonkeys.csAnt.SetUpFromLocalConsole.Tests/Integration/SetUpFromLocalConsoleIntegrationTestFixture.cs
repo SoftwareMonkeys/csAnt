@@ -28,7 +28,8 @@ namespace SoftwareMonkeys.csAnt.SetUpFromLocalConsole.Tests.Integration
 
             // Launch the setup from local console
             new SetUpFromLocalConsoleLauncher().Launch(fromDir, testProjectDir);
-
+            
+            // Check that csAnt still runs
             new HelloWorldScriptLauncher().Launch();
         }
 
@@ -39,13 +40,12 @@ namespace SoftwareMonkeys.csAnt.SetUpFromLocalConsole.Tests.Integration
                 WorkingDirectory
                 ).GrabOriginalFiles();
 
-            // TODO: Avoid creating a script by using the dedicated ScriptExecutor component
-            var script = GetDummyScript();
+            var scriptLauncher = new ScriptLauncher();
 
             // TODO: See if there's a faster way to prepare
-            script.ExecuteScript("EnsureBuild", "-mode:" + BuildMode.Value);
-            script.ExecuteScript("Repack", "-mode:" + BuildMode.Value);
-            script.ExecuteScript("CopyBinToRoot", "-mode:" + BuildMode.Value);
+            scriptLauncher.Launch("EnsureBuild", "-mode:" + BuildMode.Value);
+            scriptLauncher.Launch("Repack", "-mode:" + BuildMode.Value);
+            scriptLauncher.Launch("CopyBinToRoot", "-mode:" + BuildMode.Value);
 
 
         }

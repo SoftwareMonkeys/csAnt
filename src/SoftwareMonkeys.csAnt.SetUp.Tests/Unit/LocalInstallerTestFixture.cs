@@ -23,14 +23,6 @@ namespace SoftwareMonkeys.csAnt.SetUp.Tests.Unit
             );
 
             installer.Install();
-
-            var script = GetDummyScript();
-
-            // TODO: Is launching a hello world script the best way to check that the installation worked considering this is a unit test and not an integration test?
-
-            script.ExecuteScript("HelloWorld");
-
-            Assert.IsFalse(script.IsError, "An error occurred.");
         }
 
         [Test]
@@ -47,14 +39,6 @@ namespace SoftwareMonkeys.csAnt.SetUp.Tests.Unit
             installer.Import = true;
 
             installer.Install();
-
-            var script = GetDummyScript();
-
-            // TODO: Is launching a hello world script the best way to check that the installation worked considering this is a unit test and not an integration test?
-
-            script.ExecuteScript("HelloWorld");
-
-            Assert.IsFalse(script.IsError, "An error occurred.");
         }
         
         [Test]
@@ -72,14 +56,6 @@ namespace SoftwareMonkeys.csAnt.SetUp.Tests.Unit
 
             installer.Install();
 
-            var script = GetDummyScript();
-
-            // TODO: Is launching a hello world script the best way to check that the installation worked considering this is a unit test and not an integration test?
-
-            script.ExecuteScript("HelloWorld");
-
-            Assert.IsFalse(script.IsError, "An error occurred.");
-
             Assert.IsTrue(
                 Directory.Exists(PathConverter.ToAbsolute(".git")),
                 "The .git folder wasn't found."
@@ -88,12 +64,7 @@ namespace SoftwareMonkeys.csAnt.SetUp.Tests.Unit
 
         public MockInstallerRetriever CreateMockRetriever(string source, string destination)
         {
-            return CreateMockRetriever(source, destination, new Version("0.0.0.0"));
-        }
-
-        public MockInstallerRetriever CreateMockRetriever(string source, string destination, Version version)
-        {
-            var retriever = new MockInstallerRetriever(source, destination, version);
+            var retriever = new MockInstallerRetriever(source, destination);
 
             return retriever;
         }
