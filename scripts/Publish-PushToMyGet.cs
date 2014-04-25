@@ -5,18 +5,18 @@ using SoftwareMonkeys.csAnt;
 using SoftwareMonkeys.csAnt.Projects;
 using System.Collections.Generic;
 
-class Publish_PushToMyGetScript : BaseProjectScript
+class Publish_PushToMyGet : BaseProjectScript
 {
 	public static void Main(string[] args)
 	{
-		new Publish_PushToMyGetScript().Start(args);
+		new Publish_PushToMyGet().Start(args);
 	}
 	
 	public override bool Run(string[] args)
 	{
-        var packageName = "";
-        if (args.Length > 0)
-            packageName = args[0];
+        var packageName = ""; // Empty means all
+        if (Arguments.KeylessArguments.Length > 0)
+            packageName = Arguments.KeylessArguments[0];
 
 		ExecuteScript("PushToMyGet", packageName);
 

@@ -17,32 +17,32 @@ namespace SoftwareMonkeys.csAnt.SetUp.Install
     // TODO: Tidy up the code in this class
     public class Installer : BaseInstaller
     {
-        #region Components
         public IFileFinder FileFinder { get;set; }
 
         public BaseInstallerRetriever Retriever { get;set; }
 
         public BaseInstallUnpacker Unpacker { get;set; }
 
-        public Gitter Git = new Gitter();
-
-        public ScriptEventRaiser EventRaiser { get;set; }
-        #endregion
-
-        public string PackageName = "csAnt";
-        public Version Version = new Version("0.0.0.0");
-        public string Status = "";
-
         public bool Import { get;set; }
         public string ImportPath { get;set; }
+
         public Importer Importer { get;set; }
 
         public bool Clone { get;set; }
         public string CloneSource { get;set; }
 
+        public Gitter Git = new Gitter();
+
+        public string PackageName = "csAnt";
+
         public bool Overwrite { get;set; }
 
         public bool Clear { get;set; }
+
+        public Version Version = new Version("0.0.0.0");
+
+        // TODO: Remove if not needed
+        public ProcessStarter Starter = new ProcessStarter();
         
         public Installer (
             BaseInstallerRetriever retriever,
@@ -53,7 +53,6 @@ namespace SoftwareMonkeys.csAnt.SetUp.Install
             Unpacker = unpacker;
             FileFinder = new FileFinder();
             Importer = new Importer();
-            EventRaiser = new ScriptEventRaiser();
         }
 
         public Installer (
@@ -64,7 +63,6 @@ namespace SoftwareMonkeys.csAnt.SetUp.Install
             Unpacker = new InstallUnpacker();
             FileFinder = new FileFinder();
             Importer = new Importer();
-            EventRaiser = new ScriptEventRaiser();
         }
 
         public Installer (string packageName, string feedPath, string destination)
@@ -73,17 +71,14 @@ namespace SoftwareMonkeys.csAnt.SetUp.Install
             Unpacker = new InstallUnpacker();
             FileFinder = new FileFinder();
             Importer = new Importer();
-            EventRaiser = new ScriptEventRaiser();
         }
 
         public Installer (string sourcePath, string destination)
         {
-            // TODO: Check if sourcePath parameter is needed
             Retriever = new InstallerNugetPackageRetriever(destination);
             Unpacker = new InstallUnpacker();
             FileFinder = new FileFinder();
             Importer = new Importer();
-            EventRaiser = new ScriptEventRaiser();
         }
         
         public Installer ()
@@ -92,7 +87,6 @@ namespace SoftwareMonkeys.csAnt.SetUp.Install
             Unpacker = new InstallUnpacker();
             FileFinder = new FileFinder();
             Importer = new Importer();
-            EventRaiser = new ScriptEventRaiser();
         }
 
         public override void Install()
@@ -117,7 +111,7 @@ namespace SoftwareMonkeys.csAnt.SetUp.Install
             if (Clear)
                 ClearFiles();
 
-            Retriever.Retrieve(PackageName, Version, Status);
+            Retriever.Retrieve();
 
             Unpacker.Unpack(
                 DestinationPath, // TODO: Make this configurable
@@ -154,11 +148,8 @@ namespace SoftwareMonkeys.csAnt.SetUp.Install
 
         public void RaiseInstallEvent()
         {
-            // Launch the RaiseEvent script via the standard launcher. This ensures all newly installed assemblies are picked up.
-            new ScriptLauncher().Launch("RaiseEvent", "Install"); // TODO: Move to property
-
-            // The following approach results in an error, when trying to load the corresponding scripts
-            // new ScriptEventRaiser().Raise("Install");
+            // TODO: Move event raiser to property
+            new ScriptEventRaiser().Raise("Install");
         }
 
         public void BackupFile(string existingFile)

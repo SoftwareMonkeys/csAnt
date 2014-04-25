@@ -45,8 +45,9 @@ class CyclePublishScript : BaseProjectScript
         // Create any missing file nodes (*.node files)
 		CreateNodes();
 
+        // TODO: Check if needed. Shouldn't be required and is causing problems.
         // Determine the version from the release in case the current version isn't up to date
-        ExecuteScript("DetermineVersionFromMyGet");
+        //ExecuteScript("DetermineVersionFromMyGet");
 
         if (!String.IsNullOrEmpty(version))
         {

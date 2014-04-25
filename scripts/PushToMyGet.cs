@@ -14,9 +14,9 @@ class PushToMyGetScript : BaseProjectScript
 	
 	public override bool Run(string[] args)
 	{
-        var packageName = "";
-        if (args.Length > 0)
-            packageName = args[0];
+        var packageName = ""; // Empty means all
+        if (Arguments.KeylessArguments.Length > 0)
+            packageName = Arguments.KeylessArguments[0];
 
         var pkgsDir = CurrentDirectory
             + Path.DirectorySeparatorChar
