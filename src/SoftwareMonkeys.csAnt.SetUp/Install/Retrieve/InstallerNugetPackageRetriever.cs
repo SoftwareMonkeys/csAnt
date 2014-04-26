@@ -85,6 +85,9 @@ namespace SoftwareMonkeys.csAnt.SetUp.Install.Retrieve
             Console.WriteLine("Nuget feed path:");
             Console.WriteLine("  " + NugetSourcePath);
             Console.WriteLine("");
+            Console.WriteLine("Version: " + version.ToString());
+            Console.WriteLine("Status: " + status);
+            Console.WriteLine("");
 
             InstallNuget();
 
@@ -96,9 +99,6 @@ namespace SoftwareMonkeys.csAnt.SetUp.Install.Retrieve
             var outputCsAntDir = outputDir
                 + Path.DirectorySeparatorChar
                     + "csAnt";
-
-            if (version == new Version(0,0,0,0))
-                version = GetVersion(packageName, version, status);
 
             var arguments = new List<string>();
             arguments.Add("install");
@@ -127,6 +127,8 @@ namespace SoftwareMonkeys.csAnt.SetUp.Install.Retrieve
                 var versionString = GetVersion(packageName, version, status)
                     + "-" + status;
 
+                Console.WriteLine("Version string: " + versionString);
+
                 arguments.Add("-Version " + versionString.ToString());
             }
         }
@@ -140,14 +142,19 @@ namespace SoftwareMonkeys.csAnt.SetUp.Install.Retrieve
         {
             var versions = GetMatchingVersions(packageName, version, status);
 
-            var list = new List<string>(versions);
-            list.Sort();
+            if (versions.Length > 0)
+            {
+                var list = new List<string>(versions);
+                list.Sort();
 
-            var latestVersion = list[list.Count-1];
+                var latestVersion = list[list.Count-1];
 
-            var versionPart = latestVersion.Substring(0, latestVersion.IndexOf("-"));
+                var versionPart = latestVersion.Substring(0, latestVersion.IndexOf("-"));
 
-            return new Version(versionPart);
+                return new Version(versionPart);
+            }
+            else
+                return new Version(0,0,0,0);
         }
 
         public string[] GetMatchingVersions(string packageName, Version versionQuery, string status)
@@ -167,35 +174,63 @@ namespace SoftwareMonkeys.csAnt.SetUp.Install.Retrieve
             return matchingVersions.ToArray();
         }
 
-        public bool VersionMatches(string versionStringWithStatus, Version versionQuery, string status)
+        public bool VersionMatches(string versionWithStatus, Version versionQuery, string status)
         {
-            var versionStringParts = versionStringWithStatus.Split('-');
-            var versionPart = versionStringParts[0];
-            var statusPart = versionStringParts[1];
+            Console.WriteLine("");
+            Console.WriteLine("Checking whether version matches...");
+            Console.WriteLine("Value (version with status): " + versionWithStatus);
+            Console.WriteLine("Version query to match: " + versionQuery);
+            Console.WriteLine("Status: " + status);
 
-            var versionSections = versionPart.Split('.');
+            var versionStringParts = versionWithStatus.Split('-');
+            var versionPart = "";
+            var statusPart = "";
+
+            if (versionStringParts.Length == 1)
+                versionPart = versionWithStatus;
+            else if (versionStringParts.Length == 2)
+            {
+                versionPart = versionStringParts[0];
+                statusPart = versionStringParts[1];
+            }
 
             var statusMatches = status.Equals(statusPart);
 
             var versionMatches = VersionMatches(versionPart, versionQuery);
 
-            return versionMatches && statusMatches;
+            var matches = versionMatches && statusMatches;
+
+            Console.WriteLine("Matches: " + matches.ToString());
+            Console.WriteLine("");
+
+            return matches;
         }
         
-        public bool VersionMatches(string versionString, Version versionQuery)
+        public bool VersionMatches(string version, Version versionQuery)
         {
-            var versionMatches = true;
-
-            for (int i = 0; i < versionQuery.ToString().Split('.').Length; i++)
+            // If the version query is 0.0.0.0 then it can match any version
+            if (versionQuery == new Version(0,0,0,0))
             {
-                var sectionQuery = versionQuery.ToString().Split('.')[i];
-                var otherSection = versionString.Split('.')[i];
-
-                if (!sectionQuery.Equals(otherSection))
-                    versionMatches = false;
+                return true;
             }
+            else
+            {
+                var versionMatches = true;
+                
+                var versionStringParts = version.Split('.');
+                var versionQueryParts = versionQuery.ToString().Split('.');
 
-            return versionMatches;
+                for (int i = 0; i < versionStringParts.Length &&  i < versionQueryParts.Length; i++)
+                {
+                    var sectionQuery = versionQuery.ToString().Split('.')[i];
+                    var otherSection = version.Split('.')[i];
+
+                    if (!sectionQuery.Equals(otherSection))
+                        versionMatches = false;
+                }
+
+                return versionMatches;
+            }
         }
 
         public string[] GetVersions(string packageName)

@@ -4,24 +4,52 @@ using SoftwareMonkeys.csAnt.IO;
 using SoftwareMonkeys.csAnt.External.Nuget.Tests.Mock;
 using NUnit.Framework;
 using System.IO;
+using SoftwareMonkeys.csAnt.External.Nuget.Tests;
 
 namespace SoftwareMonkeys.csAnt.SetUp.Tests.Unit
 {
     public class InstallerNugetPackageRetrieverTestFixture : BaseSetUpUnitTestFixture
     {
         [Test]
+        public void Test_Retrieve_SpecifyStatus()
+        {
+            // Copy the nuget.exe file into the current test directory so the retriever can skip downloading it
+            new FileCopier(
+                OriginalDirectory,
+                CurrentDirectory
+                ).Copy(
+                    "lib/nuget.exe"
+                );
+
+            new NodeManager().EnsureNodes();
+
+            new MockNugetPackageCreator().Create("TestPackage", new Version("1.0.0"), "beta");
+            new MockNugetPackageCreator().Create("TestPackage", new Version("1.0.1"), "alpha");
+
+            var retriever = new InstallerNugetPackageRetriever()
+            {
+                NugetSourcePath = PathConverter.ToAbsolute("pkg"),
+                NugetPath = Path.Combine(OriginalDirectory, "lib/nuget.exe") // This shouldn't be required but leave it in just to ensure the test never tries to download the file from the web
+            };
+
+            retriever.Retrieve("TestPackage", new Version(0,0,0,0), "beta");
+
+            var expectedDir = PathConverter.ToAbsolute("lib/TestPackage.1.0.0-beta");
+
+            Assert.IsTrue(Directory.Exists(expectedDir), "The expected lib directory wasn't found.");
+        }
+
+        [Test]
         public void Test_GetVersion()
         {
-            // TODO: Should this be an integration test?
-
-            Prepare();
+            new MockNugetPackageCreator().Create("TestPackage", new Version("1.0.0"), "beta");
 
             var sourcePath = Path.Combine(CurrentDirectory, "pkg");
 
             var retriever = new InstallerNugetPackageRetriever();
             retriever.NugetSourcePath = sourcePath;
 
-            var version = retriever.GetVersion("csAnt", new Version("0.5"), "alpha");
+            var version = retriever.GetVersion("csAnt", new Version("1.0"), "beta");
 
             Console.WriteLine(version);
         }
@@ -32,6 +60,16 @@ namespace SoftwareMonkeys.csAnt.SetUp.Tests.Unit
             var retriever = new InstallerNugetPackageRetriever();
 
             bool matches = retriever.VersionMatches("1.0.0-beta", new Version("1.0"), "beta");
+
+            Assert.IsTrue(matches, "Didn't match");
+        }
+
+        [Test]
+        public void Test_VersionMatches_NoStatus()
+        {
+            var retriever = new InstallerNugetPackageRetriever();
+
+            bool matches = retriever.VersionMatches("1.0.0", new Version("1.0"), "");
 
             Assert.IsTrue(matches, "Didn't match");
         }
@@ -59,12 +97,12 @@ namespace SoftwareMonkeys.csAnt.SetUp.Tests.Unit
         public void Prepare()
         {
             // TODO: Figure out a better way to prepare for the test without a whole package cycle
-            new FilesGrabber(
+            /*new FilesGrabber(
                 OriginalDirectory,
                 WorkingDirectory
                 ).GrabOriginalFiles();
 
-            new ScriptLauncher().Launch("CyclePackage");
+            new ScriptLauncher().Launch("CyclePackage");*/
         }
     }
 }

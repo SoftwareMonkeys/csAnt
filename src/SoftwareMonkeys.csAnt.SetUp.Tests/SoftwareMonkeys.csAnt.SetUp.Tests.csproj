@@ -38,13 +38,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
-    <Compile Include="Unit\BaseSetUpUnitTestFixture.cs" />
-    <Compile Include="Unit\InstallerTestFixture.cs" />
-    <Compile Include="Unit\UpdaterTestFixture.cs" />
     <Compile Include="Mock\MockInstallerRetriever.cs" />
-    <Compile Include="Unit\LocalInstallerTestFixture.cs" />
-    <Compile Include="Unit\InstallUnpackerTestFixture.cs" />
-    <Compile Include="Unit\InstallerNugetPackageRetrieverTestFixture.cs" />
+    <Compile Include="Unit\Install\BaseSetUpUnitTestFixture.cs" />
+    <Compile Include="Unit\Install\InstallerTestFixture.cs" />
+    <Compile Include="Unit\Install\InstallUnpackerTestFixture.cs" />
+    <Compile Include="Unit\Install\LocalInstallerTestFixture.cs" />
+    <Compile Include="Unit\Install\Retrieve\InstallerNugetPackageRetrieverTestFixture.cs" />
+    <Compile Include="Unit\Update\UpdaterTestFixture.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -88,5 +88,6 @@
   <ItemGroup>
     <Folder Include="Unit\Install\" />
     <Folder Include="Unit\Install\Retrieve\" />
+    <Folder Include="Unit\Update\" />
   </ItemGroup>
 </Project>

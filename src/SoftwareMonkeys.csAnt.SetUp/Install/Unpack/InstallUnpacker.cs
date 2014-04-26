@@ -31,7 +31,7 @@ namespace SoftwareMonkeys.csAnt.SetUp.Install.Unpack
             Console.WriteLine(packageName);
             Console.WriteLine("");
             Console.WriteLine("Version:");
-            Console.WriteLine(version.ToString());
+            Console.WriteLine(version != null ? version.ToString() : "[Not set]");
             Console.WriteLine("");
             Console.WriteLine("Force overwrite:");
             Console.WriteLine(forceOverwrite);
@@ -109,7 +109,8 @@ namespace SoftwareMonkeys.csAnt.SetUp.Install.Unpack
         {
             var pkgDir = String.Empty;
 
-            if (version > new Version(0,0,0,0))
+            if (version != null
+                && version > new Version(0,0,0,0))
             {
                 pkgDir = libDir
                     + Path.DirectorySeparatorChar

@@ -139,6 +139,8 @@ namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole
             // Status
             if (arguments.ContainsAny("status"))
                 Status = arguments["status"];
+            if (String.IsNullOrEmpty(Status))
+                Status = GetStatusFromCurrentNode();
 
             // Show intro
             if (arguments.ContainsAny("intro"))
@@ -282,6 +284,18 @@ namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole
             Console.WriteLine("  -intro");
             Console.WriteLine("      Whether or not to show the introduction text. Default is true.");
             Console.WriteLine("");
+        }
+
+        static public string GetStatusFromCurrentNode()
+        {
+            // TODO: Move NodeManager to a property
+            var nodeManager = new NodeManager();
+            if (nodeManager.State.
+                CurrentNode != null
+                && nodeManager.State.CurrentNode.Properties.ContainsKey("Status"))
+                return nodeManager.State.CurrentNode.Properties["Status"];
+
+            return String.Empty;
         }
     }
 }
