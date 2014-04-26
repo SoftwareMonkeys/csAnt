@@ -53,6 +53,7 @@
     <Compile Include="NugetChecker.cs" />
     <Compile Include="NugetDownloader.cs" />
     <Compile Include="NugetExecutor.cs" />
+    <Compile Include="NugetPackageSpecFileNamer.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

@@ -45,6 +45,7 @@
     <Compile Include="Mock\MockNugetFeedCreator.cs" />
     <Compile Include="Unit\BaseNugetUnitTestFixture.cs" />
     <Compile Include="Unit\NugetPackerUnitTestFixture.cs" />
+    <Compile Include="Mock\MockNugetPackageCreator.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

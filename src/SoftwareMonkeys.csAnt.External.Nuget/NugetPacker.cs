@@ -2,6 +2,7 @@ using System;
 using SoftwareMonkeys.csAnt.Processes;
 using System.IO;
 using SoftwareMonkeys.csAnt.Versions;
+using System.Collections.Generic;
 
 
 namespace SoftwareMonkeys.csAnt.External.Nuget
@@ -19,17 +20,6 @@ namespace SoftwareMonkeys.csAnt.External.Nuget
         {
             get
             {
-                if (
-                    (version == null
-                        || version == new Version(0,0,0,0))
-                    && AutoLoadVersion
-                    && VersionManager != null
-                    )
-                {
-                    version = new Version(
-                        VersionManager.GetVersion(WorkingDirectory)
-                    );
-                }
                 return version;
             }
             set
@@ -51,13 +41,17 @@ namespace SoftwareMonkeys.csAnt.External.Nuget
             }
         }
 
+        public DotNetProcessStarter Starter { get;set; }
+
         public NugetPacker ()
         {
+            Starter = new DotNetProcessStarter();
             WorkingDirectory = Environment.CurrentDirectory;
         }
 
         public NugetPacker(string workingDirectory)
         {
+            Starter = new DotNetProcessStarter();
             WorkingDirectory = workingDirectory;
         }
 
@@ -120,29 +114,33 @@ namespace SoftwareMonkeys.csAnt.External.Nuget
             if (!Directory.Exists(outputDir))
                 Directory.CreateDirectory(outputDir);
 
-            var versionString = Version.Major
-                + "."
-                + Version.Minor
-                + "."
-                + Version.Build;
+            var versionString = "";
 
-            if (!String.IsNullOrEmpty(Status))
-                versionString = versionString
-                    + "-" + Status;
+            if (Version != null
+                && (Version != new Version(0,0,0,0)
+                || !String.IsNullOrEmpty(Status)))
+            {
+                versionString = Version.Major
+                    + "."
+                    + Version.Minor
+                    + "."
+                    + Version.Build;
 
-            // TODO: Move to a property
-            var starter = new DotNetProcessStarter();
+                if (!String.IsNullOrEmpty(Status))
+                    versionString = versionString
+                        + "-" + Status;
+            }
 
-            var arguments = new string[]{
-                "pack",
-                starter.FixArgument(filePath.Replace(WorkingDirectory, "").Trim(Path.DirectorySeparatorChar)),
-                "-basepath " + starter.FixArgument(WorkingDirectory),
-                "-outputdirectory " + starter.FixArgument(outputDir),
-                "-version " + versionString,
-                "-verbosity detailed"
-            };
+            var arguments = new List<string>();
+            arguments.Add("pack");
+            arguments.Add(Starter.FixArgument(filePath.Replace(WorkingDirectory, "").Trim(Path.DirectorySeparatorChar)));
+            arguments.Add("-basepath " + Starter.FixArgument(WorkingDirectory));
+            arguments.Add("-outputdirectory " + Starter.FixArgument(outputDir));
+            if (!String.IsNullOrEmpty(versionString))
+                arguments.Add("-version " + versionString);
+            arguments.Add("-verbosity detailed");
 
-            starter.Start(cmd, arguments);
+            Starter.Start(cmd, arguments.ToArray());
         }
     }
 }

@@ -73,7 +73,7 @@ namespace SoftwareMonkeys.csAnt.External.Nuget.Tests.Mock
 
                         Console.WriteLine("  " + toFile.Replace(feedPath, ""));
 
-                        File.Copy(file, toFile);
+                        File.Copy(file, toFile, true);
                     }
                 }
             }

@@ -24,6 +24,9 @@ namespace SoftwareMonkeys.csAnt.External.Nuget
         [XmlArrayItem("file")]
         public List<NugetPackageFile> Files  { get;set; }
 
+        [XmlIgnore]
+        public NugetPackageSpecFileNamer FileNamer { get;set; }
+
         public NugetPackageSpec ()
         {
             Construct();
@@ -39,14 +42,19 @@ namespace SoftwareMonkeys.csAnt.External.Nuget
         {
             MetaData = new NugetPackageSpecMetaData();
             Files = new List<NugetPackageFile>();
+            Saver = new NugetPackageSpecSaver();
+            FileNamer = new NugetPackageSpecFileNamer();
         }
 
         public void Save()
         {
+            if (String.IsNullOrEmpty(FilePath))
+                FilePath = FileNamer.GetSpecFileName(Environment.CurrentDirectory, MetaData.ID);
+
             Saver.Save (this, FilePath);
         }
 
-        public void AddFiles(string[] files)
+        public void AddFiles(params string[] files)
         {
             foreach (var file in files)
             {

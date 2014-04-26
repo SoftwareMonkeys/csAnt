@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 
 namespace SoftwareMonkeys.csAnt.External.Nuget
 {
@@ -6,6 +7,16 @@ namespace SoftwareMonkeys.csAnt.External.Nuget
     {
         public NugetPackageSpecFileNamer ()
         {
+        }
+
+        public string GetSpecFileName(string currentDirectory, string packageName)
+        {
+            return currentDirectory
+                + Path.DirectorySeparatorChar
+                    + "pkg"
+                    + Path.DirectorySeparatorChar
+                    + packageName
+                    + ".nuspec";
         }
     }
 }
