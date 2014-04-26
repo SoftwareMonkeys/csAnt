@@ -23,6 +23,8 @@ class PackageScript : BaseScript
 
         if (CurrentNode.Properties.ContainsKey("Status"))
             packer.Status = CurrentNode.Properties["Status"];
+        if (CurrentNode.Properties.ContainsKey("Version"))
+            packer.Version = CurrentNode.Properties["Version"];
 
         if (String.IsNullOrEmpty(packageName))
             packer.PackAll(CurrentDirectory);
