@@ -16,7 +16,7 @@
         <dependency id="NUnit" version="[2.6.0.12051]"/>
         <dependency id="NUnit.Runners" version="[2.6.0.12051]"/>
         <dependency id="NUnitResults" version="[1.1]"/>
-        <dependency id="Nuget.Core" version="[2.8.50320.36]"/>
+        <dependency id="Nuget.Core" version="[2.8.1]"/>
     </dependencies>
   </metadata>
   <files>
@@ -29,6 +29,7 @@
     <file src="csAnt.node" />
     <file src="lib/csAnt/csAnt.node" target="lib/csAnt/" />
     <file src="lib/csAnt/bin/Release/net-40/*" target="lib/csAnt/bin/Release/net-40/" />
+    <file src="lib/csAnt/bin/Debug/net-40/*" target="lib/csAnt/bin/Debug/net-40/" />
     <file src="lib/**.node" target="lib" />
     <file src="src/*.node" target="src" />
     <file src="src/**.sln" target="src" />
