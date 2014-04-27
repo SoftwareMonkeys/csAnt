@@ -42,6 +42,11 @@ namespace SoftwareMonkeys.csAnt.SetUp.Tests.Unit
         [Test]
         public void Test_GetVersion()
         {
+            new FileCopier(
+                OriginalDirectory,
+                WorkingDirectory
+                ).Copy("lib/nuget.exe");
+
             new MockNugetPackageCreator().Create("TestPackage", new Version("1.0.0"), "beta");
 
             var sourcePath = Path.Combine(CurrentDirectory, "pkg");
@@ -49,9 +54,33 @@ namespace SoftwareMonkeys.csAnt.SetUp.Tests.Unit
             var retriever = new InstallerNugetPackageRetriever();
             retriever.NugetSourcePath = sourcePath;
 
-            var version = retriever.GetVersion("csAnt", new Version("1.0"), "beta");
+            var version = retriever.GetVersion("TestPackage", new Version("1.0"), "beta");
 
             Console.WriteLine(version);
+
+            Assert.AreEqual("1.0.0", version.ToString(), "Version mismatch.");
+        }
+        
+        [Test]
+        public void Test_GetVersions()
+        {
+            new FileCopier(
+                OriginalDirectory,
+                WorkingDirectory
+                ).Copy("lib/nuget.exe");
+
+            new MockNugetPackageCreator().Create("TestPackage", new Version("1.0.0"), "beta");
+
+            var sourcePath = Path.Combine(CurrentDirectory, "pkg");
+
+            var retriever = new InstallerNugetPackageRetriever();
+            retriever.NugetSourcePath = sourcePath;
+
+            var versions = retriever.GetVersions("TestPackage");
+
+            Console.WriteLine(versions[0]);
+
+            Assert.AreEqual("1.0.0-beta", versions[0], "Version mismatch.");
         }
 
         [Test]

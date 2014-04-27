@@ -2,9 +2,9 @@ using System;
 using SoftwareMonkeys.csAnt.External.Nuget;
 using System.IO;
 using System.Collections.Generic;
-using NuGet.Runtime;
-using NuGet;
 using System.Linq;
+using SoftwareMonkeys.csAnt.IO;
+using NuGet;
 
 namespace SoftwareMonkeys.csAnt.SetUp.Install.Retrieve
 {
@@ -235,17 +235,57 @@ namespace SoftwareMonkeys.csAnt.SetUp.Install.Retrieve
 
         public string[] GetVersions(string packageName)
         {
-            //Connect to the official package repository
-            IPackageRepository repo = PackageRepositoryFactory.Default.CreateRepository(NugetSourcePath);
+            var sourceRepository = PackageRepositoryFactory.Default.CreateRepository(NugetSourcePath);
 
-            //Get the list of all NuGet packages with ID 'EntityFramework'       
-            List<IPackage> packages = repo.FindPackagesById(packageName).ToList();
+            var packageManager = new PackageManager(sourceRepository, DestinationPath);
+
+            var packages = packageManager.SourceRepository.GetPackages();
+
+            var versions = new List<string>();
+
+            foreach (var package in packages)
+            {
+                if (package.Id.ToLower() == packageName.ToLower())
+                    versions.Add(package.Version.ToString());
+            }
+
+            return versions.ToArray();
+            /*NugetExecutor.Execute(
+                "list",
+                packageName,
+                "-Source " + NugetSourcePath,
+                "-Pre"
+            );
+
+            var content = NugetExecutor.Starter.Output;
+
+            return content.Split(new [] { '\r', '\n' });*/
+
+            /*
+            /*var program = new Program();
+            var console = new NuGet.Common.Console();
+
+            var fs = new PhysicalFileSystem(DestinationPath);
+            program.invoke("Initialize", fs,  console);
+
+            var commands = program.Commands.ToDictionary((command)=>command.CommandName);
+            var cmd = commands["list"];
+
+            var packages = cmd.GetPackages();*/
+
+            /*var cmd = new ListCommand();
+            cmd.Arguments.Add(packageName);
+            cmd.Arguments.Add("-source " + NugetSourcePath);
+            cmd.Arguments.Add("-nocache");
+
+            var packages = cmd.GetPackages();
 
             var versions = from p in packages
                 select p.Version.ToString();
 
-            return versions.ToArray();
+            return versions.ToArray();*/
         }
+
     }
 }
 
