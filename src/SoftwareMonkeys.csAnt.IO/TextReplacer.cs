@@ -44,7 +44,7 @@ namespace SoftwareMonkeys.csAnt.IO
             
             foreach (string file in files)
             {
-                if (IsText(file))
+                if (IsSupportedFile(file))
                 {
                     string content = String.Empty;
 
@@ -115,24 +115,28 @@ namespace SoftwareMonkeys.csAnt.IO
         public string OpenFile(string filePath)
         {
             string content = String.Empty;
-            
-            using (StreamReader reader = new StreamReader(File.OpenRead(filePath)))
-            {
-                content = reader.ReadToEnd();
-                reader.Close();
-            }
+
+            content = File.ReadAllText(filePath);
             
             return content;
         }
         
         public void SaveFile(string filePath, string content)
         {
-            using (StreamWriter writer = new StreamWriter(File.Create(filePath)))
-            {
-                writer.Write(content);
-                writer.Close();
-            }
+            File.WriteAllText(filePath, content);
         }
+
+		public bool IsSupportedFile(string filePath)
+		{
+            try
+            {
+                return IsText(filePath);
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+		}
 
         public bool IsText(string filePath)
         {

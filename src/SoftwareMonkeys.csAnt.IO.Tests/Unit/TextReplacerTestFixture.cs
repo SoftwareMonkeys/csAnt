@@ -12,7 +12,7 @@ namespace SoftwareMonkeys.csAnt.IO.Tests
         [Test]
         public void ReplaceIn()
         {
-            var testFileName = Path.Combine(CurrentDirectory, "HelloWorld/TestFile.txt");
+            var testFileName = Path.Combine(CurrentDirectory, "TestFolder/HelloWorld/TestFile.txt");
 
             // Copy binary files over to test that they're skipped
             new FileCopier(
@@ -31,9 +31,15 @@ namespace SoftwareMonkeys.csAnt.IO.Tests
             File.WriteAllText(testFileName, testFileContent);
 
             var replacer = new TextReplacer();
-            replacer.ReplaceIn(CurrentDirectory, "**", searchText, replacementText, true);
+            replacer.ReplaceIn(
+                Path.Combine(CurrentDirectory, "TestFolder"),
+                "**",
+                searchText,
+                replacementText,
+                true
+            );
 
-            var newFileName = Path.Combine(CurrentDirectory, "HelloUniverse/TestFile.txt");
+            var newFileName = Path.Combine(CurrentDirectory, "TestFolder/HelloUniverse/TestFile.txt");
 
             Assert.IsTrue(File.Exists(newFileName), "File name wasnt changed.");
 
@@ -54,7 +60,7 @@ namespace SoftwareMonkeys.csAnt.IO.Tests
                 WorkingDirectory
                 ).Copy("*.dll");
 
-            var testFileName = Path.Combine(CurrentDirectory, "HelloWorld/TestFile.txt");
+            var testFileName = Path.Combine(CurrentDirectory, "TestFolder/HelloWorld/TestFile.txt");
 
             var testFileContent = "Hello World";
 
@@ -67,7 +73,7 @@ namespace SoftwareMonkeys.csAnt.IO.Tests
             File.WriteAllText(testFileName, testFileContent);
 
             var replacer = new TextReplacer();
-            replacer.ReplaceIn(CurrentDirectory, "**", searchText, replacementText, false);
+            replacer.ReplaceIn(Path.Combine(CurrentDirectory, "TestFolder"), "**", searchText, replacementText, false);
 
             var newText = File.ReadAllText(testFileName);
 

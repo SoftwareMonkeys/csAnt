@@ -18,6 +18,7 @@ namespace SoftwareMonkeys.csAnt.IO
             {
                 int length = sr.Read(buffer, 0, sampleSize);
                 sampleContent = new string(buffer, 0, length);
+                sr.Close();
             }
             
             //Look for 4 consecutive binary zeroes
