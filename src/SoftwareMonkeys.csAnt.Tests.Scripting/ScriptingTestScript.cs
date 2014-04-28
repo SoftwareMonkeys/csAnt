@@ -2,7 +2,7 @@ using System;
 
 namespace SoftwareMonkeys.csAnt.Tests.Scripting
 {
-    public abstract class ScriptingTestScript : BaseTestScript
+    public class ScriptingTestScript : BaseTestScript
     {
         public ScriptingTestScript (string scriptName) : base(scriptName)
         {
