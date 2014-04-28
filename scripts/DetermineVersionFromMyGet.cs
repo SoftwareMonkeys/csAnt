@@ -1,8 +1,11 @@
+//css_ref ../lib/csAnt/bin/Release/net-40/SoftwareMonkeys.csAnt.External.Nuget.dll
+
 using System;
 using System.IO;
 using System.Diagnostics;
 using SoftwareMonkeys.csAnt;
 using SoftwareMonkeys.csAnt.Projects;
+using SoftwareMonkeys.csAnt.External.Nuget;
 
 class DetermineVersionFromMyGet : BaseProjectScript
 {
@@ -17,33 +20,24 @@ class DetermineVersionFromMyGet : BaseProjectScript
         Console.WriteLine("Determining version from MyGet feed...");
         Console.WriteLine("");
 
-        var tmpDir = GetTmpDir();
+        var sourcePath = "https://www.myget.org/F/softwaremonkeys/";
 
-        var feedPath = "https://www.myget.org/F/softwaremonkeys/";
-
-        Console.WriteLine("Feed path:");
-        Console.WriteLine(feedPath);
+        Console.WriteLine("Feed source path:");
+        Console.WriteLine(sourcePath);
         Console.WriteLine("");
 
         Console.WriteLine("The latest version of csAnt will now be downloaded from the feed and installed so the version of it determined...");
         Console.WriteLine("");
 
-        ExecuteScript(
-            "Nuget",
-            "install",
-            "csAnt",
-            "-Source \"" + feedPath + "\"",
-            "-OutputDirectory \"" + tmpDir + "\"",
-            "-NoCache",
-            "-Pre"
-        );
+        var versioner = new NugetVersioner(sourcePath);
 
-        var dir = Directory.GetDirectories(tmpDir, "csAnt.*")[0];
+        var status = "";
 
-        var publishedVersionString = Path.GetFileName(dir).Replace("csAnt.", "");
-        if (publishedVersionString.Contains("-"))
-            publishedVersionString = publishedVersionString.Substring(0, publishedVersionString.IndexOf("-"));
-        var publishedVersion = new Version(publishedVersionString);
+        if (CurrentNode.Properties.ContainsKey("Status"))
+            status = CurrentNode.Properties["Status"];
+
+        Console.WriteLine("Status: " + status);
+        Console.WriteLine("");
 
         var currentVersionString = "0.0.0.0";
         if (CurrentNode.Properties.ContainsKey("Version"))
@@ -51,6 +45,8 @@ class DetermineVersionFromMyGet : BaseProjectScript
         if (currentVersionString.Contains("-"))
             currentVersionString = currentVersionString.Substring(0, currentVersionString.IndexOf("-"));
         var currentVersion = new Version(currentVersionString);
+
+        var publishedVersion = versioner.GetVersion("csAnt", status);
 
         Console.WriteLine("Current version: " + currentVersion);
         Console.WriteLine("Published version: " + publishedVersion);
