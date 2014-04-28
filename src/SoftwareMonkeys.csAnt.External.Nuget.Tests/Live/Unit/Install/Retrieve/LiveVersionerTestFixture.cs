@@ -1,15 +1,14 @@
 using System;
 using NUnit.Framework;
 using SoftwareMonkeys.csAnt.IO;
-using SoftwareMonkeys.csAnt.SetUp.Install.Retrieve;
 using SoftwareMonkeys.csAnt.External.Nuget.Tests;
 using System.IO;
 using SoftwareMonkeys.csAnt.External.Nuget;
 
-namespace SoftwareMonkeys.csAnt.SetUp.Tests.Live.Unit.Install.Retrieve
+namespace SoftwareMonkeys.csAnt.External.Nuget.Tests.Live.Unit
 {
     [TestFixture]
-    public class LiveVersionerTestFixture : BaseLiveSetUpUnitTestFixture
+    public class LiveVersionerTestFixture : BaseLiveNugetUnitTestFixture
     {
         public LiveVersionerTestFixture ()
         {
@@ -27,7 +26,7 @@ namespace SoftwareMonkeys.csAnt.SetUp.Tests.Live.Unit.Install.Retrieve
 
             var versioner = new NugetVersioner(sourcePath);
 
-            var versions = retriever.GetVersions("csAnt");
+            var versions = versioner.GetVersions("csAnt");
 
             foreach (var version in versions)
             {

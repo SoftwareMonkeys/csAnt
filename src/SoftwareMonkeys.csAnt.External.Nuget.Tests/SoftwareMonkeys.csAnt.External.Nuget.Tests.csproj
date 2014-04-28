@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>10.0.0</ProductVersion>
+    <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{A5DD8740-CCDB-4F86-974E-6480A2919620}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -46,6 +46,9 @@
     <Compile Include="Unit\BaseNugetUnitTestFixture.cs" />
     <Compile Include="Unit\NugetPackerUnitTestFixture.cs" />
     <Compile Include="Mock\MockNugetPackageCreator.cs" />
+    <Compile Include="Unit\NugetVersionerTestFixture.cs" />
+    <Compile Include="Live\Unit\Install\Retrieve\LiveVersionerTestFixture.cs" />
+    <Compile Include="Live\Unit\BaseLiveNugetUnitTestFixture.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
