@@ -31,7 +31,7 @@ class CyclePublishScript : BaseProjectScript
 
         var version = "";
         if (Arguments.ContainsAny("version"))
-            version = Arguments["version"];        
+            version = Arguments["version"];
 
 		// Clone (using git) from the project to another tmp directory
 		var tmpDir = CloneToTmpDirectory();
@@ -49,6 +49,8 @@ class CyclePublishScript : BaseProjectScript
         {
             ExecuteScript("SetVersion", version);
         }
+        else
+            ExecuteScript("DetermineVersionFromMyGet");
 
         Nodes.Refresh();
      
