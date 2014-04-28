@@ -9,7 +9,6 @@ using SoftwareMonkeys.csAnt.Processes;
 using SoftwareMonkeys.csAnt.SourceControl.Git;
 using SoftwareMonkeys.csAnt.SetUp.Install.Retrieve;
 using SoftwareMonkeys.csAnt.SetUp.Install.Unpack;
-using SoftwareMonkeys.csAnt.Tests;
 
 
 namespace SoftwareMonkeys.csAnt.SetUp.Install

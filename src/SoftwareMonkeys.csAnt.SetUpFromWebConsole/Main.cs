@@ -202,40 +202,7 @@ namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole
 
         static public void OutputIntro()
         {
-            var prefix = "";
-            if (Path.DirectorySeparatorChar == '/')
-            {
-                prefix = "sh csAnt.sh";
-            }
-            else
-            {
-                prefix = "csAnt.bat";
-            }
-         
-
-            Console.WriteLine ("");
-            Console.WriteLine ("You can now launch scripts...");
-
-            Console.WriteLine ("Syntax:");
-            Console.WriteLine ("  {0} [ScriptName]", prefix);
-            Console.WriteLine ("");
-            Console.WriteLine ("Example:");
-            Console.WriteLine ("  {0} HelloWorld", prefix);
-
-            Console.WriteLine ("");
-            Console.WriteLine ("To create a new script...");
-            Console.WriteLine ("");
-
-            Console.WriteLine ("1) Call the 'NewScript' command:");
-            Console.WriteLine ("  {0} NewScript [YourScriptName]", prefix);
-            Console.WriteLine ("");
-
-            Console.WriteLine ("2) Open your script at '/scripts/[YourScriptName].cs' to add your code, then save.");
-            Console.WriteLine ("");
-
-            Console.WriteLine ("3) Launch your script:");
-            Console.WriteLine ("  {0} [YourScriptName]", prefix);
-            Console.WriteLine ("");
+            new IntroWriter().Write();
         }
 
         static public void Help()

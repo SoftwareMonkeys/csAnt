@@ -98,6 +98,8 @@ namespace SoftwareMonkeys.csAnt.SetUpFromLocalConsole
                 installer.CloneSource = CloneSource;
 
                 installer.Install();
+
+                new IntroWriter().Write();
             }
         }
 

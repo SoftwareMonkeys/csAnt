@@ -1,5 +1,5 @@
 using System;
-namespace SoftwareMonkeys.csAnt.Tests
+namespace SoftwareMonkeys.csAnt
 {
     static public class DefaultFiles
     {

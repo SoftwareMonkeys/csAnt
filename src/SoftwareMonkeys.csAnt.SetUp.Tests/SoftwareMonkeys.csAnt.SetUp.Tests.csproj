@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>10.0.0</ProductVersion>
+    <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{8D7A46B5-25AA-4E5C-9E3A-F27574B71EEC}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -45,8 +45,7 @@
     <Compile Include="Unit\Install\LocalInstallerTestFixture.cs" />
     <Compile Include="Unit\Install\Retrieve\InstallerNugetPackageRetrieverTestFixture.cs" />
     <Compile Include="Unit\Update\UpdaterTestFixture.cs" />
-    <Compile Include="Live\Unit\Install\Retrieve\LiveInstallerNugetPackageRetrieverTestFixture.cs" />
-    <Compile Include="Live\Unit\BaseLiveSetUpUnitTestFixture.cs" />
+    <Compile Include="Unit\IntroWriterTestFixture.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -91,9 +90,5 @@
     <Folder Include="Unit\Install\" />
     <Folder Include="Unit\Install\Retrieve\" />
     <Folder Include="Unit\Update\" />
-    <Folder Include="Live\" />
-    <Folder Include="Live\Unit\" />
-    <Folder Include="Live\Unit\Install\" />
-    <Folder Include="Live\Unit\Install\Retrieve\" />
   </ItemGroup>
 </Project>

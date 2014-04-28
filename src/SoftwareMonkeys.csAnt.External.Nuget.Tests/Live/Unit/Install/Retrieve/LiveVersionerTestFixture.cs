@@ -4,13 +4,14 @@ using SoftwareMonkeys.csAnt.IO;
 using SoftwareMonkeys.csAnt.SetUp.Install.Retrieve;
 using SoftwareMonkeys.csAnt.External.Nuget.Tests;
 using System.IO;
+using SoftwareMonkeys.csAnt.External.Nuget;
 
 namespace SoftwareMonkeys.csAnt.SetUp.Tests.Live.Unit.Install.Retrieve
 {
     [TestFixture]
-    public class LiveInstallerNugetPackageRetrieverTestFixture : BaseLiveSetUpUnitTestFixture
+    public class LiveVersionerTestFixture : BaseLiveSetUpUnitTestFixture
     {
-        public LiveInstallerNugetPackageRetrieverTestFixture ()
+        public LiveVersionerTestFixture ()
         {
         }
 
@@ -24,8 +25,7 @@ namespace SoftwareMonkeys.csAnt.SetUp.Tests.Live.Unit.Install.Retrieve
 
             var sourcePath = "https://www.myget.org/F/softwaremonkeys/"; // TODO: Make this path configurable
 
-            var retriever = new InstallerNugetPackageRetriever();
-            retriever.NugetSourcePath = sourcePath;
+            var versioner = new NugetVersioner(sourcePath);
 
             var versions = retriever.GetVersions("csAnt");
 

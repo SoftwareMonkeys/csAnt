@@ -1,11 +1,16 @@
 ﻿using System;
+using NUnit.Framework;
+using SoftwareMonkeys.csAnt.Tests;
 
 namespace SoftwareMonkeys.csAnt.SetUp.Tests
 {
-    public class IntroWriterTestFixture
+    [TestFixture]
+    public class IntroWriterTestFixture : BaseUnitTestFixture
     {
-        public IntroWriterTestFixture ()
+        [Test]
+        public void Test_Write()
         {
+            new IntroWriter().Write();
         }
     }
 }

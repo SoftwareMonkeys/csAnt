@@ -2,7 +2,6 @@ using System;
 using System.IO;
 using SoftwareMonkeys.csAnt.Versions;
 using SoftwareMonkeys.csAnt.IO;
-using SoftwareMonkeys.csAnt.Tests;
 using System.Xml;
 using System.Collections.Generic;
 

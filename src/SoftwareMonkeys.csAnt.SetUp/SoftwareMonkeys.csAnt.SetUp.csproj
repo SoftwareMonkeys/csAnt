@@ -104,6 +104,7 @@
     <Compile Include="Install\Unpack\InstallUnpacker.cs" />
     <Compile Include="Install\BaseInstaller.cs" />
     <Compile Include="Install\LocalInstaller.cs" />
+    <Compile Include="IntroWriter.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
