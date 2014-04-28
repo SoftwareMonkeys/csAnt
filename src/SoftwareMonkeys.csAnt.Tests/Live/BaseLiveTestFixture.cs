@@ -1,8 +1,11 @@
 ﻿using System;
+using NUnit.Framework;
 
 namespace SoftwareMonkeys.csAnt.Tests
 {
-    public class BaseLiveTestFixture
+    [TestFixture]
+    [Category("Live")]
+    public class BaseLiveTestFixture : BaseTestFixture
     {
         public BaseLiveTestFixture ()
         {

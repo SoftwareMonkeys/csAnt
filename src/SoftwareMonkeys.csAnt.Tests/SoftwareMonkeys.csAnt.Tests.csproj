@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>10.0.0</ProductVersion>
+    <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{E79918A1-F275-4073-9968-77DAB04622A9}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -142,6 +142,8 @@
     <Compile Include="Unit\ClearTmpTestFixture.cs" />
     <Compile Include="Sanity\FailingTestFixture.cs" />
     <Compile Include="Unit\ProcessStarterTestFixture.cs" />
+    <Compile Include="Live\BaseLiveTestFixture.cs" />
+    <Compile Include="Live\Unit\BaseLiveUnitTestFixture.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -184,5 +186,7 @@
   <ItemGroup>
     <Folder Include="Unit\" />
     <Folder Include="Helpers\" />
+    <Folder Include="Live\" />
+    <Folder Include="Live\Unit\" />
   </ItemGroup>
 </Project>
