@@ -4,7 +4,7 @@ using NUnit.Framework;
 namespace SoftwareMonkeys.csAnt.Tests
 {
     [Category("Unit")]
-    public class BaseUnitTestFixture : BaseTestFixture
+    public abstract class BaseUnitTestFixture : BaseTestFixture
     {
         public BaseUnitTestFixture ()
         {

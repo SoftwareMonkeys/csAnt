@@ -5,7 +5,7 @@ namespace SoftwareMonkeys.csAnt.Tests
 {
     [TestFixture]
     [Category("Live")]
-    public class BaseLiveTestFixture : BaseTestFixture
+    public abstract class BaseLiveTestFixture : BaseTestFixture
     {
         public BaseLiveTestFixture ()
         {

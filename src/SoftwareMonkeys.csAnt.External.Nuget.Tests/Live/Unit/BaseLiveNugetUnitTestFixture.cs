@@ -6,7 +6,7 @@ using NUnit.Framework;
 namespace SoftwareMonkeys.csAnt.External.Nuget.Tests.Live.Unit
 {
     [Category("Live")]
-    public class BaseLiveNugetUnitTestFixture : BaseLiveUnitTestFixture
+    public abstract class BaseLiveNugetUnitTestFixture : BaseLiveUnitTestFixture
 	{
 	}
 }
