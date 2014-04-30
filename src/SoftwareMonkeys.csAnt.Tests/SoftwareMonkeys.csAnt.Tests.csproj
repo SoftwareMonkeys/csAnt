@@ -140,7 +140,6 @@
     <Compile Include="Sanity\HelloWorldTestFixture.cs" />
     <Compile Include="Sanity\NUnitTestRunnerTestFixture.cs" />
     <Compile Include="Unit\ClearTmpTestFixture.cs" />
-    <Compile Include="Sanity\FailingTestFixture.cs" />
     <Compile Include="Unit\ProcessStarterTestFixture.cs" />
     <Compile Include="Live\BaseLiveTestFixture.cs" />
     <Compile Include="Live\Unit\BaseLiveUnitTestFixture.cs" />
