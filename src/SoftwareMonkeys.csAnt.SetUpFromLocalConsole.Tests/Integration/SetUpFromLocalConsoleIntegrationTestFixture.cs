@@ -9,7 +9,6 @@ using SoftwareMonkeys.csAnt.SetUp.Deploy.Launch;
 
 namespace SoftwareMonkeys.csAnt.SetUpFromLocalConsole.Tests.Integration
 {
-    // TODO: Make this an integration test?
     [TestFixture]
     public class SetUpFromLocalConsoleIntegrationTestFixture : BaseSetUpFromLocalConsoleIntegrationTestFixture
     {

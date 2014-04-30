@@ -78,6 +78,7 @@ namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole
                         nugetRetriever,
                         unpacker
                         );
+                    
 
                     updater.PackageName = PackageName;
                     updater.Version = Version;
@@ -139,6 +140,7 @@ namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole
             // Status
             if (arguments.ContainsAny("status"))
                 Status = arguments["status"];
+
             if (String.IsNullOrEmpty(Status))
                 Status = GetStatusFromCurrentNode();
 
