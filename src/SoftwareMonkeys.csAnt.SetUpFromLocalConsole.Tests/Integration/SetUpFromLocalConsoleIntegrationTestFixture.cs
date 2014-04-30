@@ -35,6 +35,10 @@ namespace SoftwareMonkeys.csAnt.SetUpFromLocalConsole.Tests.Integration
 
         public void Prepare()
         {
+            Console.WriteLine("");
+            Console.WriteLine("Preparing for test...");
+            Console.WriteLine("");
+
             new FilesGrabber(
                 OriginalDirectory,
                 WorkingDirectory
@@ -45,6 +49,7 @@ namespace SoftwareMonkeys.csAnt.SetUpFromLocalConsole.Tests.Integration
             // TODO: See if there's a faster way to prepare
             scriptLauncher.Launch("EnsureBuild", "-mode:" + BuildMode.Value);
             scriptLauncher.Launch("Repack", "-mode:" + BuildMode.Value);
+            scriptLauncher.Launch("CopyBinToLib", "-mode:" + BuildMode.Value);
             scriptLauncher.Launch("CopyBinToRoot", "-mode:" + BuildMode.Value);
 
 

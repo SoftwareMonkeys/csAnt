@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>10.0.0</ProductVersion>
+    <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{485BCC0F-7E4F-4430-9174-3A1ADA428E71}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -76,6 +76,9 @@
     <Reference Include="CSScriptLibrary">
       <HintPath>..\..\lib\CS-Script.3.7.2.0\lib\net40\CSScriptLibrary.dll</HintPath>
     </Reference>
+    <Reference Include="NuGet.Core">
+      <HintPath>..\..\lib\Nuget.Core.2.8.1\lib\net40-Client\NuGet.Core.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
@@ -101,6 +104,7 @@
     <Compile Include="Install\Unpack\InstallUnpacker.cs" />
     <Compile Include="Install\BaseInstaller.cs" />
     <Compile Include="Install\LocalInstaller.cs" />
+    <Compile Include="IntroWriter.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

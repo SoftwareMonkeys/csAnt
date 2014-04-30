@@ -1,7 +1,7 @@
 {
   "Properties": {
     "Context": "Assembly",
-    "Version": "0.4.58.0"
+    "Version": "0.4.58.300"
   },
   "Name": "SoftwareMonkeys.csAnt.IO.Contracts"
 }

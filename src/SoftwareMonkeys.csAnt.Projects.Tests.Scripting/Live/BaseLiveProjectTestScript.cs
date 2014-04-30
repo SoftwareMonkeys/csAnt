@@ -9,6 +9,7 @@ namespace SoftwareMonkeys.csAnt.Projects.Tests.Scripting.Live
     {
         public BaseLiveProjectTestScript ()
         {
+            Nodes = new ProjectNodeManager();
         }
     }
 }

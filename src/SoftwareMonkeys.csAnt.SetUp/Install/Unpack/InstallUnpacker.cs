@@ -11,9 +11,12 @@ namespace SoftwareMonkeys.csAnt.SetUp.Install.Unpack
     {
         public IFileFinder FileFinder { get;set; }
 
+        public FileBackup Backup { get;set; }
+
         public InstallUnpacker ()
         {
             FileFinder = new FileFinder();
+            Backup = new FileBackup();
         }
 
         public override void Unpack (string projectDirectory, string packageName, Version version, bool forceOverwrite)
@@ -28,7 +31,7 @@ namespace SoftwareMonkeys.csAnt.SetUp.Install.Unpack
             Console.WriteLine(packageName);
             Console.WriteLine("");
             Console.WriteLine("Version:");
-            Console.WriteLine(version.ToString());
+            Console.WriteLine(version != null ? version.ToString() : "[Not set]");
             Console.WriteLine("");
             Console.WriteLine("Force overwrite:");
             Console.WriteLine(forceOverwrite);
@@ -50,8 +53,9 @@ namespace SoftwareMonkeys.csAnt.SetUp.Install.Unpack
             var skippedFiles = 0;
             var overwrittenFiles = 0;
 
-            Console.WriteLine("Looking for files in:");
+            Console.WriteLine("Looking for files in package directory:");
             Console.WriteLine(directory);
+            Console.WriteLine("");
 
             foreach (var file in FileFinder.FindFiles(directory, files))
             {
@@ -72,8 +76,10 @@ namespace SoftwareMonkeys.csAnt.SetUp.Install.Unpack
                         || isNewer)
                     )
                 {
-                    // TODO: Back up this file before deleting
+                    BackupFile(toFile);
+
                     File.Delete(toFile);
+
                     overwrittenFiles++;
                 }
 
@@ -85,7 +91,6 @@ namespace SoftwareMonkeys.csAnt.SetUp.Install.Unpack
                         file,
                         toFile
                         );
-
 
                     installedFiles++;
                 }
@@ -104,7 +109,8 @@ namespace SoftwareMonkeys.csAnt.SetUp.Install.Unpack
         {
             var pkgDir = String.Empty;
 
-            if (version > new Version(0,0,0,0))
+            if (version != null
+                && version > new Version(0,0,0,0))
             {
                 pkgDir = libDir
                     + Path.DirectorySeparatorChar
@@ -114,11 +120,18 @@ namespace SoftwareMonkeys.csAnt.SetUp.Install.Unpack
             else
             {
                 return new List<DirectoryInfo>(
-                    new DirectoryInfo(libDir).GetDirectories("csAnt.*").OrderByDescending(p => p.CreationTime)
+                    new DirectoryInfo(libDir).GetDirectories("csAnt.*")
+                        .Where(d => d.Name.StartsWith("csAnt."))
+                            .OrderByDescending(p => p.Name)
                 )[0].FullName;
             }
 
             return pkgDir;
+        }
+
+        public void BackupFile(string filePath)
+        {
+            Backup.Backup(filePath);
         }
     }
 }

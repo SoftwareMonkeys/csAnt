@@ -31,7 +31,7 @@ class CyclePublishScript : BaseProjectScript
 
         var version = "";
         if (Arguments.ContainsAny("version"))
-            version = Arguments["version"];        
+            version = Arguments["version"];
 
 		// Clone (using git) from the project to another tmp directory
 		var tmpDir = CloneToTmpDirectory();
@@ -49,14 +49,13 @@ class CyclePublishScript : BaseProjectScript
         {
             ExecuteScript("SetVersion", version);
         }
+        else
+            ExecuteScript("DetermineVersionFromMyGet");
 
         Nodes.Refresh();
      
         // Increment the 3rd position of the version for each publishing cycle
         IncrementVersion(3);
-
-        // Commit the file version information to source control
-        ExecuteScript("CommitVersion");
 
 		// Build and package the cloned source code (the package script will trigger build cycle if necessary)
         if (!String.IsNullOrEmpty(packageName))
@@ -64,10 +63,18 @@ class CyclePublishScript : BaseProjectScript
         else
             ExecuteScript("CyclePackage", "-skipincrement");
 
+        // Commit the file version information to source control
+        ExecuteScript("CommitVersion");
+
         // Return the created packages back to the original project /pkg/ directory
         ReturnPackages();
 
-        Git.Push("origin", "master", "-f");
+        var branch = "master";
+        if (CurrentNode.Properties.ContainsKey("Branch"))
+            branch = CurrentNode.Properties["Branch"];
+
+        // TODO: Make the remotes configurable
+        Git.Push("origin", branch, "-f");
 
 		if (!IsError)
 		{

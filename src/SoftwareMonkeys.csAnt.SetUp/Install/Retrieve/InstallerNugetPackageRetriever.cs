@@ -2,7 +2,9 @@ using System;
 using SoftwareMonkeys.csAnt.External.Nuget;
 using System.IO;
 using System.Collections.Generic;
-
+using System.Linq;
+using SoftwareMonkeys.csAnt.IO;
+using NuGet;
 
 namespace SoftwareMonkeys.csAnt.SetUp.Install.Retrieve
 {
@@ -22,10 +24,9 @@ namespace SoftwareMonkeys.csAnt.SetUp.Install.Retrieve
 
         public string DestinationPath { get;set; }
 
-        // TODO: Remove if not needed
-        ///public Version Version = new Version(0,0,0,0);
+        public bool IsVerbose { get;set; }
 
-        //public string PackageName = "csAnt";
+        public NugetVersioner Versioner { get;set; }
         
         public InstallerNugetPackageRetriever (string nugetSourcePath, string destinationPath)
         {
@@ -36,6 +37,7 @@ namespace SoftwareMonkeys.csAnt.SetUp.Install.Retrieve
 
             NugetChecker = new NugetChecker();
             NugetExecutor = new NugetExecutor();
+            Versioner = new NugetVersioner(nugetSourcePath);
 
             if (!String.IsNullOrEmpty(nugetSourcePath))
                 NugetSourcePath = nugetSourcePath;
@@ -50,6 +52,7 @@ namespace SoftwareMonkeys.csAnt.SetUp.Install.Retrieve
 
             NugetChecker = new NugetChecker();
             NugetExecutor = new NugetExecutor();
+            Versioner = new NugetVersioner(NugetSourcePath);
             NugetSourcePath = "https://www.myget.org/F/softwaremonkeys/";
         }
 
@@ -72,6 +75,7 @@ namespace SoftwareMonkeys.csAnt.SetUp.Install.Retrieve
             NugetSourcePath = "https://www.myget.org/F/softwaremonkeys/";
             NugetChecker = checker;
             NugetExecutor = executor;
+            Versioner = new NugetVersioner(NugetSourcePath);
         }
         
         public override void Retrieve (string packageName)
@@ -83,10 +87,13 @@ namespace SoftwareMonkeys.csAnt.SetUp.Install.Retrieve
         {
             Console.WriteLine("");
             Console.WriteLine("Nuget path:");
-            Console.WriteLine(NugetPath);
+            Console.WriteLine("  " + NugetPath);
             Console.WriteLine("");
             Console.WriteLine("Nuget feed path:");
-            Console.WriteLine(NugetSourcePath);
+            Console.WriteLine("  " + NugetSourcePath);
+            Console.WriteLine("");
+            Console.WriteLine("Version: " + version.ToString());
+            Console.WriteLine("Status: " + status);
             Console.WriteLine("");
 
             InstallNuget();
@@ -108,8 +115,7 @@ namespace SoftwareMonkeys.csAnt.SetUp.Install.Retrieve
             arguments.Add("-NoCache"); // TODO: Is this required? It slows down setup and tests, but ensures the latest version of packages are accessible
             arguments.Add("-Pre");
 
-            if (version > new Version(0, 0, 0, 0))
-                arguments.Add("-Version " + version.ToString());
+            AddVersionArgument(packageName, version, status, arguments);
 
             if (!Directory.Exists(outputCsAntDir))
                 Directory.CreateDirectory(outputCsAntDir);
@@ -120,6 +126,20 @@ namespace SoftwareMonkeys.csAnt.SetUp.Install.Retrieve
             );
         }
 
+        public void AddVersionArgument(string packageName, Version version, string status, List<string> arguments)
+        {
+            if (version > new Version(0, 0, 0, 0)
+                || !String.IsNullOrEmpty(status))
+            {
+                var versionString = Versioner.GetVersion(packageName, version, status)
+                    + "-" + status;
+
+                Console.WriteLine("Version string: " + versionString);
+
+                arguments.Add("-Version " + versionString.ToString());
+            }
+        }
+
         public void InstallNuget()
         {
             NugetChecker.CheckNuget();
@@ -127,3 +147,4 @@ namespace SoftwareMonkeys.csAnt.SetUp.Install.Retrieve
 
     }
 }
+

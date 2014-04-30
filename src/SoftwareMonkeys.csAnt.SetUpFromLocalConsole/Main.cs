@@ -10,6 +10,13 @@ namespace SoftwareMonkeys.csAnt.SetUpFromLocalConsole
 {
     class MainClass
     {
+
+        public static string PackageName = "csAnt";
+
+        public static Version Version { get;set; }
+
+        public static string Status = "";
+
         public static string SourcePath { get;set; }
 
         public static string DestinationPath { get;set; }
@@ -33,12 +40,8 @@ namespace SoftwareMonkeys.csAnt.SetUpFromLocalConsole
         public static string CloneSource { get;set; }
 
         public static bool Clone { get;set; }
-        
-        public static string PackageName = "csAnt";
 
         public static bool IsHelp { get;set; }
-
-        public static Version Version { get;set; }
 
         public static bool Direct { get;set; }
 
@@ -83,6 +86,9 @@ namespace SoftwareMonkeys.csAnt.SetUpFromLocalConsole
                     );
                 }
 
+                installer.Version = Version;
+                installer.Status = Status;
+
                 installer.Clear = Clear;
 
                 installer.Import = Import;
@@ -92,6 +98,8 @@ namespace SoftwareMonkeys.csAnt.SetUpFromLocalConsole
                 installer.CloneSource = CloneSource;
 
                 installer.Install();
+
+                new IntroWriter().Write();
             }
         }
 
@@ -178,26 +186,23 @@ namespace SoftwareMonkeys.csAnt.SetUpFromLocalConsole
             if (arguments.ContainsAny("v", "version"))
                 Version = Version.Parse(arguments["v", "version"]);
 
-
             // Package name
             if (arguments.ContainsAny("p", "pkg", "package"))
                 PackageName = arguments["p", "pkg", "package"];
 
+            // Status name
+            if (arguments.ContainsAny("status"))
+                Status = arguments["status"];
+            if (String.IsNullOrEmpty(Status))
+                Status = GetStatusFromCurrentNode();
 
-            // TODO: Remove if not needed
-            // Show intro
-            //if (arguments.ContainsAny("intro"))
-            //    ShowIntro = Convert.ToBoolean(arguments["intro"]);
-
-            // Version
+            // Nuget source
             if (arguments.ContainsAny("s", "source"))
                 NugetSourcePath = arguments["s", "source"];
 
-
-            // Version
+            // Nuget path
             if (arguments.ContainsAny("n", "nuget", "nugetpath"))
                 NugetPath = arguments["n", "nuget", "nugetpath"];
-
 
             // Overwrite
             Overwrite = arguments.ContainsAny(
@@ -252,6 +257,17 @@ namespace SoftwareMonkeys.csAnt.SetUpFromLocalConsole
                     CloneSource = path;
             }
         }
+        
+        static public string GetStatusFromCurrentNode()
+        {
+            // TODO: Move NodeManager to a property
+            var nodeManager = new NodeManager();
+            if (nodeManager.State.
+                CurrentNode != null
+                && nodeManager.State.CurrentNode.Properties.ContainsKey("Status"))
+                return nodeManager.State.CurrentNode.Properties["Status"];
 
+            return String.Empty;
+        }
     }
 }

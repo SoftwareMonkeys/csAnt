@@ -59,13 +59,7 @@ namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole
                 Console.WriteLine("Version:" + (Version == new Version(0,0,0,0) ? "[Latest]" : Version.ToString()));
                 Console.WriteLine("");
                 Console.WriteLine("Destination path:");
-                Console.WriteLine(DestinationPath);
-                Console.WriteLine("");
-                Console.WriteLine("nuget source feed path:");
-                Console.WriteLine(NugetSourcePath);
-                Console.WriteLine("");
-                Console.WriteLine("nuget exe path:");
-                Console.WriteLine(NugetPath);
+                Console.WriteLine("  " + DestinationPath);
                 Console.WriteLine("");
     
                 var nugetRetriever = new InstallerNugetPackageRetriever(
@@ -84,7 +78,6 @@ namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole
                         nugetRetriever,
                         unpacker
                         );
-                    
 
                     updater.PackageName = PackageName;
                     updater.Version = Version;
@@ -146,6 +139,8 @@ namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole
             // Status
             if (arguments.ContainsAny("status"))
                 Status = arguments["status"];
+            if (String.IsNullOrEmpty(Status))
+                Status = GetStatusFromCurrentNode();
 
             // Show intro
             if (arguments.ContainsAny("intro"))
@@ -207,40 +202,7 @@ namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole
 
         static public void OutputIntro()
         {
-            var prefix = "";
-            if (Path.DirectorySeparatorChar == '/')
-            {
-                prefix = "sh csAnt.sh";
-            }
-            else
-            {
-                prefix = "csAnt.bat";
-            }
-         
-
-            Console.WriteLine ("");
-            Console.WriteLine ("You can now launch scripts...");
-
-            Console.WriteLine ("Syntax:");
-            Console.WriteLine ("  {0} [ScriptName]", prefix);
-            Console.WriteLine ("");
-            Console.WriteLine ("Example:");
-            Console.WriteLine ("  {0} HelloWorld", prefix);
-
-            Console.WriteLine ("");
-            Console.WriteLine ("To create a new script...");
-            Console.WriteLine ("");
-
-            Console.WriteLine ("1) Call the 'NewScript' command:");
-            Console.WriteLine ("  {0} NewScript [YourScriptName]", prefix);
-            Console.WriteLine ("");
-
-            Console.WriteLine ("2) Open your script at '/scripts/[YourScriptName].cs' to add your code, then save.");
-            Console.WriteLine ("");
-
-            Console.WriteLine ("3) Launch your script:");
-            Console.WriteLine ("  {0} [YourScriptName]", prefix);
-            Console.WriteLine ("");
+            new IntroWriter().Write();
         }
 
         static public void Help()
@@ -289,6 +251,18 @@ namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole
             Console.WriteLine("  -intro");
             Console.WriteLine("      Whether or not to show the introduction text. Default is true.");
             Console.WriteLine("");
+        }
+
+        static public string GetStatusFromCurrentNode()
+        {
+            // TODO: Move NodeManager to a property
+            var nodeManager = new NodeManager();
+            if (nodeManager.State.
+                CurrentNode != null
+                && nodeManager.State.CurrentNode.Properties.ContainsKey("Status"))
+                return nodeManager.State.CurrentNode.Properties["Status"];
+
+            return String.Empty;
         }
     }
 }

@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>10.0.0</ProductVersion>
+    <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{D88EE98D-5F35-4B0E-AC92-4029A1742204}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -37,6 +37,10 @@
     <Reference Include="SoftwareMonkeys.FileNodes">
       <HintPath>..\..\lib\csAnt\bin\Release\net-40\SoftwareMonkeys.FileNodes.dll</HintPath>
     </Reference>
+    <Reference Include="System.Core" />
+    <Reference Include="NuGet.Core">
+      <HintPath>..\..\lib\Nuget.Core.2.8.1\lib\net40-Client\NuGet.Core.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
@@ -50,6 +54,8 @@
     <Compile Include="NugetChecker.cs" />
     <Compile Include="NugetDownloader.cs" />
     <Compile Include="NugetExecutor.cs" />
+    <Compile Include="NugetPackageSpecFileNamer.cs" />
+    <Compile Include="NugetVersioner.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

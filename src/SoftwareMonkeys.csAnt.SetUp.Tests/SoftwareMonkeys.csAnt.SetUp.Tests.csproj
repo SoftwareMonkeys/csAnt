@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>10.0.0</ProductVersion>
+    <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{8D7A46B5-25AA-4E5C-9E3A-F27574B71EEC}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -38,11 +38,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
-    <Compile Include="Unit\BaseSetUpUnitTestFixture.cs" />
-    <Compile Include="Unit\InstallerTestFixture.cs" />
-    <Compile Include="Unit\UpdaterTestFixture.cs" />
     <Compile Include="Mock\MockInstallerRetriever.cs" />
-    <Compile Include="Unit\LocalInstallerTestFixture.cs" />
+    <Compile Include="Unit\Install\BaseSetUpUnitTestFixture.cs" />
+    <Compile Include="Unit\Install\InstallerTestFixture.cs" />
+    <Compile Include="Unit\Install\InstallUnpackerTestFixture.cs" />
+    <Compile Include="Unit\Install\LocalInstallerTestFixture.cs" />
+    <Compile Include="Unit\Install\Retrieve\InstallerNugetPackageRetrieverTestFixture.cs" />
+    <Compile Include="Unit\Update\UpdaterTestFixture.cs" />
+    <Compile Include="Unit\IntroWriterTestFixture.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -78,5 +81,14 @@
       <Project>{16297BCB-0A8C-42E6-BE35-921085C3E238}</Project>
       <Name>SoftwareMonkeys.csAnt</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SoftwareMonkeys.csAnt.External.Nuget.Tests\SoftwareMonkeys.csAnt.External.Nuget.Tests.csproj">
+      <Project>{A5DD8740-CCDB-4F86-974E-6480A2919620}</Project>
+      <Name>SoftwareMonkeys.csAnt.External.Nuget.Tests</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Unit\Install\" />
+    <Folder Include="Unit\Install\Retrieve\" />
+    <Folder Include="Unit\Update\" />
   </ItemGroup>
 </Project>

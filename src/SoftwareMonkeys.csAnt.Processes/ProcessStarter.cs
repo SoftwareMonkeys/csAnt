@@ -2,6 +2,7 @@ using System;
 using System.Diagnostics;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 
 
 namespace SoftwareMonkeys.csAnt.Processes
@@ -11,6 +12,13 @@ namespace SoftwareMonkeys.csAnt.Processes
         public bool IsError { get;set; }
 
         public bool ThrowExceptionOnError = true;
+
+        public string Output
+        {
+            get { return OutputBuilder.ToString(); }
+        }
+
+        public StringBuilder OutputBuilder = new StringBuilder();
 
         public ProcessStarter ()
         {
@@ -120,6 +128,7 @@ namespace SoftwareMonkeys.csAnt.Processes
                 {
                     Console.SetOut (c);
                     c.WriteLine(e.Data);
+                    OutputBuilder.Append(e.Data);
                 }
             );
 
@@ -130,27 +139,13 @@ namespace SoftwareMonkeys.csAnt.Processes
                 {
                     Console.SetOut (c);
                     c.WriteLine(e.Data);
+                    OutputBuilder.Append(e.Data);
                 }
             );
 
             try
             {
                 process.Start();
-    
-                // TODO: Clean up
-                /*process.BeginOutputReadLine();
-
-                while (!process.StandardOutput.EndOfStream) {
-                    string line = process.StandardOutput.ReadLine();
-                    Console.WriteLine (line);
-                }
-
-                process.BeginOutputReadLine();
-                
-                while (!process.StandardError.EndOfStream) {
-                    string line = process.StandardOutput.ReadLine();
-                    Console.WriteLine (line);
-                }*/
 
                 process.BeginOutputReadLine();
                 process.BeginErrorReadLine();
@@ -165,6 +160,9 @@ namespace SoftwareMonkeys.csAnt.Processes
                 IsError = true;
 
                 var title = "\"Error starting process.\"";
+
+                OutputBuilder.Append(title);
+                OutputBuilder.Append(ex.ToString());
 
                 if (ThrowExceptionOnError)
                     throw new Exception (title, ex);
@@ -181,8 +179,6 @@ namespace SoftwareMonkeys.csAnt.Processes
             Console.WriteLine("");
             Console.WriteLine("--------------------");
             Console.WriteLine("");
-
-            Console.Out.Flush();
 
             return process;
         }

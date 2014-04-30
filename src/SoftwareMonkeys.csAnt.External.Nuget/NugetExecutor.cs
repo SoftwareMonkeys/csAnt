@@ -1,5 +1,6 @@
 using System;
 using SoftwareMonkeys.csAnt.Processes;
+using System.Diagnostics;
 
 
 namespace SoftwareMonkeys.csAnt.External.Nuget
@@ -11,6 +12,8 @@ namespace SoftwareMonkeys.csAnt.External.Nuget
 
         public DotNetProcessStarter Starter { get;set; }
 
+        public Process CurrentProcess { get;set; }
+
         public NugetExecutor ()
         {
             Starter = new DotNetProcessStarter();
@@ -18,7 +21,7 @@ namespace SoftwareMonkeys.csAnt.External.Nuget
 
         public virtual void Execute(params string[] arguments)
         {
-            Starter.Start(
+            CurrentProcess = Starter.Start(
                 NugetFilePath,
                 arguments
             );
