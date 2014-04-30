@@ -30,7 +30,6 @@ class DetermineVersionFromMyGet : BaseProjectScript
         Console.WriteLine("");
 
         var versioner = new NugetVersioner(sourcePath);
-
         var status = "";
 
         if (CurrentNode.Properties.ContainsKey("Status"))
