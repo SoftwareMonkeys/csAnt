@@ -29,7 +29,7 @@ namespace SoftwareMonkeys.csAnt.SetUpFromLocalConsole
 
         public static bool Import { get;set; }
 
-        public static string ImportPath = "https://git01.codeplex.com/csant/";
+        public static string ImportPath = "https://github.com/SoftwareMonkeys/csAnt.git";
 
         // TODO: Remove if not needed
         public static string NugetSourcePath = "https://www.myget.org/F/softwaremonkeys/";

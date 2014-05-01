@@ -27,13 +27,13 @@ namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole
 
         public static bool Import { get;set; }
 
-        public static string ImportPath = "https://git01.codeplex.com/csant/";
+        public static string ImportPath = "https://github.com/SoftwareMonkeys/csAnt.git";
 
         public static string NugetSourcePath = "https://www.myget.org/F/softwaremonkeys/";
 
         public static string NugetPath = "http://nuget.org/nuget.exe";
 
-        public static string CloneSource = "https://git01.codeplex.com/csant/";
+        public static string CloneSource = "https://github.com/SoftwareMonkeys/csAnt.git";
 
         public static bool Clone { get;set; }
 
