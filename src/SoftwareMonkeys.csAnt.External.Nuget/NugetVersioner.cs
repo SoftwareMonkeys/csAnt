@@ -150,40 +150,6 @@ namespace SoftwareMonkeys.csAnt.External.Nuget
             }
 
             return versions.ToArray();
-            /*NugetExecutor.Execute(
-                "list",
-                packageName,
-                "-Source " + NugetSourcePath,
-                "-Pre"
-            );
-
-            var content = NugetExecutor.Starter.Output;
-
-            return content.Split(new [] { '\r', '\n' });*/
-
-            /*
-            /*var program = new Program();
-            var console = new NuGet.Common.Console();
-
-            var fs = new PhysicalFileSystem(DestinationPath);
-            program.invoke("Initialize", fs,  console);
-
-            var commands = program.Commands.ToDictionary((command)=>command.CommandName);
-            var cmd = commands["list"];
-
-            var packages = cmd.GetPackages();*/
-
-            /*var cmd = new ListCommand();
-            cmd.Arguments.Add(packageName);
-            cmd.Arguments.Add("-source " + NugetSourcePath);
-            cmd.Arguments.Add("-nocache");
-
-            var packages = cmd.GetPackages();
-
-            var versions = from p in packages
-                select p.Version.ToString();
-
-            return versions.ToArray();*/
         }
     }
 }
