@@ -4,7 +4,8 @@
     "Version": "0.5.15.100",
     "Status": "alpha",
     "Branch": "dev",
-    "CycleBuildSolutions": "csAnt.Tests"
+    "CycleBuildSolutions": "csAnt.Tests",
+    "GitRemotes": "CodePlex,GoogleCode,GitHub"
   },
   "Name": "csAnt"
 }
