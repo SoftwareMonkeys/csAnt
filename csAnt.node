@@ -3,7 +3,7 @@
     "Group": "SoftwareMonkeys",
     "Version": "0.5.15.100",
     "Status": "alpha",
-    "Branch": "master",
+    "Branch": "dev",
     "CycleBuildSolutions": "csAnt.Tests"
   },
   "Name": "csAnt"
