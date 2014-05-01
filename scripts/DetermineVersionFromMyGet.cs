@@ -35,6 +35,8 @@ class DetermineVersionFromMyGet : BaseProjectScript
         if (CurrentNode.Properties.ContainsKey("Status"))
             status = CurrentNode.Properties["Status"];
 
+        var force = Arguments.ContainsAny("f", "force");
+
         Console.WriteLine("Status: " + status);
         Console.WriteLine("");
 
@@ -51,7 +53,8 @@ class DetermineVersionFromMyGet : BaseProjectScript
         Console.WriteLine("Published version: " + publishedVersion);
         Console.WriteLine("");
 
-        if (publishedVersion > currentVersion)
+        if (force
+            || publishedVersion > currentVersion)
         {
             Console.WriteLine("Published version is newer.");
             Console.WriteLine("Using published version.");
