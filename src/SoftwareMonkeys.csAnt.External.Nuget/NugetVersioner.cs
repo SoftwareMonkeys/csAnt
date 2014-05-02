@@ -31,30 +31,51 @@ namespace SoftwareMonkeys.csAnt.External.Nuget
 
         public Version GetVersion(string packageName, Version version, string status)
         {
+            Console.WriteLine("");
+            Console.WriteLine("Getting package version...");
+            Console.WriteLine("");
+            Console.WriteLine("Package name: " + packageName);
+            Console.WriteLine("Version (to match): " + version);
+            Console.WriteLine("");
+
             var versions = GetMatchingVersions(packageName, version, status);
 
             if (versions.Length > 0)
             {
-                var list = new List<string>(versions);
+                var list = new List<SemanticVersion>(versions);
                 list.Sort();
+
+                if (IsVerbose)
+                {
+                    Console.WriteLine("Versions found:");
+
+                    foreach (var v in list)
+                    {
+                        Console.WriteLine("  " + v);
+                    }
+                }
 
                 var latestVersion = list[list.Count-1];
 
-                var versionPart = latestVersion;
-                if (latestVersion.Contains("-"))
-                    versionPart = latestVersion.Substring(0, latestVersion.IndexOf("-"));
+                Console.WriteLine("");
+                Console.WriteLine("Latest version: " + latestVersion);
 
-                return new Version(versionPart);
+                // Extract the version part via text so it keep short versions. Using latestVersion.Version adds the missing digits even when it's not wanted.
+                var versionString = latestVersion.ToString();
+                if (versionString.Contains("-"))
+                    versionString = versionString.Substring(0, versionString.IndexOf("-"));
+
+                return new Version(versionString);
             }
             else
                 return new Version(0,0,0,0);
         }
 
-        public string[] GetMatchingVersions(string packageName, Version versionQuery, string status)
+        public SemanticVersion[] GetMatchingVersions(string packageName, Version versionQuery, string status)
         {
             var versions = GetVersions(packageName);
 
-            var matchingVersions = new List<string>();
+            var matchingVersions = new List<SemanticVersion>();
 
             foreach (var version in versions)
             {
@@ -67,28 +88,19 @@ namespace SoftwareMonkeys.csAnt.External.Nuget
             return matchingVersions.ToArray();
         }
 
-        public bool VersionMatches(string versionWithStatus, Version versionQuery, string status)
+        public bool VersionMatches(SemanticVersion semanticVersion, Version versionQuery, string status)
         {
             if (IsVerbose)
             {
                 Console.WriteLine("");
                 Console.WriteLine("Checking whether version matches...");
-                Console.WriteLine("Value (version with status): " + versionWithStatus);
+                Console.WriteLine("Value (version with status): " + semanticVersion);
                 Console.WriteLine("Version query to match: " + versionQuery);
                 Console.WriteLine("Status: " + status);
             }
 
-            var versionStringParts = versionWithStatus.Split('-');
-            var versionPart = "";
-            var statusPart = "";
-
-            if (versionStringParts.Length == 1)
-                versionPart = versionWithStatus;
-            else if (versionStringParts.Length == 2)
-            {
-                versionPart = versionStringParts[0];
-                statusPart = versionStringParts[1];
-            }
+            var versionPart = semanticVersion.Version;
+            var statusPart = semanticVersion.SpecialVersion;
 
             var statusMatches = status.Equals(statusPart);
 
@@ -108,7 +120,7 @@ namespace SoftwareMonkeys.csAnt.External.Nuget
             return matches;
         }
 
-        public bool VersionMatches(string version, Version versionQuery)
+        public bool VersionMatches(Version version, Version versionQuery)
         {
             // If the version query is 0.0.0.0 then it can match any version
             if (versionQuery == new Version(0,0,0,0))
@@ -119,15 +131,15 @@ namespace SoftwareMonkeys.csAnt.External.Nuget
             {
                 var versionMatches = true;
 
-                var versionStringParts = version.Split('.');
+                var versionStringParts = version.ToString().Split('.');
                 var versionQueryParts = versionQuery.ToString().Split('.');
 
                 for (int i = 0; i < versionStringParts.Length &&  i < versionQueryParts.Length; i++)
                 {
-                    var sectionQuery = versionQuery.ToString().Split('.')[i];
-                    var otherSection = version.Split('.')[i];
+                    var left = versionQuery.ToString().Split('.')[i];
+                    var right = version.ToString().Split('.')[i];
 
-                    if (!sectionQuery.Equals(otherSection))
+                    if (!left.Equals(right))
                         versionMatches = false;
                 }
 
@@ -135,7 +147,7 @@ namespace SoftwareMonkeys.csAnt.External.Nuget
             }
         }
 
-        public string[] GetVersions(string packageName)
+        public SemanticVersion[] GetVersions(string packageName)
         {
             var sourceRepository = PackageRepositoryFactory.Default.CreateRepository(NugetSourcePath);
 
@@ -143,12 +155,12 @@ namespace SoftwareMonkeys.csAnt.External.Nuget
 
             var packages = packageManager.SourceRepository.GetPackages();
 
-            var versions = new List<string>();
+            var versions = new List<SemanticVersion>();
 
             foreach (var package in packages)
             {
                 if (package.Id.ToLower() == packageName.ToLower())
-                    versions.Add(package.Version.ToString());
+                    versions.Add(package.Version);
             }
 
             return versions.ToArray();

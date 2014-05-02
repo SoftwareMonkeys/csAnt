@@ -89,6 +89,8 @@ namespace SoftwareMonkeys.csAnt.SetUp.Update
             Console.WriteLine("Updating csAnt...");
             Console.WriteLine("");
 
+            // The Overwrite property must be set to true otherwise the installer can't update files
+            Installer.Overwrite = true; // TODO: Should this be set when the installer is being provided? Without it the update can't function properly
             Installer.Install();
         }
     }

@@ -20,9 +20,14 @@ class UpdateScript : BaseProjectScript
         Console.WriteLine("Updating...");
         Console.WriteLine("");
 
+        var status = CurrentNode.Properties.ContainsKey("Status")
+            ? CurrentNode.Properties["Status"]
+            : "";
+
         var list = new List<string>();
         list.Add("-update");
         list.Add("-info=false");
+        list.Add("-status=" + status);
         list.AddRange(args);
 
         StartDotNetExe("csAnt-SetUp.exe", list.ToArray());

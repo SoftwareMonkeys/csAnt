@@ -157,7 +157,8 @@ namespace SoftwareMonkeys.csAnt.SetUp.Install.Retrieve
                 {
                     versionString = version.ToString() + "-" + status;
 
-                    Console.WriteLine("Version string: " + versionString);
+                    if (IsVerbose)
+                        Console.WriteLine("Version string: " + versionString);
 
                     arguments.Add("-Version " + versionString.ToString());
                 }

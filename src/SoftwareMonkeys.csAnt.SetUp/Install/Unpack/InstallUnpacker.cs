@@ -3,6 +3,7 @@ using System.IO;
 using SoftwareMonkeys.csAnt.IO;
 using System.Collections.Generic;
 using System.Linq;
+using NuGet;
 
 
 namespace SoftwareMonkeys.csAnt.SetUp.Install.Unpack
@@ -47,7 +48,7 @@ namespace SoftwareMonkeys.csAnt.SetUp.Install.Unpack
 
             var libDir = Path.Combine(projectDirectory, "lib");
 
-            var directory = GetcsAntPackageDir(libDir, version);
+            var directory = GetPackageDir(libDir, packageName, version);
 
             var installedFiles = 0;
             var skippedFiles = 0;
@@ -105,25 +106,49 @@ namespace SoftwareMonkeys.csAnt.SetUp.Install.Unpack
             Console.WriteLine();
         }
         
-        public string GetcsAntPackageDir(string libDir, Version version)
+        public string GetPackageDir(string libDir, string packageName, Version versionQuery)
         {
             var pkgDir = String.Empty;
 
-            if (version != null
-                && version > new Version(0,0,0,0))
+            if (versionQuery != null
+                && versionQuery > new Version(0,0,0,0))
             {
-                pkgDir = libDir
+                pkgDir = PathConverter.ToAbsolute(
+                    libDir
                     + Path.DirectorySeparatorChar
-                    + "csAnt."
-                        + version.ToString();
+                    + packageName
+                    + "."
+                    + versionQuery.ToString()
+                );
             }
             else
             {
-                return new List<DirectoryInfo>(
-                    new DirectoryInfo(libDir).GetDirectories("csAnt.*")
-                        .Where(d => d.Name.StartsWith("csAnt."))
-                            .OrderByDescending(p => p.Name)
-                )[0].FullName;
+                var versions = new List<SemanticVersion>();
+
+                foreach (var dir in Directory.GetDirectories(PathConverter.ToAbsolute(libDir), packageName + ".*"))
+                {
+                    var versionString = Path.GetFileName(dir).Replace(packageName, "");
+                    versionString = versionString.Trim('.');
+
+                    if (!String.IsNullOrEmpty(versionString))
+                    {
+                        var version = new SemanticVersion(versionString);
+
+                        versions.Add(version);
+                    }
+                }
+
+                versions.Sort();
+
+                var latestVersion = versions[versions.Count-1];
+
+                pkgDir = PathConverter.ToAbsolute(
+                    libDir
+                    + Path.DirectorySeparatorChar
+                    + packageName
+                    + "."
+                    + latestVersion.ToString()
+                );
             }
 
             return pkgDir;

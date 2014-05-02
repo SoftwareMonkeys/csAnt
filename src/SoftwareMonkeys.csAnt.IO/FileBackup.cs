@@ -45,7 +45,7 @@ namespace SoftwareMonkeys.csAnt
 
             toFilePath = Path.GetDirectoryName(toFilePath)
                 + Path.DirectorySeparatorChar
-                + toFileName + "." + ext
+                + toFileName + ext
                 + Path.DirectorySeparatorChar
                 + toFileName
                 + "-" + timeStamp
