@@ -25,12 +25,16 @@ End If
 If (NOT fso.FileExists(nugetFile)) Then
         ' Download nuget  
 
-        WScript.Echo "Getting the nuget.exe file"
+        WriteLine "Getting the nuget.exe file"
         Download nugetUrl, nugetFile, true
+        
+        WriteLine ""
 End If
 
 ' Get csAnt setup package
 WriteLine "Getting the installer"
+WriteLine "(this may take a while as the installer will is being downloaded.... please wait...)"
+WriteLine ""
 Start(nugetFile + " install csAnt-setup -Source " + sourcePath + " -OutputDirectory lib -NoCache")
 WriteLine "Done"
 WriteLine ""
