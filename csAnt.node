@@ -1,10 +1,11 @@
 {
   "Properties": {
     "Group": "SoftwareMonkeys",
-    "Version": "0.4.57.499",
-    "Status": "",
-    "Branch": "master",
-    "CycleBuildSolutions": "csAnt.Tests"
+    "Version": "0.5.15.100",
+    "Status": "alpha",
+    "Branch": "dev",
+    "CycleBuildSolutions": "csAnt.Tests",
+    "GitRemotes": "CodePlex,GoogleCode,GitHub"
   },
   "Name": "csAnt"
 }
