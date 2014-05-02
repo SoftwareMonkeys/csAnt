@@ -24,7 +24,7 @@ fi
 
 # Get csAnt setup package
 echo "Getting the installer"
-mono $nugetFile install csAnt-setup -Source $sourcePath -OutputDirectory lib -NoCache -Pre
+mono $nugetFile install csAnt-setup -Source $sourcePath -OutputDirectory lib -NoCache
 echo "Done"
 echo ""
 

@@ -104,7 +104,7 @@ namespace SoftwareMonkeys.csAnt.SetUp.Install.Retrieve
             Console.WriteLine("  " + NugetSourcePath);
             Console.WriteLine("");
             Console.WriteLine("Version: " + version.ToString());
-            Console.WriteLine("Status: " + status);
+            Console.WriteLine("Status: " + (!String.IsNullOrEmpty(status) ? status : "Release (not specified, using default)"));
             Console.WriteLine("");
 
             InstallNuget();
