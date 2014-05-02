@@ -86,12 +86,12 @@ namespace SoftwareMonkeys.csAnt.Projects
 
             var prefix = releaseName + ".";
 
-            //if (IsVerbose)
+            if (IsVerbose)
                 Console.WriteLine("Prefix: " + prefix);
 
             var withoutPrefix = fileName.Replace(prefix, "");
 
-            //if (IsVerbose)
+            if (IsVerbose)
                 Console.WriteLine("Without prefix: " + withoutPrefix);
 
 

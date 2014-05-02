@@ -4,9 +4,9 @@ using SoftwareMonkeys.csAnt.IO;
 
 namespace SoftwareMonkeys.csAnt.Projects.Tests.Unit
 {
-    public class PackageCheckerTestFixture : BaseProjectsUnitTestFixture
+    public class PackageCheckerUnitTestFixture : BaseProjectsUnitTestFixture
     {
-        public PackageCheckerTestFixture ()
+        public PackageCheckerUnitTestFixture ()
         {
         }
 
