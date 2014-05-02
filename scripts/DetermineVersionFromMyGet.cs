@@ -26,9 +26,6 @@ class DetermineVersionFromMyGet : BaseProjectScript
         Console.WriteLine(sourcePath);
         Console.WriteLine("");
 
-        Console.WriteLine("The latest version of csAnt will now be downloaded from the feed and installed so the version of it determined...");
-        Console.WriteLine("");
-
         var versioner = new NugetVersioner(sourcePath);
 
         var status = "";
@@ -38,7 +35,7 @@ class DetermineVersionFromMyGet : BaseProjectScript
 
         var force = Arguments.ContainsAny("f", "force");
 
-        Console.WriteLine("Status: " + status);
+        Console.WriteLine("Status: " + (!String.IsNullOrEmpty(status) ? status : "[Not specified]"));
         Console.WriteLine("");
 
         var currentVersionString = "0.0.0.0";
@@ -54,18 +51,29 @@ class DetermineVersionFromMyGet : BaseProjectScript
         Console.WriteLine("Published version: " + publishedVersion);
         Console.WriteLine("");
 
-        if (force
-            || publishedVersion > currentVersion)
+        if (publishedVersion != currentVersion)
         {
-            Console.WriteLine("Published version is newer.");
-            Console.WriteLine("Using published version.");
+            if (force
+                || publishedVersion > currentVersion)
+            {
+                if (force)
+                    Console.WriteLine("Current version is newer. Overwriting anyway.");
+                else
+                    Console.WriteLine("Published version is newer.");
 
-            ExecuteScript("SetVersion", publishedVersion.ToString());
+                Console.WriteLine("Using published version.");
+
+                ExecuteScript("SetVersion", publishedVersion.ToString());
+            }
+            else
+            {
+                Console.WriteLine("Current version is newer.");
+                Console.WriteLine("Staying with current version.");
+            }
         }
         else
         {
-            Console.WriteLine("Current version is newer.");
-            Console.WriteLine("Staying with current version.");
+                Console.WriteLine("Current version already matches the published version. Nothing needs to be done.");
         }
 
         Console.WriteLine("");
