@@ -16,10 +16,11 @@ class Test_Integration_Update : BaseTestScript
 {
     public string TestSourceDirectory = String.Empty;
     public string TestProjectDirectory = String.Empty;
+    public string Status = String.Empty;
 
 	public static void Main(string[] args)
 	{
-            new Test_Integration_Update().Start(args);
+        new Test_Integration_Update().Start(args);
 	}
 	
 	public override bool Run(string[] args)
@@ -59,13 +60,6 @@ class Test_Integration_Update : BaseTestScript
         Assert.IsTrue(newContent.Contains("Hello universe"), "The new content wasn't found.");
 
    		Assert.IsFalse(IsError, "An error occurred.");
-
-		// TODO: Check if needed
-        /*Assert.IsTrue(ConsoleWriter != null, "Console is null");
-        
-        Assert.IsTrue(ConsoleWriter.Output != null, "Console.Output is null");
-        
-        Assert.IsTrue(ConsoleWriter.Output.Contains("Update complete!"), "Invalid output.");*/
     }
 
     public void PrepareSource()
@@ -84,6 +78,11 @@ class Test_Integration_Update : BaseTestScript
 		    CurrentDirectory
 	    ).GrabOriginalFiles();
 
+        // Refresh the nodes to pick up the status
+        Nodes.Refresh();
+
+        Status = GetStatus();
+
         ClearSourcePackages();
 
         PrepareSourcePackage();
@@ -101,8 +100,11 @@ class Test_Integration_Update : BaseTestScript
 
     public void PrepareSourcePackage()
     {
-
         ExecuteScript("CyclePackage", "csAnt");
+
+        Console.WriteLine("");
+        Console.WriteLine("Status: " + Status);
+        Console.WriteLine("");
     }
 
     public void PrepareInstallation()
@@ -141,7 +143,8 @@ class Test_Integration_Update : BaseTestScript
         StartDotNetExe(
             "csAnt-SetUp.exe",
             "-Source=" + packageDir,
-            "-Nuget=" + nugetPath
+            "-Nuget=" + nugetPath,
+            "-Status=" + Status
         );
 
         return testProjectDir;
@@ -153,6 +156,9 @@ class Test_Integration_Update : BaseTestScript
         ModifyHelloWorldScript();
 
         ExecuteScript("IncrementVersion", "3");
+
+        // Refresh the nodes to pick up the new version
+        Nodes.Refresh();
 
         // Repackage
         Repackage();
@@ -211,5 +217,12 @@ class Test_Integration_Update : BaseTestScript
     public string GetNugetPath()
     {
         return Path.Combine(TestSourceDirectory, "lib/nuget.exe");
+    }
+
+    public string GetStatus()
+    {
+        if (CurrentNode.Properties.ContainsKey("Status"))
+            return CurrentNode.Properties["Status"];
+        return "";
     }
 }
