@@ -31,10 +31,15 @@ class CyclePackageScript : BaseProjectScript
 
         bool skipIncrement = Arguments.Contains("skipincrement");
 
-		ExecuteScript(
-            "EnsureBuild",
-            skipIncrement ? "-skipincrement" : ""
-        );
+        if (skipIncrement)
+        {
+    		ExecuteScript(
+                "EnsureBuild",
+                skipIncrement.ToString()
+            );
+        }
+        else
+            ExecuteScript("EnsureBuild");
 		
 		ExecuteScript("ClearBak");
 
