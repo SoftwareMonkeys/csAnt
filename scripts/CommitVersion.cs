@@ -15,7 +15,7 @@ class CommitAssemblyInfoFilesScript : BaseProjectScript
 	{
         var version = CurrentNode.Properties["Version"];
 
-        var message = @"""Updated version: " + version + @"""";
+        var message = @"""Set version to: " + version + @"""";
 
         var patterns = new string[]{
             "*.node",
@@ -24,7 +24,8 @@ class CommitAssemblyInfoFilesScript : BaseProjectScript
         };
 
         Git.Git(
-            "reset"
+            "reset",
+            "HEAD -- ."
         );
 
         foreach (var file in FindFiles(patterns))
