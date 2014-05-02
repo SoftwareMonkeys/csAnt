@@ -15,7 +15,7 @@ class CommitAssemblyInfoFilesScript : BaseProjectScript
 	{
         var version = CurrentNode.Properties["Version"];
 
-        var message = @"""Updated version: " + version + @"""";
+        var message = @"""Set version to: " + version + @"""";
 
         var patterns = new string[]{
             "*.node",
