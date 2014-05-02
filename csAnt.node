@@ -3,7 +3,7 @@
     "Group": "SoftwareMonkeys",
     "Version": "0.4.58",
     "Status": "",
-    "Branch": "0.4",
+    "Branch": "master",
     "CycleBuildSolutions": "csAnt.Tests",
     "GitRemotes": "CodePlex,GoogleCode,GitHub"
   },
