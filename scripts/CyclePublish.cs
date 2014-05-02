@@ -57,14 +57,14 @@ class CyclePublishScript : BaseProjectScript
         // Increment the 3rd position of the version for each publishing cycle
         IncrementVersion(3);
 
-        // Commit the file version information to source control
-        ExecuteScript("CommitVersion");
-
 		// Build and package the cloned source code (the package script will trigger build cycle if necessary)
         if (!String.IsNullOrEmpty(packageName))
     		ExecuteScript("CyclePackage", packageName, "-skipincrement");
         else
             ExecuteScript("CyclePackage", "-skipincrement");
+
+        // Commit the file version information to source control
+        ExecuteScript("CommitVersion");
 
         // Return the created packages back to the original project /pkg/ directory
         ReturnPackages();
