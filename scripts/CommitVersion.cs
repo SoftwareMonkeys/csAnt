@@ -39,12 +39,6 @@ class CommitAssemblyInfoFilesScript : BaseProjectScript
             "commit",
             "-m " + message
         );
-
-        Git.Git(
-            "push",
-            "origin",
-            "master"
-        );
     
         return !IsError;
 	}
