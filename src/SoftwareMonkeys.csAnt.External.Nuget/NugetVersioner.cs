@@ -40,7 +40,9 @@ namespace SoftwareMonkeys.csAnt.External.Nuget
 
                 var latestVersion = list[list.Count-1];
 
-                var versionPart = latestVersion.Substring(0, latestVersion.IndexOf("-"));
+                var versionPart = latestVersion;
+                if (latestVersion.Contains("-"))
+                    versionPart = latestVersion.Substring(0, latestVersion.IndexOf("-"));
 
                 return new Version(versionPart);
             }
