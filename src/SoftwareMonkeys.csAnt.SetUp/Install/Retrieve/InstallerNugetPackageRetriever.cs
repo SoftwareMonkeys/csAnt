@@ -142,15 +142,25 @@ namespace SoftwareMonkeys.csAnt.SetUp.Install.Retrieve
 
         public void AddVersionArgument(string packageName, Version version, string status, List<string> arguments)
         {
+            // If a version and/or status is specified
             if (version > new Version(0, 0, 0, 0)
                 || !String.IsNullOrEmpty(status))
             {
-                var versionString = Versioner.GetVersion(packageName, version, status)
-                    + "-" + status;
+                // Get the latest version based on the version and status specified (eg. specifying 1.0 will match the latest 1.0.* version, and specifying a status will get the latest version for that status)
+                version = Versioner.GetVersion(packageName, version, status);
 
-                Console.WriteLine("Version string: " + versionString);
+                var versionString = "";
 
-                arguments.Add("-Version " + versionString.ToString());
+                // If a matching version was found and/or status is specified
+                if (version > new Version(0, 0, 0, 0)
+                    || !String.IsNullOrEmpty(status))
+                {
+                    versionString = version.ToString() + "-" + status;
+
+                    Console.WriteLine("Version string: " + versionString);
+
+                    arguments.Add("-Version " + versionString.ToString());
+                }
             }
         }
 
