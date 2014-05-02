@@ -24,7 +24,8 @@ class CommitAssemblyInfoFilesScript : BaseProjectScript
         };
 
         Git.Git(
-            "reset"
+            "reset",
+            "HEAD -- ."
         );
 
         foreach (var file in FindFiles(patterns))
