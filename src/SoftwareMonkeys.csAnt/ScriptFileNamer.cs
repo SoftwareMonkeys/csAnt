@@ -121,7 +121,7 @@ namespace SoftwareMonkeys.csAnt
             return AssembliesDirectory
                 + Path.DirectorySeparatorChar
                 + scriptName
-                + "Script.exe";
+                + ".exe";
         }
     }
 }
