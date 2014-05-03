@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>10.0.0</ProductVersion>
+    <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{3BFB55C4-1247-49BD-AEC9-31BC3C0F1168}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -113,6 +113,7 @@
     <Compile Include="SolutionBuilder.cs" />
     <Compile Include="FileTimeStampManager.cs" />
     <Compile Include="SolutionBuildChecker.cs" />
+    <Compile Include="PackageChecker.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

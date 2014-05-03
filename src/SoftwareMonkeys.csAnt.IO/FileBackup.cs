@@ -1,6 +1,6 @@
 using System;
 using System.IO;
-
+using SoftwareMonkeys.csAnt.IO;
 
 namespace SoftwareMonkeys.csAnt
 {
@@ -12,9 +12,16 @@ namespace SoftwareMonkeys.csAnt
 
         public string Backup(string relativeFilePath)
         {
+        	relativeFilePath = PathConverter.ToRelative(relativeFilePath);
+        	
+        	Console.WriteLine("");
+        	Console.WriteLine("Backing up file:");
+        	Console.WriteLine(relativeFilePath);
+        	Console.WriteLine("");
+        	
             var fromFullFilePath = String.Empty;
 
-            fromFullFilePath = Path.GetFullPath(relativeFilePath);
+            fromFullFilePath = PathConverter.ToAbsolute(relativeFilePath);
 
             var toFilePath = Environment.CurrentDirectory
                 + Path.DirectorySeparatorChar
@@ -38,21 +45,17 @@ namespace SoftwareMonkeys.csAnt
 
             toFilePath = Path.GetDirectoryName(toFilePath)
                 + Path.DirectorySeparatorChar
-                + toFileName
+                + toFileName + ext
                 + Path.DirectorySeparatorChar
                 + toFileName
                 + "-" + timeStamp
                 + ext;
+
+            Console.WriteLine("To:");
+            Console.WriteLine("  " + PathConverter.ToRelative(toFilePath));
             
             if (!Directory.Exists(Path.GetDirectoryName(toFilePath)))
                 Directory.CreateDirectory(Path.GetDirectoryName(toFilePath));
-
-            // TODO: Clean up
-            //Console.WriteLine("");
-            Console.WriteLine("Backed up: " + fromFullFilePath.Replace (Environment.CurrentDirectory, ""));
-            //Console.WriteLine("To:");
-            //Console.WriteLine("  " + toFilePath.Replace (Environment.CurrentDirectory, ""));
-            //Console.WriteLine("");
 
             File.Copy(
                 fromFullFilePath,

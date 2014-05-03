@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>10.0.0</ProductVersion>
+    <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{5B5A328E-6F70-498A-AB13-26E48CBE3BA1}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -88,6 +88,8 @@
     <Compile Include="BaseProjectsTestFixture.Construct.cs" />
     <Compile Include="DummyProjectScriptConstructor.cs" />
     <Compile Include="Integration\SolutionBuildCheckerTestFixture.cs" />
+    <Compile Include="Unit\BaseProjectsUnitTestFixture.cs" />
+    <Compile Include="Unit\PackageCheckerUnitTestFixture.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -130,5 +132,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Integration\" />
+    <Folder Include="Unit\" />
   </ItemGroup>
 </Project>

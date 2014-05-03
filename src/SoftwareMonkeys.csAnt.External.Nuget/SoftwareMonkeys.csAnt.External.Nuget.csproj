@@ -44,7 +44,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
-    <Compile Include="NugetPackageCreator.cs" />
     <Compile Include="NugetPackageSpec.cs" />
     <Compile Include="NugetPackageSpecSaver.cs" />
     <Compile Include="NugetPackageFile.cs" />
@@ -56,6 +55,7 @@
     <Compile Include="NugetExecutor.cs" />
     <Compile Include="NugetPackageSpecFileNamer.cs" />
     <Compile Include="NugetVersioner.cs" />
+    <Compile Include="NugetPackageSpecCreator.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

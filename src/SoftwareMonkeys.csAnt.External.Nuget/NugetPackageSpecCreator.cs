@@ -6,9 +6,9 @@ using SoftwareMonkeys.csAnt.IO;
 
 namespace SoftwareMonkeys.csAnt.External.Nuget
 {
-    public class NugetPackageCreator
+    public class NugetPackageSpecCreator
     {
-        public NugetPackageCreator ()
+        public NugetPackageSpecCreator ()
         {
         }
 
