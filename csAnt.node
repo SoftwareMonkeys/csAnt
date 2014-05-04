@@ -1,9 +1,9 @@
 {
   "Properties": {
     "Group": "SoftwareMonkeys",
-    "Version": "0.4.59",
-    "Status": "",
-    "Branch": "master",
+    "Version": "0.5.16",
+    "Status": "alpha",
+    "Branch": "dev",
     "CycleBuildSolutions": "csAnt.Tests",
     "GitRemotes": "CodePlex,GoogleCode,GitHub"
   },

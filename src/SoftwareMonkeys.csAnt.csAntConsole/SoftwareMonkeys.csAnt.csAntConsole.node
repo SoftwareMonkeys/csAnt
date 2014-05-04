@@ -1,7 +1,7 @@
 {
   "Properties": {
     "Context": "Assembly",
-    "Version": "0.4.59"
+    "Version": "0.5.16"
   },
   "Name": "SoftwareMonkeys.csAnt.csAntConsole"
 }
