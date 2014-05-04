@@ -1,19 +1,20 @@
 using System;
 using System.IO;
+using SoftwareMonkeys.FileNodes;
 
 namespace SoftwareMonkeys.csAnt.Projects
 {
     public class ProjectCreator
     {
-        public NodesCreator NodesCreator { get; set; }
+        public FileNodesCreator NodesCreator { get; set; }
 
-        public INodeState NodeState { get;set; }
+        public IFileNodeState NodeState { get;set; }
 
         public ProjectCreator (
-            INodeState nodeState
+            IFileNodeState nodeState
             )
         {
-            NodesCreator = new NodesCreator(nodeState);
+            NodesCreator = new FileNodesCreator(nodeState);
         }
 
         public void Create (string projectDirectory)

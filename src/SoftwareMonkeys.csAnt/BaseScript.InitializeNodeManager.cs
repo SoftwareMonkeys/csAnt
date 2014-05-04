@@ -1,10 +1,11 @@
 using System;
+using SoftwareMonkeys.FileNodes;
 
 namespace SoftwareMonkeys.csAnt
 {
     public partial class BaseScript
     {
-        public void InitializeNodeManager(INodeManager nodeManager)
+        public void InitializeNodeManager(IFileNodeManager nodeManager)
         {
             if (IsVerbose) {
                 Console.WriteLine ("");
@@ -14,6 +15,10 @@ namespace SoftwareMonkeys.csAnt
             }
 
             Nodes = nodeManager;
+
+            // TODO: Should these be set here or keep values provided?
+            Nodes.IncludeParentNodes = true;
+            Nodes.IncludeChildNodes = true;
         }
     }
 }

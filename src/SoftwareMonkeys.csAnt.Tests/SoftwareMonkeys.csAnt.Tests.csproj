@@ -143,6 +143,7 @@
     <Compile Include="Unit\ProcessStarterTestFixture.cs" />
     <Compile Include="Live\BaseLiveTestFixture.cs" />
     <Compile Include="Live\Unit\BaseLiveUnitTestFixture.cs" />
+    <Compile Include="Unit\LibraryVersionerTestFixture.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

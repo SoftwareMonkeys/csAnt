@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>10.0.0</ProductVersion>
+    <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{16297BCB-0A8C-42E6-BE35-921085C3E238}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -87,6 +87,8 @@
     <Reference Include="SoftwareMonkeys.FileNodes">
       <HintPath>..\..\lib\FileNodes.0.5.3.200\bin\Release\SoftwareMonkeys.FileNodes.dll</HintPath>
     </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
@@ -210,11 +212,6 @@
     <Compile Include="ConsoleVerbosity.cs" />
     <Compile Include="BaseScript.ExecuteScriptFile.cs" />
     <Compile Include="BaseScript.BuildMode.cs" />
-    <Compile Include="NodeRefresher.cs" />
-    <Compile Include="NodeManager.cs" />
-    <Compile Include="NodesCreator.cs" />
-    <Compile Include="NodeState.cs" />
-    <Compile Include="NodeGetter.cs" />
     <Compile Include="BaseScript.Nodes.cs" />
     <Compile Include="BaseScript.InitializeNodeManager.cs" />
     <Compile Include="BaseScript.VersionAndTimeStamp.cs" />
@@ -247,6 +244,7 @@
     <Compile Include="ScriptFinder.cs" />
     <Compile Include="BaseScript.ScriptFinder.cs" />
     <Compile Include="ScriptLauncher.cs" />
+    <Compile Include="LibraryVersioner.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

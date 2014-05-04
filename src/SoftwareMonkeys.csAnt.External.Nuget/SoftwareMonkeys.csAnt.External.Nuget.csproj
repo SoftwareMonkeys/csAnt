@@ -34,12 +34,12 @@
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="SoftwareMonkeys.FileNodes">
-      <HintPath>..\..\lib\csAnt\bin\Release\net-40\SoftwareMonkeys.FileNodes.dll</HintPath>
-    </Reference>
     <Reference Include="System.Core" />
     <Reference Include="NuGet.Core">
       <HintPath>..\..\lib\Nuget.Core.2.8.1\lib\net40-Client\NuGet.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="SoftwareMonkeys.FileNodes">
+      <HintPath>..\..\lib\FileNodes.0.5.3.200\bin\Release\SoftwareMonkeys.FileNodes.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

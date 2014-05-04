@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>10.0.0</ProductVersion>
+    <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{EA178299-9D1E-482E-B3CD-D3CEBF62CADF}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -113,9 +113,6 @@
     <Compile Include="IScriptRelocator.cs" />
     <Compile Include="IScriptTearDowner.cs" />
     <Compile Include="IScript.ConsoleWriter.cs" />
-    <Compile Include="INodeManager.cs" />
-    <Compile Include="INodeState.cs" />
-    <Compile Include="INodeGetter.cs" />
     <Compile Include="IScript.Importer.cs" />
     <Compile Include="IScriptCompiler.cs" />
     <Compile Include="IScriptExecutor.cs" />

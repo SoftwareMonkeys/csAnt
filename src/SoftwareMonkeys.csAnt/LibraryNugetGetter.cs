@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using SoftwareMonkeys.csAnt.Processes;
 using SoftwareMonkeys.csAnt.External.Nuget;
+using SoftwareMonkeys.FileNodes;
 
 
 namespace SoftwareMonkeys.csAnt
@@ -9,11 +10,11 @@ namespace SoftwareMonkeys.csAnt
     // TODO: Decide whether this should be moved to External.Nuget assembly
     public class LibraryNugetGetter
     {
-        public INodeState NodeState { get;set; }
+        public IFileNodeState NodeState { get;set; }
         public DotNetProcessStarter Starter { get;set; }
         public NugetChecker Checker { get;set; }
 
-        public LibraryNugetGetter (INodeState nodeState)
+        public LibraryNugetGetter (IFileNodeState nodeState)
         {
             NodeState = nodeState;
             Starter = new DotNetProcessStarter();

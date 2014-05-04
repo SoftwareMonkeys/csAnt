@@ -1,10 +1,11 @@
 using System;
-using SoftwareMonkeys.csAnt.SetUp.Install.Retrieve;
-using SoftwareMonkeys.csAnt.IO;
-using SoftwareMonkeys.csAnt.External.Nuget.Tests.Mock;
-using NUnit.Framework;
 using System.IO;
+using NUnit.Framework;
+using SoftwareMonkeys.FileNodes;
 using SoftwareMonkeys.csAnt.External.Nuget.Tests;
+using SoftwareMonkeys.csAnt.External.Nuget.Tests.Mock;
+using SoftwareMonkeys.csAnt.IO;
+using SoftwareMonkeys.csAnt.SetUp.Install.Retrieve;
 
 namespace SoftwareMonkeys.csAnt.SetUp.Tests.Unit
 {
@@ -21,7 +22,7 @@ namespace SoftwareMonkeys.csAnt.SetUp.Tests.Unit
                     "lib/nuget.exe"
                 );
 
-            new NodeManager().EnsureNodes();
+            new FileNodeManager().EnsureNodes();
 
             new MockNugetPackageCreator().Create("TestPackage", new Version("1.0.0"), "beta");
             new MockNugetPackageCreator().Create("TestPackage", new Version("1.0.1"), "alpha");

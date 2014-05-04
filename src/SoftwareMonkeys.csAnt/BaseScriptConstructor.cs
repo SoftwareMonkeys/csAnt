@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using SoftwareMonkeys.csAnt.IO;
 using System.IO;
+using SoftwareMonkeys.FileNodes;
 
 namespace SoftwareMonkeys.csAnt
 {
@@ -90,7 +91,7 @@ namespace SoftwareMonkeys.csAnt
 
         public virtual void ConstructNodeManager()
         {
-            Script.InitializeNodeManager(new NodeManager());
+            Script.InitializeNodeManager(new FileNodeManager());
         }
 
         public virtual void ConstructScriptStack()

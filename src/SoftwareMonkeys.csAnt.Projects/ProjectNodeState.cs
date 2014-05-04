@@ -3,7 +3,7 @@ using SoftwareMonkeys.FileNodes;
 
 namespace SoftwareMonkeys.csAnt.Projects
 {
-    public class ProjectNodeState : NodeState
+    public class ProjectNodeState : FileNodeState
     {
         public new ProjectNodeGetter Getter { get;set; }
 

@@ -4,7 +4,7 @@ using System.IO;
 
 namespace SoftwareMonkeys.csAnt.Projects
 {
-    public class ProjectNodeGetter : NodeGetter
+    public class ProjectNodeGetter : FileNodeGetter
     {
         public new ProjectNodeState State
         {
@@ -12,7 +12,7 @@ namespace SoftwareMonkeys.csAnt.Projects
             set { base.State = value; }
         }
 
-        public ProjectNodeGetter (INodeState state) : base(state)
+        public ProjectNodeGetter (IFileNodeState state) : base(state)
         {
         }
 
@@ -28,33 +28,9 @@ namespace SoftwareMonkeys.csAnt.Projects
 
         public FileNode GetGroupNode()
         {
-            //if (IsVerbose)
-            //{
-            //    Console.WriteLine("");
-            //    Console.WriteLine("Getting group node...");
-            //    Console.WriteLine("");
-            //}
-            
-            // TODO: See if this should be injected via constructor
-            var fileNodes = new FileNodeManager(false); // Check if IsVerbose should be configurable
+            var node = GetCurrentNode();
 
-            // Get the group directory (one step up from the project directory)
-            string dir = Path.GetFullPath(
-                Environment.CurrentDirectory
-                + Path.DirectorySeparatorChar
-                + ".."
-            );
-
-            // Scan for the group node
-            FileNode node = fileNodes.Get(dir, false, false);
-            
-            if (node == null)
-                throw new GroupNodeNotFoundException();
-
-            if (State.CurrentNode != null)
-                node.Nodes.Add (State.CurrentNode.Name, State.CurrentNode);
-            
-            return node;
+            return node.ParentNode;
         }
     }
 }

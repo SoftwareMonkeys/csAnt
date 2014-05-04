@@ -27,7 +27,7 @@ class AddCsAntImportScript : BaseProjectScript
         {
                 Importer.AddImport(
                         "csAnt",
-                        "https://code.google.com/p/csant/"
+                        "https://github.com/SoftwareMonkeys/csAnt.git" // TODO: Make this configurable
                 );
         }
 

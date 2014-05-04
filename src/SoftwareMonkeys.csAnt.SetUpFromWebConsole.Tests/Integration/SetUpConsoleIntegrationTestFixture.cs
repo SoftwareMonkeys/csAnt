@@ -194,7 +194,8 @@ namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole.Tests.Integration
                 WorkingDirectory
                 ).GrabOriginalFiles();
 
-            var nodeManager = new ProjectNodeManager();
+            var nodeManager = new ProjectNodeManager(WorkingDirectory);
+            nodeManager.IncludeChildNodes = true;
             nodeManager.EnsureNodes();
 
             var currentNode = nodeManager.State.CurrentNode;

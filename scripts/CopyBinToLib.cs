@@ -106,12 +106,16 @@ class CopyBinToLibScript : BaseProjectScript
 
     public void UpdateVersion()
     {
-        var csAntLibNode = CurrentNode.Nodes["Libraries"].Nodes["csAnt"];
+        if (CurrentNode.Nodes.ContainsKey("Libraries")
+            && CurrentNode.Nodes["Libraries"].Nodes.ContainsKey("csAnt"))
+        {
+            var csAntLibNode = CurrentNode.Nodes["Libraries"].Nodes["csAnt"];
 
-        var version = CurrentNode.Properties["Version"];
+            var version = CurrentNode.Properties["Version"];
 
-        csAntLibNode.Properties["Version"] = version;
-        csAntLibNode.Save();
+            csAntLibNode.Properties["Version"] = version;
+            csAntLibNode.Save();
+        }
     }
 
 	public string GetLibDir()

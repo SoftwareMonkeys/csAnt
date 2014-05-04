@@ -1,10 +1,11 @@
 using System;
 using System.IO;
+using SoftwareMonkeys.FileNodes;
 using SoftwareMonkeys.csAnt;
 using SoftwareMonkeys.csAnt.IO;
 using SoftwareMonkeys.csAnt.SetUp;
-using SoftwareMonkeys.csAnt.Versions;
 using SoftwareMonkeys.csAnt.SetUp.Install;
+using SoftwareMonkeys.csAnt.Versions;
 
 namespace SoftwareMonkeys.csAnt.SetUpFromLocalConsole
 {
@@ -261,9 +262,8 @@ namespace SoftwareMonkeys.csAnt.SetUpFromLocalConsole
         static public string GetStatusFromCurrentNode()
         {
             // TODO: Move NodeManager to a property
-            var nodeManager = new NodeManager();
-            if (nodeManager.State.
-                CurrentNode != null
+            var nodeManager = new FileNodeManager();
+            if (nodeManager.State.CurrentNode != null
                 && nodeManager.State.CurrentNode.Properties.ContainsKey("Status"))
                 return nodeManager.State.CurrentNode.Properties["Status"];
 

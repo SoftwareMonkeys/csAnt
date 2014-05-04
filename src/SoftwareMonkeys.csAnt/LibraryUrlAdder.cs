@@ -7,9 +7,9 @@ namespace SoftwareMonkeys.csAnt
 {
     public class LibraryUrlAdder
     {
-        public INodeState NodeState { get;set; }
+        public IFileNodeState NodeState { get;set; }
 
-        public LibraryUrlAdder (INodeState nodeState)
+        public LibraryUrlAdder (IFileNodeState nodeState)
         {
             NodeState = nodeState;
         }

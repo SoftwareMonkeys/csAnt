@@ -40,6 +40,7 @@ namespace SoftwareMonkeys.csAnt.Imports
         public Gitter Git { get;set; }
         public IFileFinder Finder { get;set; }
         public FileSync FileSync { get;set; }
+        public FileBackup Backup { get;set; }
 
         public Importer ()
         {
@@ -47,6 +48,7 @@ namespace SoftwareMonkeys.csAnt.Imports
             Git = new Gitter();
             Finder = new FileFinder();
             FileSync = new FileSync();
+            Backup = new FileBackup();
         }
 
         public string AddImport (string importProject, string importProjectPath)
@@ -170,8 +172,6 @@ namespace SoftwareMonkeys.csAnt.Imports
                         var toFile = file.Replace (importDir, WorkingDirectory);
 
                         // TODO: Implement flattenHeirarchy
-                        //if (flattenHeirarchy)
-                            //toFile = toFile.Replace (
                         
                         Console.WriteLine ("");
                         Console.WriteLine ("Copying file:");
@@ -184,22 +184,28 @@ namespace SoftwareMonkeys.csAnt.Imports
 
                         DirectoryChecker.EnsureDirectoryExists(Path.GetDirectoryName(toFile));
 
-                        if (File.GetLastWriteTime(file) > File.GetLastWriteTime(toFile))
-                        {
+                        // TODO: Check if needed. The time checks don't seem to be necessary.
+                        //if (File.GetLastWriteTime(file) > File.GetLastWriteTime(toFile))
+                        //{
+                            if (File.Exists(toFile))
+                            {
+                                Backup.Backup(toFile.Replace(importDir, ""));
+                            }
+
                             File.Copy(file, toFile, true);
-                            if (IsVerbose)
-                                Console.WriteLine ("File is newer. Using.");
-                        }
-                        else if (File.GetLastWriteTime(file) == File.GetLastWriteTime(toFile))
-                        {
-                            if (IsVerbose)
-                                Console.WriteLine ("File is same age. Skipping.");
-                        }
-                        else
-                        {
-                            if (IsVerbose)
-                                Console.WriteLine ("File is older. Skipping.");
-                        }
+                        //if (IsVerbose)
+                            //        Console.WriteLine ("File is newer. Using.");
+                        //}
+                            //else if (File.GetLastWriteTime(file) == File.GetLastWriteTime(toFile))
+                            //{
+                            //    if (IsVerbose)
+                            //        Console.WriteLine ("File is same age. Skipping.");
+                            //}
+                            //else
+                            //{
+                            //    if (IsVerbose)
+                            //        Console.WriteLine ("File is older. Skipping.");
+                        // }
                     }
                 }
                 else
@@ -273,6 +279,8 @@ namespace SoftwareMonkeys.csAnt.Imports
                     Console.WriteLine ("Pattern:");
                     Console.WriteLine (pattern);
                     Console.WriteLine ("");
+
+                    // TODO: Instead of using time based sync, export all files and commit to git, then import all files
 
                     FileSync.Sync (WorkingDirectory, importedProjectPath, pattern);
                     Git.AddTo (importedProjectPath, pattern);
@@ -364,7 +372,13 @@ namespace SoftwareMonkeys.csAnt.Imports
 
                     DirectoryChecker.EnsureDirectoryExists(Path.GetDirectoryName(toFile));
 
-                    File.Copy(file, toFile);
+                    // TODO: Check if need. Git should be keeping backups stored so this backup shouldn't be required.
+                    /*if (File.Exists(toFile))
+                    {
+                        Backup.Backup(toFile);
+                    }*/
+
+                    File.Copy(file, toFile, true);
 
                     var sourcePath = File.ReadAllText(importedProjectDirectory + Path.DirectorySeparatorChar + "source.txt");
                     

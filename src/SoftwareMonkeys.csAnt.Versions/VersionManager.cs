@@ -11,9 +11,9 @@ namespace SoftwareMonkeys.csAnt.Versions
 
         public string GetVersion(string workingDirectory)
         {
-            var scanner = new FileNodeScanner();
+            var finder = new FileNodeFinder();
 
-            var node = scanner.ScanDirectory(workingDirectory, false, false);
+            var node = finder.Find(workingDirectory);
 
             if (node == null)
                 throw new Exception("File node not found in working directory: " + workingDirectory);

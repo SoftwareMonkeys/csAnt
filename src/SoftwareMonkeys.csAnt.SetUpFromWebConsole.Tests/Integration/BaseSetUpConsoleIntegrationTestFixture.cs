@@ -1,10 +1,11 @@
 using System;
 using SoftwareMonkeys.csAnt.Tests;
+using SoftwareMonkeys.csAnt.Tests.Integration;
 
 
 namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole.Tests.Integration
 {
-    public class BaseSetUpConsoleIntegrationTestFixture : BaseIntegrationTestFixture
+    public abstract class BaseSetUpConsoleIntegrationTestFixture : BaseIntegrationTestFixture
     {
         public BaseSetUpConsoleIntegrationTestFixture ()
         {

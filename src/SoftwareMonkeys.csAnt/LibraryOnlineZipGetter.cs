@@ -1,12 +1,13 @@
 using System;
+using SoftwareMonkeys.FileNodes;
 
 namespace SoftwareMonkeys.csAnt
 {
     public class LibraryOnlineZipGetter
     {
-        public INodeState NodeState { get;set; }
+        public IFileNodeState NodeState { get;set; }
 
-        public LibraryOnlineZipGetter (INodeState nodeState)
+        public LibraryOnlineZipGetter (IFileNodeState nodeState)
         {
             NodeState = nodeState;
         }

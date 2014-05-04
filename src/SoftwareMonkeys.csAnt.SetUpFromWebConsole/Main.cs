@@ -1,12 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using SoftwareMonkeys.FileNodes;
 using SoftwareMonkeys.csAnt;
 using SoftwareMonkeys.csAnt.SetUp;
+using SoftwareMonkeys.csAnt.SetUp.Install;
 using SoftwareMonkeys.csAnt.SetUp.Install.Retrieve;
 using SoftwareMonkeys.csAnt.SetUp.Install.Unpack;
 using SoftwareMonkeys.csAnt.SetUp.Update;
-using SoftwareMonkeys.csAnt.SetUp.Install;
 
 namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole
 {
@@ -246,7 +247,7 @@ namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole
             Console.WriteLine("      Whether to import text files (eg. scripts) via git, which handles changes, merges, and commits back to the source project.");
             Console.WriteLine("");
             Console.WriteLine("  -c, -clone");
-            Console.WriteLine("      Whether to import text files (eg. scripts) via git, which handles changes, merges, and commits back to the source project.");
+            Console.WriteLine("      Whether to clone the source git repository to the destination.");
             Console.WriteLine("");
             Console.WriteLine("  -intro");
             Console.WriteLine("      Whether or not to show the introduction text. Default is true.");
@@ -256,9 +257,8 @@ namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole
         static public string GetStatusFromCurrentNode()
         {
             // TODO: Move NodeManager to a property
-            var nodeManager = new NodeManager();
-            if (nodeManager.State.
-                CurrentNode != null
+            var nodeManager = new FileNodeManager();
+            if (nodeManager.State.CurrentNode != null
                 && nodeManager.State.CurrentNode.Properties.ContainsKey("Status"))
                 return nodeManager.State.CurrentNode.Properties["Status"];
 

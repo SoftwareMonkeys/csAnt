@@ -8,9 +8,9 @@ namespace SoftwareMonkeys.csAnt
     // TODO: Decide whether this should be moved to External.Nuget assembly
     public class LibraryNugetAdder
     {
-        public INodeState NodeState { get;set; }
+        public IFileNodeState NodeState { get;set; }
 
-        public LibraryNugetAdder (INodeState nodeState)
+        public LibraryNugetAdder (IFileNodeState nodeState)
         {
             NodeState = nodeState;
         }

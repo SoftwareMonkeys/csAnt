@@ -1,9 +1,10 @@
 using System;
 using System.IO;
+using SoftwareMonkeys.FileNodes;
 
 namespace SoftwareMonkeys.csAnt.Projects
 {
-    public class ProjectNodeCreator : NodesCreator
+    public class ProjectNodeCreator : FileNodesCreator
     {
         public new ProjectNodeState State
         {
@@ -13,7 +14,7 @@ namespace SoftwareMonkeys.csAnt.Projects
 
         public bool IsVerbose { get;set; }
 
-        public ProjectNodeCreator (INodeState nodeState) : base(nodeState)
+        public ProjectNodeCreator (IFileNodeState nodeState) : base(nodeState)
         {
         }
 

@@ -20,7 +20,12 @@
     </dependencies>
   </metadata>
   <files>
+    <file src="scripts/AddCsAntImport.cs" target="scripts" />
+    <file src="scripts/ExportFile.cs" target="scripts" />
     <file src="scripts/HelloWorld.cs" target="scripts" />
+    <file src="scripts/ImportFile.cs" target="scripts" />
+    <file src="scripts/ImportScript.cs" target="scripts" />
+    <file src="scripts/ImportSync.cs" target="scripts" />
     <file src="scripts/RaiseEvent.cs" target="scripts" />
     <file src="scripts/FixNUnitRunners.cs" target="scripts" />
     <file src="scripts/OnInstall_FixNUnitRunners.cs" target="scripts" />

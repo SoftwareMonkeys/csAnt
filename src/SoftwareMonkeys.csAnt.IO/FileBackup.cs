@@ -6,6 +6,16 @@ namespace SoftwareMonkeys.csAnt
 {
     public class FileBackup
     {
+        private string workingDirectory;
+        public string WorkingDirectory
+        {
+            get {
+                if (String.IsNullOrEmpty(workingDirectory))
+                    return Environment.CurrentDirectory;
+                return workingDirectory; }
+            set { workingDirectory = value; }
+        }
+
         public FileBackup ()
         {
         }

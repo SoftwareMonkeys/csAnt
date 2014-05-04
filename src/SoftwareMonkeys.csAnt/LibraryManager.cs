@@ -1,4 +1,7 @@
 using System;
+using SoftwareMonkeys.FileNodes;
+
+
 namespace SoftwareMonkeys.csAnt
 {
     public class LibraryManager
@@ -8,10 +11,10 @@ namespace SoftwareMonkeys.csAnt
         public LibraryUrlAdder UrlAdder { get;set; }
         public LibraryNugetAdder NugetAdder { get;set; }
 
-        public INodeState Nodes { get;set; }
+        public IFileNodeState Nodes { get;set; }
 
         public LibraryManager (
-            INodeState nodes
+            IFileNodeState nodes
         )
         {
             Nodes = nodes;

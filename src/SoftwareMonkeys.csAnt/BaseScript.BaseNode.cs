@@ -31,14 +31,15 @@ namespace SoftwareMonkeys.csAnt
 				Console.WriteLine("");
 			}
 
+            throw new NotImplementedException();
 			// TODO: See if this should be injected via constructor
-            var fileNodes = new FileNodeManager();
+            /*var fileNodes = new FileNodeManager();
 
 			string dir = CurrentDirectory;
 			
 			FileNode node = fileNodes.Get(dir, true, true);
-
-			return node;
+*/
+            //			return node;
 		}
 	}
 }

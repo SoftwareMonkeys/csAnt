@@ -1,8 +1,9 @@
 using System;
+using SoftwareMonkeys.FileNodes;
 
 namespace SoftwareMonkeys.csAnt.Projects
 {
-    public class ProjectNodeManager : NodeManager
+    public class ProjectNodeManager : FileNodeManager
     {
         public new ProjectNodeCreator Creator {
             get { return (ProjectNodeCreator)base.Creator; }
@@ -16,6 +17,14 @@ namespace SoftwareMonkeys.csAnt.Projects
 
         public ProjectNodeManager () : base()
         {
+            State = new ProjectNodeState();
+            Creator = new ProjectNodeCreator(State);
+        }
+
+        public ProjectNodeManager (string workingDirectory) : base(workingDirectory)
+        {
+            IncludeChildNodes = true;
+            IncludeParentNodes = true;
             State = new ProjectNodeState();
             Creator = new ProjectNodeCreator(State);
         }

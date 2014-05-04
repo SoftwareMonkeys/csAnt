@@ -2,7 +2,8 @@
 
 using System;
 using System.IO;
-using System.Collections.Generic;
+using Microsoft.CSharp;
+using System.Diagnostics;
 using SoftwareMonkeys.csAnt;
 using SoftwareMonkeys.csAnt.SetUp;
 using SoftwareMonkeys.csAnt.SetUp.Deploy.Launch;
@@ -25,19 +26,18 @@ class MergeBranch : BaseProjectScript
 		Console.WriteLine("Merging '" + branch + "' branch into current...");
 		Console.WriteLine("");
 
-        // Revert all assembly info files before stash
-        foreach (var f in GetExcludedAssemblyInfoFiles())
-        {
-            RevertFile(f);
-        }
-
         Git.Git("stash");
 
         Git.Git("merge --no-commit " + branch);
 
-        foreach (var f in GetExcludedFiles())
+        foreach (var nodeFile in FindFiles("**.node"))
         {
-            RevertFile(f);
+            RevertFile(nodeFile);
+        }
+
+        foreach (var assemblyInfoFile in FindFiles("src", "**.AssemblyInfo.cs"))
+        {
+            RevertFile(assemblyInfoFile);
         }
 
         if (commit)
@@ -53,33 +53,4 @@ class MergeBranch : BaseProjectScript
         Git.Git("reset HEAD " + ToRelative(nodeFile));
         Git.Git("checkout -- " + ToRelative(nodeFile));
     }
-
-    public string[] GetExcludedFiles()
-    {
-        var list = new List<string>();
-
-        list.AddRange(GetExcludedNodeFiles());
-        list.AddRange(GetExcludedAssemblyInfoFiles());
-
-        return list.ToArray();
-    }
-
-    public string[] GetExcludedNodeFiles()
-    {
-        var list = new List<string>();
-
-        list.AddRange(FindFiles("**.node"));
-
-        return list.ToArray();
-    }
-
-    public string[] GetExcludedAssemblyInfoFiles()
-    {
-        var list = new List<string>();
-
-        list.AddRange(FindFiles("src", "**.AssemblyInfo.cs"));
-
-        return list.ToArray();
-    }
-        
 }

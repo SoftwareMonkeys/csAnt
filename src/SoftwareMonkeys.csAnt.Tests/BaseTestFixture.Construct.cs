@@ -1,4 +1,5 @@
 using System;
+using SoftwareMonkeys.FileNodes;
 
 namespace SoftwareMonkeys.csAnt.Tests
 {
@@ -6,7 +7,7 @@ namespace SoftwareMonkeys.csAnt.Tests
     {
         public virtual void Construct()
         {
-            Nodes = new NodeManager();
+            Nodes = new FileNodeManager();
         }
     }
 }

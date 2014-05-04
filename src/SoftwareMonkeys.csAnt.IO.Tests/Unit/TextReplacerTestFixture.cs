@@ -2,6 +2,7 @@ using System;
 using NUnit.Framework;
 using System.IO;
 using System.Reflection;
+using SoftwareMonkeys.csAnt.IO.Tests.Unit;
 
 
 namespace SoftwareMonkeys.csAnt.IO.Tests

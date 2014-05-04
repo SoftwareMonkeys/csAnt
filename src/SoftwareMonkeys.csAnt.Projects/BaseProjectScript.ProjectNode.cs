@@ -19,53 +19,8 @@ namespace SoftwareMonkeys.csAnt.Projects
 		{
 			get
 			{
-				if (projectNode == null)
-				{
-					projectNode = GetProjectNode();
-
-					CurrentNode = projectNode;
-				}
-				return projectNode;
+                return CurrentNode;
 			}
-		}
-		
-		public FileNode GetProjectNode()
-		{
-			if (IsVerbose)
-			{
-				Console.WriteLine("");
-				Console.WriteLine("Getting project node...");
-				Console.WriteLine("");
-			}
-			
-			// TODO: See if this should be injected via constructor
-            var fileNodes = new FileNodeManager(IsVerbose);
-
-			string dir = CurrentDirectory;
-			
-			if (IsVerbose)
-			{
-				Console.WriteLine("");
-				Console.WriteLine("Project node directory: " + dir);
-				Console.WriteLine("");
-			}
-			
-			bool foundPropertiesFile = Directory.GetFiles(dir, "*.node").Length > 0;
-			
-			// Step up the directories looking for .node file
-			while (!foundPropertiesFile
-			       || dir.IndexOf(Path.DirectorySeparatorChar) == dir.LastIndexOf(Path.DirectorySeparatorChar))
-			{
-				dir = Path.GetDirectoryName(dir);
-				
-				foundPropertiesFile = Directory.GetFiles(dir, "*.node").Length > 0;
-			}
-
-			FileNode node = fileNodes.Get(dir, false, true);
-
-			CurrentDirectory = Path.GetDirectoryName(node.FilePath);
-			
-			return node;
 		}
 	}
 }

@@ -1,6 +1,7 @@
 using System;
-using NUnit.Framework;
 using System.IO;
+using NUnit.Framework;
+using SoftwareMonkeys.FileNodes;
 using SoftwareMonkeys.csAnt.IO;
 
 
@@ -23,7 +24,7 @@ namespace SoftwareMonkeys.csAnt.Tests.Integration
                 WorkingDirectory
             ).GrabOriginalScriptingFiles();
 
-            var nodeManager = new NodeManager();
+            var nodeManager = new FileNodeManager();
 
             nodeManager.CreateNodes();
 

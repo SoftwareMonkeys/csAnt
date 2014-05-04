@@ -1,6 +1,7 @@
 using System;
 using NUnit.Framework;
 using SoftwareMonkeys.csAnt.IO;
+using SoftwareMonkeys.csAnt.Tests.Integration;
 
 namespace SoftwareMonkeys.csAnt.Tests
 {

@@ -8,14 +8,14 @@ namespace SoftwareMonkeys.csAnt
 {
     public class LibraryGetter
     {
-        public INodeState NodeState { get;set; }
+        public IFileNodeState NodeState { get;set; }
         public IFileZipper Zipper { get;set; }
         public LibraryOnlineZipGetter OnlineZipGetter { get;set; }
         public LibraryLocalZipGetter LocalZipGetter { get;set; }
         public LibraryNugetGetter NugetGetter { get;set; }
 
         public LibraryGetter (
-            INodeState nodeState
+            IFileNodeState nodeState
         )
         {
             NodeState = nodeState;

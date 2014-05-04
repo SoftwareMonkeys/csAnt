@@ -20,6 +20,8 @@ class DetermineVersionFromMyGet : BaseProjectScript
         Console.WriteLine("Determining version from MyGet feed...");
         Console.WriteLine("");
 
+        var packageName = ProjectName;
+
         var sourcePath = "https://www.myget.org/F/softwaremonkeys/";
 
         Console.WriteLine("Feed source path:");
@@ -45,7 +47,7 @@ class DetermineVersionFromMyGet : BaseProjectScript
             currentVersionString = currentVersionString.Substring(0, currentVersionString.IndexOf("-"));
         var currentVersion = new Version(currentVersionString);
 
-        var publishedVersion = versioner.GetVersion("csAnt", status);
+        var publishedVersion = versioner.GetVersion(packageName, status);
 
         Console.WriteLine("Current version: " + currentVersion);
         Console.WriteLine("Published version: " + publishedVersion);
