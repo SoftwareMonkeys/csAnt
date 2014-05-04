@@ -50,7 +50,7 @@ class MergeBranch : BaseProjectScript
 
     public void RevertFile(string nodeFile)
     {
-        Git.Git("reset HEAD " + ToRelative(nodeFile));
+        Git.Git("reset HEAD -- " + ToRelative(nodeFile));
         Git.Git("checkout -- " + ToRelative(nodeFile));
     }
 
