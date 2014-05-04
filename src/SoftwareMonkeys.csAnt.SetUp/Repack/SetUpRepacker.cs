@@ -26,7 +26,7 @@ namespace SoftwareMonkeys.csAnt.SetUp.Repack
                 "lib/HtmlAgilityPack.1.4.6/lib/Net40/HtmlAgilityPack.dll",
                 "lib/CS-Script.3.7.2.0/lib/net40/CSScriptLibrary.dll",
                 "lib/CS-Script.3.7.2.0/lib/net40/Mono.CSharp.dll",
-                "lib/FileNodes.0.5.3.200/bin/Release/SoftwareMonkeys.FileNodes.dll",
+                "lib/FileNodes.0.6.1/bin/Release/SoftwareMonkeys.FileNodes.dll",
                 "lib/Newtonsoft.Json.6.0.2/lib/net40/Newtonsoft.Json.dll",
                 "lib/Nuget.Core.2.8.1/lib/net40-Client/NuGet.Core.dll",
                 "bin/{BuildMode}/SoftwareMonkeys.csAnt.dll",
