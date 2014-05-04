@@ -17,7 +17,7 @@ namespace SoftwareMonkeys.csAnt.Projects
 
             script.InitializeVersionManager(new VersionManager());
 
-            script.InitializeNodeManager(new ProjectNodeManager());
+            script.InitializeNodeManager(new ProjectNodeManager(parentScript.Nodes.CurrentNode));
         }
     }
 }

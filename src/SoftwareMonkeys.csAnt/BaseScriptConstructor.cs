@@ -29,6 +29,8 @@ namespace SoftwareMonkeys.csAnt
 
             ConstructConsoleWriter(scriptName, parentScript);
 
+            ConstructNodeManager(parentScript);
+
             ConstructScriptStack();
 
             OutputHeader();
@@ -56,7 +58,6 @@ namespace SoftwareMonkeys.csAnt
                 
                 // TODO: Improve consistency in this code
                 Script.TemporaryDirectoryCreator = Script.ParentScript.TemporaryDirectoryCreator;
-                Script.InitializeNodeManager(Script.ParentScript.Nodes);
                 //Script.Relocator = Script.ParentScript.Relocator; // TODO: Remove if not needed. At the moment each script must have its own relocator. Could possibly change relocator so it doesn't need one per script
                 Script.InitializeFileFinder(Script.ParentScript.FileFinder);
                 Script.Indenter = new Indenter(Script.ParentScript.Indenter.Indent+1);
@@ -72,7 +73,6 @@ namespace SoftwareMonkeys.csAnt
 #endif
                 
                 ConstructTDC();
-                ConstructNodeManager();
                 ConstructFileFinder();
             }
         }
@@ -89,9 +89,12 @@ namespace SoftwareMonkeys.csAnt
             Console.SetOut ((TextWriter)Script.ConsoleWriter);
         }
 
-        public virtual void ConstructNodeManager()
+        public virtual void ConstructNodeManager(IScript parentScript)
         {
-            Script.InitializeNodeManager(new FileNodeManager());
+            var manager = new FileNodeManager();
+            if (parentScript != null)
+                manager.CurrentNode = parentScript.Nodes.CurrentNode;
+            Script.InitializeNodeManager(manager);
         }
 
         public virtual void ConstructScriptStack()
