@@ -31,7 +31,8 @@ class Test_BuildFromGitScript : BaseProjectTestScript
 
         Git.Clone(OriginalDirectory, CurrentDirectory);
 
-        CreateNodes();
+        Nodes.EnsureNodes();
+        Nodes.Refresh();
 
         // Grab the required library files
         Console.WriteLine("Grabbing required library files...");
@@ -45,71 +46,8 @@ class Test_BuildFromGitScript : BaseProjectTestScript
         Console.WriteLine("Launching build cycle...");
 
         ExecuteScript("CycleBuild");
-        
-
-		/*var dummyProjectDir = PrepareTest();
-
-		if (!IsError)
-		{
-			// Build and test the cloned copy of the project
-			BuildClonedCopy(dummyProjectDir);
-		}*/
 
 		return !IsError;
 	}
-
-	/*public string PrepareTest()
-	{
-        var testDir = CurrentDirectory;
-		
-		new FilesGrabber(
-                    OriginalDirectory,
-                    CurrentDirectory
-        ).GrabOriginalScriptingFiles();
-
-		// Clone the project to another directory
-		var dummyProjectDir = CloneToTmpDirectory();
-
-		// Relocate to the dummy project directory
-		Relocate(dummyProjectDir);
-
-		// Create the required nodes
-		CreateNodes();
-
-		// Grab the library files (so there's no need to run setup)
-		new FilesGrabber(
-                    testDir,
-                    dummyProjectDir
-                ).GrabOriginalFiles(
-			"lib/**"
-		);
-
-		return dummyProjectDir;
-	}*/
-
-	/*{
-		Console.WriteLine("Cloning to tmp directory...");
-
-		var projectDirectory = Path.GetDirectoryName(CurrentDirectory)
-                    + Path.DirectorySeparatorChar
-                    + "TestProject";
-
-		Console.WriteLine("Tmp directory:");
-		Console.WriteLine(projectDirectory);
-
-		Directory.CreateDirectory(projectDirectory);
-
-		GitClone(OriginalDirectory, projectDirectory);
-
-		return projectDirectory;
-	}*/
-
-	/*public void BuildClonedCopy(string dummyProjectDir)
-	{
-		CurrentDirectory = dummyProjectDir;
-
-		// Build and test
-		ExecuteScript("CycleBuild");
-	}*/
 
 }
