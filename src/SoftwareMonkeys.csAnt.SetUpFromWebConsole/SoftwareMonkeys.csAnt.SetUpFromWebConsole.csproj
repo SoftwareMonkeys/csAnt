@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -78,7 +78,7 @@
       <HintPath>..\..\lib\CS-Script.3.7.2.0\lib\net40\CSScriptLibrary.dll</HintPath>
     </Reference>
     <Reference Include="SoftwareMonkeys.FileNodes">
-      <HintPath>..\..\lib\FileNodes.0.5.3.200\bin\Release\SoftwareMonkeys.FileNodes.dll</HintPath>
+      <HintPath>..\..\lib\FileNodes.0.6.1\bin\Release\SoftwareMonkeys.FileNodes.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
