@@ -16,6 +16,9 @@ using SoftwareMonkeys.csAnt.Projects.Tests.Scripting;
 
 class Test_BuildFromSourcePackageScript : BaseProjectTestScript
 {
+    public string SourceProjectDirectory;
+    public string TestProjectDirectory;
+
 	public static void Main(string[] args)
 	{
 		new Test_BuildFromSourcePackageScript().Start(args);
@@ -26,6 +29,8 @@ class Test_BuildFromSourcePackageScript : BaseProjectTestScript
 		Console.WriteLine("");
 		Console.WriteLine("Testing a build cycle from the source package...");
 		Console.WriteLine("");
+
+        SourceProjectDirectory = CurrentDirectory;
 		
         new FilesGrabber(
             OriginalDirectory,
@@ -46,24 +51,24 @@ class Test_BuildFromSourcePackageScript : BaseProjectTestScript
 
 	public void DeployAndBuild()
 	{
-        var tmpDir = GetTmpDir();
+        TestProjectDirectory = GetTmpDir();
 
 		var releaseZipFile = GetNewestFile(
-			OriginalDirectory
+			SourceProjectDirectory
 			+ Path.DirectorySeparatorChar
 			+ "pkg"
 			+ Path.DirectorySeparatorChar
 			+ "csAnt-src"
 		);
 
-		Unzip(releaseZipFile, tmpDir);			
+		Unzip(releaseZipFile, TestProjectDirectory);			
 
 		Console.WriteLine("");
-		Console.WriteLine("Tmp dir:");
-		Console.WriteLine(" " + tmpDir);
+		Console.WriteLine("Test project directory:");
+		Console.WriteLine(" " + TestProjectDirectory);
 		Console.WriteLine("");
 
-		Relocate(tmpDir);
+		Relocate(TestProjectDirectory);
 
 		if (!IsError)
 		{
@@ -73,8 +78,5 @@ class Test_BuildFromSourcePackageScript : BaseProjectTestScript
 
 			ExecuteScript("CycleBuild");
 		}
-
-		// Move back to the original project directory
-		Relocate(OriginalDirectory);
 	}
 }
