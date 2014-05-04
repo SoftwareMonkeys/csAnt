@@ -42,7 +42,9 @@ class GenerateAssemblyInfoFilesScript : BaseProjectScript
         var assemblyTitle = Path.GetFileName(assemblyDir);
         var assemblyCompany = GroupName;
 
-        var version = new VersionManager().GetVersion(assemblyDir);
+        var version = CurrentNode.Properties.ContainsKey("Version")
+            ? CurrentNode.Properties["Version"]
+            : "0.0.0.0";
 
         output = output.Replace("{{AssemblyTitle}}", assemblyTitle)
             .Replace("{{AssemblyCompany}}", assemblyCompany)
