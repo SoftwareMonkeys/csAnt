@@ -5,21 +5,30 @@ namespace SoftwareMonkeys.csAnt.Versions
 {
     public class VersionManager
     {
+        public FileNode CurrentNode { get;set; }
+        public FileNodeFinder Finder { get;set; }
+
         public VersionManager ()
         {
+            Finder = new FileNodeFinder();
+        }
+
+        public VersionManager (FileNode currentNode)
+        {
+            Finder = new FileNodeFinder();
+            CurrentNode = CurrentNode;
         }
 
         public string GetVersion(string workingDirectory)
         {
-            var finder = new FileNodeFinder();
+            if (CurrentNode == null)
+                CurrentNode = Finder.Find(workingDirectory);
 
-            var node = finder.Find(workingDirectory);
-
-            if (node == null)
+            if (CurrentNode == null)
                 throw new Exception("File node not found in working directory: " + workingDirectory);
 
-            if (node.Properties.ContainsKey("Version"))
-                return node.Properties["Version"];
+            if (CurrentNode.Properties.ContainsKey("Version"))
+                return CurrentNode.Properties["Version"];
             else
                 return "0.0.0.0";
         }
