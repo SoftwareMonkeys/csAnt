@@ -15,13 +15,10 @@ namespace SoftwareMonkeys.csAnt.SetUp.Install.Unpack
 
         public FileBackup Backup { get;set; }
 
-        public FileNodeManager Nodes { get;set; }
-
         public InstallUnpacker ()
         {
             FileFinder = new FileFinder();
             Backup = new FileBackup();
-            Nodes = new FileNodeManager();
         }
 
         public override void Unpack (string projectDirectory, string packageName, Version version, bool forceOverwrite)
@@ -41,8 +38,6 @@ namespace SoftwareMonkeys.csAnt.SetUp.Install.Unpack
             Console.WriteLine("Force overwrite:");
             Console.WriteLine(forceOverwrite);
             Console.WriteLine("");
-
-            InstallNode(projectDirectory, packageName, version);
 
             var files = new string[]{
                 "csAnt.sh",
@@ -109,12 +104,6 @@ namespace SoftwareMonkeys.csAnt.SetUp.Install.Unpack
             Console.WriteLine("Files skipped: " + skippedFiles);
             Console.WriteLine("Files overwritten: " + overwrittenFiles);
             Console.WriteLine();
-        }
-
-        public void InstallNode(string projectDirectory, string packageName, Version version)
-        {
-            Nodes.WorkingDirectory = projectDirectory;
-            Nodes.EnsureNodes();
         }
         
         public string GetPackageDir(string libDir, string packageName, Version versionQuery)

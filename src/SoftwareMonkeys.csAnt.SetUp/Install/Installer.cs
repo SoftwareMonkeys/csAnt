@@ -9,6 +9,7 @@ using SoftwareMonkeys.csAnt.Processes;
 using SoftwareMonkeys.csAnt.SourceControl.Git;
 using SoftwareMonkeys.csAnt.SetUp.Install.Retrieve;
 using SoftwareMonkeys.csAnt.SetUp.Install.Unpack;
+using SoftwareMonkeys.FileNodes;
 
 
 namespace SoftwareMonkeys.csAnt.SetUp.Install
@@ -26,6 +27,8 @@ namespace SoftwareMonkeys.csAnt.SetUp.Install
         public Gitter Git = new Gitter();
 
         public ScriptEventRaiser EventRaiser { get;set; }
+
+        public FileNodeManager Nodes { get;set; }
         #endregion
 
         public string PackageName = "csAnt";
@@ -53,6 +56,7 @@ namespace SoftwareMonkeys.csAnt.SetUp.Install
             FileFinder = new FileFinder();
             Importer = new Importer();
             EventRaiser = new ScriptEventRaiser();
+            Nodes = new FileNodeManager();
         }
 
         public Installer (
@@ -64,6 +68,7 @@ namespace SoftwareMonkeys.csAnt.SetUp.Install
             FileFinder = new FileFinder();
             Importer = new Importer();
             EventRaiser = new ScriptEventRaiser();
+            Nodes = new FileNodeManager();
         }
 
         public Installer (string packageName, string feedPath, string destination)
@@ -73,6 +78,7 @@ namespace SoftwareMonkeys.csAnt.SetUp.Install
             FileFinder = new FileFinder();
             Importer = new Importer();
             EventRaiser = new ScriptEventRaiser();
+            Nodes = new FileNodeManager();
         }
 
         public Installer (string sourcePath, string destination)
@@ -83,6 +89,7 @@ namespace SoftwareMonkeys.csAnt.SetUp.Install
             FileFinder = new FileFinder();
             Importer = new Importer();
             EventRaiser = new ScriptEventRaiser();
+            Nodes = new FileNodeManager();
         }
         
         public Installer ()
@@ -92,6 +99,7 @@ namespace SoftwareMonkeys.csAnt.SetUp.Install
             FileFinder = new FileFinder();
             Importer = new Importer();
             EventRaiser = new ScriptEventRaiser();
+            Nodes = new FileNodeManager();
         }
 
         public override void Install()
@@ -131,7 +139,15 @@ namespace SoftwareMonkeys.csAnt.SetUp.Install
             if (Clone)
                 CloneFiles();
 
+            EnsureNode();
+
             RaiseInstallEvent();
+        }
+
+        public void EnsureNode()
+        {
+            Nodes.WorkingDirectory = DestinationPath;
+            Nodes.EnsureNodes();
         }
 
         public void ClearFiles()
