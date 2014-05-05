@@ -47,7 +47,10 @@ namespace SoftwareMonkeys.csAnt.Versions
             currentNode.Save();
 
             if (!currentNode.Nodes.ContainsKey("Source"))
-                throw new Exception("Can't find 'Source' node.");
+                Getter.SetChildNodes(currentNode);
+
+            if (!currentNode.Nodes.ContainsKey("Source"))
+                throw new Exception("Can't find 'Source' node (either the file doesn't exist or it wasn't loaded).");
 
             currentNode.Nodes["Source"].Properties["Version"] = version.ToString();
             currentNode.Nodes["Source"].Save();

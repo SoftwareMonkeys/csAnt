@@ -8,6 +8,8 @@ namespace SoftwareMonkeys.csAnt.Tests
         public virtual void Construct()
         {
             Nodes = new FileNodeManager();
+            Nodes.IncludeChildNodes = true;
+            Nodes.IncludeParentNodes = true;
         }
     }
 }
