@@ -5,7 +5,7 @@ using SoftwareMonkeys.csAnt.Tests.Unit;
 
 namespace SoftwareMonkeys.csAnt.IO.Tests.Unit
 {
-    public class BaseIOUnitTestFixture : BaseUnitTestFixture
+    public abstract class BaseIOUnitTestFixture : BaseUnitTestFixture
     {
     }
 

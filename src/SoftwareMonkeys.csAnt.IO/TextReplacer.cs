@@ -36,8 +36,12 @@ namespace SoftwareMonkeys.csAnt.IO
             patterns.AddRange(ExcludePatterns);
 
             string[] files = Finder.FindFiles(workingDir, patterns.ToArray());
-            
-            Console.WriteLine("Performing (" + (commit ? "real" : "mock") + ") replace in the following files:");
+
+            Console.WriteLine("Performing (" + (commit ? "real" : "mock") + ") replace of the following text...");
+            Console.WriteLine("From:");
+            Console.WriteLine("  " + textToFind);
+            Console.WriteLine("To:");
+            Console.WriteLine("  " + replacementText);
 
             var totalChanges = 0;
             var totalSkipped = 0;

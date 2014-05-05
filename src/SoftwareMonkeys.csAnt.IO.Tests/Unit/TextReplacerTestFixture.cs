@@ -5,7 +5,7 @@ using System.Reflection;
 using SoftwareMonkeys.csAnt.IO.Tests.Unit;
 
 
-namespace SoftwareMonkeys.csAnt.IO.Tests
+namespace SoftwareMonkeys.csAnt.IO.Tests.Unit
 {
     [TestFixture]
     public class TextReplacerTestFixture : BaseIOUnitTestFixture
