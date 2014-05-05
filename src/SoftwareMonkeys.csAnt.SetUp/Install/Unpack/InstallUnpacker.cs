@@ -4,6 +4,7 @@ using SoftwareMonkeys.csAnt.IO;
 using System.Collections.Generic;
 using System.Linq;
 using NuGet;
+using SoftwareMonkeys.FileNodes;
 
 
 namespace SoftwareMonkeys.csAnt.SetUp.Install.Unpack
@@ -14,10 +15,13 @@ namespace SoftwareMonkeys.csAnt.SetUp.Install.Unpack
 
         public FileBackup Backup { get;set; }
 
+        public FileNodeManager Nodes { get;set; }
+
         public InstallUnpacker ()
         {
             FileFinder = new FileFinder();
             Backup = new FileBackup();
+            Nodes = new FileNodeManager();
         }
 
         public override void Unpack (string projectDirectory, string packageName, Version version, bool forceOverwrite)
@@ -38,8 +42,9 @@ namespace SoftwareMonkeys.csAnt.SetUp.Install.Unpack
             Console.WriteLine(forceOverwrite);
             Console.WriteLine("");
 
+            InstallNode(projectDirectory, packageName, version);
+
             var files = new string[]{
-                "csAnt.node",
                 "csAnt.sh",
                 "csAnt.bat",
                 "scripts/**",
@@ -104,6 +109,12 @@ namespace SoftwareMonkeys.csAnt.SetUp.Install.Unpack
             Console.WriteLine("Files skipped: " + skippedFiles);
             Console.WriteLine("Files overwritten: " + overwrittenFiles);
             Console.WriteLine();
+        }
+
+        public void InstallNode(string projectDirectory, string packageName, Version version)
+        {
+            Nodes.WorkingDirectory = projectDirectory;
+            Nodes.EnsureNodes();
         }
         
         public string GetPackageDir(string libDir, string packageName, Version versionQuery)

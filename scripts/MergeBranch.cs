@@ -33,7 +33,7 @@ class MergeBranch : BaseProjectScript
 
         Git.Git("stash");
 
-        Git.Git("merge --no-commit " + branch);
+        Git.Git("merge --no-commit --no-ff " + branch);
 
         foreach (var f in GetExcludedFiles())
         {
