@@ -1,7 +1,7 @@
 {
   "Properties": {
     "Context": "Assembly",
-    "Version": "0.4.59"
+    "Version": "0.4.62.100"
   },
   "Name": "SoftwareMonkeys.csAnt.SetUp.Tests"
 }
