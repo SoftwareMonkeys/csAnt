@@ -68,6 +68,14 @@ class UpdateLib : BaseScript
             
         ExecuteScript("SetLibVersion", id, foundVersion.ToString());
 
+        new FileCopier(
+            ToAbsolute("lib"),
+            ToAbsolute("pkg")
+        ).Copy(
+            "*.nupkg",
+            "!" + CurrentNode.Name
+        );
+
 		return !IsError;
 	}
 }
