@@ -17,6 +17,8 @@ namespace SoftwareMonkeys.csAnt.Projects
 
         public ProjectNodeManager () : base()
         {
+            IncludeChildNodes = true;
+            IncludeParentNodes = true;
             State = new ProjectNodeState();
             Creator = new ProjectNodeCreator(State);
         }
