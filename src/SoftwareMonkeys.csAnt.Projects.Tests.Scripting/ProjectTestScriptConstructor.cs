@@ -32,10 +32,13 @@ namespace SoftwareMonkeys.csAnt.Projects.Tests.Scripting
             script.SetUpper = new ProjectTestScriptSetUpper (script);
 
             script.TearDowner = new ProjectTestScriptTearDowner (script);
-            
-            script.InitializeVersionManager(new VersionManager());
 
-            script.InitializeNodeManager(new ProjectNodeManager());
+            var nodeManager = new ProjectNodeManager();
+            if (parentScript != null)
+                nodeManager.CurrentNode = parentScript.Nodes.CurrentNode;
+            script.InitializeNodeManager(nodeManager);
+
+            script.InitializeVersionManager(new VersionManager(nodeManager.CurrentNode));
             
             if (Script.IsVerbose) {
                 Console.WriteLine ("");

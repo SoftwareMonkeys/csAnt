@@ -15,12 +15,12 @@ namespace SoftwareMonkeys.csAnt.Projects
 
             base.Construct (scriptName, parentScript);
 
-            script.InitializeVersionManager(new VersionManager());
-
             var nodeManager = new ProjectNodeManager();
             if (parentScript != null)
                 nodeManager.CurrentNode = parentScript.Nodes.CurrentNode;
             script.InitializeNodeManager(nodeManager);
+
+            script.InitializeVersionManager(new VersionManager(nodeManager.CurrentNode));
         }
     }
 }

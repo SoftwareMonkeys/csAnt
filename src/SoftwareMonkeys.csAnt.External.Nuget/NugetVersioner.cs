@@ -35,7 +35,8 @@ namespace SoftwareMonkeys.csAnt.External.Nuget
             Console.WriteLine("Getting package version...");
             Console.WriteLine("");
             Console.WriteLine("Package name: " + packageName);
-            Console.WriteLine("Version (to match): " + version);
+            Console.WriteLine("Version (to match): " + (version != null && version != new Version(0,0,0,0) ? version.ToString() : "[Latest]"));
+            Console.WriteLine("Status (to match): " + (!String.IsNullOrEmpty(status) ? status : "[Stable release]"));
             Console.WriteLine("");
 
             var versions = GetMatchingVersions(packageName, version, status);

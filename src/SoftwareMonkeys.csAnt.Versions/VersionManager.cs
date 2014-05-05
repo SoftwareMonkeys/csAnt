@@ -1,4 +1,4 @@
-using System;
+ using System;
 using SoftwareMonkeys.FileNodes;
 
 namespace SoftwareMonkeys.csAnt.Versions
@@ -6,23 +6,25 @@ namespace SoftwareMonkeys.csAnt.Versions
     public class VersionManager
     {
         public FileNode CurrentNode { get;set; }
-        public FileNodeFinder Finder { get;set; }
+        public FileNodeGetter Getter { get;set; }
 
         public VersionManager ()
         {
-            Finder = new FileNodeFinder();
+            Getter = new FileNodeGetter();
+            Getter.IncludeChildNodes = true;
         }
 
         public VersionManager (FileNode currentNode)
         {
-            Finder = new FileNodeFinder();
+            Getter = new FileNodeGetter();
+            Getter.IncludeChildNodes = true;
             CurrentNode = CurrentNode;
         }
 
         public string GetVersion(string workingDirectory)
         {
             if (CurrentNode == null)
-                CurrentNode = Finder.Find(workingDirectory);
+                CurrentNode = Getter.FindNode(workingDirectory);
 
             if (CurrentNode == null)
                 throw new Exception("File node not found in working directory: " + workingDirectory);

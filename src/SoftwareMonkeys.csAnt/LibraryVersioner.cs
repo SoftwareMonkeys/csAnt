@@ -15,31 +15,35 @@ namespace SoftwareMonkeys.csAnt
         {
         }
 
-        public void SetVersion(string id, string version)
+        public void SetVersion(string id, string toVersion)
         {
             Console.WriteLine("");
             Console.WriteLine("Setting library version...");
             Console.WriteLine("");
             Console.WriteLine("Updating files:");
 
-            UpdateNuspecFiles(id, version);
-            UpdateCsProjFiles(id, version);
+            var fromVersion = GetVersion(id);
+
+            UpdateNuspecFiles(id, fromVersion, toVersion);
+            UpdateCsProjFiles(id, fromVersion, toVersion);
+            UpdateSourceFiles(id, fromVersion, toVersion);
+
             Console.WriteLine("");
             Console.WriteLine("Done");
             Console.WriteLine("");
         }
 
-        public void UpdateNuspecFiles(string id, string version)
+        public void UpdateNuspecFiles(string id, string fromVersion, string toVersion)
         {
             var pkgDir = Path.GetFullPath("pkg");
 
             foreach (var file in Directory.GetFiles(pkgDir, "*.nuspec"))
             {
-                UpdateNuspecFile(id, version, file);
+                UpdateNuspecFile(id, fromVersion, toVersion, file);
             }
         }
 
-        public void UpdateNuspecFile(string id, string version, string file)
+        public void UpdateNuspecFile(string id, string fromVersion, string toVersion, string file)
         {
             var doc = new XmlDocument();
             doc.Load(file);
@@ -47,7 +51,7 @@ namespace SoftwareMonkeys.csAnt
 
             if (node != null)
             {
-                node.Attributes["version"].Value = "[" + version + "]";
+                node.Attributes["version"].Value = "[" + toVersion + "]";
 
                 Console.WriteLine("  " + PathConverter.ToRelative(file));
 
@@ -55,17 +59,17 @@ namespace SoftwareMonkeys.csAnt
             }
         }
 
-        public void UpdateCsProjFiles(string id, string version)
+        public void UpdateCsProjFiles(string id, string fromVersion, string toVersion)
         {
             var srcDir = Path.GetFullPath("src");
 
             foreach (var file in Directory.GetFiles(srcDir, "*.csproj", SearchOption.AllDirectories))
             {
-                UpdateCsProjFile(id, version, file);
+                UpdateCsProjFile(id, fromVersion, toVersion, file);
             }
         }
 
-        public void UpdateCsProjFile(string id, string version, string file)
+        public void UpdateCsProjFile(string id, string fromVersion, string toVersion, string file)
         {
             XNamespace msbuild = "http://schemas.microsoft.com/developer/msbuild/2003";
 
@@ -102,7 +106,7 @@ namespace SoftwareMonkeys.csAnt
 
                         if (matches)
                         {
-                            part = id + "." + version;
+                            part = id + "." + toVersion;
 
                             parts[i] = part;
 
@@ -119,6 +123,36 @@ namespace SoftwareMonkeys.csAnt
                     doc.Save(file);
                 }
             }
+        }
+
+        public void UpdateSourceFiles(string id, string fromVersion, string toVersion)
+        {
+            var fromText = id + "." + fromVersion;
+            var toText = id + "." + toVersion;
+
+            var replacer = new TextReplacer();
+            replacer.ReplaceIn(
+                Path.GetFullPath("src"),
+                "**.cs",
+                fromText,
+                toText,
+                true
+            );
+        }
+
+        public string GetVersion(string id)
+        {
+            foreach (var file in Directory.GetFiles(Path.GetFullPath("pkg"), "*.nuspec"))
+            {
+                var doc = new XmlDocument();
+                doc.Load(file);
+                var node = doc.SelectSingleNode("//dependency[@id='" + id + "']");
+
+                if (node != null)
+                    return node.Attributes["version"].Value.Trim('[').Trim(']');
+            }
+
+            return String.Empty;
         }
     }
 }

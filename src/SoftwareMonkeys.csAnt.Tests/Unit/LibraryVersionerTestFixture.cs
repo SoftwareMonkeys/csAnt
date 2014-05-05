@@ -21,24 +21,26 @@ namespace SoftwareMonkeys.csAnt.Tests.Unit
             var newVersion = "1000.1000.1000.1000";
 
             var versioner = new LibraryVersioner();
+            var existingVersion = versioner.GetVersion("FileNodes");
 
             versioner.SetVersion(id, newVersion);
 
-            CheckNuspecFiles(id, newVersion);
-            CheckCsProjFiles(id, newVersion);
-            //CheckLibDir(id, newVersion); // TODO: Check if needed
+            CheckNuspecFiles(id, existingVersion, newVersion);
+            CheckCsProjFiles(id, existingVersion, newVersion);
+            CheckSourceDir(id, existingVersion, newVersion);
         }
 
-        public void CheckNuspecFiles(string id, string newVersion)
+        public void CheckNuspecFiles(string id, string existingVersion, string newVersion)
         {
             CheckFiles(
                 id,
+                existingVersion,
                 newVersion,
                 Directory.GetFiles(Path.GetFullPath("pkg"), "*.nuspec")
             );
         }
 
-        public void CheckCsProjFiles(string id, string newVersion)
+        public void CheckCsProjFiles(string id, string existingVersion, string newVersion)
         {
             var list = new List<string>();
 
@@ -52,12 +54,13 @@ namespace SoftwareMonkeys.csAnt.Tests.Unit
 
             CheckFiles(
                 id,
+                existingVersion,
                 newVersion,
                 list.ToArray()
             );
         }
 
-        public void CheckLibDir(string id, string newVersion)
+        public void CheckLibDir(string id, string existingVersion, string newVersion)
         {
             var dir = Path.GetFullPath("lib")
                 + Path.DirectorySeparatorChar
@@ -66,7 +69,29 @@ namespace SoftwareMonkeys.csAnt.Tests.Unit
             Assert.IsTrue(Directory.Exists(dir), "New lib directory not found.");
         }
 
-        public void CheckFiles(string id, string newVersion, params string[] files)
+        public void CheckSourceDir(string id, string existingVersion, string newVersion)
+        {
+            var srcDir = Path.GetFullPath("src");
+
+            var list = new List<string>();
+
+            foreach (var dir in Directory.GetDirectories(srcDir))
+            {
+                var files = Directory.GetFiles(dir, "*.cs");
+
+                if (files.Length > 0)
+                    list.AddRange(files);
+            }
+
+            CheckFiles(
+                id,
+                existingVersion,
+                newVersion,
+                list.ToArray()
+            );
+        }
+
+        public void CheckFiles(string id, string existingVersion, string newVersion, params string[] files)
         {
             Console.WriteLine("Checking files...");
 
@@ -76,18 +101,29 @@ namespace SoftwareMonkeys.csAnt.Tests.Unit
 
                 var content = File.ReadAllText(file);
 
-                if (content.Contains(id))
+                Assert.IsFalse(content.Contains(existingVersion.ToString()));
+
+                if (content.Contains(id + ".")
+                    || content.Contains(id + "\""))
                 {
                     if (IsVerbose)
                     {
                         Console.WriteLine("    Contains ID: " + id);
-                        if (content.Contains(newVersion))
-                            Console.WriteLine("    Contains new version.");
-                        else
-                            Console.WriteLine("    Does not contain version.");
                     }
 
-                    Assert.IsTrue(content.Contains(newVersion));
+                    bool doesContain = content.Contains(newVersion);
+
+                    if (doesContain)
+                    {
+                        if (IsVerbose)
+                            Console.WriteLine("    Contains new version.");
+                    }
+                    else
+                    {
+                        Console.WriteLine("    Missing new version.");
+
+                        Assert.Fail("    New version not found.");
+                    }
                 }
                 else
                 {
