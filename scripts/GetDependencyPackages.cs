@@ -36,12 +36,17 @@ class GetDependencyPackages : BaseProjectScript
                 + Path.DirectorySeparatorChar
                 + "pkg";
 
+            var libDir = CurrentDirectory
+                + Path.DirectorySeparatorChar
+                + "lib";
+
             Relocate(tmpDir);
 
             StartDotNetExe(
                 "lib/nuget.exe",
                 "install",
                 "csAnt",
+                "-Source " + libDir,
                 "-Source " + pkgDir,
                 "-Source " + "https://www.myget.org/F/softwaremonkeys/",
                 "-Source " + "https://go.microsoft.com/fwlink/?LinkID=206669",
