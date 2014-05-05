@@ -10,7 +10,7 @@ namespace SoftwareMonkeys.csAnt
                 return new string[]{
                     "lib/csAnt/**",
                     "lib/CS-Script.3.7.2.0/lib/net40/**",
-                    "lib/FileNodes.0.6.1/**",
+                    "lib/FileNodes.0.6.4/**",
                     "lib/NUnit.2.6.0.12051/lib/nunit.framework.dll",
                     "lib/NUnit.Runners.2.6.0.12051/tools/nunit-console.exe",
                     "lib/NUnitResults.1.1/**",

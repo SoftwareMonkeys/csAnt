@@ -8,7 +8,7 @@
     <description>C# scripting and automation environment (source code).</description>
     <dependencies>
       <dependency id="CS-Script" version="[3.7.2.0]" />
-      <dependency id="FileNodes" version="[0.6.1]" />
+      <dependency id="FileNodes" version="[0.6.4]" />
       <dependency id="Newtonsoft.Json" version="[6.0.2]" />
       <dependency id="HtmlAgilityPack" version="[1.4.6]" />
       <dependency id="SharpZipLib" version="[0.86.0]" />
