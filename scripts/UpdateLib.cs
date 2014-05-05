@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Collections.Generic;
 using SoftwareMonkeys.csAnt;
+using SoftwareMonkeys.csAnt.IO;
 using SoftwareMonkeys.csAnt.External.Nuget;
 
 class UpdateLib : BaseScript

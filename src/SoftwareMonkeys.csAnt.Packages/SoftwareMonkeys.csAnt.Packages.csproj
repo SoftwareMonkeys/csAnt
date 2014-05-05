@@ -66,7 +66,7 @@
     <Reference Include="System.Xml" />
     <Reference Include="System.Web" />
     <Reference Include="SoftwareMonkeys.FileNodes">
-      <HintPath>..\..\lib\FileNodes.0.6.4\bin\Release\SoftwareMonkeys.FileNodes.dll</HintPath>
+      <HintPath>..\..\lib\FileNodes.0.6.5\bin\Release\SoftwareMonkeys.FileNodes.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

@@ -112,7 +112,7 @@ namespace SoftwareMonkeys.csAnt.IO
             if (!commit)
                 Console.WriteLine("The replacement wasn't committed.");
             Console.WriteLine("");
-            Console.WriteLine("Replacement complete:");
+            Console.WriteLine("Replacement complete!");
             Console.WriteLine("");
         }
         
