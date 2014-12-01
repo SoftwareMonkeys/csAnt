@@ -65,13 +65,15 @@ namespace SoftwareMonkeys.csAnt.Projects
         public Version GetLatestPackageVersion(string packageName)
         {
             var dir = PathConverter.ToAbsolute("pkg/" + packageName);
+            
+            var version = new Version (0, 0, 0, 0);
 
-            var latestFilePath = FileNavigator.GetNewestFile(dir);
+            if (Directory.Exists (dir)) {
+                var latestFilePath = FileNavigator.GetNewestFile (dir);
 
-            var version = new Version(0,0,0,0);
-
-            if (!String.IsNullOrEmpty(latestFilePath))
-                version = GetVersionFromPackageFileName(latestFilePath);
+                if (!String.IsNullOrEmpty (latestFilePath))
+                    version = GetVersionFromPackageFileName (latestFilePath);
+            }
 
             return version;
         }
