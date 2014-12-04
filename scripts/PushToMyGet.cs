@@ -64,14 +64,23 @@ class PushToMyGetScript : BaseProjectScript
             Console.WriteLine("Package file:");
             Console.WriteLine(" " + pkgFile);
 
-            var apiKey = CurrentNode.Nodes["Security"].Nodes["MyGet"].Properties["ApiKey"];
+	        var myGetNode = CurrentNode.Nodes["Security"].Nodes["MyGet"];
+	        
+	        if (!myGetNode.Properties.ContainsKey("ApiKey"))
+	        {
+	            Error("ApiKey value not found in MyGet security file.");
+	        }
+	        else
+	        {
+                var apiKey = myGetNode.Properties["ApiKey"];
 
-            var arguments = "push"
-                + " " + pkgFile
-                + " " + apiKey
-                + " -Source " + destination;
+                var arguments = "push"
+                    + " " + pkgFile
+                    + " " + apiKey
+                    + " -Source " + destination;
 
-            ExecuteScript("nuget", arguments);
+                ExecuteScript("nuget", arguments);
+            }
         }
         else
             Console.WriteLine("No package file. Skipping " + Path.GetFileName(dir));
