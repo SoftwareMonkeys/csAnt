@@ -245,7 +245,6 @@
     <Compile Include="BaseScript.ScriptFinder.cs" />
     <Compile Include="ScriptLauncher.cs" />
     <Compile Include="LibraryVersioner.cs" />
-    <Compile Include="Apps\AppScriptFileNamer.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
