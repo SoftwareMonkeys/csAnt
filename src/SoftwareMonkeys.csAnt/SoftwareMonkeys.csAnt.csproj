@@ -245,6 +245,7 @@
     <Compile Include="BaseScript.ScriptFinder.cs" />
     <Compile Include="ScriptLauncher.cs" />
     <Compile Include="LibraryVersioner.cs" />
+    <Compile Include="Apps\AppScriptFileNamer.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -276,5 +277,8 @@
       <Project>{94578333-F8C9-40C0-9300-8D808ED1CD7A}</Project>
       <Name>SoftwareMonkeys.csAnt.SourceControl.Git</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Apps\" />
   </ItemGroup>
 </Project>
