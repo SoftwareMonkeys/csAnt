@@ -9,6 +9,11 @@ echo ""
 echo "(Please wait. This might take a while, as files need to be downloaded and installed.)"
 echo ""
 
+echo "Installing certificates..."
+mozroots --import --sync
+echo "... done."
+echo ""
+
 # Create lib directory
 if [ ! -d "$libDir" ]; then
     mkdir $libDir
