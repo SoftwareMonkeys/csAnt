@@ -224,7 +224,7 @@ namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole
             Console.WriteLine("      The version to install. Default is the latest version.");
             Console.WriteLine("");
             Console.WriteLine("  -status");
-            Console.WriteLine("      The version to install. Default is the latest version.");
+            Console.WriteLine("      The version to install. Default is the stable release.");
             Console.WriteLine("");
             Console.WriteLine("  -d, -destination");
             Console.WriteLine("      The destination folder to install the files to (absolute or relative).");
@@ -241,7 +241,7 @@ namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole
             Console.WriteLine("      Tells the installer to force overwrite of files.");
             Console.WriteLine("");
             Console.WriteLine("  -u, -update");
-            Console.WriteLine("      Performs an update instead of a standard instead.");
+            Console.WriteLine("      Performs an update instead of a standard install.");
             Console.WriteLine("");
             Console.WriteLine("  -i, -import");
             Console.WriteLine("      Whether to import text files (eg. scripts) via git, which handles changes, merges, and commits back to the source project.");
