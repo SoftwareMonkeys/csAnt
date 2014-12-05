@@ -167,7 +167,7 @@ namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole.Tests.Integration
 
         public string Prepare(string setupFileName, string buildMode)
         {
-            // Grab all the original files
+            // Grab all the original files to the staging directory
             new FilesGrabber(
                 OriginalDirectory,
                 WorkingDirectory,

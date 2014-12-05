@@ -37,6 +37,27 @@ namespace SoftwareMonkeys.csAnt.IO
                 };
             }
         }
+        
+        public string[] LibPackageFilePatterns
+        {
+            get
+            {
+                return new string[] {
+                    "lib/csAnt/*.nupkg",
+                    "lib/FileNodes.0.6.5/*.nupkg",
+                    "lib/HtmlAgilityPack.1.4.6/*.nupkg",
+                    "lib/CS-Script.3.7.2.0/*.nupkg",
+                    "lib/SharpZipLib.0.86.0/*.nupkg",
+                    "lib/ILRepack.1.25.0/*.nupkg",
+                    "lib/Newtonsoft.Json.6.0.2/*.nupkg",
+                    "lib/NUnit.2.6.0.12051/*.nupkg",
+                    "lib/NUnit.Runners.2.6.0.12051/*.nupkg",
+                    "lib/NUnitResults.1.1/*.nupkg",
+                    "lib/Nuget.Core.2.8.1/*.nupkg"
+                };
+            }
+        }
+
         public string[] SrcFilePatterns
         {
             get

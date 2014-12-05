@@ -58,22 +58,25 @@ namespace SoftwareMonkeys.csAnt.External.Nuget.Tests.Mock
         {
             Console.WriteLine("");
             Console.WriteLine("Getting required packages...");
+            
+            var pkgDirs = new string[] {
+                "pkg",
+                "lib"
+            };
 
-            var pkgDir = Path.Combine(originalDirectory, "pkg");
-
-            foreach (var dir in Directory.GetDirectories(pkgDir))
-            {
-                if (!Path.GetFileName(dir).StartsWith("csAnt"))
-                {
-                    foreach (var file in Directory.GetFiles(dir))
-                    {
-                        var toFile = file.Replace(pkgDir, feedPath);
+            foreach (var pkgDir in pkgDirs) {
+                var fullPkgDir = Path.Combine (OriginalDirectory, pkgDir);
+                foreach (var dir in Directory.GetDirectories(fullPkgDir)) {
+                    if (!Path.GetFileName (dir).StartsWith ("csAnt")) {
+                        foreach (var file in Directory.GetFiles(dir, "*.nupkg", SearchOption.AllDirectories)) {
+                            var toFile = file.Replace (fullPkgDir, feedPath);
     
-                        DirectoryChecker.EnsureDirectoryExists(Path.GetDirectoryName(toFile));
+                            DirectoryChecker.EnsureDirectoryExists (Path.GetDirectoryName (toFile));
 
-                        Console.WriteLine("  " + toFile.Replace(feedPath, ""));
+                            Console.WriteLine ("  " + toFile.Replace (feedPath, ""));
 
-                        File.Copy(file, toFile, true);
+                            File.Copy (file, toFile, true);
+                        }
                     }
                 }
             }

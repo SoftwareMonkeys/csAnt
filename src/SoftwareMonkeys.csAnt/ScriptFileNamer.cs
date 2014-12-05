@@ -6,9 +6,12 @@ namespace SoftwareMonkeys.csAnt
 {
     public class ScriptFileNamer
     {
+        // TODO: Reorganize class code
         public bool IsVerbose { get;set; }
 
         public string BuildMode = "Release";
+
+        public string AppsDir = Path.GetFullPath("apps");
         
         public string AssembliesDirectory
         {
@@ -52,6 +55,11 @@ namespace SoftwareMonkeys.csAnt
 
             if (String.IsNullOrEmpty(scriptPath))
             {
+                scriptPath = GetAppScriptPath(scriptsDir, scriptName);
+            }
+
+            if (String.IsNullOrEmpty(scriptPath))
+            {
                 throw new ScriptNotFoundException(scriptName);
             }
                         
@@ -64,12 +72,7 @@ namespace SoftwareMonkeys.csAnt
 
             foreach (var p in Directory.GetFiles(scriptsDir))
             {
-                string fileName = Path.GetFileNameWithoutExtension(p);
-
-                string ext = Path.GetExtension(p).Trim('.');
-                
-                if (fileName.ToLower() == scriptName.Trim().ToLower()
-                    && ext == "cs")
+                if (MatchesFileName(scriptName, p))
                 {
                     scriptPath = p;
                 }
@@ -108,6 +111,23 @@ namespace SoftwareMonkeys.csAnt
             return scriptPath;
         }
 
+        public string GetAppScriptPath(string scriptsDir, string scriptName)
+        {
+            string scriptPath = String.Empty;
+
+            foreach (var a in Directory.GetDirectories(AppsDir))
+            {
+                foreach (var p in Directory.GetFiles(a + "/scripts")) {
+                    if (MatchesFileName(scriptName, p)) {
+                        scriptPath = p;
+                    }
+                }
+
+            }
+
+            return scriptPath;
+        }
+
         public string GetScriptsPath()
         {
             var path = Path.Combine(Environment.CurrentDirectory, "scripts");
@@ -122,6 +142,16 @@ namespace SoftwareMonkeys.csAnt
                 + Path.DirectorySeparatorChar
                 + scriptName
                 + ".exe";
+        }
+
+        public bool MatchesFileName(string scriptName, string scriptFilePath)
+        {
+            var fileName = Path.GetFileNameWithoutExtension (scriptFilePath);
+
+            var ext = Path.GetExtension (scriptFilePath).Trim ('.');
+
+            return fileName.ToLower () == scriptName.Trim ().ToLower ()
+                && ext == "cs";
         }
     }
 }
