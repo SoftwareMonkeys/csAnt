@@ -15,37 +15,40 @@ class CycleScript : BaseProjectScript
 	public override bool Run(string[] args)
 	{
 		Console.WriteLine("");
-		Console.WriteLine("Starting a full local cycle.");
+		Console.WriteLine("Starting a full cycle.");
 		Console.WriteLine("");
-
-		Console.WriteLine("Building...");
-		Console.WriteLine("");
+		
+		bool test = Arguments.ContainsAny("t", "test");
+		
+		ExecuteScript("DetermineVersionFromMyGet");
 
 		// Build the solutions
 		ExecuteScript(
 			"EnsureBuild"
 		);
 
-        // TODO: Remove if not needed. Tests take a long time and should be done separately.
-		/*if (!IsError)
+		if (!IsError)
 		{
-			Console.WriteLine("Testing and creating reports...");
-			Console.WriteLine("");
+            if (test)
+            {
+			    Console.WriteLine("Testing and creating reports...");
+			    Console.WriteLine("");
 
-			// Run tests
-			ExecuteScript(
-				"RunTests"
-			);
-		}*/
+			    // Run tests
+			    ExecuteScript(
+				    "CycleTests"
+			    );
+		    }
+		}
 
 		if (!IsError)
 		{
-			Console.WriteLine("Creating package files locally...");
+			Console.WriteLine("Creating and publish packages...");
 			Console.WriteLine("");
 
 			// Run release scripts
 			ExecuteScript(
-				"CyclePackage"
+				"CyclePublish"
 			);
 		}
 		
