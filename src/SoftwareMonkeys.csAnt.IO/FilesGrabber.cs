@@ -127,6 +127,16 @@ namespace SoftwareMonkeys.csAnt.IO
                 };
             }
         }
+        
+        public string[] TestResultsPatterns
+        {
+            get
+            {
+                return new string[] {
+                    "tests/results/**"
+                };
+            }
+        }
 
         private bool overwrite;
         public bool Overwrite
@@ -216,6 +226,8 @@ namespace SoftwareMonkeys.csAnt.IO
             Grab(PackageFilePatterns);
 
             Grab(MiscFilePatterns);
+
+            Grab(TestResultsPatterns);
         }
 
         public void GrabOriginalFiles (params string[] patterns)
