@@ -235,8 +235,10 @@ namespace SoftwareMonkeys.csAnt.IO
             Grab(LauncherFilePatterns);
 
             Grab(NodeFilePatterns);
-
+            
             Grab(LibFilePatterns);
+
+            Grab(LibPackageFilePatterns);
 
             Grab(SrcFilePatterns);
 
