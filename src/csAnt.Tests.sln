@@ -261,7 +261,7 @@ Global
 		{EA178299-9D1E-482E-B3CD-D3CEBF62CADF}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = SoftwareMonkeys.csAnt\SoftwareMonkeys.csAnt.csproj
+		StartupItem = SoftwareMonkeys.csAnt.csAntConsole\SoftwareMonkeys.csAnt.csAntConsole.csproj
 		Policies = $0
 		$0.DotNetNamingPolicy = $1
 		$1.DirectoryNamespaceAssociation = None
