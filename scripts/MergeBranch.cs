@@ -44,6 +44,8 @@ class MergeBranch : BaseProjectScript
             Git.Git("commit -m \"Merged '" + branch + "' branch.\"");
         
         Git.Git("stash pop");
+        
+        ExecuteScript("GenerateAssemblyInfoFiles");
 
 		return !IsError;
 	}
