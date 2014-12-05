@@ -12,7 +12,7 @@ using SoftwareMonkeys.csAnt.Tests.Scripting;
 using NUnit.Framework;
 
 [TestFixture]
-class Test_Integration_Update : BaseTestScript
+class Test_Integration_UpdateScript : BaseTestScript
 {
     public string TestSourceDirectory = String.Empty;
     public string TestProjectDirectory = String.Empty;
@@ -20,7 +20,7 @@ class Test_Integration_Update : BaseTestScript
 
 	public static void Main(string[] args)
 	{
-        new Test_Integration_Update().Start(args);
+        new Test_Integration_UpdateScript().Start(args);
 	}
 	
 	public override bool Run(string[] args)
