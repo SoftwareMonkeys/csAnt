@@ -158,7 +158,8 @@ namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole.Tests.Integration
             processStarter.Start(
                 setupFileName,
                 "-nuget=" + LocalNugetFilePath,
-                "-source=" + Path.Combine(sourceDir, "pkg"),
+                "-source=" + MockFeedPath,
+                //"-source=" + Path.Combine(sourceDir, "pkg") + ";" + Path.Combine(sourceDir, "lib"), // TODO: Remove if not needed
                 "-status=beta"
                 );
 
@@ -299,6 +300,8 @@ namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole.Tests.Integration
                 ).GrabOriginalFiles(
                 setupFileName
                 );
+            
+            CreateMockFeed();
 
             // Create the path to a local copy of nuget.exe (so it doesn't get downloaded from the web)
             LocalNugetFilePath = WorkingDirectory

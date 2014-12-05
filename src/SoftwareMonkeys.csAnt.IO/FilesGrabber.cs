@@ -33,7 +33,8 @@ namespace SoftwareMonkeys.csAnt.IO
                     "lib/NUnit.2.6.0.12051/lib/**",
                     "lib/NUnit.Runners.2.6.0.12051/tools/**",
                     "lib/NUnitResults.1.1/bin/*",
-                    "lib/Nuget.Core.2.8.1/lib/net40-Client/*"
+                    "lib/Nuget.Core.2.8.1/lib/net40-Client/*",
+                    "lib/Microsoft.Web.Xdt.1.0.0/lib/net40/**" 
                 };
             }
         }
@@ -53,7 +54,8 @@ namespace SoftwareMonkeys.csAnt.IO
                     "lib/NUnit.2.6.0.12051/*.nupkg",
                     "lib/NUnit.Runners.2.6.0.12051/*.nupkg",
                     "lib/NUnitResults.1.1/*.nupkg",
-                    "lib/Nuget.Core.2.8.1/*.nupkg"
+                    "lib/Nuget.Core.2.8.1/*.nupkg",
+                    "lib/Microsoft.Web.Xdt.1.0.0/*.nupkg" 
                 };
             }
         }
