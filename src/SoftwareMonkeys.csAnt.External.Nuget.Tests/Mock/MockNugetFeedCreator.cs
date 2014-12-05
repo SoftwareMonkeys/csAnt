@@ -10,9 +10,12 @@ namespace SoftwareMonkeys.csAnt.External.Nuget.Tests.Mock
     {
         public string FeedPath { get;set; }
 
+        // TODO: Remove if not needed. Not currently in use.
         public string OriginalDirectory { get;set; }
 
         public string WorkingDirectory { get;set; }
+
+        public bool IncludeProjectPackages = true;
 
         public MockNugetFeedCreator (string originalDirectory, string workingDirectory, string feedPath)
         {
@@ -67,7 +70,8 @@ namespace SoftwareMonkeys.csAnt.External.Nuget.Tests.Mock
             foreach (var pkgDir in pkgDirs) {
                 var fullPkgDir = Path.Combine (workingDirectory, pkgDir);
                 foreach (var dir in Directory.GetDirectories(fullPkgDir)) {
-                    // if (!Path.GetFileName (dir).StartsWith ("csAnt")) {
+                    if (IncludeProjectPackages
+                        || !Path.GetFileName (dir).StartsWith ("csAnt")) {
                         foreach (var file in Directory.GetFiles(dir, "*.nupkg", SearchOption.AllDirectories)) {
                             var toFile = file.Replace (fullPkgDir, feedPath);
     
@@ -77,7 +81,7 @@ namespace SoftwareMonkeys.csAnt.External.Nuget.Tests.Mock
 
                             File.Copy (file, toFile, true);
                         }
-                    //}
+                    }
                 }
             }
 

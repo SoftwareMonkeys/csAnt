@@ -36,40 +36,39 @@ namespace SoftwareMonkeys.csAnt.External.Nuget
             Console.WriteLine("");
             Console.WriteLine("Package name: " + packageName);
             Console.WriteLine("Version (to match): " + (version != null && version != new Version(0,0,0,0) ? version.ToString() : "[Latest]"));
-            Console.WriteLine("Status (to match): " + (!String.IsNullOrEmpty(status) ? status : "[Stable release]"));
+            Console.WriteLine("Status (to match): " + (!String.IsNullOrEmpty(status) ? status : "[Stable]"));
             Console.WriteLine("");
 
             var versions = GetMatchingVersions(packageName, version, status);
 
-            if (versions.Length > 0)
-            {
-                var list = new List<SemanticVersion>(versions);
-                list.Sort();
+            if (versions.Length > 0) {
+                var list = new List<SemanticVersion> (versions);
+                list.Sort ();
 
-                if (IsVerbose)
-                {
-                    Console.WriteLine("Versions found:");
+                if (IsVerbose) {
+                    Console.WriteLine ("Versions found:");
 
-                    foreach (var v in list)
-                    {
-                        Console.WriteLine("  " + v);
+                    foreach (var v in list) {
+                        Console.WriteLine ("  " + v);
                     }
                 }
 
-                var latestVersion = list[list.Count-1];
+                var latestVersion = list [list.Count - 1];
 
-                Console.WriteLine("");
-                Console.WriteLine("Latest version: " + latestVersion);
+                Console.WriteLine ("");
+                Console.WriteLine ("Latest version: " + latestVersion);
 
                 // Extract the version part via text so it keep short versions. Using latestVersion.Version adds the missing digits even when it's not wanted.
-                var versionString = latestVersion.ToString();
-                if (versionString.Contains("-"))
-                    versionString = versionString.Substring(0, versionString.IndexOf("-"));
+                var versionString = latestVersion.ToString ();
+                if (versionString.Contains ("-"))
+                    versionString = versionString.Substring (0, versionString.IndexOf ("-"));
 
-                return new Version(versionString);
+                return new Version (versionString);
+            } else {
+                Console.WriteLine ("No matching versions found.");
+
+                return new Version (0, 0, 0, 0);
             }
-            else
-                return new Version(0,0,0,0);
         }
 
         public SemanticVersion[] GetMatchingVersions(string packageName, Version versionQuery, string status)
@@ -150,6 +149,8 @@ namespace SoftwareMonkeys.csAnt.External.Nuget
 
         public SemanticVersion[] GetVersions(string packageName)
         {
+            Console.WriteLine ("Nuget source path: " + NugetSourcePath);
+
             var sourceRepository = PackageRepositoryFactory.Default.CreateRepository(NugetSourcePath);
 
             var packageManager = new PackageManager(sourceRepository, Environment.CurrentDirectory);
