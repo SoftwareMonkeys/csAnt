@@ -14,8 +14,13 @@ class CommitAssemblyInfoFilesScript : BaseProjectScript
 	public override bool Run(string[] args)
 	{
         var version = CurrentNode.Properties["Version"];
+        
+        var status = CurrentNode.Properties["Status"];
+        
+        if (String.IsNullOrEmpty(status))
+            status = "stable";
 
-        var message = @"""Set version to: " + version + @"""";
+        var message = @"""Set version to: " + version + @" (" + status + @")""";
 
         var patterns = new string[]{
             "*.node",
