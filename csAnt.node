@@ -5,7 +5,7 @@
     "Status": "alpha",
     "Branch": "dev",
     "CycleBuildSolutions": "csAnt.Tests",
-    "GitRemotes": "GitHub"
+    "GitRemotes": "origin"
   },
   "Name": "csAnt"
 }
