@@ -40,10 +40,12 @@
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="Integration\BaseGitIntegrationTestFixture.cs" />
     <Compile Include="Integration\GitterTestFixture.cs" />
+    <Compile Include="Unit\GitBranchIdentifierTestFixture.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <Folder Include="Integration\" />
+    <Folder Include="Unit\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SoftwareMonkeys.csAnt.Tests\SoftwareMonkeys.csAnt.Tests.csproj">
@@ -61,6 +63,10 @@
     <ProjectReference Include="..\SoftwareMonkeys.csAnt.Imports\SoftwareMonkeys.csAnt.Imports.csproj">
       <Project>{B34DA062-E44B-4044-AC28-D006FC66CCA7}</Project>
       <Name>SoftwareMonkeys.csAnt.Imports</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SoftwareMonkeys.csAnt.Projects.Tests\SoftwareMonkeys.csAnt.Projects.Tests.csproj">
+      <Project>{5B5A328E-6F70-498A-AB13-26E48CBE3BA1}</Project>
+      <Name>SoftwareMonkeys.csAnt.Projects.Tests</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>
