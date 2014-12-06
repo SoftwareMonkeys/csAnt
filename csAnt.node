@@ -5,7 +5,8 @@
     "Status": "alpha",
     "Branch": "dev",
     "CycleBuildSolutions": "csAnt.Tests",
-    "GitRemotes": "origin"
+    "GitRemotes": "origin",
+    "NuGetFeedPath": "https://www.myget.org/F/softwaremonkeys/"
   },
   "Name": "csAnt"
 }
