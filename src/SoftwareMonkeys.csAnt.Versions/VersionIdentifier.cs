@@ -36,7 +36,7 @@ namespace SoftwareMonkeys.csAnt.Versions
                     ? nugetVersion
                     : gitVersion);
             
-            Console.WriteLine ("Chosen version: " + version.ToString ());
+            Console.WriteLine ("Latest version: " + version.ToString ());
 
             return version;
         }

@@ -3,7 +3,6 @@ using SoftwareMonkeys.csAnt.Processes;
 using System.IO;
 using System.Collections.Generic;
 
-
 namespace SoftwareMonkeys.csAnt.SourceControl.Git
 {
     public class Gitter
@@ -265,6 +264,18 @@ namespace SoftwareMonkeys.csAnt.SourceControl.Git
         public void Reset(params string[] arguments)
         {
             Git("reset", arguments);
+        }
+
+        public void Branch(string branchName)
+        {
+            Branch (branchName, false);
+        }
+
+        public void Branch(string branchName, bool checkoutNewBranch)
+        {
+            Git ("branch " + branchName);
+            if (checkoutNewBranch)
+                Git ("checkout " + branchName);
         }
     }
 }

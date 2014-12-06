@@ -41,6 +41,10 @@ namespace SoftwareMonkeys.csAnt.External.Nuget
             }
         }
 
+        public string Branch { get; set; }
+
+        public string[] StandardBranches = new string[]{"master", "dev"};
+
         public DotNetProcessStarter Starter { get;set; }
 
         public NugetPacker ()
@@ -129,6 +133,11 @@ namespace SoftwareMonkeys.csAnt.External.Nuget
                 if (!String.IsNullOrEmpty(Status))
                     versionString = versionString
                         + "-" + Status;
+
+                if (!String.IsNullOrEmpty(Branch)
+                    && !IsStandardBranch(Branch))
+                    versionString = versionString
+                        + "-" + Branch;
             }
 
             var arguments = new List<string>();
@@ -141,6 +150,11 @@ namespace SoftwareMonkeys.csAnt.External.Nuget
             arguments.Add("-verbosity detailed");
 
             Starter.Start(cmd, arguments.ToArray());
+        }
+
+        public bool IsStandardBranch(string branch)
+        {
+            return Array.IndexOf (StandardBranches, branch) > -1;
         }
     }
 }
