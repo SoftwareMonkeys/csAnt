@@ -3,7 +3,7 @@
     "Group": "SoftwareMonkeys",
     "Version": "0.5.38.0",
     "Status": "alpha",
-    "Branch": "BranchPackages",
+    "Branch": "dev",
     "CycleBuildSolutions": "csAnt.Tests",
     "GitRemotes": "origin",
     "NuGetFeedPath": "https://www.myget.org/F/softwaremonkeys/"
