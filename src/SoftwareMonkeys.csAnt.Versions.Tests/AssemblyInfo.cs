@@ -1,7 +1,7 @@
 using System.Reflection;
 using System.Runtime.CompilerServices;
 
-[assembly: AssemblyTitle("SoftwareMonkeys.csAnt.SourceControl.Git")]
+[assembly: AssemblyTitle("SoftwareMonkeys.csAnt.Versions.Tests")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("SoftwareMonkeys")]
