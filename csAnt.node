@@ -1,11 +1,12 @@
 {
   "Properties": {
     "Group": "SoftwareMonkeys",
-    "Version": "0.5.34.0",
+    "Version": "0.5.35.0",
     "Status": "alpha",
     "Branch": "dev",
     "CycleBuildSolutions": "csAnt.Tests",
-    "GitRemotes": "origin"
+    "GitRemotes": "origin",
+    "NuGetFeedPath": "https://www.myget.org/F/softwaremonkeys/"
   },
   "Name": "csAnt"
 }
