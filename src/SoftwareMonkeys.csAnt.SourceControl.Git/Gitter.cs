@@ -111,9 +111,18 @@ namespace SoftwareMonkeys.csAnt.SourceControl.Git
                 Starter.FixArgument(Environment.CurrentDirectory)
             );
         }
+        
+        public void Clone(
+            string sourceDir,
+            string destinationDir
+            )
+        {
+            Clone(sourceDir, "", destinationDir);
+        }
 
         public void Clone(
             string sourceDir,
+            string branch,
             string destinationDir
         )
         {
@@ -126,12 +135,18 @@ namespace SoftwareMonkeys.csAnt.SourceControl.Git
             // (the temporary folder works around the issue of cloning into existing directory)
             var tmpDir = Path.Combine(destinationDir, "_tmpclone");
 
-            Git (
-                "clone",
-                Starter.FixArgument(sourceDir),
-                Starter.FixArgument(tmpDir),
-                "--verbose"
-            );
+            var args = new List<string> ();
+            
+            args.Add ("clone");
+            if (!String.IsNullOrEmpty (branch)) {
+                args.Add ("-b");
+                args.Add (branch);
+            }
+            args.Add (Starter.FixArgument (sourceDir));
+            args.Add (Starter.FixArgument (tmpDir));
+            args.Add ("--verbose");
+
+            Git (args.ToArray());
 
             // TODO: Move DirectoryMover to a property
             new DirectoryMover().Move(tmpDir, destinationDir, true);

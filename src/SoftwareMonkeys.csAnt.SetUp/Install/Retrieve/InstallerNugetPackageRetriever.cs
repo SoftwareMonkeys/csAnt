@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using SoftwareMonkeys.csAnt.IO;
 using NuGet;
+using SoftwareMonkeys.csAnt.Versions;
 
 namespace SoftwareMonkeys.csAnt.SetUp.Install.Retrieve
 {
