@@ -50,7 +50,7 @@ class CyclePublishScript : BaseProjectScript
             ExecuteScript("SetVersion", version);
         }
         else
-            ExecuteScript("DetermineVersionFromMyGet");
+            ExecuteScript("IdentifyVersion");
 
         Nodes.Refresh();
      
