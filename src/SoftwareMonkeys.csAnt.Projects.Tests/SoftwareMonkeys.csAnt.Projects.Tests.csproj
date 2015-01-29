@@ -95,7 +95,6 @@
     <Compile Include="Unit\BaseProjectsUnitTestFixture.cs" />
     <Compile Include="Unit\PackageCheckerUnitTestFixture.cs" />
     <Compile Include="Util\TestSourceProjectInitializer.cs" />
-    <Compile Include="Util\TestInstallationInitializer.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
