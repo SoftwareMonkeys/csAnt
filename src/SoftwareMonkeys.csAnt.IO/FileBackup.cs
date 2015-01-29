@@ -59,7 +59,8 @@ namespace SoftwareMonkeys.csAnt
                 + Path.DirectorySeparatorChar
                 + toFileName
                 + "-" + timeStamp
-                + ext;
+                + ext
+                + ".bak"; // Add .bak extention to disable certain files which are used based on their extension
 
             Console.WriteLine("To:");
             Console.WriteLine("  " + PathConverter.ToRelative(toFilePath));
