@@ -275,7 +275,12 @@ namespace SoftwareMonkeys.csAnt.SourceControl.Git
         {
             Git ("branch " + branchName);
             if (checkoutNewBranch)
-                Git ("checkout " + branchName);
+                Checkout(branchName);
+        }
+
+        public void Checkout(string branchName)
+        {
+            Git ("checkout", branchName);
         }
     }
 }
