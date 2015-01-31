@@ -22,14 +22,11 @@ class Test_MergeBranch : BaseTestScript
 	
 	public override bool Run(string[] args)
 	{
-        new FilesGrabber(
-            OriginalDirectory,
-            CurrentDirectory
-        ).GrabOriginalFiles();
-
         var branch = new GitBranchIdentifier().Identify();
 
         var gitter = new Gitter();
+
+        gitter.Clone(OriginalDirectory, CurrentDirectory);      
 
         var testBranchName = "TestBranch";
 
@@ -56,6 +53,7 @@ class Test_MergeBranch : BaseTestScript
         // Run the MergeBranch script
         ExecuteScript("MergeBranch", testBranchName);
 
+        // Run the HelloWorld script to ensure the scripting is still functional
         ExecuteScript("HelloWorld");
 
 		return !IsError;
