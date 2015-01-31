@@ -49,7 +49,7 @@ namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole.Tests.Integration
                 "-source=" + MockFeedPath
             );
 
-            Assert.IsFalse(processStarter.IsError);
+            Assert.IsFalse(processStarter.IsError, "An error occurred.");
         }
 
         [Test]
@@ -85,7 +85,7 @@ namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole.Tests.Integration
                 "-import=" + importPath
             );
 
-            Assert.IsFalse(processStarter.IsError);
+            Assert.IsFalse(processStarter.IsError, "An error occurred.");
         }
 
 
@@ -123,7 +123,7 @@ namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole.Tests.Integration
                 "-clone=" + clonePath
             );
 
-            Assert.IsFalse(processStarter.IsError);
+            Assert.IsFalse(processStarter.IsError, "An error occurred.");
         }
 
 
@@ -158,11 +158,12 @@ namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole.Tests.Integration
             processStarter.Start(
                 setupFileName,
                 "-nuget=" + LocalNugetFilePath,
-                "-source=" + Path.Combine(sourceDir, "pkg"),
+                "-source=" + MockFeedPath,
+                //"-source=" + Path.Combine(sourceDir, "pkg") + ";" + Path.Combine(sourceDir, "lib"), // TODO: Remove if not needed
                 "-status=beta"
                 );
 
-            Assert.IsFalse(processStarter.IsError);
+            Assert.IsFalse(processStarter.IsError, "An error occurred.");
         }
 
         public string Prepare(string setupFileName, string buildMode)
@@ -299,6 +300,8 @@ namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole.Tests.Integration
                 ).GrabOriginalFiles(
                 setupFileName
                 );
+            
+            CreateMockFeed();
 
             // Create the path to a local copy of nuget.exe (so it doesn't get downloaded from the web)
             LocalNugetFilePath = WorkingDirectory

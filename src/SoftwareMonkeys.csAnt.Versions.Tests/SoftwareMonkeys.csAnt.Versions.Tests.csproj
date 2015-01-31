@@ -5,12 +5,12 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.0</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{5D55A561-2497-45F5-8C49-6244671C04B5}</ProjectGuid>
+    <ProjectGuid>{63BADDDF-3C8B-4B9C-B3E7-B37E7C61B080}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>SoftwareMonkeys.csAnt.SourceControl.Git.Tests</RootNamespace>
-    <AssemblyName>SoftwareMonkeys.csAnt.SourceControl.Git.Tests</AssemblyName>
+    <RootNamespace>SoftwareMonkeys.csAnt.Versions.Tests</RootNamespace>
+    <AssemblyName>SoftwareMonkeys.csAnt.Versions.Tests</AssemblyName>
     <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>SoftwareMonkeys.csAnt.SourceControl.Git.Tests.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>SoftwareMonkeys.csAnt.Versions.Tests.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -23,7 +23,7 @@
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>none</DebugType>
+    <DebugType>full</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>..\..\bin\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
@@ -35,19 +35,28 @@
     <Reference Include="nunit.framework">
       <HintPath>..\..\lib\NUnit.2.6.0.12051\lib\nunit.framework.dll</HintPath>
     </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="AssemblyInfo.cs" />
-    <Compile Include="Integration\BaseGitIntegrationTestFixture.cs" />
-    <Compile Include="Integration\GitterTestFixture.cs" />
-    <Compile Include="Unit\GitBranchIdentifierTestFixture.cs" />
+    <Reference Include="SoftwareMonkeys.FileNodes">
+      <HintPath>..\..\lib\FileNodes.0.6.5\bin\Release\SoftwareMonkeys.FileNodes.dll</HintPath>
+    </Reference>
+    <Reference Include="NuGet.Core">
+      <HintPath>..\..\lib\Nuget.Core.2.8.1\lib\net40-Client\NuGet.Core.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
-    <Folder Include="Integration\" />
     <Folder Include="Unit\" />
+    <Folder Include="Live\" />
+    <Folder Include="Live\Unit\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SoftwareMonkeys.csAnt.Projects.Tests\SoftwareMonkeys.csAnt.Projects.Tests.csproj">
+      <Project>{5B5A328E-6F70-498A-AB13-26E48CBE3BA1}</Project>
+      <Name>SoftwareMonkeys.csAnt.Projects.Tests</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SoftwareMonkeys.csAnt.Projects\SoftwareMonkeys.csAnt.Projects.csproj">
+      <Project>{3BFB55C4-1247-49BD-AEC9-31BC3C0F1168}</Project>
+      <Name>SoftwareMonkeys.csAnt.Projects</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SoftwareMonkeys.csAnt.Tests\SoftwareMonkeys.csAnt.Tests.csproj">
       <Project>{E79918A1-F275-4073-9968-77DAB04622A9}</Project>
       <Name>SoftwareMonkeys.csAnt.Tests</Name>
@@ -56,17 +65,25 @@
       <Project>{EA178299-9D1E-482E-B3CD-D3CEBF62CADF}</Project>
       <Name>SoftwareMonkeys.csAnt.Contracts</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SoftwareMonkeys.csAnt.Versions\SoftwareMonkeys.csAnt.Versions.csproj">
+      <Project>{9B72A2B8-0BC4-40BE-B242-AC79A080CEB6}</Project>
+      <Name>SoftwareMonkeys.csAnt.Versions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SoftwareMonkeys.csAnt.IO\SoftwareMonkeys.csAnt.IO.csproj">
+      <Project>{749ED083-15BD-4522-8FBE-847870434680}</Project>
+      <Name>SoftwareMonkeys.csAnt.IO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SoftwareMonkeys.csAnt.IO.Contracts\SoftwareMonkeys.csAnt.IO.Contracts.csproj">
+      <Project>{53E3AFEA-3627-4846-B2E4-5A8091E96BC6}</Project>
+      <Name>SoftwareMonkeys.csAnt.IO.Contracts</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SoftwareMonkeys.csAnt.SourceControl.Git\SoftwareMonkeys.csAnt.SourceControl.Git.csproj">
       <Project>{94578333-F8C9-40C0-9300-8D808ED1CD7A}</Project>
       <Name>SoftwareMonkeys.csAnt.SourceControl.Git</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SoftwareMonkeys.csAnt.Imports\SoftwareMonkeys.csAnt.Imports.csproj">
-      <Project>{B34DA062-E44B-4044-AC28-D006FC66CCA7}</Project>
-      <Name>SoftwareMonkeys.csAnt.Imports</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SoftwareMonkeys.csAnt.Projects.Tests\SoftwareMonkeys.csAnt.Projects.Tests.csproj">
-      <Project>{5B5A328E-6F70-498A-AB13-26E48CBE3BA1}</Project>
-      <Name>SoftwareMonkeys.csAnt.Projects.Tests</Name>
+    <ProjectReference Include="..\SoftwareMonkeys.csAnt.External.Nuget.Tests\SoftwareMonkeys.csAnt.External.Nuget.Tests.csproj">
+      <Project>{A5DD8740-CCDB-4F86-974E-6480A2919620}</Project>
+      <Name>SoftwareMonkeys.csAnt.External.Nuget.Tests</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>

@@ -46,9 +46,6 @@
     <Compile Include="Unit\BaseNugetUnitTestFixture.cs" />
     <Compile Include="Unit\NugetPackerUnitTestFixture.cs" />
     <Compile Include="Mock\MockNugetPackageCreator.cs" />
-    <Compile Include="Unit\NugetVersionerTestFixture.cs" />
-    <Compile Include="Live\Unit\Install\Retrieve\LiveVersionerTestFixture.cs" />
-    <Compile Include="Live\Unit\BaseLiveNugetUnitTestFixture.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

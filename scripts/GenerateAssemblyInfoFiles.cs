@@ -32,6 +32,9 @@ class GenerateAssemblyInfoFilesScript : BaseProjectScript
 
     public void GenerateIn(string assemblyDir)
     {
+        Console.WriteLine("Generating in directory:");
+        Console.WriteLine(assemblyDir);
+    
         var output = GetTemplate();
 
         var assemblyInfoFilePath = Path.Combine(
@@ -50,7 +53,7 @@ class GenerateAssemblyInfoFilesScript : BaseProjectScript
             .Replace("{{AssemblyCompany}}", assemblyCompany)
             .Replace("{{AssemblyVersion}}", version);
 
-        Console.WriteLine("Generating: " + ToRelative(assemblyInfoFilePath));
+        Console.WriteLine("File: " + ToRelative(assemblyInfoFilePath));
 
         File.WriteAllText(assemblyInfoFilePath, output);
     }

@@ -20,7 +20,7 @@ class CycleScript : BaseProjectScript
 		
 		bool test = Arguments.ContainsAny("t", "test");
 		
-		ExecuteScript("DetermineVersionFromMyGet");
+		ExecuteScript("IdentifyVersion");
 
 		// Build the solutions
 		ExecuteScript(

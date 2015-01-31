@@ -1,24 +1,32 @@
  using System;
 using SoftwareMonkeys.FileNodes;
+using NuGet;
 
 namespace SoftwareMonkeys.csAnt.Versions
 {
     public class VersionManager
     {
-        public FileNode CurrentNode { get;set; }
-        public FileNodeGetter Getter { get;set; }
+        public FileNode CurrentNode { get; set; }
+        public FileNodeGetter Getter { get; set; }
 
         public VersionManager ()
         {
-            Getter = new FileNodeGetter();
+            Construct ();
+
             Getter.IncludeChildNodes = true;
         }
 
         public VersionManager (FileNode currentNode)
         {
-            Getter = new FileNodeGetter();
+            Construct ();
+
             Getter.IncludeChildNodes = true;
             CurrentNode = CurrentNode;
+        }
+
+        public void Construct()
+        {
+            Getter = new FileNodeGetter();
         }
 
         public string GetVersion(string workingDirectory)
