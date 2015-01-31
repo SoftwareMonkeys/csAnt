@@ -14,6 +14,8 @@ namespace SoftwareMonkeys.csAnt.Projects
 
         public FileTimeStampManager TimeStamps { get;set; }
 
+        public bool SkipIncrement = false;
+
         public SolutionBuildChecker ()
         {
             Executor = new ScriptExecutor();
@@ -83,8 +85,15 @@ namespace SoftwareMonkeys.csAnt.Projects
         {
             Executor.WorkingDirectory = projectDirectory;
 
+            var arguments = new List<string> ();
+
+            arguments.Add ("-mode=" + buildMode);
+
+            if (SkipIncrement)
+                arguments.Add ("-skipincrement");
+
             // Execute the "CycleBuild" script (or whatever was specified)
-            Executor.Execute(CycleBuildScript, "-mode=" + buildMode);
+            Executor.Execute(CycleBuildScript, arguments.ToArray());
 
             TimeStamps.WriteNewData(projectDirectory, latestTimeStamps);
         }
