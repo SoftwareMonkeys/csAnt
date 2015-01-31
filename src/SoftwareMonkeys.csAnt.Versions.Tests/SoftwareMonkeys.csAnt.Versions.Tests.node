@@ -3,5 +3,5 @@
     "Context": "Assembly",
     "Version": "0.4.69.0"
   },
-  "Name": "SoftwareMonkeys.csAnt.Tests"
+  "Name": "SoftwareMonkeys.csAnt.Versions.Tests"
 }
