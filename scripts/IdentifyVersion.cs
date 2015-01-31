@@ -26,6 +26,9 @@ class IdentifyVersion : BaseProjectScript
 
         var packageName = ProjectName;
 
+        if (!CurrentNode.Properties.ContainsKey("NuGetFeedPath"))
+            throw new Exception("*.node file doesn't contain 'NuGetFeedPath' property.");
+
         var sourcePath = CurrentNode.Properties["NuGetFeedPath"];
 
         Console.WriteLine("Feed source path:");
@@ -55,8 +58,9 @@ class IdentifyVersion : BaseProjectScript
         var currentVersionString = "0.0.0.0";
         if (CurrentNode.Properties.ContainsKey("Version"))
             currentVersionString = CurrentNode.Properties["Version"];
-            
-        currentVersionString += "-" + status;
+        
+        if (!String.IsNullOrEmpty(status))
+            currentVersionString += "-" + status;
             
         var currentVersion = new SemanticVersion(currentVersionString);
 
@@ -77,7 +81,7 @@ class IdentifyVersion : BaseProjectScript
                 if (force)
                     Console.WriteLine("Current local version is newer. Overwriting anyway.");
                 else
-                    Console.WriteLine("Lastest found version is newer.");
+                    Console.WriteLine("Latest found version is newer.");
 
                 Console.WriteLine("Using latest found version.");
 
