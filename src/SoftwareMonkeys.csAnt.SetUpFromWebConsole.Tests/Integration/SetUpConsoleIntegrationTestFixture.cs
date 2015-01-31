@@ -49,7 +49,7 @@ namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole.Tests.Integration
                 "-source=" + MockFeedPath
             );
 
-            Assert.IsFalse(processStarter.IsError);
+            Assert.IsFalse(processStarter.IsError, "An error occurred.");
         }
 
         [Test]
@@ -85,7 +85,7 @@ namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole.Tests.Integration
                 "-import=" + importPath
             );
 
-            Assert.IsFalse(processStarter.IsError);
+            Assert.IsFalse(processStarter.IsError, "An error occurred.");
         }
 
 
@@ -123,7 +123,7 @@ namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole.Tests.Integration
                 "-clone=" + clonePath
             );
 
-            Assert.IsFalse(processStarter.IsError);
+            Assert.IsFalse(processStarter.IsError, "An error occurred.");
         }
 
 
@@ -163,7 +163,7 @@ namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole.Tests.Integration
                 "-status=beta"
                 );
 
-            Assert.IsFalse(processStarter.IsError);
+            Assert.IsFalse(processStarter.IsError, "An error occurred.");
         }
 
         public string Prepare(string setupFileName, string buildMode)

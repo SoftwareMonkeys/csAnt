@@ -19,7 +19,9 @@ namespace SoftwareMonkeys.csAnt.Tests
                 + "-"
                 + Time.Minute
                 + "-"
-                + Time.Second;
+                + Time.Second
+                + "-"
+                + Time.Millisecond;
         }
     }
 }

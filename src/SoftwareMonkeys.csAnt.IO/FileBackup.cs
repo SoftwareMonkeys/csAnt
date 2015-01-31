@@ -26,7 +26,7 @@ namespace SoftwareMonkeys.csAnt
         	
         	Console.WriteLine("");
         	Console.WriteLine("Backing up file:");
-        	Console.WriteLine(relativeFilePath);
+        	Console.WriteLine(" " + relativeFilePath);
         	Console.WriteLine("");
         	
             var fromFullFilePath = String.Empty;
@@ -59,8 +59,8 @@ namespace SoftwareMonkeys.csAnt
                 + Path.DirectorySeparatorChar
                 + toFileName
                 + "-" + timeStamp
-                + ext
-                + ".bak"; // Add .bak extention to disable certain files which are used based on their extension
+                    + ext
+                    + ".bak"; // Add .bak extention to disable certain files which are used based on their extension
 
             Console.WriteLine("To:");
             Console.WriteLine("  " + PathConverter.ToRelative(toFilePath));

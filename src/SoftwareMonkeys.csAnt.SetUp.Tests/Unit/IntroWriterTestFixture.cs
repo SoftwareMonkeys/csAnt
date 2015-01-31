@@ -3,7 +3,7 @@ using NUnit.Framework;
 using SoftwareMonkeys.csAnt.Tests;
 using SoftwareMonkeys.csAnt.Tests.Unit;
 
-namespace SoftwareMonkeys.csAnt.SetUp.Tests
+namespace SoftwareMonkeys.csAnt.SetUp.Tests.Unit
 {
     [TestFixture]
     public class IntroWriterTestFixture : BaseUnitTestFixture

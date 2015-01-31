@@ -16,6 +16,10 @@ namespace SoftwareMonkeys.csAnt.Tests
                 Console.WriteLine (GetType ().Name);
             }
 
+            // Set the current time
+            Time = DateTime.Now;
+
+            // Get the time stamp
             TimeStamp = GetTimeStamp ();
 
             if (IsVerbose) {
