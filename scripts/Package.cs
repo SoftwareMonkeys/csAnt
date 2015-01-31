@@ -27,6 +27,9 @@ class PackageScript : BaseScript
         if (CurrentNode.Properties.ContainsKey("Version"))
             packer.Version = new Version(CurrentNode.Properties["Version"]);
 
+        if (CurrentNode.Properties.ContainsKey("Branch"))
+            packer.Branch = CurrentNode.Properties["Branch"];
+
         if (String.IsNullOrEmpty(packageName))
             packer.PackAll(CurrentDirectory);
         else

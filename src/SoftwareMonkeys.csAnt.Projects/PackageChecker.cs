@@ -46,7 +46,7 @@ namespace SoftwareMonkeys.csAnt.Projects
             {
                 Console.WriteLine("'" + packageName + "' package is NOT up to date.");
 
-                Executor.Execute(PackageScript, packageName);
+                Executor.Execute(PackageScript, packageName, "-skipincrement");
             }
             else
                 Console.WriteLine("'" + packageName + "' package is up to date.");
@@ -58,8 +58,20 @@ namespace SoftwareMonkeys.csAnt.Projects
         {
             var version = GetLatestPackageVersion(packageName);
 
+            Console.WriteLine ("Latest package version: " + version);
+            Console.WriteLine ("Current version: " + CurrentVersion);
+
+            // Fix the version and remove the last number otherwise it messes up the version checking
+            // (the last number isn't necessary as it's not included in package version numbers)
+            var currentVersionString = CurrentVersion.ToString ();
+            var fixedCurrentVersionString = currentVersionString.Substring (0, currentVersionString.LastIndexOf ("."));
+
+            var fixedVersion = new Version (fixedCurrentVersionString);
+
+            Console.WriteLine ("Fixed version: " + fixedVersion);
+
             // If the current version is newer than the package version return true
-            return (CurrentVersion > version);
+            return (fixedVersion > version);
         }
 
         public Version GetLatestPackageVersion(string packageName)

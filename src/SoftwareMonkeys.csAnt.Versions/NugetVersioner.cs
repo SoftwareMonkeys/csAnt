@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using NuGet;
 
-namespace SoftwareMonkeys.csAnt.External.Nuget
+namespace SoftwareMonkeys.csAnt.Versions
 {
     public class NugetVersioner
     {
@@ -24,52 +24,61 @@ namespace SoftwareMonkeys.csAnt.External.Nuget
             return GetVersion(packageName, "");
         }
 
+        public SemanticVersion GetSemanticVersion(string packageName)
+        {
+            return GetSemanticVersion (packageName, "");
+        }
+
         public Version GetVersion(string packageName, string status)
         {
             return GetVersion(packageName, new Version(0,0,0,0), status);
         }
 
+        public SemanticVersion GetSemanticVersion(string packageName, string status)
+        {
+            return GetSemanticVersion (packageName, new Version (0, 0, 0, 0), status);
+        }
+        
         public Version GetVersion(string packageName, Version version, string status)
+        {
+            return GetSemanticVersion (packageName, version, status).Version;
+        }
+
+        public SemanticVersion GetSemanticVersion(string packageName, Version version, string status)
         {
             Console.WriteLine("");
             Console.WriteLine("Getting package version...");
             Console.WriteLine("");
             Console.WriteLine("Package name: " + packageName);
             Console.WriteLine("Version (to match): " + (version != null && version != new Version(0,0,0,0) ? version.ToString() : "[Latest]"));
-            Console.WriteLine("Status (to match): " + (!String.IsNullOrEmpty(status) ? status : "[Stable release]"));
+            Console.WriteLine("Status (to match): " + (!String.IsNullOrEmpty(status) ? status : "[Stable]"));
             Console.WriteLine("");
 
             var versions = GetMatchingVersions(packageName, version, status);
 
-            if (versions.Length > 0)
-            {
-                var list = new List<SemanticVersion>(versions);
-                list.Sort();
+            if (versions.Length > 0) {
+                var list = new List<SemanticVersion> (versions);
+                list.Sort ();
 
-                if (IsVerbose)
-                {
-                    Console.WriteLine("Versions found:");
+                if (IsVerbose) {
+                    Console.WriteLine ("Versions found:");
 
-                    foreach (var v in list)
-                    {
-                        Console.WriteLine("  " + v);
+                    foreach (var v in list) {
+                        Console.WriteLine ("  " + v);
                     }
                 }
 
-                var latestVersion = list[list.Count-1];
+                var latestVersion = list [list.Count - 1];
 
-                Console.WriteLine("");
-                Console.WriteLine("Latest version: " + latestVersion);
+                Console.WriteLine ("");
+                Console.WriteLine ("Latest package version: " + latestVersion);
 
-                // Extract the version part via text so it keep short versions. Using latestVersion.Version adds the missing digits even when it's not wanted.
-                var versionString = latestVersion.ToString();
-                if (versionString.Contains("-"))
-                    versionString = versionString.Substring(0, versionString.IndexOf("-"));
+                return latestVersion;
+            } else {
+                Console.WriteLine ("No matching versions found.");
 
-                return new Version(versionString);
+                return new SemanticVersion (0, 0, 0, 0);
             }
-            else
-                return new Version(0,0,0,0);
         }
 
         public SemanticVersion[] GetMatchingVersions(string packageName, Version versionQuery, string status)
@@ -150,6 +159,8 @@ namespace SoftwareMonkeys.csAnt.External.Nuget
 
         public SemanticVersion[] GetVersions(string packageName)
         {
+            Console.WriteLine ("Nuget source path: " + NugetSourcePath);
+
             var sourceRepository = PackageRepositoryFactory.Default.CreateRepository(NugetSourcePath);
 
             var packageManager = new PackageManager(sourceRepository, Environment.CurrentDirectory);

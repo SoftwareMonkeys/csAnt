@@ -176,6 +176,7 @@ namespace SoftwareMonkeys.csAnt.SetUp.Install
             // new ScriptEventRaiser().Raise("Install");
         }
 
+        // TODO: Remove if not needed
         public void BackupFile(string existingFile)
         {
             throw new NotImplementedException();
@@ -243,6 +244,29 @@ namespace SoftwareMonkeys.csAnt.SetUp.Install
                 Console.WriteLine("");
                 Console.WriteLine("Error: Failed to clone. No path was specified on the CloneSource property.");
                 Console.WriteLine("");
+            }
+
+            FixMultipleNodes ();
+        }
+
+        public void FixMultipleNodes()
+        {
+            // Check if there's an existing node file
+            var nodeFiles = FileFinder.FindFiles (Environment.CurrentDirectory, "*.node");
+
+            var folderName = Path.GetFileName (Environment.CurrentDirectory);
+
+            // If there's more than 1 node found
+            if (nodeFiles.Length > 1) {
+                foreach (var file in nodeFiles) {
+                    var name = Path.GetFileNameWithoutExtension (file);
+
+                    // Remove the node that doesn't match the folder name
+                    if (folderName != name) {
+                        //BackupFile (file); // TODO: Remove if not needed
+                        File.Delete (file);
+                    }
+                }
             }
         }
     }

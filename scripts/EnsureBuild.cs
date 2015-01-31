@@ -20,7 +20,9 @@ class EnsureBuildScript : BaseScript
         if (Arguments.Contains("mode"))
             buildMode = Arguments["mode"];
 
-        new SolutionBuildChecker().EnsureBuilt(CurrentDirectory, buildMode);
+        var checker = new SolutionBuildChecker();
+        checker.SkipIncrement = Arguments.Contains("skipincrement");
+        checker.EnsureBuilt(CurrentDirectory, buildMode);
 
 		return !IsError;
 	}

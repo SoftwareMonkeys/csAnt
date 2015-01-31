@@ -10,9 +10,12 @@ namespace SoftwareMonkeys.csAnt.External.Nuget.Tests.Mock
     {
         public string FeedPath { get;set; }
 
+        // TODO: Remove if not needed. Not currently in use.
         public string OriginalDirectory { get;set; }
 
         public string WorkingDirectory { get;set; }
+
+        public bool IncludeProjectPackages = true;
 
         public MockNugetFeedCreator (string originalDirectory, string workingDirectory, string feedPath)
         {
@@ -24,7 +27,7 @@ namespace SoftwareMonkeys.csAnt.External.Nuget.Tests.Mock
         public void Create()
         {
             var nuget = new NugetPacker(WorkingDirectory);
-            nuget.Version = new Version(new VersionManager().GetVersion(OriginalDirectory));
+            nuget.Version = new Version(new VersionManager().GetVersion(WorkingDirectory));
 
             var pkgDir = WorkingDirectory
                 + Path.DirectorySeparatorChar
@@ -51,29 +54,33 @@ namespace SoftwareMonkeys.csAnt.External.Nuget.Tests.Mock
 
             File.Copy(pkgFile, pkgToFile, true);
 
-            GrabRequiredPackages(OriginalDirectory, FeedPath);
+            GrabRequiredPackages(WorkingDirectory, FeedPath);
         }
 
-        public void GrabRequiredPackages(string originalDirectory, string feedPath)
+        public void GrabRequiredPackages(string workingDirectory, string feedPath)
         {
             Console.WriteLine("");
             Console.WriteLine("Getting required packages...");
+            
+            var pkgDirs = new string[] {
+                "pkg",
+                "lib"
+            };
 
-            var pkgDir = Path.Combine(originalDirectory, "pkg");
-
-            foreach (var dir in Directory.GetDirectories(pkgDir))
-            {
-                if (!Path.GetFileName(dir).StartsWith("csAnt"))
-                {
-                    foreach (var file in Directory.GetFiles(dir))
-                    {
-                        var toFile = file.Replace(pkgDir, feedPath);
+            foreach (var pkgDir in pkgDirs) {
+                var fullPkgDir = Path.Combine (workingDirectory, pkgDir);
+                foreach (var dir in Directory.GetDirectories(fullPkgDir)) {
+                    if (IncludeProjectPackages
+                        || !Path.GetFileName (dir).StartsWith ("csAnt")) {
+                        foreach (var file in Directory.GetFiles(dir, "*.nupkg", SearchOption.AllDirectories)) {
+                            var toFile = file.Replace (fullPkgDir, feedPath);
     
-                        DirectoryChecker.EnsureDirectoryExists(Path.GetDirectoryName(toFile));
+                            DirectoryChecker.EnsureDirectoryExists (Path.GetDirectoryName (toFile));
 
-                        Console.WriteLine("  " + toFile.Replace(feedPath, ""));
+                            Console.WriteLine ("  " + toFile.Replace (feedPath, ""));
 
-                        File.Copy(file, toFile, true);
+                            File.Copy (file, toFile, true);
+                        }
                     }
                 }
             }

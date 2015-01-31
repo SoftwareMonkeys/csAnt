@@ -22,6 +22,7 @@ namespace SoftwareMonkeys.csAnt
 			}
 		}
 		
+        // TODO: Remove if not needed
 		public FileNode GetBaseNode()
 		{
 			if (IsVerbose)

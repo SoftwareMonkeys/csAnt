@@ -33,10 +33,33 @@ namespace SoftwareMonkeys.csAnt.IO
                     "lib/NUnit.2.6.0.12051/lib/**",
                     "lib/NUnit.Runners.2.6.0.12051/tools/**",
                     "lib/NUnitResults.1.1/bin/*",
-                    "lib/Nuget.Core.2.8.1/lib/net40-Client/*"
+                    "lib/Nuget.Core.2.8.1/lib/net40-Client/*",
+                    "lib/Microsoft.Web.Xdt.1.0.0/lib/net40/**" 
                 };
             }
         }
+        
+        public string[] LibPackageFilePatterns
+        {
+            get
+            {
+                return new string[] {
+                    "lib/csAnt/*.nupkg",
+                    "lib/FileNodes.0.6.5/*.nupkg",
+                    "lib/HtmlAgilityPack.1.4.6/*.nupkg",
+                    "lib/CS-Script.3.7.2.0/*.nupkg",
+                    "lib/SharpZipLib.0.86.0/*.nupkg",
+                    "lib/ILRepack.1.25.0/*.nupkg",
+                    "lib/Newtonsoft.Json.6.0.2/*.nupkg",
+                    "lib/NUnit.2.6.0.12051/*.nupkg",
+                    "lib/NUnit.Runners.2.6.0.12051/*.nupkg",
+                    "lib/NUnitResults.1.1/*.nupkg",
+                    "lib/Nuget.Core.2.8.1/*.nupkg",
+                    "lib/Microsoft.Web.Xdt.1.0.0/*.nupkg" 
+                };
+            }
+        }
+
         public string[] SrcFilePatterns
         {
             get
@@ -127,6 +150,16 @@ namespace SoftwareMonkeys.csAnt.IO
                 };
             }
         }
+        
+        public string[] TestResultsPatterns
+        {
+            get
+            {
+                return new string[] {
+                    "tests/results/**"
+                };
+            }
+        }
 
         private bool overwrite;
         public bool Overwrite
@@ -204,8 +237,10 @@ namespace SoftwareMonkeys.csAnt.IO
             Grab(LauncherFilePatterns);
 
             Grab(NodeFilePatterns);
-
+            
             Grab(LibFilePatterns);
+
+            Grab(LibPackageFilePatterns);
 
             Grab(SrcFilePatterns);
 
@@ -216,6 +251,8 @@ namespace SoftwareMonkeys.csAnt.IO
             Grab(PackageFilePatterns);
 
             Grab(MiscFilePatterns);
+
+            Grab(TestResultsPatterns);
         }
 
         public void GrabOriginalFiles (params string[] patterns)

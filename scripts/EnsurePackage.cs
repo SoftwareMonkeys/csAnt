@@ -31,12 +31,12 @@ class EnsurePackageScript : BaseProjectScript
 
 		Console.WriteLine("Current version: " + currentVersion);
 
-        var checker = new PackageChecker(new Version(currentVersion));
+		var checker = new PackageChecker(new Version(currentVersion));
 
-        if (!String.IsNullOrEmpty(packageName))
-            checker.Check(packageName);
-        else
-            checker.Check();
+		if (!String.IsNullOrEmpty(packageName))
+		    checker.Check(packageName);
+		else
+		    checker.Check();
 
 		return !IsError;
 	}

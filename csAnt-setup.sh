@@ -9,6 +9,24 @@ echo ""
 echo "(Please wait. This might take a while, as files need to be downloaded and installed.)"
 echo ""
 
+STATUS=''
+
+for i in "$@"
+do
+case $i in
+    -s=*|-status=*|--status=*)
+    STATUS="${i#*=}"
+    shift
+    ;;
+esac
+done
+
+if [ -z $STATUS ]; then
+    STATUS='stable'
+fi 
+
+echo "Target status: $STATUS"
+
 echo "Installing certificates..."
 mozroots --import --sync
 echo "... done."
@@ -27,11 +45,17 @@ if [ ! -f "$nugetFile" ]; then
     echo ""
 fi
 
+# TODO: If the user specified a status then modify the nuget install command to get the installer with that status
 # Get csAnt setup package
 echo "Getting the installer"
 echo "(this may take a while as the installer will is being downloaded.... please wait...)"
 echo ""
-mono $nugetFile install csAnt-setup -Source $sourcePath -OutputDirectory lib -NoCache
+
+if [ "$STATUS" = "stable" ]; then
+    mono $nugetFile install csAnt-setup -Source $sourcePath -OutputDirectory lib -NoCache
+else
+    mono $nugetFile install csAnt-setup -Source $sourcePath -OutputDirectory lib -NoCache -Pre
+fi
 echo "Done"
 echo ""
 

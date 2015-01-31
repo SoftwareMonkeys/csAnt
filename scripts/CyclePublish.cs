@@ -50,7 +50,7 @@ class CyclePublishScript : BaseProjectScript
             ExecuteScript("SetVersion", version);
         }
         else
-            ExecuteScript("DetermineVersionFromMyGet");
+            ExecuteScript("IdentifyVersion");
 
         Nodes.Refresh();
      
@@ -119,6 +119,7 @@ class CyclePublishScript : BaseProjectScript
         grabber.Grab(grabber.BinFilePatterns);
         grabber.Grab(grabber.LibFilePatterns);
         grabber.Grab(grabber.PackageSpecFilePatterns);
+        grabber.Grab(grabber.TestResultsPatterns);
 	}
 
 	public string CloneToTmpDirectory()

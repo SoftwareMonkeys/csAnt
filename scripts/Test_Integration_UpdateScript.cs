@@ -1,6 +1,8 @@
-//css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.dll;
-//css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.Tests.dll;
-//css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.Tests.Scripting.dll;
+//css_ref ../lib/csAnt/bin/Release/net-40/SoftwareMonkeys.csAnt.dll;
+//css_ref ../lib/csAnt/bin/Release/net-40/SoftwareMonkeys.csAnt.Tests.dll;
+//css_ref ../lib/csAnt/bin/Release/net-40/SoftwareMonkeys.csAnt.Tests.Scripting.dll;
+//css_ref ../lib/csAnt/bin/Release/net-40/SoftwareMonkeys.csAnt.External.Nuget.dll;
+//css_ref ../lib/csAnt/bin/Release/net-40/SoftwareMonkeys.csAnt.External.Nuget.Tests.dll;
 //css_ref ../lib/NUnit.2.6.0.12051/lib/nunit.framework.dll
 
 using System;
@@ -9,24 +11,31 @@ using SoftwareMonkeys.csAnt;
 using SoftwareMonkeys.csAnt.IO;
 using SoftwareMonkeys.csAnt.Tests;
 using SoftwareMonkeys.csAnt.Tests.Scripting;
+using SoftwareMonkeys.csAnt.External.Nuget.Tests.Mock;
 using NUnit.Framework;
 
 [TestFixture]
-class Test_Integration_Update : BaseTestScript
+class Test_Integration_UpdateScript : BaseTestScript
 {
     public string TestSourceDirectory = String.Empty;
-    public string TestProjectDirectory = String.Empty;
+    public string TestInstallationDirectory = String.Empty;
+    public string TestFeedDirectory = String.Empty;
     public string Status = String.Empty;
+    public Version BeforeVersion = new Version(1,0,0,0);
+    public Version AfterVersion = new Version(1,0,0,1);
 
 	public static void Main(string[] args)
 	{
-        new Test_Integration_Update().Start(args);
+        new Test_Integration_UpdateScript().Start(args);
 	}
 	
 	public override bool Run(string[] args)
 	{
-        // Prepare a test project source and package
-        PrepareSource();
+        // Prepare a source project and package
+        PrepareSourceProject();
+        
+        // Create a nuget feed
+        CreateMockFeed();
 
         // Prepare a test installation (installing from the above source) to run the update on
         PrepareInstallation();
@@ -34,8 +43,11 @@ class Test_Integration_Update : BaseTestScript
         // Modify a source file
         UpdateSourceCode();
         
+        // Update the nuget feed
+        CreateMockFeed();
+        
         // Move back to the test project directory
-        Relocate(TestProjectDirectory);
+        Relocate(TestInstallationDirectory);
 
         // Run the update
         RunUpdate();
@@ -48,7 +60,7 @@ class Test_Integration_Update : BaseTestScript
 
     public void CheckUpdate()
     {        
-        var newHelloWorldFile = Path.Combine(TestProjectDirectory, "scripts/HelloWorld.cs");
+        var newHelloWorldFile = Path.Combine(TestInstallationDirectory, "scripts/HelloWorld.cs");
 
         Console.WriteLine("");
         Console.WriteLine("Checking file:");
@@ -62,7 +74,7 @@ class Test_Integration_Update : BaseTestScript
    		Assert.IsFalse(IsError, "An error occurred.");
     }
 
-    public void PrepareSource()
+    public void PrepareSourceProject()
     {
         TestSourceDirectory = CurrentDirectory;
 
@@ -80,12 +92,15 @@ class Test_Integration_Update : BaseTestScript
 
         // Refresh the nodes to pick up the status
         Nodes.Refresh();
+        
+        Nodes.CurrentNode.Properties["Version"] = BeforeVersion.ToString();
+        Nodes.CurrentNode.Save();
 
         Status = GetStatus();
 
         ClearSourcePackages();
 
-        PrepareSourcePackage();
+        PrepareSourceProjectPackage();
     }
 
     public void ClearSourcePackages()
@@ -98,7 +113,7 @@ class Test_Integration_Update : BaseTestScript
         }
     }
 
-    public void PrepareSourcePackage()
+    public void PrepareSourceProjectPackage()
     {
         ExecuteScript("CyclePackage", "csAnt");
 
@@ -111,17 +126,17 @@ class Test_Integration_Update : BaseTestScript
     {
         TestSourceDirectory = CurrentDirectory;
 
-        TestProjectDirectory = Path.GetDirectoryName(CurrentDirectory)
+        TestInstallationDirectory = Path.GetDirectoryName(CurrentDirectory)
             + Path.DirectorySeparatorChar
-            + "TestProject";
+            + "TestInstallation";
 
-        EnsureDirectoryExists(TestProjectDirectory);
+        EnsureDirectoryExists(TestInstallationDirectory);
 
         // Relocate to test project directory
-        Relocate(TestProjectDirectory);
+        Relocate(TestInstallationDirectory);
 
         // Install the test project from the package
-        InstallTestProject(TestSourceDirectory, TestProjectDirectory);
+        InstallTestProject(TestSourceDirectory, TestInstallationDirectory);
 
         Relocate(TestSourceDirectory);
     }
@@ -136,13 +151,11 @@ class Test_Integration_Update : BaseTestScript
             "csAnt-SetUp.exe"
         );
 
-        var packageDir = GetPackageDir();
-
         var nugetPath = GetNugetPath();
 
         StartDotNetExe(
             "csAnt-SetUp.exe",
-            "-Source=" + packageDir,
+            "-Source=" + TestFeedDirectory,
             "-Nuget=" + nugetPath,
             "-Status=" + Status
         );
@@ -162,6 +175,19 @@ class Test_Integration_Update : BaseTestScript
 
         // Repackage
         Repackage();
+    }
+    
+    public void CreateMockFeed()
+    {
+        TestFeedDirectory = Path.GetFullPath("../../TestFeed");
+        
+        Console.WriteLine("Test feed directory: " + TestFeedDirectory);
+    
+        new MockNugetFeedCreator(
+            OriginalDirectory,
+            TestSourceDirectory,
+            TestFeedDirectory
+        ).Create();
     }
 
     public void ModifyHelloWorldScript()
@@ -196,22 +222,13 @@ class Test_Integration_Update : BaseTestScript
 
     public void RunUpdate()
     {
-        var packageDir = GetPackageDir();
-
         var nugetPath = GetNugetPath();
 
         ExecuteScript(
             "Update",
-            "-Source=" + packageDir,
+            "-Source=" + TestFeedDirectory, // TODO: Should a mock feed directory be used instead?
             "-Nuget=" + nugetPath
         );
-    }
-
-    public string GetPackageDir()
-    {
-        return TestSourceDirectory
-            + Path.DirectorySeparatorChar
-            + "pkg";
     }
 
     public string GetNugetPath()

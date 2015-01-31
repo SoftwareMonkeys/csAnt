@@ -24,6 +24,8 @@
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
     <BaseIntermediateOutputPath>obj\</BaseIntermediateOutputPath>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>SoftwareMonkeys.csAnt.Projects.Tests.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>full</DebugType>
@@ -33,6 +35,8 @@
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
     <DebugSymbols>true</DebugSymbols>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>SoftwareMonkeys.csAnt.Projects.Tests.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <DebugType>none</DebugType>
@@ -90,6 +94,7 @@
     <Compile Include="Integration\SolutionBuildCheckerTestFixture.cs" />
     <Compile Include="Unit\BaseProjectsUnitTestFixture.cs" />
     <Compile Include="Unit\PackageCheckerUnitTestFixture.cs" />
+    <Compile Include="Util\TestSourceProjectInitializer.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -129,9 +134,14 @@
       <Project>{DA236BEB-4C3A-4076-AB72-1AEE6DB82BEA}</Project>
       <Name>SoftwareMonkeys.csAnt.Processes</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SoftwareMonkeys.csAnt.External.Nuget\SoftwareMonkeys.csAnt.External.Nuget.csproj">
+      <Project>{D88EE98D-5F35-4B0E-AC92-4029A1742204}</Project>
+      <Name>SoftwareMonkeys.csAnt.External.Nuget</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Integration\" />
     <Folder Include="Unit\" />
+    <Folder Include="Util\" />
   </ItemGroup>
 </Project>
