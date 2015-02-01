@@ -60,6 +60,8 @@ class Test_Integration_UpdateScript : BaseTestScript
 
     public void CheckUpdate()
     {        
+        Console.WriteLine("Checking that the update worked...");
+
         var newHelloWorldFile = Path.Combine(TestInstallationDirectory, "scripts/HelloWorld.cs");
 
         Console.WriteLine("");
@@ -105,6 +107,8 @@ class Test_Integration_UpdateScript : BaseTestScript
 
     public void ClearSourcePackages()
     {
+        Console.WriteLine("Clearing source packages...");
+
         foreach (var file in FindFiles(ToAbsolute("pkg"), "**.nupkg"))
         {
             var name = Path.GetFileNameWithoutExtension(Path.GetDirectoryName(file));
@@ -115,6 +119,8 @@ class Test_Integration_UpdateScript : BaseTestScript
 
     public void PrepareSourceProjectPackage()
     {
+        Console.WriteLine("Preparing source project package...");
+
         ExecuteScript("CyclePackage", "csAnt");
 
         Console.WriteLine("");
@@ -124,6 +130,8 @@ class Test_Integration_UpdateScript : BaseTestScript
 
     public void PrepareInstallation()
     {
+        Console.WriteLine("Preparing the test installation...");
+
         TestSourceDirectory = CurrentDirectory;
 
         TestInstallationDirectory = Path.GetDirectoryName(CurrentDirectory)
@@ -144,6 +152,8 @@ class Test_Integration_UpdateScript : BaseTestScript
 
     public string InstallTestProject(string testDir, string testProjectDir)
     {
+        Console.WriteLine("Installing the test project...");
+
         new FileCopier(
             testDir,
             testProjectDir
@@ -162,23 +172,11 @@ class Test_Integration_UpdateScript : BaseTestScript
 
         return testProjectDir;
     }
-
-    public void UpdateSourceCode()
-    {
-        // Modify the HelloWorld script in the source project to see if it gets updated
-        ModifyHelloWorldScript();
-
-        ExecuteScript("IncrementVersion", "3");
-
-        // Refresh the nodes to pick up the new version
-        Nodes.Refresh();
-
-        // Repackage
-        Repackage();
-    }
     
     public void CreateMockFeed()
     {
+        Console.WriteLine("Creating a mock nuget feed...");
+
         TestFeedDirectory = Path.GetFullPath("../TestFeed");
         
         Console.WriteLine("Test feed directory: " + TestFeedDirectory);
@@ -192,6 +190,8 @@ class Test_Integration_UpdateScript : BaseTestScript
 
     public void ModifyHelloWorldScript()
     {
+        Console.WriteLine("Modifying the HelloWorld script...");
+        
         var helloWorldFile = Path.Combine(TestSourceDirectory, "apps/csAnt/scripts/HelloWorld.cs");
 
         var content = File.ReadAllText(helloWorldFile);
@@ -215,13 +215,33 @@ class Test_Integration_UpdateScript : BaseTestScript
         File.WriteAllText(helloWorldFile, content);
     }
 
+    public void UpdateSourceCode()
+    {
+        Console.WriteLine("Updating the source code...");
+
+        // Modify the HelloWorld script in the source project to see if it gets updated
+        ModifyHelloWorldScript();
+
+        ExecuteScript("IncrementVersion", "3");
+
+        // Refresh the nodes to pick up the new version
+        Nodes.Refresh();
+
+        // Repackage
+        Repackage();
+    }
+
     public void Repackage()
     {
+        Console.WriteLine("Repackaging the source code...");
+   
         ExecuteScript("Package", "csAnt");
     }
 
     public void RunUpdate()
     {
+        Console.WriteLine("Running the update...");
+
         var nugetPath = GetNugetPath();
 
         ExecuteScript(
