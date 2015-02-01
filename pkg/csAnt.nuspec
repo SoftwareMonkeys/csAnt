@@ -20,16 +20,16 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="scripts/AddCsAntImport.cs" target="scripts" />
-    <file src="scripts/ExportFile.cs" target="scripts" />
-    <file src="scripts/HelloWorld.cs" target="scripts" />
-    <file src="scripts/ImportFile.cs" target="scripts" />
-    <file src="scripts/ImportScript.cs" target="scripts" />
-    <file src="scripts/ImportSync.cs" target="scripts" />
-    <file src="scripts/RaiseEvent.cs" target="scripts" />
-    <file src="scripts/FixNUnitRunners.cs" target="scripts" />
-    <file src="scripts/OnInstall_FixNUnitRunners.cs" target="scripts" />
-    <file src="scripts/Update.cs" target="scripts" />
+    <file src="apps/csAnt/scripts/AddCsAntImport.cs" target="scripts" />
+    <file src="apps/csAnt/scripts/ExportFile.cs" target="scripts" />
+    <file src="apps/csAnt/scripts/HelloWorld.cs" target="scripts" />
+    <file src="apps/csAnt/scripts/ImportFile.cs" target="scripts" />
+    <file src="apps/csAnt/scripts/ImportScript.cs" target="scripts" />
+    <file src="apps/csAnt/scripts/ImportSync.cs" target="scripts" />
+    <file src="apps/csAnt/scripts/RaiseEvent.cs" target="scripts" />
+    <file src="apps/csAnt/scripts/FixNUnitRunners.cs" target="scripts" />
+    <file src="apps/csAnt/scripts/OnInstall_FixNUnitRunners.cs" target="scripts" />
+    <file src="apps/csAnt/scripts/Update.cs" target="scripts" />
     <file src="csAnt-setupfromlocal.sh" />
     <file src="csAnt-setup.sh" />
     <file src="csAnt-setup.vbs" />

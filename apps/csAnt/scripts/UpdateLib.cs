@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using SoftwareMonkeys.csAnt;
 using SoftwareMonkeys.csAnt.IO;
 using SoftwareMonkeys.csAnt.External.Nuget;
+using SoftwareMonkeys.csAnt.Versions;
 
 class UpdateLib : BaseScript
 {

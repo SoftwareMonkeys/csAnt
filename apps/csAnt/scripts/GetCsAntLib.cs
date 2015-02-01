@@ -1,5 +1,5 @@
-//css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.dll;
-//css_ref ../lib/FileNodes/bin/Release/SoftwareMonkeys.FileNodes.dll;
+//css_ref "SoftwareMonkeys.csAnt.dll";
+//css_ref "SoftwareMonkeys.FileNodes.dll";
 using System;
 using System.IO;
 using Microsoft.CSharp;

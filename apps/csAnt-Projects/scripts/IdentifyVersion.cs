@@ -1,6 +1,6 @@
-//css_ref ../lib/csAnt/bin/Release/net-40/SoftwareMonkeys.csAnt.External.Nuget.dll
-//css_ref ../lib/csAnt/bin/Release/net-40/SoftwareMonkeys.csAnt.Versions.dll
-//css_ref ../lib/Nuget.Core.2.8.1/lib/net40-Client/NuGet.Core.dll
+//css_ref "SoftwareMonkeys.csAnt.External.Nuget.dll";
+//css_ref "SoftwareMonkeys.csAnt.Versions.dll";
+//css_ref "NuGet.Core.dll";
 
 
 using System;

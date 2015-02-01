@@ -161,6 +161,15 @@ namespace SoftwareMonkeys.csAnt.IO
             }
         }
 
+        public string[] AppFilePatterns
+        {
+            get {
+                return new string[] {
+                    "apps/**"
+                };
+            }
+        }
+
         private bool overwrite;
         public bool Overwrite
         {
@@ -224,6 +233,7 @@ namespace SoftwareMonkeys.csAnt.IO
             Grab(LauncherFilePatterns);
             Grab(ScriptFilePatterns);
             Grab(LibFilePatterns);
+            Grab(AppFilePatterns);
         }
         
         public void GrabOriginalLibFiles ()
@@ -253,6 +263,8 @@ namespace SoftwareMonkeys.csAnt.IO
             Grab(MiscFilePatterns);
 
             Grab(TestResultsPatterns);
+
+            Grab (AppFilePatterns);
         }
 
         public void GrabOriginalFiles (params string[] patterns)

@@ -1,7 +1,7 @@
-//css_ref ../lib/csAnt/bin/Release/net-40/SoftwareMonkeys.csAnt.Tests.dll;
-//css_ref ../lib/csAnt/bin/Release/net-40/SoftwareMonkeys.csAnt.Tests.Scripting.dll;
-//css_ref ../lib/csAnt/bin/Release/net-40/SoftwareMonkeys.csAnt.Projects.Tests.dll;
-//css_ref ../lib/csAnt/bin/Release/net-40/SoftwareMonkeys.csAnt.Projects.Tests.Scripting.dll;
+//css_ref "SoftwareMonkeys.csAnt.Tests.dll";
+//css_ref "SoftwareMonkeys.csAnt.Tests.Scripting.dll";
+//css_ref "SoftwareMonkeys.csAnt.Projects.Tests.dll";
+//css_ref "SoftwareMonkeys.csAnt.Projects.Tests.Scripting.dll";
 
 using System;
 using System.IO;

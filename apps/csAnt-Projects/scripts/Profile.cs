@@ -1,4 +1,4 @@
-//css_ref ../lib/csAnt/bin/Release/SoftwareMonkeys.csAnt.dll;
+//css_ref "SoftwareMonkeys.csAnt.dll";
 using System;
 using Microsoft.CSharp;
 using System.Diagnostics;

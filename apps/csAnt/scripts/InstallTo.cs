@@ -1,6 +1,6 @@
-//css_ref ../lib/csAnt/bin/Release/net-40/SoftwareMonkeys.csAnt.dll;
-//css_ref ../lib/csAnt/bin/Release/net-40/SoftwareMonkeys.csAnt.Projects.dll;
-//css_ref ../lib/csAnt/bin/Release/net-40/SoftwareMonkeys.csAnt.SetUp.dll;
+//css_ref "SoftwareMonkeys.csAnt.dll";
+//css_ref "SoftwareMonkeys.csAnt.Projects.dll";
+//css_ref "SoftwareMonkeys.csAnt.SetUp.dll";
 
 using System;
 using System.IO;
@@ -10,6 +10,7 @@ using SoftwareMonkeys.csAnt;
 using SoftwareMonkeys.csAnt.Projects;
 using SoftwareMonkeys.csAnt.SetUp.Install;
 
+// TODO: Should this be moved to the "csAnt" app instead of the "csAnt-Projects" app?
 class InstallToScript : BaseProjectScript
 {
 	public static void Main(string[] args)

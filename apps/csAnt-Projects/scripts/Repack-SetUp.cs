@@ -1,4 +1,4 @@
-//css_ref ../lib/csAnt/bin/Release/net-40/SoftwareMonkeys.csAnt.SetUp.dll
+//css_ref "SoftwareMonkeys.csAnt.SetUp.dll";
 
 using System;
 using System.IO;
