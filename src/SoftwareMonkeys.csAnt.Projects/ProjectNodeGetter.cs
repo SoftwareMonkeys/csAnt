@@ -20,8 +20,8 @@ namespace SoftwareMonkeys.csAnt.Projects
         {
             var node = base.GetCurrentNode ();
 
-            if (State.GroupNode != null)
-                State.GroupNode.Nodes.Add(node.Name, node);
+            //if (State.GroupNode != null)
+            //    State.GroupNode.Nodes.Add(node.Name, node);
 
             return node;
         }
