@@ -1,11 +1,12 @@
 {
   "Properties": {
     "Group": "SoftwareMonkeys",
-    "Version": "0.5.20.200",
+    "Version": "0.5.45.100",
     "Status": "alpha",
     "Branch": "apps",
     "CycleBuildSolutions": "csAnt.Tests",
-    "GitRemotes": "CodePlex,GoogleCode,GitHub"
+    "GitRemotes": "CodePlex,GoogleCode,GitHub",
+    "NuGetFeedPath": "https://www.myget.org/F/softwaremonkeys/"
   },
   "Name": "csAnt"
 }
