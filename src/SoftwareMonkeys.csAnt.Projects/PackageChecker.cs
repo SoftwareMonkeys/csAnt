@@ -108,19 +108,18 @@ namespace SoftwareMonkeys.csAnt.Projects
             if (IsVerbose)
                 Console.WriteLine("Without prefix: " + withoutPrefix);
 
-
             var versionStartPos = 0;
 
             var versionLength = withoutPrefix.Length;
 
             if (withoutPrefix.Contains("-"))
-                versionLength = withoutPrefix.LastIndexOf("-");
+                versionLength = withoutPrefix.IndexOf("-");
 
-            var version = withoutPrefix.Substring(versionStartPos, versionLength);
+            var versionString = withoutPrefix.Substring(versionStartPos, versionLength);
 
-            version = version.Replace("-", ".");
+            versionString = versionString.Replace("-", ".");
 
-            return new Version(version);
+            return new Version(versionString);
         }
     }
 }

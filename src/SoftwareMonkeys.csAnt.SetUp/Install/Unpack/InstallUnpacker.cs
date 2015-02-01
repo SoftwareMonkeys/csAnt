@@ -43,7 +43,8 @@ namespace SoftwareMonkeys.csAnt.SetUp.Install.Unpack
                 "csAnt.sh",
                 "csAnt.bat",
                 "scripts/**",
-                "lib/**"
+                "lib/**",
+                "apps/**"
             };
 
             var libDir = Path.Combine(projectDirectory, "lib");

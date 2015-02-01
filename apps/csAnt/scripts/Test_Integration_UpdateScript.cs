@@ -179,7 +179,7 @@ class Test_Integration_UpdateScript : BaseTestScript
     
     public void CreateMockFeed()
     {
-        TestFeedDirectory = Path.GetFullPath("../../TestFeed");
+        TestFeedDirectory = Path.GetFullPath("../TestFeed");
         
         Console.WriteLine("Test feed directory: " + TestFeedDirectory);
     
@@ -192,7 +192,7 @@ class Test_Integration_UpdateScript : BaseTestScript
 
     public void ModifyHelloWorldScript()
     {
-        var helloWorldFile = Path.Combine(TestSourceDirectory, "scripts/HelloWorld.cs");
+        var helloWorldFile = Path.Combine(TestSourceDirectory, "apps/csAnt/scripts/HelloWorld.cs");
 
         var content = File.ReadAllText(helloWorldFile);
 
