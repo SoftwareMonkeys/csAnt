@@ -16,7 +16,7 @@ namespace SoftwareMonkeys.csAnt.SetUp.Tests.Unit
         [Test]
         public void Update()
         {
-            Prepare("1.0.0.0");
+            Prepare("1.0.0.0-alpha-branch");
 
             //ModifyFile();
 

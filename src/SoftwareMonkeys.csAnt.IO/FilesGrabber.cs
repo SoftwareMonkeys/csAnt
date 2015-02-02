@@ -170,6 +170,15 @@ namespace SoftwareMonkeys.csAnt.IO
             }
         }
 
+        public string[] GitFilePatterns
+        {
+            get {
+                return new string[] {
+                    ".git/**"
+                };
+            }
+        }
+
         private bool overwrite;
         public bool Overwrite
         {
@@ -281,10 +290,15 @@ namespace SoftwareMonkeys.csAnt.IO
         {
             GrabOriginalFiles(LibFilePatterns);
         }
-        
+
         public void GrabSrcFiles()
         {
             GrabOriginalFiles(SrcFilePatterns);
+        }
+
+        public void GrabGitFiles()
+        {
+            GrabOriginalFiles(GitFilePatterns);
         }
 
     }

@@ -3,6 +3,7 @@
 //css_ref "SoftwareMonkeys.csAnt.Tests.Scripting.dll";
 //css_ref "SoftwareMonkeys.csAnt.External.Nuget.dll";
 //css_ref "SoftwareMonkeys.csAnt.External.Nuget.Tests.dll";
+//css_ref "SoftwareMonkeys.csAnt.SourceControl.Git.dll";
 //css_ref "nunit.framework.dll";
 
 using System;
@@ -12,6 +13,7 @@ using SoftwareMonkeys.csAnt.IO;
 using SoftwareMonkeys.csAnt.Tests;
 using SoftwareMonkeys.csAnt.Tests.Scripting;
 using SoftwareMonkeys.csAnt.External.Nuget.Tests.Mock;
+using SoftwareMonkeys.csAnt.SourceControl.Git;
 using NUnit.Framework;
 
 [TestFixture]
@@ -21,6 +23,7 @@ class Test_Integration_UpdateScript : BaseTestScript
     public string TestInstallationDirectory = String.Empty;
     public string TestFeedDirectory = String.Empty;
     public string Status = String.Empty;
+    public string Branch = String.Empty;
     public Version BeforeVersion = new Version(1,0,0,0);
     public Version AfterVersion = new Version(1,0,0,1);
 
@@ -87,10 +90,12 @@ class Test_Integration_UpdateScript : BaseTestScript
         Console.WriteLine("  " + TestSourceDirectory);
         Console.WriteLine("");
 
-        new FilesGrabber(
+        var grabber = new FilesGrabber(
 		    OriginalDirectory,
 		    CurrentDirectory
-	    ).GrabOriginalFiles();
+	    );
+        grabber.GrabOriginalFiles();
+        grabber.GrabGitFiles();
 
         // Refresh the nodes to pick up the status
         Nodes.Refresh();
@@ -99,6 +104,7 @@ class Test_Integration_UpdateScript : BaseTestScript
         Nodes.CurrentNode.Save();
 
         Status = GetStatus();
+        Branch = GetBranch();
 
         ClearSourcePackages();
 
@@ -125,6 +131,7 @@ class Test_Integration_UpdateScript : BaseTestScript
 
         Console.WriteLine("");
         Console.WriteLine("Status: " + Status);
+        Console.WriteLine("Branch: " + Branch);
         Console.WriteLine("");
     }
 
@@ -167,7 +174,8 @@ class Test_Integration_UpdateScript : BaseTestScript
             "csAnt-SetUp.exe",
             "-Source=" + TestFeedDirectory,
             "-Nuget=" + nugetPath,
-            "-Status=" + Status
+            "-Status=" + Status,
+            "-Branch=" + Branch
         );
 
         return testProjectDir;
@@ -261,5 +269,10 @@ class Test_Integration_UpdateScript : BaseTestScript
         if (CurrentNode.Properties.ContainsKey("Status"))
             return CurrentNode.Properties["Status"];
         return "";
+    }
+
+    public string GetBranch()
+    {
+        return new GitBranchIdentifier().Identify();
     }
 }

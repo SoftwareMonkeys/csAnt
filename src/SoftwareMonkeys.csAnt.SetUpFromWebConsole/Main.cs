@@ -8,6 +8,7 @@ using SoftwareMonkeys.csAnt.SetUp.Install;
 using SoftwareMonkeys.csAnt.SetUp.Install.Retrieve;
 using SoftwareMonkeys.csAnt.SetUp.Install.Unpack;
 using SoftwareMonkeys.csAnt.SetUp.Update;
+using SoftwareMonkeys.csAnt.SourceControl.Git;
 
 namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole
 {
@@ -17,6 +18,7 @@ namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole
         public static string PackageName = "csAnt";
         public static Version Version = new Version(0,0,0,0);
         public static string Status = String.Empty;
+        public static string Branch = String.Empty;
 
         public static string DestinationPath { get;set; }
 
@@ -83,6 +85,7 @@ namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole
                     updater.PackageName = PackageName;
                     updater.Version = Version;
                     updater.Status = Status;
+                    updater.Branch = Branch;
 
                     updater.Clear = Clear;
                     updater.Import = Import;
@@ -102,6 +105,7 @@ namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole
                     installer.PackageName = PackageName;
                     installer.Version = Version;
                     installer.Status = Status;
+                    installer.Branch = Branch;
 
                     installer.Clear = Clear;
                     installer.Import = Import;
@@ -142,6 +146,12 @@ namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole
                 Status = arguments["status"];
             if (String.IsNullOrEmpty(Status))
                 Status = GetStatusFromCurrentNode();
+            
+            // Branch
+            if (arguments.ContainsAny("branch"))
+                Branch = arguments["branch"];
+            if (String.IsNullOrEmpty(Branch))
+                Branch = GetCurrentBranch();
 
             // Show intro
             if (arguments.ContainsAny("intro"))
@@ -263,6 +273,11 @@ namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole
                 return nodeManager.State.CurrentNode.Properties["Status"];
 
             return String.Empty;
+        }
+
+        static public string GetCurrentBranch()
+        {
+            return new GitBranchIdentifier().Identify();
         }
     }
 }

@@ -6,17 +6,11 @@ namespace SoftwareMonkeys.csAnt
 {
 	public partial class BaseScript
 	{
+        public FileBackup FileBackup = new FileBackup();
+
 		public string BackupFile(string relativeFilePath)
 		{
-			var cmd = new BackupFileCommand(
-				this,
-				relativeFilePath
-			);
-
-			ExecuteCommand(cmd);
-
-			return (string)cmd.ReturnValue;
-
+            return FileBackup.Backup (relativeFilePath);
 		}
 	}
 }

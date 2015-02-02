@@ -23,7 +23,7 @@ namespace SoftwareMonkeys.csAnt.SetUp.Tests
             throw new NotImplementedException ();
         }
 
-        public override void Retrieve (string packageName, Version version, string status)
+        public override void Retrieve (string packageName, Version version, string status, string branch)
         {
             var toDir = DestinationPath
                 + Path.DirectorySeparatorChar

@@ -42,10 +42,10 @@ namespace SoftwareMonkeys.csAnt.SetUp.Install.Retrieve
         
         public override void Retrieve(string packageName)
         {
-            Retrieve(packageName, new Version(0,0,0,0), String.Empty);
+            Retrieve(packageName, new Version(0,0,0,0), String.Empty, String.Empty);
         }
 
-        public override void Retrieve(string packageName, Version version, string status)
+        public override void Retrieve(string packageName, Version version, string status, string branch)
         {
             Console.WriteLine("Retrieving files from:");
             Console.WriteLine(SourcePath);

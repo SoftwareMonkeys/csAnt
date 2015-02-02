@@ -18,6 +18,7 @@ class UpdateLib : BaseScript
         var id = args[0];
         var version = "0.0.0.0";
         var status = "";
+        var branch = "";
         var sourcePath = "https://www.myget.org/F/softwaremonkeys/";
         var defaultSourcePath = "https://go.microsoft.com/fwlink/?LinkID=206669";
 
@@ -29,6 +30,9 @@ class UpdateLib : BaseScript
 
         if (Arguments.ContainsAny("status"))
             status = Arguments["status"];
+
+        if (Arguments.ContainsAny("branch"))
+            branch = Arguments["branch"];
 
         Console.WriteLine("");
         Console.WriteLine("Updating library...");
@@ -42,7 +46,7 @@ class UpdateLib : BaseScript
 
         var versioner = new NugetVersioner();
         versioner.NugetSourcePath = sourcePath;
-        var foundVersion = versioner.GetVersion(id, new Version(version), status);
+        var foundVersion = versioner.GetVersion(id, new Version(version), status, branch);
 
         Console.WriteLine("Found version: " + (foundVersion != null && foundVersion > new Version(0,0,0,0) ? foundVersion.ToString() : "[Latest]"));
         Console.WriteLine("");

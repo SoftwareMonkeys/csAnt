@@ -22,10 +22,12 @@ namespace SoftwareMonkeys.csAnt.SetUp.Tests.Unit
                     "lib/nuget.exe"
                 );
 
+            var branchName = "branch";
+
             new FileNodeManager().EnsureNodes();
 
-            new MockNugetPackageCreator().Create("TestPackage", new Version("1.0.0"), "beta");
-            new MockNugetPackageCreator().Create("TestPackage", new Version("1.0.1"), "alpha");
+            new MockNugetPackageCreator().Create("TestPackage", new Version("1.0.0"), "beta", branchName);
+            new MockNugetPackageCreator().Create("TestPackage", new Version("1.0.1"), "alpha", branchName);
 
             var retriever = new InstallerNugetPackageRetriever()
             {
@@ -33,9 +35,9 @@ namespace SoftwareMonkeys.csAnt.SetUp.Tests.Unit
                 NugetPath = Path.Combine(OriginalDirectory, "lib/nuget.exe") // This shouldn't be required but leave it in just to ensure the test never tries to download the file from the web
             };
 
-            retriever.Retrieve("TestPackage", new Version(0,0,0,0), "beta");
+            retriever.Retrieve("TestPackage", new Version(0,0,0,0), "beta", branchName);
 
-            var expectedDir = PathConverter.ToAbsolute("lib/TestPackage.1.0.0-beta");
+            var expectedDir = PathConverter.ToAbsolute("lib/TestPackage.1.0.0-beta-" + branchName);
 
             Assert.IsTrue(Directory.Exists(expectedDir), "The expected lib directory wasn't found.");
         }

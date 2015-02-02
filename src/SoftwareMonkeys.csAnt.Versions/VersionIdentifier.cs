@@ -43,7 +43,7 @@ namespace SoftwareMonkeys.csAnt.Versions
 
         public SemanticVersion GetNuGetVersionVersion()
         {
-            var version = NugetVersioner.GetSemanticVersion(PackageName, Status);
+            var version = NugetVersioner.GetSemanticVersion(PackageName, Status, Branch);
 
 
             return version;

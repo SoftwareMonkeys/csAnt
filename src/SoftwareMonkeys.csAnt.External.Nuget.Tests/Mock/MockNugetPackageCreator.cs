@@ -13,14 +13,14 @@ namespace SoftwareMonkeys.csAnt.External.Nuget.Tests
             Packer = new NugetPacker();
         }
 
-        public void Create(string name, Version version, string status)
+        public void Create(string name, Version version, string status, string branch)
         {
             var spec = new NugetPackageSpec();
             spec.MetaData.ID = name;
             spec.MetaData.Version = version.ToString();
 
             if (!String.IsNullOrEmpty(status))
-                spec.MetaData.Version += "-" + status;
+                spec.MetaData.Version += "-" + status + "-" + branch;
 
             var helloWorldFile = "HelloWorld.txt";
 
