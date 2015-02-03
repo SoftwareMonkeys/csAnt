@@ -18,6 +18,7 @@ namespace SoftwareMonkeys.csAnt.Versions
         {
             GitVersioner = new GitVersioner (branch);
             Status = status;
+            Branch = branch;
             NugetVersioner = new NugetVersioner (nugetSourcePath);
             PackageName = packageName;
         }

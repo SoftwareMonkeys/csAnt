@@ -47,7 +47,7 @@ namespace SoftwareMonkeys.csAnt.Versions
         public SemanticVersion GetSemanticVersion(string packageName, Version version, string status, string branch)
         {
             Console.WriteLine("");
-            Console.WriteLine("Getting package version...");
+            Console.WriteLine("Getting nuget package version...");
             Console.WriteLine("");
             Console.WriteLine("Package name: " + packageName);
             Console.WriteLine("Version (to match): " + (version != null && version != new Version(0,0,0,0) ? version.ToString() : "[Latest]"));
@@ -108,6 +108,7 @@ namespace SoftwareMonkeys.csAnt.Versions
                 Console.WriteLine("Value (version with status): " + semanticVersion);
                 Console.WriteLine("Version query to match: " + versionQuery);
                 Console.WriteLine("Status: " + status);
+                Console.WriteLine("Branch: " + branch);
             }
 
             var versionPart = semanticVersion.Version;
@@ -134,7 +135,8 @@ namespace SoftwareMonkeys.csAnt.Versions
             if (IsVerbose)
             {
                 Console.WriteLine("Status matches: " + statusMatches.ToString());
-                Console.WriteLine("Version matches: " + statusMatches.ToString());
+                Console.WriteLine("Branch matches: " + branchMatches.ToString());
+                Console.WriteLine("Version matches: " + versionMatches.ToString());
                 Console.WriteLine("Total match: " + matches.ToString());
                 Console.WriteLine("");
             }
