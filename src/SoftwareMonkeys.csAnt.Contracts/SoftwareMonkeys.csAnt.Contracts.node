@@ -1,11 +1,7 @@
 {
   "Properties": {
     "Context": "Assembly",
-<<<<<<< Updated upstream
     "Version": "0.5.43.800"
-=======
-    "Version": "0.4.64.600"
->>>>>>> Stashed changes
   },
   "Name": "SoftwareMonkeys.csAnt.Contracts"
 }
