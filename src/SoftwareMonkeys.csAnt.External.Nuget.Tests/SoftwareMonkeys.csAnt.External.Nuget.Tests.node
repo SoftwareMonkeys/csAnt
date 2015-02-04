@@ -1,7 +1,7 @@
 {
   "Properties": {
     "Context": "Assembly",
-    "Version": "0.5.43.800"
+    "Version": "0.5.43.1000"
   },
   "Name": "SoftwareMonkeys.csAnt.External.Nuget.Tests"
 }
