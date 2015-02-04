@@ -9,6 +9,7 @@
     <dependencies />
   </metadata>
   <files>
+    <file src="csAnt.node" /><!-- Include the node file for version and other meta data. -->
     <file src="csAnt-SetUp.exe" />
   </files>
 </package>
