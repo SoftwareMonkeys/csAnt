@@ -44,6 +44,8 @@ namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole
 
         public static bool ShowIntro = true;
 
+        public static FileNodeManager NodeManager = new FileNodeManager();
+
         public static void Main (string[] args)
         {
             ParseArguments(args);
@@ -151,7 +153,7 @@ namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole
             if (arguments.ContainsAny("branch"))
                 Branch = arguments["branch"];
             if (String.IsNullOrEmpty(Branch))
-                Branch = GetCurrentBranch();
+                Branch = GetBranchFromCurrentNode();
 
             // Show intro
             if (arguments.ContainsAny("intro"))
@@ -234,7 +236,10 @@ namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole
             Console.WriteLine("      The version to install. Default is the latest version.");
             Console.WriteLine("");
             Console.WriteLine("  -status");
-            Console.WriteLine("      The version to install. Default is the stable release.");
+            Console.WriteLine("      The status of the version to install. Default is the stable release.");
+            Console.WriteLine("");
+            Console.WriteLine("  -branch");
+            Console.WriteLine("      The branch of the version to install. Default is the master branch.");
             Console.WriteLine("");
             Console.WriteLine("  -d, -destination");
             Console.WriteLine("      The destination folder to install the files to (absolute or relative).");
@@ -266,18 +271,23 @@ namespace SoftwareMonkeys.csAnt.SetUpFromWebConsole
 
         static public string GetStatusFromCurrentNode()
         {
-            // TODO: Move NodeManager to a property
-            var nodeManager = new FileNodeManager();
-            if (nodeManager.State.CurrentNode != null
-                && nodeManager.State.CurrentNode.Properties.ContainsKey("Status"))
-                return nodeManager.State.CurrentNode.Properties["Status"];
+            if (NodeManager.State.CurrentNode != null
+                && NodeManager.State.CurrentNode.Properties.ContainsKey("Status"))
+                return NodeManager.State.CurrentNode.Properties["Status"];
 
             return String.Empty;
         }
 
-        static public string GetCurrentBranch()
+        static public string GetBranchFromCurrentNode()
         {
-            return new GitBranchIdentifier().Identify();
+            if (NodeManager.State.CurrentNode != null
+                && NodeManager.State.CurrentNode.Properties.ContainsKey("Branch"))
+                return NodeManager.State.CurrentNode.Properties["Branch"];
+
+            return "master"; // TODO: Is this the best place to specify the default branch?
+
+            // TODO: Remove if not needed. Shouldn't be needed because the .node file should contain the branch name.
+            //return new GitBranchIdentifier().Identify();
         }
     }
 }

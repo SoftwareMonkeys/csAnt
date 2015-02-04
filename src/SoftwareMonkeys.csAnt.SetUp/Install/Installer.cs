@@ -111,6 +111,9 @@ namespace SoftwareMonkeys.csAnt.SetUp.Install
             Console.WriteLine("Destination:");
             Console.WriteLine("  " + DestinationPath);
             Console.WriteLine("");
+            Console.WriteLine("Status: " + Status.ToString());
+            Console.WriteLine("Branch: " + Branch.ToString());
+            Console.WriteLine("");
             Console.WriteLine("Clear: " + Clear.ToString());
             Console.WriteLine("Overwrite: " + Overwrite.ToString());
             Console.WriteLine("");

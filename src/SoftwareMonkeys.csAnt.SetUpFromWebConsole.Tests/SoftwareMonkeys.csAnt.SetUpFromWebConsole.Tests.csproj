@@ -39,8 +39,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
-    <Compile Include="Integration\BaseSetUpConsoleIntegrationTestFixture.cs" />
     <Compile Include="Integration\SetUpConsoleIntegrationTestFixture.cs" />
+    <Compile Include="Integration\SetUpConsoleCloneTestFixture.cs" />
+    <Compile Include="Integration\SetUpConsoleImportTestFixture.cs" />
+    <Compile Include="Integration\SetUpConsoleSpecifyStatusTestFixture.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -95,6 +97,10 @@
     <ProjectReference Include="..\SoftwareMonkeys.csAnt.External.Nuget.Tests\SoftwareMonkeys.csAnt.External.Nuget.Tests.csproj">
       <Project>{A5DD8740-CCDB-4F86-974E-6480A2919620}</Project>
       <Name>SoftwareMonkeys.csAnt.External.Nuget.Tests</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SoftwareMonkeys.csAnt.SetUp.Tests\SoftwareMonkeys.csAnt.SetUp.Tests.csproj">
+      <Project>{8D7A46B5-25AA-4E5C-9E3A-F27574B71EEC}</Project>
+      <Name>SoftwareMonkeys.csAnt.SetUp.Tests</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
