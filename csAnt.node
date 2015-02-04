@@ -1,15 +1,9 @@
 {
   "Properties": {
     "Group": "SoftwareMonkeys",
-<<<<<<< Updated upstream
     "Version": "0.5.43.800",
     "Status": "alpha",
     "Branch": "dev",
-=======
-    "Version": "0.4.64.600",
-    "Status": "",
-    "Branch": "master",
->>>>>>> Stashed changes
     "CycleBuildSolutions": "csAnt.Tests",
     "GitRemotes": "origin",
     "NuGetFeedPath": "https://www.myget.org/F/softwaremonkeys/"
