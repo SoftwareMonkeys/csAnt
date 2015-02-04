@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>10.0.0</ProductVersion>
+    <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{9B72A2B8-0BC4-40BE-B242-AC79A080CEB6}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -90,6 +90,7 @@
     <Compile Include="GitVersioner.cs" />
     <Compile Include="NugetVersioner.cs" />
     <Compile Include="VersionIdentifier.cs" />
+    <Compile Include="CoreBranchInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

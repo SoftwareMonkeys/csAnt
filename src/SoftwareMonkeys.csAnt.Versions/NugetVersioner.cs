@@ -10,6 +10,8 @@ namespace SoftwareMonkeys.csAnt.Versions
 
         public string NugetSourcePath { get;set; }
 
+        public CoreBranchInfo CoreBranches = new CoreBranchInfo();
+
         public NugetVersioner ()
         {
         }
@@ -126,7 +128,10 @@ namespace SoftwareMonkeys.csAnt.Versions
 
             var statusMatches = status.Equals(statusPart);
 
-            var branchMatches = branch.Equals(branchPart);
+            var isCoreBranch = CoreBranches.IsCoreBranch (branch);
+
+            var branchMatches = branch.Equals(branchPart)
+                || (String.IsNullOrEmpty(branchPart) && isCoreBranch);
 
             var versionMatches = VersionMatches(versionPart, versionQuery);
 
@@ -136,6 +141,7 @@ namespace SoftwareMonkeys.csAnt.Versions
             {
                 Console.WriteLine("Status matches: " + statusMatches.ToString());
                 Console.WriteLine("Branch matches: " + branchMatches.ToString());
+                Console.WriteLine ("Is core branch?: " + isCoreBranch.ToString ());
                 Console.WriteLine("Version matches: " + versionMatches.ToString());
                 Console.WriteLine("Total match: " + matches.ToString());
                 Console.WriteLine("");

@@ -13,12 +13,35 @@ namespace SoftwareMonkeys.csAnt.SetUp.Tests.Unit
     [TestFixture]
     public class UpdaterTestFixture : BaseSetUpUnitTestFixture
     {
+
         [Test]
-        public void Update()
+        public void Update_CoreBranch()
+        {
+            Prepare("1.0.0.0-alpha");
+
+            //ModifyFile(); // TODO: Remove if not needed
+
+            var updater = new Updater(
+                CreateMockInstallerRetriever(
+                    OriginalDirectory,
+                    WorkingDirectory
+                )
+            );
+
+            updater.Version = new Version("2.0.0.0");
+
+            updater.Update();
+
+            // Check that csAnt still runs
+            new HelloWorldScriptLauncher().Launch();
+        }
+
+        [Test]
+        public void Update_OtherBranch()
         {
             Prepare("1.0.0.0-alpha-branch");
 
-            //ModifyFile();
+            //ModifyFile();// TODO: Remove if not needed
 
             var updater = new Updater(
                 CreateMockInstallerRetriever(

@@ -4,6 +4,7 @@ using System.IO;
 using SoftwareMonkeys.csAnt.Versions;
 using System.Collections.Generic;
 using SoftwareMonkeys.csAnt.IO;
+using SoftwareMonkeys.FileNodes;
 
 
 namespace SoftwareMonkeys.csAnt.External.Nuget
@@ -44,9 +45,9 @@ namespace SoftwareMonkeys.csAnt.External.Nuget
 
         public string Branch { get; set; }
 
-        public string[] StandardBranches = new string[]{"master", "dev"};
-
         public DotNetProcessStarter Starter { get;set; }
+
+        public CoreBranchInfo CoreBranches = new CoreBranchInfo();
 
         public NugetPacker ()
         {
@@ -136,7 +137,7 @@ namespace SoftwareMonkeys.csAnt.External.Nuget
                         + "-" + Status;
 
                 if (!String.IsNullOrEmpty(Branch)
-                    && !IsStandardBranch(Branch))
+                    && !CoreBranches.IsCoreBranch(Branch))
                     versionString = versionString
                         + "-" + Branch;
             }
@@ -153,11 +154,6 @@ namespace SoftwareMonkeys.csAnt.External.Nuget
             Starter.Start(cmd, arguments.ToArray());
 
             return FileNavigator.GetNewestFile (outputDir); // TODO: Is this the best way to get the package file name? Or should it be created manually?
-        }
-
-        public bool IsStandardBranch(string branch)
-        {
-            return Array.IndexOf (StandardBranches, branch) > -1;
         }
     }
 }
