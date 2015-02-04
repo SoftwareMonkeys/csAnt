@@ -1,6 +1,8 @@
 ﻿using System;
 using System.IO;
 using SoftwareMonkeys.csAnt.IO;
+using SoftwareMonkeys.csAnt.IO.Compression;
+using SoftwareMonkeys.FileNodes;
 
 namespace SoftwareMonkeys.csAnt.Projects
 {
@@ -59,15 +61,16 @@ namespace SoftwareMonkeys.csAnt.Projects
         {
             var version = GetLatestPackageVersion(packageName);
 
-            Console.WriteLine ("Latest package version: " + version);
-            Console.WriteLine ("Current version: " + CurrentVersion);
+            Console.WriteLine ("Latest nuget package version: " + version);
+            Console.WriteLine ("Current version (in .node file): " + CurrentVersion);
 
+            // TODO: Clean up
             // Fix the version and remove the last number otherwise it messes up the version checking
             // (the last number isn't necessary as it's not included in package version numbers)
             var currentVersionString = CurrentVersion.ToString ();
-            var fixedCurrentVersionString = currentVersionString.Substring (0, currentVersionString.LastIndexOf ("."));
+            //var fixedCurrentVersionString = currentVersionString.Substring (0, currentVersionString.LastIndexOf ("."));
 
-            var fixedVersion = new Version (fixedCurrentVersionString);
+            var fixedVersion = new Version (currentVersionString);
 
             Console.WriteLine ("Fixed version: " + fixedVersion);
 
@@ -77,6 +80,9 @@ namespace SoftwareMonkeys.csAnt.Projects
 
         public Version GetLatestPackageVersion(string packageName)
         {
+            Console.WriteLine ("Getting latest package version...");
+            Console.WriteLine ("Package name: " + packageName);
+
             var dir = PathConverter.ToAbsolute("pkg/" + packageName);
             
             var version = new Version (0, 0, 0, 0);
@@ -85,42 +91,38 @@ namespace SoftwareMonkeys.csAnt.Projects
                 var latestFilePath = FileNavigator.GetNewestFile (dir);
 
                 if (!String.IsNullOrEmpty (latestFilePath))
-                    version = GetVersionFromPackageFileName (latestFilePath);
-            }
+                    version = GetVersionFromPackageFile (latestFilePath);
+                else
+                    Console.WriteLine ("No package file found: " + latestFilePath);
+            } else
+                Console.WriteLine ("Package directory not found: " + dir);
 
             return version;
         }
 
-        public Version GetVersionFromPackageFileName(string packageFilePath)
+        public Version GetVersionFromPackageFile(string packageFilePath)
         {
-            var fileName = Path.GetFileNameWithoutExtension(packageFilePath);
+            Console.WriteLine ("Getting version from package file...");
+            Console.WriteLine ("  " + packageFilePath);
 
-            Console.WriteLine("Package file: " + fileName);
+            var tmpDir = Path.GetFullPath(Path.Combine(packageFilePath, "../_tmp"));
 
-            var releaseName = Path.GetFileName(Path.GetDirectoryName(packageFilePath));
+            var zipper = new FileZipper ();
+            zipper.Unzip (packageFilePath, tmpDir);
 
-            var prefix = releaseName + ".";
+            var nodeManager = new FileNodeManager (tmpDir);
 
-            if (IsVerbose)
-                Console.WriteLine("Prefix: " + prefix);
+            if (nodeManager.CurrentNode == null)
+                throw new Exception ("Can't find .node file in: " + tmpDir);
 
-            var withoutPrefix = fileName.Replace(prefix, "");
+            var version = new Version(nodeManager.CurrentNode.Properties ["Version"]);
+            
+            Console.WriteLine ("Version: " + version);
+            Console.WriteLine ("");
 
-            if (IsVerbose)
-                Console.WriteLine("Without prefix: " + withoutPrefix);
+            Directory.Delete (tmpDir, true);
 
-            var versionStartPos = 0;
-
-            var versionLength = withoutPrefix.Length;
-
-            if (withoutPrefix.Contains("-"))
-                versionLength = withoutPrefix.IndexOf("-");
-
-            var versionString = withoutPrefix.Substring(versionStartPos, versionLength);
-
-            versionString = versionString.Replace("-", ".");
-
-            return new Version(versionString);
+            return version;
         }
     }
 }

@@ -136,6 +136,11 @@ namespace SoftwareMonkeys.csAnt.IO.Compression
                 + "/"
                 + subPath.Trim('/');
         }
+        
+        public int Unzip(string zipFilePath, string destinationPath)
+        {
+            return Unzip (zipFilePath, destinationPath, "/");
+        }
 
         public int Unzip(string zipFilePath, string destinationPath, string subPath)
         {
