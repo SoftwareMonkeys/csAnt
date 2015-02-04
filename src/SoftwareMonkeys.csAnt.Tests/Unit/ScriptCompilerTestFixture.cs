@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using NUnit.Framework;
 using SoftwareMonkeys.csAnt.Tests.Unit;
+using SoftwareMonkeys.csAnt.IO;
 
 namespace SoftwareMonkeys.csAnt.Tests
 {
@@ -11,9 +12,14 @@ namespace SoftwareMonkeys.csAnt.Tests
         [Test]
         public void Test_CompileScripts()
         {
-            var script = GetDummyScript();
+            new FilesGrabber (OriginalDirectory, CurrentDirectory)
+                .GrabOriginalFiles ();
 
-            var scriptPath = CreateScriptFile();
+            new ScriptExecutor (WorkingDirectory).Execute ("CycleBuild");
+
+            //var script = GetDummyScript();
+
+            //var scriptPath = CreateScriptFile();
 
             var scriptCompiler = new ScriptCompiler();
             scriptCompiler.CompileAll();

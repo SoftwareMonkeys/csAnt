@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using CSScriptLibrary;
 using SoftwareMonkeys.csAnt.IO;
+using System.Collections.Generic;
 
 
 namespace SoftwareMonkeys.csAnt
@@ -40,18 +41,11 @@ namespace SoftwareMonkeys.csAnt
 
             if (!Directory.Exists (binDir))
                 Directory.CreateDirectory(binDir);
-                    
-            // TODO: Move to a ScriptsDirectory property
-            var scriptsDir = Environment.CurrentDirectory
-                + Path.DirectorySeparatorChar
-                + "scripts";
 
             Console.WriteLine ("");
             Console.WriteLine ("Compiling scripts...");
 
             if (IsVerbose) {
-                Console.WriteLine ("Scripts directory:");
-                Console.WriteLine (scriptsDir);
                 Console.WriteLine ("Bin directory:");
                 Console.WriteLine (binDir);
                 Console.WriteLine ("");
@@ -61,7 +55,9 @@ namespace SoftwareMonkeys.csAnt
             var totalFailed = 0;
             var totalSkipped = 0;
 
-            foreach (var scriptPath in Directory.GetFiles(scriptsDir, "*.cs")) {
+            var scriptFiles = GetScriptFiles ();
+
+            foreach (var scriptPath in scriptFiles) {
                 
                 var scriptName = Path.GetFileNameWithoutExtension (scriptPath);
 
@@ -110,6 +106,29 @@ namespace SoftwareMonkeys.csAnt
             Console.WriteLine ("");
             Console.WriteLine ("Finished!");
             Console.WriteLine ("");
+        }
+
+        public string[] GetScriptFiles()
+        {
+            // TODO: Move to a ScriptsDirectory property
+            var scriptsDir = Environment.CurrentDirectory
+                + Path.DirectorySeparatorChar
+                    + "scripts";
+            
+            if (IsVerbose) {
+                Console.WriteLine ("Scripts directory:");
+                Console.WriteLine (scriptsDir);
+            }
+
+            var scriptFiles = new List<string> ();
+            scriptFiles.AddRange (Directory.GetFiles (scriptsDir, "*.cs"));
+
+            foreach (var appDir in Directory.GetDirectories(Path.GetFullPath("apps"))) {
+                var appScriptsDir = appDir + Path.DirectorySeparatorChar + "scripts";
+                scriptFiles.AddRange (Directory.GetFiles (appScriptsDir, "*.cs"));
+            }
+
+            return scriptFiles.ToArray ();
         }
     }
 }

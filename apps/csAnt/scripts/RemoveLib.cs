@@ -1,0 +1,30 @@
+//css_ref "SoftwareMonkeys.csAnt.dll";
+using System;
+using System.IO;
+using Microsoft.CSharp;
+using System.Diagnostics;
+using SoftwareMonkeys.csAnt;
+
+class RemoveLibScript : BaseScript
+{
+	public static void Main(string[] args)
+	{
+		new RemoveLibScript().Start(args);
+	}
+	
+	public override bool Run(string[] args)
+	{
+		if (args.Length < 1)
+		{
+			Console.WriteLine("One argument expected; name.");
+		}
+		else
+		{
+			string name = args[0];
+
+			RemoveLib(name);
+		}
+
+		return !IsError;
+	}
+}

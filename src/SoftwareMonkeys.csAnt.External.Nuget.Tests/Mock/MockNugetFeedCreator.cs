@@ -24,6 +24,13 @@ namespace SoftwareMonkeys.csAnt.External.Nuget.Tests.Mock
             FeedPath = feedPath;
         }
 
+        public MockNugetFeedCreator (string originalDirectory, string workingDirectory)
+        {
+            OriginalDirectory = originalDirectory;
+            WorkingDirectory = workingDirectory;
+            FeedPath = Path.Combine(workingDirectory, "../TestNugetFeed");
+        }
+
         public void Create()
         {
             var nuget = new NugetPacker(WorkingDirectory);
@@ -37,7 +44,7 @@ namespace SoftwareMonkeys.csAnt.External.Nuget.Tests.Mock
                     + Path.DirectorySeparatorChar
                     + "csAnt.nuspec";
 
-            // TODO: Perform packaging in temporary directory instead of main project
+            // TODO: Perform packaging in temporary directory instead of working directory
             nuget.PackageFile(specFile);
 
             var pkgFile = FileNavigator.GetNewestFile(
@@ -67,11 +74,19 @@ namespace SoftwareMonkeys.csAnt.External.Nuget.Tests.Mock
                 "lib"
             };
 
+            // TODO: Reorganize this code so it's simpler to read. Use FilesGrabber utility.
             foreach (var pkgDir in pkgDirs) {
                 var fullPkgDir = Path.Combine (workingDirectory, pkgDir);
+                // Get the nuget.exe file
+                var nugetFilePath = Path.Combine (fullPkgDir, "nuget.exe");
+                if (File.Exists (nugetFilePath)) {
+                    var toFile = nugetFilePath.Replace (fullPkgDir, feedPath);
+                    File.Copy (nugetFilePath, toFile, true);
+                }
                 foreach (var dir in Directory.GetDirectories(fullPkgDir)) {
                     if (IncludeProjectPackages
                         || !Path.GetFileName (dir).StartsWith ("csAnt")) {
+                        // Get the package files
                         foreach (var file in Directory.GetFiles(dir, "*.nupkg", SearchOption.AllDirectories)) {
                             var toFile = file.Replace (fullPkgDir, feedPath);
     

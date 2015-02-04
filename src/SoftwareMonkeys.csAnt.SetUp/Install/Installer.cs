@@ -34,6 +34,7 @@ namespace SoftwareMonkeys.csAnt.SetUp.Install
         public string PackageName = "csAnt";
         public Version Version = new Version("0.0.0.0");
         public string Status = "";
+        public string Branch = "";
 
         public bool Import { get;set; }
         public string ImportPath { get;set; }
@@ -110,6 +111,9 @@ namespace SoftwareMonkeys.csAnt.SetUp.Install
             Console.WriteLine("Destination:");
             Console.WriteLine("  " + DestinationPath);
             Console.WriteLine("");
+            Console.WriteLine("Status: " + Status.ToString());
+            Console.WriteLine("Branch: " + Branch.ToString());
+            Console.WriteLine("");
             Console.WriteLine("Clear: " + Clear.ToString());
             Console.WriteLine("Overwrite: " + Overwrite.ToString());
             Console.WriteLine("");
@@ -124,7 +128,7 @@ namespace SoftwareMonkeys.csAnt.SetUp.Install
             if (Clear)
                 ClearFiles();
 
-            Retriever.Retrieve(PackageName, Version, Status);
+            Retriever.Retrieve(PackageName, Version, Status, Branch);
 
             Unpacker.Unpack(
                 DestinationPath, // TODO: Make this configurable

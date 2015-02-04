@@ -3,6 +3,7 @@ using SoftwareMonkeys.csAnt.Processes;
 using System.IO;
 using SoftwareMonkeys.csAnt.Versions;
 using System.Collections.Generic;
+using SoftwareMonkeys.csAnt.IO;
 
 
 namespace SoftwareMonkeys.csAnt.External.Nuget
@@ -76,33 +77,33 @@ namespace SoftwareMonkeys.csAnt.External.Nuget
             }
         }
         
-        public void Pack(string projectDirectory, string packageName)
+        public string Pack(string sourceDirectory, string packageName)
         {
             Console.WriteLine("");
             Console.WriteLine("Packing nuget package: " + packageName);
-            Console.WriteLine("Project directory:");
-            Console.WriteLine(projectDirectory);
+            Console.WriteLine("Source directory:");
+            Console.WriteLine(sourceDirectory);
             Console.WriteLine("");
 
-            var packageFile = projectDirectory
+            var packageSpecFile = sourceDirectory
                 + Path.DirectorySeparatorChar
                     + "pkg"
                     + Path.DirectorySeparatorChar
                     + packageName
                     + ".nuspec";
 
-            if (!File.Exists(packageFile))
-                throw new ArgumentException("Cannot find '" + packageName + "' package in '" + projectDirectory + "' project directory, at '" + packageFile + "'.");
+            if (!File.Exists(packageSpecFile))
+                throw new ArgumentException("Cannot find '" + packageName + "' package in '" + sourceDirectory + "' project directory, at '" + packageSpecFile + "'.");
         
-            PackageFile(packageFile);
+            return PackageFile(packageSpecFile);
         }
 
-        public void PackageFile(string filePath)
+        public string PackageFile(string packageSpecFilePath)
         {
             Console.WriteLine("");
-            Console.WriteLine("Packing nuget package: " + Path.GetFileNameWithoutExtension(filePath));
-            Console.WriteLine("File path:");
-            Console.WriteLine(filePath);
+            Console.WriteLine("Packing nuget package: " + Path.GetFileNameWithoutExtension(packageSpecFilePath));
+            Console.WriteLine("Package spec path:");
+            Console.WriteLine(packageSpecFilePath);
             Console.WriteLine("");
 
             var cmd = "lib"
@@ -113,7 +114,7 @@ namespace SoftwareMonkeys.csAnt.External.Nuget
                 + Path.DirectorySeparatorChar
                 + "pkg"
                 + Path.DirectorySeparatorChar
-                + Path.GetFileNameWithoutExtension(filePath);
+                + Path.GetFileNameWithoutExtension(packageSpecFilePath);
 
             if (!Directory.Exists(outputDir))
                 Directory.CreateDirectory(outputDir);
@@ -142,7 +143,7 @@ namespace SoftwareMonkeys.csAnt.External.Nuget
 
             var arguments = new List<string>();
             arguments.Add("pack");
-            arguments.Add(Starter.FixArgument(filePath.Replace(WorkingDirectory, "").Trim(Path.DirectorySeparatorChar)));
+            arguments.Add(Starter.FixArgument(packageSpecFilePath.Replace(WorkingDirectory, "").Trim(Path.DirectorySeparatorChar)));
             arguments.Add("-basepath " + Starter.FixArgument(WorkingDirectory));
             arguments.Add("-outputdirectory " + Starter.FixArgument(outputDir));
             if (!String.IsNullOrEmpty(versionString))
@@ -150,6 +151,8 @@ namespace SoftwareMonkeys.csAnt.External.Nuget
             arguments.Add("-verbosity detailed");
 
             Starter.Start(cmd, arguments.ToArray());
+
+            return FileNavigator.GetNewestFile (outputDir); // TODO: Is this the best way to get the package file name? Or should it be created manually?
         }
 
         public bool IsStandardBranch(string branch)

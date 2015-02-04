@@ -30,22 +30,74 @@ namespace SoftwareMonkeys.csAnt
 
         public string[] Find(string pattern)
         {
-            var scriptsDir = WorkingDirectory
-                + Path.DirectorySeparatorChar
-                + "scripts";
+            var list = new List<string> ();
 
-            if (!pattern.EndsWith(".cs"))
-                pattern += ".cs";
+            list.AddRange (FindStandardScripts (pattern));
 
-            var scripts = Finder.FindFiles (scriptsDir, pattern);
+            list.AddRange (FindAppScripts (pattern));
 
+            return list.ToArray ();
+        }
+
+        public string[] FindStandardScripts(string pattern)
+        {
             var scriptNames = new List<string>();
 
-            foreach (var script in scripts) {
-                scriptNames.Add (Path.GetFileNameWithoutExtension(script));
+            var scriptsDir = WorkingDirectory
+                + Path.DirectorySeparatorChar
+                    + "scripts";
+
+            if (Directory.Exists (scriptsDir)) {
+                if (!pattern.EndsWith (".cs"))
+                    pattern += ".cs";
+
+                var scripts = Finder.FindFiles (scriptsDir, pattern);
+
+                foreach (var script in scripts) {
+                    scriptNames.Add (Path.GetFileNameWithoutExtension (script));
+                }
             }
 
             return scriptNames.ToArray();
+        }
+        
+
+        public string[] FindAppScripts(string pattern)
+        {
+            var scriptsDirs = GetAppScriptsDirs();
+
+            if (!pattern.EndsWith(".cs"))
+                pattern += ".cs";
+            
+            var scriptNames = new List<string> ();
+
+            foreach (var scriptsDir in scriptsDirs) {
+                var scripts = Finder.FindFiles (scriptsDir, pattern);
+
+                foreach (var script in scripts) {
+                    scriptNames.Add (Path.GetFileNameWithoutExtension (script));
+                }
+            }
+
+            return scriptNames.ToArray();
+        }
+
+        public string[] GetAppScriptsDirs()
+        {
+            var list = new List<string> ();
+
+            var appsDir = Path.GetFullPath ("apps");
+
+            if (Directory.Exists (appsDir)) {
+                foreach (var appDir in Directory.GetDirectories(appsDir)) {
+                    var scriptsDir = appDir + Path.DirectorySeparatorChar + "scripts";
+
+                    if (Directory.Exists (scriptsDir))
+                        list.Add (scriptsDir);
+                }
+            }
+
+            return list.ToArray();
         }
     }
 }

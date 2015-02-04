@@ -18,6 +18,7 @@ namespace SoftwareMonkeys.csAnt.Versions
         {
             GitVersioner = new GitVersioner (branch);
             Status = status;
+            Branch = branch;
             NugetVersioner = new NugetVersioner (nugetSourcePath);
             PackageName = packageName;
         }
@@ -43,7 +44,7 @@ namespace SoftwareMonkeys.csAnt.Versions
 
         public SemanticVersion GetNuGetVersionVersion()
         {
-            var version = NugetVersioner.GetSemanticVersion(PackageName, Status);
+            var version = NugetVersioner.GetSemanticVersion(PackageName, Status, Branch);
 
 
             return version;

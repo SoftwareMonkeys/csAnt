@@ -26,35 +26,36 @@ namespace SoftwareMonkeys.csAnt.Versions
 
         public SemanticVersion GetSemanticVersion(string packageName)
         {
-            return GetSemanticVersion (packageName, "");
+            return GetSemanticVersion (packageName, "", "");
         }
 
         public Version GetVersion(string packageName, string status)
         {
-            return GetVersion(packageName, new Version(0,0,0,0), status);
+            return GetVersion(packageName, new Version(0,0,0,0), status, "");
         }
 
-        public SemanticVersion GetSemanticVersion(string packageName, string status)
+        public SemanticVersion GetSemanticVersion(string packageName, string status, string branch)
         {
-            return GetSemanticVersion (packageName, new Version (0, 0, 0, 0), status);
+            return GetSemanticVersion (packageName, new Version (0, 0, 0, 0), status, branch);
         }
         
-        public Version GetVersion(string packageName, Version version, string status)
+        public Version GetVersion(string packageName, Version version, string status, string branch)
         {
-            return GetSemanticVersion (packageName, version, status).Version;
+            return GetSemanticVersion (packageName, version, status, branch).Version;
         }
 
-        public SemanticVersion GetSemanticVersion(string packageName, Version version, string status)
+        public SemanticVersion GetSemanticVersion(string packageName, Version version, string status, string branch)
         {
             Console.WriteLine("");
-            Console.WriteLine("Getting package version...");
+            Console.WriteLine("Getting nuget package version...");
             Console.WriteLine("");
             Console.WriteLine("Package name: " + packageName);
             Console.WriteLine("Version (to match): " + (version != null && version != new Version(0,0,0,0) ? version.ToString() : "[Latest]"));
             Console.WriteLine("Status (to match): " + (!String.IsNullOrEmpty(status) ? status : "[Stable]"));
+            Console.WriteLine("Branch (to match): " + (!String.IsNullOrEmpty(branch) ? branch : "[master]"));
             Console.WriteLine("");
 
-            var versions = GetMatchingVersions(packageName, version, status);
+            var versions = GetMatchingVersions(packageName, version, status, branch);
 
             if (versions.Length > 0) {
                 var list = new List<SemanticVersion> (versions);
@@ -81,7 +82,7 @@ namespace SoftwareMonkeys.csAnt.Versions
             }
         }
 
-        public SemanticVersion[] GetMatchingVersions(string packageName, Version versionQuery, string status)
+        public SemanticVersion[] GetMatchingVersions(string packageName, Version versionQuery, string status, string branch)
         {
             var versions = GetVersions(packageName);
 
@@ -89,7 +90,7 @@ namespace SoftwareMonkeys.csAnt.Versions
 
             foreach (var version in versions)
             {
-                if (VersionMatches(version, versionQuery, status))
+                if (VersionMatches(version, versionQuery, status, branch))
                 {
                     matchingVersions.Add(version);
                 }
@@ -98,7 +99,7 @@ namespace SoftwareMonkeys.csAnt.Versions
             return matchingVersions.ToArray();
         }
 
-        public bool VersionMatches(SemanticVersion semanticVersion, Version versionQuery, string status)
+        public bool VersionMatches(SemanticVersion semanticVersion, Version versionQuery, string status, string branch)
         {
             if (IsVerbose)
             {
@@ -107,22 +108,35 @@ namespace SoftwareMonkeys.csAnt.Versions
                 Console.WriteLine("Value (version with status): " + semanticVersion);
                 Console.WriteLine("Version query to match: " + versionQuery);
                 Console.WriteLine("Status: " + status);
+                Console.WriteLine("Branch: " + branch);
             }
 
             var versionPart = semanticVersion.Version;
-            var statusPart = semanticVersion.SpecialVersion;
+            var postFix = semanticVersion.SpecialVersion;
+
+            var statusPart = "";
+            var branchPart = "";
+
+            if (postFix.Contains ("-")) {
+                var postFixParts = postFix.Split ('-');
+                statusPart = postFixParts [0];
+                branchPart = postFixParts [1];
+            } else
+                statusPart = postFix;
 
             var statusMatches = status.Equals(statusPart);
 
+            var branchMatches = branch.Equals(branchPart);
+
             var versionMatches = VersionMatches(versionPart, versionQuery);
 
-
-            var matches = versionMatches && statusMatches;
+            var matches = versionMatches && statusMatches && branchMatches;
 
             if (IsVerbose)
             {
                 Console.WriteLine("Status matches: " + statusMatches.ToString());
-                Console.WriteLine("Version matches: " + statusMatches.ToString());
+                Console.WriteLine("Branch matches: " + branchMatches.ToString());
+                Console.WriteLine("Version matches: " + versionMatches.ToString());
                 Console.WriteLine("Total match: " + matches.ToString());
                 Console.WriteLine("");
             }

@@ -21,13 +21,13 @@ namespace SoftwareMonkeys.csAnt.SetUp.Install.Unpack
             Backup = new FileBackup();
         }
 
-        public override void Unpack (string projectDirectory, string packageName, Version version, bool forceOverwrite)
+        public override void Unpack (string installationDirectory, string packageName, Version version, bool forceOverwrite)
         {
             Console.WriteLine("");
             Console.WriteLine("Installing files...");
             Console.WriteLine("");
-            Console.WriteLine("Project directory:");
-            Console.WriteLine(projectDirectory);
+            Console.WriteLine("Installation directory:");
+            Console.WriteLine(installationDirectory);
             Console.WriteLine("");
             Console.WriteLine("Package name:");
             Console.WriteLine(packageName);
@@ -43,10 +43,11 @@ namespace SoftwareMonkeys.csAnt.SetUp.Install.Unpack
                 "csAnt.sh",
                 "csAnt.bat",
                 "scripts/**",
-                "lib/**"
+                "lib/**",
+                "apps/**"
             };
 
-            var libDir = Path.Combine(projectDirectory, "lib");
+            var libDir = Path.Combine(installationDirectory, "lib");
 
             var directory = GetPackageDir(libDir, packageName, version);
 
@@ -60,7 +61,7 @@ namespace SoftwareMonkeys.csAnt.SetUp.Install.Unpack
 
             foreach (var file in FileFinder.FindFiles(directory, files))
             {
-                var toFile = file.Replace(directory, projectDirectory);
+                var toFile = file.Replace(directory, installationDirectory);
 
                 if (!Directory.Exists(Path.GetDirectoryName(toFile)))
                     Directory.CreateDirectory(Path.GetDirectoryName(toFile));
@@ -84,7 +85,7 @@ namespace SoftwareMonkeys.csAnt.SetUp.Install.Unpack
                     overwrittenFiles++;
                 }
 
-                Console.WriteLine(toFile.Replace(projectDirectory, ""));
+                Console.WriteLine(toFile.Replace(installationDirectory, ""));
 
                 if (!File.Exists(toFile))
                 {
@@ -113,45 +114,66 @@ namespace SoftwareMonkeys.csAnt.SetUp.Install.Unpack
             if (versionQuery != null
                 && versionQuery > new Version(0,0,0,0))
             {
-                pkgDir = PathConverter.ToAbsolute(
-                    libDir
-                    + Path.DirectorySeparatorChar
-                    + packageName
-                    + "."
-                    + versionQuery.ToString()
-                );
+                pkgDir = GetSpecificPackageDir (libDir, packageName, versionQuery);
             }
             else
             {
-                var versions = new List<SemanticVersion>();
+                pkgDir = GetLatestPackageDir (libDir, packageName);
+            }
 
-                foreach (var dir in Directory.GetDirectories(PathConverter.ToAbsolute(libDir), packageName + ".*"))
+            return pkgDir;
+        }
+
+        public string GetSpecificPackageDir(string libDir, string packageName, Version versionQuery)
+        {
+            var pkgDir = PathConverter.ToAbsolute(
+                libDir
+                + Path.DirectorySeparatorChar
+                + packageName
+                + "."
+                + versionQuery.ToString()
+                );
+
+            return pkgDir;
+        }
+
+        public string GetLatestPackageDir(string libDir, string packageName)
+        {
+            Console.WriteLine ("Identifying latest package directory...");
+            Console.WriteLine ("Libs dir: " + libDir);
+            Console.WriteLine ("Package name: " + packageName);
+
+            var versions = new List<SemanticVersion>();
+
+            foreach (var dir in Directory.GetDirectories(PathConverter.ToAbsolute(libDir), packageName + ".*"))
+            {
+                var versionString = Path.GetFileName(dir).Replace(packageName, "");
+                versionString = versionString.Trim('.');
+
+                if (!String.IsNullOrEmpty(versionString))
                 {
-                    var versionString = Path.GetFileName(dir).Replace(packageName, "");
-                    versionString = versionString.Trim('.');
+                    var version = new SemanticVersion(versionString);
 
-                    if (!String.IsNullOrEmpty(versionString))
-                    {
-                        var version = new SemanticVersion(versionString);
-
-                        versions.Add(version);
-                    }
+                    versions.Add(version);
                 }
+            }
 
-                versions.Sort();
+            if (versions.Count > 0) {
+                versions.Sort ();
 
-                var latestVersion = versions[versions.Count-1];
+                var latestVersion = versions [versions.Count - 1];
 
-                pkgDir = PathConverter.ToAbsolute(
+                var pkgDir = PathConverter.ToAbsolute (
                     libDir
                     + Path.DirectorySeparatorChar
                     + packageName
                     + "."
-                    + latestVersion.ToString()
+                    + latestVersion.ToString ()
                 );
-            }
-
-            return pkgDir;
+                return pkgDir;
+                
+            } else
+                throw new Exception ("No packages found to install.");
         }
 
         public void BackupFile(string filePath)

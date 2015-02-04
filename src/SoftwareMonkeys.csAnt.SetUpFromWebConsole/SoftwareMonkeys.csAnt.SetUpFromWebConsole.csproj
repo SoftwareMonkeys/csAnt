@@ -111,5 +111,9 @@
       <Project>{EA178299-9D1E-482E-B3CD-D3CEBF62CADF}</Project>
       <Name>SoftwareMonkeys.csAnt.Contracts</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SoftwareMonkeys.csAnt.SourceControl.Git\SoftwareMonkeys.csAnt.SourceControl.Git.csproj">
+      <Project>{94578333-F8C9-40C0-9300-8D808ED1CD7A}</Project>
+      <Name>SoftwareMonkeys.csAnt.SourceControl.Git</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>

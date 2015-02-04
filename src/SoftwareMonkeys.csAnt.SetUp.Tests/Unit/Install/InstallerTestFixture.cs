@@ -16,7 +16,7 @@ namespace SoftwareMonkeys.csAnt.SetUp.Tests.Unit
         [Test]
         public void Test_Install()
         {
-            MoveToTestProjectDir ();
+            PrepareTestInstallationDirectory ();
 
             var installer = new Installer(
                 CreateMockRetriever(OriginalDirectory, WorkingDirectory)
@@ -28,7 +28,7 @@ namespace SoftwareMonkeys.csAnt.SetUp.Tests.Unit
         [Test]
         public void Test_Install_Import()
         {
-            MoveToTestProjectDir ();
+            PrepareTestInstallationDirectory ();
 
             var installer = new Installer(
                 CreateMockInstallerRetriever(
@@ -46,7 +46,7 @@ namespace SoftwareMonkeys.csAnt.SetUp.Tests.Unit
         [Test]
         public void Test_Install_Clone()
         {
-            MoveToTestProjectDir ();
+            PrepareTestInstallationDirectory ();
 
             var installer = new Installer(
                 CreateMockInstallerRetriever(
@@ -76,15 +76,11 @@ namespace SoftwareMonkeys.csAnt.SetUp.Tests.Unit
             return retriever;
         }
 
-        public void MoveToTestProjectDir()
+        public void PrepareTestInstallationDirectory()
         {
-            var testProjectDir = Path.GetFullPath ("../TestProject");
-
-            DirectoryChecker.EnsureDirectoryExists (testProjectDir);
-
-            Environment.CurrentDirectory = testProjectDir;
-
-            WorkingDirectory = testProjectDir;
+            var creator = new TestInstallationCreator(OriginalDirectory, WorkingDirectory);
+            creator.CreateBlank ();
+            creator.MoveTo(this);
         }
     }
 }

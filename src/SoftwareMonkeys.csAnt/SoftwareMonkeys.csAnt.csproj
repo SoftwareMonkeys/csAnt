@@ -143,7 +143,6 @@
     <Compile Include="BaseScript.Zip.cs" />
     <Compile Include="ConsoleWriter.cs" />
     <Compile Include="Arguments.cs" />
-    <Compile Include="Commands\BackupFileCommand.cs" />
     <Compile Include="Commands\BaseScriptCommand.cs" />
     <Compile Include="Commands\DownloadAndUnzipCommand.cs" />
     <Compile Include="Commands\HelloWorldCommand.cs" />
@@ -245,6 +244,7 @@
     <Compile Include="BaseScript.ScriptFinder.cs" />
     <Compile Include="ScriptLauncher.cs" />
     <Compile Include="LibraryVersioner.cs" />
+    <Compile Include="ScriptsDirectoryNotFoundException.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

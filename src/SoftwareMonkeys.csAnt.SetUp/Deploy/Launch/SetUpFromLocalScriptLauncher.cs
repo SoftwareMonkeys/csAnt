@@ -23,18 +23,18 @@ namespace SoftwareMonkeys.csAnt.SetUp.Deploy.Launch
             Starter = new ProcessStarter();
         }
         
-        public override void Launch(string destinationPath)
+        public override void Launch(string installationPath)
         {
             // TODO: Should sourcePath be set to Environment.CurrentDirectory?
 
             Console.WriteLine("Launching setup from local script...");
             Console.WriteLine("");
-            Console.WriteLine("Project directory:");
-            Console.WriteLine(destinationPath);
+            Console.WriteLine("Installation path:");
+            Console.WriteLine(installationPath);
 
             var name = "csAnt-setupfromlocal";
 
-            var arguments = GetArguments(String.Empty, destinationPath);
+            var arguments = GetArguments(String.Empty, installationPath);
 
             // TODO: Should the project directory be set to Environment.CurrentDirectory?
             if (SoftwareMonkeys.csAnt.Processes.Platform.IsLinux)
@@ -43,18 +43,18 @@ namespace SoftwareMonkeys.csAnt.SetUp.Deploy.Launch
                 Starter.Start("cscript", name + ".vbs", arguments);
         }
 
-        public override void Launch(string sourcePath, string destinationPath)
+        public override void Launch(string sourcePath, string installationDirectory)
         {
             // TODO: Should sourcePath be set to Environment.CurrentDirectory?
 
             Console.WriteLine("Launching setup from local script...");
             Console.WriteLine("");
-            Console.WriteLine("Project directory:");
-            Console.WriteLine(destinationPath);
+            Console.WriteLine("Installation directory:");
+            Console.WriteLine(installationDirectory);
 
             var name = "csAnt-setupfromlocal";
 
-            var arguments = GetArguments(sourcePath, destinationPath);
+            var arguments = GetArguments(sourcePath, installationDirectory);
 
             // TODO: Should the project directory be set to Environment.CurrentDirectory?
             if (SoftwareMonkeys.csAnt.Processes.Platform.IsLinux)

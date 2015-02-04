@@ -43,6 +43,9 @@ namespace SoftwareMonkeys.csAnt
             
             string scriptsDir = GetScriptsPath();
                         
+            if (!Directory.Exists (scriptsDir))
+                throw new ScriptsDirectoryNotFoundException (scriptsDir);
+
             scriptPath = GetStandardScriptPath(scriptsDir, scriptName);
             
             if (String.IsNullOrEmpty(scriptPath))

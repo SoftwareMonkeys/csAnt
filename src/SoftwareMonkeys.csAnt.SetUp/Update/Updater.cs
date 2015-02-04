@@ -28,6 +28,12 @@ namespace SoftwareMonkeys.csAnt.SetUp.Update
             set { Installer.Status = value; }
         }
 
+        public string Branch
+        {
+            get { return Installer.Branch; }
+            set { Installer.Branch = value; }
+        }
+
         public bool Import
         {
             get { return Installer.Import; }

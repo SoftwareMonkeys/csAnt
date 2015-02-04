@@ -8,6 +8,7 @@
     <description>C# scripting and automation environment (test results).</description>
   </metadata>
   <files>
+    <file src="csAnt.node" target="csAnt.node" />
     <file src="tests/results/**" target="tests/results" />
   </files>
 </package>

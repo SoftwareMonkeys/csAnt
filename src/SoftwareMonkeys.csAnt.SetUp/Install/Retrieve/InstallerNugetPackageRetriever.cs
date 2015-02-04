@@ -92,10 +92,10 @@ namespace SoftwareMonkeys.csAnt.SetUp.Install.Retrieve
         
         public override void Retrieve (string packageName)
         {
-            Retrieve(packageName, new Version(0,0,0,0), String.Empty);
+            Retrieve(packageName, new Version(0,0,0,0), String.Empty, String.Empty);
         }
 
-        public override void Retrieve (string packageName, Version version, string status)
+        public override void Retrieve (string packageName, Version version, string status, string branch)
         {
             Console.WriteLine("");
             Console.WriteLine("Nuget path:");
@@ -106,9 +106,10 @@ namespace SoftwareMonkeys.csAnt.SetUp.Install.Retrieve
             Console.WriteLine("");
             Console.WriteLine("Version: " + version.ToString());
             Console.WriteLine("Status: " + (!String.IsNullOrEmpty(status) ? status : "Release (not specified, using default)"));
+            Console.WriteLine("Branch: " + (!String.IsNullOrEmpty(branch) ? branch : "master (not specified, using default)"));
             Console.WriteLine("");
 
-            InstallNuget();
+            InstallNuget(NugetSourcePath);
 
             // TODO: Move this to a config file
             var outputDir = DestinationPath
@@ -130,7 +131,7 @@ namespace SoftwareMonkeys.csAnt.SetUp.Install.Retrieve
             if (!String.IsNullOrEmpty(status)) 
                 arguments.Add("-Pre");
 
-            AddVersionArgument(packageName, version, status, arguments);
+            AddVersionArgument(packageName, version, status, branch, arguments);
 
             if (!Directory.Exists(outputCsAntDir))
                 Directory.CreateDirectory(outputCsAntDir);
@@ -141,22 +142,25 @@ namespace SoftwareMonkeys.csAnt.SetUp.Install.Retrieve
             );
         }
 
-        public void AddVersionArgument(string packageName, Version version, string status, List<string> arguments)
+        public void AddVersionArgument(string packageName, Version version, string status, string branch, List<string> arguments)
         {
             // If a version and/or status is specified
             if (version > new Version(0, 0, 0, 0)
                 || !String.IsNullOrEmpty(status))
             {
                 // Get the latest version based on the version and status specified (eg. specifying 1.0 will match the latest 1.0.* version, and specifying a status will get the latest version for that status)
-                version = Versioner.GetVersion(packageName, version, status);
+                version = Versioner.GetVersion(packageName, version, status, branch);
 
                 var versionString = "";
 
                 // If a matching version was found and/or status is specified
                 if (version > new Version(0, 0, 0, 0)
-                    || !String.IsNullOrEmpty(status))
+                    || !String.IsNullOrEmpty(status)
+                    || !String.IsNullOrEmpty(branch))
                 {
                     versionString = version.ToString() + "-" + status;
+                    if (!String.IsNullOrEmpty (branch))
+                        versionString += "-" + branch;
 
                     if (IsVerbose)
                         Console.WriteLine("Version string: " + versionString);
@@ -166,9 +170,9 @@ namespace SoftwareMonkeys.csAnt.SetUp.Install.Retrieve
             }
         }
 
-        public void InstallNuget()
+        public void InstallNuget(string nugetSourcePath)
         {
-            NugetChecker.CheckNuget();
+            NugetChecker.CheckNuget(nugetSourcePath);
         }
 
     }

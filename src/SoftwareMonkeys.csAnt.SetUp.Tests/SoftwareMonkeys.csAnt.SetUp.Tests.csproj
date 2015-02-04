@@ -49,6 +49,7 @@
     <Compile Include="Unit\Install\Retrieve\InstallerNugetPackageRetrieverTestFixture.cs" />
     <Compile Include="Unit\Update\UpdaterTestFixture.cs" />
     <Compile Include="Unit\IntroWriterTestFixture.cs" />
+    <Compile Include="SetUpTestPreparer.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -87,6 +88,14 @@
     <ProjectReference Include="..\SoftwareMonkeys.csAnt.External.Nuget.Tests\SoftwareMonkeys.csAnt.External.Nuget.Tests.csproj">
       <Project>{A5DD8740-CCDB-4F86-974E-6480A2919620}</Project>
       <Name>SoftwareMonkeys.csAnt.External.Nuget.Tests</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SoftwareMonkeys.csAnt.Projects\SoftwareMonkeys.csAnt.Projects.csproj">
+      <Project>{3BFB55C4-1247-49BD-AEC9-31BC3C0F1168}</Project>
+      <Name>SoftwareMonkeys.csAnt.Projects</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SoftwareMonkeys.csAnt.Projects.Tests\SoftwareMonkeys.csAnt.Projects.Tests.csproj">
+      <Project>{5B5A328E-6F70-498A-AB13-26E48CBE3BA1}</Project>
+      <Name>SoftwareMonkeys.csAnt.Projects.Tests</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

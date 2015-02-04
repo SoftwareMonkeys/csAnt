@@ -86,4 +86,7 @@
       <Name>SoftwareMonkeys.csAnt.External.Nuget.Tests</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Unit\NugetVersionerTestFixture.cs" />
+  </ItemGroup>
 </Project>
