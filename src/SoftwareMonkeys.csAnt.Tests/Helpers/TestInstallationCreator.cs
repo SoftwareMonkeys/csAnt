@@ -46,13 +46,14 @@ namespace SoftwareMonkeys.csAnt.Tests.Helpers
         
         public string CreateTestInstallationPath()
         {
-            return Path.Combine (WorkingDirectory, "../" + InstallationDirectoryName);
+            return Path.GetFullPath(Path.Combine (WorkingDirectory, "../" + InstallationDirectoryName));
         }
 
-        public void Move()
+        public void MoveTo(BaseTestFixture fixture)
         {
             Environment.CurrentDirectory = InstallationPath;
             WorkingDirectory = InstallationPath;
+            fixture.WorkingDirectory = InstallationPath;
         }
     }
 }

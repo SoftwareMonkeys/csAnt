@@ -80,7 +80,7 @@ namespace SoftwareMonkeys.csAnt.SetUp.Tests.Unit
         {
             var creator = new TestInstallationCreator(OriginalDirectory, WorkingDirectory);
             creator.CreateBlank ();
-            creator.Move();
+            creator.MoveTo(this);
         }
     }
 }

@@ -13,25 +13,26 @@ namespace SoftwareMonkeys.csAnt.SetUp.Deploy.Launch
             Starter = new DotNetProcessStarter();
         }
         
-        public override void Launch(string sourceDirectory, string projectDirectory)
+        public override void Launch(string sourcePath, string installationPath)
         {
             // TODO: Should sourceDirectory be set to Environment.CurrentDirectory?
 
             Console.WriteLine("Launching setup from local script...");
             Console.WriteLine("");
-            Console.WriteLine("Source directory:");
-            Console.WriteLine(sourceDirectory);
+            Console.WriteLine("Source path:");
+            Console.WriteLine(sourcePath);
             Console.WriteLine("");
-            Console.WriteLine("Project directory:");
-            Console.WriteLine(projectDirectory);
+            Console.WriteLine("Installation path:");
+            Console.WriteLine(installationPath);
 
             Starter.Start(
                 "csAnt-SetUpFromLocal.exe",
-                sourceDirectory,
-                "-Destination=" + projectDirectory
+                sourcePath,
+                "-Destination=" + installationPath
                 );
         }
 
+        // TODO: Remove if not needed
         public override void Launch(string sourceDirectory)
         {
             throw new NotImplementedException();

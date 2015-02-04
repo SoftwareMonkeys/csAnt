@@ -109,7 +109,7 @@ namespace SoftwareMonkeys.csAnt.SetUp.Install.Retrieve
             Console.WriteLine("Branch: " + (!String.IsNullOrEmpty(branch) ? branch : "master (not specified, using default)"));
             Console.WriteLine("");
 
-            InstallNuget();
+            InstallNuget(NugetSourcePath);
 
             // TODO: Move this to a config file
             var outputDir = DestinationPath
@@ -170,9 +170,9 @@ namespace SoftwareMonkeys.csAnt.SetUp.Install.Retrieve
             }
         }
 
-        public void InstallNuget()
+        public void InstallNuget(string nugetSourcePath)
         {
-            NugetChecker.CheckNuget();
+            NugetChecker.CheckNuget(nugetSourcePath);
         }
 
     }

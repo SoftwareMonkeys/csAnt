@@ -80,7 +80,7 @@ namespace SoftwareMonkeys.csAnt.External.Nuget
         {
             Console.WriteLine("");
             Console.WriteLine("Packing nuget package: " + packageName);
-            Console.WriteLine("Project directory:");
+            Console.WriteLine("Source directory:");
             Console.WriteLine(projectDirectory);
             Console.WriteLine("");
 

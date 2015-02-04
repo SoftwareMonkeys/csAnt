@@ -12,7 +12,7 @@ namespace SoftwareMonkeys.csAnt.Projects
 		{
 			get
             {
-                if (CurrentNode.Properties.ContainsKey("Group"))
+                if (CurrentNode != null && CurrentNode.Properties.ContainsKey("Group"))
                     return CurrentNode.Properties["Group"];
                 else
                     return GroupNode.Name;

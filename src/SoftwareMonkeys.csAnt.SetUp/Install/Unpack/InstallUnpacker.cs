@@ -21,13 +21,13 @@ namespace SoftwareMonkeys.csAnt.SetUp.Install.Unpack
             Backup = new FileBackup();
         }
 
-        public override void Unpack (string projectDirectory, string packageName, Version version, bool forceOverwrite)
+        public override void Unpack (string installationDirectory, string packageName, Version version, bool forceOverwrite)
         {
             Console.WriteLine("");
             Console.WriteLine("Installing files...");
             Console.WriteLine("");
-            Console.WriteLine("Project directory:");
-            Console.WriteLine(projectDirectory);
+            Console.WriteLine("Installation directory:");
+            Console.WriteLine(installationDirectory);
             Console.WriteLine("");
             Console.WriteLine("Package name:");
             Console.WriteLine(packageName);
@@ -47,7 +47,7 @@ namespace SoftwareMonkeys.csAnt.SetUp.Install.Unpack
                 "apps/**"
             };
 
-            var libDir = Path.Combine(projectDirectory, "lib");
+            var libDir = Path.Combine(installationDirectory, "lib");
 
             var directory = GetPackageDir(libDir, packageName, version);
 
@@ -61,7 +61,7 @@ namespace SoftwareMonkeys.csAnt.SetUp.Install.Unpack
 
             foreach (var file in FileFinder.FindFiles(directory, files))
             {
-                var toFile = file.Replace(directory, projectDirectory);
+                var toFile = file.Replace(directory, installationDirectory);
 
                 if (!Directory.Exists(Path.GetDirectoryName(toFile)))
                     Directory.CreateDirectory(Path.GetDirectoryName(toFile));
@@ -85,7 +85,7 @@ namespace SoftwareMonkeys.csAnt.SetUp.Install.Unpack
                     overwrittenFiles++;
                 }
 
-                Console.WriteLine(toFile.Replace(projectDirectory, ""));
+                Console.WriteLine(toFile.Replace(installationDirectory, ""));
 
                 if (!File.Exists(toFile))
                 {
@@ -139,7 +139,7 @@ namespace SoftwareMonkeys.csAnt.SetUp.Install.Unpack
 
         public string GetLatestPackageDir(string libDir, string packageName)
         {
-            Console.WriteLine ("Identifying latet package directory...");
+            Console.WriteLine ("Identifying latest package directory...");
             Console.WriteLine ("Libs dir: " + libDir);
             Console.WriteLine ("Package name: " + packageName);
 

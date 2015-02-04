@@ -4,6 +4,7 @@ using SoftwareMonkeys.csAnt.IO;
 
 namespace SoftwareMonkeys.csAnt.Projects
 {
+    // TODO: Should this be moved to ...External.Nuget library?
     public class PackageChecker
     {
         public string PackageScript = "CyclePackage";
