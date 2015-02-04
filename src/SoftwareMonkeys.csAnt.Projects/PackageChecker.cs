@@ -59,23 +59,13 @@ namespace SoftwareMonkeys.csAnt.Projects
 
         public bool RequiresPackage(string packageName)
         {
-            var version = GetLatestPackageVersion(packageName);
+            var packageVersion = GetLatestPackageVersion(packageName);
 
-            Console.WriteLine ("Latest nuget package version: " + version);
+            Console.WriteLine ("Latest nuget package version: " + packageVersion);
             Console.WriteLine ("Current version (in .node file): " + CurrentVersion);
 
-            // TODO: Clean up
-            // Fix the version and remove the last number otherwise it messes up the version checking
-            // (the last number isn't necessary as it's not included in package version numbers)
-            var currentVersionString = CurrentVersion.ToString ();
-            //var fixedCurrentVersionString = currentVersionString.Substring (0, currentVersionString.LastIndexOf ("."));
-
-            var fixedVersion = new Version (currentVersionString);
-
-            Console.WriteLine ("Fixed version: " + fixedVersion);
-
             // If the current version is newer than the package version return true
-            return (fixedVersion > version);
+            return (CurrentVersion > packageVersion);
         }
 
         public Version GetLatestPackageVersion(string packageName)
