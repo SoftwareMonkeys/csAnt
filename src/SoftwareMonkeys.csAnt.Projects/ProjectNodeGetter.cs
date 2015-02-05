@@ -30,6 +30,9 @@ namespace SoftwareMonkeys.csAnt.Projects
         {
             var node = GetCurrentNode();
 
+            if (node == null)
+                throw new Exception ("CurrentNode is null");
+
             return node.ParentNode;
         }
     }

@@ -16,6 +16,12 @@ namespace SoftwareMonkeys.csAnt.Projects
 		{
 			get
 			{
+                if (Nodes == null)
+                    throw new Exception ("Nodes property (FileNodeManager) is null.");
+
+                if (Nodes.State == null)
+                    throw new Exception ("Nodes.State property is null.");
+
                 return Nodes.State.GroupNode;
 			}
 		}
