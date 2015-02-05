@@ -39,6 +39,17 @@ namespace SoftwareMonkeys.csAnt.Tests.Helpers
             return path;
         }
 
+        public void GrabSetupFiles()
+        {
+            new FileCopier(
+                OriginalDirectory,
+                WorkingDirectory
+            ).Copy(
+                "csAnt.node",
+                "csAnt-SetUp.exe"
+            );
+        }
+
         public string CreateAndGrabFiles()
         {
             throw new NotImplementedException ();

@@ -66,6 +66,7 @@ namespace SoftwareMonkeys.csAnt.SetUp.Tests
                 workingBinDirectory,
                 testProjectDirectory
                 ).GrabOriginalFiles(
+                "csAnt.node",
                 setupFileName
                 );
 

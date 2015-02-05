@@ -161,10 +161,12 @@ class Test_Integration_UpdateScript : BaseTestScript
     {
         Console.WriteLine("Installing the test project...");
 
+        // TODO: Use test installation creator helper
         new FileCopier(
             testDir,
             testProjectDir
         ).Copy(
+            "csAnt.node",
             "csAnt-SetUp.exe"
         );
 
@@ -189,6 +191,7 @@ class Test_Integration_UpdateScript : BaseTestScript
         
         Console.WriteLine("Test feed directory: " + TestFeedDirectory);
     
+        // TODO: Use nuget test feed creator helper
         new MockNugetFeedCreator(
             OriginalDirectory,
             TestSourceDirectory,

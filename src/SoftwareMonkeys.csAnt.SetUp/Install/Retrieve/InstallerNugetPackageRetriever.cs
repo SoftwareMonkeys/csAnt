@@ -38,6 +38,8 @@ namespace SoftwareMonkeys.csAnt.SetUp.Install.Retrieve
         public bool IsVerbose { get;set; }
 
         public NugetVersioner Versioner { get;set; }
+
+        public CoreBranchInfo CoreBranches = new CoreBranchInfo();
         
         public InstallerNugetPackageRetriever (string nugetSourcePath, string destinationPath)
         {
@@ -159,7 +161,8 @@ namespace SoftwareMonkeys.csAnt.SetUp.Install.Retrieve
                     || !String.IsNullOrEmpty(branch))
                 {
                     versionString = version.ToString() + "-" + status;
-                    if (!String.IsNullOrEmpty (branch))
+                    if (!String.IsNullOrEmpty (branch)
+                        && !CoreBranches.IsCoreBranch(branch))
                         versionString += "-" + branch;
 
                     if (IsVerbose)
