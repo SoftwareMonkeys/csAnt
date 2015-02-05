@@ -1,11 +1,13 @@
 using System;
 using NUnit.Framework;
 using NuGet;
+using SoftwareMonkeys.csAnt.Tests;
+using SoftwareMonkeys.csAnt.IO;
 
 namespace SoftwareMonkeys.csAnt.Versions.Tests
 {
     [TestFixture]
-    public class NugetVersionerTestFixture
+    public class NugetVersionerTestFixture : BaseTestFixture
     {
         [Test]
         public void Test_VersionMatches_StatusAndBranchMatches()

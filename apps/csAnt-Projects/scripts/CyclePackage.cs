@@ -35,7 +35,7 @@ class CyclePackageScript : BaseProjectScript
         {
     		ExecuteScript(
                 "EnsureBuild",
-                skipIncrement.ToString()
+                "-skipincrement"
             );
         }
         else

@@ -17,14 +17,13 @@ namespace SoftwareMonkeys.csAnt.SetUp.Tests.Unit
             // Copy the nuget.exe file into the current test directory so the retriever can skip downloading it
             new FileCopier(
                 OriginalDirectory,
-                CurrentDirectory
+                CurrentDirectory,
+                true
                 ).Copy(
                     "lib/nuget.exe"
                 );
 
             var branchName = "branch";
-
-            new FileNodeManager().EnsureNodes();
 
             new MockNugetPackageCreator().Create("TestPackage", new Version("1.0.0"), "beta", branchName);
             new MockNugetPackageCreator().Create("TestPackage", new Version("1.0.1"), "alpha", branchName);

@@ -5,28 +5,33 @@ namespace SoftwareMonkeys.csAnt.Versions
 {
     public class CoreBranchInfo
     {
-        // TODO: Remove if not needed
-        //public string WorkingDirectory { get;set; }
-
-        public CoreBranchInfo ()// string workingDirectory) // TODO: Remove if not needed
+        private string[] coreBranches = new string[]{"master", "dev"};
+        public string[] CoreBranches
         {
-            // TODO: Remove if not needed
-            //WorkingDirectory = workingDirectory;
+            get{
+                // Check for core branch list specified in the .node file (if it exists)
+                CheckCoreBranchesInNodeFile ();
+                return coreBranches;
+            }
+        }
+
+        public CoreBranchInfo ()
+        {
         }
 
         public bool IsCoreBranch(string branch)
         {
+            return Array.IndexOf (CoreBranches, branch) > -1;
+        }
+
+        public void CheckCoreBranchesInNodeFile()
+        {
             var nodeManager = new FileNodeManager ();
 
-            if (nodeManager.CurrentNode == null)
-                throw new Exception ("File node not found in: " + Environment.CurrentDirectory);
-
-            if (!nodeManager.CurrentNode.Properties.ContainsKey ("CoreBranches"))
-                throw new Exception ("CoreBranches property not found in *.node");
-
-            var coreBranches = nodeManager.CurrentNode.Properties ["CoreBranches"].Split (',');
-
-            return Array.IndexOf (coreBranches, branch) > -1;
+            if (nodeManager.CurrentNode != null
+                && nodeManager.CurrentNode.Properties.ContainsKey ("CoreBranches")) {
+                coreBranches = nodeManager.CurrentNode.Properties ["CoreBranches"].Split (',');
+            }
         }
     }
 }

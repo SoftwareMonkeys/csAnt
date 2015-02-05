@@ -166,7 +166,6 @@ class Test_Integration_UpdateScript : BaseTestScript
             testDir,
             testProjectDir
         ).Copy(
-            "csAnt.node",
             "csAnt-SetUp.exe"
         );
 

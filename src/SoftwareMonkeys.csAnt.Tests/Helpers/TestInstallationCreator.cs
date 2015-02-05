@@ -45,7 +45,6 @@ namespace SoftwareMonkeys.csAnt.Tests.Helpers
                 OriginalDirectory,
                 WorkingDirectory
             ).Copy(
-                "csAnt.node",
                 "csAnt-SetUp.exe"
             );
         }

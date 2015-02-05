@@ -12,10 +12,13 @@ namespace SoftwareMonkeys.csAnt.Projects
 		{
 			get
             {
-                if (CurrentNode != null && CurrentNode.Properties.ContainsKey("Group"))
-                    return CurrentNode.Properties["Group"];
-                else
+                if (CurrentNode != null && CurrentNode.Properties.ContainsKey ("Group"))
+                    return CurrentNode.Properties ["Group"];
+                else {
+                    if (GroupNode == null)
+                        throw new Exception ("GroupNode is null");
                     return GroupNode.Name;
+                }
             }
 		}
 	}
